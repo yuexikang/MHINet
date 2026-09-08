@@ -449,3 +449,15 @@ not be described as bitwise deterministic.
 Not started.  E00/E01 and later experiments remain blocked by the incomplete
 TINY-S/TINY-8 learnability gate.  No test item has been evaluated and no model
 validation result has been claimed.
+
+P5 entrypoint preparation has begun without executing E00/E01.  The evaluator
+now emits both explicitly named all-finite-geometry diagnostics and
+conditional-valid H0/every-update/final summaries, so a finite fallback from a
+failed initializer cannot masquerade as a valid estimate.  A rejected proposal
+keeps its guarded retained H in the trajectory denominator while rejection is
+reported separately.  Per-pair JSONL and flattened CSV now retain every state,
+accepted/reason code and name, support count, condition number, solve status,
+corner-update magnitude and saturation.  Window recall remains explicitly
+unavailable rather than fabricated because the current forward contract does
+not retain GT-to-window membership.  Five CPU evaluation regression tests
+passed; this is output-contract engineering, not P5 validation evidence.

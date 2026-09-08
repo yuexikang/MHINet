@@ -21,6 +21,11 @@ from .evaluate import evaluate_model, write_evaluation
 from .losses import sequence_corner_l1
 from .metrics import homography_trajectory_metrics
 from .model import MHINet, build_model
+from .tiny_gate import (
+    REGISTERED_PROTOCOL,
+    REQUIRED_EXPERIMENTS,
+    registered_experiment_errors,
+)
 
 
 @dataclass(frozen=True)
@@ -207,16 +212,6 @@ def _validate_tiny_gate(path: Path | None, required: bool) -> dict[str, Any] | N
     if payload.get("errors"):
         raise RuntimeError(f"Tiny gate contains merge errors: {payload['errors']}")
     protocol = payload.get("protocol", {})
-    expected_protocol = {
-        "training_revision": "1.2",
-        "loss": "uniform proposal-corner coordinate L1",
-        "FGO": False,
-        "extra_losses": False,
-        "planar_head": False,
-    }
-    for key, expected in expected_protocol.items():
-        if protocol.get(key) != expected:
-            raise RuntimeError(f"Tiny gate protocol mismatch for {key}: {protocol.get(key)!r}")
     cache = payload.get("cache", {})
     sample_protocol = protocol.get(
         "sample_protocol", cache.get("sample_protocol")
@@ -225,50 +220,41 @@ def _validate_tiny_gate(path: Path | None, required: bool) -> dict[str, Any] | N
         "diagnostic_sample_count", cache.get("diagnostic_sample_count")
     )
     test_used = protocol.get("test_used", cache.get("test_used"))
-    if sample_protocol != "one_pair_residuals" or diagnostic_count != 32:
-        raise RuntimeError("Tiny gate sample protocol/count does not match the registered recipe")
-    if test_used is not False:
-        raise RuntimeError("Tiny gate must explicitly record test_used=false")
-    required = {
-        "TINY-S-D8": (8,),
-        "TINY-S-D4": (4,),
-        "TINY-S-D2": (2,),
-        "TINY-S-D1": (1,),
-        "TINY-8": (8, 4, 2, 1),
+    observed_protocol = {
+        "training_revision": protocol.get("training_revision"),
+        "loss": protocol.get("loss"),
+        "FGO": protocol.get("FGO"),
+        "extra_losses": protocol.get("extra_losses"),
+        "planar_head": protocol.get("planar_head"),
+        "precision": protocol.get("precision"),
+        "tiny_weight_average_start_step": protocol.get(
+            "tiny_weight_average_start_step"
+        ),
+        "sample_protocol": sample_protocol,
+        "diagnostic_sample_count": diagnostic_count,
+        "test_used": test_used,
     }
+    if observed_protocol != REGISTERED_PROTOCOL:
+        raise RuntimeError(
+            "Tiny gate protocol/sample definition does not match the registered recipe"
+        )
     experiments = payload.get("experiments", [])
     names = [item.get("name") for item in experiments]
     if len(names) != len(set(names)):
         raise RuntimeError("Tiny gate contains duplicate experiment names")
-    if set(names) != set(required):
-        missing = sorted(set(required) - set(names))
-        extra = sorted(repr(name) for name in set(names) - set(required))
+    if set(names) != set(REQUIRED_EXPERIMENTS):
+        missing = sorted(set(REQUIRED_EXPERIMENTS) - set(names))
+        extra = sorted(
+            repr(name) for name in set(names) - set(REQUIRED_EXPERIMENTS)
+        )
         raise RuntimeError(
             f"Tiny gate experiment set mismatch; missing={missing}, extra={extra}"
         )
     for item in experiments:
         name = str(item["name"])
-        if item.get("status") != "passed" or not item.get("criterion", {}).get(
-            "met", False
-        ):
-            raise RuntimeError(f"Tiny gate experiment is not passed: {name}")
-        if item.get("sample_count") != 32:
-            raise RuntimeError(f"Tiny gate experiment has wrong sample count: {name}")
-        if tuple(item.get("active_scales", ())) != required[name]:
-            raise RuntimeError(f"Tiny gate experiment has wrong scale schedule: {name}")
-        final = item.get("final", {})
-        threshold = float(item.get("criterion", {}).get("threshold_mace_px", 0.1))
-        mean_mace = float(final.get("H_final_mace_px", {}).get("mean", float("inf")))
-        if (
-            not math.isfinite(threshold)
-            or threshold <= 0
-            or threshold > 0.1
-            or not math.isfinite(mean_mace)
-            or mean_mace >= threshold
-        ):
-            raise RuntimeError(f"Tiny gate metric does not meet threshold: {name}")
-        if final.get("failed_pairs") != 0 or final.get("rejected_updates") != 0:
-            raise RuntimeError(f"Tiny gate experiment contains failures: {name}")
+        item_errors = registered_experiment_errors(item, name, source=str(source))
+        if item_errors:
+            raise RuntimeError("Tiny gate experiment mismatch: " + "; ".join(item_errors))
     return {"path": str(source), "sha256": sha256_file(source)}
 
 

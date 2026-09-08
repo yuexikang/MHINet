@@ -290,12 +290,14 @@ conda run --no-capture-output -n loma-repro \
   python -m unittest discover -s tests -v
 ```
 
-Result at this point: 57 tests passed.  `compileall`, every CLI `--help`
+Result at this point: 59 tests passed.  `compileall`, every CLI `--help`
 entry, and the 31-file design-package verifier also passed.  The regression
 suite now explicitly checks that an isolated non-finite decoder output is
 reported instead of being hidden by its guarded zero placeholder, and that
 the repeated-pair GPU-preload path can execute both raw and parameter-averaged
-tiny evaluations with the correct call contract.
+tiny evaluations with the correct call contract.  It also asserts that all
+1,024-query chunks use one activation-checkpoint context and that optimizer
+protocol drift makes the tiny gate fail closed.
 
 ### Tiny-overfit attempts
 
@@ -404,6 +406,14 @@ diagnostic-only and is never used by formal training.
   and listed D4/D2/D1/TINY-8 as missing; formal E01 then rejected that artifact
   before model construction or any optimizer step.  Partial artifact SHA256:
   `0680e3cb6015fc17807aede502ed5b285617a45f514e70f31e8b9fa108a257e4`.
+- The gate validator now checks each experiment's two-updates-per-scale
+  schedule, B1/accumulation-4 AdamW recipe, lr/weight decay/clip/scheduler,
+  BF16 mode, translation residual protocol, finite gradients, controlled-H0
+  provenance, checkpoint metadata/hash, and the registered readout policy in
+  addition to its metric.  A real partial merge of D8/D4/D2 accepted all three
+  artifacts and failed only for the two legitimately missing experiments,
+  D1 and TINY-8.  Partial artifact SHA256:
+  `cfeec1624d4cae514d367b2b6838daac9835e8a293341ce39436b8afc484f3a2`.
 
 CUDA warns that `grid_sampler_2d_backward_cuda` and
 `adaptive_avg_pool2d_backward_cuda` have no deterministic implementation.

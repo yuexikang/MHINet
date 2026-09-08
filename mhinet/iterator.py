@@ -1,4 +1,4 @@
-"""Four-scale, eight-update differentiable MHINet refinement loop."""
+"""Multi-scale Homography Iterative Refinement Module (MHIR)."""
 
 from __future__ import annotations
 
@@ -43,7 +43,7 @@ ITERATOR_REASON_NAMES = {
 
 
 class MultiScaleHIterator(nn.Module):
-    """Run D8/D4/D2/D1 twice each without detaching H, T, or features."""
+    """Refine H twice per fused descriptor scale D8/D4/D2/D1 without detach."""
 
     scales = (8, 4, 2, 1)
 

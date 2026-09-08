@@ -1,8 +1,10 @@
-"""Trainable shared DINOv3/MVT + Stage1 + VGG/DeDoDe provider.
+"""Shared GHIM and CGMDP feature provider for MHINet.
 
 This module deliberately calls the reusable LoMa components below their legacy
-``inference_mode`` wrappers.  DINO remains frozen; a frozen Stage1 head still
-participates in autograd with respect to its MVT input.
+``inference_mode`` wrappers. DINOv3 remains frozen; the frozen GHIM homography
+head still participates in autograd with respect to its MVT input. CGMDP
+combines MVT context, VGG features, and a DeDoDe-style cumulative decoder; its
+D8/D4/D2/D1 outputs are fused matching descriptors, not DeDoDe-only features.
 """
 
 from __future__ import annotations
@@ -46,11 +48,11 @@ def _safe_load(path: Path) -> Mapping[str, Any]:
 
 
 class SafeMatchabilityWeightedHomographyFitter(nn.Module):
-    """Old Stage1 weighted fit with invalid samples isolated before autograd solve.
+    """GHIM weighted fit with invalid samples isolated before autograd solve.
 
     The normal equation, threshold, tiny clamped row weights, and ridge exactly
-    match the existing Stage1 fitter on eligible samples.  Eligibility is
-    inspected without gradients; ``solve_ex`` is invoked only for that subset.
+    match the legacy Stage1 fitter on eligible samples. Eligibility is inspected
+    without gradients; ``solve_ex`` is invoked only for that subset.
     """
 
     def __init__(
@@ -154,13 +156,14 @@ class SafeMatchabilityWeightedHomographyFitter(nn.Module):
 
 
 class SharedFeatureProvider(nn.Module):
-    """Own exactly one DINO/MVT instance and emit H0 plus D8/D4/D2/D1."""
+    """Run shared GHIM/CGMDP and emit H0, MVT context, and matching descriptors."""
 
     scales = (8, 4, 2, 1)
 
     def __init__(self, descriptor: nn.Module, stage1_head: nn.Module) -> None:
         super().__init__()
         self.descriptor = descriptor
+        # Legacy compatibility alias: ``stage1_head`` is the GHIM homography head.
         self.stage1_head = stage1_head
         self._profile = "heads"
         self._call_counts: dict[str, int] = {}
@@ -367,6 +370,8 @@ class SharedFeatureProvider(nn.Module):
                 raise AssertionError(
                     f"D{scale} shape mismatch: {tuple(pyramid[scale].shape)} != {expected}"
                 )
+        # ``stage1_*`` return keys are legacy aliases retained for callers and
+        # serialized artifacts; architecturally they report GHIM validity/output.
         return {
             "pair_descriptors": pair_descriptors,
             "context": contextualized,

@@ -3,11 +3,11 @@
 The diagnostic deliberately differs from formal training in one documented
 way: H0 is constructed from the exact target homography plus a small,
 deterministic corner residual that is guaranteed to lie inside the active
-local-search range.  Raw image pairs and frozen LoMa/DeDoDe pyramid features
-come from the real training manifest.  The registered memorization diagnostic
-uses 32 controlled H0 residual conditions for one exact pair; the stricter
-``distinct_pairs`` mode uses 32 unique pairs.  No validation or test item is
-used.
+local-search range. Raw image pairs and frozen CGMDP multi-scale matching
+descriptors come from the real training manifest. The registered memorization
+diagnostic uses 32 controlled H0 residual conditions for one exact pair; the
+stricter ``distinct_pairs`` mode uses 32 unique pairs. No validation or test
+item is used.
 """
 
 from __future__ import annotations

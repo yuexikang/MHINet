@@ -1,4 +1,4 @@
-"""MHINet v1.0 implementation, following training protocol v1.2."""
+"""MHINet v1.0 GHIM/CGMDP/MHIR implementation under protocol v1.2."""
 
 from .config import ArchitectureConfig, RuntimePaths, load_architecture_config
 

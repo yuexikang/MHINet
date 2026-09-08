@@ -1,4 +1,4 @@
-"""Top-level MHINet model and training-profile ownership."""
+"""Top-level GHIM/CGMDP/MHIR model and training-profile ownership."""
 
 from __future__ import annotations
 
@@ -24,7 +24,7 @@ from .modules import (
 
 
 class MHINet(nn.Module):
-    """Shared Stage1/feature provider followed by eight H refinement updates."""
+    """Run GHIM/CGMDP followed by MHIR's eight homography updates."""
 
     def __init__(
         self,

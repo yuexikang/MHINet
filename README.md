@@ -1,11 +1,30 @@
 # MHINet
 
 This repository is the server implementation of the MHINet v1 architecture
-and training protocol v1.2 from `MHINet_server_handoff_v1.2/`.  It preserves
-the existing LoMa Stage1 and VGG/DeDoDe initialization, computes the shared
-DINOv3/MVT path once per pair, and performs two H updates at each of
-D8/D4/D2/D1.  Planar, FGO, overlap, and auxiliary-correlation losses are not
-part of the mainline implementation.
+and training protocol v1.2 from `MHINet_server_handoff_v1.2/`. The model is
+described as three functional modules:
+
+1. **Global Homography Initialization Module (GHIM):** shared DINOv3 and MVT
+   infer the initial global homography `H0` and the cross-image context
+   `F_MVT = (F_MVT^A, F_MVT^B)`.
+2. **Cross-image Guided Multi-scale Descriptor Pyramid (CGMDP):** MVT context
+   and VGG multi-scale local features enter a DeDoDe-style cumulative decoder
+   to produce the matching descriptors `D8`, `D4`, `D2`, and `D1`.
+3. **Multi-scale Homography Iterative Refinement Module (MHIR):** an adapter,
+   H-guided local correlation, and a refinement decoder perform two homography
+   updates at each scale, giving `H0 -> H1 -> ... -> H8 = H_final`.
+
+`Ds` means the fused matching descriptor at image scale `1/s`; it does not
+name a DeDoDe layer or a feature produced by DeDoDe alone. In particular,
+`D8/D4/D2/D1` are jointly generated from `F_MVT`, VGG features, and the
+DeDoDe-style cumulative decoder. See
+[`docs/model_architecture.md`](docs/model_architecture.md) for the complete
+data flow and terminology.
+
+The Python/config fields named `stage1_*` and the external LoRetta source names
+are retained as legacy compatibility aliases for GHIM. They do not denote an
+additional model stage. Planar, FGO, overlap, and auxiliary-correlation losses
+are not part of the mainline implementation.
 
 The implementation is not yet a validated model result.  P0--P3 and the P4
 gradient/profile checks pass; the staged tiny-overfit gate is still being
@@ -110,6 +129,17 @@ conda run --no-capture-output -n loma-repro \
            artifacts/p4_tiny_8_translation_swa.json \
   --output artifacts/p4_tiny_gate.json --overwrite
 ```
+
+## D1 efficiency ablations
+
+The implemented reference remains dense D1 correlation over all
+`784 x 784 = 614,656` source positions with a `5 x 5` target search window.
+Its results are the baseline for two planned, not-yet-implemented ablations:
+sparse D1 queries guided by D2 support, and a `3 x 3` D1 search window. The
+mainline tiny gate must pass before either ablation is evaluated. The frozen
+comparison protocol, trajectory metrics, query recall/coverage diagnostics,
+latency, and memory fields are registered in
+[`docs/experiment_plan.md`](docs/experiment_plan.md).
 
 ## Minimal training and exact-boundary resume
 

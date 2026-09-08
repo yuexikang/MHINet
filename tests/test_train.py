@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from mhinet.train import (
     DeterministicIndexStream,
@@ -96,11 +97,21 @@ class TrainingProtocolTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "gate.json"
             path.write_text(json.dumps(payload), encoding="utf-8")
-            self.assertIsNotNone(_validate_tiny_gate(path, True))
-            payload["experiments"][0]["final"]["H_final_mace_px"]["mean"] = 0.2
-            path.write_text(json.dumps(payload), encoding="utf-8")
-            with self.assertRaises(RuntimeError):
-                _validate_tiny_gate(path, True)
+            def metric_errors(item: dict, name: str, *, source: str) -> list[str]:
+                mean = item["final"]["H_final_mace_px"]["mean"]
+                return [] if mean < 0.1 else [f"{source}: {name} metric failed"]
+
+            with patch(
+                "mhinet.train.registered_experiment_errors",
+                side_effect=metric_errors,
+            ):
+                self.assertIsNotNone(_validate_tiny_gate(path, True))
+                payload["experiments"][0]["final"]["H_final_mace_px"][
+                    "mean"
+                ] = 0.2
+                path.write_text(json.dumps(payload), encoding="utf-8")
+                with self.assertRaises(RuntimeError):
+                    _validate_tiny_gate(path, True)
 
     def test_minimal_config_is_protocol_v12_and_explicitly_not_formal(self) -> None:
         config = TrainConfig.from_json("configs/train_minimal_smoke.json")

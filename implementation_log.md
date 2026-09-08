@@ -5,6 +5,14 @@ active requirements are the server handoff package training protocol v1.2 and
 loss revision 1.1.  Files under `history/` were not used as implementation
 instructions.
 
+Canonical model terminology from this point forward is GHIM (global
+homography initialization, producing `H0` and `F_MVT`), CGMDP (MVT-guided
+multi-scale descriptor pyramid, producing the fused matching descriptors
+`D8/D4/D2/D1`) and MHIR (eight-update homography refinement, producing
+`H_final`).  Historic `stage1_*` names below quote legacy code, checkpoints or
+artifacts and remain compatibility aliases; they do not denote an additional
+functional module.
+
 ## 2026-09-08 — design package and repository
 
 - Project/repository: `/home/disk1/MHINet`; initialized with `git init -b main`.
@@ -290,7 +298,7 @@ conda run --no-capture-output -n loma-repro \
   python -m unittest discover -s tests -v
 ```
 
-Result at this point: 59 tests passed.  `compileall`, every CLI `--help`
+Result at this point: 65 tests passed.  `compileall`, every CLI `--help`
 entry, and the 31-file design-package verifier also passed.  The regression
 suite now explicitly checks that an isolated non-finite decoder output is
 reported instead of being hidden by its guarded zero placeholder, and that
@@ -401,7 +409,7 @@ diagnostic-only and is never used by formal training.
   6,697,497,088/7,021,264,896 bytes.  Its `failed` status is expected because
   it is not the 32-residual learnability run.  Artifact SHA256
   `2a3f52d3e395e49ba2ebc53dad253c612b8417a42775a52238d81af32f9cb5e3`.
-  TINY-S-D1 is now the active next gate; TINY-8 has not been run.
+  TINY-8 has not been run.
 - A real-feature signal comparison was added before interpreting the slow D1
   curve.  With the registered half-bound D1 residual, the random-adapter
   nearest-vs-centre correlation margin was only `0.002778` on average, versus
@@ -426,6 +434,21 @@ diagnostic-only and is never used by formal training.
   `cd47126d9b3faa97542ddef6187981da10eb64a4a97ddeac494b66314e0e914b`.
   An intermediate one-sampler-only smoke is retained with SHA256
   `92c45486e8a9642691b1abff94ac84c2e9a6bfb6a689af1dc9277573ec11d43b`.
+- The registered dense D1 5x5 run used the pre-optimization process and reached
+  step 864 before its hosting exec session ended without a Python traceback,
+  OOM record, final artifact or checkpoint.  It therefore remains an
+  interrupted **non-pass**, not a completed 2,000-step result.  Mean final MACE
+  fell from `0.927098 px` at step 32 to `0.474308 px` at step 160, then
+  plateaued: the last ten 32-step observations averaged `0.4606961 px` in the
+  range `[0.457148, 0.466198]`, with zero rejected updates throughout.  The
+  raw log SHA256 is
+  `92661c88c1d18d5efe45c9749e20afb52b9cf0380ba4ae1ac3bcf4e6a22fc81f`;
+  the preserved observation artifact SHA256 is
+  `dbfa8521480c0939e4619f1b6ceca7a066dcae28ebb496d30e4f5a24ccf0fa5d`.
+  Per the updated experiment plan, this dense full-grid 5x5 observation is the
+  baseline for sparse-query D1 and 3x3-window D1 comparisons.  Neither variant
+  may replace the mainline until matched-budget validation shows its accuracy,
+  failure-rate, memory and latency trade-off.
 - The independent-run merger was exercised with only D8.  It failed closed
   and listed D4/D2/D1/TINY-8 as missing; formal E01 then rejected that artifact
   before model construction or any optimizer step.  Partial artifact SHA256:
@@ -433,11 +456,17 @@ diagnostic-only and is never used by formal training.
 - The gate validator now checks each experiment's two-updates-per-scale
   schedule, B1/accumulation-4 AdamW recipe, lr/weight decay/clip/scheduler,
   BF16 mode, translation residual protocol, finite gradients, controlled-H0
-  provenance, checkpoint metadata/hash, and the registered readout policy in
-  addition to its metric.  A real partial merge of D8/D4/D2 accepted all three
-  artifacts and failed only for the two legitimately missing experiments,
-  D1 and TINY-8.  Partial artifact SHA256:
-  `cfeec1624d4cae514d367b2b6838daac9835e8a293341ce39436b8afc484f3a2`.
+  provenance and seed.  It no longer trusts a reported checkpoint hash: it
+  verifies the on-disk path/bytes/SHA256, restricted-loads the payload, binds
+  progress and metadata to the experiment, and checks raw/averaged readout
+  ownership.  It also recomputes mean/median/P90/max, failures and rejections
+  from all 32 per-condition rows, checks history consistency and requires the
+  five independent artifacts to share data/resource evidence.  D8/D4 predate
+  two readout flags; only their two independently reloaded immutable checkpoint
+  hashes receive an explicit legacy migration exception.  A fresh strict
+  partial merge accepts D8/D4/D2 and fails only for the legitimately missing
+  D1 and TINY-8 experiments.  Partial artifact SHA256:
+  `99ff441f1f00b005b0c301dbf899161c9ccdaf9dcd3769d86fb058bcc8901f3b`.
 
 CUDA warns that `grid_sampler_2d_backward_cuda` and
 `adaptive_avg_pool2d_backward_cuda` have no deterministic implementation.

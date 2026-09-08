@@ -13,6 +13,24 @@
     "diagnostic_sample_count": 32,
     "test_used": false
   },
+  "data_and_resource_evidence": {
+    "manifest": "/home/disk1/Data/datasets/GoogleEarth_scale_pairs/train/pairs.jsonl",
+    "manifest_sha256": "3eed3d3d425caf8465afb5121dfd85960f00932fccc343f37187e14ce27d499c",
+    "unique_image_pair_count": 1,
+    "pair_ids": [
+      "current__34.801100126.376330_pair0"
+    ],
+    "parent_groups": [
+      "parent:current/Train/34.801100126.376330.jpg"
+    ],
+    "geo_groups": [
+      "geo_0.01:3480:12637"
+    ],
+    "architecture_sha256": "4a859f413ee4be59acb1dc6c0cf189e80b8f4e7b3f54dc9f117acd1ac5cfe128",
+    "loma_checkpoint": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+    "dino_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+    "selected_ghim_checkpoint_legacy_stage1_key": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e"
+  },
   "sources": [
     {
       "path": "/home/disk1/MHINet/artifacts/p4_tiny_s_d8_translation_swa.json",
@@ -15287,6 +15305,18 @@
   ],
   "errors": [
     "missing experiments: ['TINY-8', 'TINY-S-D1']"
+  ],
+  "legacy_readout_compatibility": [
+    {
+      "experiment": "TINY-S-D8",
+      "checkpoint_sha256": "dc7360186b688c245909c5b0da01abf491f17234313754a0ea422b0c8cc1af98",
+      "compatibility": "missing readout flags accepted only for this independently reloaded and metric-verified immutable checkpoint"
+    },
+    {
+      "experiment": "TINY-S-D4",
+      "checkpoint_sha256": "9ff3d1f54fa0ef657907658d63baad70218aaa85489db9b9f5003a120eeb7650",
+      "compatibility": "missing readout flags accepted only for this independently reloaded and metric-verified immutable checkpoint"
+    }
   ],
   "scope_note": "This merged artifact is a fixed-train-set learnability gate, not validation accuracy. Averaged and raw readouts remain explicit in each experiment."
 }

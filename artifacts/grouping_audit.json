@@ -1,0 +1,29 @@
+{
+  "policy": {
+    "parent_group": "parent_image_A/B; test=input_pair_row_index",
+    "geo_cell_degrees": 0.01,
+    "selection_rule": "hold val fixed; exclude train cells present in val",
+    "test_role": "sealed evaluation only; never used for exclusions or selection"
+  },
+  "source_rows": {
+    "train": 36000,
+    "val": 2500,
+    "test": 1000
+  },
+  "unique_parent_groups": {
+    "train": 18000,
+    "val": 1250,
+    "test": 500
+  },
+  "unique_geo_groups": {
+    "train": 2661,
+    "val": 190,
+    "test": 500
+  },
+  "train_val_parent_overlap": [],
+  "train_val_geo_overlap": [
+    "geo_0.01:3753:12660"
+  ],
+  "safe_train_pairs": 35996,
+  "excluded_train_pairs": 4
+}

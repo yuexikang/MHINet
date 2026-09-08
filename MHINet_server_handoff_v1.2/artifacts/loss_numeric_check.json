@@ -1,0 +1,25 @@
+{
+  "scope": "scalar_loss_formula_checks_only",
+  "status": "passed",
+  "bounded_fgo_nonnegative_monotonic": true,
+  "continuous_at_threshold": true,
+  "maximum_scalar_gradient_gain": 5.0,
+  "max_finite_difference_gradient_error": 3.7136338448817696e-10,
+  "sticky_trigger_example": {
+    "stage_errors": [
+      0.5,
+      2.0
+    ],
+    "independent_threshold_loss": 0.8333333333333333,
+    "official_sticky_flag_loss": 0.357142857142857
+  },
+  "original_fgo_near_zero_gain_limit": 101.0,
+  "exact_zero_abs_subgradient_note": "chain gradient can be zero at exact perfect match",
+  "not_tested": [
+    "torch_autograd",
+    "AMP",
+    "model_gradient_norms",
+    "training",
+    "validation_accuracy"
+  ]
+}

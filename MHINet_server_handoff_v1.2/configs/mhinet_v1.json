@@ -1,0 +1,286 @@
+{
+  "status": "complete_architecture_design_not_implemented",
+  "model_name": "MHINet",
+  "version": "1.0",
+  "base_commit": "899fdb99a4076e312196bbbf99a3c329739b5d7a",
+  "input": {
+    "size_hw": [
+      784,
+      784
+    ],
+    "pair_batch_size": 1,
+    "color": "RGB",
+    "range": [
+      0,
+      1
+    ],
+    "resize": "bicubic"
+  },
+  "stage1": {
+    "reuse_existing": true,
+    "retain_existing_matchability_fitter": true,
+    "shared_dino_mvt": true,
+    "dino_frozen": true,
+    "mvt_trainable_in_joint": true,
+    "head_parameters_frozen": true,
+    "detach_H0_in_joint": false,
+    "checkpoint_policy": "resolve_existing_selected_stage1_and_load_mvt_head_together"
+  },
+  "pyramid": {
+    "reuse_vgg19_bn": true,
+    "scales": [
+      8,
+      4,
+      2,
+      1
+    ],
+    "cumulative_channels": 256,
+    "export_scale4": true,
+    "run_scale1": true
+  },
+  "adapter": {
+    "channels": [
+      64,
+      64,
+      32,
+      32
+    ],
+    "kernel": 1,
+    "bias": false,
+    "activation": "none",
+    "normalize": "l2",
+    "epsilon": 1e-06,
+    "share_across_views": true
+  },
+  "iteration": {
+    "scales": [
+      8,
+      4,
+      2,
+      1
+    ],
+    "iterations_per_scale": [
+      2,
+      2,
+      2,
+      2
+    ],
+    "total_updates": 8,
+    "share_within_scale": true,
+    "share_across_scales": false,
+    "detach_between_updates": false
+  },
+  "correlation": {
+    "query_policy": "full_source_grid",
+    "sampling": "H_p_plus_target_coordinate_delta",
+    "radius": [
+      4,
+      4,
+      3,
+      2
+    ],
+    "candidates": [
+      81,
+      81,
+      49,
+      25
+    ],
+    "candidate_order": "dy_outer_dx_inner_ascending",
+    "renormalize_sampled_features": true,
+    "softmax": false,
+    "invalid_value": 0,
+    "query_chunk_size": 1024,
+    "activation_checkpoint_training": true,
+    "align_corners": false
+  },
+  "decoder": {
+    "input_order": [
+      "correlation",
+      "candidate_valid",
+      "source_position_xy",
+      "H_flow_xy"
+    ],
+    "input_channels": [
+      166,
+      166,
+      102,
+      54
+    ],
+    "flow_clip": [
+      -2,
+      2
+    ],
+    "stem": {
+      "kernel": 1,
+      "channels": 64,
+      "bias": false,
+      "group_norm_groups": 8,
+      "activation": "GELU"
+    },
+    "down_blocks": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "down_block": {
+      "channels": 64,
+      "conv1_kernel": 3,
+      "conv1_stride": 2,
+      "conv2_kernel": 3,
+      "conv2_stride": 1,
+      "padding": 1,
+      "conv_bias": false,
+      "skip_kernel": 1,
+      "skip_stride": 2,
+      "group_norm_groups": 8,
+      "activation": "GELU"
+    },
+    "adaptive_pool_hw": [
+      4,
+      4
+    ],
+    "mlp": [
+      1024,
+      256,
+      8
+    ],
+    "linear_bias": true,
+    "final_linear_init": "all_zero",
+    "output_activation": "tanh",
+    "max_delta_input_pixels": [
+      32,
+      16,
+      6,
+      2
+    ]
+  },
+  "geometry": {
+    "H_direction": "A_to_B_normalized",
+    "corner_order": [
+      "TL",
+      "TR",
+      "BL",
+      "BR"
+    ],
+    "state": "four_corner_normalized_displacement",
+    "update": "add_corner_delta_then_four_point_DLT",
+    "solver": "8x8_solve_ex_h33_equals_1",
+    "dtype": "float32",
+    "ridge": 0,
+    "learned_weights": false,
+    "minimum_supported_queries": 16,
+    "condition_max": 1000000,
+    "projection_denominator_min": 0.0001,
+    "validity_grid_hw": [
+      9,
+      9
+    ],
+    "rejected_update": "retain_previous_H_and_T",
+    "line_search": false,
+    "solve_safety": "screen_finite_condition_before_autograd_solve_valid_subset_then_postcheck_projection"
+  },
+  "loss": {
+    "profile": "sequence_corner_l1",
+    "proposal_corner_weight": 1.0,
+    "reduction": "mean_over_8_coordinates_then_uniform_8_updates_then_valid_pairs",
+    "sequence_gamma": 1.0,
+    "normalize_sequence_weights": true,
+    "error_units": "target_input_pixels_784",
+    "supervise_pre_guard_proposal": true,
+    "default_grid_loss_weight": 0.0,
+    "default_correlation_aux_weight": 0.0,
+    "fgo_enabled": false,
+    "all_invalid_batch": "skip_optimizer_step",
+    "optional_bounded_fgo": {
+      "status": "separate_finetune_ablation_only",
+      "enabled": false,
+      "updates_1based": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "reference_error_input_pixels": 1.0,
+      "threshold_dimensionless": 1.0,
+      "epsilon_dimensionless": 0.1,
+      "lambda": 0.04,
+      "maximum_scalar_gradient_gain": 5.0,
+      "ramp_optimizer_steps": 200,
+      "finetune_optimizer_steps": 2000,
+      "new_module_lr": 2e-05,
+      "per_sample_per_update": true,
+      "sticky_trigger": false,
+      "keep_trainable_modules_unchanged": true,
+      "all_active_group_lr_multiplier": 0.2
+    },
+    "optional_overlap": {
+      "enabled": false,
+      "weight": 0.1,
+      "updates_1based": [
+        2,
+        4,
+        6,
+        8
+      ],
+      "grid_hw": [
+        7,
+        7
+      ],
+      "mask_source": "GT_overlap",
+      "on": "finite_valid_proposal_H",
+      "penalty": "SmoothL1_beta_1_input_px"
+    },
+    "optional_corr": {
+      "enabled": false,
+      "weight": 0.02,
+      "temperature": 0.1,
+      "max_queries_per_scale": 1024,
+      "iterations_1based": [
+        1
+      ],
+      "detach_aux_centers_and_labels": true,
+      "recompute_aux_correlation": true,
+      "label": "bilinear_soft_target_from_GT_H"
+    }
+  },
+  "training": {
+    "initial_phase": "heads",
+    "target_phase": "joint",
+    "optimizer": "AdamW",
+    "learning_rates": {
+      "new_modules": 0.0001,
+      "dedode": 1e-05,
+      "vgg": 5e-06,
+      "mvt": 1e-06
+    },
+    "weight_decay": 0.0001,
+    "gradient_accumulation": 4,
+    "gradient_clip_norm": 1.0,
+    "warmup_fraction": 0.05,
+    "scheduler": "cosine_to_0.1_initial_lr",
+    "heads_optimizer_steps": 10000,
+    "continuation_optimizer_steps": 10000,
+    "budget_status": "proposed_pilot_budget_confirm_after_profile",
+    "validation_interval": 500,
+    "feature_precision_cuda": "bfloat16",
+    "geometry_precision": "float32",
+    "vgg_bn_running_stats": "eval",
+    "vgg_bn_affine_trainable_when_vgg_trainable": true,
+    "freeze_dino_eval": true,
+    "default_h0_aux_loss_weight": 0,
+    "avoid_cache_after_trainable_mvt_vgg_dedode": true,
+    "seed_pilot": 0,
+    "seeds_final": [
+      0,
+      1,
+      2
+    ]
+  },
+  "expected_new_parameters": 2544160,
+  "new_planar_or_confidence_heads": false,
+  "runtime_paths": "provided_separately_via_cli_no_hardcoded_paths",
+  "results": null,
+  "loss_revision": "1.1",
+  "training_revision": "1.2"
+}

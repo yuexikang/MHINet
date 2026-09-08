@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mhinet"
+version = "0.1.0"
+description = "Differentiable multi-scale homography iteration on shared DINOv3/MVT and DeDoDe features"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy>=1.24",
+  "Pillow>=9",
+  "torch>=2.1",
+  "torchvision>=0.16",
+]
+
+[project.scripts]
+mhinet = "mhinet.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["mhinet*"]

@@ -1,0 +1,15 @@
+{
+  "scope": "numpy_float64_geometry_equations_only_not_model_test",
+  "cases": 128,
+  "seed": 20260907,
+  "max_four_point_reconstruction_error_input_px": 2.611244553918368e-13,
+  "max_scale_transform_error_scale_px": 3.410605131648481e-13,
+  "status": "passed",
+  "not_tested": [
+    "torch_backward",
+    "GPU_precision",
+    "model_forward",
+    "training",
+    "learned_accuracy"
+  ]
+}

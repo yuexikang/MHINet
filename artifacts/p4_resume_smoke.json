@@ -1,0 +1,45 @@
+{
+  "gate": "P4_EXACT_BOUNDARY_RESUME_SMOKE",
+  "status": "passed_with_documented_cuda_nondeterminism",
+  "training_config": "/home/disk1/MHINet/configs/train_minimal_smoke.json",
+  "training_config_sha256": "6946de077ed11b5f3a5dcf495003fe073a7c7e424815597b1cd716a66f0239c4",
+  "pause": {
+    "status": "paused",
+    "optimizer_step": 1,
+    "data_position": 4,
+    "checkpoint": "/home/disk1/MHINet/outputs/mhinet_resume_smoke/checkpoints/step_0000001.pt",
+    "checkpoint_bytes": 906932089,
+    "checkpoint_sha256": "5a17a0d4582b478fbe22c3081044ae2a08aab69c5ac68bcae72618cb5b2155f3"
+  },
+  "resume": {
+    "status": "completed",
+    "optimizer_step": 2,
+    "data_position": 8,
+    "checkpoint": "/home/disk1/MHINet/outputs/mhinet_resume_smoke/checkpoints/step_0000002.pt",
+    "checkpoint_bytes": 906932409,
+    "checkpoint_sha256": "5b339a7a8f81c77b2998ce078ce79dcc6d3a0d68f6f817ea5a1ccb3ee534021a",
+    "model_loaded_without_missing_or_unexpected_keys": true,
+    "optimizer_restored": true,
+    "scheduler_restored": true,
+    "cpu_rng_restored": true,
+    "cuda_rng_restored": true
+  },
+  "uninterrupted_reference": {
+    "checkpoint": "/home/disk1/MHINet/outputs/mhinet_minimal_smoke/checkpoints/step_0000002.pt",
+    "checkpoint_sha256": "fb3f0bdd23c9b8807965ddee7471e13d0b4d234f7f8094946e80a83831c75a75"
+  },
+  "comparison": {
+    "optimizer_step_equal": true,
+    "data_progress_equal": true,
+    "scheduler_state_equal": true,
+    "training_log_rounded_step_2_equal": true,
+    "model_tensors_total": 964,
+    "model_tensors_exactly_equal": 963,
+    "differing_tensor": "iterator.adapters.8.projection.weight",
+    "differing_elements": 134,
+    "maximum_absolute_difference": 8.298084139823914e-7,
+    "mean_absolute_difference_over_differing_tensor": 2.3996449272090103e-10,
+    "explanation": "CUDA grid_sample/adaptive_avg_pool backward kernels warn that they are nondeterministic; the boundary state and RNG streams restore correctly, while the resulting adapter difference is below 1e-6."
+  },
+  "scope_note": "This proves a usable optimizer-boundary pause/resume path, not model accuracy and not bitwise CUDA reproducibility."
+}

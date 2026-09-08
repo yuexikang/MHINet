@@ -1,0 +1,146 @@
+{
+  "gate": "P0",
+  "status": "passed",
+  "architecture": {
+    "path": "/home/disk1/MHINet/MHINet_server_handoff_v1.2/configs/mhinet_v1.json",
+    "sha256": "4a859f413ee4be59acb1dc6c0cf189e80b8f4e7b3f54dc9f117acd1ac5cfe128",
+    "training_revision": "1.2",
+    "loss_revision": "1.1"
+  },
+  "runtime_config": "/home/disk1/MHINet/configs/runtime_paths.server.json",
+  "source": {
+    "mhinet_repo": "/home/disk1/MHINet",
+    "loma": {
+      "path": "/home/disk1/LoMa",
+      "head": "899fdb99a4076e312196bbbf99a3c329739b5d7a",
+      "branch": "codex/stage1-dedode-pyramid-hroi-v1",
+      "dirty_paths": [],
+      "remote": "https://github.com/yuexikang/2-step.git"
+    },
+    "loma_expected_head": "899fdb99a4076e312196bbbf99a3c329739b5d7a",
+    "loma_head_matches_design": true,
+    "loretta": {
+      "path": "/home/disk1/LoMa/third_party/LoRetta",
+      "head": "e274bb5628e6324dbe36a1590d88e5adbfe1d06e",
+      "branch": "codex/stage1-local-support",
+      "dirty_paths": [],
+      "remote": "https://github.com/yusiwei77-star/LoRetta.git"
+    }
+  },
+  "assets": {
+    "dino_checkpoint": {
+      "path": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "resolved_path": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "bytes": 1294957584,
+      "sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e"
+    },
+    "selected_stage1_checkpoint": {
+      "path": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "resolved_path": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "bytes": 1294957584,
+      "sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e"
+    },
+    "pyramid_checkpoint": {
+      "path": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+      "resolved_path": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+      "bytes": 757888113,
+      "sha256": "3a38824391e22b33bb3e10377c7736243fd8a2fbf1561446e7e133e497c35758"
+    }
+  },
+  "data": {
+    "splits": {
+      "train": {
+        "manifest": "/home/disk1/Data/datasets/GoogleEarth_scale_pairs/train/pairs.jsonl",
+        "manifest_sha256": "3eed3d3d425caf8465afb5121dfd85960f00932fccc343f37187e14ce27d499c",
+        "rows": 36000,
+        "unique_pair_ids": 36000,
+        "unique_parent_ids": 18000,
+        "missing_required_files": []
+      },
+      "val": {
+        "manifest": "/home/disk1/Data/datasets/GoogleEarth_scale_pairs/val/pairs.jsonl",
+        "manifest_sha256": "a5e6f58bc46cef2dcc49db4e859e2a845755d6aee13be88c998f14a0386b5503",
+        "rows": 2500,
+        "unique_pair_ids": 2500,
+        "unique_parent_ids": 1250,
+        "missing_required_files": []
+      },
+      "test": {
+        "manifest": "/home/disk1/Data/datasets/GoogleEarth_scale_pairs/test/pairs.jsonl",
+        "manifest_sha256": "3db0eca8c64a23cb1000d6905cbcf82dd221f653033e3b8463cd9484601dfb06",
+        "rows": 1000,
+        "unique_pair_ids": 1000,
+        "unique_parent_ids": 1000,
+        "missing_required_files": []
+      }
+    },
+    "parent_overlap_examples": {
+      "train_val": [],
+      "train_test": [],
+      "val_test": []
+    },
+    "parent_disjoint": true,
+    "all_materialized": true
+  },
+  "environment": {
+    "python": "3.10.20 (main, Jun 11 2026, 15:17:37) [GCC 14.3.0]",
+    "platform": "Linux-6.8.0-56-generic-x86_64-with-glibc2.35",
+    "conda_prefix": "/root/miniconda3/envs/loma-repro",
+    "torch": "2.11.0+cu128",
+    "torch_cuda": "12.8",
+    "cudnn": 91900,
+    "cuda_available": true,
+    "bf16_supported": true,
+    "modules": {
+      "torchvision": {
+        "status": "available",
+        "version": "0.26.0+cu128"
+      },
+      "numpy": {
+        "status": "available",
+        "version": "2.2.6"
+      },
+      "scipy": {
+        "status": "available",
+        "version": "1.15.3"
+      },
+      "cv2": {
+        "status": "available",
+        "version": "4.13.0"
+      },
+      "kornia": {
+        "status": "available",
+        "version": "0.8.2"
+      },
+      "einops": {
+        "status": "available",
+        "version": "0.8.2"
+      },
+      "pytest": {
+        "status": "unavailable",
+        "error": "ModuleNotFoundError: No module named 'pytest'"
+      },
+      "openpyxl": {
+        "status": "unavailable",
+        "error": "ModuleNotFoundError: No module named 'openpyxl'"
+      },
+      "timm": {
+        "status": "unavailable",
+        "error": "AttributeError: `np.float_` was removed in the NumPy 2.0 release. Use `np.float64` instead."
+      }
+    },
+    "gpus": [
+      "0, NVIDIA GeForce RTX 4090, 24564, 565.57.01",
+      "1, NVIDIA GeForce RTX 4090, 24564, 565.57.01",
+      "2, NVIDIA GeForce RTX 4090, 24564, 565.57.01",
+      "3, NVIDIA GeForce RTX 4090, 24564, 565.57.01"
+    ]
+  },
+  "known_training_wrapper_audit": {
+    "legacy_full_model_train_forces_eval": true,
+    "legacy_extract_pyramid_inference_mode": true,
+    "legacy_mvt_contextualize_no_grad": true,
+    "stage1_head_forward_allows_input_gradient": true,
+    "new_provider_must_bypass_legacy_wrappers": true
+  }
+}

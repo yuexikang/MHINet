@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1090" viewBox="0 0 1600 1090">
+<rect width="100%" height="100%" fill="#f7f9fc"/>
+<text x="60" y="40" text-anchor="start" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="32" fill="#20354e">MHINet v1 | Multi-scale Homography Iteration Network</text>
+<text x="60" y="81" text-anchor="start" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="22" fill="#61768c">4 feature scales  /  2 updates per scale  /  8 corner-residual updates</text>
+<rect x="60" y="135" width="240" height="66" rx="12" fill="#ffffff" stroke="#a3b4c6" stroke-width="2"/>
+<text x="180.0" y="168.0" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="22" fill="#20354e">Image A + Image B</text>
+<text x="350" y="151" text-anchor="start" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="22" fill="#256ca3">A  PRESERVED GLOBAL INITIALIZATION</text>
+<rect x="350" y="185" width="230" height="86" rx="12" fill="#e7f0fb" stroke="#a3b4c6" stroke-width="2"/>
+<text x="465.0" y="214.5" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="22" fill="#20354e">Shared DINOv3</text>
+<text x="465.0" y="241.5" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="22" fill="#20354e">L11 / L17</text>
+<rect x="620" y="185" width="180" height="86" rx="12" fill="#e7f0fb" stroke="#a3b4c6" stroke-width="2"/>
+<text x="710.0" y="228.0" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="22" fill="#20354e">Shared MVT</text>
+<rect x="840" y="185" width="240" height="86" rx="12" fill="#e7f0fb" stroke="#a3b4c6" stroke-width="2"/>
+<text x="960.0" y="214.5" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="20" fill="#20354e">Pair-aware context</text>
+<text x="960.0" y="241.5" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="20" fill="#20354e">49 x 49 x 1024</text>
+<rect x="1120" y="185" width="240" height="86" rx="12" fill="#e7f0fb" stroke="#a3b4c6" stroke-width="2"/>
+<text x="1240.0" y="214.5" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="20" fill="#20354e">Existing Stage1 head</text>
+<text x="1240.0" y="241.5" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="20" fill="#20354e">+ original fitter</text>
+<rect x="1410" y="195" width="120" height="65" rx="12" fill="#e7f0fb" stroke="#a3b4c6" stroke-width="2"/>
+<text x="1470.0" y="227.5" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="22" fill="#20354e">H0</text>
+<polyline points="300,168 325,168 325,228 350,228" fill="none" stroke="#56738f" stroke-width="3"/>
+<polygon points="350,228 339.1946347717679,233.21958640933477 339.1946347717679,222.78041359066523" fill="#56738f"/>
+<polyline points="580,228 620,228" fill="none" stroke="#56738f" stroke-width="3"/>
+<polygon points="620,228 609.1946347717678,233.21958640933477 609.1946347717678,222.78041359066523" fill="#56738f"/>
+<polyline points="800,228 840,228" fill="none" stroke="#56738f" stroke-width="3"/>
+<polygon points="840,228 829.1946347717678,233.21958640933477 829.1946347717678,222.78041359066523" fill="#56738f"/>
+<polyline points="1080,228 1120,228" fill="none" stroke="#56738f" stroke-width="3"/>
+<polygon points="1120,228 1109.1946347717678,233.21958640933477 1109.1946347717678,222.78041359066523" fill="#56738f"/>
+<polyline points="1360,228 1410,228" fill="none" stroke="#56738f" stroke-width="3"/>
+<polygon points="1410,228 1399.1946347717678,233.21958640933477 1399.1946347717678,222.78041359066523" fill="#56738f"/>
+<text x="570" y="311" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="20" fill="#61768c">One shared context; one backbone extraction</text>
+<text x="350" y="373" text-anchor="start" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="22" fill="#247c62">B  CUMULATIVE FEATURE PYRAMID</text>
+<rect x="60" y="430" width="240" height="86" rx="12" fill="#e6f4ec" stroke="#a3b4c6" stroke-width="2"/>
+<text x="180.0" y="459.5" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="22" fill="#20354e">Shared VGG19-BN</text>
+<text x="180.0" y="486.5" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="22" fill="#20354e">local features</text>
+<rect x="350" y="425" width="460" height="100" rx="12" fill="#e6f4ec" stroke="#a3b4c6" stroke-width="2"/>
+<text x="580.0" y="461.5" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="22" fill="#20354e">DeDoDe cumulative decoder</text>
+<text x="580.0" y="488.5" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="22" fill="#20354e">Export D8 / D4 / D2 / D1</text>
+<polyline points="180,201 180,430" fill="none" stroke="#247c62" stroke-width="3"/>
+<polygon points="180,430 174.78041359066523,419.1946347717679 185.21958640933477,419.1946347717679" fill="#247c62"/>
+<polyline points="300,473 350,473" fill="none" stroke="#247c62" stroke-width="3"/>
+<polygon points="350,473 339.1946347717679,478.21958640933474 339.1946347717679,467.78041359066526" fill="#247c62"/>
+<polyline points="960,271 960,349 780,349 780,425" fill="none" stroke="#247c62" stroke-width="3"/>
+<polygon points="780,425 774.7804135906653,414.1946347717679 785.2195864093347,414.1946347717679" fill="#247c62"/>
+<text x="1150" y="442" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="21" fill="#247c62">A/B share the adapter at each scale</text>
+<text x="1150" y="480" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="20" fill="#61768c">Full source grid + local target candidates</text>
+<rect x="340" y="595" width="240" height="90" rx="12" fill="#e6f4ec" stroke="#a3b4c6" stroke-width="2"/>
+<text x="460.0" y="626.5" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="20" fill="#20354e">D8 -&gt; 64 channels</text>
+<text x="460.0" y="653.5" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="20" fill="#20354e">98 x 98   |   K=81</text>
+<rect x="650" y="595" width="240" height="90" rx="12" fill="#e6f4ec" stroke="#a3b4c6" stroke-width="2"/>
+<text x="770.0" y="626.5" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="20" fill="#20354e">D4 -&gt; 64 channels</text>
+<text x="770.0" y="653.5" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="20" fill="#20354e">196 x 196   |   K=81</text>
+<rect x="960" y="595" width="240" height="90" rx="12" fill="#e6f4ec" stroke="#a3b4c6" stroke-width="2"/>
+<text x="1080.0" y="626.5" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="20" fill="#20354e">D2 -&gt; 32 channels</text>
+<text x="1080.0" y="653.5" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="20" fill="#20354e">392 x 392   |   K=49</text>
+<rect x="1270" y="595" width="240" height="90" rx="12" fill="#e6f4ec" stroke="#a3b4c6" stroke-width="2"/>
+<text x="1390.0" y="626.5" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="20" fill="#20354e">D1 -&gt; 32 channels</text>
+<text x="1390.0" y="653.5" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="20" fill="#20354e">784 x 784   |   K=25</text>
+<polyline points="580,525 580,561" fill="none" stroke="#247c62" stroke-width="3"/>
+<polyline points="460,561 1390,561" fill="none" stroke="#247c62" stroke-width="3"/>
+<polyline points="460,561 460,595" fill="none" stroke="#247c62" stroke-width="3"/>
+<polygon points="460,595 454.78041359066526,584.1946347717678 465.21958640933474,584.1946347717678" fill="#247c62"/>
+<polyline points="770,561 770,595" fill="none" stroke="#247c62" stroke-width="3"/>
+<polygon points="770,595 764.7804135906653,584.1946347717678 775.2195864093347,584.1946347717678" fill="#247c62"/>
+<polyline points="1080,561 1080,595" fill="none" stroke="#247c62" stroke-width="3"/>
+<polygon points="1080,595 1074.7804135906651,584.1946347717678 1085.2195864093349,584.1946347717678" fill="#247c62"/>
+<polyline points="1390,561 1390,595" fill="none" stroke="#247c62" stroke-width="3"/>
+<polygon points="1390,595 1384.7804135906651,584.1946347717678 1395.2195864093349,584.1946347717678" fill="#247c62"/>
+<text x="60" y="726" text-anchor="start" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="22" fill="#9a5d24">C  H ITERATOR</text>
+<text x="60" y="763" text-anchor="start" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="20" fill="#9a5d24">4 scales x 2 updates</text>
+<rect x="340" y="790" width="240" height="95" rx="12" fill="#fff0df" stroke="#a3b4c6" stroke-width="2"/>
+<text x="460.0" y="824.0" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="20" fill="#20354e">Refine-8 x 2</text>
+<text x="460.0" y="851.0" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="20" fill="#20354e">Shared within scale</text>
+<polyline points="460,685 460,790" fill="none" stroke="#247c62" stroke-width="3"/>
+<polygon points="460,790 454.78041359066526,779.1946347717678 465.21958640933474,779.1946347717678" fill="#247c62"/>
+<rect x="650" y="790" width="240" height="95" rx="12" fill="#fff0df" stroke="#a3b4c6" stroke-width="2"/>
+<text x="770.0" y="824.0" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="20" fill="#20354e">Refine-4 x 2</text>
+<text x="770.0" y="851.0" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="20" fill="#20354e">Shared within scale</text>
+<polyline points="770,685 770,790" fill="none" stroke="#247c62" stroke-width="3"/>
+<polygon points="770,790 764.7804135906653,779.1946347717678 775.2195864093347,779.1946347717678" fill="#247c62"/>
+<rect x="960" y="790" width="240" height="95" rx="12" fill="#fff0df" stroke="#a3b4c6" stroke-width="2"/>
+<text x="1080.0" y="824.0" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="20" fill="#20354e">Refine-2 x 2</text>
+<text x="1080.0" y="851.0" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="20" fill="#20354e">Shared within scale</text>
+<polyline points="1080,685 1080,790" fill="none" stroke="#247c62" stroke-width="3"/>
+<polygon points="1080,790 1074.7804135906651,779.1946347717678 1085.2195864093349,779.1946347717678" fill="#247c62"/>
+<rect x="1270" y="790" width="240" height="95" rx="12" fill="#fff0df" stroke="#a3b4c6" stroke-width="2"/>
+<text x="1390.0" y="824.0" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="20" fill="#20354e">Refine-1 x 2</text>
+<text x="1390.0" y="851.0" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="20" fill="#20354e">Shared within scale</text>
+<polyline points="1390,685 1390,790" fill="none" stroke="#247c62" stroke-width="3"/>
+<polygon points="1390,790 1384.7804135906651,779.1946347717678 1395.2195864093349,779.1946347717678" fill="#247c62"/>
+<polyline points="1470,195 1470,116 25,116 25,837 340,837" fill="none" stroke="#256ca3" stroke-width="3"/>
+<polygon points="340,837 329.1946347717679,842.2195864093347 329.1946347717679,831.7804135906653" fill="#256ca3"/>
+<polyline points="580,837 650,837" fill="none" stroke="#9a5d24" stroke-width="3"/>
+<polygon points="650,837 639.1946347717678,842.2195864093347 639.1946347717678,831.7804135906653" fill="#9a5d24"/>
+<text x="615.0" y="811" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="18" fill="#9a5d24">H[8]</text>
+<polyline points="890,837 960,837" fill="none" stroke="#9a5d24" stroke-width="3"/>
+<polygon points="960,837 949.1946347717678,842.2195864093347 949.1946347717678,831.7804135906653" fill="#9a5d24"/>
+<text x="925.0" y="811" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="18" fill="#9a5d24">H[4]</text>
+<polyline points="1200,837 1270,837" fill="none" stroke="#9a5d24" stroke-width="3"/>
+<polygon points="1270,837 1259.1946347717678,842.2195864093347 1259.1946347717678,831.7804135906653" fill="#9a5d24"/>
+<text x="1235.0" y="811" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="18" fill="#9a5d24">H[2]</text>
+<rect x="1270" y="944" width="240" height="66" rx="12" fill="#fce3c7" stroke="#a3b4c6" stroke-width="2"/>
+<text x="1390.0" y="977.0" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="21" fill="#20354e">H[1] = final H</text>
+<polyline points="1390,885 1390,944" fill="none" stroke="#9a5d24" stroke-width="3"/>
+<polygon points="1390,944 1384.7804135906651,933.1946347717678 1395.2195864093349,933.1946347717678" fill="#9a5d24"/>
+<rect x="60" y="936" width="1100" height="100" rx="12" fill="#ffffff" stroke="#a3b4c6" stroke-width="2"/>
+<text x="610.0" y="972.5" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="22" fill="#20354e">Every update: current H -&gt; local correlation -&gt; CNN -&gt; 4 x 2 corner residual</text>
+<text x="610.0" y="999.5" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="22" fill="#20354e">Add corner displacement -&gt; four-point DLT -&gt; next H</text>
+<text x="800" y="1065" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="18" fill="#61768c">Current design: no new Planar / confidence branch. Existing Stage1 remains intact. Not yet implemented.</text>
+</svg>

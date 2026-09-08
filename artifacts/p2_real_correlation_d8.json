@@ -1,0 +1,413 @@
+{
+  "gate": "P2_real_correlation_signal_audit",
+  "status": "diagnostic",
+  "pair_id": "current__34.801100126.376330_pair0",
+  "scale": 8,
+  "seed": 0,
+  "controlled_corner_residual_input_px": [
+    [
+      -4.49737548828125,
+      1.0654296875
+    ],
+    [
+      -4.541259765625,
+      0.19384765625
+    ],
+    [
+      -5.5999908447265625,
+      -0.59466552734375
+    ],
+    [
+      -2.8975830078125,
+      0.75701904296875
+    ]
+  ],
+  "adapter_valid_points": 19208,
+  "random_zero_init_adapter": {
+    "feature_shape": [
+      1,
+      2,
+      64,
+      98,
+      98
+    ],
+    "feature_dtype": "torch.float32",
+    "radius": 4,
+    "queries": 9604,
+    "observable_queries": 4726,
+    "selected_queries": 4726,
+    "selected_fraction": 0.49208661913871765,
+    "oracle_offset_feature_px": {
+      "mean": 0.6292625069618225,
+      "median": 0.6341605186462402,
+      "p90": 0.6712793111801147,
+      "min": 0.5223146080970764,
+      "max": 0.7030838131904602
+    },
+    "argmax_endpoint_error_feature_px": {
+      "mean": 0.6189116835594177,
+      "median": 0.3921554386615753,
+      "p90": 1.0988492965698242,
+      "min": 0.31077703833580017,
+      "max": 6.123338222503662
+    },
+    "argmax_within_0_75_feature_px": 0.8675412535667419,
+    "argmax_within_1_5_feature_px": 0.9517562389373779,
+    "nearest_integer_candidate_top1_fraction": 0.6910706758499146,
+    "nearest_integer_candidate_rank": {
+      "mean": 2.1603894233703613,
+      "median": 1.0,
+      "p90": 3.0,
+      "min": 1.0,
+      "max": 59.0
+    },
+    "nearest_integer_candidate_correlation": {
+      "mean": 0.920215904712677,
+      "median": 0.9600461721420288,
+      "p90": 0.9893490076065063,
+      "min": 0.09230292588472366,
+      "max": 0.9964092969894409
+    },
+    "center_candidate_correlation": {
+      "mean": 0.9054487347602844,
+      "median": 0.9527288675308228,
+      "p90": 0.9814329743385315,
+      "min": 0.0,
+      "max": 0.9933983087539673
+    },
+    "nearest_minus_center_correlation": {
+      "mean": 0.014767248183488846,
+      "median": 0.00861513614654541,
+      "p90": 0.029319703578948975,
+      "min": -0.1034398078918457,
+      "max": 0.873382568359375
+    },
+    "valid_candidates_per_query": {
+      "mean": 78.52052307128906,
+      "median": 81.0,
+      "p90": 81.0,
+      "min": 20.0,
+      "max": 81.0
+    }
+  },
+  "raw_256d_descriptor": {
+    "feature_shape": [
+      1,
+      2,
+      256,
+      98,
+      98
+    ],
+    "feature_dtype": "torch.float32",
+    "radius": 4,
+    "queries": 9604,
+    "observable_queries": 4726,
+    "selected_queries": 4726,
+    "selected_fraction": 0.49208661913871765,
+    "oracle_offset_feature_px": {
+      "mean": 0.6292625069618225,
+      "median": 0.6341605186462402,
+      "p90": 0.6712793111801147,
+      "min": 0.5223146080970764,
+      "max": 0.7030838131904602
+    },
+    "argmax_endpoint_error_feature_px": {
+      "mean": 0.4927668571472168,
+      "median": 0.38433533906936646,
+      "p90": 0.6744692325592041,
+      "min": 0.31077703833580017,
+      "max": 6.113300800323486
+    },
+    "argmax_within_0_75_feature_px": 0.933559000492096,
+    "argmax_within_1_5_feature_px": 0.988785445690155,
+    "nearest_integer_candidate_top1_fraction": 0.7816334962844849,
+    "nearest_integer_candidate_rank": {
+      "mean": 1.493652105331421,
+      "median": 1.0,
+      "p90": 2.0,
+      "min": 1.0,
+      "max": 42.0
+    },
+    "nearest_integer_candidate_correlation": {
+      "mean": 0.9261704087257385,
+      "median": 0.9622912406921387,
+      "p90": 0.9887085556983948,
+      "min": 0.20399081707000732,
+      "max": 0.994865894317627
+    },
+    "center_candidate_correlation": {
+      "mean": 0.9119369387626648,
+      "median": 0.9553405046463013,
+      "p90": 0.9799225330352783,
+      "min": 0.0,
+      "max": 0.9905930757522583
+    },
+    "nearest_minus_center_correlation": {
+      "mean": 0.014233484864234924,
+      "median": 0.00812375545501709,
+      "p90": 0.020987898111343384,
+      "min": -0.05248236656188965,
+      "max": 0.8918606638908386
+    },
+    "valid_candidates_per_query": {
+      "mean": 78.52052307128906,
+      "median": 81.0,
+      "p90": 81.0,
+      "min": 20.0,
+      "max": 81.0
+    }
+  },
+  "shared_call_counts": {
+    "dino": 1,
+    "mvt": 1,
+    "vgg": 1,
+    "dedode_full_pyramid": 1
+  },
+  "build": {
+    "architecture_path": "/home/disk1/MHINet/MHINet_server_handoff_v1.2/configs/mhinet_v1.json",
+    "architecture_sha256": "4a859f413ee4be59acb1dc6c0cf189e80b8f4e7b3f54dc9f117acd1ac5cfe128",
+    "provider": {
+      "loma_root": "/home/disk1/LoMa",
+      "loma_checkpoint": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+      "dino_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "selected_stage1_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "loretta_loaded_keys": 807,
+      "locator": {
+        "source": "official_loretta_checkpoint",
+        "overridden": false
+      },
+      "descriptor_initialization": {
+        "migrated_tensors": 364,
+        "vgg_tensors": 84,
+        "decoder_tensors": 280,
+        "top_refiner_mapping": "LoMa-B scale 14 -> DINOv3 scale 16"
+      },
+      "ownership": {
+        "dino_wrapper_instances": 1,
+        "mvt_object_references": 1,
+        "stage1_head_contains_dino": 0,
+        "stage1_head_contains_mvt": 0,
+        "decoder_scales": [
+          "16",
+          "8",
+          "4",
+          "2",
+          "1"
+        ]
+      },
+      "legacy_training_wrappers_reused": false,
+      "safe_stage1_fitter": true
+    },
+    "training_parameters": {
+      "profile": "heads",
+      "groups": {
+        "new_modules": {
+          "parameters": 2544160,
+          "trainable_parameters": 2544160,
+          "tensor_count": 158,
+          "trainable_tensor_count": 158,
+          "optimizer_parameter_ids": [
+            133775418916464,
+            133775418916144,
+            133775418915824,
+            133775418915504,
+            133775418915184,
+            133775418915024,
+            133775418914864,
+            133775418914064,
+            133775418913904,
+            133775418913744,
+            133775418913424,
+            133775418913264,
+            133775418913104,
+            133775418912784,
+            133775418912464,
+            133775418912304,
+            133775418912144,
+            133775418911824,
+            133775418911664,
+            133775418911504,
+            133775418911184,
+            133775418910864,
+            133775418910704,
+            133775418910544,
+            133775418910224,
+            133775418910064,
+            133775418909904,
+            133775418909584,
+            133775418909424,
+            133775418909264,
+            133775418909104,
+            133775418908944,
+            133775418908624,
+            133775418908464,
+            133775418908304,
+            133775418907984,
+            133775418907824,
+            133775418907664,
+            133775418907344,
+            133775418907184,
+            133775418907024,
+            133775418906704,
+            133775418906384,
+            133775418906224,
+            133775418906064,
+            133775418905744,
+            133775418905584,
+            133775418905424,
+            133775418905104,
+            133775418904784,
+            133775418904624,
+            133775418904464,
+            133775418904144,
+            133775418903984,
+            133775418903824,
+            133775418903504,
+            133775418903184,
+            133775418903024,
+            133775418902864,
+            133775418902544,
+            133775418902384,
+            133775418902224,
+            133775418901904,
+            133775418901744,
+            133775418901584,
+            133775418901424,
+            133775418901264,
+            133775418900944,
+            133775418900784,
+            133775418900624,
+            133775418901664,
+            133775418901504,
+            133775418901824,
+            133775418900704,
+            133775418901984,
+            133775418902144,
+            133775418901024,
+            133775418902464,
+            133775418902624,
+            133775418902784,
+            133775418903104,
+            133775418903264,
+            133775418903424,
+            133775418903744,
+            133775418904064,
+            133775418904224,
+            133775418904384,
+            133775418904704,
+            133775418904864,
+            133775418905024,
+            133775418905344,
+            133775418905664,
+            133775418905824,
+            133775418905984,
+            133775418906304,
+            133775418906464,
+            133775418906624,
+            133775418906944,
+            133775418907264,
+            133775418907424,
+            133775418907584,
+            133775418907904,
+            133775418908064,
+            133775418908224,
+            133775418908544,
+            133775418908704,
+            133775418908864,
+            133775418909024,
+            133775418909184,
+            133775418909504,
+            133775418909664,
+            133775418909824,
+            133775418910144,
+            133775418910304,
+            133775418910464,
+            133775418910784,
+            133775418910944,
+            133775418911104,
+            133775418911424,
+            133775418911744,
+            133775418911904,
+            133775418912064,
+            133775418912384,
+            133775418912544,
+            133775418912704,
+            133775418913024,
+            133775418913344,
+            133775418913504,
+            133775418913664,
+            133775418913984,
+            133775418914144,
+            133775418914304,
+            133775418914624,
+            133775418914944,
+            133775418915104,
+            133775418915264,
+            133775418915584,
+            133775418915744,
+            133775418915904,
+            133775418916224,
+            133775418916384,
+            133775418785712,
+            133775418785552,
+            133775418785232,
+            133775418785072,
+            133775418784912,
+            133775418784592,
+            133775418784272,
+            133775418784112,
+            133775418783952,
+            133775418783632,
+            133775418783472,
+            133775418783312,
+            133775418782992,
+            133775418782832,
+            133775418782672,
+            133775418782512,
+            133775418782352
+          ]
+        },
+        "dedode": {
+          "parameters": 8219297,
+          "trainable_parameters": 0,
+          "tensor_count": 190,
+          "trainable_tensor_count": 0,
+          "optimizer_parameter_ids": []
+        },
+        "vgg": {
+          "parameters": 10592064,
+          "trainable_parameters": 0,
+          "tensor_count": 48,
+          "trainable_tensor_count": 0,
+          "optimizer_parameter_ids": []
+        },
+        "mvt": {
+          "parameters": 87417088,
+          "trainable_parameters": 0,
+          "tensor_count": 150,
+          "trainable_tensor_count": 0,
+          "optimizer_parameter_ids": []
+        },
+        "dino": {
+          "parameters": 227564544,
+          "trainable_parameters": 0,
+          "tensor_count": 259,
+          "trainable_tensor_count": 0,
+          "optimizer_parameter_ids": []
+        },
+        "stage1_head_parameters": {
+          "parameters": 2957572,
+          "trainable_parameters": 0,
+          "tensor_count": 10,
+          "trainable_tensor_count": 0,
+          "optimizer_parameter_ids": []
+        }
+      },
+      "total_trainable_parameters": 2544160,
+      "new_parameters": 2544160,
+      "dino_trainable_parameters": 0,
+      "stage1_head_trainable_parameters": 0
+    }
+  },
+  "interpretation": "This measures fixed-feature local retrieval signal only. It is not a training result or validation metric."
+}

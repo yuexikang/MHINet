@@ -1,0 +1,4072 @@
+{
+  "gate": "P4_TINY_S_TINY_8",
+  "status": "failed",
+  "protocol": {
+    "training_revision": "1.2",
+    "loss": "uniform proposal-corner coordinate L1",
+    "FGO": false,
+    "extra_losses": false,
+    "planar_head": false,
+    "precision": "BF16 feature/CNN autocast, FP32 correlation/geometry",
+    "deterministic_algorithms": "enabled_warn_only"
+  },
+  "runtime_config": "/home/disk1/MHINet/configs/runtime_paths.server.json",
+  "device": "cuda:0",
+  "build": {
+    "architecture_path": "/home/disk1/MHINet/MHINet_server_handoff_v1.2/configs/mhinet_v1.json",
+    "architecture_sha256": "4a859f413ee4be59acb1dc6c0cf189e80b8f4e7b3f54dc9f117acd1ac5cfe128",
+    "provider": {
+      "loma_root": "/home/disk1/LoMa",
+      "loma_checkpoint": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+      "dino_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "selected_stage1_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "loretta_loaded_keys": 807,
+      "locator": {
+        "source": "official_loretta_checkpoint",
+        "overridden": false
+      },
+      "descriptor_initialization": {
+        "migrated_tensors": 364,
+        "vgg_tensors": 84,
+        "decoder_tensors": 280,
+        "top_refiner_mapping": "LoMa-B scale 14 -> DINOv3 scale 16"
+      },
+      "ownership": {
+        "dino_wrapper_instances": 1,
+        "mvt_object_references": 1,
+        "stage1_head_contains_dino": 0,
+        "stage1_head_contains_mvt": 0,
+        "decoder_scales": [
+          "16",
+          "8",
+          "4",
+          "2",
+          "1"
+        ]
+      },
+      "legacy_training_wrappers_reused": false,
+      "safe_stage1_fitter": true
+    },
+    "training_parameters": {
+      "profile": "heads",
+      "groups": {
+        "new_modules": {
+          "parameters": 2544160,
+          "trainable_parameters": 2544160,
+          "tensor_count": 158,
+          "trainable_tensor_count": 158,
+          "optimizer_parameter_ids": [
+            130787336092576,
+            130786991978864,
+            130787493582528,
+            130786820556816,
+            130786820556576,
+            130787671684688,
+            130786820558896,
+            130786820557696,
+            130786820557536,
+            130786820557856,
+            130786820558096,
+            130786820558016,
+            130786820558336,
+            130786820558176,
+            130786820558736,
+            130786820558656,
+            130786820560416,
+            130786820559136,
+            130786820559056,
+            130786820559216,
+            130786820559616,
+            130786820559776,
+            130786820559696,
+            130786820559856,
+            130786820560256,
+            130786820560176,
+            130786820560016,
+            130786820561936,
+            130786820560496,
+            130786820560736,
+            130786820560656,
+            130786820560896,
+            130786820561136,
+            130786820561056,
+            130786820561376,
+            130786820561616,
+            130786820561216,
+            130786820561856,
+            130786820563456,
+            130786820562016,
+            130786820562176,
+            130786820562256,
+            130786820562656,
+            130786820562576,
+            130786820562416,
+            130786820562896,
+            130786820562816,
+            130786820563296,
+            130786820562976,
+            130786820564976,
+            130786820563536,
+            130786820563776,
+            130786820563936,
+            130786820563856,
+            130786820564256,
+            130786820564416,
+            130786820564656,
+            130786820564176,
+            130786820564896,
+            130786820566496,
+            130786820565056,
+            130786820564816,
+            130786820565296,
+            130786820565216,
+            130786820565696,
+            130786820565616,
+            130786820565376,
+            130786820565936,
+            130786820565856,
+            130786820566336,
+            130786820566416,
+            130786820566016,
+            130786820568016,
+            130786820566816,
+            130786820566736,
+            130786820566976,
+            130786820567296,
+            130786820567456,
+            130786820567376,
+            130786820567696,
+            130786820567936,
+            130786820567856,
+            130786820569536,
+            130786820567776,
+            130786820568336,
+            130786820568256,
+            130786820568736,
+            130786820568816,
+            130786820568416,
+            130786820569056,
+            130786820569376,
+            130786820569456,
+            130786820568976,
+            130786820571056,
+            130786820569856,
+            130786820569776,
+            130786820569616,
+            130786820570336,
+            130786820570496,
+            130786820570416,
+            130786820570736,
+            130786820570976,
+            130786820570896,
+            130786820570816,
+            130786820554816,
+            130786820555056,
+            130786820554976,
+            130786820555376,
+            130786820555296,
+            130786820555456,
+            130786820555696,
+            130786820555616,
+            130786820555936,
+            130786820556096,
+            130786820556256,
+            130786820556896,
+            130786820557056,
+            130786820557936,
+            130786820558416,
+            130786820559296,
+            130786820559456,
+            130786820559936,
+            130786820560976,
+            130786820560576,
+            130786820561456,
+            130786820562336,
+            130786820563056,
+            130786820563136,
+            130786820563616,
+            130786820564496,
+            130786820564576,
+            130786820565456,
+            130786820566096,
+            130786820566576,
+            130786820567056,
+            130786820567536,
+            130786820568496,
+            130786820568576,
+            130786820569136,
+            130786820570016,
+            130786820570576,
+            130786820570176,
+            130786820555136,
+            130786820555776,
+            130786820555856,
+            130786991127536,
+            130786991127856,
+            130786991128176,
+            130786991128336,
+            130786991128496,
+            130786991112336,
+            130786991112496,
+            130786991112656,
+            130786991112976,
+            130786991113136,
+            130786991113296,
+            130786991113456,
+            130786991113616
+          ]
+        },
+        "dedode": {
+          "parameters": 8219297,
+          "trainable_parameters": 0,
+          "tensor_count": 190,
+          "trainable_tensor_count": 0,
+          "optimizer_parameter_ids": []
+        },
+        "vgg": {
+          "parameters": 10592064,
+          "trainable_parameters": 0,
+          "tensor_count": 48,
+          "trainable_tensor_count": 0,
+          "optimizer_parameter_ids": []
+        },
+        "mvt": {
+          "parameters": 87417088,
+          "trainable_parameters": 0,
+          "tensor_count": 150,
+          "trainable_tensor_count": 0,
+          "optimizer_parameter_ids": []
+        },
+        "dino": {
+          "parameters": 227564544,
+          "trainable_parameters": 0,
+          "tensor_count": 259,
+          "trainable_tensor_count": 0,
+          "optimizer_parameter_ids": []
+        },
+        "stage1_head_parameters": {
+          "parameters": 2957572,
+          "trainable_parameters": 0,
+          "tensor_count": 10,
+          "trainable_tensor_count": 0,
+          "optimizer_parameter_ids": []
+        }
+      },
+      "total_trainable_parameters": 2544160,
+      "new_parameters": 2544160,
+      "dino_trainable_parameters": 0,
+      "stage1_head_trainable_parameters": 0
+    }
+  },
+  "cache": {
+    "source": "leakage-safe train split; exact single-image homography pairs",
+    "manifest": "/home/disk1/Data/datasets/GoogleEarth_scale_pairs/train/pairs.jsonl",
+    "manifest_sha256": "3eed3d3d425caf8465afb5121dfd85960f00932fccc343f37187e14ce27d499c",
+    "sample_count": 1,
+    "pair_ids": [
+      "current__34.801100126.376330_pair0"
+    ],
+    "parent_groups": [
+      "parent:current/Train/34.801100126.376330.jpg"
+    ],
+    "geo_groups": [
+      "geo_0.01:3480:12637"
+    ],
+    "validation_geo_groups_used_only_for_exclusion": 190,
+    "test_used": false,
+    "provider_prefix_computed": [
+      8
+    ],
+    "stored_scales": [
+      8
+    ],
+    "feature_shapes": {
+      "8": [
+        1,
+        2,
+        256,
+        98,
+        98
+      ]
+    },
+    "feature_dtypes": {
+      "8": "torch.bfloat16"
+    },
+    "cache_bytes_cpu": 9834496,
+    "shared_call_counts_total": {
+      "dino": 1,
+      "mvt": 1,
+      "vgg": 1,
+      "dedode_full_pyramid": 1
+    },
+    "shared_once_per_pair": true,
+    "elapsed_seconds": 0.6306326892226934,
+    "pairs_per_second": 1.585709109422447,
+    "peak_allocated_bytes": 1609051648,
+    "sample_protocol": "one_pair_residuals",
+    "unique_image_pair_count": 1,
+    "diagnostic_sample_count": 32,
+    "diagnostic_sample_definition": "one exact image pair with 32 deterministic locally observable H0 residuals"
+  },
+  "experiments": [
+    {
+      "name": "TINY-S-D8",
+      "status": "failed",
+      "active_scales": [
+        8
+      ],
+      "updates": 2,
+      "seed": 0,
+      "sample_count": 32,
+      "sample_protocol": "one_pair_residuals",
+      "residual_profile": "translation",
+      "optimizer": {
+        "name": "AdamW",
+        "learning_rate": 0.001,
+        "weight_decay": 0.0,
+        "scheduler": null,
+        "batch_size": 1,
+        "gradient_accumulation": 4,
+        "effective_batch_size": 4,
+        "gradient_clip_norm": 1.0,
+        "optimizer_steps": 2000,
+        "maximum_steps": 2000
+      },
+      "controlled_H0": {
+        "source": "GT plus deterministic diagnostic-only corner residual",
+        "profile": "translation",
+        "formal_training_injection": false,
+        "maximum_declared_abs_residual_px": 16.0,
+        "actual_abs_residual_px": {
+          "mean": 9.388519287109375,
+          "median": 11.200057983398438,
+          "p90": 15.20001220703125,
+          "max": 16.00006103515625
+        }
+      },
+      "criterion": {
+        "definition": "32-sample mean final MACE < threshold, zero failed pairs, zero rejected updates",
+        "threshold_mace_px": 0.1,
+        "met": false
+      },
+      "initial": {
+        "trajectory_mean_mace_px": [
+          14.868889808654785,
+          14.868888854980469,
+          14.868888854980469
+        ],
+        "trajectory_median_mace_px": [
+          14.293676376342773,
+          14.293655395507812,
+          14.293655395507812
+        ],
+        "H0_mace_px": {
+          "mean": 14.868890762329102,
+          "median": 14.293676376342773,
+          "p90": 18.711280822753906,
+          "max": 20.25677490234375
+        },
+        "H_final_mace_px": {
+          "mean": 14.868888854980469,
+          "median": 14.293655395507812,
+          "p90": 18.711286544799805,
+          "max": 20.256790161132812
+        },
+        "failed_pairs": 0,
+        "failure_rate": 0.0,
+        "rejected_updates": 0,
+        "rejected_update_rate": 0.0,
+        "elapsed_seconds": 4.589947863481939,
+        "latency_ms_per_pair_single_pass": 143.4358707338106,
+        "per_pair": [
+          {
+            "diagnostic_sample_index": 0,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              11.351982116699219,
+              11.351971626281738,
+              11.351971626281738
+            ],
+            "H0_mace_px": 11.351982116699219,
+            "H_updates_mace_px": [
+              11.351971626281738,
+              11.351971626281738
+            ],
+            "H_final_mace_px": 11.351971626281738,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 1,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              12.436074256896973,
+              12.436044692993164,
+              12.436044692993164
+            ],
+            "H0_mace_px": 12.436074256896973,
+            "H_updates_mace_px": [
+              12.436044692993164,
+              12.436044692993164
+            ],
+            "H_final_mace_px": 12.436044692993164,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 2,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              12.816895484924316,
+              12.816909790039062,
+              12.816909790039062
+            ],
+            "H0_mace_px": 12.816895484924316,
+            "H_updates_mace_px": [
+              12.816909790039062,
+              12.816909790039062
+            ],
+            "H_final_mace_px": 12.816909790039062,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 3,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              15.5220308303833,
+              15.522069931030273,
+              15.522069931030273
+            ],
+            "H0_mace_px": 15.5220308303833,
+            "H_updates_mace_px": [
+              15.522069931030273,
+              15.522069931030273
+            ],
+            "H_final_mace_px": 15.522069931030273,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 4,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              17.24793815612793,
+              17.247943878173828,
+              17.247943878173828
+            ],
+            "H0_mace_px": 17.24793815612793,
+            "H_updates_mace_px": [
+              17.247943878173828,
+              17.247943878173828
+            ],
+            "H_final_mace_px": 17.247943878173828,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 5,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              20.25677490234375,
+              20.256790161132812,
+              20.256790161132812
+            ],
+            "H0_mace_px": 20.25677490234375,
+            "H_updates_mace_px": [
+              20.256790161132812,
+              20.256790161132812
+            ],
+            "H_final_mace_px": 20.256790161132812,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 6,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              16.484699249267578,
+              16.48470687866211,
+              16.48470687866211
+            ],
+            "H0_mace_px": 16.484699249267578,
+            "H_updates_mace_px": [
+              16.48470687866211,
+              16.48470687866211
+            ],
+            "H_final_mace_px": 16.48470687866211,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 7,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              12.559553146362305,
+              12.559553146362305,
+              12.559553146362305
+            ],
+            "H0_mace_px": 12.559553146362305,
+            "H_updates_mace_px": [
+              12.559553146362305,
+              12.559553146362305
+            ],
+            "H_final_mace_px": 12.559553146362305,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 8,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              12.158084869384766,
+              12.158125877380371,
+              12.158125877380371
+            ],
+            "H0_mace_px": 12.158084869384766,
+            "H_updates_mace_px": [
+              12.158125877380371,
+              12.158125877380371
+            ],
+            "H_final_mace_px": 12.158125877380371,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 9,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              13.423262596130371,
+              13.423261642456055,
+              13.423261642456055
+            ],
+            "H0_mace_px": 13.423262596130371,
+            "H_updates_mace_px": [
+              13.423261642456055,
+              13.423261642456055
+            ],
+            "H_final_mace_px": 13.423261642456055,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 10,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              15.274982452392578,
+              15.274992942810059,
+              15.274992942810059
+            ],
+            "H0_mace_px": 15.274982452392578,
+            "H_updates_mace_px": [
+              15.274992942810059,
+              15.274992942810059
+            ],
+            "H_final_mace_px": 15.274992942810059,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 11,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              19.999462127685547,
+              19.99941635131836,
+              19.99941635131836
+            ],
+            "H0_mace_px": 19.999462127685547,
+            "H_updates_mace_px": [
+              19.99941635131836,
+              19.99941635131836
+            ],
+            "H_final_mace_px": 19.99941635131836,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 12,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              15.200393676757812,
+              15.200370788574219,
+              15.200370788574219
+            ],
+            "H0_mace_px": 15.200393676757812,
+            "H_updates_mace_px": [
+              15.200370788574219,
+              15.200370788574219
+            ],
+            "H_final_mace_px": 15.200370788574219,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 13,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              18.76242446899414,
+              18.762432098388672,
+              18.762432098388672
+            ],
+            "H0_mace_px": 18.76242446899414,
+            "H_updates_mace_px": [
+              18.762432098388672,
+              18.762432098388672
+            ],
+            "H_final_mace_px": 18.762432098388672,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 14,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              11.238728523254395,
+              11.238746643066406,
+              11.238746643066406
+            ],
+            "H0_mace_px": 11.238728523254395,
+            "H_updates_mace_px": [
+              11.238746643066406,
+              11.238746643066406
+            ],
+            "H_final_mace_px": 11.238746643066406,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 15,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              12.223798751831055,
+              12.22383975982666,
+              12.22383975982666
+            ],
+            "H0_mace_px": 12.223798751831055,
+            "H_updates_mace_px": [
+              12.22383975982666,
+              12.22383975982666
+            ],
+            "H_final_mace_px": 12.22383975982666,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 16,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              13.02199649810791,
+              13.021991729736328,
+              13.021991729736328
+            ],
+            "H0_mace_px": 13.02199649810791,
+            "H_updates_mace_px": [
+              13.021991729736328,
+              13.021991729736328
+            ],
+            "H_final_mace_px": 13.021991729736328,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 17,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              18.25098419189453,
+              18.250988006591797,
+              18.250988006591797
+            ],
+            "H0_mace_px": 18.25098419189453,
+            "H_updates_mace_px": [
+              18.250988006591797,
+              18.250988006591797
+            ],
+            "H_final_mace_px": 18.250988006591797,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 18,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              15.74528694152832,
+              15.745260238647461,
+              15.745260238647461
+            ],
+            "H0_mace_px": 15.74528694152832,
+            "H_updates_mace_px": [
+              15.745260238647461,
+              15.745260238647461
+            ],
+            "H_final_mace_px": 15.745260238647461,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 19,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              15.517596244812012,
+              15.517566680908203,
+              15.517566680908203
+            ],
+            "H0_mace_px": 15.517596244812012,
+            "H_updates_mace_px": [
+              15.517566680908203,
+              15.517566680908203
+            ],
+            "H_final_mace_px": 15.517566680908203,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 20,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              16.00619125366211,
+              16.00619125366211,
+              16.00619125366211
+            ],
+            "H0_mace_px": 16.00619125366211,
+            "H_updates_mace_px": [
+              16.00619125366211,
+              16.00619125366211
+            ],
+            "H_final_mace_px": 16.00619125366211,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 21,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              11.439580917358398,
+              11.439577102661133,
+              11.439577102661133
+            ],
+            "H0_mace_px": 11.439580917358398,
+            "H_updates_mace_px": [
+              11.439577102661133,
+              11.439577102661133
+            ],
+            "H_final_mace_px": 11.439577102661133,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 22,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              12.092632293701172,
+              12.092706680297852,
+              12.092706680297852
+            ],
+            "H0_mace_px": 12.092632293701172,
+            "H_updates_mace_px": [
+              12.092706680297852,
+              12.092706680297852
+            ],
+            "H_final_mace_px": 12.092706680297852,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 23,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              17.059978485107422,
+              17.05997657775879,
+              17.05997657775879
+            ],
+            "H0_mace_px": 17.059978485107422,
+            "H_updates_mace_px": [
+              17.05997657775879,
+              17.05997657775879
+            ],
+            "H_final_mace_px": 17.05997657775879,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 24,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              13.600068092346191,
+              13.60003662109375,
+              13.60003662109375
+            ],
+            "H0_mace_px": 13.600068092346191,
+            "H_updates_mace_px": [
+              13.60003662109375,
+              13.60003662109375
+            ],
+            "H_final_mace_px": 13.60003662109375,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 25,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              16.26692008972168,
+              16.266916275024414,
+              16.266916275024414
+            ],
+            "H0_mace_px": 16.26692008972168,
+            "H_updates_mace_px": [
+              16.266916275024414,
+              16.266916275024414
+            ],
+            "H_final_mace_px": 16.266916275024414,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 26,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              15.791934967041016,
+              15.791902542114258,
+              15.791902542114258
+            ],
+            "H0_mace_px": 15.791934967041016,
+            "H_updates_mace_px": [
+              15.791902542114258,
+              15.791902542114258
+            ],
+            "H_final_mace_px": 15.791902542114258,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 27,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              19.480682373046875,
+              19.48067855834961,
+              19.48067855834961
+            ],
+            "H0_mace_px": 19.480682373046875,
+            "H_updates_mace_px": [
+              19.48067855834961,
+              19.48067855834961
+            ],
+            "H_final_mace_px": 19.48067855834961,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 28,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              11.862804412841797,
+              11.862808227539062,
+              11.862808227539062
+            ],
+            "H0_mace_px": 11.862804412841797,
+            "H_updates_mace_px": [
+              11.862808227539062,
+              11.862808227539062
+            ],
+            "H_final_mace_px": 11.862808227539062,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 29,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              14.232349395751953,
+              14.232365608215332,
+              14.232365608215332
+            ],
+            "H0_mace_px": 14.232349395751953,
+            "H_updates_mace_px": [
+              14.232365608215332,
+              14.232365608215332
+            ],
+            "H_final_mace_px": 14.232365608215332,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 30,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              14.184690475463867,
+              14.184664726257324,
+              14.184664726257324
+            ],
+            "H0_mace_px": 14.184690475463867,
+            "H_updates_mace_px": [
+              14.184664726257324,
+              14.184664726257324
+            ],
+            "H_final_mace_px": 14.184664726257324,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 31,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              14.293676376342773,
+              14.293655395507812,
+              14.293655395507812
+            ],
+            "H0_mace_px": 14.293676376342773,
+            "H_updates_mace_px": [
+              14.293655395507812,
+              14.293655395507812
+            ],
+            "H_final_mace_px": 14.293655395507812,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      "final": {
+        "trajectory_mean_mace_px": [
+          14.868889808654785,
+          0.49094879627227783,
+          0.1900748312473297
+        ],
+        "trajectory_median_mace_px": [
+          14.293676376342773,
+          0.4232575297355652,
+          0.18401360511779785
+        ],
+        "H0_mace_px": {
+          "mean": 14.868890762329102,
+          "median": 14.293676376342773,
+          "p90": 18.711280822753906,
+          "max": 20.25677490234375
+        },
+        "H_final_mace_px": {
+          "mean": 0.1900748312473297,
+          "median": 0.18401360511779785,
+          "p90": 0.2439158707857132,
+          "max": 0.2832152843475342
+        },
+        "failed_pairs": 0,
+        "failure_rate": 0.0,
+        "rejected_updates": 0,
+        "rejected_update_rate": 0.0,
+        "elapsed_seconds": 3.879276283085346,
+        "latency_ms_per_pair_single_pass": 121.22738384641707,
+        "per_pair": [
+          {
+            "diagnostic_sample_index": 0,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              11.351982116699219,
+              0.6473156809806824,
+              0.17847247421741486
+            ],
+            "H0_mace_px": 11.351982116699219,
+            "H_updates_mace_px": [
+              0.6473156809806824,
+              0.17847247421741486
+            ],
+            "H_final_mace_px": 0.17847247421741486,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 1,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              12.436074256896973,
+              0.4266214370727539,
+              0.13624486327171326
+            ],
+            "H0_mace_px": 12.436074256896973,
+            "H_updates_mace_px": [
+              0.4266214370727539,
+              0.13624486327171326
+            ],
+            "H_final_mace_px": 0.13624486327171326,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 2,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              12.816895484924316,
+              0.2729409337043762,
+              0.12211254239082336
+            ],
+            "H0_mace_px": 12.816895484924316,
+            "H_updates_mace_px": [
+              0.2729409337043762,
+              0.12211254239082336
+            ],
+            "H_final_mace_px": 0.12211254239082336,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 3,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              15.5220308303833,
+              0.7855151295661926,
+              0.23071271181106567
+            ],
+            "H0_mace_px": 15.5220308303833,
+            "H_updates_mace_px": [
+              0.7855151295661926,
+              0.23071271181106567
+            ],
+            "H_final_mace_px": 0.23071271181106567,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 4,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              17.24793815612793,
+              0.5615447163581848,
+              0.24472929537296295
+            ],
+            "H0_mace_px": 17.24793815612793,
+            "H_updates_mace_px": [
+              0.5615447163581848,
+              0.24472929537296295
+            ],
+            "H_final_mace_px": 0.24472929537296295,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 5,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              20.25677490234375,
+              0.7402682900428772,
+              0.1528172343969345
+            ],
+            "H0_mace_px": 20.25677490234375,
+            "H_updates_mace_px": [
+              0.7402682900428772,
+              0.1528172343969345
+            ],
+            "H_final_mace_px": 0.1528172343969345,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 6,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              16.484699249267578,
+              0.9238967299461365,
+              0.2365950495004654
+            ],
+            "H0_mace_px": 16.484699249267578,
+            "H_updates_mace_px": [
+              0.9238967299461365,
+              0.2365950495004654
+            ],
+            "H_final_mace_px": 0.2365950495004654,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 7,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              12.559553146362305,
+              0.3102022409439087,
+              0.15213550627231598
+            ],
+            "H0_mace_px": 12.559553146362305,
+            "H_updates_mace_px": [
+              0.3102022409439087,
+              0.15213550627231598
+            ],
+            "H_final_mace_px": 0.15213550627231598,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 8,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              12.158084869384766,
+              0.14643996953964233,
+              0.14626233279705048
+            ],
+            "H0_mace_px": 12.158084869384766,
+            "H_updates_mace_px": [
+              0.14643996953964233,
+              0.14626233279705048
+            ],
+            "H_final_mace_px": 0.14626233279705048,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 9,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              13.423262596130371,
+              0.3998275697231293,
+              0.15904974937438965
+            ],
+            "H0_mace_px": 13.423262596130371,
+            "H_updates_mace_px": [
+              0.3998275697231293,
+              0.15904974937438965
+            ],
+            "H_final_mace_px": 0.15904974937438965,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 10,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              15.274982452392578,
+              0.26759636402130127,
+              0.19104552268981934
+            ],
+            "H0_mace_px": 15.274982452392578,
+            "H_updates_mace_px": [
+              0.26759636402130127,
+              0.19104552268981934
+            ],
+            "H_final_mace_px": 0.19104552268981934,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 11,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              19.999462127685547,
+              1.1318968534469604,
+              0.27217161655426025
+            ],
+            "H0_mace_px": 19.999462127685547,
+            "H_updates_mace_px": [
+              1.1318968534469604,
+              0.27217161655426025
+            ],
+            "H_final_mace_px": 0.27217161655426025,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 12,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              15.200393676757812,
+              0.25921767950057983,
+              0.15389862656593323
+            ],
+            "H0_mace_px": 15.200393676757812,
+            "H_updates_mace_px": [
+              0.25921767950057983,
+              0.15389862656593323
+            ],
+            "H_final_mace_px": 0.15389862656593323,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 13,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              18.76242446899414,
+              0.6836926341056824,
+              0.2832152843475342
+            ],
+            "H0_mace_px": 18.76242446899414,
+            "H_updates_mace_px": [
+              0.6836926341056824,
+              0.2832152843475342
+            ],
+            "H_final_mace_px": 0.2832152843475342,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 14,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              11.238728523254395,
+              0.40439867973327637,
+              0.1881302297115326
+            ],
+            "H0_mace_px": 11.238728523254395,
+            "H_updates_mace_px": [
+              0.40439867973327637,
+              0.1881302297115326
+            ],
+            "H_final_mace_px": 0.1881302297115326,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 15,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              12.223798751831055,
+              0.2861054241657257,
+              0.1815015822649002
+            ],
+            "H0_mace_px": 12.223798751831055,
+            "H_updates_mace_px": [
+              0.2861054241657257,
+              0.1815015822649002
+            ],
+            "H_final_mace_px": 0.1815015822649002,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 16,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              13.02199649810791,
+              0.4232575297355652,
+              0.1710999459028244
+            ],
+            "H0_mace_px": 13.02199649810791,
+            "H_updates_mace_px": [
+              0.4232575297355652,
+              0.1710999459028244
+            ],
+            "H_final_mace_px": 0.1710999459028244,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 17,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              18.25098419189453,
+              0.7525379061698914,
+              0.20360304415225983
+            ],
+            "H0_mace_px": 18.25098419189453,
+            "H_updates_mace_px": [
+              0.7525379061698914,
+              0.20360304415225983
+            ],
+            "H_final_mace_px": 0.20360304415225983,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 18,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              15.74528694152832,
+              0.8773839473724365,
+              0.2656533420085907
+            ],
+            "H0_mace_px": 15.74528694152832,
+            "H_updates_mace_px": [
+              0.8773839473724365,
+              0.2656533420085907
+            ],
+            "H_final_mace_px": 0.2656533420085907,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 19,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              15.517596244812012,
+              0.5595496892929077,
+              0.18401360511779785
+            ],
+            "H0_mace_px": 15.517596244812012,
+            "H_updates_mace_px": [
+              0.5595496892929077,
+              0.18401360511779785
+            ],
+            "H_final_mace_px": 0.18401360511779785,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 20,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              16.00619125366211,
+              0.5728247165679932,
+              0.11836793273687363
+            ],
+            "H0_mace_px": 16.00619125366211,
+            "H_updates_mace_px": [
+              0.5728247165679932,
+              0.11836793273687363
+            ],
+            "H_final_mace_px": 0.11836793273687363,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 21,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              11.439580917358398,
+              0.32095324993133545,
+              0.16825777292251587
+            ],
+            "H0_mace_px": 11.439580917358398,
+            "H_updates_mace_px": [
+              0.32095324993133545,
+              0.16825777292251587
+            ],
+            "H_final_mace_px": 0.16825777292251587,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 22,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              12.092632293701172,
+              0.3388403058052063,
+              0.1914597451686859
+            ],
+            "H0_mace_px": 12.092632293701172,
+            "H_updates_mace_px": [
+              0.3388403058052063,
+              0.1914597451686859
+            ],
+            "H_final_mace_px": 0.1914597451686859,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 23,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              17.059978485107422,
+              0.2060241550207138,
+              0.19595155119895935
+            ],
+            "H0_mace_px": 17.059978485107422,
+            "H_updates_mace_px": [
+              0.2060241550207138,
+              0.19595155119895935
+            ],
+            "H_final_mace_px": 0.19595155119895935,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 24,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              13.600068092346191,
+              0.22888809442520142,
+              0.18027272820472717
+            ],
+            "H0_mace_px": 13.600068092346191,
+            "H_updates_mace_px": [
+              0.22888809442520142,
+              0.18027272820472717
+            ],
+            "H_final_mace_px": 0.18027272820472717,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 25,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              16.26692008972168,
+              0.22122633457183838,
+              0.21159671247005463
+            ],
+            "H0_mace_px": 16.26692008972168,
+            "H_updates_mace_px": [
+              0.22122633457183838,
+              0.21159671247005463
+            ],
+            "H_final_mace_px": 0.21159671247005463,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 26,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              15.791934967041016,
+              0.7690480947494507,
+              0.22547563910484314
+            ],
+            "H0_mace_px": 15.791934967041016,
+            "H_updates_mace_px": [
+              0.7690480947494507,
+              0.22547563910484314
+            ],
+            "H_final_mace_px": 0.22547563910484314,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 27,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              19.480682373046875,
+              0.30518075823783875,
+              0.21585053205490112
+            ],
+            "H0_mace_px": 19.480682373046875,
+            "H_updates_mace_px": [
+              0.30518075823783875,
+              0.21585053205490112
+            ],
+            "H_final_mace_px": 0.21585053205490112,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 28,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              11.862804412841797,
+              0.4821808338165283,
+              0.14189749956130981
+            ],
+            "H0_mace_px": 11.862804412841797,
+            "H_updates_mace_px": [
+              0.4821808338165283,
+              0.14189749956130981
+            ],
+            "H_final_mace_px": 0.14189749956130981,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 29,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              14.232349395751953,
+              0.7049039602279663,
+              0.214029461145401
+            ],
+            "H0_mace_px": 14.232349395751953,
+            "H_updates_mace_px": [
+              0.7049039602279663,
+              0.214029461145401
+            ],
+            "H_final_mace_px": 0.214029461145401,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 30,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              14.184690475463867,
+              0.48224958777427673,
+              0.1722078025341034
+            ],
+            "H0_mace_px": 14.184690475463867,
+            "H_updates_mace_px": [
+              0.48224958777427673,
+              0.1722078025341034
+            ],
+            "H_final_mace_px": 0.1722078025341034,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 31,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              14.293676376342773,
+              0.2178306132555008,
+              0.19356268644332886
+            ],
+            "H0_mace_px": 14.293676376342773,
+            "H_updates_mace_px": [
+              0.2178306132555008,
+              0.19356268644332886
+            ],
+            "H_final_mace_px": 0.19356268644332886,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      "initial_to_final_mean_mace_improvement_px": 14.678814023733139,
+      "history": [
+        {
+          "optimizer_step": 0,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              14.868888854980469,
+              14.868888854980469
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              14.293655395507812,
+              14.293655395507812
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 14.868888854980469,
+              "median": 14.293655395507812,
+              "p90": 18.711286544799805,
+              "max": 20.256790161132812
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 4.589947863481939,
+            "latency_ms_per_pair_single_pass": 143.4358707338106
+          }
+        },
+        {
+          "optimizer_step": 32,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              5.852508544921875,
+              5.420991897583008
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              5.191842555999756,
+              3.368278980255127
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 5.42099142074585,
+              "median": 3.368278980255127,
+              "p90": 11.005558013916016,
+              "max": 12.235807418823242
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.8773398092016578,
+            "latency_ms_per_pair_single_pass": 121.1668690375518
+          }
+        },
+        {
+          "optimizer_step": 64,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              4.371151924133301,
+              1.7179187536239624
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              4.329385757446289,
+              1.6352996826171875
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 1.7179187536239624,
+              "median": 1.6352996826171875,
+              "p90": 2.344440221786499,
+              "max": 3.247833728790283
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 4.063428897410631,
+            "latency_ms_per_pair_single_pass": 126.98215304408222
+          }
+        },
+        {
+          "optimizer_step": 96,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              2.394026517868042,
+              2.3305258750915527
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              1.8906588554382324,
+              1.8465089797973633
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 2.3305256366729736,
+              "median": 1.8465089797973633,
+              "p90": 3.6617982387542725,
+              "max": 3.8964366912841797
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.951754446141422,
+            "latency_ms_per_pair_single_pass": 123.49232644191943
+          }
+        },
+        {
+          "optimizer_step": 128,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              3.834620475769043,
+              2.380418062210083
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              4.002629280090332,
+              2.3114447593688965
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 2.380418062210083,
+              "median": 2.3114447593688965,
+              "p90": 3.3702168464660645,
+              "max": 3.398671865463257
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.9141228580847383,
+            "latency_ms_per_pair_single_pass": 122.31633931514807
+          }
+        },
+        {
+          "optimizer_step": 160,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              2.323962688446045,
+              1.065476894378662
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              2.025266647338867,
+              1.0861337184906006
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 1.065476894378662,
+              "median": 1.0861337184906006,
+              "p90": 1.4206280708312988,
+              "max": 1.5523760318756104
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 4.026049707084894,
+            "latency_ms_per_pair_single_pass": 125.81405334640294
+          }
+        },
+        {
+          "optimizer_step": 192,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              2.689192295074463,
+              1.7812612056732178
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              2.4357919692993164,
+              1.8360215425491333
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 1.7812612056732178,
+              "median": 1.8360215425491333,
+              "p90": 2.0786516666412354,
+              "max": 2.163606643676758
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.8822261691093445,
+            "latency_ms_per_pair_single_pass": 121.31956778466702
+          }
+        },
+        {
+          "optimizer_step": 224,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              1.8093080520629883,
+              1.2334684133529663
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              1.4887070655822754,
+              1.2547560930252075
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 1.2334684133529663,
+              "median": 1.2547560930252075,
+              "p90": 1.4891207218170166,
+              "max": 1.6707240343093872
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 4.076492216438055,
+            "latency_ms_per_pair_single_pass": 127.39038176368922
+          }
+        },
+        {
+          "optimizer_step": 256,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              1.86514413356781,
+              0.8601706027984619
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              1.7190101146697998,
+              0.8683054447174072
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.8601705431938171,
+              "median": 0.8683054447174072,
+              "p90": 1.1411384344100952,
+              "max": 1.3317039012908936
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.839427014812827,
+            "latency_ms_per_pair_single_pass": 119.98209421290085
+          }
+        },
+        {
+          "optimizer_step": 288,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              1.5197397470474243,
+              0.5684049129486084
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              1.3746373653411865,
+              0.46722984313964844
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.5684049129486084,
+              "median": 0.46722984313964844,
+              "p90": 0.9605241417884827,
+              "max": 1.22259521484375
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.9688011594116688,
+            "latency_ms_per_pair_single_pass": 124.02503623161465
+          }
+        },
+        {
+          "optimizer_step": 320,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              2.1735754013061523,
+              0.6673645377159119
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              2.039926290512085,
+              0.526268720626831
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.6673644781112671,
+              "median": 0.526268720626831,
+              "p90": 1.0738555192947388,
+              "max": 1.6304409503936768
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.888570439070463,
+            "latency_ms_per_pair_single_pass": 121.51782622095197
+          }
+        },
+        {
+          "optimizer_step": 352,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              1.6933504343032837,
+              0.6947711706161499
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              1.7206969261169434,
+              0.5782530903816223
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.6947711110115051,
+              "median": 0.5782530903816223,
+              "p90": 1.0444436073303223,
+              "max": 1.5142056941986084
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.6916838344186544,
+            "latency_ms_per_pair_single_pass": 115.36511982558295
+          }
+        },
+        {
+          "optimizer_step": 384,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              1.265487551689148,
+              0.697123110294342
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              0.9481329917907715,
+              0.6334420442581177
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.697123110294342,
+              "median": 0.6334420442581177,
+              "p90": 0.9995313882827759,
+              "max": 1.3778208494186401
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.965571460314095,
+            "latency_ms_per_pair_single_pass": 123.92410813481547
+          }
+        },
+        {
+          "optimizer_step": 416,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              1.1035816669464111,
+              0.5000244975090027
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              0.9232131242752075,
+              0.4609932601451874
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.5000244975090027,
+              "median": 0.4609932601451874,
+              "p90": 0.7445824146270752,
+              "max": 0.8609169721603394
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 4.158909762278199,
+            "latency_ms_per_pair_single_pass": 129.96593007119372
+          }
+        },
+        {
+          "optimizer_step": 448,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              1.4953006505966187,
+              0.4935808777809143
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              1.3509740829467773,
+              0.4723811447620392
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.4935808777809143,
+              "median": 0.4723811447620392,
+              "p90": 0.664639413356781,
+              "max": 0.7839515209197998
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.9431201508268714,
+            "latency_ms_per_pair_single_pass": 123.22250471333973
+          }
+        },
+        {
+          "optimizer_step": 480,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              2.0229909420013428,
+              0.6917293071746826
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              1.9293904304504395,
+              0.6642886400222778
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.6917293667793274,
+              "median": 0.6642886400222778,
+              "p90": 0.8669374585151672,
+              "max": 0.9656834602355957
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.9369165282696486,
+            "latency_ms_per_pair_single_pass": 123.02864150842652
+          }
+        },
+        {
+          "optimizer_step": 512,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              1.94048273563385,
+              0.6202528476715088
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              1.8492522239685059,
+              0.5435998439788818
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.6202528476715088,
+              "median": 0.5435998439788818,
+              "p90": 0.9852705001831055,
+              "max": 1.2313425540924072
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.7831256445497274,
+            "latency_ms_per_pair_single_pass": 118.22267639217898
+          }
+        },
+        {
+          "optimizer_step": 544,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              1.5404776334762573,
+              0.65821373462677
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              1.344548225402832,
+              0.5830029845237732
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.65821373462677,
+              "median": 0.5830029845237732,
+              "p90": 1.038968563079834,
+              "max": 1.379812479019165
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.729160889983177,
+            "latency_ms_per_pair_single_pass": 116.53627781197429
+          }
+        },
+        {
+          "optimizer_step": 576,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              1.6514678001403809,
+              0.4930163621902466
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              1.630807876586914,
+              0.46932440996170044
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.4930163621902466,
+              "median": 0.46932440996170044,
+              "p90": 0.6260353922843933,
+              "max": 0.7987215518951416
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.5880952263250947,
+            "latency_ms_per_pair_single_pass": 112.12797582265921
+          }
+        },
+        {
+          "optimizer_step": 608,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              1.7205264568328857,
+              0.8546133041381836
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              1.4406638145446777,
+              0.8121748566627502
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.854613184928894,
+              "median": 0.8121748566627502,
+              "p90": 1.0845016241073608,
+              "max": 1.8095085620880127
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.801485595293343,
+            "latency_ms_per_pair_single_pass": 118.79642485291697
+          }
+        },
+        {
+          "optimizer_step": 640,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              1.101527452468872,
+              0.3660176992416382
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              1.0020933151245117,
+              0.35886335372924805
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.3660176992416382,
+              "median": 0.35886335372924805,
+              "p90": 0.4519907832145691,
+              "max": 0.6779122352600098
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.73709003534168,
+            "latency_ms_per_pair_single_pass": 116.7840636044275
+          }
+        },
+        {
+          "optimizer_step": 672,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              1.543122410774231,
+              0.5250241756439209
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              1.4811780452728271,
+              0.5199081301689148
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.5250241756439209,
+              "median": 0.5199081301689148,
+              "p90": 0.6099763512611389,
+              "max": 0.694616436958313
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.4967310801148415,
+            "latency_ms_per_pair_single_pass": 109.2728462535888
+          }
+        },
+        {
+          "optimizer_step": 704,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              1.0219876766204834,
+              0.5620421171188354
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              1.0344033241271973,
+              0.5060713887214661
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.5620421171188354,
+              "median": 0.5060713887214661,
+              "p90": 0.9985873699188232,
+              "max": 1.1704446077346802
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 4.151530739851296,
+            "latency_ms_per_pair_single_pass": 129.735335620353
+          }
+        },
+        {
+          "optimizer_step": 736,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              0.8569393754005432,
+              0.5509855151176453
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              0.7507685422897339,
+              0.5171084403991699
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.5509855151176453,
+              "median": 0.5171084403991699,
+              "p90": 0.7703664302825928,
+              "max": 1.027276873588562
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.442833694629371,
+            "latency_ms_per_pair_single_pass": 107.58855295716785
+          }
+        },
+        {
+          "optimizer_step": 768,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              1.386946439743042,
+              0.469902366399765
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              1.3397712707519531,
+              0.4171968996524811
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.469902366399765,
+              "median": 0.4171968996524811,
+              "p90": 0.6284559369087219,
+              "max": 0.9538499116897583
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.973733911290765,
+            "latency_ms_per_pair_single_pass": 124.1791847278364
+          }
+        },
+        {
+          "optimizer_step": 800,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              1.742803692817688,
+              0.6337231397628784
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              1.8011252880096436,
+              0.5152242183685303
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.6337231397628784,
+              "median": 0.5152242183685303,
+              "p90": 1.3022449016571045,
+              "max": 1.4252415895462036
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.8608721885830164,
+            "latency_ms_per_pair_single_pass": 120.65225589321926
+          }
+        },
+        {
+          "optimizer_step": 832,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              1.1001721620559692,
+              1.0587360858917236
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              1.0193963050842285,
+              1.0619632005691528
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 1.0587360858917236,
+              "median": 1.0619632005691528,
+              "p90": 1.5303795337677002,
+              "max": 1.8318740129470825
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.7404047157615423,
+            "latency_ms_per_pair_single_pass": 116.8876473675482
+          }
+        },
+        {
+          "optimizer_step": 864,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              0.9578189849853516,
+              0.3887662887573242
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              0.8322495222091675,
+              0.3341052532196045
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.3887662887573242,
+              "median": 0.3341052532196045,
+              "p90": 0.6139455437660217,
+              "max": 0.9114150404930115
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.817159552127123,
+            "latency_ms_per_pair_single_pass": 119.28623600397259
+          }
+        },
+        {
+          "optimizer_step": 896,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              1.7369496822357178,
+              0.6392240524291992
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              1.2703447341918945,
+              0.5696474313735962
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.6392240524291992,
+              "median": 0.5696474313735962,
+              "p90": 1.0129034519195557,
+              "max": 1.240057110786438
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.8454891685396433,
+            "latency_ms_per_pair_single_pass": 120.17153651686385
+          }
+        },
+        {
+          "optimizer_step": 928,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              1.0143826007843018,
+              0.5318544507026672
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              0.965275228023529,
+              0.5141205191612244
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.5318544507026672,
+              "median": 0.5141205191612244,
+              "p90": 0.6784332394599915,
+              "max": 0.8113917112350464
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 4.04407121706754,
+            "latency_ms_per_pair_single_pass": 126.37722553336062
+          }
+        },
+        {
+          "optimizer_step": 960,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              1.3736637830734253,
+              0.5590718984603882
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              1.2650542259216309,
+              0.5007473230361938
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.5590718984603882,
+              "median": 0.5007473230361938,
+              "p90": 0.8271377086639404,
+              "max": 0.8965025544166565
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.88517252728343,
+            "latency_ms_per_pair_single_pass": 121.41164147760719
+          }
+        },
+        {
+          "optimizer_step": 992,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              2.1144042015075684,
+              0.7333897352218628
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              1.7566497325897217,
+              0.4784964323043823
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.7333897352218628,
+              "median": 0.4784964323043823,
+              "p90": 1.5673861503601074,
+              "max": 2.015751838684082
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.7794176237657666,
+            "latency_ms_per_pair_single_pass": 118.1068007426802
+          }
+        },
+        {
+          "optimizer_step": 1024,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              1.5401898622512817,
+              0.4304367005825043
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              1.4068776369094849,
+              0.3749813437461853
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.4304366707801819,
+              "median": 0.3749813437461853,
+              "p90": 0.5562980771064758,
+              "max": 1.0232633352279663
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.9939425326883793,
+            "latency_ms_per_pair_single_pass": 124.81070414651185
+          }
+        },
+        {
+          "optimizer_step": 1056,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              1.112346887588501,
+              0.5819408893585205
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              1.0468802452087402,
+              0.46465468406677246
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.5819408297538757,
+              "median": 0.46465468406677246,
+              "p90": 1.3142805099487305,
+              "max": 1.4623801708221436
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 4.064542656764388,
+            "latency_ms_per_pair_single_pass": 127.01695802388713
+          }
+        },
+        {
+          "optimizer_step": 1088,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              0.9248974323272705,
+              0.3531402051448822
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              0.8515976667404175,
+              0.35792940855026245
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.3531402349472046,
+              "median": 0.35792940855026245,
+              "p90": 0.46756428480148315,
+              "max": 0.546027660369873
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.7968166125938296,
+            "latency_ms_per_pair_single_pass": 118.65051914355718
+          }
+        },
+        {
+          "optimizer_step": 1120,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              0.8244258165359497,
+              0.47052904963493347
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              0.6735649108886719,
+              0.3563377559185028
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.47052904963493347,
+              "median": 0.3563377559185028,
+              "p90": 0.7740150094032288,
+              "max": 1.2124541997909546
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.74557095579803,
+            "latency_ms_per_pair_single_pass": 117.04909236868843
+          }
+        },
+        {
+          "optimizer_step": 1152,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              1.1571418046951294,
+              0.45644450187683105
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              0.6971298456192017,
+              0.4347662627696991
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.45644453167915344,
+              "median": 0.4347662627696991,
+              "p90": 0.5631489753723145,
+              "max": 0.9604710936546326
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.858338671736419,
+            "latency_ms_per_pair_single_pass": 120.5730834917631
+          }
+        },
+        {
+          "optimizer_step": 1184,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              0.8718113899230957,
+              0.36289167404174805
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              0.8043954968452454,
+              0.34242168068885803
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.36289164423942566,
+              "median": 0.34242168068885803,
+              "p90": 0.4824030101299286,
+              "max": 0.5519139766693115
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.752810213714838,
+            "latency_ms_per_pair_single_pass": 117.27531917858869
+          }
+        },
+        {
+          "optimizer_step": 1216,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              0.8636734485626221,
+              0.27849775552749634
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              0.6775083541870117,
+              0.26079317927360535
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.27849775552749634,
+              "median": 0.26079317927360535,
+              "p90": 0.4209698736667633,
+              "max": 0.53361976146698
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 4.049454254098237,
+            "latency_ms_per_pair_single_pass": 126.54544544056989
+          }
+        },
+        {
+          "optimizer_step": 1248,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              0.9498368501663208,
+              0.3445633053779602
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              0.8761568069458008,
+              0.34487175941467285
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.3445633351802826,
+              "median": 0.34487175941467285,
+              "p90": 0.425602525472641,
+              "max": 0.4544837474822998
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.9685193728655577,
+            "latency_ms_per_pair_single_pass": 124.01623040204868
+          }
+        },
+        {
+          "optimizer_step": 1280,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              1.2010788917541504,
+              0.36469289660453796
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              1.4075340032577515,
+              0.2635422348976135
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.3646928668022156,
+              "median": 0.2635422348976135,
+              "p90": 0.5893187522888184,
+              "max": 0.6963773965835571
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.8717856146395206,
+            "latency_ms_per_pair_single_pass": 120.99330045748502
+          }
+        },
+        {
+          "optimizer_step": 1312,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              0.8472739458084106,
+              0.34017494320869446
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              0.7739868760108948,
+              0.3222872018814087
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.34017494320869446,
+              "median": 0.3222872018814087,
+              "p90": 0.4505026340484619,
+              "max": 0.6043684482574463
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.8735734475776553,
+            "latency_ms_per_pair_single_pass": 121.04917023680173
+          }
+        },
+        {
+          "optimizer_step": 1344,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              0.7406982183456421,
+              0.25165945291519165
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              0.6117985248565674,
+              0.22481012344360352
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.25165948271751404,
+              "median": 0.22481012344360352,
+              "p90": 0.33237358927726746,
+              "max": 0.6046172976493835
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.8340315567329526,
+            "latency_ms_per_pair_single_pass": 119.81348614790477
+          }
+        },
+        {
+          "optimizer_step": 1376,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              1.086130142211914,
+              0.3379456698894501
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              1.0306117534637451,
+              0.3286813795566559
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.3379456698894501,
+              "median": 0.3286813795566559,
+              "p90": 0.494371235370636,
+              "max": 0.5434715747833252
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.8561996575444937,
+            "latency_ms_per_pair_single_pass": 120.50623929826543
+          }
+        },
+        {
+          "optimizer_step": 1408,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              1.106781005859375,
+              0.2585427463054657
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              0.9390314221382141,
+              0.2117912769317627
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.2585427463054657,
+              "median": 0.2117912769317627,
+              "p90": 0.4683208465576172,
+              "max": 0.6278626322746277
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.871145498007536,
+            "latency_ms_per_pair_single_pass": 120.9732968127355
+          }
+        },
+        {
+          "optimizer_step": 1440,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              0.8786672353744507,
+              0.37610456347465515
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              0.5208151936531067,
+              0.33329516649246216
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.37610459327697754,
+              "median": 0.33329516649246216,
+              "p90": 0.5390804409980774,
+              "max": 0.6723147034645081
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 4.011195029132068,
+            "latency_ms_per_pair_single_pass": 125.34984466037713
+          }
+        },
+        {
+          "optimizer_step": 1472,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              1.0287305116653442,
+              0.44906556606292725
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              1.0426759719848633,
+              0.4244990646839142
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.44906556606292725,
+              "median": 0.4244990646839142,
+              "p90": 0.5638021230697632,
+              "max": 0.8257831335067749
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.8345881747081876,
+            "latency_ms_per_pair_single_pass": 119.83088045963086
+          }
+        },
+        {
+          "optimizer_step": 1504,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              0.8475202322006226,
+              0.30142486095428467
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              0.6583326458930969,
+              0.2480037808418274
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.30142486095428467,
+              "median": 0.2480037808418274,
+              "p90": 0.45060592889785767,
+              "max": 0.7107663154602051
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.845599259249866,
+            "latency_ms_per_pair_single_pass": 120.17497685155831
+          }
+        },
+        {
+          "optimizer_step": 1536,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              1.0450985431671143,
+              0.281085342168808
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              0.9065852761268616,
+              0.29082515835762024
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.2810853123664856,
+              "median": 0.29082515835762024,
+              "p90": 0.4189322292804718,
+              "max": 0.4699022173881531
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.9342432655394077,
+            "latency_ms_per_pair_single_pass": 122.94510204810649
+          }
+        },
+        {
+          "optimizer_step": 1568,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              1.131774663925171,
+              0.311225950717926
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              1.020039439201355,
+              0.27255865931510925
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.311225950717926,
+              "median": 0.27255865931510925,
+              "p90": 0.4271709620952606,
+              "max": 0.5436563491821289
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.6526898527517915,
+            "latency_ms_per_pair_single_pass": 114.14655789849348
+          }
+        },
+        {
+          "optimizer_step": 1600,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              0.5143950581550598,
+              0.34888651967048645
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              0.41990014910697937,
+              0.337525337934494
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.34888654947280884,
+              "median": 0.337525337934494,
+              "p90": 0.4165080189704895,
+              "max": 0.5361523628234863
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.650855300948024,
+            "latency_ms_per_pair_single_pass": 114.08922815462574
+          }
+        },
+        {
+          "optimizer_step": 1632,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              0.9260032176971436,
+              0.22353655099868774
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              0.8063391447067261,
+              0.20372724533081055
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.22353655099868774,
+              "median": 0.20372724533081055,
+              "p90": 0.3467200696468353,
+              "max": 0.4862321615219116
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.8153427075594664,
+            "latency_ms_per_pair_single_pass": 119.22945961123332
+          }
+        },
+        {
+          "optimizer_step": 1664,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              0.6204431653022766,
+              0.2862057089805603
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              0.5255515575408936,
+              0.26260605454444885
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.2862057089805603,
+              "median": 0.26260605454444885,
+              "p90": 0.4683130979537964,
+              "max": 0.6637930274009705
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 4.029726038686931,
+            "latency_ms_per_pair_single_pass": 125.9289387089666
+          }
+        },
+        {
+          "optimizer_step": 1696,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              0.9018802642822266,
+              0.38008493185043335
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              0.729353666305542,
+              0.37396639585494995
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.38008493185043335,
+              "median": 0.37396639585494995,
+              "p90": 0.4922671616077423,
+              "max": 0.61276775598526
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.9476425740867853,
+            "latency_ms_per_pair_single_pass": 123.36383044021204
+          }
+        },
+        {
+          "optimizer_step": 1728,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              0.9817572832107544,
+              0.3674786388874054
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              0.8443193435668945,
+              0.35703811049461365
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.3674786388874054,
+              "median": 0.35703811049461365,
+              "p90": 0.44946739077568054,
+              "max": 0.5647478103637695
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.6212711511179805,
+            "latency_ms_per_pair_single_pass": 113.16472347243689
+          }
+        },
+        {
+          "optimizer_step": 1760,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              0.7373625040054321,
+              0.20458637177944183
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              0.6133327484130859,
+              0.19797295331954956
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.20458637177944183,
+              "median": 0.19797295331954956,
+              "p90": 0.26270434260368347,
+              "max": 0.29907476902008057
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.8429687079042196,
+            "latency_ms_per_pair_single_pass": 120.09277212200686
+          }
+        },
+        {
+          "optimizer_step": 1792,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              1.1141843795776367,
+              0.29288333654403687
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              1.0419878959655762,
+              0.28829678893089294
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.29288336634635925,
+              "median": 0.28829678893089294,
+              "p90": 0.39298951625823975,
+              "max": 0.5343456864356995
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.880993213504553,
+            "latency_ms_per_pair_single_pass": 121.28103792201728
+          }
+        },
+        {
+          "optimizer_step": 1824,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              1.0456798076629639,
+              0.31045857071876526
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              0.6693789958953857,
+              0.2832489013671875
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.31045857071876526,
+              "median": 0.2832489013671875,
+              "p90": 0.4601537585258484,
+              "max": 0.5058425664901733
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.994533925317228,
+            "latency_ms_per_pair_single_pass": 124.82918516616337
+          }
+        },
+        {
+          "optimizer_step": 1856,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              0.7855724692344666,
+              0.25849297642707825
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              0.7301439642906189,
+              0.25611642003059387
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.25849294662475586,
+              "median": 0.25611642003059387,
+              "p90": 0.3529546856880188,
+              "max": 0.38736581802368164
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.811451466754079,
+            "latency_ms_per_pair_single_pass": 119.10785833606496
+          }
+        },
+        {
+          "optimizer_step": 1888,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              0.9721040725708008,
+              0.18687595427036285
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              0.9970330595970154,
+              0.17159737646579742
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.18687595427036285,
+              "median": 0.17159737646579742,
+              "p90": 0.29050105810165405,
+              "max": 0.4249783754348755
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.9910016739740968,
+            "latency_ms_per_pair_single_pass": 124.71880231169052
+          }
+        },
+        {
+          "optimizer_step": 1920,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              0.9173198938369751,
+              0.2751930058002472
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              0.7783698439598083,
+              0.23386850953102112
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.2751929759979248,
+              "median": 0.23386850953102112,
+              "p90": 0.48098528385162354,
+              "max": 0.6230608820915222
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.97006977815181,
+            "latency_ms_per_pair_single_pass": 124.06468056724407
+          }
+        },
+        {
+          "optimizer_step": 1952,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              0.6995446681976318,
+              0.33086198568344116
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              0.7085702419281006,
+              0.3172154128551483
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.33086201548576355,
+              "median": 0.3172154128551483,
+              "p90": 0.4633720815181732,
+              "max": 0.49222052097320557
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.9487539641559124,
+            "latency_ms_per_pair_single_pass": 123.39856137987226
+          }
+        },
+        {
+          "optimizer_step": 1984,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              0.708366870880127,
+              0.20901603996753693
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              0.7267240881919861,
+              0.16482262313365936
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.20901603996753693,
+              "median": 0.16482262313365936,
+              "p90": 0.4004976749420166,
+              "max": 0.4425920844078064
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.8189402567222714,
+            "latency_ms_per_pair_single_pass": 119.34188302257098
+          }
+        },
+        {
+          "optimizer_step": 2000,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              14.868889808654785,
+              0.49094879627227783,
+              0.1900748312473297
+            ],
+            "trajectory_median_mace_px": [
+              14.293676376342773,
+              0.4232575297355652,
+              0.18401360511779785
+            ],
+            "H0_mace_px": {
+              "mean": 14.868890762329102,
+              "median": 14.293676376342773,
+              "p90": 18.711280822753906,
+              "max": 20.25677490234375
+            },
+            "H_final_mace_px": {
+              "mean": 0.1900748312473297,
+              "median": 0.18401360511779785,
+              "p90": 0.2439158707857132,
+              "max": 0.2832152843475342
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 3.879276283085346,
+            "latency_ms_per_pair_single_pass": 121.22738384641707
+          }
+        }
+      ],
+      "last_sequence_corner_l1_px": 0.32365989685058594,
+      "gradient_finite": true,
+      "maximum_preclip_gradient_norm": 343.8019714355469,
+      "training_elapsed_seconds": 2088.6083262311295,
+      "mean_training_step_seconds_including_periodic_eval": 1.0443041631155647,
+      "peak_allocated_bytes": 223675392,
+      "checkpoint": {
+        "path": "/home/disk1/MHINet/outputs/tiny_overfit/tiny-s-d8_one-pair-residuals_translation_seed0.pt",
+        "format": "mhinet.training",
+        "version": 1,
+        "bytes": 14482063,
+        "optimizer_step": 2000,
+        "microbatch_progress": null,
+        "data_progress": {
+          "epoch": 249,
+          "position": 32,
+          "order_seed": 249
+        },
+        "metadata": {
+          "diagnostic": "TINY-S-D8",
+          "active_scales": [
+            8
+          ],
+          "known_H0_residual_injected": true,
+          "formal_training_checkpoint": false,
+          "sample_count": 32,
+          "sample_protocol": "one_pair_residuals",
+          "residual_profile": "translation",
+          "pair_ids": [
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0"
+          ]
+        },
+        "cuda_rng_captured": true,
+        "sha256": "43d71164b68ead7c94b4bb5ed4eeffc8c804420c28241af5844d8d969c82f576"
+      },
+      "scope_note": "This is a training-set learnability diagnostic with controlled H0; it is not validation accuracy and must not select a formal configuration."
+    }
+  ]
+}

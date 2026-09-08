@@ -1,0 +1,325 @@
+{
+  "gate": "P4_gradient_audit",
+  "status": "passed",
+  "pair_id": "current__37.534900126.607065_pair0",
+  "device": "cuda:0",
+  "heads_cached_feature_two_steps": [
+    {
+      "adapters": {
+        "8": {
+          "parameter_tensors": 1,
+          "gradient_tensors": 1,
+          "finite": true,
+          "norm": 0.0,
+          "nonzero_elements": 0
+        },
+        "4": {
+          "parameter_tensors": 1,
+          "gradient_tensors": 1,
+          "finite": true,
+          "norm": 0.0,
+          "nonzero_elements": 0
+        },
+        "2": {
+          "parameter_tensors": 1,
+          "gradient_tensors": 1,
+          "finite": true,
+          "norm": 0.0,
+          "nonzero_elements": 0
+        },
+        "1": {
+          "parameter_tensors": 1,
+          "gradient_tensors": 1,
+          "finite": true,
+          "norm": 0.0,
+          "nonzero_elements": 0
+        }
+      },
+      "decoder_fc2": {
+        "8": {
+          "parameter_tensors": 2,
+          "gradient_tensors": 2,
+          "finite": true,
+          "norm": 536.4423023494699,
+          "nonzero_elements": 2056
+        },
+        "4": {
+          "parameter_tensors": 2,
+          "gradient_tensors": 2,
+          "finite": true,
+          "norm": 202.86388024054455,
+          "nonzero_elements": 2056
+        },
+        "2": {
+          "parameter_tensors": 2,
+          "gradient_tensors": 2,
+          "finite": true,
+          "norm": 30.21931351271381,
+          "nonzero_elements": 2056
+        },
+        "1": {
+          "parameter_tensors": 2,
+          "gradient_tensors": 2,
+          "finite": true,
+          "norm": 5.678311145777565,
+          "nonzero_elements": 2048
+        }
+      },
+      "decoder_upstream": {
+        "8": {
+          "parameter_tensors": 26,
+          "gradient_tensors": 26,
+          "finite": true,
+          "norm": 0.0,
+          "nonzero_elements": 0
+        },
+        "4": {
+          "parameter_tensors": 33,
+          "gradient_tensors": 33,
+          "finite": true,
+          "norm": 0.0,
+          "nonzero_elements": 0
+        },
+        "2": {
+          "parameter_tensors": 40,
+          "gradient_tensors": 40,
+          "finite": true,
+          "norm": 0.0,
+          "nonzero_elements": 0
+        },
+        "1": {
+          "parameter_tensors": 47,
+          "gradient_tensors": 47,
+          "finite": true,
+          "norm": 0.0,
+          "nonzero_elements": 0
+        }
+      },
+      "step_before_optimizer": 0,
+      "loss": 4.003545761108398,
+      "all_update_H_requires_grad": true,
+      "all_proposals_require_grad": true
+    },
+    {
+      "adapters": {
+        "8": {
+          "parameter_tensors": 1,
+          "gradient_tensors": 1,
+          "finite": true,
+          "norm": 0.705664921519044,
+          "nonzero_elements": 16384
+        },
+        "4": {
+          "parameter_tensors": 1,
+          "gradient_tensors": 1,
+          "finite": true,
+          "norm": 0.23170231581457945,
+          "nonzero_elements": 16384
+        },
+        "2": {
+          "parameter_tensors": 1,
+          "gradient_tensors": 1,
+          "finite": true,
+          "norm": 0.1345233674791631,
+          "nonzero_elements": 8192
+        },
+        "1": {
+          "parameter_tensors": 1,
+          "gradient_tensors": 1,
+          "finite": true,
+          "norm": 0.02229220566764541,
+          "nonzero_elements": 8192
+        }
+      },
+      "decoder_fc2": {
+        "8": {
+          "parameter_tensors": 2,
+          "gradient_tensors": 2,
+          "finite": true,
+          "norm": 505.33063172865474,
+          "nonzero_elements": 2056
+        },
+        "4": {
+          "parameter_tensors": 2,
+          "gradient_tensors": 2,
+          "finite": true,
+          "norm": 195.1893275673427,
+          "nonzero_elements": 2056
+        },
+        "2": {
+          "parameter_tensors": 2,
+          "gradient_tensors": 2,
+          "finite": true,
+          "norm": 30.3056680747357,
+          "nonzero_elements": 2056
+        },
+        "1": {
+          "parameter_tensors": 2,
+          "gradient_tensors": 2,
+          "finite": true,
+          "norm": 5.384776683044702,
+          "nonzero_elements": 2048
+        }
+      },
+      "decoder_upstream": {
+        "8": {
+          "parameter_tensors": 26,
+          "gradient_tensors": 26,
+          "finite": true,
+          "norm": 77.4275984037239,
+          "nonzero_elements": 507327
+        },
+        "4": {
+          "parameter_tensors": 33,
+          "gradient_tensors": 33,
+          "finite": true,
+          "norm": 31.164263202791258,
+          "nonzero_elements": 585452
+        },
+        "2": {
+          "parameter_tensors": 40,
+          "gradient_tensors": 40,
+          "finite": true,
+          "norm": 6.573108478478951,
+          "nonzero_elements": 659412
+        },
+        "1": {
+          "parameter_tensors": 47,
+          "gradient_tensors": 47,
+          "finite": true,
+          "norm": 1.3941967377005835,
+          "nonzero_elements": 733408
+        }
+      },
+      "step_before_optimizer": 1,
+      "loss": 16.113651275634766,
+      "all_update_H_requires_grad": true,
+      "all_proposals_require_grad": true
+    }
+  ],
+  "final_only_decoder_gradients": {
+    "8": {
+      "parameter_tensors": 28,
+      "gradient_tensors": 28,
+      "finite": true,
+      "norm": 0.6873205012098387,
+      "nonzero_elements": 509435
+    },
+    "4": {
+      "parameter_tensors": 35,
+      "gradient_tensors": 35,
+      "finite": true,
+      "norm": 0.3673478134642335,
+      "nonzero_elements": 587521
+    },
+    "2": {
+      "parameter_tensors": 42,
+      "gradient_tensors": 42,
+      "finite": true,
+      "norm": 0.12838893464069975,
+      "nonzero_elements": 661487
+    },
+    "1": {
+      "parameter_tensors": 49,
+      "gradient_tensors": 49,
+      "finite": true,
+      "norm": 0.04347244911219256,
+      "nonzero_elements": 735478
+    }
+  },
+  "mvt_H0_route": {
+    "loss": 0.010213173925876617,
+    "mvt": {
+      "parameter_tensors": 150,
+      "gradient_tensors": 150,
+      "finite": true,
+      "norm": 0.08828312501334727,
+      "nonzero_elements": 87269363
+    },
+    "vgg": {
+      "parameter_tensors": 48,
+      "gradient_tensors": 0,
+      "finite": true,
+      "norm": 0.0,
+      "nonzero_elements": 0
+    },
+    "dedode": {
+      "parameter_tensors": 190,
+      "gradient_tensors": 0,
+      "finite": true,
+      "norm": 0.0,
+      "nonzero_elements": 0
+    },
+    "dino_grad_all_none": true,
+    "stage1_head_grad_all_none": true,
+    "call_counts": {
+      "dino": 1,
+      "mvt": 1,
+      "vgg": 0,
+      "dedode_full_pyramid": 0
+    }
+  },
+  "mvt_pyramid_route": {
+    "diagnostic_loss": 0.1015625,
+    "mvt": {
+      "parameter_tensors": 150,
+      "gradient_tensors": 150,
+      "finite": true,
+      "norm": 0.05273149845177199,
+      "nonzero_elements": 87271567
+    },
+    "vgg": {
+      "parameter_tensors": 48,
+      "gradient_tensors": 48,
+      "finite": true,
+      "norm": 0.35504486509498634,
+      "nonzero_elements": 10592050
+    },
+    "dedode": {
+      "parameter_tensors": 190,
+      "gradient_tensors": 76,
+      "finite": true,
+      "norm": 0.19009787147156695,
+      "nonzero_elements": 7335168
+    },
+    "adapter_D8": {
+      "parameter_tensors": 1,
+      "gradient_tensors": 1,
+      "finite": true,
+      "norm": 0.027216833906418842,
+      "nonzero_elements": 16384
+    },
+    "decoder_D8": {
+      "parameter_tensors": 28,
+      "gradient_tensors": 28,
+      "finite": true,
+      "norm": 1009.4111626791434,
+      "nonzero_elements": 509448
+    },
+    "dino_grad_all_none": true,
+    "stage1_head_grad_all_none": true,
+    "call_counts": {
+      "dino": 1,
+      "mvt": 1,
+      "vgg": 1,
+      "dedode_full_pyramid": 1
+    },
+    "H0_detach_note": "H_gt.detach() is used only in this diagnostic to isolate the pyramid route; production joint forward does not detach H0/H/T."
+  },
+  "assertions": {
+    "step0_all_fc2_nonzero": true,
+    "step0_all_upstream_zero_expected": true,
+    "step1_all_decoder_and_adapter_upstream_nonzero": true,
+    "final_only_reaches_all_scales": true,
+    "mvt_H0_route_nonzero": true,
+    "mvt_pyramid_route_nonzero": true,
+    "vgg_pyramid_route_nonzero": true,
+    "dedode_pyramid_route_nonzero": true,
+    "dino_and_stage1_head_parameter_grads_none": true
+  },
+  "peak_allocated_bytes": {
+    "heads_cached_eight_round": 4630508032,
+    "joint_branch_diagnostics": 5493430272
+  },
+  "scope_note": "This audits full cached-feature eight-round heads backward and the two real MVT routes separately. A full 784 joint eight-round backward is a separate smoke/profile gate."
+}

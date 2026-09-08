@@ -1,0 +1,65 @@
+{
+  "diagnostic": "P4_TINY_S_D8_FAILURE_ANALYSIS",
+  "status": "cause_isolated_pending_protocol_gate_rerun",
+  "source_run": {
+    "artifact": "/home/disk1/MHINet/artifacts/p4_tiny_s_d8_translation.json",
+    "artifact_sha256": "33f885db0d08cc85c518c03f2adfd5b83e03ed6ff9bdc62daaf4ef72e3cf0df4",
+    "checkpoint": "/home/disk1/MHINet/outputs/tiny_overfit/tiny-s-d8_one-pair-residuals_translation_seed0.pt",
+    "checkpoint_sha256": "43d71164b68ead7c94b4bb5ed4eeffc8c804420c28241af5844d8d969c82f576",
+    "optimizer_steps": 2000,
+    "raw_final_mean_mace_px": 0.1900748312473297,
+    "raw_final_median_mace_px": 0.18401360511779785,
+    "raw_final_p90_mace_px": 0.2439158707857132,
+    "failed_pairs": 0,
+    "rejected_updates": 0,
+    "maximum_preclip_gradient_norm": 343.8019714355469
+  },
+  "precision_isolation": {
+    "same_checkpoint_bf16_mean_final_mace_px": 0.1900748312473297,
+    "same_checkpoint_fp32_mean_final_mace_px": 0.1954963654279709,
+    "conclusion": "BF16 adapter/decoder autocast is not the observed 0.1-pixel floor."
+  },
+  "single_residual_stepwise_isolation": {
+    "artifact": "/home/disk1/MHINet/artifacts/p4_tiny_d8_single_residual_stepwise.json",
+    "artifact_sha256": "a24ccdcde9c2b905d805b63a71939e1fc62f93f7e7ca5b4a0dcec5a3a1b57f1b",
+    "first_observed_below_threshold_step": 440,
+    "mean_final_mace_px": 0.0846242904663086,
+    "interpretation": "The forward, proposal supervision, DLT, and optimizer can cross 0.1 px; the 32-sample endpoint failure is not a hard numerical floor. This one-sample result is not a gate pass."
+  },
+  "off_protocol_step_size_probe": {
+    "starting_checkpoint_step": 2000,
+    "changed_learning_rate": 0.0001,
+    "effective_probe_batch": "B8 x accumulation4 over all 32 diagnostic residuals",
+    "additional_steps": 20,
+    "trajectory_mean_mace_px_at_probe_end": [
+      14.868889808654785,
+      0.2267431616783142,
+      0.07739540934562683
+    ],
+    "mean_final_mace_px": 0.07739541679620743,
+    "is_gate_evidence": false,
+    "interpretation": "A tenfold smaller step removes the endpoint oscillation, but violates the fixed-lr/no-scheduler tiny recipe and is retained only as diagnosis."
+  },
+  "off_budget_weight_average_probe": {
+    "source_steps": "raw protocol checkpoint 2000 plus steps 2001 through 2032",
+    "equal_weight_snapshots": 33,
+    "trajectory_mean_mace_px": [
+      14.868889808654785,
+      0.28616899251937866,
+      0.087943434715271
+    ],
+    "mean_final_mace_px": 0.087943434715271,
+    "failed_pairs": 0,
+    "rejected_updates": 0,
+    "is_gate_evidence": false,
+    "interpretation": "Averaging adjacent constant-lr weights suppresses the L1 sign-gradient oscillation without changing the model or loss. A fresh within-2000-step predeclared-average run is required before it can be gate evidence."
+  },
+  "conclusion": {
+    "window_or_guard_failure": false,
+    "bf16_floor": false,
+    "implementation_nan": false,
+    "identified_issue": "constant-lr L1 endpoint parameter oscillation under stochastic B1/effective-batch4 updates",
+    "next_action": "fresh D8 run with raw and predeclared in-budget equal-weight parameter-average readouts; do not advance scales or E00/E01 unless it passes"
+  },
+  "test_used": false
+}

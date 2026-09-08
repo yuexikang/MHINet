@@ -1,0 +1,21 @@
+﻿id,priority,question,change,profile,start,optimizer_steps,pilot_seeds,compare,gate,status,legacy_id
+E00,P0 必做,现有初始化精度是多少,仅评估原Stage1 H0,eval,原选定checkpoint,0,1,后续全部,固定val IDs；失败也记录,待执行,M00
+E01,P0 必做,八轮精修是否有效,四尺度各2轮；L1等权,heads,原选定checkpoint+新层初始化,10000,1,E00,通过P0–P4；非no-move,待执行,M04 / L03
+E02,P1 主线,解冻DeDoDe有无收益,续训DeDoDe+新层,decoder_finetune,同一E01-W checkpoint,10000,1,E01-W及E03–05,相同续训数据/optimizer重启,待执行,M08
+E03,P1 主线,VGG微调有无收益,在E02参数组上加VGG,vgg_finetune,同一E01-W checkpoint,10000,1,E02,保持MVT冻结,待执行,
+E04,P1 主线,MVT微调有无收益,在E02参数组上加MVT,mvt_finetune,同一E01-W checkpoint,10000,1,E02,两条MVT梯度通过；记录自身H0,待执行,
+E05,P1 主线,完整联合训练有无收益,DeDoDe+VGG+MVT+新层,joint,同一E01-W checkpoint,10000,1,E02 / E03 / E04,相同起点和预算；记录自身H0,待执行,
+E06,P1 结构,粗尺度能达到什么精度,仅D8各2轮；共2轮,heads,原选定checkpoint+新层初始化,10000,1,E00 / E01,同数据种子；按实际U归一化loss,待执行,M01
+E07,P1 结构,增加D4的收益,D8/D4各2轮；共4轮,heads,原选定checkpoint+新层初始化,10000,1,E06,从头训练同预算,待执行,M02
+E08,P1 结构,D2及D1的边际收益,D8/D4/D2各2轮；共6轮,heads,原选定checkpoint+新层初始化,10000,1,E07 / E01,同时报告增加D1的显存和延迟,待执行,M03
+E09,P1 机制,每尺度第二轮是否值得,四尺度各1轮；共4轮,heads,原选定checkpoint+新层初始化,10000,1,E01,同训练步数；补报算力成本,待执行,M05
+E10,P1 机制,H引导重新采样是否有用,同尺度第二轮复用首轮C和mask,heads,原选定checkpoint+新层初始化,10000,1,E01,当前H-flow仍更新；不detach首轮C,待执行,M06
+E11,P2 可选,显式H-flow通道有无收益,仅将两个H-flow输入通道置零,heads,原选定checkpoint+新层初始化,10000,1,E01,参数数目不变；保留H引导采样,待执行,M07变体
+L01,P1 损失,L1与SmoothL1差异,仅改corner为SmoothL1 beta1；等权,heads,原选定checkpoint+新层初始化,10000,1,E01,同单位同预算；不加grid,待执行,新正交对照
+L02,P1 损失,序列衰减是否有益,仅改gamma为0.8；仍L1,heads,原选定checkpoint+新层初始化,10000,1,E01,序列权重归一化,待执行,旧L02
+F00,P2 条件,排除额外训练步数收益,继续原L1；活跃组lr乘0.2,选定主配置,共同选定B checkpoint,2000,1,F01 / F02,标签可信且进入亚像素区,待执行,旧L04
+F01,P2 条件,原MCNet FGO语义是否有效,移植batch均值+sticky flag FGO,同F00,共同选定B checkpoint,2000,1,F00,记录B=1；八轮求和/均值尺度约定,待执行,旧L05
+F02,P2 条件,有界FGO是否改善细精度,仅D2/D1；lambda0.04；ramp200,同F00,共同选定B checkpoint,2000,1,F00 / F01,标量最大梯度倍率5；相同活跃组,待执行,旧L06
+X01,P2 诊断,内部几何监督是否必要,L1+overlap网格权重0.1,heads,原选定checkpoint+新层初始化,10000,1,E01,仅内部transfer指标暴露缺口才跑,待执行,旧L07
+X02,P2 诊断,局部表示是否学习不足,L1+aux corr权重0.02,heads,原选定checkpoint+新层初始化,10000,1,E01,GT已在窗内但相关峰不学习才跑,待执行,旧L08
+E01-C,P1 归因,解冻DeDoDe收益是否只是多训练,只续训heads；与E02等预算,heads,同一E01-W checkpoint,10000,1,E02,宣称DeDoDe解冻收益时必做,待执行,

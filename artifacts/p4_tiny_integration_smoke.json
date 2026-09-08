@@ -1,0 +1,771 @@
+{
+  "gate": "P4_TINY_S_TINY_8",
+  "status": "failed",
+  "protocol": {
+    "training_revision": "1.2",
+    "loss": "uniform proposal-corner coordinate L1",
+    "FGO": false,
+    "extra_losses": false,
+    "planar_head": false,
+    "precision": "BF16 feature/CNN autocast, FP32 correlation/geometry",
+    "deterministic_algorithms": "enabled_warn_only"
+  },
+  "runtime_config": "/home/disk1/MHINet/configs/runtime_paths.server.json",
+  "device": "cuda:0",
+  "build": {
+    "architecture_path": "/home/disk1/MHINet/MHINet_server_handoff_v1.2/configs/mhinet_v1.json",
+    "architecture_sha256": "4a859f413ee4be59acb1dc6c0cf189e80b8f4e7b3f54dc9f117acd1ac5cfe128",
+    "provider": {
+      "loma_root": "/home/disk1/LoMa",
+      "loma_checkpoint": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+      "dino_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "selected_stage1_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "loretta_loaded_keys": 807,
+      "locator": {
+        "source": "official_loretta_checkpoint",
+        "overridden": false
+      },
+      "descriptor_initialization": {
+        "migrated_tensors": 364,
+        "vgg_tensors": 84,
+        "decoder_tensors": 280,
+        "top_refiner_mapping": "LoMa-B scale 14 -> DINOv3 scale 16"
+      },
+      "ownership": {
+        "dino_wrapper_instances": 1,
+        "mvt_object_references": 1,
+        "stage1_head_contains_dino": 0,
+        "stage1_head_contains_mvt": 0,
+        "decoder_scales": [
+          "16",
+          "8",
+          "4",
+          "2",
+          "1"
+        ]
+      },
+      "legacy_training_wrappers_reused": false,
+      "safe_stage1_fitter": true
+    },
+    "training_parameters": {
+      "profile": "heads",
+      "groups": {
+        "new_modules": {
+          "parameters": 2544160,
+          "trainable_parameters": 2544160,
+          "tensor_count": 158,
+          "trainable_tensor_count": 158,
+          "optimizer_parameter_ids": [
+            136301782856416,
+            136301390610032,
+            136301390595872,
+            136301390608752,
+            136301390597792,
+            136301390606512,
+            136301390608912,
+            136301390607632,
+            136301390610352,
+            136301390609952,
+            136301390610272,
+            136301390606912,
+            136301390609872,
+            136301390609632,
+            136301390609152,
+            136301390608432,
+            136301390608672,
+            136301390608272,
+            136301390607552,
+            136301390607712,
+            136301390607312,
+            136301390609392,
+            136301390609792,
+            136301390608192,
+            136301390607392,
+            136301390609712,
+            136301390608512,
+            136301390608992,
+            136301390608832,
+            136301390607952,
+            136301390607872,
+            136301401762496,
+            136301401762816,
+            136301401762976,
+            136301401763136,
+            136301401763456,
+            136301401763616,
+            136301401763776,
+            136301401763936,
+            136301401764096,
+            136301401764736,
+            136301401764576,
+            136301401765056,
+            136301401765216,
+            136301401765376,
+            136301401765696,
+            136301401765856,
+            136301401766016,
+            136301401766656,
+            136301401766496,
+            136301401767136,
+            136301401766816,
+            136301401767296,
+            136301401767456,
+            136301401767616,
+            136301401762336,
+            136301401751616,
+            136301401751776,
+            136301401751936,
+            136301401752256,
+            136301401752416,
+            136301401752576,
+            136301401752896,
+            136301401753056,
+            136301401753216,
+            136301401753376,
+            136301401753536,
+            136301401753856,
+            136301401754016,
+            136301401754176,
+            136301401754496,
+            136301401754656,
+            136301401754816,
+            136301401755136,
+            136301401755296,
+            136301401755456,
+            136301401755776,
+            136301401756096,
+            136301401756256,
+            136301401756416,
+            136301401756736,
+            136301401756896,
+            136301401757056,
+            136301401757376,
+            136301401757696,
+            136301401757856,
+            136301401758016,
+            136301401758336,
+            136301401758496,
+            136301401758656,
+            136301401758976,
+            136301401759296,
+            136301401759456,
+            136301401759616,
+            136301401759936,
+            136301401760096,
+            136301401760256,
+            136301401760576,
+            136301401760896,
+            136301401761056,
+            136301401761216,
+            136301401762176,
+            136301401761856,
+            136301401762016,
+            136301401754096,
+            136301401753456,
+            136301401753616,
+            136301401766256,
+            136301401752816,
+            136301401753936,
+            136301401751856,
+            136301401752016,
+            136301401754256,
+            136301401767376,
+            136301401767536,
+            136301401767056,
+            136301401766416,
+            136301401766576,
+            136301401766896,
+            136301401766096,
+            136301401765456,
+            136301401765616,
+            136301401765136,
+            136301401764496,
+            136301401764656,
+            136301401764336,
+            136301401763696,
+            136301401764016,
+            136301401763376,
+            136301401762896,
+            136301401762576,
+            136301401762736,
+            136301401762416,
+            136301401761776,
+            136301401762096,
+            136301401761456,
+            136301401760816,
+            136301401761136,
+            136301401760496,
+            136301401760016,
+            136301401759856,
+            136301401760176,
+            136301401759536,
+            136301401758896,
+            136301401759216,
+            136301401758576,
+            136301401758416,
+            136301401757616,
+            136301401757136,
+            136301401757456,
+            136301401756816,
+            136301401757296,
+            136301401756656,
+            136301401756496,
+            136301401756336,
+            136301401755696,
+            136301401755216,
+            136301401755376
+          ]
+        },
+        "dedode": {
+          "parameters": 8219297,
+          "trainable_parameters": 0,
+          "tensor_count": 190,
+          "trainable_tensor_count": 0,
+          "optimizer_parameter_ids": []
+        },
+        "vgg": {
+          "parameters": 10592064,
+          "trainable_parameters": 0,
+          "tensor_count": 48,
+          "trainable_tensor_count": 0,
+          "optimizer_parameter_ids": []
+        },
+        "mvt": {
+          "parameters": 87417088,
+          "trainable_parameters": 0,
+          "tensor_count": 150,
+          "trainable_tensor_count": 0,
+          "optimizer_parameter_ids": []
+        },
+        "dino": {
+          "parameters": 227564544,
+          "trainable_parameters": 0,
+          "tensor_count": 259,
+          "trainable_tensor_count": 0,
+          "optimizer_parameter_ids": []
+        },
+        "stage1_head_parameters": {
+          "parameters": 2957572,
+          "trainable_parameters": 0,
+          "tensor_count": 10,
+          "trainable_tensor_count": 0,
+          "optimizer_parameter_ids": []
+        }
+      },
+      "total_trainable_parameters": 2544160,
+      "new_parameters": 2544160,
+      "dino_trainable_parameters": 0,
+      "stage1_head_trainable_parameters": 0
+    }
+  },
+  "cache": {
+    "source": "leakage-safe train split; exact single-image homography pairs",
+    "manifest": "/home/disk1/Data/datasets/GoogleEarth_scale_pairs/train/pairs.jsonl",
+    "manifest_sha256": "3eed3d3d425caf8465afb5121dfd85960f00932fccc343f37187e14ce27d499c",
+    "sample_count": 2,
+    "pair_ids": [
+      "current__34.801100126.376330_pair0",
+      "current__34.801100126.376330_pair1"
+    ],
+    "parent_groups": [
+      "parent:current/Train/34.801100126.376330.jpg",
+      "parent:current/Train/34.801100126.376330.jpg"
+    ],
+    "geo_groups": [
+      "geo_0.01:3480:12637",
+      "geo_0.01:3480:12637"
+    ],
+    "validation_geo_groups_used_only_for_exclusion": 190,
+    "test_used": false,
+    "provider_prefix_computed": [
+      8
+    ],
+    "stored_scales": [
+      8
+    ],
+    "feature_shapes": {
+      "8": [
+        1,
+        2,
+        256,
+        98,
+        98
+      ]
+    },
+    "feature_dtypes": {
+      "8": "torch.bfloat16"
+    },
+    "cache_bytes_cpu": 19668992,
+    "shared_call_counts_total": {
+      "dino": 2,
+      "mvt": 2,
+      "vgg": 2,
+      "dedode_full_pyramid": 2
+    },
+    "shared_once_per_pair": true,
+    "elapsed_seconds": 0.6357835242524743,
+    "pairs_per_second": 3.145724800515254,
+    "peak_allocated_bytes": 1609051648
+  },
+  "experiments": [
+    {
+      "name": "TINY-S-D8",
+      "status": "failed",
+      "active_scales": [
+        8
+      ],
+      "updates": 2,
+      "seed": 999,
+      "sample_count": 2,
+      "optimizer": {
+        "name": "AdamW",
+        "learning_rate": 0.001,
+        "weight_decay": 0.0,
+        "scheduler": null,
+        "batch_size": 1,
+        "optimizer_steps": 2,
+        "maximum_steps": 2
+      },
+      "controlled_H0": {
+        "source": "GT plus deterministic diagnostic-only corner residual",
+        "formal_training_injection": false,
+        "maximum_declared_abs_residual_px": 16.0,
+        "actual_abs_residual_px": {
+          "mean": 4.216191291809082,
+          "median": 4.754638671875,
+          "p90": 5.89093017578125,
+          "max": 6.0
+        }
+      },
+      "criterion": {
+        "definition": "32-sample mean final MACE < threshold, zero failed pairs, zero rejected updates",
+        "threshold_mace_px": 0.1,
+        "met": false
+      },
+      "initial": {
+        "trajectory_mean_mace_px": [
+          6.348554611206055,
+          6.34856653213501,
+          6.34856653213501
+        ],
+        "trajectory_median_mace_px": [
+          5.526941299438477,
+          5.5269670486450195,
+          5.5269670486450195
+        ],
+        "H0_mace_px": {
+          "mean": 6.348554611206055,
+          "median": 5.526941299438477,
+          "p90": 7.005845069885254,
+          "max": 7.170167922973633
+        },
+        "H_final_mace_px": {
+          "mean": 6.34856653213501,
+          "median": 5.5269670486450195,
+          "p90": 7.00584602355957,
+          "max": 7.170166015625
+        },
+        "failed_pairs": 0,
+        "failure_rate": 0.0,
+        "rejected_updates": 0,
+        "rejected_update_rate": 0.0,
+        "elapsed_seconds": 0.5769248362630606,
+        "latency_ms_per_pair_single_pass": 288.4624181315303,
+        "per_pair": [
+          {
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              5.526941299438477,
+              5.5269670486450195,
+              5.5269670486450195
+            ],
+            "H0_mace_px": 5.526941299438477,
+            "H_updates_mace_px": [
+              5.5269670486450195,
+              5.5269670486450195
+            ],
+            "H_final_mace_px": 5.5269670486450195,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "pair_id": "current__34.801100126.376330_pair1",
+            "trajectory_mace_px": [
+              7.170167922973633,
+              7.170166015625,
+              7.170166015625
+            ],
+            "H0_mace_px": 7.170167922973633,
+            "H_updates_mace_px": [
+              7.170166015625,
+              7.170166015625
+            ],
+            "H_final_mace_px": 7.170166015625,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      "final": {
+        "trajectory_mean_mace_px": [
+          6.348554611206055,
+          5.890920639038086,
+          5.454736709594727
+        ],
+        "trajectory_median_mace_px": [
+          5.526941299438477,
+          5.37048864364624,
+          5.228574752807617
+        ],
+        "H0_mace_px": {
+          "mean": 6.348554611206055,
+          "median": 5.526941299438477,
+          "p90": 7.005845069885254,
+          "max": 7.170167922973633
+        },
+        "H_final_mace_px": {
+          "mean": 5.454736709594727,
+          "median": 5.228574752807617,
+          "p90": 5.6356658935546875,
+          "max": 5.680898189544678
+        },
+        "failed_pairs": 0,
+        "failure_rate": 0.0,
+        "rejected_updates": 0,
+        "rejected_update_rate": 0.0,
+        "elapsed_seconds": 0.1455584093928337,
+        "latency_ms_per_pair_single_pass": 72.77920469641685,
+        "per_pair": [
+          {
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              5.526941299438477,
+              5.37048864364624,
+              5.228574752807617
+            ],
+            "H0_mace_px": 5.526941299438477,
+            "H_updates_mace_px": [
+              5.37048864364624,
+              5.228574752807617
+            ],
+            "H_final_mace_px": 5.228574752807617,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "pair_id": "current__34.801100126.376330_pair1",
+            "trajectory_mace_px": [
+              7.170167922973633,
+              6.411352634429932,
+              5.680898189544678
+            ],
+            "H0_mace_px": 7.170167922973633,
+            "H_updates_mace_px": [
+              6.411352634429932,
+              5.680898189544678
+            ],
+            "H_final_mace_px": 5.680898189544678,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      "initial_to_final_mean_mace_improvement_px": 0.8938298225402832,
+      "history": [
+        {
+          "optimizer_step": 0,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              6.348554611206055,
+              6.34856653213501,
+              6.34856653213501
+            ],
+            "trajectory_median_mace_px": [
+              5.526941299438477,
+              5.5269670486450195,
+              5.5269670486450195
+            ],
+            "H0_mace_px": {
+              "mean": 6.348554611206055,
+              "median": 5.526941299438477,
+              "p90": 7.005845069885254,
+              "max": 7.170167922973633
+            },
+            "H_final_mace_px": {
+              "mean": 6.34856653213501,
+              "median": 5.5269670486450195,
+              "p90": 7.00584602355957,
+              "max": 7.170166015625
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 0.5769248362630606,
+            "latency_ms_per_pair_single_pass": 288.4624181315303,
+            "per_pair": [
+              {
+                "pair_id": "current__34.801100126.376330_pair0",
+                "trajectory_mace_px": [
+                  5.526941299438477,
+                  5.5269670486450195,
+                  5.5269670486450195
+                ],
+                "H0_mace_px": 5.526941299438477,
+                "H_updates_mace_px": [
+                  5.5269670486450195,
+                  5.5269670486450195
+                ],
+                "H_final_mace_px": 5.5269670486450195,
+                "update_accepted": [
+                  true,
+                  true
+                ],
+                "failure_reason_codes": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "pair_id": "current__34.801100126.376330_pair1",
+                "trajectory_mace_px": [
+                  7.170167922973633,
+                  7.170166015625,
+                  7.170166015625
+                ],
+                "H0_mace_px": 7.170167922973633,
+                "H_updates_mace_px": [
+                  7.170166015625,
+                  7.170166015625
+                ],
+                "H_final_mace_px": 7.170166015625,
+                "update_accepted": [
+                  true,
+                  true
+                ],
+                "failure_reason_codes": [
+                  0,
+                  0
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "optimizer_step": 1,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              6.348554611206055,
+              5.3653244972229,
+              8.757123947143555
+            ],
+            "trajectory_median_mace_px": [
+              5.526941299438477,
+              1.783564567565918,
+              4.12216854095459
+            ],
+            "H0_mace_px": {
+              "mean": 6.348554611206055,
+              "median": 5.526941299438477,
+              "p90": 7.005845069885254,
+              "max": 7.170167922973633
+            },
+            "H_final_mace_px": {
+              "mean": 8.757123947143555,
+              "median": 4.12216854095459,
+              "p90": 12.465088844299316,
+              "max": 13.392080307006836
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 0.22319933492690325,
+            "latency_ms_per_pair_single_pass": 111.59966746345162,
+            "per_pair": [
+              {
+                "pair_id": "current__34.801100126.376330_pair0",
+                "trajectory_mace_px": [
+                  5.526941299438477,
+                  8.947084426879883,
+                  13.392080307006836
+                ],
+                "H0_mace_px": 5.526941299438477,
+                "H_updates_mace_px": [
+                  8.947084426879883,
+                  13.392080307006836
+                ],
+                "H_final_mace_px": 13.392080307006836,
+                "update_accepted": [
+                  true,
+                  true
+                ],
+                "failure_reason_codes": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "pair_id": "current__34.801100126.376330_pair1",
+                "trajectory_mace_px": [
+                  7.170167922973633,
+                  1.783564567565918,
+                  4.12216854095459
+                ],
+                "H0_mace_px": 7.170167922973633,
+                "H_updates_mace_px": [
+                  1.783564567565918,
+                  4.12216854095459
+                ],
+                "H_final_mace_px": 4.12216854095459,
+                "update_accepted": [
+                  true,
+                  true
+                ],
+                "failure_reason_codes": [
+                  0,
+                  0
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "optimizer_step": 2,
+          "metrics": {
+            "trajectory_mean_mace_px": [
+              6.348554611206055,
+              5.890920639038086,
+              5.454736709594727
+            ],
+            "trajectory_median_mace_px": [
+              5.526941299438477,
+              5.37048864364624,
+              5.228574752807617
+            ],
+            "H0_mace_px": {
+              "mean": 6.348554611206055,
+              "median": 5.526941299438477,
+              "p90": 7.005845069885254,
+              "max": 7.170167922973633
+            },
+            "H_final_mace_px": {
+              "mean": 5.454736709594727,
+              "median": 5.228574752807617,
+              "p90": 5.6356658935546875,
+              "max": 5.680898189544678
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 0.1455584093928337,
+            "latency_ms_per_pair_single_pass": 72.77920469641685,
+            "per_pair": [
+              {
+                "pair_id": "current__34.801100126.376330_pair0",
+                "trajectory_mace_px": [
+                  5.526941299438477,
+                  5.37048864364624,
+                  5.228574752807617
+                ],
+                "H0_mace_px": 5.526941299438477,
+                "H_updates_mace_px": [
+                  5.37048864364624,
+                  5.228574752807617
+                ],
+                "H_final_mace_px": 5.228574752807617,
+                "update_accepted": [
+                  true,
+                  true
+                ],
+                "failure_reason_codes": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "pair_id": "current__34.801100126.376330_pair1",
+                "trajectory_mace_px": [
+                  7.170167922973633,
+                  6.411352634429932,
+                  5.680898189544678
+                ],
+                "H0_mace_px": 7.170167922973633,
+                "H_updates_mace_px": [
+                  6.411352634429932,
+                  5.680898189544678
+                ],
+                "H_final_mace_px": 5.680898189544678,
+                "update_accepted": [
+                  true,
+                  true
+                ],
+                "failure_reason_codes": [
+                  0,
+                  0
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "last_sequence_corner_l1_px": 7.064992904663086,
+      "gradient_finite": true,
+      "training_elapsed_seconds": 1.5105593651533127,
+      "mean_training_step_seconds_including_periodic_eval": 0.7552796825766563,
+      "peak_allocated_bytes": 221566976,
+      "checkpoint": {
+        "path": "/home/disk1/MHINet/outputs/tiny_overfit/tiny-s-d8_seed999.pt",
+        "format": "mhinet.training",
+        "version": 1,
+        "bytes": 14481871,
+        "optimizer_step": 2,
+        "microbatch_progress": null,
+        "data_progress": {
+          "next_epoch_seed": 1000
+        },
+        "metadata": {
+          "diagnostic": "TINY-S-D8",
+          "active_scales": [
+            8
+          ],
+          "known_H0_residual_injected": true,
+          "formal_training_checkpoint": false,
+          "sample_count": 2,
+          "pair_ids": [
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair1"
+          ]
+        },
+        "cuda_rng_captured": true,
+        "sha256": "e628369ecc2539b963b66e6a62ad5afe5be541f84b1de8f606077e9e30c793f2"
+      },
+      "scope_note": "This is a training-set learnability diagnostic with controlled H0; it is not validation accuracy and must not select a formal configuration."
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "revision": "1.2",
+  "profiles": {
+    "heads": [
+      "adapters",
+      "refinement_decoders"
+    ],
+    "decoder_finetune": [
+      "adapters",
+      "refinement_decoders",
+      "dedode"
+    ],
+    "vgg_finetune": [
+      "adapters",
+      "refinement_decoders",
+      "dedode",
+      "vgg"
+    ],
+    "mvt_finetune": [
+      "adapters",
+      "refinement_decoders",
+      "dedode",
+      "mvt"
+    ],
+    "joint": [
+      "adapters",
+      "refinement_decoders",
+      "dedode",
+      "vgg",
+      "mvt"
+    ]
+  },
+  "always_frozen": [
+    "dino",
+    "stage1_head_parameters"
+  ],
+  "frozen_head_forward_allows_input_gradient": true,
+  "joint_H0_detach": false,
+  "iteration_H_detach": false
+}

@@ -96,27 +96,53 @@ The baseline command keeps B=1, effective batch 4, AdamW lr 1e-3, zero weight
 decay, no scheduler, clip 1, and trains only adapters/refinement decoders.  It
 uses controlled H0 only inside the diagnostic, never in formal training.
 
+Long jobs are run one experiment at a time because D1 uses the full legal
+residual fraction while D8/D4/D2/TINY-8 use `0.5`. This is the registered dense
+D1 5x5 command:
+
 ```bash
 CUDA_VISIBLE_DEVICES=3 conda run --no-capture-output -n loma-repro \
   python -u -m mhinet.cli tiny-overfit \
-  --runtime configs/runtime_paths.server.json \
-  --experiments D8,D4,D2,D1,TINY-8 \
+  --runtime configs/runtime_paths.server.json --experiments D1 \
   --sample-protocol one_pair_residuals \
-  --residual-profile translation --precision bf16 \
-  --sample-count 32 --seed 0 --max-steps 2000 --eval-interval 32 \
-  --threshold-mace-px 0.1 --weight-average-start-step 1536 \
-  --output artifacts/p4_tiny_gate.json --overwrite
+  --residual-profile translation --residual-bound-fraction 1.0 \
+  --precision bf16 --sample-count 32 --seed 0 \
+  --max-steps 2000 --eval-interval 32 --threshold-mace-px 0.1 \
+  --weight-average-start-step 1536 --heartbeat-interval 8 \
+  --progress-checkpoint outputs/tiny_overfit/d1_dense5_progress.pt \
+  --output artifacts/p4_tiny_s_d1_translation_swa.json --overwrite
+```
+
+If the process is interrupted, repeat every trajectory-defining argument and
+resume the raw optimizer boundary. Keep the same one-visible-GPU topology:
+
+```bash
+CUDA_VISIBLE_DEVICES=3 conda run --no-capture-output -n loma-repro \
+  python -u -m mhinet.cli tiny-overfit \
+  --runtime configs/runtime_paths.server.json --experiments D1 \
+  --sample-protocol one_pair_residuals \
+  --residual-profile translation --residual-bound-fraction 1.0 \
+  --precision bf16 --sample-count 32 --seed 0 \
+  --max-steps 2000 --eval-interval 32 --threshold-mace-px 0.1 \
+  --weight-average-start-step 1536 --heartbeat-interval 8 \
+  --resume-progress outputs/tiny_overfit/d1_dense5_progress.pt \
+  --output artifacts/p4_tiny_s_d1_translation_swa.json
 ```
 
 The registered diagnostic uses `--weight-average-start-step 1536` to expose a
 tiny-only equal-weight parameter-average readout while preserving every raw
 endpoint metric.  It does not alter the optimizer, loss, or formal trainer and
-must be reported as such; an averaged tiny checkpoint is marked non-resumable.
-Omitting the flag is useful for raw-endpoint failure isolation, but that output
-cannot be merged into the registered gate.
+must be reported as such; an averaged final tiny checkpoint is marked
+non-resumable. The separate progress checkpoint is atomically written at raw
+optimizer boundaries, contains RNG/data cursor/history/averager state, and is
+strictly bound to architecture, data manifest, runtime and weight hashes.
+Omitting the averaging flag is useful for raw-endpoint failure isolation, but
+that output cannot be merged into the registered gate.
 
-Long single-scale jobs may be run independently and merged only after all five
-artifacts pass.  The merge fails closed on missing experiments, protocol
+Run D8/D4/D2/TINY-8 with the same recipe but
+`--residual-bound-fraction 0.5`, distinct progress/output paths and the matching
+`--experiments` value. Long jobs may be merged only after all five artifacts
+pass. The merge fails closed on missing experiments, protocol
 differences, failed/rejected geometry, or a metric at/above 0.1 px:
 
 ```bash

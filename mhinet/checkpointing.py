@@ -192,6 +192,7 @@ def save_checkpoint(
     microbatch_progress: Any = None,
     data_progress: Any = None,
     metadata: Mapping[str, Any] | None = None,
+    auxiliary_state: Any = None,
 ) -> dict[str, Any]:
     """Atomically save all state required for exact training continuation."""
 
@@ -201,6 +202,7 @@ def save_checkpoint(
     safe_microbatch = _safe_value(microbatch_progress, location="microbatch_progress")
     safe_data = _safe_value(data_progress, location="data_progress")
     safe_metadata = _safe_value(dict(metadata or {}), location="metadata")
+    safe_auxiliary = _safe_value(auxiliary_state, location="auxiliary_state")
     rng_state = capture_rng_state()
     payload = {
         "format": CHECKPOINT_FORMAT,
@@ -216,6 +218,7 @@ def save_checkpoint(
         },
         "rng": rng_state,
         "metadata": safe_metadata,
+        "auxiliary_state": safe_auxiliary,
     }
     _atomic_torch_save(payload, target)
     return {
@@ -293,6 +296,7 @@ def load_checkpoint(
         "microbatch_progress": progress.get("microbatch"),
         "data_progress": progress.get("data"),
         "metadata": payload.get("metadata", {}),
+        "auxiliary_state": payload.get("auxiliary_state"),
         "missing_model_keys": list(incompatible.missing_keys),
         "unexpected_model_keys": list(incompatible.unexpected_keys),
         "restored": restored,

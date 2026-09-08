@@ -467,6 +467,37 @@ diagnostic-only and is never used by formal training.
   partial merge accepts D8/D4/D2 and fails only for the legitimately missing
   D1 and TINY-8 experiments.  Partial artifact SHA256:
   `99ff441f1f00b005b0c301dbf899161c9ccdaf9dcd3769d86fb058bcc8901f3b`.
+- Long TINY-S/TINY-8 runs now have an independent atomic progress checkpoint
+  path and strict `--resume-progress` entrypoint.  The progress role always
+  stores the raw iterator and matching AdamW state at a completed optimizer
+  boundary; it also stores the exact data cursor, Python/NumPy/Torch/CUDA RNG,
+  compact metric history, original step-0 endpoint, accumulated timing/peak
+  memory and the FP32 equal-weight parameter averager.  Averager tensors live
+  only in the binary `auxiliary_state` and are deliberately omitted from the
+  JSON-facing save report.  A restricted `weights_only=True` preflight runs
+  before live state or an existing partial JSON is changed.  Resume fails on a
+  mismatch in experiment/scales, seed, budget, evaluation interval, threshold,
+  sample protocol/order, residual profile/bound, precision, averaging window,
+  optimizer recipe, target size, architecture, manifest, runtime config or
+  DINO/GHIM/pyramid checkpoint path/size/SHA256.  Heartbeats default to every
+  eight optimizer steps and perform no extra forward pass; an evaluation step
+  and heartbeat are merged into one save.  The same visible-CUDA-device
+  topology is required because all visible CUDA RNG streams are restored.
+- The final evidence checkpoint filename now includes residual-bound fraction
+  and optimizer budget, preventing a short diagnostic from overwriting a
+  registered 2,000-step result.  A resumed checkpoint that had already passed
+  at its current evaluated step finalizes without another optimizer update.
+  The redundant per-parameter CUDA finite-gradient synchronization was removed;
+  `clip_grad_norm_(error_if_nonfinite=True)` remains the single fail-closed
+  finite-norm check before every optimizer step.
+- A CPU interruption-equivalence regression stops immediately after the
+  step-1 heartbeat, reloads the restricted progress payload, and reaches step 3
+  with bit-exact model and AdamW tensor states relative to an uninterrupted
+  run, including the parameter-average window.  Name mismatch and non-finite
+  averager state are rejected.  Command:
+  `CUDA_VISIBLE_DEVICES=0 /root/miniconda3/envs/loma-repro/bin/python -m unittest discover -s tests -v`.
+  Result: all 67 tests passed in 2.741 seconds.  This validates checkpoint
+  mechanics only; it is not a D1/TINY-8 learnability or model-validation pass.
 
 CUDA warns that `grid_sampler_2d_backward_cuda` and
 `adaptive_avg_pool2d_backward_cuda` have no deterministic implementation.

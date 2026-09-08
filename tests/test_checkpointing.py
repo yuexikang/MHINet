@@ -69,10 +69,19 @@ class CheckpointRoundTripTests(unittest.TestCase):
                 microbatch_progress=microbatch_progress,
                 data_progress=data_progress,
                 metadata={"run_id": "tiny", "config_path": Path("configs/tiny.json")},
+                auxiliary_state={
+                    "averaged_snapshots": 4,
+                    "averages": [torch.tensor([1.5, 2.5])],
+                },
             )
             self.assertTrue(path.is_file())
             self.assertEqual(saved["optimizer_step"], 23)
             self.assertGreater(saved["bytes"], 0)
+            self.assertNotIn(
+                "auxiliary_state",
+                saved,
+                msg="large binary-only state must never be expanded into JSON reports",
+            )
             self.assertEqual(
                 list(path.parent.glob(f".{path.name}.*.tmp")),
                 [],
@@ -85,6 +94,7 @@ class CheckpointRoundTripTests(unittest.TestCase):
             self.assertEqual(raw["format"], CHECKPOINT_FORMAT)
             self.assertIn("torch_cpu", raw["rng"])
             self.assertIn("torch_cuda", raw["rng"])
+            self.assertEqual(raw["auxiliary_state"]["averaged_snapshots"], 4)
 
             expected_python = [random.random() for _ in range(4)]
             expected_numpy = np.random.random(4)
@@ -118,6 +128,11 @@ class CheckpointRoundTripTests(unittest.TestCase):
             self.assertEqual(loaded["data_progress"], data_progress)
             self.assertEqual(loaded["metadata"]["run_id"], "tiny")
             self.assertEqual(loaded["metadata"]["config_path"], "configs/tiny.json")
+            self.assertEqual(loaded["auxiliary_state"]["averaged_snapshots"], 4)
+            torch.testing.assert_close(
+                loaded["auxiliary_state"]["averages"][0],
+                torch.tensor([1.5, 2.5]),
+            )
             self.assertEqual(loaded["missing_model_keys"], [])
             self.assertEqual(loaded["unexpected_model_keys"], [])
             self.assertEqual(

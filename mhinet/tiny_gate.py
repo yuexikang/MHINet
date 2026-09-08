@@ -24,6 +24,16 @@ REQUIRED_EXPERIMENTS = {
     "TINY-8": (8, 4, 2, 1),
 }
 
+REGISTERED_MAX_RESIDUAL_PX = {
+    "TINY-S-D8": 16.0,
+    "TINY-S-D4": 8.0,
+    "TINY-S-D2": 3.0,
+    # Half-bound D1 exposed only ~0.71 feature-pixel displacement and stalled;
+    # the full 2 px decoder bound remains legal and restores local observability.
+    "TINY-S-D1": 2.0,
+    "TINY-8": 16.0,
+}
+
 REGISTERED_PROTOCOL = {
     "training_revision": "1.2",
     "loss": "uniform proposal-corner coordinate L1",
@@ -443,11 +453,39 @@ def registered_experiment_errors(
         errors.append(f"{prefix} averaged readout has no snapshots")
 
     controlled_h0 = experiment.get("controlled_H0", {})
-    if not (
+    expected_max_residual = REGISTERED_MAX_RESIDUAL_PX[name]
+    expected_fraction = 1.0 if name == "TINY-S-D1" else 0.5
+    if not isinstance(controlled_h0, Mapping) or not (
         controlled_h0.get("profile") == "translation"
         and controlled_h0.get("formal_training_injection") is False
+        and _exact_float(
+            controlled_h0.get("maximum_declared_abs_residual_px"),
+            expected_max_residual,
+        )
     ):
         errors.append(f"{prefix} controlled-H0 provenance is invalid")
+    else:
+        reported_fraction = controlled_h0.get(
+            "bound_fraction_of_coarsest_active_decoder"
+        )
+        if reported_fraction is not None and not _exact_float(
+            reported_fraction, expected_fraction
+        ):
+            errors.append(f"{prefix} controlled-H0 bound fraction is invalid")
+        if name == "TINY-S-D1" and not _exact_float(
+            reported_fraction, expected_fraction
+        ):
+            errors.append(f"{prefix} D1 must record its full-bound residual policy")
+        actual_stats = controlled_h0.get("actual_abs_residual_px")
+        actual_max = (
+            _metric_float(actual_stats.get("max"))
+            if isinstance(actual_stats, Mapping)
+            else None
+        )
+        if actual_max is None or not math.isclose(
+            actual_max, expected_max_residual, rel_tol=0.0, abs_tol=1e-3
+        ):
+            errors.append(f"{prefix} controlled-H0 actual bound is invalid")
 
     criterion = experiment.get("criterion", {})
     threshold = criterion.get("threshold_mace_px")

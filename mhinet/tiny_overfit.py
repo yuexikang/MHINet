@@ -454,7 +454,10 @@ def run_one_tiny_experiment(
     precision: str,
     weight_average_start_step: int | None,
     overwrite: bool,
+    residual_bound_fraction: float = 0.5,
 ) -> dict[str, Any]:
+    if not 0.0 < residual_bound_fraction <= 1.0:
+        raise ValueError("residual_bound_fraction must be in (0, 1]")
     device = torch.device(runtime.device)
     _fresh_new_modules(model, device, seed)
     for scale in ALL_SCALES:
@@ -475,7 +478,9 @@ def run_one_tiny_experiment(
         if weight_average_start_step is None
         else _ParameterAverager(trainable_parameters)
     )
-    max_residual = 0.5 * max(SCALE_SPECS[scale].max_delta_px for scale in active_scales)
+    max_residual = residual_bound_fraction * max(
+        SCALE_SPECS[scale].max_delta_px for scale in active_scales
+    )
     H0_values: list[torch.Tensor] = []
     actual_residuals: list[torch.Tensor] = []
     for index, sample in enumerate(cache):
@@ -810,6 +815,7 @@ def run_one_tiny_experiment(
             "source": "GT plus deterministic diagnostic-only corner residual",
             "profile": residual_profile,
             "formal_training_injection": False,
+            "bound_fraction_of_coarsest_active_decoder": residual_bound_fraction,
             "maximum_declared_abs_residual_px": max_residual,
             "actual_abs_residual_px": _statistics(residual_stack.abs().flatten()),
         },
@@ -861,6 +867,7 @@ def run_tiny_overfit(
     weight_average_start_step: int | None = None,
     overwrite: bool = False,
     partial_output: Path | None = None,
+    residual_bound_fraction: float = 0.5,
 ) -> dict[str, Any]:
     if sample_count <= 0:
         raise ValueError("sample_count must be positive")
@@ -882,6 +889,8 @@ def run_tiny_overfit(
         1 <= int(weight_average_start_step) <= max_steps
     ):
         raise ValueError("weight_average_start_step must be within [1, max_steps]")
+    if not 0.0 < residual_bound_fraction <= 1.0:
+        raise ValueError("residual_bound_fraction must be in (0, 1]")
     device = torch.device(runtime.device)
     if device.type != "cuda":
         raise RuntimeError("Real full-resolution tiny-overfit currently requires CUDA")
@@ -971,6 +980,7 @@ def run_tiny_overfit(
             precision=precision,
             weight_average_start_step=weight_average_start_step,
             overwrite=overwrite,
+            residual_bound_fraction=residual_bound_fraction,
         )
         report["experiments"].append(result)
         if partial_output is not None:
@@ -1026,6 +1036,15 @@ def main(argv: list[str] | None = None) -> int:
             "is still reported and the formal trainer never enables this"
         ),
     )
+    parser.add_argument(
+        "--residual-bound-fraction",
+        type=float,
+        default=0.5,
+        help=(
+            "Fraction of the coarsest active decoder update bound used for "
+            "controlled H0 residuals; the registered D1 diagnostic uses 1.0"
+        ),
+    )
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--overwrite", action="store_true")
     args = parser.parse_args(argv)
@@ -1046,6 +1065,7 @@ def main(argv: list[str] | None = None) -> int:
         weight_average_start_step=args.weight_average_start_step,
         overwrite=args.overwrite,
         partial_output=output,
+        residual_bound_fraction=args.residual_bound_fraction,
     )
     _write_json(output, report)
     print(json.dumps(_jsonable(report), indent=2, ensure_ascii=False))

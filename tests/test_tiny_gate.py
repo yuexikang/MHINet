@@ -10,7 +10,11 @@ import torch
 
 from mhinet.checkpointing import CHECKPOINT_FORMAT, CHECKPOINT_VERSION
 from mhinet.config import sha256_file
-from mhinet.tiny_gate import REQUIRED_EXPERIMENTS, merge_tiny_gate_artifacts
+from mhinet.tiny_gate import (
+    REGISTERED_MAX_RESIDUAL_PX,
+    REQUIRED_EXPERIMENTS,
+    merge_tiny_gate_artifacts,
+)
 
 
 class TinyGateMergeTests(unittest.TestCase):
@@ -153,6 +157,15 @@ class TinyGateMergeTests(unittest.TestCase):
                     "controlled_H0": {
                         "profile": "translation",
                         "formal_training_injection": False,
+                        "bound_fraction_of_coarsest_active_decoder": (
+                            1.0 if name == "TINY-S-D1" else 0.5
+                        ),
+                        "maximum_declared_abs_residual_px": (
+                            REGISTERED_MAX_RESIDUAL_PX[name]
+                        ),
+                        "actual_abs_residual_px": {
+                            "max": REGISTERED_MAX_RESIDUAL_PX[name]
+                        },
                     },
                     "criterion": {"met": True, "threshold_mace_px": 0.1},
                     "initial": initial,

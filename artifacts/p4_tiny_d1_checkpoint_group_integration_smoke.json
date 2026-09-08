@@ -1,0 +1,644 @@
+{
+  "gate": "P4_TINY_S_TINY_8",
+  "status": "failed",
+  "protocol": {
+    "training_revision": "1.2",
+    "loss": "uniform proposal-corner coordinate L1",
+    "FGO": false,
+    "extra_losses": false,
+    "planar_head": false,
+    "precision": "BF16 adapter/CNN autocast, FP32 correlation/geometry",
+    "deterministic_algorithms": "enabled_warn_only",
+    "tiny_weight_average_start_step": 1
+  },
+  "runtime_config": "/home/disk1/MHINet/configs/runtime_paths.server.json",
+  "device": "cuda:0",
+  "build": {
+    "architecture_path": "/home/disk1/MHINet/MHINet_server_handoff_v1.2/configs/mhinet_v1.json",
+    "architecture_sha256": "4a859f413ee4be59acb1dc6c0cf189e80b8f4e7b3f54dc9f117acd1ac5cfe128",
+    "provider": {
+      "loma_root": "/home/disk1/LoMa",
+      "loma_checkpoint": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+      "dino_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "selected_stage1_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "loretta_loaded_keys": 807,
+      "locator": {
+        "source": "official_loretta_checkpoint",
+        "overridden": false
+      },
+      "descriptor_initialization": {
+        "migrated_tensors": 364,
+        "vgg_tensors": 84,
+        "decoder_tensors": 280,
+        "top_refiner_mapping": "LoMa-B scale 14 -> DINOv3 scale 16"
+      },
+      "ownership": {
+        "dino_wrapper_instances": 1,
+        "mvt_object_references": 1,
+        "stage1_head_contains_dino": 0,
+        "stage1_head_contains_mvt": 0,
+        "decoder_scales": [
+          "16",
+          "8",
+          "4",
+          "2",
+          "1"
+        ]
+      },
+      "legacy_training_wrappers_reused": false,
+      "safe_stage1_fitter": true
+    },
+    "training_parameters": {
+      "profile": "heads",
+      "groups": {
+        "new_modules": {
+          "parameters": 2544160,
+          "trainable_parameters": 2544160,
+          "tensor_count": 158,
+          "trainable_tensor_count": 158
+        },
+        "dedode": {
+          "parameters": 8219297,
+          "trainable_parameters": 0,
+          "tensor_count": 190,
+          "trainable_tensor_count": 0
+        },
+        "vgg": {
+          "parameters": 10592064,
+          "trainable_parameters": 0,
+          "tensor_count": 48,
+          "trainable_tensor_count": 0
+        },
+        "mvt": {
+          "parameters": 87417088,
+          "trainable_parameters": 0,
+          "tensor_count": 150,
+          "trainable_tensor_count": 0
+        },
+        "dino": {
+          "parameters": 227564544,
+          "trainable_parameters": 0,
+          "tensor_count": 259,
+          "trainable_tensor_count": 0
+        },
+        "stage1_head_parameters": {
+          "parameters": 2957572,
+          "trainable_parameters": 0,
+          "tensor_count": 10,
+          "trainable_tensor_count": 0
+        }
+      },
+      "total_trainable_parameters": 2544160,
+      "new_parameters": 2544160,
+      "dino_trainable_parameters": 0,
+      "stage1_head_trainable_parameters": 0
+    }
+  },
+  "cache": {
+    "source": "leakage-safe train split; exact single-image homography pairs",
+    "manifest": "/home/disk1/Data/datasets/GoogleEarth_scale_pairs/train/pairs.jsonl",
+    "manifest_sha256": "3eed3d3d425caf8465afb5121dfd85960f00932fccc343f37187e14ce27d499c",
+    "sample_count": 1,
+    "pair_ids": [
+      "current__34.801100126.376330_pair0"
+    ],
+    "parent_groups": [
+      "parent:current/Train/34.801100126.376330.jpg"
+    ],
+    "geo_groups": [
+      "geo_0.01:3480:12637"
+    ],
+    "validation_geo_groups_used_only_for_exclusion": 190,
+    "test_used": false,
+    "provider_prefix_computed": [
+      8,
+      4,
+      2,
+      1
+    ],
+    "stored_scales": [
+      1
+    ],
+    "feature_shapes": {
+      "1": [
+        1,
+        2,
+        256,
+        784,
+        784
+      ]
+    },
+    "feature_dtypes": {
+      "1": "torch.bfloat16"
+    },
+    "cache_bytes_cpu": 629407744,
+    "shared_call_counts_total": {
+      "dino": 1,
+      "mvt": 1,
+      "vgg": 1,
+      "dedode_full_pyramid": 1
+    },
+    "shared_once_per_pair": true,
+    "elapsed_seconds": 1.1009228536859155,
+    "pairs_per_second": 0.9083288594218719,
+    "peak_allocated_bytes": 10794867712,
+    "peak_reserved_bytes": 13220446208,
+    "sample_protocol": "one_pair_residuals",
+    "unique_image_pair_count": 1,
+    "diagnostic_sample_count": 2,
+    "diagnostic_sample_definition": "one exact image pair with 32 deterministic locally observable H0 residuals"
+  },
+  "experiments": [
+    {
+      "name": "TINY-S-D1",
+      "status": "failed",
+      "active_scales": [
+        1
+      ],
+      "updates": 2,
+      "seed": 890,
+      "sample_count": 2,
+      "sample_protocol": "one_pair_residuals",
+      "residual_profile": "translation",
+      "precision": "bf16",
+      "primary_readout": "equal_weight_parameter_average",
+      "weight_averaging": {
+        "enabled": true,
+        "start_optimizer_step": 1,
+        "averaged_snapshots": 1,
+        "applied_to_primary_readout": true,
+        "training_optimizer_unchanged": true,
+        "formal_training_enabled": false
+      },
+      "frozen_feature_residency": "one shared GPU copy for repeated exact image pair",
+      "optimizer": {
+        "name": "AdamW",
+        "learning_rate": 0.001,
+        "weight_decay": 0.0,
+        "scheduler": null,
+        "batch_size": 1,
+        "gradient_accumulation": 4,
+        "effective_batch_size": 4,
+        "gradient_clip_norm": 1.0,
+        "optimizer_steps": 1,
+        "maximum_steps": 1
+      },
+      "controlled_H0": {
+        "source": "GT plus deterministic diagnostic-only corner residual",
+        "profile": "translation",
+        "formal_training_injection": false,
+        "maximum_declared_abs_residual_px": 1.0,
+        "actual_abs_residual_px": {
+          "mean": 0.6143426895141602,
+          "median": 0.59906005859375,
+          "p90": 0.750091552734375,
+          "max": 0.7501220703125
+        }
+      },
+      "criterion": {
+        "definition": "32-sample primary-readout mean final MACE < threshold, zero failed pairs, zero rejected updates",
+        "threshold_mace_px": 0.1,
+        "met": false
+      },
+      "initial": {
+        "trajectory_mean_mace_px": [
+          0.8876582980155945,
+          0.8876768946647644,
+          0.8876768946647644
+        ],
+        "trajectory_median_mace_px": [
+          0.8539890050888062,
+          0.8539774417877197,
+          0.8539774417877197
+        ],
+        "H0_mace_px": {
+          "mean": 0.8876582980155945,
+          "median": 0.8539890050888062,
+          "p90": 0.9145937561988831,
+          "max": 0.9213275909423828
+        },
+        "H_final_mace_px": {
+          "mean": 0.8876768946647644,
+          "median": 0.8539774417877197,
+          "p90": 0.9146364331245422,
+          "max": 0.9213763475418091
+        },
+        "failed_pairs": 0,
+        "failure_rate": 0.0,
+        "rejected_updates": 0,
+        "rejected_update_rate": 0.0,
+        "elapsed_seconds": 2.057837091386318,
+        "latency_ms_per_pair_single_pass": 1028.918545693159,
+        "per_pair": [
+          {
+            "diagnostic_sample_index": 0,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              0.9213275909423828,
+              0.9213763475418091,
+              0.9213763475418091
+            ],
+            "H0_mace_px": 0.9213275909423828,
+            "H_updates_mace_px": [
+              0.9213763475418091,
+              0.9213763475418091
+            ],
+            "H_final_mace_px": 0.9213763475418091,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 1,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              0.8539890050888062,
+              0.8539774417877197,
+              0.8539774417877197
+            ],
+            "H0_mace_px": 0.8539890050888062,
+            "H_updates_mace_px": [
+              0.8539774417877197,
+              0.8539774417877197
+            ],
+            "H_final_mace_px": 0.8539774417877197,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      "raw_final": {
+        "trajectory_mean_mace_px": [
+          0.8876582980155945,
+          0.3155449628829956,
+          0.39731842279434204
+        ],
+        "trajectory_median_mace_px": [
+          0.8539890050888062,
+          0.3136002719402313,
+          0.3186803460121155
+        ],
+        "H0_mace_px": {
+          "mean": 0.8876582980155945,
+          "median": 0.8539890050888062,
+          "p90": 0.9145937561988831,
+          "max": 0.9213275909423828
+        },
+        "H_final_mace_px": {
+          "mean": 0.39731842279434204,
+          "median": 0.3186803460121155,
+          "p90": 0.4602288603782654,
+          "max": 0.4759564697742462
+        },
+        "failed_pairs": 0,
+        "failure_rate": 0.0,
+        "rejected_updates": 0,
+        "rejected_update_rate": 0.0,
+        "elapsed_seconds": 1.7372474316507578,
+        "latency_ms_per_pair_single_pass": 868.6237158253789,
+        "per_pair": [
+          {
+            "diagnostic_sample_index": 0,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              0.9213275909423828,
+              0.3136002719402313,
+              0.3186803460121155
+            ],
+            "H0_mace_px": 0.9213275909423828,
+            "H_updates_mace_px": [
+              0.3136002719402313,
+              0.3186803460121155
+            ],
+            "H_final_mace_px": 0.3186803460121155,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 1,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              0.8539890050888062,
+              0.3174896836280823,
+              0.4759564697742462
+            ],
+            "H0_mace_px": 0.8539890050888062,
+            "H_updates_mace_px": [
+              0.3174896836280823,
+              0.4759564697742462
+            ],
+            "H_final_mace_px": 0.4759564697742462,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      "final": {
+        "trajectory_mean_mace_px": [
+          0.8876582980155945,
+          0.3155449628829956,
+          0.39731842279434204
+        ],
+        "trajectory_median_mace_px": [
+          0.8539890050888062,
+          0.3136002719402313,
+          0.3186803460121155
+        ],
+        "H0_mace_px": {
+          "mean": 0.8876582980155945,
+          "median": 0.8539890050888062,
+          "p90": 0.9145937561988831,
+          "max": 0.9213275909423828
+        },
+        "H_final_mace_px": {
+          "mean": 0.39731842279434204,
+          "median": 0.3186803460121155,
+          "p90": 0.4602288603782654,
+          "max": 0.4759564697742462
+        },
+        "failed_pairs": 0,
+        "failure_rate": 0.0,
+        "rejected_updates": 0,
+        "rejected_update_rate": 0.0,
+        "elapsed_seconds": 1.5888199638575315,
+        "latency_ms_per_pair_single_pass": 794.4099819287658,
+        "per_pair": [
+          {
+            "diagnostic_sample_index": 0,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              0.9213275909423828,
+              0.3136002719402313,
+              0.3186803460121155
+            ],
+            "H0_mace_px": 0.9213275909423828,
+            "H_updates_mace_px": [
+              0.3136002719402313,
+              0.3186803460121155
+            ],
+            "H_final_mace_px": 0.3186803460121155,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          },
+          {
+            "diagnostic_sample_index": 1,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              0.8539890050888062,
+              0.3174896836280823,
+              0.4759564697742462
+            ],
+            "H0_mace_px": 0.8539890050888062,
+            "H_updates_mace_px": [
+              0.3174896836280823,
+              0.4759564697742462
+            ],
+            "H_final_mace_px": 0.4759564697742462,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      "initial_to_final_mean_mace_improvement_px": 0.49035847187042236,
+      "history": [
+        {
+          "optimizer_step": 0,
+          "raw_metrics": {
+            "trajectory_mean_mace_px": [
+              0.8876582980155945,
+              0.8876768946647644,
+              0.8876768946647644
+            ],
+            "trajectory_median_mace_px": [
+              0.8539890050888062,
+              0.8539774417877197,
+              0.8539774417877197
+            ],
+            "H0_mace_px": {
+              "mean": 0.8876582980155945,
+              "median": 0.8539890050888062,
+              "p90": 0.9145937561988831,
+              "max": 0.9213275909423828
+            },
+            "H_final_mace_px": {
+              "mean": 0.8876768946647644,
+              "median": 0.8539774417877197,
+              "p90": 0.9146364331245422,
+              "max": 0.9213763475418091
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 2.057837091386318,
+            "latency_ms_per_pair_single_pass": 1028.918545693159
+          },
+          "weight_averaged_metrics": null,
+          "primary_metrics": {
+            "trajectory_mean_mace_px": [
+              0.8876582980155945,
+              0.8876768946647644,
+              0.8876768946647644
+            ],
+            "trajectory_median_mace_px": [
+              0.8539890050888062,
+              0.8539774417877197,
+              0.8539774417877197
+            ],
+            "H0_mace_px": {
+              "mean": 0.8876582980155945,
+              "median": 0.8539890050888062,
+              "p90": 0.9145937561988831,
+              "max": 0.9213275909423828
+            },
+            "H_final_mace_px": {
+              "mean": 0.8876768946647644,
+              "median": 0.8539774417877197,
+              "p90": 0.9146364331245422,
+              "max": 0.9213763475418091
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 2.057837091386318,
+            "latency_ms_per_pair_single_pass": 1028.918545693159
+          },
+          "weight_average_count": 0
+        },
+        {
+          "optimizer_step": 1,
+          "raw_metrics": {
+            "trajectory_mean_mace_px": [
+              0.8876582980155945,
+              0.3155449628829956,
+              0.39731842279434204
+            ],
+            "trajectory_median_mace_px": [
+              0.8539890050888062,
+              0.3136002719402313,
+              0.3186803460121155
+            ],
+            "H0_mace_px": {
+              "mean": 0.8876582980155945,
+              "median": 0.8539890050888062,
+              "p90": 0.9145937561988831,
+              "max": 0.9213275909423828
+            },
+            "H_final_mace_px": {
+              "mean": 0.39731842279434204,
+              "median": 0.3186803460121155,
+              "p90": 0.4602288603782654,
+              "max": 0.4759564697742462
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 1.7372474316507578,
+            "latency_ms_per_pair_single_pass": 868.6237158253789
+          },
+          "weight_averaged_metrics": {
+            "trajectory_mean_mace_px": [
+              0.8876582980155945,
+              0.3155449628829956,
+              0.39731842279434204
+            ],
+            "trajectory_median_mace_px": [
+              0.8539890050888062,
+              0.3136002719402313,
+              0.3186803460121155
+            ],
+            "H0_mace_px": {
+              "mean": 0.8876582980155945,
+              "median": 0.8539890050888062,
+              "p90": 0.9145937561988831,
+              "max": 0.9213275909423828
+            },
+            "H_final_mace_px": {
+              "mean": 0.39731842279434204,
+              "median": 0.3186803460121155,
+              "p90": 0.4602288603782654,
+              "max": 0.4759564697742462
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 1.5888199638575315,
+            "latency_ms_per_pair_single_pass": 794.4099819287658
+          },
+          "primary_metrics": {
+            "trajectory_mean_mace_px": [
+              0.8876582980155945,
+              0.3155449628829956,
+              0.39731842279434204
+            ],
+            "trajectory_median_mace_px": [
+              0.8539890050888062,
+              0.3136002719402313,
+              0.3186803460121155
+            ],
+            "H0_mace_px": {
+              "mean": 0.8876582980155945,
+              "median": 0.8539890050888062,
+              "p90": 0.9145937561988831,
+              "max": 0.9213275909423828
+            },
+            "H_final_mace_px": {
+              "mean": 0.39731842279434204,
+              "median": 0.3186803460121155,
+              "p90": 0.4602288603782654,
+              "max": 0.4759564697742462
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 1.5888199638575315,
+            "latency_ms_per_pair_single_pass": 794.4099819287658
+          },
+          "weight_average_count": 1
+        }
+      ],
+      "last_sequence_corner_l1_px": 0.6143426895141602,
+      "gradient_finite": true,
+      "maximum_preclip_gradient_norm": 25.069942474365234,
+      "training_elapsed_seconds": 18.109171277843416,
+      "mean_training_step_seconds_including_periodic_eval": 18.109171277843416,
+      "peak_allocated_bytes": 6697497088,
+      "peak_reserved_bytes": 7021264896,
+      "checkpoint": {
+        "path": "/home/disk1/MHINet/outputs/tiny_overfit/tiny-s-d1_one-pair-residuals_translation_bf16_weight-average-from-1_seed890.pt",
+        "format": "mhinet.training",
+        "version": 1,
+        "bytes": 16250897,
+        "optimizer_step": 1,
+        "microbatch_progress": null,
+        "data_progress": {
+          "epoch": 1,
+          "position": 2,
+          "order_seed": 891
+        },
+        "metadata": {
+          "diagnostic": "TINY-S-D1",
+          "active_scales": [
+            1
+          ],
+          "known_H0_residual_injected": true,
+          "formal_training_checkpoint": false,
+          "sample_count": 2,
+          "sample_protocol": "one_pair_residuals",
+          "residual_profile": "translation",
+          "precision": "bf16",
+          "weight_average_start_step": 1,
+          "weight_average_count": 1,
+          "checkpoint_contains_weight_average": true,
+          "optimizer_resume_supported": false,
+          "pair_ids": [
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0"
+          ]
+        },
+        "cuda_rng_captured": true,
+        "sha256": "bd0c4b706607346258fec773766112edcdf58666560c232ea48ae12ef744aac9"
+      },
+      "scope_note": "This is a training-set learnability diagnostic with controlled H0; it is not validation accuracy and must not select a formal configuration."
+    }
+  ]
+}

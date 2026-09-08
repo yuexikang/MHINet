@@ -8,7 +8,8 @@ instructions.
 ## 2026-09-08 — design package and repository
 
 - Project/repository: `/home/disk1/MHINet`; initialized with `git init -b main`.
-  At the time this section was written the new repository had no commit yet.
+  The first implementation/evidence milestone through the D8/D4 tiny gates is
+  commit `5ff680b` (`Implement MHINet v1 through P4 D8/D4 gates`).
 - Design package: `/home/disk1/MHINet/MHINet_server_handoff_v1.2`.
 - Read order followed: `START_HERE.md`, docs `01`, `03`, `05`, `06`, `02`,
   `07`, `08`, then all files under `configs/`.
@@ -222,6 +223,31 @@ CUDA_VISIBLE_DEVICES=0 conda run --no-capture-output -n loma-repro \
   step 0 via H0.  DINO and Stage1-head gradients remained absent.  Shared
   DINO/MVT/VGG/full-pyramid calls were one per step in both profiles.
 
+After D2 timing exposed excessive Python overhead from constructing one
+activation-checkpoint context per 1,024-query chunk, correlation was refactored
+to checkpoint the complete chunk loop once.  Sampling still occurs in the same
+1,024-query chunks, with identical ordering and no detach; the existing direct,
+chunked/un-chunked and checkpointed output/gradient tests all pass.  Fresh
+two-step 784 profiles for the current implementation both passed:
+
+The current path was first exercised by a 32-residual, one-step D2 integration
+with finite backward and zero rejected updates (expected `failed` solely due to
+the one-step budget); peak allocated/reserved memory was
+2,761,892,352/3,011,510,272 bytes.  Artifact SHA256
+`805142ff226a1047aa1f9bf7d17de713e912adafaf1e111abc13bfc458281a87`.
+
+- `heads`: peak allocated/reserved
+  8,731,754,496/9,053,405,184 bytes; artifact SHA256
+  `c6657331a21076f54da91dfbe7374214d105827afc4a41a941ba1d182c96a37b`.
+- `joint`: peak allocated/reserved
+  17,336,022,016/17,792,237,568 bytes on the 24 GiB RTX 4090; artifact SHA256
+  `7dac145bf10f0e8d7bd582ddf2b96c6915f708bbb54cdf3bd253aca4b59ef9c6`.
+  At step 1, DeDoDe, VGG and MVT gradients were all finite and nonzero; DINO
+  and Stage1-head parameter gradients remained absent, and shared call counts
+  remained one.  The optimization trades about 3.1 GiB extra peak allocation
+  in `joint` for lower checkpoint-management overhead and remains below the
+  measured device limit; both the old and current profiles are retained.
+
 Minimal trainer smoke (D8, two rounds, two optimizer steps, B1 x accumulation
 4) used `configs/train_minimal_smoke.json`, SHA256
 `6946de077ed11b5f3a5dcf495003fe073a7c7e424815597b1cd716a66f0239c4`:
@@ -354,7 +380,26 @@ diagnostic-only and is never used by formal training.
   diagnostic residuals and one optimizer step, not because of a runtime error.
   Artifact SHA256:
   `997f739826d1f747d3f210d93e2ffb35ecf63c0d0e5e0b4db50a8ecfd409bbc7`.
-  TINY-S-D2 is now the active next gate; D1/TINY-8 have not been run.
+- TINY-S-D2 passed at optimizer step 416 using the raw parameter readout,
+  before the predeclared averaging window: mean/median/P90 final MACE
+  0.095326/0.100922/0.124073 px, zero failed pairs and zero rejected updates.
+  Artifact:
+  `/home/disk1/MHINet/artifacts/p4_tiny_s_d2_translation_swa.json`, 107,374
+  bytes, SHA256
+  `78cb079f66d69f13719f9a79627fe90aaa86b0c29cf8cde98999066015e82f73`.
+  Checkpoint:
+  `/home/disk1/MHINet/outputs/tiny_overfit/tiny-s-d2_one-pair-residuals_translation_bf16_weight-average-from-1536_seed0.pt`,
+  15,644,987 bytes, SHA256
+  `7ea700fb910714bd631f72e7908ba7f3ce1f0c866ac3742b272975aaa45f2c9b`.
+- A two-residual, one-step D1 integration then exercised the current grouped
+  checkpoint implementation at full 784 resolution.  Forward, backward, raw
+  evaluation, averaged evaluation and checkpoint save all completed with
+  finite gradients, zero failed pairs and zero rejected updates.  Peak
+  allocated/reserved training memory was
+  6,697,497,088/7,021,264,896 bytes.  Its `failed` status is expected because
+  it is not the 32-residual learnability run.  Artifact SHA256
+  `2a3f52d3e395e49ba2ebc53dad253c612b8417a42775a52238d81af32f9cb5e3`.
+  TINY-S-D1 is now the active next gate; TINY-8 has not been run.
 - The independent-run merger was exercised with only D8.  It failed closed
   and listed D4/D2/D1/TINY-8 as missing; formal E01 then rejected that artifact
   before model construction or any optimizer step.  Partial artifact SHA256:

@@ -215,37 +215,63 @@ def h_guided_local_correlation(
         correlation = torch.where(valid, correlation, torch.zeros_like(correlation))
         return correlation, valid
 
-    correlation_chunks: list[Tensor] = []
-    valid_chunks: list[Tensor] = []
-    for start in range(0, query_count, chunk_size):
-        stop = min(start + chunk_size, query_count)
-        source_chunk = source_flat[:, :, start:stop]
-        chunk_inputs = (
-            source_chunk,
-            source_valid_flat[:, start:stop],
-            safe_target,
-            target_finite_float,
-            projected[:, start:stop],
-            projection_valid[:, start:stop],
-            offsets,
-        )
-        checkpoint_needed = activation_checkpoint and torch.is_grad_enabled() and any(
-            tensor.requires_grad for tensor in chunk_inputs if tensor.is_floating_point()
-        )
-        if checkpoint_needed:
-            correlation, valid = checkpoint(
-                compute_chunk,
-                *chunk_inputs,
-                use_reentrant=False,
-                preserve_rng_state=False,
-            )
-        else:
-            correlation, valid = compute_chunk(*chunk_inputs)
-        correlation_chunks.append(correlation)
-        valid_chunks.append(valid)
+    def compute_all_chunks(
+        source_tensor: Tensor,
+        source_valid_tensor: Tensor,
+        target_tensor: Tensor,
+        target_finite_tensor: Tensor,
+        projected_tensor: Tensor,
+        projection_valid_tensor: Tensor,
+        offset_tensor: Tensor,
+    ) -> tuple[Tensor, Tensor]:
+        """Run the fixed 1024-query sampling chunks under one checkpoint.
 
-    correlation_flat = torch.cat(correlation_chunks, dim=1)
-    valid_flat = torch.cat(valid_chunks, dim=1)
+        A checkpoint per small chunk creates hundreds of Python checkpoint
+        contexts at D2/D1.  Checkpointing the complete chunk loop retains the
+        exact sampling chunk size and tensor order while recomputing the same
+        loop once during backward.
+        """
+
+        correlation_chunks: list[Tensor] = []
+        valid_chunks: list[Tensor] = []
+        for start in range(0, query_count, chunk_size):
+            stop = min(start + chunk_size, query_count)
+            correlation, valid = compute_chunk(
+                source_tensor[:, :, start:stop],
+                source_valid_tensor[:, start:stop],
+                target_tensor,
+                target_finite_tensor,
+                projected_tensor[:, start:stop],
+                projection_valid_tensor[:, start:stop],
+                offset_tensor,
+            )
+            correlation_chunks.append(correlation)
+            valid_chunks.append(valid)
+        return torch.cat(correlation_chunks, dim=1), torch.cat(valid_chunks, dim=1)
+
+    checkpoint_inputs = (
+        source_flat,
+        source_valid_flat,
+        safe_target,
+        target_finite_float,
+        projected,
+        projection_valid,
+        offsets,
+    )
+    checkpoint_needed = activation_checkpoint and torch.is_grad_enabled() and any(
+        tensor.requires_grad
+        for tensor in checkpoint_inputs
+        if tensor.is_floating_point()
+    )
+    if checkpoint_needed:
+        correlation_flat, valid_flat = checkpoint(
+            compute_all_chunks,
+            *checkpoint_inputs,
+            use_reentrant=False,
+            preserve_rng_state=False,
+        )
+    else:
+        correlation_flat, valid_flat = compute_all_chunks(*checkpoint_inputs)
     correlation_map = correlation_flat.permute(0, 2, 1).reshape(
         batch, candidate_count, source_height, source_width
     )

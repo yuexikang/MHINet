@@ -1,0 +1,93 @@
+{
+  "evidence": "P4 tiny progress/resume CUDA smoke",
+  "scope": "checkpoint mechanics only; not a learnability or validation pass",
+  "git_commit": "1ccedfae8574cf01eb398ad00b12af8e4f7ef610",
+  "environment": {
+    "conda_environment": "loma-repro",
+    "python": "3.10.20",
+    "torch": "2.11.0+cu128",
+    "cuda_runtime": "12.8",
+    "cudnn": 91900,
+    "device": "NVIDIA GeForce RTX 4090",
+    "CUDA_VISIBLE_DEVICES": "0"
+  },
+  "protocol": {
+    "experiment": "TINY-S-D8",
+    "sample_protocol": "one_pair_residuals",
+    "diagnostic_sample_count": 2,
+    "seed": 0,
+    "maximum_steps": 1,
+    "evaluation_interval": 1,
+    "heartbeat_interval": 1,
+    "precision": "bf16",
+    "residual_profile": "translation",
+    "residual_bound_fraction": 0.5,
+    "expected_gate_status": "failed because this two-condition one-step smoke is not the registered 32-condition gate"
+  },
+  "fresh_command": "CUDA_VISIBLE_DEVICES=0 /root/miniconda3/envs/loma-repro/bin/python -u -m mhinet.tiny_overfit --runtime configs/runtime_paths.server.json --experiments D8 --sample-protocol one_pair_residuals --residual-profile translation --residual-bound-fraction 0.5 --precision bf16 --sample-count 2 --seed 0 --max-steps 1 --eval-interval 1 --threshold-mace-px 0.1 --heartbeat-interval 1 --progress-checkpoint outputs/tiny_overfit/resume_smoke_1ccedfa_progress.pt --output outputs/tiny_overfit/resume_smoke_1ccedfa_fresh.json --overwrite",
+  "resume_command": "CUDA_VISIBLE_DEVICES=0 /root/miniconda3/envs/loma-repro/bin/python -u -m mhinet.tiny_overfit --runtime configs/runtime_paths.server.json --experiments D8 --sample-protocol one_pair_residuals --residual-profile translation --residual-bound-fraction 0.5 --precision bf16 --sample-count 2 --seed 0 --max-steps 1 --eval-interval 1 --threshold-mace-px 0.1 --heartbeat-interval 1 --resume-progress outputs/tiny_overfit/resume_smoke_1ccedfa_progress.pt --output outputs/tiny_overfit/resume_smoke_1ccedfa_resumed.json",
+  "fresh_result": {
+    "process_exit_code": 1,
+    "status": "failed_as_expected",
+    "optimizer_step": 1,
+    "history_steps": [0, 1],
+    "initial_mean_mace_px": 11.89400863647461,
+    "final_mean_mace_px": 2.285935878753662,
+    "failed_pairs": 0,
+    "rejected_updates": 0,
+    "peak_allocated_bytes": 581881856,
+    "peak_reserved_bytes": 692060160,
+    "report": {
+      "path": "/home/disk1/MHINet/outputs/tiny_overfit/resume_smoke_1ccedfa_fresh.json",
+      "bytes": 23063,
+      "sha256": "40295093c3db9c6f5479e290c6c32fde68cd32a1d06516358dc29cc6cb44dd65"
+    }
+  },
+  "resume_result": {
+    "process_exit_code": 1,
+    "status": "failed_as_expected",
+    "optimizer_step_before": 1,
+    "optimizer_step_after": 1,
+    "extra_optimizer_steps": 0,
+    "history_steps": [0, 1],
+    "history_equal_to_fresh": true,
+    "model_restored": true,
+    "optimizer_restored": true,
+    "torch_cpu_rng_restored": true,
+    "torch_cuda_rng_restored": true,
+    "initial_mean_mace_px": 11.89400863647461,
+    "final_mean_mace_px": 2.285935878753662,
+    "failed_pairs": 0,
+    "rejected_updates": 0,
+    "report": {
+      "path": "/home/disk1/MHINet/outputs/tiny_overfit/resume_smoke_1ccedfa_resumed.json",
+      "bytes": 26507,
+      "sha256": "ca6ea0247385a81f601dc61679407e6210f5b3780e238816945b2971cf8d4c42"
+    }
+  },
+  "progress_checkpoint": {
+    "path": "/home/disk1/MHINet/outputs/tiny_overfit/resume_smoke_1ccedfa_progress.pt",
+    "format": "mhinet.training",
+    "version": 1,
+    "checkpoint_role": "tiny_progress",
+    "optimizer_step": 1,
+    "bytes": 14488399,
+    "sha256": "c7419803b9a89baa48cb258960de2c57594965677240bc87067f5afcef9c6be2",
+    "restricted_loader": "torch.load(weights_only=True)",
+    "contains_raw_model_and_matching_optimizer": true,
+    "contains_auxiliary_rng_data_history_and_averager_slot": true
+  },
+  "final_checkpoint_after_resume": {
+    "path": "/home/disk1/MHINet/outputs/tiny_overfit/tiny-s-d8_one-pair-residuals_translation_bf16_raw_bound-0p5_budget-1_seed0.pt",
+    "bytes": 14484239,
+    "sha256": "672709c64d459f2e177a75f500fbc6f64f8ca3c130637cd9de03fe0b6d7ad92e"
+  },
+  "resource_fingerprints": {
+    "architecture_sha256": "4a859f413ee4be59acb1dc6c0cf189e80b8f4e7b3f54dc9f117acd1ac5cfe128",
+    "training_manifest_sha256": "3eed3d3d425caf8465afb5121dfd85960f00932fccc343f37187e14ce27d499c",
+    "runtime_config_sha256": "485c41935c83d8e7ed0b248fed794844abfd48a62c28d90b5328cafa24bc179d",
+    "dino_and_ghim_checkpoint_sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+    "pyramid_checkpoint_sha256": "3a38824391e22b33bb3e10377c7736243fd8a2fbf1561446e7e133e497c35758"
+  },
+  "determinism_note": "CUDA deterministic_algorithms is warn_only; adaptive_avg_pool2d_backward_cuda and grid_sampler_2d_backward_cuda warn that they are not deterministic, so this is not a cross-process bitwise-determinism claim."
+}

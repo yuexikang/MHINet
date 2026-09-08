@@ -498,6 +498,22 @@ diagnostic-only and is never used by formal training.
   `CUDA_VISIBLE_DEVICES=0 /root/miniconda3/envs/loma-repro/bin/python -m unittest discover -s tests -v`.
   Result: all 67 tests passed in 2.741 seconds.  This validates checkpoint
   mechanics only; it is not a D1/TINY-8 learnability or model-validation pass.
+- A real CUDA smoke at Git `1ccedfae8574cf01eb398ad00b12af8e4f7ef610`
+  then ran D8 for one optimizer step on two controlled conditions, wrote a
+  14,488,399-byte raw progress checkpoint, and resumed it with zero additional
+  optimizer steps.  The restored report confirms model, AdamW, Torch CPU RNG
+  and CUDA RNG restoration; history remained `[0, 1]`, MACE remained exactly
+  `11.89400863647461 -> 2.285935878753662 px`, and failures/rejections remained
+  zero.  Both processes correctly returned status `failed` because two
+  conditions and one step are not the registered gate.  The progress checkpoint
+  is `/home/disk1/MHINet/outputs/tiny_overfit/resume_smoke_1ccedfa_progress.pt`,
+  SHA256 `c7419803b9a89baa48cb258960de2c57594965677240bc87067f5afcef9c6be2`;
+  the post-resume final checkpoint SHA256 is
+  `672709c64d459f2e177a75f500fbc6f64f8ca3c130637cd9de03fe0b6d7ad92e`.
+  Exact commands, environment versions, output paths, resource hashes and
+  expected-failure scope are in
+  `/home/disk1/MHINet/artifacts/p4_tiny_resume_cuda_smoke.json`, SHA256
+  `f588599ffaef020a8f6a4f0ab21d5932bc35612baf0619d3af49b7ecdd371058`.
 
 CUDA warns that `grid_sampler_2d_backward_cuda` and
 `adaptive_avg_pool2d_backward_cuda` have no deterministic implementation.

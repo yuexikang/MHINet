@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 import unittest
+from unittest import mock
 
 import torch
 import torch.nn.functional as F
+from torch.utils.checkpoint import checkpoint as torch_checkpoint
 
 from mhinet.correlation import (
     HGuidedLocalCorrelation,
@@ -175,6 +177,24 @@ class CorrelationConventionTests(unittest.TestCase):
 
 
 class CorrelationAutogradTests(unittest.TestCase):
+    def test_chunk_loop_uses_one_activation_checkpoint_context(self) -> None:
+        source = torch.randn(1, 3, 3, 4, requires_grad=True)
+        target = torch.randn(1, 3, 4, 5, requires_grad=True)
+        homography = torch.eye(3).unsqueeze(0).requires_grad_()
+        with mock.patch(
+            "mhinet.correlation.checkpoint", wraps=torch_checkpoint
+        ) as checkpoint_call:
+            correlation, _ = h_guided_local_correlation(
+                source,
+                target,
+                homography,
+                radius=1,
+                query_chunk_size=3,
+                activation_checkpoint=True,
+            )
+            correlation.square().sum().backward()
+        self.assertEqual(checkpoint_call.call_count, 1)
+
     def test_activation_checkpoint_matches_output_and_gradient(self) -> None:
         torch.manual_seed(30)
         base_source = torch.randn(1, 3, 3, 4, dtype=torch.float64)

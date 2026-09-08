@@ -402,6 +402,30 @@ diagnostic-only and is never used by formal training.
   it is not the 32-residual learnability run.  Artifact SHA256
   `2a3f52d3e395e49ba2ebc53dad253c612b8417a42775a52238d81af32f9cb5e3`.
   TINY-S-D1 is now the active next gate; TINY-8 has not been run.
+- A real-feature signal comparison was added before interpreting the slow D1
+  curve.  With the registered half-bound D1 residual, the random-adapter
+  nearest-vs-centre correlation margin was only `0.002778` on average, versus
+  `0.016658` at D2.  Using the full legal D1 decoder bound increased that D1
+  margin to `0.008696`; this is diagnosis only and the active run still uses
+  the registered half-bound residual.  Half-bound D1, full-bound D1 and
+  half-bound D2 artifact SHA256 values are respectively
+  `f8f6e3ebaee6537e213ab544c49d0d1dc67310771e1a4db868f99acded7c1751`,
+  `5a6d85493dcd28399008da0efc50cd05b4c0ff118e319f96f65799d92ecc1c67`
+  and `72c8c74a108e6f1b548d403b76a595ae99b3f5b41739cd9693afe0a239800a9e`.
+- D1 profiling showed that 614,656 queries create 601 fixed 1,024-query
+  sampling chunks.  Correlation now samples the 32-channel target and its
+  finite mask in one 33-channel `grid_sample`, and constructs the complete
+  candidate grid once inside the same non-reentrant checkpoint before slicing
+  it into the unchanged row-major chunks.  No precision, ordering, detach or
+  gradient rule changed.  The existing output/gradient/checkpoint reference
+  suite passed.  A real two-residual D1 one-step smoke reduced elapsed time
+  from `18.1092 s` to `14.9944 s` (17.2%) while peak allocated/reserved memory
+  rose from 6,697,497,088/7,021,264,896 to
+  7,141,153,280/7,409,238,016 bytes; gradients stayed finite and update
+  rejection stayed zero.  The final optimization artifact SHA256 is
+  `cd47126d9b3faa97542ddef6187981da10eb64a4a97ddeac494b66314e0e914b`.
+  An intermediate one-sampler-only smoke is retained with SHA256
+  `92c45486e8a9642691b1abff94ac84c2e9a6bfb6a689af1dc9277573ec11d43b`.
 - The independent-run merger was exercised with only D8.  It failed closed
   and listed D4/D2/D1/TINY-8 as missing; formal E01 then rejected that artifact
   before model construction or any optimizer step.  Partial artifact SHA256:

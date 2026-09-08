@@ -161,45 +161,22 @@ def h_guided_local_correlation(
     def compute_chunk(
         source_chunk: Tensor,
         source_valid_chunk: Tensor,
-        target_tensor: Tensor,
-        target_finite_tensor: Tensor,
-        projected_chunk: Tensor,
-        projection_valid_chunk: Tensor,
-        offset_tensor: Tensor,
+        sampling_target_tensor: Tensor,
+        sampling_grid_chunk: Tensor,
+        in_bounds_chunk: Tensor,
     ) -> tuple[Tensor, Tensor]:
-        candidate_px = projected_chunk[:, :, None, :] + offset_tensor[None, None, :, :]
-        candidate_finite = torch.isfinite(candidate_px).all(dim=-1)
-        in_bounds = (
-            candidate_finite
-            & projection_valid_chunk[:, :, None]
-            & (candidate_px[..., 0] >= 0.0)
-            & (candidate_px[..., 0] <= target_width - 1.0)
-            & (candidate_px[..., 1] >= 0.0)
-            & (candidate_px[..., 1] <= target_height - 1.0)
-        )
-
-        # Keep grid_sample away from huge/invalid coordinates while preserving
-        # the continuous H -> grid path for every geometrically valid entry.
-        safe_candidate_px = torch.where(
-            in_bounds[..., None], candidate_px, torch.zeros_like(candidate_px)
-        )
-        sampling_grid = pixel_to_normalized(
-            safe_candidate_px, (target_height, target_width)
-        )
-        sampled = F.grid_sample(
-            target_tensor,
-            sampling_grid,
+        # Features and their finite-support mask use the same grid.  Sampling
+        # them together removes one CUDA grid_sample launch per fixed query
+        # chunk without changing chunk size/order or either autograd path.
+        sampled_with_finite = F.grid_sample(
+            sampling_target_tensor,
+            sampling_grid_chunk,
             mode="bilinear",
             padding_mode="zeros",
             align_corners=False,
         )
-        sampled_finite_weight = F.grid_sample(
-            target_finite_tensor,
-            sampling_grid,
-            mode="bilinear",
-            padding_mode="zeros",
-            align_corners=False,
-        ).squeeze(1)
+        sampled = sampled_with_finite[:, :-1]
+        sampled_finite_weight = sampled_with_finite[:, -1]
         sampled_finite = sampled_finite_weight >= (1.0 - 1e-6)
         sampled_norm = torch.linalg.vector_norm(sampled, dim=1)
         sampled_valid = (
@@ -211,7 +188,7 @@ def h_guided_local_correlation(
         sampled_unit = sampled / sampled_norm.clamp_min(feature_epsilon)[:, None]
 
         correlation = torch.einsum("bcq,bcqk->bqk", source_chunk, sampled_unit)
-        valid = in_bounds & source_valid_chunk[:, :, None] & sampled_valid
+        valid = in_bounds_chunk & source_valid_chunk[:, :, None] & sampled_valid
         correlation = torch.where(valid, correlation, torch.zeros_like(correlation))
         return correlation, valid
 
@@ -232,6 +209,31 @@ def h_guided_local_correlation(
         loop once during backward.
         """
 
+        sampling_target = torch.cat((target_tensor, target_finite_tensor), dim=1)
+        # Candidate geometry is independent of the query chunk.  Building the
+        # complete grid once inside this checkpointed region avoids repeating
+        # thousands of small pointwise CUDA launches at D2/D1.  Sampling itself
+        # remains in the contract's fixed row-major query chunks.
+        candidate_px = (
+            projected_tensor[:, :, None, :] + offset_tensor[None, None, :, :]
+        )
+        candidate_finite = torch.isfinite(candidate_px).all(dim=-1)
+        in_bounds = (
+            candidate_finite
+            & projection_valid_tensor[:, :, None]
+            & (candidate_px[..., 0] >= 0.0)
+            & (candidate_px[..., 0] <= target_width - 1.0)
+            & (candidate_px[..., 1] >= 0.0)
+            & (candidate_px[..., 1] <= target_height - 1.0)
+        )
+        # Keep grid_sample away from huge/invalid coordinates while preserving
+        # the continuous H -> grid path for every geometrically valid entry.
+        safe_candidate_px = torch.where(
+            in_bounds[..., None], candidate_px, torch.zeros_like(candidate_px)
+        )
+        sampling_grid = pixel_to_normalized(
+            safe_candidate_px, (target_height, target_width)
+        )
         correlation_chunks: list[Tensor] = []
         valid_chunks: list[Tensor] = []
         for start in range(0, query_count, chunk_size):
@@ -239,11 +241,9 @@ def h_guided_local_correlation(
             correlation, valid = compute_chunk(
                 source_tensor[:, :, start:stop],
                 source_valid_tensor[:, start:stop],
-                target_tensor,
-                target_finite_tensor,
-                projected_tensor[:, start:stop],
-                projection_valid_tensor[:, start:stop],
-                offset_tensor,
+                sampling_target,
+                sampling_grid[:, start:stop],
+                in_bounds[:, start:stop],
             )
             correlation_chunks.append(correlation)
             valid_chunks.append(valid)

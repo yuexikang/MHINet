@@ -127,9 +127,18 @@ def _audit_features(
     }
 
 
-def run_audit(runtime: RuntimePaths, *, pair_index: int, scale: int, seed: int) -> dict[str, Any]:
+def run_audit(
+    runtime: RuntimePaths,
+    *,
+    pair_index: int,
+    scale: int,
+    seed: int,
+    residual_bound_fraction: float = 0.5,
+) -> dict[str, Any]:
     if scale not in RADII:
         raise ValueError(f"scale must be one of {tuple(RADII)}, got {scale}")
+    if not 0.0 < residual_bound_fraction <= 1.0:
+        raise ValueError("residual_bound_fraction must be in (0, 1]")
     device = torch.device(runtime.device)
     dataset = HomographyPairDataset(
         runtime.data_root / "train/pairs.jsonl", max_pairs=pair_index + 1
@@ -147,7 +156,9 @@ def run_audit(runtime: RuntimePaths, *, pair_index: int, scale: int, seed: int) 
         H0_cpu, residual = controlled_h0_from_ground_truth(
             sample["H_gt_norm"],
             sample_index=0,
-            max_abs_residual_px=0.5 * SCALE_SPECS[scale].max_delta_px,
+            max_abs_residual_px=(
+                residual_bound_fraction * SCALE_SPECS[scale].max_delta_px
+            ),
             seed=seed,
         )
         H0 = H0_cpu.unsqueeze(0).to(device)
@@ -172,6 +183,10 @@ def run_audit(runtime: RuntimePaths, *, pair_index: int, scale: int, seed: int) 
         "pair_id": sample["pair_id"],
         "scale": scale,
         "seed": seed,
+        "residual_bound_fraction": residual_bound_fraction,
+        "maximum_declared_abs_residual_px": (
+            residual_bound_fraction * SCALE_SPECS[scale].max_delta_px
+        ),
         "controlled_corner_residual_input_px": residual.tolist(),
         "adapter_valid_points": int(adapter_valid.sum().item()),
         "random_zero_init_adapter": adapted_report,
@@ -191,6 +206,12 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--pair-index", type=int, default=0)
     parser.add_argument("--scale", type=int, default=8)
     parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument(
+        "--residual-bound-fraction",
+        type=float,
+        default=0.5,
+        help="Fraction of the selected decoder's input-pixel update bound in (0,1]",
+    )
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--overwrite", action="store_true")
     args = parser.parse_args(argv)
@@ -202,6 +223,7 @@ def main(argv: list[str] | None = None) -> int:
         pair_index=args.pair_index,
         scale=args.scale,
         seed=args.seed,
+        residual_bound_fraction=args.residual_bound_fraction,
     )
     output.parent.mkdir(parents=True, exist_ok=True)
     encoded = json.dumps(report, indent=2, ensure_ascii=False) + "\n"

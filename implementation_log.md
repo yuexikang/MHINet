@@ -449,6 +449,28 @@ diagnostic-only and is never used by formal training.
   baseline for sparse-query D1 and 3x3-window D1 comparisons.  Neither variant
   may replace the mainline until matched-budget validation shows its accuracy,
   failure-rate, memory and latency trade-off.
+- A dense D1 5x5 **diagnostic**, started at Git `d77b487` after the correlation
+  optimization, expanded the controlled residual to the full legal D1 decoder
+  bound and completed its declared 256-step budget.  Exact command:
+  `CUDA_VISIBLE_DEVICES=3 /root/miniconda3/envs/loma-repro/bin/python -u -m mhinet.tiny_overfit --runtime configs/runtime_paths.server.json --experiments D1 --sample-protocol one_pair_residuals --residual-profile translation --precision bf16 --sample-count 32 --seed 0 --max-steps 256 --eval-interval 32 --threshold-mace-px 0.1 --residual-bound-fraction 1.0 --output artifacts/p4_tiny_s_d1_full_bound_diagnostic_256.json --overwrite`.
+  Mean final MACE moved from `1.858603 px` at step 0 to `1.853464`,
+  `0.989137`, `0.955050`, `0.929901`, `0.946010`, `0.921074`,
+  `0.920057`, and `0.930858 px` at steps 32--256.  The final
+  median/P90/max were `0.822484/1.731238/1.863900 px`; H1 and H2 means were
+  `0.931836` and `0.930858 px`.  All 32 conditions remained finite with zero
+  rejected updates, but the best observed mean was still far above `0.1 px`.
+  Peak allocated/reserved memory was
+  `7,138,167,296/7,411,335,168` bytes and measured training time was
+  `3,241.151 s`.  Artifact SHA256:
+  `920a5386fad222c5a648cfadca49f7d107d388109ae468eeac78d3f4d8164353`;
+  raw stderr SHA256:
+  `9ccb831427b6c37dd5a0b838755770eeee762213350b0b2764d1fad953765cab`;
+  16,250,961-byte checkpoint
+  `/home/disk1/MHINet/outputs/tiny_overfit/tiny-s-d1_one-pair-residuals_translation_bf16_raw_seed0.pt`
+  SHA256 `b33f3b148b58e96f7d5af4bfde1681f56c6a2c1be0dda803a51bd6e97b8dadd4`.
+  This is a completed short diagnostic failure, not the registered 2,000-step
+  averaged D1 gate.  Increasing residual amplitude alone therefore does not
+  resolve D1 learnability and does not justify a blind long continuation.
 - The independent-run merger was exercised with only D8.  It failed closed
   and listed D4/D2/D1/TINY-8 as missing; formal E01 then rejected that artifact
   before model construction or any optimizer step.  Partial artifact SHA256:

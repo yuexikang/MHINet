@@ -183,9 +183,10 @@ The implemented reference remains dense D1 correlation over all
 `784 x 784 = 614,656` source positions with a `5 x 5` target search window.
 Its results are the baseline for two planned, not-yet-implemented ablations:
 sparse D1 queries guided by D2 support, and a `3 x 3` D1 search window. The
-mainline tiny gate must pass before either ablation is evaluated. The frozen
-comparison protocol, trajectory metrics, query recall/coverage diagnostics,
-latency, and memory fields are registered in
+mainline tiny gate, E00/E01 and the equal-budget E02--E05 comparison must finish
+before either ablation is evaluated. The selected main checkpoint and grouped
+validation protocol must then be frozen. The comparison draft, trajectory
+metrics, query recall/coverage diagnostics, latency, and memory fields are in
 [`docs/experiment_plan.md`](docs/experiment_plan.md).
 
 ## Minimal training and exact-boundary resume

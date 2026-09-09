@@ -1,0 +1,96 @@
+{
+  "registration_status": "draft_non_executable",
+  "training_revision": "1.2",
+  "purpose": "post_mainline_D1_efficiency_comparison",
+  "ordering_prerequisites": [
+    "P0_P4_dense_D1_tiny_gate_passed",
+    "E00_E01_completed",
+    "E02_E05_equal_start_equal_budget_completed",
+    "main_configuration_selected_on_validation_only"
+  ],
+  "baseline": {
+    "variant_id": "D1-DENSE-5",
+    "query_policy": "all_614656_D1_positions",
+    "search_radius": 2,
+    "candidate_window": [5, 5],
+    "candidates_per_query": 25,
+    "checkpoint_path": null,
+    "checkpoint_sha256": null,
+    "git_commit": null
+  },
+  "variants": [
+    {
+      "variant_id": "D1-SPARSE-5",
+      "query_policy": "D2_support_overlap_confidence_and_corner_leverage",
+      "search_radius": 2,
+      "candidate_window": [5, 5],
+      "candidates_per_query": 25,
+      "same_checkpoint_inference_only_first": true
+    },
+    {
+      "variant_id": "D1-DENSE-3",
+      "query_policy": "all_614656_D1_positions",
+      "search_radius": 1,
+      "candidate_window": [3, 3],
+      "candidates_per_query": 9,
+      "theoretical_candidate_reduction_fraction": 0.64,
+      "center_source": "post_D2_H6_projection",
+      "same_checkpoint_inference_only_first": true
+    }
+  ],
+  "sparse_selector": {
+    "uses_ground_truth_for_selection": false,
+    "eligibility": "D2_valid_support_and_current_H_projected_overlap",
+    "confidence_formula": null,
+    "query_count": null,
+    "query_fraction": null,
+    "spatial_bins": null,
+    "corner_leverage_definition": null,
+    "mask_upsampling": null,
+    "tie_break": null,
+    "boundary_policy": null,
+    "under_budget_fallback": null,
+    "selection_across_two_D1_rounds": null
+  },
+  "data": {
+    "selection_split": "val",
+    "test_used_for_selection": false,
+    "grouping_keys": ["parent_image", "geo_region"],
+    "validation_manifest": "/home/disk1/Data/datasets/GoogleEarth_scale_pairs/val/pairs.jsonl",
+    "validation_manifest_sha256": "a5e6f58bc46cef2dcc49db4e859e2a845755d6aee13be88c998f14a0386b5503",
+    "validation_pair_ids_path": null,
+    "validation_pair_ids_sha256": null
+  },
+  "seeds": {
+    "screen": [0],
+    "selected_main_and_key_controls": [0, 1, 2]
+  },
+  "runtime_lock": {
+    "precision": null,
+    "query_chunk_size": null,
+    "warmup_repetitions": null,
+    "timed_repetitions": null,
+    "gpu_model": "NVIDIA_RTX_4090",
+    "interleaved_variant_order": true
+  },
+  "decision_margins": {
+    "maximum_allowed_accuracy_loss": null,
+    "maximum_allowed_failure_rate_increase": null,
+    "minimum_useful_latency_improvement": null,
+    "minimum_useful_memory_improvement": null
+  },
+  "required_outputs": {
+    "geometry_states": ["H0", "H1", "H2", "H3", "H4", "H5", "H6", "H7", "H8", "H_final"],
+    "accuracy": ["mace_input_px", "mace_native_px", "grid_error", "success_auc"],
+    "robustness": ["failure_rate", "update_rejection", "reason_codes", "nonfinite_count"],
+    "resources": ["peak_allocated_bytes", "peak_reserved_bytes", "latency_median", "latency_p95", "D1_correlation_latency"],
+    "query_diagnostics": ["selected_count", "query_fraction", "valid_support_coverage", "evaluation_only_overlap_coverage", "query_recall", "window_recall", "spatial_and_corner_coverage"]
+  },
+  "draft_blockers": [
+    "selected_main_checkpoint",
+    "exact_validation_pair_ids",
+    "sparse_selector_numeric_policy",
+    "runtime_measurement_protocol",
+    "decision_margins"
+  ]
+}

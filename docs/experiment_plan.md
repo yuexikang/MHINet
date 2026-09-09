@@ -1,7 +1,10 @@
 # D1 efficiency ablation plan
 
-Status: **pre-registered plan; not implemented**. The current model remains the
-dense D1 reference. This plan does not change training or inference logic.
+Status: **pre-registration draft; not implemented or executable**. The current
+model remains the dense D1 reference. Selector thresholds, the validation
+subset and decision margins are intentionally unset in
+`configs/d1_efficiency_ablation_v1.2.json`; they must be frozen before the first
+comparison. This plan does not change training or inference logic.
 
 ## Objective and ordering
 
@@ -14,15 +17,26 @@ The experiment order is fixed:
 
 1. Complete the existing mainline P0--P4/TINY gate with dense D1. Do not use an
    ablation to bypass or redefine a failed mainline gate.
-2. Preserve the dense D1 result and freeze its exact comparison checkpoint,
-   data manifest, seed, evaluation pairs, and runtime protocol.
-3. Run the dense reference under the profiling protocol below.
-4. Run sparse-query D1 and 3 x 3-window D1 separately against that reference.
-5. Consider a combined sparse + 3 x 3 variant only after both individual
+2. Run E00/E01, then the equal-start/equal-budget E02--E05 feature-group
+   comparisons (and E01-C if claiming a DeDoDe-unfreezing effect), using only
+   validation evidence for selection.
+3. Select the main configuration, then freeze its exact dense-D1 checkpoint,
+   data manifest, grouped validation pair IDs, seed and runtime protocol. A
+   partial/interrupted tiny diagnostic is not this comparison baseline.
+4. Fill every currently-null registration field in
+   `configs/d1_efficiency_ablation_v1.2.json`, save its SHA-256, and run the
+   frozen `D1-DENSE-5` reference under the profiling protocol below.
+5. Run sparse-query D1 and 3 x 3-window D1 separately against that reference.
+6. Consider a combined sparse + 3 x 3 variant only after both individual
    effects have been reported.
 
 The test split remains sealed. Development and selection use the same
-registered validation subset for every variant.
+registered validation subset for every variant, grouped by parent image and
+geographic region. Seed 0 is the budget screen; after a variant is selected,
+the main configuration, dense reference and key comparison run seeds 0/1/2
+(reusing rather than repeating an existing seed-0 run). Only after the full
+registration is frozen may the final selected comparisons be evaluated once
+on test; test never tunes selectors, windows or decision margins.
 
 ## Registered variants
 
@@ -161,3 +175,8 @@ pairs, and both absolute and relative resource values.
 The dense D1 result remains the primary reference. Do not overwrite its
 artifact, merge ablation results into the mainline gate, or present a projected
 64% candidate reduction as measured end-to-end speedup.
+
+The machine-readable registration draft is
+`configs/d1_efficiency_ablation_v1.2.json`. Its `null` fields are blockers, not
+defaults: a runner must reject the draft until `registration_status` is
+`frozen` and all required fields have concrete values.

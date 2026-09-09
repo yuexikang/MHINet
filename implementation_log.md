@@ -462,10 +462,13 @@ diagnostic-only and is never used by formal training.
   `92661c88c1d18d5efe45c9749e20afb52b9cf0380ba4ae1ac3bcf4e6a22fc81f`;
   the preserved observation artifact SHA256 is
   `dbfa8521480c0939e4619f1b6ceca7a066dcae28ebb496d30e4f5a24ccf0fa5d`.
-  Per the updated experiment plan, this dense full-grid 5x5 observation is the
-  baseline for sparse-query D1 and 3x3-window D1 comparisons.  Neither variant
-  may replace the mainline until matched-budget validation shows its accuracy,
-  failure-rate, memory and latency trade-off.
+  This is an initial dense full-grid 5x5 failure diagnosis, **not** the formal
+  baseline for sparse-query D1 and 3x3-window D1 comparisons: it has no final
+  checkpoint/artifact and cannot support a same-checkpoint paired comparison.
+  The formal `D1-DENSE-5` reference remains unestablished and must be produced
+  only after P4, E00/E01, E02--E05 and main-configuration selection.  Neither
+  variant may replace the mainline until matched-budget validation shows its
+  accuracy, failure-rate, memory and latency trade-off.
 - A dense D1 5x5 **diagnostic**, started at Git `d77b487` after the correlation
   optimization, expanded the controlled residual to the full legal D1 decoder
   bound and completed its declared 256-step budget.  Exact command:
@@ -583,6 +586,20 @@ not be described as bitwise deterministic.
 Not started.  E00/E01 and later experiments remain blocked by the incomplete
 TINY-S/TINY-8 learnability gate.  No test item has been evaluated and no model
 validation result has been claimed.
+
+The D1 efficiency work is now explicitly ordered after E00/E01, the equal-start
+E02--E05 feature-group comparison and validation-only main-configuration
+selection.  The earlier step-864 interrupted dense observation was corrected
+from “baseline” to an initial failure diagnosis because it has neither a final
+artifact nor a checkpoint for paired evaluation.  The machine-readable sparse-
+query/3x3-window registration is a deliberately non-executable draft at
+`/home/disk1/MHINet/configs/d1_efficiency_ablation_v1.2.json`, 96 lines, SHA256
+`d6cce6aa4ce41caeceab6ee61297c77f9af2ccc5fd6a205862aa017b33d7b2f9`.
+Known facts (dense 5x5, D2-guided eligibility, 3x3's theoretical 64% candidate
+reduction, grouped validation and seed-0 then seed-0/1/2 policy) are fixed;
+unknown selector thresholds, exact validation IDs, runtime repetitions and
+accuracy/speed/memory decision margins remain `null` blockers rather than
+invented defaults.  No D1 efficiency implementation or result is claimed.
 
 P5 entrypoint preparation has begun without executing E00/E01.  The evaluator
 now emits both explicitly named all-finite-geometry diagnostics and

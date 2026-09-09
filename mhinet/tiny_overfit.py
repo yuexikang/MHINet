@@ -64,9 +64,11 @@ class CachedTinySample:
 
 def _jsonable(value: Any) -> Any:
     if isinstance(value, torch.Tensor):
-        return value.detach().cpu().tolist()
+        return _jsonable(value.detach().cpu().tolist())
     if isinstance(value, Path):
         return str(value)
+    if isinstance(value, float) and not math.isfinite(value):
+        return None
     if isinstance(value, dict):
         return {str(key): _jsonable(item) for key, item in value.items()}
     if isinstance(value, (list, tuple)):
@@ -78,7 +80,13 @@ def _write_json(path: Path, payload: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(path.suffix + ".tmp")
     temporary.write_text(
-        json.dumps(_jsonable(payload), indent=2, ensure_ascii=False) + "\n",
+        json.dumps(
+            _jsonable(payload),
+            indent=2,
+            ensure_ascii=False,
+            allow_nan=False,
+        )
+        + "\n",
         encoding="utf-8",
     )
     temporary.replace(path)
@@ -524,77 +532,157 @@ def evaluate_tiny_training_set(
     cnn_autocast_enabled: bool = True,
     preloaded_pyramid: Mapping[int, torch.Tensor] | None = None,
 ) -> dict[str, Any]:
+    if not cache:
+        raise ValueError("Tiny endpoint cache must not be empty")
+    if len(H0_values) != len(cache):
+        raise ValueError("Tiny endpoint H0 count must match the cache")
     iterator = model.iterator
     was_training = iterator.training
     iterator.eval()
-    if device.type == "cuda":
-        torch.cuda.synchronize(device)
-    started = time.perf_counter()
-    trajectories: list[torch.Tensor] = []
-    per_pair: list[dict[str, Any]] = []
-    rejected_updates = 0
-    failed_pairs = 0
-    feature_dtype = torch.bfloat16 if cnn_autocast_enabled else torch.float32
-    for index, sample in enumerate(cache):
-        pyramid = {
-            scale: (
-                preloaded_pyramid[scale]
-                if preloaded_pyramid is not None
-                else sample.pyramid[scale].to(device=device, dtype=feature_dtype)
-            )
-            for scale in active_scales
-        }
-        H_gt = sample.H_gt_norm.unsqueeze(0).to(device)
-        H0 = H0_values[index].unsqueeze(0).to(device)
-        outputs = iterator(
-            pyramid,
-            H0,
-            torch.ones((1,), dtype=torch.bool, device=device),
-            active_scales=active_scales,
-            cnn_autocast_enabled=cnn_autocast_enabled,
-        )
-        metrics = homography_trajectory_metrics(outputs, H_gt, target_hw=TARGET_HW)
-        trajectory = metrics["trajectory_mace_px"][0].detach().cpu()
-        trajectories.append(trajectory)
-        rejected = int((~outputs["update_accepted"]).sum().item())
-        failed = not bool(outputs["overall_valid"][0].item())
-        rejected_updates += rejected
-        failed_pairs += int(failed)
-        per_pair.append(
-            {
-                "diagnostic_sample_index": index,
-                "pair_id": sample.pair_id,
-                "trajectory_mace_px": trajectory.tolist(),
-                "H0_mace_px": float(trajectory[0].item()),
-                "H_updates_mace_px": trajectory[1:].tolist(),
-                "H_final_mace_px": float(trajectory[-1].item()),
-                "update_accepted": outputs["update_accepted"][0].cpu().tolist(),
-                "failure_reason_codes": outputs["failure_reason_codes"][0]
-                .cpu()
-                .tolist(),
+    try:
+        if device.type == "cuda":
+            torch.cuda.synchronize(device)
+        started = time.perf_counter()
+        trajectories: list[torch.Tensor] = []
+        per_pair: list[dict[str, Any]] = []
+        rejected_updates = 0
+        failed_pairs = 0
+        feature_dtype = torch.bfloat16 if cnn_autocast_enabled else torch.float32
+        for index, sample in enumerate(cache):
+            pyramid = {
+                scale: (
+                    preloaded_pyramid[scale]
+                    if preloaded_pyramid is not None
+                    else sample.pyramid[scale].to(device=device, dtype=feature_dtype)
+                )
+                for scale in active_scales
             }
-        )
-        del pyramid, H_gt, H0, outputs, metrics
-    if device.type == "cuda":
-        torch.cuda.synchronize(device)
-    elapsed = time.perf_counter() - started
-    stacked = torch.stack(trajectories)
-    final = stacked[:, -1]
-    result = {
-        "trajectory_mean_mace_px": stacked.mean(dim=0).tolist(),
-        "trajectory_median_mace_px": stacked.median(dim=0).values.tolist(),
-        "H0_mace_px": _statistics(stacked[:, 0]),
-        "H_final_mace_px": _statistics(final),
-        "failed_pairs": failed_pairs,
-        "failure_rate": failed_pairs / len(cache),
-        "rejected_updates": rejected_updates,
-        "rejected_update_rate": rejected_updates / (len(cache) * (stacked.shape[1] - 1)),
-        "elapsed_seconds": elapsed,
-        "latency_ms_per_pair_single_pass": elapsed * 1000.0 / len(cache),
-        "per_pair": per_pair,
-    }
-    iterator.train(was_training)
-    return result
+            H_gt = sample.H_gt_norm.unsqueeze(0).to(device)
+            H0 = H0_values[index].unsqueeze(0).to(device)
+            outputs = iterator(
+                pyramid,
+                H0,
+                torch.ones((1,), dtype=torch.bool, device=device),
+                active_scales=active_scales,
+                cnn_autocast_enabled=cnn_autocast_enabled,
+            )
+            metrics = homography_trajectory_metrics(outputs, H_gt, target_hw=TARGET_HW)
+            trajectory = metrics["trajectory_mace_px"][0].detach().cpu()
+            corners = image_corners(
+                TARGET_HW,
+                normalized=True,
+                device=device,
+                dtype=torch.float32,
+            )
+            target_corners, target_valid, _ = safe_project_points(H_gt[0], corners)
+            h0_corners, h0_valid, _ = safe_project_points(H0[0], corners)
+            if not bool(target_valid.all() & h0_valid.all()):
+                raise FloatingPointError(
+                    "Tiny endpoint has invalid H0/GT corner projection"
+                )
+            update_corners, update_valid, _ = safe_project_points(
+                outputs["H_updates_norm"][0], corners
+            )
+            target_corners_px = normalized_to_pixel(target_corners, TARGET_HW)
+            h0_residual_px = target_corners_px - normalized_to_pixel(
+                h0_corners, TARGET_HW
+            )
+            update_residual_px = target_corners_px.unsqueeze(0) - normalized_to_pixel(
+                update_corners, TARGET_HW
+            )
+            update_residual_px = torch.where(
+                update_valid[..., None],
+                update_residual_px,
+                torch.full_like(update_residual_px, float("nan")),
+            )
+            trajectories.append(trajectory)
+            rejected = int((~outputs["update_accepted"]).sum().item())
+            failed = not bool(outputs["overall_valid"][0].item())
+            rejected_updates += rejected
+            failed_pairs += int(failed)
+            per_pair.append(
+                {
+                    "diagnostic_sample_index": index,
+                    "pair_id": sample.pair_id,
+                    "trajectory_mace_px": trajectory.tolist(),
+                    "H0_mace_px": float(trajectory[0].item()),
+                    "H_updates_mace_px": trajectory[1:].tolist(),
+                    "H_final_mace_px": float(trajectory[-1].item()),
+                    "update_accepted": outputs["update_accepted"][0].cpu().tolist(),
+                    "failure_reason_codes": outputs["failure_reason_codes"][0]
+                    .cpu()
+                    .tolist(),
+                    "decoder_output_finite": outputs["decoder_output_finite"][0]
+                    .cpu()
+                    .tolist(),
+                    "H0_corner_residual_px": h0_residual_px.detach().cpu().tolist(),
+                    "H_updates_corner_residual_px": update_residual_px.detach()
+                    .cpu()
+                    .tolist(),
+                    "H_updates_corner_projection_valid": update_valid.detach()
+                    .cpu()
+                    .tolist(),
+                    "delta_px": outputs["delta_px"][0].detach().cpu().tolist(),
+                    "tanh_saturation_fraction": outputs[
+                        "tanh_saturation_fraction"
+                    ][0]
+                    .detach()
+                    .cpu()
+                    .tolist(),
+                    "supported_query_count": outputs["supported_query_count"][0]
+                    .detach()
+                    .cpu()
+                    .tolist(),
+                    "condition_number": outputs["condition_number"][0]
+                    .detach()
+                    .cpu()
+                    .tolist(),
+                    "solve_info": outputs["solve_info"][0].detach().cpu().tolist(),
+                    "H0_norm": outputs["H0_norm"][0].detach().cpu().tolist(),
+                    "H_updates_norm": outputs["H_updates_norm"][0]
+                    .detach()
+                    .cpu()
+                    .tolist(),
+                    "H_final_norm": outputs["H_final_norm"][0]
+                    .detach()
+                    .cpu()
+                    .tolist(),
+                    "update_scale_schedule": list(outputs["update_scale_schedule"]),
+                    "cnn_precision": outputs["cnn_precision"],
+                }
+            )
+            del (
+                pyramid,
+                H_gt,
+                H0,
+                outputs,
+                metrics,
+                corners,
+                target_corners,
+                h0_corners,
+                update_corners,
+            )
+        if device.type == "cuda":
+            torch.cuda.synchronize(device)
+        elapsed = time.perf_counter() - started
+        stacked = torch.stack(trajectories)
+        final = stacked[:, -1]
+        return {
+            "trajectory_mean_mace_px": stacked.mean(dim=0).tolist(),
+            "trajectory_median_mace_px": stacked.median(dim=0).values.tolist(),
+            "H0_mace_px": _statistics(stacked[:, 0]),
+            "H_final_mace_px": _statistics(final),
+            "failed_pairs": failed_pairs,
+            "failure_rate": failed_pairs / len(cache),
+            "rejected_updates": rejected_updates,
+            "rejected_update_rate": rejected_updates
+            / (len(cache) * (stacked.shape[1] - 1)),
+            "elapsed_seconds": elapsed,
+            "latency_ms_per_pair_single_pass": elapsed * 1000.0 / len(cache),
+            "per_pair": per_pair,
+        }
+    finally:
+        iterator.train(was_training)
 
 
 def _fresh_new_modules(model: MHINet, device: torch.device, seed: int) -> None:

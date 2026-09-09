@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import unittest
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -13,14 +14,120 @@ from mhinet.geometry import image_corners, normalized_to_pixel, safe_project_poi
 from mhinet.tiny_overfit import (
     CachedTinySample,
     _ParameterAverager,
+    _jsonable,
     _preflight_tiny_progress,
     controlled_h0_from_ground_truth,
+    evaluate_tiny_training_set,
     parse_experiments,
     run_one_tiny_experiment,
 )
 
 
 class TinyOverfitProtocolTests(unittest.TestCase):
+    @staticmethod
+    def _endpoint_model() -> nn.Module:
+        class EndpointIterator(nn.Module):
+            def forward(
+                self,
+                _pyramid: object,
+                H0: torch.Tensor,
+                _valid: torch.Tensor,
+                **_kwargs: object,
+            ) -> dict[str, object]:
+                batch = H0.shape[0]
+                updates = H0[:, None].expand(-1, 2, -1, -1).clone()
+                return {
+                    "H0_norm": H0,
+                    "H_updates_norm": updates,
+                    "H_final_norm": updates[:, -1],
+                    "delta_px": torch.tensor(
+                        [[[[0.25, -0.5]] * 4, [[-0.1, 0.2]] * 4]],
+                        dtype=torch.float32,
+                    ).expand(batch, -1, -1, -1),
+                    "decoder_output_finite": torch.ones(
+                        (batch, 2), dtype=torch.bool
+                    ),
+                    "update_accepted": torch.tensor(
+                        [[True, False]], dtype=torch.bool
+                    ).expand(batch, -1),
+                    "failure_reason_codes": torch.tensor(
+                        [[0, 2]], dtype=torch.int64
+                    ).expand(batch, -1),
+                    "supported_query_count": torch.tensor(
+                        [[100, 0]], dtype=torch.int64
+                    ).expand(batch, -1),
+                    "condition_number": torch.tensor(
+                        [[1.0, float("inf")]], dtype=torch.float32
+                    ).expand(batch, -1),
+                    "solve_info": torch.tensor(
+                        [[0, -1]], dtype=torch.int64
+                    ).expand(batch, -1),
+                    "tanh_saturation_fraction": torch.tensor(
+                        [[0.0, 0.25]], dtype=torch.float32
+                    ).expand(batch, -1),
+                    "overall_valid": torch.ones((batch,), dtype=torch.bool),
+                    "update_scale_schedule": (1, 1),
+                    "cnn_precision": "fp32",
+                }
+
+        class EndpointModel(nn.Module):
+            def __init__(self) -> None:
+                super().__init__()
+                self.iterator = EndpointIterator()
+
+        return EndpointModel()
+
+    def test_endpoint_evaluation_records_round_diagnostics_as_strict_json(self) -> None:
+        model = self._endpoint_model()
+        model.iterator.train()
+        sample = CachedTinySample(
+            pair_id="train-only",
+            parent_group="parent",
+            geo_group="geo",
+            H_gt_norm=torch.eye(3),
+            pyramid={1: torch.zeros((1, 2, 256, 1, 1))},
+        )
+        report = evaluate_tiny_training_set(
+            model,  # type: ignore[arg-type]
+            [sample],
+            [torch.eye(3)],
+            active_scales=(1,),
+            device=torch.device("cpu"),
+            cnn_autocast_enabled=False,
+        )
+        self.assertTrue(model.iterator.training)
+        row = report["per_pair"][0]
+        self.assertEqual(len(row["H0_corner_residual_px"]), 4)
+        self.assertEqual(len(row["H_updates_corner_residual_px"]), 2)
+        self.assertEqual(len(row["delta_px"]), 2)
+        self.assertEqual(row["update_accepted"], [True, False])
+        self.assertEqual(row["supported_query_count"], [100, 0])
+        self.assertEqual(row["update_scale_schedule"], [1, 1])
+        encoded = json.dumps(_jsonable(report), allow_nan=False)
+        self.assertIn('"condition_number": [1.0, null]', encoded)
+
+    def test_endpoint_evaluation_restores_training_mode_after_invalid_h0(self) -> None:
+        model = self._endpoint_model()
+        model.iterator.train()
+        sample = CachedTinySample(
+            pair_id="invalid-h0",
+            parent_group="parent",
+            geo_group="geo",
+            H_gt_norm=torch.eye(3),
+            pyramid={1: torch.zeros((1, 2, 256, 1, 1))},
+        )
+        invalid_h0 = torch.zeros((3, 3))
+        with self.assertRaisesRegex(FloatingPointError, "invalid H0/GT"):
+            evaluate_tiny_training_set(
+                model,  # type: ignore[arg-type]
+                [sample],
+                [invalid_h0],
+                active_scales=(1,),
+                device=torch.device("cpu"),
+                cnn_autocast_enabled=False,
+            )
+        self.assertTrue(model.iterator.training)
+
     def test_weight_average_evaluation_accepts_preloaded_repeated_pair(self) -> None:
         class FakeIterator(nn.Module):
             def __init__(self) -> None:

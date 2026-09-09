@@ -14,6 +14,7 @@ COMMAND_MODULES = {
     "gradient-audit": "mhinet.gradient_audit",
     "real-correlation-audit": "mhinet.real_correlation_audit",
     "tiny-overfit": "mhinet.tiny_overfit",
+    "tiny-checkpoint-audit": "mhinet.tiny_checkpoint_audit",
     "tiny-gate-merge": "mhinet.tiny_gate",
     "train": "mhinet.train",
     "resume": "mhinet.train",

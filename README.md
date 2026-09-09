@@ -139,6 +139,27 @@ strictly bound to architecture, data manifest, runtime and weight hashes.
 Omitting the averaging flag is useful for raw-endpoint failure isolation, but
 that output cannot be merged into the registered gate.
 
+A completed final or atomic progress checkpoint can be re-evaluated without an
+optimizer, RNG restoration, backward pass, or parameter update. Legacy tiny
+checkpoints must receive every protocol field that was not embedded in them;
+the command fails on conflicts with fields that were embedded:
+
+```bash
+CUDA_VISIBLE_DEVICES=0 conda run --no-capture-output -n loma-repro \
+  python -m mhinet.cli tiny-checkpoint-audit \
+  --runtime configs/runtime_paths.server.json \
+  --checkpoint outputs/tiny_overfit/tiny-s-d1_one-pair-residuals_translation_bf16_raw_seed0.pt \
+  --experiment D1 --sample-count 32 \
+  --sample-protocol one_pair_residuals --residual-profile translation \
+  --precision bf16 --seed 0 --residual-bound-fraction 1.0 \
+  --output artifacts/p4_tiny_s_d1_full_bound_bf16_checkpoint_audit.json
+```
+
+The audit snapshots the checkpoint before reading it, strictly loads only the
+MHIR iterator, verifies that the serialized/load/post-forward state hashes are
+identical, and emits H0, each H, decoder deltas, solve diagnostics, support and
+saturation per condition. Its `diagnostic_complete` status is not a P4 pass.
+
 Run D8/D4/D2/TINY-8 with the same recipe but
 `--residual-bound-fraction 0.5`, distinct progress/output paths and the matching
 `--experiments` value. Long jobs may be merged only after all five artifacts

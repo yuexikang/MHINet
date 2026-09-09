@@ -553,6 +553,25 @@ diagnostic-only and is never used by formal training.
   expected-failure scope are in
   `/home/disk1/MHINet/artifacts/p4_tiny_resume_cuda_smoke.json`, SHA256
   `f588599ffaef020a8f6a4f0ab21d5932bc35612baf0619d3af49b7ecdd371058`.
+- Added the read-only `tiny-checkpoint-audit` entrypoint for diagnosing a
+  serialized raw/averaged endpoint without resuming training.  It snapshots a
+  possibly live atomic progress file before restricted preflight, rejects
+  formal/unknown checkpoint roles and protocol conflicts, requires explicit
+  supplements for missing legacy seed/bound fields, reconstructs the exact
+  train-only controlled conditions, and strictly loads only the MHIR iterator
+  with `restore_rng=False` and no optimizer.  It records H0, every H, both
+  per-scale decoder deltas, support/condition/solve/saturation fields and
+  canonical serialized/load/post-forward state hashes.  Its status is
+  deliberately `diagnostic_complete`, never `passed`.
+- Tiny endpoint serialization now restores the iterator's original train/eval
+  mode even when projection diagnosis raises, records per-update corner
+  residuals and emits strict JSON (`null` for non-finite diagnostics rather
+  than non-standard `Infinity`/`NaN`).  Command:
+  `/root/miniconda3/envs/loma-repro/bin/python -m unittest discover -s tests -v`.
+  Result: all 77 tests passed in 1.576 seconds, including direct rejected-update,
+  invalid-H0 restoration, protocol-conflict, legacy-supplement and exact-state-
+  digest regressions.  This is checkpoint/diagnostic engineering only; no new
+  D1 learnability or validation result is claimed.
 
 CUDA warns that `grid_sampler_2d_backward_cuda` and
 `adaptive_avg_pool2d_backward_cuda` have no deterministic implementation.

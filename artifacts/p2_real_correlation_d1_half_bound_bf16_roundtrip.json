@@ -1,0 +1,505 @@
+{
+  "gate": "P2_real_correlation_signal_audit",
+  "status": "diagnostic",
+  "pair_id": "current__34.801100126.376330_pair0",
+  "scale": 1,
+  "seed": 0,
+  "residual_bound_fraction": 0.5,
+  "maximum_declared_abs_residual_px": 1.0,
+  "controlled_corner_residual_input_px": [
+    [
+      -0.70001220703125,
+      0.1156005859375
+    ],
+    [
+      -0.699951171875,
+      0.11566162109375
+    ],
+    [
+      -0.70001220703125,
+      0.11566162109375
+    ],
+    [
+      -0.7000732421875,
+      0.11578369140625
+    ]
+  ],
+  "adapter_valid_points": 1229312,
+  "random_zero_init_adapter": {
+    "feature_shape": [
+      1,
+      2,
+      32,
+      784,
+      784
+    ],
+    "feature_dtype": "torch.float32",
+    "radius": 2,
+    "queries": 614656,
+    "observable_queries": 307506,
+    "selected_queries": 307461,
+    "selected_fraction": 0.5002163648605347,
+    "oracle_offset_feature_px": {
+      "mean": 0.709596574306488,
+      "median": 0.7095885276794434,
+      "p90": 0.7096434831619263,
+      "min": 0.70938640832901,
+      "max": 0.7098942995071411
+    },
+    "argmax_endpoint_error_feature_px": {
+      "mean": 1.2232604026794434,
+      "median": 1.1278754472732544,
+      "p90": 2.483097791671753,
+      "min": 0.3211708068847656,
+      "max": 3.430440902709961
+    },
+    "argmax_within_0_75_feature_px": 0.4015175700187683,
+    "argmax_within_1_5_feature_px": 0.661485493183136,
+    "nearest_integer_candidate_top1_fraction": 0.27205076813697815,
+    "nearest_integer_candidate_rank": {
+      "mean": 4.981256008148193,
+      "median": 3.0,
+      "p90": 12.0,
+      "min": 1.0,
+      "max": 25.0
+    },
+    "nearest_integer_candidate_correlation": {
+      "mean": 0.90704345703125,
+      "median": 0.958219587802887,
+      "p90": 0.9908216595649719,
+      "min": -0.35065197944641113,
+      "max": 0.997927188873291
+    },
+    "center_candidate_correlation": {
+      "mean": 0.9042650461196899,
+      "median": 0.9565231204032898,
+      "p90": 0.9892574548721313,
+      "min": -0.36138176918029785,
+      "max": 0.9975376129150391
+    },
+    "nearest_minus_center_correlation": {
+      "mean": 0.0027784211561083794,
+      "median": 0.0013960599899291992,
+      "p90": 0.01037454605102539,
+      "min": -0.09339958429336548,
+      "max": 0.9112006425857544
+    },
+    "bf16_decoder_input_roundtrip": {
+      "emulation": "FP32 correlation -> BF16 -> FP32 round-trip",
+      "valid_score_abs_quantization_error": {
+        "mean": 0.0009662557276897132,
+        "median": 0.0009585022926330566,
+        "p90": 0.001754164695739746,
+        "min": 0.0,
+        "max": 0.001953125
+      },
+      "nearest_candidate_abs_quantization_error": {
+        "mean": 0.0009696924244053662,
+        "median": 0.0009649991989135742,
+        "p90": 0.0017548799514770508,
+        "min": 0.0,
+        "max": 0.001953125
+      },
+      "center_candidate_abs_quantization_error": {
+        "mean": 0.0009656378533691168,
+        "median": 0.0009595155715942383,
+        "p90": 0.0017535686492919922,
+        "min": 0.0,
+        "max": 0.001953125
+      },
+      "nearest_minus_center_raw": {
+        "mean": 0.0027784211561083794,
+        "median": 0.0013960599899291992,
+        "p90": 0.01037454605102539,
+        "min": -0.09339958429336548,
+        "max": 0.9112006425857544
+      },
+      "nearest_minus_center_after_bf16": {
+        "mean": 0.00277760555036366,
+        "median": 0.0,
+        "p90": 0.01171875,
+        "min": -0.09375,
+        "max": 0.91015625
+      },
+      "nearest_center_equal_after_bf16_fraction": 0.30227896571159363,
+      "raw_positive_margin_fraction": 0.6276275515556335,
+      "positive_margin_fraction_after_bf16": 0.45891672372817993,
+      "raw_margin_sign_preserved_fraction": 0.6977307200431824,
+      "raw_positive_margin_retained_fraction": 0.7311927676200867,
+      "argmax_candidate_preserved_fraction": 0.5915806889533997,
+      "nearest_candidate_rank1_after_bf16_fraction": 0.456688791513443
+    },
+    "valid_candidates_per_query": {
+      "mean": 24.932167053222656,
+      "median": 25.0,
+      "p90": 25.0,
+      "min": 9.0,
+      "max": 25.0
+    }
+  },
+  "raw_256d_descriptor": {
+    "feature_shape": [
+      1,
+      2,
+      256,
+      784,
+      784
+    ],
+    "feature_dtype": "torch.float32",
+    "radius": 2,
+    "queries": 614656,
+    "observable_queries": 307506,
+    "selected_queries": 307461,
+    "selected_fraction": 0.5002163648605347,
+    "oracle_offset_feature_px": {
+      "mean": 0.709596574306488,
+      "median": 0.7095885276794434,
+      "p90": 0.7096434831619263,
+      "min": 0.70938640832901,
+      "max": 0.7098942995071411
+    },
+    "argmax_endpoint_error_feature_px": {
+      "mean": 0.7648447155952454,
+      "median": 0.32154545187950134,
+      "p90": 1.7040050029754639,
+      "min": 0.3211708068847656,
+      "max": 3.4304118156433105
+    },
+    "argmax_within_0_75_feature_px": 0.6630108952522278,
+    "argmax_within_1_5_feature_px": 0.8766704797744751,
+    "nearest_integer_candidate_top1_fraction": 0.5039403438568115,
+    "nearest_integer_candidate_rank": {
+      "mean": 2.810821533203125,
+      "median": 1.0,
+      "p90": 7.0,
+      "min": 1.0,
+      "max": 22.0
+    },
+    "nearest_integer_candidate_correlation": {
+      "mean": 0.9144349694252014,
+      "median": 0.9557996988296509,
+      "p90": 0.9897935390472412,
+      "min": 0.08121615648269653,
+      "max": 0.9960192441940308
+    },
+    "center_candidate_correlation": {
+      "mean": 0.9120420813560486,
+      "median": 0.954803466796875,
+      "p90": 0.9878413677215576,
+      "min": 0.0,
+      "max": 0.9959098100662231
+    },
+    "nearest_minus_center_correlation": {
+      "mean": 0.0023927949368953705,
+      "median": 0.0013157129287719727,
+      "p90": 0.005566537380218506,
+      "min": -0.026338279247283936,
+      "max": 0.8671654462814331
+    },
+    "bf16_decoder_input_roundtrip": {
+      "emulation": "FP32 correlation -> BF16 -> FP32 round-trip",
+      "valid_score_abs_quantization_error": {
+        "mean": 0.0009690550505183637,
+        "median": 0.0009630918502807617,
+        "p90": 0.0017548799514770508,
+        "min": 0.0,
+        "max": 0.001953125
+      },
+      "nearest_candidate_abs_quantization_error": {
+        "mean": 0.0009748903685249388,
+        "median": 0.0009723901748657227,
+        "p90": 0.0017568469047546387,
+        "min": 0.0,
+        "max": 0.001953125
+      },
+      "center_candidate_abs_quantization_error": {
+        "mean": 0.0009660025243647397,
+        "median": 0.0009589791297912598,
+        "p90": 0.0017535686492919922,
+        "min": 0.0,
+        "max": 0.001953125
+      },
+      "nearest_minus_center_raw": {
+        "mean": 0.0023927949368953705,
+        "median": 0.0013157129287719727,
+        "p90": 0.005566537380218506,
+        "min": -0.026338279247283936,
+        "max": 0.8671654462814331
+      },
+      "nearest_minus_center_after_bf16": {
+        "mean": 0.002389241475611925,
+        "median": 0.0,
+        "p90": 0.00390625,
+        "min": -0.0263671875,
+        "max": 0.8671875
+      },
+      "nearest_center_equal_after_bf16_fraction": 0.44725996255874634,
+      "raw_positive_margin_fraction": 0.7131375670433044,
+      "positive_margin_fraction_after_bf16": 0.4216729700565338,
+      "raw_margin_sign_preserved_fraction": 0.552749752998352,
+      "raw_positive_margin_retained_fraction": 0.5912926197052002,
+      "argmax_candidate_preserved_fraction": 0.5661888718605042,
+      "nearest_candidate_rank1_after_bf16_fraction": 0.734174370765686
+    },
+    "valid_candidates_per_query": {
+      "mean": 24.932167053222656,
+      "median": 25.0,
+      "p90": 25.0,
+      "min": 9.0,
+      "max": 25.0
+    }
+  },
+  "shared_call_counts": {
+    "dino": 1,
+    "mvt": 1,
+    "vgg": 1,
+    "dedode_full_pyramid": 1
+  },
+  "build": {
+    "architecture_path": "/home/disk1/MHINet/MHINet_server_handoff_v1.2/configs/mhinet_v1.json",
+    "architecture_sha256": "4a859f413ee4be59acb1dc6c0cf189e80b8f4e7b3f54dc9f117acd1ac5cfe128",
+    "provider": {
+      "loma_root": "/home/disk1/LoMa",
+      "loma_checkpoint": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+      "dino_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "selected_stage1_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "loretta_loaded_keys": 807,
+      "locator": {
+        "source": "official_loretta_checkpoint",
+        "overridden": false
+      },
+      "descriptor_initialization": {
+        "migrated_tensors": 364,
+        "vgg_tensors": 84,
+        "decoder_tensors": 280,
+        "top_refiner_mapping": "LoMa-B scale 14 -> DINOv3 scale 16"
+      },
+      "ownership": {
+        "dino_wrapper_instances": 1,
+        "mvt_object_references": 1,
+        "stage1_head_contains_dino": 0,
+        "stage1_head_contains_mvt": 0,
+        "decoder_scales": [
+          "16",
+          "8",
+          "4",
+          "2",
+          "1"
+        ]
+      },
+      "legacy_training_wrappers_reused": false,
+      "safe_stage1_fitter": true
+    },
+    "training_parameters": {
+      "profile": "heads",
+      "groups": {
+        "new_modules": {
+          "parameters": 2544160,
+          "trainable_parameters": 2544160,
+          "tensor_count": 158,
+          "trainable_tensor_count": 158,
+          "optimizer_parameter_ids": [
+            130095877575264,
+            130101438664752,
+            130101438671152,
+            130095567339280,
+            130095567338960,
+            130095567338800,
+            130095567338640,
+            130095567337840,
+            130095567337680,
+            130095567337520,
+            130095567337200,
+            130095567337040,
+            130095567336880,
+            130095567336560,
+            130095567336320,
+            130095567336160,
+            130095567336000,
+            130095567335680,
+            130095567335520,
+            130095567335360,
+            130095567335040,
+            130095567334720,
+            130095567334560,
+            130095567334400,
+            130095567334080,
+            130095567333920,
+            130095567333760,
+            130095567333440,
+            130095567333280,
+            130095567333120,
+            130095567332960,
+            130095567332800,
+            130095567332480,
+            130095567332320,
+            130095567332160,
+            130095567331840,
+            130095567331680,
+            130095567331520,
+            130095567331200,
+            130095567331040,
+            130095567330880,
+            130095567330560,
+            130095567330240,
+            130095567330080,
+            130095567329920,
+            130095567329600,
+            130095567329440,
+            130095567329280,
+            130095567328960,
+            130095567328800,
+            130095567328640,
+            130095567328480,
+            130095567328160,
+            130095567328000,
+            130095567327840,
+            130095567327520,
+            130095567327200,
+            130095567327040,
+            130095567326880,
+            130095567326560,
+            130095567326400,
+            130095567326240,
+            130095567325920,
+            130095567325760,
+            130095567325600,
+            130095567325440,
+            130095567325280,
+            130095567324960,
+            130095567324800,
+            130095567324640,
+            130095567324320,
+            130095567324160,
+            130095567324000,
+            130095567323680,
+            130095567323520,
+            130095567323360,
+            130095567336640,
+            130095567336960,
+            130095567337120,
+            130095567337280,
+            130095567337600,
+            130095567337760,
+            130095567337920,
+            130095567338080,
+            130095567338880,
+            130095567338560,
+            130095567338720,
+            130095567339200,
+            130095567339360,
+            130095567336400,
+            130095567324400,
+            130095567324560,
+            130095567323280,
+            130095567323440,
+            130095567324880,
+            130095567324080,
+            130095567323760,
+            130095567325200,
+            130095567325520,
+            130095567325680,
+            130095567325840,
+            130095567326160,
+            130095567326320,
+            130095567326480,
+            130095567326800,
+            130095567326960,
+            130095567327120,
+            130095567327280,
+            130095567327440,
+            130095567327760,
+            130095567327920,
+            130095567328080,
+            130095567328400,
+            130095567328560,
+            130095567328720,
+            130095567329040,
+            130095567329200,
+            130095567329360,
+            130095567329680,
+            130095567330000,
+            130095567330160,
+            130095567330320,
+            130095567330640,
+            130095567330800,
+            130095567330960,
+            130095567331280,
+            130095567331600,
+            130095567331760,
+            130095567331920,
+            130095567332240,
+            130095567332400,
+            130095567332560,
+            130095567332880,
+            130095567333200,
+            130095567333360,
+            130095567333520,
+            130095567333840,
+            130095567334000,
+            130095567334160,
+            130095567334480,
+            130095567334800,
+            130095567334960,
+            130095567335760,
+            130095567335280,
+            130095567335440,
+            130095567336240,
+            130095567930368,
+            130095567929888,
+            130095567929648,
+            130095567929488,
+            130095567930288,
+            130095567929808,
+            130095567930528,
+            130095567929728,
+            130095567930048,
+            130095567929408,
+            130095567929568,
+            130095567930448
+          ]
+        },
+        "dedode": {
+          "parameters": 8219297,
+          "trainable_parameters": 0,
+          "tensor_count": 190,
+          "trainable_tensor_count": 0,
+          "optimizer_parameter_ids": []
+        },
+        "vgg": {
+          "parameters": 10592064,
+          "trainable_parameters": 0,
+          "tensor_count": 48,
+          "trainable_tensor_count": 0,
+          "optimizer_parameter_ids": []
+        },
+        "mvt": {
+          "parameters": 87417088,
+          "trainable_parameters": 0,
+          "tensor_count": 150,
+          "trainable_tensor_count": 0,
+          "optimizer_parameter_ids": []
+        },
+        "dino": {
+          "parameters": 227564544,
+          "trainable_parameters": 0,
+          "tensor_count": 259,
+          "trainable_tensor_count": 0,
+          "optimizer_parameter_ids": []
+        },
+        "stage1_head_parameters": {
+          "parameters": 2957572,
+          "trainable_parameters": 0,
+          "tensor_count": 10,
+          "trainable_tensor_count": 0,
+          "optimizer_parameter_ids": []
+        }
+      },
+      "total_trainable_parameters": 2544160,
+      "new_parameters": 2544160,
+      "dino_trainable_parameters": 0,
+      "stage1_head_trainable_parameters": 0
+    }
+  },
+  "interpretation": "This measures fixed-feature local retrieval signal only. It is not a training result or validation metric."
+}

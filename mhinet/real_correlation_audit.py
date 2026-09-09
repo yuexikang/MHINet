@@ -36,6 +36,89 @@ def _stats(values: torch.Tensor) -> dict[str, float]:
     }
 
 
+def _bf16_signal_diagnostics(
+    selected_scores: torch.Tensor,
+    selected_valid: torch.Tensor,
+    nearest_indices: torch.Tensor,
+    *,
+    center_index: int,
+) -> dict[str, Any]:
+    """Measure information lost if FP32 correlation reaches a BF16 CNN input.
+
+    This is a round-trip diagnostic only.  It does not change the production
+    correlation or decoder precision policy.
+    """
+
+    if selected_scores.ndim != 2 or selected_valid.shape != selected_scores.shape:
+        raise ValueError("selected scores/valid mask must have matching NxK shapes")
+    if nearest_indices.shape != selected_scores.shape[:1]:
+        raise ValueError("nearest_indices must have shape N")
+    if not 0 <= int(center_index) < selected_scores.shape[1]:
+        raise ValueError("center_index is outside the candidate dimension")
+    if not bool(selected_valid.any(dim=1).all()):
+        raise ValueError("every selected query must have at least one valid candidate")
+
+    quantized = selected_scores.to(torch.bfloat16).float()
+    gather_index = nearest_indices[:, None]
+    nearest_raw = selected_scores.gather(1, gather_index).squeeze(1)
+    nearest_quantized = quantized.gather(1, gather_index).squeeze(1)
+    center_raw = selected_scores[:, center_index]
+    center_quantized = quantized[:, center_index]
+    raw_margin = nearest_raw - center_raw
+    quantized_margin = nearest_quantized - center_quantized
+    raw_positive = raw_margin > 0
+
+    raw_masked = selected_scores.masked_fill(~selected_valid, float("-inf"))
+    quantized_masked = quantized.masked_fill(~selected_valid, float("-inf"))
+    raw_argmax = raw_masked.argmax(dim=1)
+    quantized_argmax = quantized_masked.argmax(dim=1)
+    quantized_rank = (
+        (quantized_masked > nearest_quantized[:, None]).sum(dim=1) + 1
+    )
+    valid_scores = selected_scores[selected_valid]
+    valid_quantized = quantized[selected_valid]
+
+    retained_positive = (
+        None
+        if not bool(raw_positive.any())
+        else float((quantized_margin[raw_positive] > 0).float().mean().item())
+    )
+    return {
+        "emulation": "FP32 correlation -> BF16 -> FP32 round-trip",
+        "valid_score_abs_quantization_error": _stats(
+            (valid_quantized - valid_scores).abs()
+        ),
+        "nearest_candidate_abs_quantization_error": _stats(
+            (nearest_quantized - nearest_raw).abs()
+        ),
+        "center_candidate_abs_quantization_error": _stats(
+            (center_quantized - center_raw).abs()
+        ),
+        "nearest_minus_center_raw": _stats(raw_margin),
+        "nearest_minus_center_after_bf16": _stats(quantized_margin),
+        "nearest_center_equal_after_bf16_fraction": float(
+            (quantized_margin == 0).float().mean().item()
+        ),
+        "raw_positive_margin_fraction": float(raw_positive.float().mean().item()),
+        "positive_margin_fraction_after_bf16": float(
+            (quantized_margin > 0).float().mean().item()
+        ),
+        "raw_margin_sign_preserved_fraction": float(
+            (torch.sign(quantized_margin) == torch.sign(raw_margin))
+            .float()
+            .mean()
+            .item()
+        ),
+        "raw_positive_margin_retained_fraction": retained_positive,
+        "argmax_candidate_preserved_fraction": float(
+            (quantized_argmax == raw_argmax).float().mean().item()
+        ),
+        "nearest_candidate_rank1_after_bf16_fraction": float(
+            (quantized_rank == 1).float().mean().item()
+        ),
+    }
+
+
 @torch.no_grad()
 def _audit_features(
     pair_features: torch.Tensor,
@@ -96,6 +179,9 @@ def _audit_features(
     selected_nearest = nearest_correlation[selected]
     selected_center = center_correlation[selected]
     selected_rank = correct_rank[selected].float()
+    selected_scores = flat_correlation[selected]
+    selected_valid_candidates = flat_valid[selected]
+    selected_nearest_indices = nearest[selected]
     return {
         "feature_shape": list(pair_features.shape),
         "feature_dtype": str(pair_features.dtype),
@@ -122,6 +208,12 @@ def _audit_features(
         "center_candidate_correlation": _stats(selected_center),
         "nearest_minus_center_correlation": _stats(
             selected_nearest - selected_center
+        ),
+        "bf16_decoder_input_roundtrip": _bf16_signal_diagnostics(
+            selected_scores,
+            selected_valid_candidates,
+            selected_nearest_indices,
+            center_index=center_index,
         ),
         "valid_candidates_per_query": _stats(valid_count[selected].float()),
     }

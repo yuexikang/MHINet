@@ -1,0 +1,505 @@
+{
+  "gate": "P2_real_correlation_signal_audit",
+  "status": "diagnostic",
+  "pair_id": "current__34.801100126.376330_pair0",
+  "scale": 1,
+  "seed": 0,
+  "residual_bound_fraction": 1.0,
+  "maximum_declared_abs_residual_px": 2.0,
+  "controlled_corner_residual_input_px": [
+    [
+      -1.4000091552734375,
+      0.23138427734375
+    ],
+    [
+      -1.39990234375,
+      0.23138427734375
+    ],
+    [
+      -1.4000091552734375,
+      0.2314453125
+    ],
+    [
+      -1.4000244140625,
+      0.23138427734375
+    ]
+  ],
+  "adapter_valid_points": 1229312,
+  "random_zero_init_adapter": {
+    "feature_shape": [
+      1,
+      2,
+      32,
+      784,
+      784
+    ],
+    "feature_dtype": "torch.float32",
+    "radius": 2,
+    "queries": 614656,
+    "observable_queries": 307506,
+    "selected_queries": 307188,
+    "selected_fraction": 0.49977222084999084,
+    "oracle_offset_feature_px": {
+      "mean": 1.419049620628357,
+      "median": 1.4190508127212524,
+      "p90": 1.4190865755081177,
+      "min": 1.4188356399536133,
+      "max": 1.419317364692688
+    },
+    "argmax_endpoint_error_feature_px": {
+      "mean": 1.2061303853988647,
+      "median": 0.8665375709533691,
+      "p90": 2.3106513023376465,
+      "min": 0.46196508407592773,
+      "max": 4.0670342445373535
+    },
+    "argmax_within_0_75_feature_px": 0.41417309641838074,
+    "argmax_within_1_5_feature_px": 0.7266071438789368,
+    "nearest_integer_candidate_top1_fraction": 0.22475486993789673,
+    "nearest_integer_candidate_rank": {
+      "mean": 4.643143653869629,
+      "median": 3.0,
+      "p90": 10.0,
+      "min": 1.0,
+      "max": 25.0
+    },
+    "nearest_integer_candidate_correlation": {
+      "mean": 0.9065216183662415,
+      "median": 0.9579013586044312,
+      "p90": 0.9903867244720459,
+      "min": -0.35342085361480713,
+      "max": 0.9980223774909973
+    },
+    "center_candidate_correlation": {
+      "mean": 0.8978260159492493,
+      "median": 0.9493076801300049,
+      "p90": 0.9846373796463013,
+      "min": -0.36812537908554077,
+      "max": 0.9972593784332275
+    },
+    "nearest_minus_center_correlation": {
+      "mean": 0.008695713244378567,
+      "median": 0.005830228328704834,
+      "p90": 0.019537515938282013,
+      "min": -0.07800406217575073,
+      "max": 0.9077731370925903
+    },
+    "bf16_decoder_input_roundtrip": {
+      "emulation": "FP32 correlation -> BF16 -> FP32 round-trip",
+      "valid_score_abs_quantization_error": {
+        "mean": 0.0009659597417339683,
+        "median": 0.0009583234786987305,
+        "p90": 0.0017539262771606445,
+        "min": 0.0,
+        "max": 0.001953125
+      },
+      "nearest_candidate_abs_quantization_error": {
+        "mean": 0.0009676085319370031,
+        "median": 0.0009603500366210938,
+        "p90": 0.0017571449279785156,
+        "min": 0.0,
+        "max": 0.001953125
+      },
+      "center_candidate_abs_quantization_error": {
+        "mean": 0.0009656099136918783,
+        "median": 0.0009603500366210938,
+        "p90": 0.0017545223236083984,
+        "min": 0.0,
+        "max": 0.001953125
+      },
+      "nearest_minus_center_raw": {
+        "mean": 0.008695713244378567,
+        "median": 0.005830228328704834,
+        "p90": 0.019537515938282013,
+        "min": -0.07800406217575073,
+        "max": 0.9077731370925903
+      },
+      "nearest_minus_center_after_bf16": {
+        "mean": 0.008696053177118301,
+        "median": 0.0078125,
+        "p90": 0.01953125,
+        "min": -0.078125,
+        "max": 0.90625
+      },
+      "nearest_center_equal_after_bf16_fraction": 0.1652766466140747,
+      "raw_positive_margin_fraction": 0.8421195149421692,
+      "positive_margin_fraction_after_bf16": 0.7337135672569275,
+      "raw_margin_sign_preserved_fraction": 0.8347233533859253,
+      "raw_positive_margin_retained_fraction": 0.8712701797485352,
+      "argmax_candidate_preserved_fraction": 0.6009544730186462,
+      "nearest_candidate_rank1_after_bf16_fraction": 0.41676759719848633
+    },
+    "valid_candidates_per_query": {
+      "mean": 24.925687789916992,
+      "median": 25.0,
+      "p90": 25.0,
+      "min": 6.0,
+      "max": 25.0
+    }
+  },
+  "raw_256d_descriptor": {
+    "feature_shape": [
+      1,
+      2,
+      256,
+      784,
+      784
+    ],
+    "feature_dtype": "torch.float32",
+    "radius": 2,
+    "queries": 614656,
+    "observable_queries": 307506,
+    "selected_queries": 307188,
+    "selected_fraction": 0.49977222084999084,
+    "oracle_offset_feature_px": {
+      "mean": 1.419049620628357,
+      "median": 1.4190508127212524,
+      "p90": 1.4190865755081177,
+      "min": 1.4188356399536133,
+      "max": 1.419317364692688
+    },
+    "argmax_endpoint_error_feature_px": {
+      "mean": 0.8152331709861755,
+      "median": 0.6430075168609619,
+      "p90": 1.4190864562988281,
+      "min": 0.46196508407592773,
+      "max": 4.067017555236816
+    },
+    "argmax_within_0_75_feature_px": 0.6364246010780334,
+    "argmax_within_1_5_feature_px": 0.9021934270858765,
+    "nearest_integer_candidate_top1_fraction": 0.40705692768096924,
+    "nearest_integer_candidate_rank": {
+      "mean": 2.7521257400512695,
+      "median": 2.0,
+      "p90": 6.0,
+      "min": 1.0,
+      "max": 21.0
+    },
+    "nearest_integer_candidate_correlation": {
+      "mean": 0.9141830801963806,
+      "median": 0.9558103084564209,
+      "p90": 0.9891887903213501,
+      "min": 0.08361548185348511,
+      "max": 0.9960652589797974
+    },
+    "center_candidate_correlation": {
+      "mean": 0.9060293436050415,
+      "median": 0.9486422538757324,
+      "p90": 0.9822604656219482,
+      "min": 0.0,
+      "max": 0.994394063949585
+    },
+    "nearest_minus_center_correlation": {
+      "mean": 0.008153720758855343,
+      "median": 0.0056133270263671875,
+      "p90": 0.015112748369574547,
+      "min": -0.023040562868118286,
+      "max": 0.8683078289031982
+    },
+    "bf16_decoder_input_roundtrip": {
+      "emulation": "FP32 correlation -> BF16 -> FP32 round-trip",
+      "valid_score_abs_quantization_error": {
+        "mean": 0.0009690401493571699,
+        "median": 0.0009627342224121094,
+        "p90": 0.0017548799514770508,
+        "min": 0.0,
+        "max": 0.001953125
+      },
+      "nearest_candidate_abs_quantization_error": {
+        "mean": 0.0009709795122034848,
+        "median": 0.0009646415710449219,
+        "p90": 0.0017574597150087357,
+        "min": 0.0,
+        "max": 0.001953125
+      },
+      "center_candidate_abs_quantization_error": {
+        "mean": 0.0009681107476353645,
+        "median": 0.0009630918502807617,
+        "p90": 0.0017544031143188477,
+        "min": 0.0,
+        "max": 0.001953125
+      },
+      "nearest_minus_center_raw": {
+        "mean": 0.008153720758855343,
+        "median": 0.0056133270263671875,
+        "p90": 0.015112748369574547,
+        "min": -0.023040562868118286,
+        "max": 0.8683078289031982
+      },
+      "nearest_minus_center_after_bf16": {
+        "mean": 0.008143615908920765,
+        "median": 0.00390625,
+        "p90": 0.015625,
+        "min": -0.0234375,
+        "max": 0.8671875
+      },
+      "nearest_center_equal_after_bf16_fraction": 0.16038712859153748,
+      "raw_positive_margin_fraction": 0.9374780058860779,
+      "positive_margin_fraction_after_bf16": 0.8124243021011353,
+      "raw_margin_sign_preserved_fraction": 0.8396129012107849,
+      "raw_positive_margin_retained_fraction": 0.8666062355041504,
+      "argmax_candidate_preserved_fraction": 0.513392448425293,
+      "nearest_candidate_rank1_after_bf16_fraction": 0.6897730231285095
+    },
+    "valid_candidates_per_query": {
+      "mean": 24.925687789916992,
+      "median": 25.0,
+      "p90": 25.0,
+      "min": 6.0,
+      "max": 25.0
+    }
+  },
+  "shared_call_counts": {
+    "dino": 1,
+    "mvt": 1,
+    "vgg": 1,
+    "dedode_full_pyramid": 1
+  },
+  "build": {
+    "architecture_path": "/home/disk1/MHINet/MHINet_server_handoff_v1.2/configs/mhinet_v1.json",
+    "architecture_sha256": "4a859f413ee4be59acb1dc6c0cf189e80b8f4e7b3f54dc9f117acd1ac5cfe128",
+    "provider": {
+      "loma_root": "/home/disk1/LoMa",
+      "loma_checkpoint": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+      "dino_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "selected_stage1_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "loretta_loaded_keys": 807,
+      "locator": {
+        "source": "official_loretta_checkpoint",
+        "overridden": false
+      },
+      "descriptor_initialization": {
+        "migrated_tensors": 364,
+        "vgg_tensors": 84,
+        "decoder_tensors": 280,
+        "top_refiner_mapping": "LoMa-B scale 14 -> DINOv3 scale 16"
+      },
+      "ownership": {
+        "dino_wrapper_instances": 1,
+        "mvt_object_references": 1,
+        "stage1_head_contains_dino": 0,
+        "stage1_head_contains_mvt": 0,
+        "decoder_scales": [
+          "16",
+          "8",
+          "4",
+          "2",
+          "1"
+        ]
+      },
+      "legacy_training_wrappers_reused": false,
+      "safe_stage1_fitter": true
+    },
+    "training_parameters": {
+      "profile": "heads",
+      "groups": {
+        "new_modules": {
+          "parameters": 2544160,
+          "trainable_parameters": 2544160,
+          "tensor_count": 158,
+          "trainable_tensor_count": 158,
+          "optimizer_parameter_ids": [
+            123748254162976,
+            123753657380720,
+            123753657380000,
+            123748191320992,
+            123747786063632,
+            123747786063472,
+            123747786063312,
+            123747786062512,
+            123747786062352,
+            123747786062192,
+            123747786061872,
+            123747786061712,
+            123747786061552,
+            123747786061232,
+            123747786060912,
+            123747786060752,
+            123747786060592,
+            123747786060272,
+            123747786060112,
+            123747786059952,
+            123747786059712,
+            123747786059392,
+            123747786059232,
+            123747786059072,
+            123747786058752,
+            123747786058592,
+            123747786058432,
+            123747786058112,
+            123747786057952,
+            123747786057792,
+            123747786057632,
+            123747786057472,
+            123747786057152,
+            123747786056992,
+            123747786056832,
+            123747786056512,
+            123747786056352,
+            123747786056192,
+            123747786055872,
+            123747786055712,
+            123747786055552,
+            123747786055232,
+            123747786054912,
+            123747786054752,
+            123747786054592,
+            123747786054272,
+            123747786054112,
+            123747786053952,
+            123747786053632,
+            123747786053312,
+            123747786053152,
+            123747786052992,
+            123747786052672,
+            123747786052512,
+            123747786052352,
+            123747786052032,
+            123747786051712,
+            123747786051552,
+            123747786051392,
+            123747786051072,
+            123747786050912,
+            123747786050752,
+            123747786050432,
+            123747786050272,
+            123747786050112,
+            123747786049952,
+            123747786049792,
+            123747786049472,
+            123747786049312,
+            123747786049152,
+            123747786048832,
+            123747786048672,
+            123747786048512,
+            123747786048192,
+            123747786048032,
+            123747786047872,
+            123747786047552,
+            123747786060192,
+            123747786060352,
+            123747786060512,
+            123747786060832,
+            123747786060992,
+            123747786061152,
+            123747786061792,
+            123747786061632,
+            123747786062272,
+            123747786061952,
+            123747786062432,
+            123747786062592,
+            123747786062752,
+            123747786063072,
+            123747786063392,
+            123747786063552,
+            123747786063712,
+            123747786048752,
+            123747786059472,
+            123747786047632,
+            123747786048592,
+            123747786047792,
+            123747786049232,
+            123747786049072,
+            123747786048432,
+            123747786049392,
+            123747786049552,
+            123747786049872,
+            123747786050032,
+            123747786050192,
+            123747786050352,
+            123747786050512,
+            123747786050832,
+            123747786050992,
+            123747786051152,
+            123747786051472,
+            123747786051632,
+            123747786051792,
+            123747786052112,
+            123747786052272,
+            123747786052432,
+            123747786052752,
+            123747786053072,
+            123747786053232,
+            123747786053392,
+            123747786053712,
+            123747786053872,
+            123747786054032,
+            123747786054352,
+            123747786054672,
+            123747786054832,
+            123747786054992,
+            123747786055312,
+            123747786055472,
+            123747786055632,
+            123747786055952,
+            123747786056272,
+            123747786056432,
+            123747786056592,
+            123747786056912,
+            123747786057072,
+            123747786057232,
+            123747786057552,
+            123747786057872,
+            123747786058032,
+            123747786058192,
+            123747786058512,
+            123747786058672,
+            123747786058832,
+            123747786059312,
+            123747785801488,
+            123747785801328,
+            123747785801168,
+            123747785800848,
+            123747785800688,
+            123747785800528,
+            123747785800208,
+            123747785800048,
+            123747785799888,
+            123747785799728,
+            123747785799568
+          ]
+        },
+        "dedode": {
+          "parameters": 8219297,
+          "trainable_parameters": 0,
+          "tensor_count": 190,
+          "trainable_tensor_count": 0,
+          "optimizer_parameter_ids": []
+        },
+        "vgg": {
+          "parameters": 10592064,
+          "trainable_parameters": 0,
+          "tensor_count": 48,
+          "trainable_tensor_count": 0,
+          "optimizer_parameter_ids": []
+        },
+        "mvt": {
+          "parameters": 87417088,
+          "trainable_parameters": 0,
+          "tensor_count": 150,
+          "trainable_tensor_count": 0,
+          "optimizer_parameter_ids": []
+        },
+        "dino": {
+          "parameters": 227564544,
+          "trainable_parameters": 0,
+          "tensor_count": 259,
+          "trainable_tensor_count": 0,
+          "optimizer_parameter_ids": []
+        },
+        "stage1_head_parameters": {
+          "parameters": 2957572,
+          "trainable_parameters": 0,
+          "tensor_count": 10,
+          "trainable_tensor_count": 0,
+          "optimizer_parameter_ids": []
+        }
+      },
+      "total_trainable_parameters": 2544160,
+      "new_parameters": 2544160,
+      "dino_trainable_parameters": 0,
+      "stage1_head_trainable_parameters": 0
+    }
+  },
+  "interpretation": "This measures fixed-feature local retrieval signal only. It is not a training result or validation metric."
+}

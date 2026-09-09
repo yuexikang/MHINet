@@ -420,6 +420,23 @@ diagnostic-only and is never used by formal training.
   `f8f6e3ebaee6537e213ab544c49d0d1dc67310771e1a4db868f99acded7c1751`,
   `5a6d85493dcd28399008da0efc50cd05b4c0ff118e319f96f65799d92ecc1c67`
   and `72c8c74a108e6f1b548d403b76a595ae99b3f5b41739cd9693afe0a239800a9e`.
+- The correlation audit now also emulates the decoder-boundary conversion
+  `FP32 -> BF16 -> FP32` without changing production forward precision.  For
+  the random 32-channel adapter, half-bound D1 had a mean valid-score
+  quantization error of `0.000966`, `30.23%` nearest/centre ties after
+  conversion, only `73.12%` retention of originally positive margins,
+  `69.77%` margin-sign preservation and `59.16%` argmax preservation.  Full-
+  bound D1 improved those values to `16.53%`, `87.13%`, `83.47%` and `60.10%`;
+  half-bound D2 was materially stronger at `7.91%`, `94.47%`, `92.09%` and
+  `83.47%`.  The raw 256-channel descriptor shows the same scale ordering.
+  This makes BF16 loss of small D1 contrast a plausible contributor, not a
+  proven sole cause; the separately running FP32 training comparison is the
+  causal check.  Updated D1-half/D1-full/D2-half artifact SHA256 values are
+  `2166fe976a49b801ff4e581d2d498c4d4206eaa65905ac012334832c51aafff3`,
+  `9a0dd15088da2b4c82dff3b78ffa73cd5515f631877fc24e3d3f77a1c19b23a2`
+  and `8e9812521051d3c79cb8a13721aebcc2ca07471c7ae3b1b676a20ee2635f579e`.
+  Two pure-CPU edge/reference tests cover ties, rank loss, invalid shapes and
+  empty valid rows; the complete suite passed 69/69 in 7.794 seconds.
 - D1 profiling showed that 614,656 queries create 601 fixed 1,024-query
   sampling chunks.  Correlation now samples the 32-channel target and its
   finite mask in one 33-channel `grid_sample`, and constructs the complete

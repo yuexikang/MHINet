@@ -893,7 +893,53 @@ joint-branch diagnostics. The artifact also embeds the active architecture,
 provider, and checkpoint provenance. Artifact: 10,308 bytes, SHA256
 `cca64b4f3573f9c40a70b980f4221b874fa6fe34c3dad06445ef5bf9c3be06fd`.
 
-Still pending for the new architecture: 784 heads/joint memory and latency
-profile, resume smoke, D8/D4/D2/TINY-6 tiny-overfit, E00, and E01.
-Earlier artifacts do not fill these gaps. E00/E01 remain blocked until the new
-P3/P4 and TINY-6 gate pass.
+Real-resource P4 two-step heads-only profile command (physical GPU 1 exposed
+as `cuda:0`):
+
+```bash
+CUDA_VISIBLE_DEVICES=1 /root/miniconda3/envs/loma-repro/bin/python -u \
+  -m mhinet.cli profile \
+  --runtime configs/runtime_paths.server.json --profile heads \
+  --optimizer-steps 2 \
+  --output artifacts/p4_profile_heads_mcnet_d2.json --overwrite
+```
+
+Result: `passed` on an RTX 4090 at the real `784x784` input size. Peak
+allocated/reserved memory was `3,999,755,264/4,882,169,856` bytes. Unwarmed
+step-0 forward/backward time was `0.558349/0.558144 s`; step 1 was
+`0.257731/0.434172 s`. Both steps accepted all six updates and recorded one
+DINO, MVT, VGG, and cumulative DeDoDe call, four decoder steps through D2,
+and zero scale-1 steps. At zero initialization, step 0 had 372 nonzero new-head
+gradient elements; after the first update, step 1 had 798,968, consistent with
+the expected delayed upstream-gradient activation. DINO and the frozen GHIM
+head had no gradients. Artifact: 8,582 bytes, SHA256
+`c4dcb825c5d01057d3c9a116eee837ff411e353ebdd25727f73856c1832f34a1`.
+
+Real-resource P4 two-step joint profile command (physical GPU 2 exposed as
+`cuda:0`):
+
+```bash
+CUDA_VISIBLE_DEVICES=2 /root/miniconda3/envs/loma-repro/bin/python -u \
+  -m mhinet.cli profile \
+  --runtime configs/runtime_paths.server.json --profile joint \
+  --optimizer-steps 2 \
+  --output artifacts/p4_profile_joint_mcnet_d2.json --overwrite
+```
+
+Result: `passed` on an RTX 4090. Peak allocated/reserved memory was
+`10,934,943,232/11,836,325,888` bytes. Unwarmed step-0 forward/backward time
+was `0.569247/0.920599 s`; step 1 was `0.265485/0.889338 s`. Both steps used
+the six-update `8,8,4,4,2,2` schedule, kept H/proposal tensors differentiable,
+ran shared DINO/MVT/VGG once, stopped the cumulative decoder after four steps,
+and did not execute D1. Total active trainable parameters were `107,061,671`.
+The expected zero-head boundary was visible at step 0: DeDoDe and VGG gradient
+tensors existed but had zero norm, while MVT already received gradient through
+H0. At step 1, DeDoDe/VGG/MVT gradient norms were respectively
+`0.361962/0.489198/34.208104`, all finite and nonzero; DINO and the frozen
+GHIM head still had no gradients. Artifact: 8,707 bytes, SHA256
+`92a67d98bee23f1de71e8c3d468c6f00442737b65e8357d76b8ff92b1a391fe4`.
+
+Still pending for the new architecture: checkpoint-v2 exact-boundary resume
+smoke, D8/D4/D2/TINY-6 tiny-overfit, E00, and E01. Earlier artifacts do not
+fill these gaps. E00/E01 remain blocked until the new P3/P4 and TINY-6 gate
+pass.

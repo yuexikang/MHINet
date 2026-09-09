@@ -1,0 +1,301 @@
+{
+  "gate": "P4_actual_784_profile",
+  "status": "passed",
+  "profile": "joint",
+  "pair_id": "current__37.534900126.607065_pair0",
+  "optimizer_steps": 2,
+  "device": "cuda:0",
+  "physical_device_name": "NVIDIA GeForce RTX 4090",
+  "free_memory_before_build_bytes": 24866652160,
+  "total_device_memory_bytes": 25278087168,
+  "peak_allocated_bytes": 10934943232,
+  "peak_reserved_bytes": 11836325888,
+  "records": [
+    {
+      "step_before_optimizer": 0,
+      "loss": 4.003545761108398,
+      "forward_seconds": 0.5692474180832505,
+      "backward_seconds": 0.9205986512824893,
+      "shared_call_counts": {
+        "dino": 1,
+        "mvt": 1,
+        "vgg": 1,
+        "dedode_decode_calls": 1,
+        "dedode_steps": 4,
+        "dedode_scale1": 0
+      },
+      "active_scales": [
+        8,
+        4,
+        2
+      ],
+      "update_scale_schedule": [
+        8,
+        8,
+        4,
+        4,
+        2,
+        2
+      ],
+      "H_updates_require_grad": true,
+      "proposal_Q_requires_grad": true,
+      "accepted_updates": 6,
+      "gradients": {
+        "new_modules": {
+          "parameters": 1176712,
+          "gradient_tensors": 99,
+          "finite": true,
+          "norm": 95.245532173842,
+          "nonzero_elements": 364
+        },
+        "dedode": {
+          "parameters": 8219297,
+          "gradient_tensors": 152,
+          "finite": true,
+          "norm": 0.0,
+          "nonzero_elements": 0
+        },
+        "vgg": {
+          "parameters": 10592064,
+          "gradient_tensors": 48,
+          "finite": true,
+          "norm": 0.0,
+          "nonzero_elements": 0
+        },
+        "mvt": {
+          "parameters": 87417088,
+          "gradient_tensors": 150,
+          "finite": true,
+          "norm": 34.60927956736556,
+          "nonzero_elements": 87272916
+        },
+        "dino": {
+          "parameters": 227564544,
+          "gradient_tensors": 0,
+          "finite": true,
+          "norm": 0.0,
+          "nonzero_elements": 0
+        },
+        "stage1_head_parameters": {
+          "parameters": 2957572,
+          "gradient_tensors": 0,
+          "finite": true,
+          "norm": 0.0,
+          "nonzero_elements": 0
+        }
+      },
+      "memory_allocated_bytes_after_backward": 2241582592,
+      "memory_reserved_bytes_after_backward": 11804868608
+    },
+    {
+      "step_before_optimizer": 1,
+      "loss": 3.874907970428467,
+      "forward_seconds": 0.2654847605153918,
+      "backward_seconds": 0.8893381617963314,
+      "shared_call_counts": {
+        "dino": 1,
+        "mvt": 1,
+        "vgg": 1,
+        "dedode_decode_calls": 1,
+        "dedode_steps": 4,
+        "dedode_scale1": 0
+      },
+      "active_scales": [
+        8,
+        4,
+        2
+      ],
+      "update_scale_schedule": [
+        8,
+        8,
+        4,
+        4,
+        2,
+        2
+      ],
+      "H_updates_require_grad": true,
+      "proposal_Q_requires_grad": true,
+      "accepted_updates": 6,
+      "gradients": {
+        "new_modules": {
+          "parameters": 1176712,
+          "gradient_tensors": 99,
+          "finite": true,
+          "norm": 95.13201973399083,
+          "nonzero_elements": 808531
+        },
+        "dedode": {
+          "parameters": 8219297,
+          "gradient_tensors": 152,
+          "finite": true,
+          "norm": 0.36196229893230275,
+          "nonzero_elements": 8194751
+        },
+        "vgg": {
+          "parameters": 10592064,
+          "gradient_tensors": 48,
+          "finite": true,
+          "norm": 0.4891980009403839,
+          "nonzero_elements": 10592051
+        },
+        "mvt": {
+          "parameters": 87417088,
+          "gradient_tensors": 150,
+          "finite": true,
+          "norm": 34.20810392470919,
+          "nonzero_elements": 87275571
+        },
+        "dino": {
+          "parameters": 227564544,
+          "gradient_tensors": 0,
+          "finite": true,
+          "norm": 0.0,
+          "nonzero_elements": 0
+        },
+        "stage1_head_parameters": {
+          "parameters": 2957572,
+          "gradient_tensors": 0,
+          "finite": true,
+          "norm": 0.0,
+          "nonzero_elements": 0
+        }
+      },
+      "memory_allocated_bytes_after_backward": 2241868288,
+      "memory_reserved_bytes_after_backward": 11836325888
+    }
+  ],
+  "assertions": {
+    "all_recorded_gradients_finite": true,
+    "dino_and_stage1_head_grad_none": true,
+    "shared_dino_mvt_once_per_step": true
+  },
+  "training_parameters": {
+    "profile": "joint",
+    "groups": {
+      "new_modules": {
+        "parameters": 1176712,
+        "trainable_parameters": 833222,
+        "tensor_count": 140,
+        "trainable_tensor_count": 99
+      },
+      "dedode": {
+        "parameters": 8219297,
+        "trainable_parameters": 8219297,
+        "tensor_count": 190,
+        "trainable_tensor_count": 190
+      },
+      "vgg": {
+        "parameters": 10592064,
+        "trainable_parameters": 10592064,
+        "tensor_count": 48,
+        "trainable_tensor_count": 48
+      },
+      "mvt": {
+        "parameters": 87417088,
+        "trainable_parameters": 87417088,
+        "tensor_count": 150,
+        "trainable_tensor_count": 150
+      },
+      "dino": {
+        "parameters": 227564544,
+        "trainable_parameters": 0,
+        "tensor_count": 259,
+        "trainable_tensor_count": 0
+      },
+      "stage1_head_parameters": {
+        "parameters": 2957572,
+        "trainable_parameters": 0,
+        "tensor_count": 10,
+        "trainable_tensor_count": 0
+      }
+    },
+    "total_trainable_parameters": 107061671,
+    "new_parameters": 1176712,
+    "dino_trainable_parameters": 0,
+    "stage1_head_trainable_parameters": 0
+  },
+  "build": {
+    "architecture_path": "/home/disk1/MHINet/configs/mhinet_mcnet_v1.2.json",
+    "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+    "mhir_revision": "mcnet_correlation_decoder_784_v1",
+    "mcnet_reference_commit": "cc03479689b3cf40f0c384954f338b434765c155",
+    "provider": {
+      "loma_root": "/home/disk1/LoMa",
+      "loma_checkpoint": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+      "dino_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "selected_stage1_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "loretta_loaded_keys": 807,
+      "locator": {
+        "source": "official_loretta_checkpoint",
+        "overridden": false
+      },
+      "descriptor_initialization": {
+        "migrated_tensors": 364,
+        "vgg_tensors": 84,
+        "decoder_tensors": 280,
+        "top_refiner_mapping": "LoMa-B scale 14 -> DINOv3 scale 16"
+      },
+      "ownership": {
+        "dino_wrapper_instances": 1,
+        "mvt_object_references": 1,
+        "stage1_head_contains_dino": 0,
+        "stage1_head_contains_mvt": 0,
+        "decoder_scales": [
+          "16",
+          "8",
+          "4",
+          "2",
+          "1"
+        ]
+      },
+      "legacy_training_wrappers_reused": false,
+      "safe_stage1_fitter": true
+    },
+    "training_parameters": {
+      "profile": "heads",
+      "groups": {
+        "new_modules": {
+          "parameters": 1176712,
+          "trainable_parameters": 833222,
+          "tensor_count": 140,
+          "trainable_tensor_count": 99
+        },
+        "dedode": {
+          "parameters": 8219297,
+          "trainable_parameters": 0,
+          "tensor_count": 190,
+          "trainable_tensor_count": 0
+        },
+        "vgg": {
+          "parameters": 10592064,
+          "trainable_parameters": 0,
+          "tensor_count": 48,
+          "trainable_tensor_count": 0
+        },
+        "mvt": {
+          "parameters": 87417088,
+          "trainable_parameters": 0,
+          "tensor_count": 150,
+          "trainable_tensor_count": 0
+        },
+        "dino": {
+          "parameters": 227564544,
+          "trainable_parameters": 0,
+          "tensor_count": 259,
+          "trainable_tensor_count": 0
+        },
+        "stage1_head_parameters": {
+          "parameters": 2957572,
+          "trainable_parameters": 0,
+          "tensor_count": 10,
+          "trainable_tensor_count": 0
+        }
+      },
+      "total_trainable_parameters": 833222,
+      "new_parameters": 1176712,
+      "dino_trainable_parameters": 0,
+      "stage1_head_trainable_parameters": 0
+    }
+  },
+  "note": "Single-pair contended-server engineering profile; timings are not a production benchmark. The mainline is six D8/D4/D2 updates; full joint is not inferred from a frozen-heads run."
+}

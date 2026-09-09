@@ -225,12 +225,15 @@ def run_audit(
     pair_index: int,
     scale: int,
     seed: int,
+    condition_index: int = 0,
     residual_bound_fraction: float = 0.5,
 ) -> dict[str, Any]:
     if scale not in RADII:
         raise ValueError(f"scale must be one of {tuple(RADII)}, got {scale}")
     if not 0.0 < residual_bound_fraction <= 1.0:
         raise ValueError("residual_bound_fraction must be in (0, 1]")
+    if condition_index < 0:
+        raise ValueError("condition_index must be non-negative")
     device = torch.device(runtime.device)
     dataset = HomographyPairDataset(
         runtime.data_root / "train/pairs.jsonl", max_pairs=pair_index + 1
@@ -247,7 +250,7 @@ def run_audit(
         )
         H0_cpu, residual = controlled_h0_from_ground_truth(
             sample["H_gt_norm"],
-            sample_index=0,
+            sample_index=condition_index,
             max_abs_residual_px=(
                 residual_bound_fraction * SCALE_SPECS[scale].max_delta_px
             ),
@@ -275,6 +278,7 @@ def run_audit(
         "pair_id": sample["pair_id"],
         "scale": scale,
         "seed": seed,
+        "condition_index": condition_index,
         "residual_bound_fraction": residual_bound_fraction,
         "maximum_declared_abs_residual_px": (
             residual_bound_fraction * SCALE_SPECS[scale].max_delta_px
@@ -299,6 +303,12 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--scale", type=int, default=8)
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument(
+        "--condition-index",
+        type=int,
+        default=0,
+        help="Controlled-H0 condition index; use the same index as tiny-overfit",
+    )
+    parser.add_argument(
         "--residual-bound-fraction",
         type=float,
         default=0.5,
@@ -315,6 +325,7 @@ def main(argv: list[str] | None = None) -> int:
         pair_index=args.pair_index,
         scale=args.scale,
         seed=args.seed,
+        condition_index=args.condition_index,
         residual_bound_fraction=args.residual_bound_fraction,
     )
     output.parent.mkdir(parents=True, exist_ok=True)

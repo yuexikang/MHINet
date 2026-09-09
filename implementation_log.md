@@ -575,6 +575,13 @@ diagnostic-only and is never used by formal training.
   invalid-H0 restoration, protocol-conflict, legacy-supplement and exact-state-
   digest regressions.  This is checkpoint/diagnostic engineering only; no new
   D1 learnability or validation result is claimed.
+- Checkpoint delta summaries now keep x/y coordinates separate and report the
+  fraction of controlled conditions improved by each update, preventing an
+  easy horizontal correction from hiding a vertical failure in one aggregate.
+  The real-correlation audit accepts an explicit `--condition-index` so the
+  exact horizontal- or vertical-dominant H0 conditions from tiny-overfit can be
+  reproduced.  Full-suite command unchanged; all 79 tests passed in 1.824
+  seconds.  No production forward, loss, precision or training rule changed.
 
 CUDA warns that `grid_sampler_2d_backward_cuda` and
 `adaptive_avg_pool2d_backward_cuda` have no deterministic implementation.

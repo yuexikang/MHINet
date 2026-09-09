@@ -331,6 +331,29 @@ def _summarize_delta_diagnostics(endpoint: Mapping[str, Any]) -> dict[str, Any]:
             (flat_desired[valid_cosine] * flat_delta[valid_cosine]).sum(dim=1)
             / cosine_denominator[valid_cosine]
         )
+        coordinate_axes: dict[str, Any] = {}
+        for coordinate_index, coordinate_name in enumerate(("x", "y")):
+            desired_coordinate = desired_before[..., coordinate_index]
+            delta_coordinate = delta[..., coordinate_index]
+            after_coordinate = desired_after[..., coordinate_index]
+            nonzero_target = desired_coordinate.abs() > 1e-6
+            sign_agreement = (
+                torch.sign(delta_coordinate[nonzero_target])
+                == torch.sign(desired_coordinate[nonzero_target])
+            ).float()
+            coordinate_axes[coordinate_name] = {
+                "desired_before_abs_px": _finite_stats(desired_coordinate.abs()),
+                "decoder_delta_abs_px": _finite_stats(delta_coordinate.abs()),
+                "delta_minus_desired_abs_px": _finite_stats(
+                    (delta_coordinate - desired_coordinate).abs()
+                ),
+                "desired_after_abs_px": _finite_stats(after_coordinate.abs()),
+                "delta_target_sign_agreement_fraction": (
+                    None
+                    if not sign_agreement.numel()
+                    else float(sign_agreement.mean().item())
+                ),
+            }
         summaries.append(
             {
                 "update_index": update_index,
@@ -346,7 +369,17 @@ def _summarize_delta_diagnostics(endpoint: Mapping[str, Any]) -> dict[str, Any]:
                     desired_before.abs().mean(dim=(1, 2))
                     - desired_after.abs().mean(dim=(1, 2))
                 ),
+                "improved_condition_fraction": float(
+                    (
+                        desired_after.abs().mean(dim=(1, 2))
+                        < desired_before.abs().mean(dim=(1, 2))
+                    )
+                    .float()
+                    .mean()
+                    .item()
+                ),
                 "delta_to_desired_cosine_per_condition": _finite_stats(cosine),
+                "coordinate_axes": coordinate_axes,
                 "tanh_saturation_fraction": _finite_stats(
                     torch.tensor(
                         [row["tanh_saturation_fraction"][update_index] for row in rows]

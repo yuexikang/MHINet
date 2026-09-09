@@ -9,6 +9,7 @@ from mhinet.tiny_checkpoint_audit import (
     _inspect_checkpoint_payload,
     _resolve_protocol,
     _state_dict_sha256,
+    _summarize_delta_diagnostics,
 )
 
 
@@ -150,6 +151,37 @@ class TinyCheckpointAuditTests(unittest.TestCase):
         self.assertEqual(
             _state_dict_sha256({"counter": torch.tensor(1)}),
             _state_dict_sha256({"counter": torch.tensor(1)}),
+        )
+
+    def test_delta_summary_keeps_x_and_y_failure_modes_separate(self) -> None:
+        endpoint = {
+            "per_pair": [
+                {
+                    "H0_corner_residual_px": [[2.0, -1.0]] * 4,
+                    "H_updates_corner_residual_px": [
+                        [[0.0, -1.0]] * 4,
+                        [[0.0, -1.0]] * 4,
+                    ],
+                    "delta_px": [[[2.0, 0.0]] * 4, [[0.0, 0.0]] * 4],
+                    "update_accepted": [True, True],
+                    "update_scale_schedule": [1, 1],
+                    "tanh_saturation_fraction": [0.0, 0.0],
+                    "supported_query_count": [100, 100],
+                    "condition_number": [2.0, 2.0],
+                }
+            ]
+        }
+        summary = _summarize_delta_diagnostics(endpoint)
+        first = summary["updates"][0]
+        self.assertEqual(first["coordinate_axes"]["x"]["desired_after_abs_px"]["mean"], 0.0)
+        self.assertEqual(first["coordinate_axes"]["y"]["desired_after_abs_px"]["mean"], 1.0)
+        self.assertEqual(
+            first["coordinate_axes"]["x"]["delta_target_sign_agreement_fraction"],
+            1.0,
+        )
+        self.assertEqual(
+            first["coordinate_axes"]["y"]["delta_target_sign_agreement_fraction"],
+            0.0,
         )
 
 

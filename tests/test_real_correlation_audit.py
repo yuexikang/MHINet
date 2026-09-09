@@ -4,10 +4,20 @@ import unittest
 
 import torch
 
-from mhinet.real_correlation_audit import _bf16_signal_diagnostics
+from mhinet.real_correlation_audit import _bf16_signal_diagnostics, run_audit
 
 
 class CorrelationPrecisionAuditTests(unittest.TestCase):
+    def test_condition_index_must_be_non_negative_before_resource_access(self) -> None:
+        with self.assertRaisesRegex(ValueError, "condition_index"):
+            run_audit(  # type: ignore[arg-type]
+                None,
+                pair_index=0,
+                scale=1,
+                seed=0,
+                condition_index=-1,
+            )
+
     def test_bf16_roundtrip_reports_ties_and_argmax_loss(self) -> None:
         scores = torch.tensor(
             [

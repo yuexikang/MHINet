@@ -648,6 +648,59 @@ diagnostic-only and is never used by formal training.
   `7,921,545,728/8,204,058,624` bytes.  This proves only that the x-dominant
   condition is individually learnable in either precision, not that D1 or P4
   passes.  Separate y-positive/y-negative one-condition jobs are in progress.
+- The full 32-condition D1 FP32 diagnostic launched from Git `e39d187`
+  completed all 256 optimizer steps.  Exact command:
+  `CUDA_VISIBLE_DEVICES=1 /root/miniconda3/envs/loma-repro/bin/python -u -m
+  mhinet.tiny_overfit --runtime configs/runtime_paths.server.json
+  --experiments D1 --sample-protocol one_pair_residuals --residual-profile
+  translation --precision fp32 --sample-count 32 --seed 0 --max-steps 256
+  --eval-interval 32 --threshold-mace-px 0.1 --residual-bound-fraction 1.0
+  --heartbeat-interval 8 --progress-checkpoint
+  outputs/tiny_overfit/d1_full_bound_fp32_256_progress.pt --output
+  artifacts/p4_tiny_s_d1_full_bound_fp32_diagnostic_256.json --overwrite`.
+  Its H0/H1/H2 mean MACE was `1.858605 -> 0.948720 -> 0.929889 px`;
+  the best sampled endpoint was `0.918012 px` at step 160.  It had zero
+  failures/rejections but missed the registered `<0.1 px` threshold.  Training
+  took `3310.370 s`, with peak allocated/reserved CUDA memory
+  `7,921,545,728/8,204,058,624` bytes.  Artifact: 101,431 bytes, SHA256
+  `8345c778c5a8df086b62131dd1f2d2e6b6db49a7a16214347359457a787fb405`;
+  final checkpoint: 16,252,945 bytes, SHA256
+  `6b5820e86c370cac9c8320ce1232230186a41a8bfd8d8b6c422ac66d10be729d`.
+  FP32 therefore does not explain or fix the 32-condition D1 plateau.
+- The condition-2 y-positive and condition-14 y-negative one-sample BF16
+  diagnostics launched from Git `b50ef2e` also completed 128 optimizer steps.
+  They used the same D1 full-bound command as the earlier one-condition runs,
+  with `--condition-index-offset 2` on GPU2 or
+  `--condition-index-offset 14` on GPU3 and their separately recorded
+  progress/output paths.  Condition 2 moved
+  `1.602059 -> 0.810867 -> 0.023410 px`; condition 14 moved
+  `1.404833 -> 0.699856 -> 0.011812 px`.  Both had zero failure/rejection.
+  The top-level statuses correctly remain `failed` because each has only one
+  sample and cannot satisfy the 32-condition gate.  Artifact bytes/SHA256 are
+  `52,267`/`b43c45918818130b08db47253751a2d18fdd12c39b81033fd844bc53564e3d23`
+  and
+  `52,112`/`7bafe83bce9f426d04c0ba59ad2abf8239e08543447d507173dc277db8d7a152`.
+  Final-checkpoint SHA256 values are
+  `5bf6ea1726f60340784165379225a971d857e40eb796aaf949dfc32f0b501424`
+  and
+  `aad9fea00bee55000049d696f0694995e6cad9081512d3e99d3f3e54e8e81fdb`.
+  Training elapsed was `1486.101/1480.555 s`; each run used
+  `7,138,167,296/7,411,335,168` peak allocated/reserved bytes.  Together with
+  condition 0, these results show that both horizontal and vertical residuals
+  are individually learnable; the unresolved failure is joint coverage or
+  multi-condition optimization, not a demonstrated missing vertical signal.
+- A registered 32-condition BF16/SWA D1 run with a 2,000-step budget started
+  afterward but did **not** finish.  The process is no longer present and its
+  stderr ends after a normal heartbeat without a Python exception.  The last
+  atomic progress checkpoint is a restricted-loadable `tiny_progress` at step
+  184 (19,389,293 bytes, SHA256
+  `b046f763ea844087ec3803ecce24a347e11de1056cdcc27648b65b179f17f38e`);
+  the last completed evaluation was step 160 at `0.925703 px`.  SWA had not
+  begun because its configured start is step 1536.  The partial running JSON is
+  deliberately not committed as final evidence.  The checkpoint records the
+  exact 2,000-step signature and resource identities, so it can be considered
+  for strict resume after the unexplained external termination is accounted
+  for; it is not a D1 pass.
 
 CUDA warns that `grid_sampler_2d_backward_cuda` and
 `adaptive_avg_pool2d_backward_cuda` have no deterministic implementation.

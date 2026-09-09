@@ -1,0 +1,1698 @@
+{
+  "gate": "P4_TINY_S_TINY_8",
+  "status": "failed",
+  "protocol": {
+    "training_revision": "1.2",
+    "loss": "uniform proposal-corner coordinate L1",
+    "FGO": false,
+    "extra_losses": false,
+    "planar_head": false,
+    "precision": "BF16 adapter/CNN autocast, FP32 correlation/geometry",
+    "deterministic_algorithms": "enabled_warn_only",
+    "tiny_weight_average_start_step": null,
+    "tiny_progress_checkpoint_interval": 8,
+    "tiny_progress_checkpoint_role": "raw optimizer boundary",
+    "condition_index_offset": 2
+  },
+  "runtime_config": "/home/disk1/MHINet/configs/runtime_paths.server.json",
+  "device": "cuda:0",
+  "build": {
+    "architecture_path": "/home/disk1/MHINet/MHINet_server_handoff_v1.2/configs/mhinet_v1.json",
+    "architecture_sha256": "4a859f413ee4be59acb1dc6c0cf189e80b8f4e7b3f54dc9f117acd1ac5cfe128",
+    "provider": {
+      "loma_root": "/home/disk1/LoMa",
+      "loma_checkpoint": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+      "dino_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "selected_stage1_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "loretta_loaded_keys": 807,
+      "locator": {
+        "source": "official_loretta_checkpoint",
+        "overridden": false
+      },
+      "descriptor_initialization": {
+        "migrated_tensors": 364,
+        "vgg_tensors": 84,
+        "decoder_tensors": 280,
+        "top_refiner_mapping": "LoMa-B scale 14 -> DINOv3 scale 16"
+      },
+      "ownership": {
+        "dino_wrapper_instances": 1,
+        "mvt_object_references": 1,
+        "stage1_head_contains_dino": 0,
+        "stage1_head_contains_mvt": 0,
+        "decoder_scales": [
+          "16",
+          "8",
+          "4",
+          "2",
+          "1"
+        ]
+      },
+      "legacy_training_wrappers_reused": false,
+      "safe_stage1_fitter": true
+    },
+    "training_parameters": {
+      "profile": "heads",
+      "groups": {
+        "new_modules": {
+          "parameters": 2544160,
+          "trainable_parameters": 2544160,
+          "tensor_count": 158,
+          "trainable_tensor_count": 158
+        },
+        "dedode": {
+          "parameters": 8219297,
+          "trainable_parameters": 0,
+          "tensor_count": 190,
+          "trainable_tensor_count": 0
+        },
+        "vgg": {
+          "parameters": 10592064,
+          "trainable_parameters": 0,
+          "tensor_count": 48,
+          "trainable_tensor_count": 0
+        },
+        "mvt": {
+          "parameters": 87417088,
+          "trainable_parameters": 0,
+          "tensor_count": 150,
+          "trainable_tensor_count": 0
+        },
+        "dino": {
+          "parameters": 227564544,
+          "trainable_parameters": 0,
+          "tensor_count": 259,
+          "trainable_tensor_count": 0
+        },
+        "stage1_head_parameters": {
+          "parameters": 2957572,
+          "trainable_parameters": 0,
+          "tensor_count": 10,
+          "trainable_tensor_count": 0
+        }
+      },
+      "total_trainable_parameters": 2544160,
+      "new_parameters": 2544160,
+      "dino_trainable_parameters": 0,
+      "stage1_head_trainable_parameters": 0
+    }
+  },
+  "cache": {
+    "source": "leakage-safe train split; exact single-image homography pairs",
+    "manifest": "/home/disk1/Data/datasets/GoogleEarth_scale_pairs/train/pairs.jsonl",
+    "manifest_sha256": "3eed3d3d425caf8465afb5121dfd85960f00932fccc343f37187e14ce27d499c",
+    "sample_count": 1,
+    "pair_ids": [
+      "current__34.801100126.376330_pair0"
+    ],
+    "parent_groups": [
+      "parent:current/Train/34.801100126.376330.jpg"
+    ],
+    "geo_groups": [
+      "geo_0.01:3480:12637"
+    ],
+    "validation_geo_groups_used_only_for_exclusion": 190,
+    "test_used": false,
+    "provider_prefix_computed": [
+      8,
+      4,
+      2,
+      1
+    ],
+    "stored_scales": [
+      1
+    ],
+    "feature_shapes": {
+      "1": [
+        1,
+        2,
+        256,
+        784,
+        784
+      ]
+    },
+    "feature_dtypes": {
+      "1": "torch.bfloat16"
+    },
+    "cache_bytes_cpu": 629407744,
+    "shared_call_counts_total": {
+      "dino": 1,
+      "mvt": 1,
+      "vgg": 1,
+      "dedode_full_pyramid": 1
+    },
+    "shared_once_per_pair": true,
+    "elapsed_seconds": 0.6926757711917162,
+    "pairs_per_second": 1.4436768854778144,
+    "peak_allocated_bytes": 10794867712,
+    "peak_reserved_bytes": 13220446208,
+    "sample_protocol": "one_pair_residuals",
+    "unique_image_pair_count": 1,
+    "diagnostic_sample_count": 1,
+    "diagnostic_sample_definition": "one exact image pair with 1 deterministic locally observable H0 residuals",
+    "condition_index_offset": 2
+  },
+  "experiments": [
+    {
+      "name": "TINY-S-D1",
+      "status": "failed",
+      "active_scales": [
+        1
+      ],
+      "updates": 2,
+      "seed": 0,
+      "sample_count": 1,
+      "sample_protocol": "one_pair_residuals",
+      "residual_profile": "translation",
+      "precision": "bf16",
+      "primary_readout": "raw_parameters",
+      "weight_averaging": {
+        "enabled": false,
+        "start_optimizer_step": null,
+        "averaged_snapshots": 0,
+        "applied_to_primary_readout": false,
+        "training_optimizer_unchanged": true,
+        "formal_training_enabled": false
+      },
+      "frozen_feature_residency": "one shared GPU copy for repeated exact image pair",
+      "optimizer": {
+        "name": "AdamW",
+        "learning_rate": 0.001,
+        "weight_decay": 0.0,
+        "scheduler": null,
+        "batch_size": 1,
+        "gradient_accumulation": 4,
+        "effective_batch_size": 4,
+        "gradient_clip_norm": 1.0,
+        "optimizer_steps": 128,
+        "maximum_steps": 128
+      },
+      "controlled_H0": {
+        "source": "GT plus deterministic diagnostic-only corner residual",
+        "profile": "translation",
+        "formal_training_injection": false,
+        "bound_fraction_of_coarsest_active_decoder": 1.0,
+        "condition_index_offset": 2,
+        "condition_indices": [
+          2
+        ],
+        "maximum_declared_abs_residual_px": 2.0,
+        "actual_abs_residual_px": {
+          "mean": 0.8411159515380859,
+          "median": 0.082275390625,
+          "p90": 1.600012183189392,
+          "max": 1.60009765625
+        }
+      },
+      "criterion": {
+        "definition": "32-sample primary-readout mean final MACE < threshold, zero failed pairs, zero rejected updates",
+        "threshold_mace_px": 0.1,
+        "met": false
+      },
+      "initial": {
+        "trajectory_mean_mace_px": [
+          1.6020886898040771,
+          1.6020591259002686,
+          1.6020591259002686
+        ],
+        "trajectory_median_mace_px": [
+          1.6020886898040771,
+          1.6020591259002686,
+          1.6020591259002686
+        ],
+        "H0_mace_px": {
+          "mean": 1.6020886898040771,
+          "median": 1.6020886898040771,
+          "p90": 1.6020886898040771,
+          "max": 1.6020886898040771
+        },
+        "H_final_mace_px": {
+          "mean": 1.6020591259002686,
+          "median": 1.6020591259002686,
+          "p90": 1.6020591259002686,
+          "max": 1.6020591259002686
+        },
+        "failed_pairs": 0,
+        "failure_rate": 0.0,
+        "rejected_updates": 0,
+        "rejected_update_rate": 0.0,
+        "elapsed_seconds": 0.580475402995944,
+        "latency_ms_per_pair_single_pass": 580.475402995944,
+        "per_pair": [
+          {
+            "diagnostic_sample_index": 0,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              1.6020886898040771,
+              1.6020591259002686,
+              1.6020591259002686
+            ],
+            "H0_mace_px": 1.6020886898040771,
+            "H_updates_mace_px": [
+              1.6020591259002686,
+              1.6020591259002686
+            ],
+            "H_final_mace_px": 1.6020591259002686,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ],
+            "decoder_output_finite": [
+              true,
+              true
+            ],
+            "H0_corner_residual_px": [
+              [
+                0.082244873046875,
+                1.599853515625
+              ],
+              [
+                0.082275390625,
+                1.5999755859375
+              ],
+              [
+                0.0822296142578125,
+                1.5999755859375
+              ],
+              [
+                0.082275390625,
+                1.60009765625
+              ]
+            ],
+            "H_updates_corner_residual_px": [
+              [
+                [
+                  0.082244873046875,
+                  1.59979248046875
+                ],
+                [
+                  0.082275390625,
+                  1.5999755859375
+                ],
+                [
+                  0.082244873046875,
+                  1.5999755859375
+                ],
+                [
+                  0.08233642578125,
+                  1.60003662109375
+                ]
+              ],
+              [
+                [
+                  0.082244873046875,
+                  1.59979248046875
+                ],
+                [
+                  0.082275390625,
+                  1.5999755859375
+                ],
+                [
+                  0.082244873046875,
+                  1.5999755859375
+                ],
+                [
+                  0.08233642578125,
+                  1.60003662109375
+                ]
+              ]
+            ],
+            "H_updates_corner_projection_valid": [
+              [
+                true,
+                true,
+                true,
+                true
+              ],
+              [
+                true,
+                true,
+                true,
+                true
+              ]
+            ],
+            "delta_px": [
+              [
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0
+                ]
+              ]
+            ],
+            "tanh_saturation_fraction": [
+              0.0,
+              0.0
+            ],
+            "supported_query_count": [
+              308749,
+              308749
+            ],
+            "condition_number": [
+              3.4426565170288086,
+              3.4426565170288086
+            ],
+            "solve_info": [
+              0,
+              0
+            ],
+            "H0_norm": [
+              [
+                1.0634634494781494,
+                -0.0029633890371769667,
+                0.544228196144104
+              ],
+              [
+                0.010494505055248737,
+                1.0585157871246338,
+                -0.5711478590965271
+              ],
+              [
+                -0.015639986842870712,
+                0.016515765339136124,
+                1.0
+              ]
+            ],
+            "H_updates_norm": [
+              [
+                [
+                  1.0634634494781494,
+                  -0.0029633890371769667,
+                  0.5442281365394592
+                ],
+                [
+                  0.010494491085410118,
+                  1.0585157871246338,
+                  -0.5711477994918823
+                ],
+                [
+                  -0.01564004272222519,
+                  0.016515767201781273,
+                  1.0
+                ]
+              ],
+              [
+                [
+                  1.0634634494781494,
+                  -0.0029633890371769667,
+                  0.5442281365394592
+                ],
+                [
+                  0.010494491085410118,
+                  1.0585157871246338,
+                  -0.5711477994918823
+                ],
+                [
+                  -0.01564004272222519,
+                  0.016515767201781273,
+                  1.0
+                ]
+              ]
+            ],
+            "H_final_norm": [
+              [
+                1.0634634494781494,
+                -0.0029633890371769667,
+                0.5442281365394592
+              ],
+              [
+                0.010494491085410118,
+                1.0585157871246338,
+                -0.5711477994918823
+              ],
+              [
+                -0.01564004272222519,
+                0.016515767201781273,
+                1.0
+              ]
+            ],
+            "update_scale_schedule": [
+              1,
+              1
+            ],
+            "cnn_precision": "bf16_autocast"
+          }
+        ]
+      },
+      "raw_final": {
+        "trajectory_mean_mace_px": [
+          1.6020886898040771,
+          0.8108667135238647,
+          0.023410402238368988
+        ],
+        "trajectory_median_mace_px": [
+          1.6020886898040771,
+          0.8108667135238647,
+          0.023410402238368988
+        ],
+        "H0_mace_px": {
+          "mean": 1.6020886898040771,
+          "median": 1.6020886898040771,
+          "p90": 1.6020886898040771,
+          "max": 1.6020886898040771
+        },
+        "H_final_mace_px": {
+          "mean": 0.023410402238368988,
+          "median": 0.023410402238368988,
+          "p90": 0.023410402238368988,
+          "max": 0.023410402238368988
+        },
+        "failed_pairs": 0,
+        "failure_rate": 0.0,
+        "rejected_updates": 0,
+        "rejected_update_rate": 0.0,
+        "elapsed_seconds": 0.3954608477652073,
+        "latency_ms_per_pair_single_pass": 395.4608477652073,
+        "per_pair": [
+          {
+            "diagnostic_sample_index": 0,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              1.6020886898040771,
+              0.8108667135238647,
+              0.023410402238368988
+            ],
+            "H0_mace_px": 1.6020886898040771,
+            "H_updates_mace_px": [
+              0.8108667135238647,
+              0.023410402238368988
+            ],
+            "H_final_mace_px": 0.023410402238368988,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ],
+            "decoder_output_finite": [
+              true,
+              true
+            ],
+            "H0_corner_residual_px": [
+              [
+                0.082244873046875,
+                1.599853515625
+              ],
+              [
+                0.082275390625,
+                1.5999755859375
+              ],
+              [
+                0.0822296142578125,
+                1.5999755859375
+              ],
+              [
+                0.082275390625,
+                1.60009765625
+              ]
+            ],
+            "H_updates_corner_residual_px": [
+              [
+                [
+                  0.0385284423828125,
+                  0.79913330078125
+                ],
+                [
+                  0.0400390625,
+                  0.7991943359375
+                ],
+                [
+                  0.039459228515625,
+                  0.8382568359375
+                ],
+                [
+                  0.03851318359375,
+                  0.8031005859375
+                ]
+              ],
+              [
+                [
+                  -0.0051727294921875,
+                  0.00225830078125
+                ],
+                [
+                  -0.002197265625,
+                  0.00238037109375
+                ],
+                [
+                  -0.0032501220703125,
+                  0.0765380859375
+                ],
+                [
+                  -0.00518798828125,
+                  0.00628662109375
+                ]
+              ]
+            ],
+            "H_updates_corner_projection_valid": [
+              [
+                true,
+                true,
+                true,
+                true
+              ],
+              [
+                true,
+                true,
+                true,
+                true
+              ]
+            ],
+            "delta_px": [
+              [
+                [
+                  0.043701171875,
+                  0.80078125
+                ],
+                [
+                  0.042236328125,
+                  0.80078125
+                ],
+                [
+                  0.042724609375,
+                  0.76171875
+                ],
+                [
+                  0.043701171875,
+                  0.796875
+                ]
+              ],
+              [
+                [
+                  0.043701171875,
+                  0.796875
+                ],
+                [
+                  0.042236328125,
+                  0.796875
+                ],
+                [
+                  0.042724609375,
+                  0.76171875
+                ],
+                [
+                  0.043701171875,
+                  0.796875
+                ]
+              ]
+            ],
+            "tanh_saturation_fraction": [
+              0.0,
+              0.0
+            ],
+            "supported_query_count": [
+              308749,
+              309143
+            ],
+            "condition_number": [
+              3.4403443336486816,
+              3.438042163848877
+            ],
+            "solve_info": [
+              0,
+              0
+            ],
+            "H0_norm": [
+              [
+                1.0634634494781494,
+                -0.0029633890371769667,
+                0.544228196144104
+              ],
+              [
+                0.010494505055248737,
+                1.0585157871246338,
+                -0.5711478590965271
+              ],
+              [
+                -0.015639986842870712,
+                0.016515765339136124,
+                1.0
+              ]
+            ],
+            "H_updates_norm": [
+              [
+                [
+                  1.0634492635726929,
+                  -0.0029618372209370136,
+                  0.5443148612976074
+                ],
+                [
+                  0.010498660616576672,
+                  1.0585219860076904,
+                  -0.5691350698471069
+                ],
+                [
+                  -0.01566181518137455,
+                  0.016514072194695473,
+                  1.0
+                ]
+              ],
+              [
+                [
+                  1.0634350776672363,
+                  -0.0029602856375277042,
+                  0.5444015860557556
+                ],
+                [
+                  0.010502585209906101,
+                  1.058532953262329,
+                  -0.5671271681785583
+                ],
+                [
+                  -0.015683520585298538,
+                  0.01651240698993206,
+                  1.0
+                ]
+              ]
+            ],
+            "H_final_norm": [
+              [
+                1.0634350776672363,
+                -0.0029602856375277042,
+                0.5444015860557556
+              ],
+              [
+                0.010502585209906101,
+                1.058532953262329,
+                -0.5671271681785583
+              ],
+              [
+                -0.015683520585298538,
+                0.01651240698993206,
+                1.0
+              ]
+            ],
+            "update_scale_schedule": [
+              1,
+              1
+            ],
+            "cnn_precision": "bf16_autocast"
+          }
+        ]
+      },
+      "final": {
+        "trajectory_mean_mace_px": [
+          1.6020886898040771,
+          0.8108667135238647,
+          0.023410402238368988
+        ],
+        "trajectory_median_mace_px": [
+          1.6020886898040771,
+          0.8108667135238647,
+          0.023410402238368988
+        ],
+        "H0_mace_px": {
+          "mean": 1.6020886898040771,
+          "median": 1.6020886898040771,
+          "p90": 1.6020886898040771,
+          "max": 1.6020886898040771
+        },
+        "H_final_mace_px": {
+          "mean": 0.023410402238368988,
+          "median": 0.023410402238368988,
+          "p90": 0.023410402238368988,
+          "max": 0.023410402238368988
+        },
+        "failed_pairs": 0,
+        "failure_rate": 0.0,
+        "rejected_updates": 0,
+        "rejected_update_rate": 0.0,
+        "elapsed_seconds": 0.3954608477652073,
+        "latency_ms_per_pair_single_pass": 395.4608477652073,
+        "per_pair": [
+          {
+            "diagnostic_sample_index": 0,
+            "pair_id": "current__34.801100126.376330_pair0",
+            "trajectory_mace_px": [
+              1.6020886898040771,
+              0.8108667135238647,
+              0.023410402238368988
+            ],
+            "H0_mace_px": 1.6020886898040771,
+            "H_updates_mace_px": [
+              0.8108667135238647,
+              0.023410402238368988
+            ],
+            "H_final_mace_px": 0.023410402238368988,
+            "update_accepted": [
+              true,
+              true
+            ],
+            "failure_reason_codes": [
+              0,
+              0
+            ],
+            "decoder_output_finite": [
+              true,
+              true
+            ],
+            "H0_corner_residual_px": [
+              [
+                0.082244873046875,
+                1.599853515625
+              ],
+              [
+                0.082275390625,
+                1.5999755859375
+              ],
+              [
+                0.0822296142578125,
+                1.5999755859375
+              ],
+              [
+                0.082275390625,
+                1.60009765625
+              ]
+            ],
+            "H_updates_corner_residual_px": [
+              [
+                [
+                  0.0385284423828125,
+                  0.79913330078125
+                ],
+                [
+                  0.0400390625,
+                  0.7991943359375
+                ],
+                [
+                  0.039459228515625,
+                  0.8382568359375
+                ],
+                [
+                  0.03851318359375,
+                  0.8031005859375
+                ]
+              ],
+              [
+                [
+                  -0.0051727294921875,
+                  0.00225830078125
+                ],
+                [
+                  -0.002197265625,
+                  0.00238037109375
+                ],
+                [
+                  -0.0032501220703125,
+                  0.0765380859375
+                ],
+                [
+                  -0.00518798828125,
+                  0.00628662109375
+                ]
+              ]
+            ],
+            "H_updates_corner_projection_valid": [
+              [
+                true,
+                true,
+                true,
+                true
+              ],
+              [
+                true,
+                true,
+                true,
+                true
+              ]
+            ],
+            "delta_px": [
+              [
+                [
+                  0.043701171875,
+                  0.80078125
+                ],
+                [
+                  0.042236328125,
+                  0.80078125
+                ],
+                [
+                  0.042724609375,
+                  0.76171875
+                ],
+                [
+                  0.043701171875,
+                  0.796875
+                ]
+              ],
+              [
+                [
+                  0.043701171875,
+                  0.796875
+                ],
+                [
+                  0.042236328125,
+                  0.796875
+                ],
+                [
+                  0.042724609375,
+                  0.76171875
+                ],
+                [
+                  0.043701171875,
+                  0.796875
+                ]
+              ]
+            ],
+            "tanh_saturation_fraction": [
+              0.0,
+              0.0
+            ],
+            "supported_query_count": [
+              308749,
+              309143
+            ],
+            "condition_number": [
+              3.4403443336486816,
+              3.438042163848877
+            ],
+            "solve_info": [
+              0,
+              0
+            ],
+            "H0_norm": [
+              [
+                1.0634634494781494,
+                -0.0029633890371769667,
+                0.544228196144104
+              ],
+              [
+                0.010494505055248737,
+                1.0585157871246338,
+                -0.5711478590965271
+              ],
+              [
+                -0.015639986842870712,
+                0.016515765339136124,
+                1.0
+              ]
+            ],
+            "H_updates_norm": [
+              [
+                [
+                  1.0634492635726929,
+                  -0.0029618372209370136,
+                  0.5443148612976074
+                ],
+                [
+                  0.010498660616576672,
+                  1.0585219860076904,
+                  -0.5691350698471069
+                ],
+                [
+                  -0.01566181518137455,
+                  0.016514072194695473,
+                  1.0
+                ]
+              ],
+              [
+                [
+                  1.0634350776672363,
+                  -0.0029602856375277042,
+                  0.5444015860557556
+                ],
+                [
+                  0.010502585209906101,
+                  1.058532953262329,
+                  -0.5671271681785583
+                ],
+                [
+                  -0.015683520585298538,
+                  0.01651240698993206,
+                  1.0
+                ]
+              ]
+            ],
+            "H_final_norm": [
+              [
+                1.0634350776672363,
+                -0.0029602856375277042,
+                0.5444015860557556
+              ],
+              [
+                0.010502585209906101,
+                1.058532953262329,
+                -0.5671271681785583
+              ],
+              [
+                -0.015683520585298538,
+                0.01651240698993206,
+                1.0
+              ]
+            ],
+            "update_scale_schedule": [
+              1,
+              1
+            ],
+            "cnn_precision": "bf16_autocast"
+          }
+        ]
+      },
+      "initial_to_final_mean_mace_improvement_px": 1.5786487236618996,
+      "history": [
+        {
+          "optimizer_step": 0,
+          "raw_metrics": {
+            "trajectory_mean_mace_px": [
+              1.6020886898040771,
+              1.6020591259002686,
+              1.6020591259002686
+            ],
+            "trajectory_median_mace_px": [
+              1.6020886898040771,
+              1.6020591259002686,
+              1.6020591259002686
+            ],
+            "H0_mace_px": {
+              "mean": 1.6020886898040771,
+              "median": 1.6020886898040771,
+              "p90": 1.6020886898040771,
+              "max": 1.6020886898040771
+            },
+            "H_final_mace_px": {
+              "mean": 1.6020591259002686,
+              "median": 1.6020591259002686,
+              "p90": 1.6020591259002686,
+              "max": 1.6020591259002686
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 0.580475402995944,
+            "latency_ms_per_pair_single_pass": 580.475402995944
+          },
+          "weight_averaged_metrics": null,
+          "primary_metrics": {
+            "trajectory_mean_mace_px": [
+              1.6020886898040771,
+              1.6020591259002686,
+              1.6020591259002686
+            ],
+            "trajectory_median_mace_px": [
+              1.6020886898040771,
+              1.6020591259002686,
+              1.6020591259002686
+            ],
+            "H0_mace_px": {
+              "mean": 1.6020886898040771,
+              "median": 1.6020886898040771,
+              "p90": 1.6020886898040771,
+              "max": 1.6020886898040771
+            },
+            "H_final_mace_px": {
+              "mean": 1.6020591259002686,
+              "median": 1.6020591259002686,
+              "p90": 1.6020591259002686,
+              "max": 1.6020591259002686
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 0.580475402995944,
+            "latency_ms_per_pair_single_pass": 580.475402995944
+          },
+          "weight_average_count": 0
+        },
+        {
+          "optimizer_step": 16,
+          "raw_metrics": {
+            "trajectory_mean_mace_px": [
+              1.6020886898040771,
+              0.7955357432365417,
+              0.04064948856830597
+            ],
+            "trajectory_median_mace_px": [
+              1.6020886898040771,
+              0.7955357432365417,
+              0.04064948856830597
+            ],
+            "H0_mace_px": {
+              "mean": 1.6020886898040771,
+              "median": 1.6020886898040771,
+              "p90": 1.6020886898040771,
+              "max": 1.6020886898040771
+            },
+            "H_final_mace_px": {
+              "mean": 0.04064948856830597,
+              "median": 0.04064948856830597,
+              "p90": 0.04064948856830597,
+              "max": 0.04064948856830597
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 0.39709879737347364,
+            "latency_ms_per_pair_single_pass": 397.09879737347364
+          },
+          "weight_averaged_metrics": null,
+          "primary_metrics": {
+            "trajectory_mean_mace_px": [
+              1.6020886898040771,
+              0.7955357432365417,
+              0.04064948856830597
+            ],
+            "trajectory_median_mace_px": [
+              1.6020886898040771,
+              0.7955357432365417,
+              0.04064948856830597
+            ],
+            "H0_mace_px": {
+              "mean": 1.6020886898040771,
+              "median": 1.6020886898040771,
+              "p90": 1.6020886898040771,
+              "max": 1.6020886898040771
+            },
+            "H_final_mace_px": {
+              "mean": 0.04064948856830597,
+              "median": 0.04064948856830597,
+              "p90": 0.04064948856830597,
+              "max": 0.04064948856830597
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 0.39709879737347364,
+            "latency_ms_per_pair_single_pass": 397.09879737347364
+          },
+          "weight_average_count": 0
+        },
+        {
+          "optimizer_step": 32,
+          "raw_metrics": {
+            "trajectory_mean_mace_px": [
+              1.6020886898040771,
+              0.7796854376792908,
+              0.16624484956264496
+            ],
+            "trajectory_median_mace_px": [
+              1.6020886898040771,
+              0.7796854376792908,
+              0.16624484956264496
+            ],
+            "H0_mace_px": {
+              "mean": 1.6020886898040771,
+              "median": 1.6020886898040771,
+              "p90": 1.6020886898040771,
+              "max": 1.6020886898040771
+            },
+            "H_final_mace_px": {
+              "mean": 0.16624484956264496,
+              "median": 0.16624484956264496,
+              "p90": 0.16624484956264496,
+              "max": 0.16624484956264496
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 0.3984658485278487,
+            "latency_ms_per_pair_single_pass": 398.4658485278487
+          },
+          "weight_averaged_metrics": null,
+          "primary_metrics": {
+            "trajectory_mean_mace_px": [
+              1.6020886898040771,
+              0.7796854376792908,
+              0.16624484956264496
+            ],
+            "trajectory_median_mace_px": [
+              1.6020886898040771,
+              0.7796854376792908,
+              0.16624484956264496
+            ],
+            "H0_mace_px": {
+              "mean": 1.6020886898040771,
+              "median": 1.6020886898040771,
+              "p90": 1.6020886898040771,
+              "max": 1.6020886898040771
+            },
+            "H_final_mace_px": {
+              "mean": 0.16624484956264496,
+              "median": 0.16624484956264496,
+              "p90": 0.16624484956264496,
+              "max": 0.16624484956264496
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 0.3984658485278487,
+            "latency_ms_per_pair_single_pass": 398.4658485278487
+          },
+          "weight_average_count": 0
+        },
+        {
+          "optimizer_step": 48,
+          "raw_metrics": {
+            "trajectory_mean_mace_px": [
+              1.6020886898040771,
+              0.8197296857833862,
+              0.0695175901055336
+            ],
+            "trajectory_median_mace_px": [
+              1.6020886898040771,
+              0.8197296857833862,
+              0.0695175901055336
+            ],
+            "H0_mace_px": {
+              "mean": 1.6020886898040771,
+              "median": 1.6020886898040771,
+              "p90": 1.6020886898040771,
+              "max": 1.6020886898040771
+            },
+            "H_final_mace_px": {
+              "mean": 0.0695175901055336,
+              "median": 0.0695175901055336,
+              "p90": 0.0695175901055336,
+              "max": 0.0695175901055336
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 0.40332629159092903,
+            "latency_ms_per_pair_single_pass": 403.32629159092903
+          },
+          "weight_averaged_metrics": null,
+          "primary_metrics": {
+            "trajectory_mean_mace_px": [
+              1.6020886898040771,
+              0.8197296857833862,
+              0.0695175901055336
+            ],
+            "trajectory_median_mace_px": [
+              1.6020886898040771,
+              0.8197296857833862,
+              0.0695175901055336
+            ],
+            "H0_mace_px": {
+              "mean": 1.6020886898040771,
+              "median": 1.6020886898040771,
+              "p90": 1.6020886898040771,
+              "max": 1.6020886898040771
+            },
+            "H_final_mace_px": {
+              "mean": 0.0695175901055336,
+              "median": 0.0695175901055336,
+              "p90": 0.0695175901055336,
+              "max": 0.0695175901055336
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 0.40332629159092903,
+            "latency_ms_per_pair_single_pass": 403.32629159092903
+          },
+          "weight_average_count": 0
+        },
+        {
+          "optimizer_step": 64,
+          "raw_metrics": {
+            "trajectory_mean_mace_px": [
+              1.6020886898040771,
+              0.799211323261261,
+              0.041190557181835175
+            ],
+            "trajectory_median_mace_px": [
+              1.6020886898040771,
+              0.799211323261261,
+              0.041190557181835175
+            ],
+            "H0_mace_px": {
+              "mean": 1.6020886898040771,
+              "median": 1.6020886898040771,
+              "p90": 1.6020886898040771,
+              "max": 1.6020886898040771
+            },
+            "H_final_mace_px": {
+              "mean": 0.041190557181835175,
+              "median": 0.041190557181835175,
+              "p90": 0.041190557181835175,
+              "max": 0.041190557181835175
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 0.3954624906182289,
+            "latency_ms_per_pair_single_pass": 395.4624906182289
+          },
+          "weight_averaged_metrics": null,
+          "primary_metrics": {
+            "trajectory_mean_mace_px": [
+              1.6020886898040771,
+              0.799211323261261,
+              0.041190557181835175
+            ],
+            "trajectory_median_mace_px": [
+              1.6020886898040771,
+              0.799211323261261,
+              0.041190557181835175
+            ],
+            "H0_mace_px": {
+              "mean": 1.6020886898040771,
+              "median": 1.6020886898040771,
+              "p90": 1.6020886898040771,
+              "max": 1.6020886898040771
+            },
+            "H_final_mace_px": {
+              "mean": 0.041190557181835175,
+              "median": 0.041190557181835175,
+              "p90": 0.041190557181835175,
+              "max": 0.041190557181835175
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 0.3954624906182289,
+            "latency_ms_per_pair_single_pass": 395.4624906182289
+          },
+          "weight_average_count": 0
+        },
+        {
+          "optimizer_step": 80,
+          "raw_metrics": {
+            "trajectory_mean_mace_px": [
+              1.6020886898040771,
+              0.8332276940345764,
+              0.06562775373458862
+            ],
+            "trajectory_median_mace_px": [
+              1.6020886898040771,
+              0.8332276940345764,
+              0.06562775373458862
+            ],
+            "H0_mace_px": {
+              "mean": 1.6020886898040771,
+              "median": 1.6020886898040771,
+              "p90": 1.6020886898040771,
+              "max": 1.6020886898040771
+            },
+            "H_final_mace_px": {
+              "mean": 0.06562775373458862,
+              "median": 0.06562775373458862,
+              "p90": 0.06562775373458862,
+              "max": 0.06562775373458862
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 0.3924964228644967,
+            "latency_ms_per_pair_single_pass": 392.4964228644967
+          },
+          "weight_averaged_metrics": null,
+          "primary_metrics": {
+            "trajectory_mean_mace_px": [
+              1.6020886898040771,
+              0.8332276940345764,
+              0.06562775373458862
+            ],
+            "trajectory_median_mace_px": [
+              1.6020886898040771,
+              0.8332276940345764,
+              0.06562775373458862
+            ],
+            "H0_mace_px": {
+              "mean": 1.6020886898040771,
+              "median": 1.6020886898040771,
+              "p90": 1.6020886898040771,
+              "max": 1.6020886898040771
+            },
+            "H_final_mace_px": {
+              "mean": 0.06562775373458862,
+              "median": 0.06562775373458862,
+              "p90": 0.06562775373458862,
+              "max": 0.06562775373458862
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 0.3924964228644967,
+            "latency_ms_per_pair_single_pass": 392.4964228644967
+          },
+          "weight_average_count": 0
+        },
+        {
+          "optimizer_step": 96,
+          "raw_metrics": {
+            "trajectory_mean_mace_px": [
+              1.6020886898040771,
+              0.835076630115509,
+              0.08458563685417175
+            ],
+            "trajectory_median_mace_px": [
+              1.6020886898040771,
+              0.835076630115509,
+              0.08458563685417175
+            ],
+            "H0_mace_px": {
+              "mean": 1.6020886898040771,
+              "median": 1.6020886898040771,
+              "p90": 1.6020886898040771,
+              "max": 1.6020886898040771
+            },
+            "H_final_mace_px": {
+              "mean": 0.08458563685417175,
+              "median": 0.08458563685417175,
+              "p90": 0.08458563685417175,
+              "max": 0.08458563685417175
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 0.3928921679034829,
+            "latency_ms_per_pair_single_pass": 392.8921679034829
+          },
+          "weight_averaged_metrics": null,
+          "primary_metrics": {
+            "trajectory_mean_mace_px": [
+              1.6020886898040771,
+              0.835076630115509,
+              0.08458563685417175
+            ],
+            "trajectory_median_mace_px": [
+              1.6020886898040771,
+              0.835076630115509,
+              0.08458563685417175
+            ],
+            "H0_mace_px": {
+              "mean": 1.6020886898040771,
+              "median": 1.6020886898040771,
+              "p90": 1.6020886898040771,
+              "max": 1.6020886898040771
+            },
+            "H_final_mace_px": {
+              "mean": 0.08458563685417175,
+              "median": 0.08458563685417175,
+              "p90": 0.08458563685417175,
+              "max": 0.08458563685417175
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 0.3928921679034829,
+            "latency_ms_per_pair_single_pass": 392.8921679034829
+          },
+          "weight_average_count": 0
+        },
+        {
+          "optimizer_step": 112,
+          "raw_metrics": {
+            "trajectory_mean_mace_px": [
+              1.6020886898040771,
+              0.7869207859039307,
+              0.05458957701921463
+            ],
+            "trajectory_median_mace_px": [
+              1.6020886898040771,
+              0.7869207859039307,
+              0.05458957701921463
+            ],
+            "H0_mace_px": {
+              "mean": 1.6020886898040771,
+              "median": 1.6020886898040771,
+              "p90": 1.6020886898040771,
+              "max": 1.6020886898040771
+            },
+            "H_final_mace_px": {
+              "mean": 0.05458957701921463,
+              "median": 0.05458957701921463,
+              "p90": 0.05458957701921463,
+              "max": 0.05458957701921463
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 0.39972162153571844,
+            "latency_ms_per_pair_single_pass": 399.72162153571844
+          },
+          "weight_averaged_metrics": null,
+          "primary_metrics": {
+            "trajectory_mean_mace_px": [
+              1.6020886898040771,
+              0.7869207859039307,
+              0.05458957701921463
+            ],
+            "trajectory_median_mace_px": [
+              1.6020886898040771,
+              0.7869207859039307,
+              0.05458957701921463
+            ],
+            "H0_mace_px": {
+              "mean": 1.6020886898040771,
+              "median": 1.6020886898040771,
+              "p90": 1.6020886898040771,
+              "max": 1.6020886898040771
+            },
+            "H_final_mace_px": {
+              "mean": 0.05458957701921463,
+              "median": 0.05458957701921463,
+              "p90": 0.05458957701921463,
+              "max": 0.05458957701921463
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 0.39972162153571844,
+            "latency_ms_per_pair_single_pass": 399.72162153571844
+          },
+          "weight_average_count": 0
+        },
+        {
+          "optimizer_step": 128,
+          "raw_metrics": {
+            "trajectory_mean_mace_px": [
+              1.6020886898040771,
+              0.8108667135238647,
+              0.023410402238368988
+            ],
+            "trajectory_median_mace_px": [
+              1.6020886898040771,
+              0.8108667135238647,
+              0.023410402238368988
+            ],
+            "H0_mace_px": {
+              "mean": 1.6020886898040771,
+              "median": 1.6020886898040771,
+              "p90": 1.6020886898040771,
+              "max": 1.6020886898040771
+            },
+            "H_final_mace_px": {
+              "mean": 0.023410402238368988,
+              "median": 0.023410402238368988,
+              "p90": 0.023410402238368988,
+              "max": 0.023410402238368988
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 0.3954608477652073,
+            "latency_ms_per_pair_single_pass": 395.4608477652073
+          },
+          "weight_averaged_metrics": null,
+          "primary_metrics": {
+            "trajectory_mean_mace_px": [
+              1.6020886898040771,
+              0.8108667135238647,
+              0.023410402238368988
+            ],
+            "trajectory_median_mace_px": [
+              1.6020886898040771,
+              0.8108667135238647,
+              0.023410402238368988
+            ],
+            "H0_mace_px": {
+              "mean": 1.6020886898040771,
+              "median": 1.6020886898040771,
+              "p90": 1.6020886898040771,
+              "max": 1.6020886898040771
+            },
+            "H_final_mace_px": {
+              "mean": 0.023410402238368988,
+              "median": 0.023410402238368988,
+              "p90": 0.023410402238368988,
+              "max": 0.023410402238368988
+            },
+            "failed_pairs": 0,
+            "failure_rate": 0.0,
+            "rejected_updates": 0,
+            "rejected_update_rate": 0.0,
+            "elapsed_seconds": 0.3954608477652073,
+            "latency_ms_per_pair_single_pass": 395.4608477652073
+          },
+          "weight_average_count": 0
+        }
+      ],
+      "last_sequence_corner_l1_px": 0.22333240509033203,
+      "gradient_finite": true,
+      "maximum_preclip_gradient_norm": 26.841379165649414,
+      "resume": null,
+      "progress": {
+        "checkpoint": {
+          "path": "/home/disk1/MHINet/outputs/tiny_overfit/d1_condition2_vertical_positive_bf16_128_progress.pt",
+          "format": "mhinet.training",
+          "version": 1,
+          "bytes": 16265169,
+          "optimizer_step": 128,
+          "sha256": "da79d587d22d95b31da634a3b28461027f03580e2b1f53e32dca87fb0df4b504"
+        },
+        "heartbeat_interval_optimizer_steps": 8,
+        "last_evaluated_step": 128,
+        "resume_segments": 0,
+        "raw_model_and_optimizer_boundary": true
+      },
+      "training_elapsed_seconds": 1486.1013400955126,
+      "periodic_evaluation_elapsed_seconds": 3.1749244881793857,
+      "progress_checkpoint_io_seconds": 2.3922574277967215,
+      "mean_training_step_seconds_including_periodic_eval": 11.610166719496192,
+      "peak_allocated_bytes": 7138167296,
+      "peak_reserved_bytes": 7411335168,
+      "checkpoint": {
+        "path": "/home/disk1/MHINet/outputs/tiny_overfit/tiny-s-d1_one-pair-residuals_translation_bf16_raw_bound-1_budget-128_seed0_condition-offset-2.pt",
+        "format": "mhinet.training",
+        "version": 1,
+        "bytes": 16252689,
+        "optimizer_step": 128,
+        "microbatch_progress": null,
+        "data_progress": {
+          "epoch": 511,
+          "position": 1,
+          "order_seed": 511
+        },
+        "metadata": {
+          "checkpoint_role": "tiny_final_evidence",
+          "diagnostic": "TINY-S-D1",
+          "active_scales": [
+            1
+          ],
+          "known_H0_residual_injected": true,
+          "formal_training_checkpoint": false,
+          "sample_count": 1,
+          "sample_protocol": "one_pair_residuals",
+          "residual_profile": "translation",
+          "precision": "bf16",
+          "weight_average_start_step": null,
+          "residual_bound_fraction": 1.0,
+          "condition_index_offset": 2,
+          "maximum_steps": 128,
+          "evaluation_interval": 16,
+          "weight_average_count": 0,
+          "checkpoint_contains_weight_average": false,
+          "optimizer_resume_supported": true,
+          "pair_ids": [
+            "current__34.801100126.376330_pair0"
+          ],
+          "tiny_progress_signature": {
+            "format": "mhinet.tiny_progress",
+            "version": 1,
+            "diagnostic": "TINY-S-D1",
+            "active_scales": [
+              1
+            ],
+            "seed": 0,
+            "maximum_steps": 128,
+            "evaluation_interval": 16,
+            "threshold_mace_px": 0.1,
+            "sample_count": 1,
+            "sample_protocol": "one_pair_residuals",
+            "residual_profile": "translation",
+            "precision": "bf16",
+            "weight_average_start_step": null,
+            "residual_bound_fraction": 1.0,
+            "maximum_declared_abs_residual_px": 2.0,
+            "target_hw": [
+              784,
+              784
+            ],
+            "pair_ids": [
+              "current__34.801100126.376330_pair0"
+            ],
+            "optimizer": {
+              "name": "AdamW",
+              "learning_rate": 0.001,
+              "weight_decay": 0.0,
+              "gradient_accumulation": 4,
+              "gradient_clip_norm": 1.0
+            },
+            "resume_context": {
+              "architecture_sha256": "4a859f413ee4be59acb1dc6c0cf189e80b8f4e7b3f54dc9f117acd1ac5cfe128",
+              "training_manifest_sha256": "3eed3d3d425caf8465afb5121dfd85960f00932fccc343f37187e14ce27d499c",
+              "runtime_config": {
+                "path": "/home/disk1/MHINet/configs/runtime_paths.server.json",
+                "bytes": 1068,
+                "sha256": "485c41935c83d8e7ed0b248fed794844abfd48a62c28d90b5328cafa24bc179d"
+              },
+              "dino_checkpoint": {
+                "path": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+                "bytes": 1294957584,
+                "sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e"
+              },
+              "selected_ghim_checkpoint": {
+                "path": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+                "bytes": 1294957584,
+                "sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e"
+              },
+              "pyramid_checkpoint": {
+                "path": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+                "bytes": 757888113,
+                "sha256": "3a38824391e22b33bb3e10377c7736243fd8a2fbf1561446e7e133e497c35758"
+              }
+            },
+            "condition_index_offset": 2
+          }
+        },
+        "cuda_rng_captured": true,
+        "sha256": "5bf6ea1726f60340784165379225a971d857e40eb796aaf949dfc32f0b501424"
+      },
+      "scope_note": "This is a training-set learnability diagnostic with controlled H0; it is not validation accuracy and must not select a formal configuration."
+    }
+  ]
+}

@@ -38,6 +38,7 @@ class TinyCheckpointAuditTests(unittest.TestCase):
             "pair_ids": ("pair", "pair"),
             "target_hw": (784, 784),
             "maximum_declared_abs_residual_px": 2.0,
+            "condition_index_offset": 2,
             "resume_context": {},
         }
 
@@ -55,6 +56,7 @@ class TinyCheckpointAuditTests(unittest.TestCase):
         self.assertEqual(protocol["diagnostic"], "TINY-S-D1")
         self.assertEqual(protocol["active_scales"], (1,))
         self.assertEqual(protocol["seed"], 3)
+        self.assertEqual(protocol["condition_index_offset"], 2)
         self.assertEqual(protocol["maximum_declared_abs_residual_px"], 2.0)
         self.assertEqual(protocol["legacy_supplemented_fields"], [])
 

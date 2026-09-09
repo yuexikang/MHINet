@@ -55,6 +55,7 @@ _PROTOCOL_FIELDS = (
     "pair_ids",
     "target_hw",
     "maximum_declared_abs_residual_px",
+    "condition_index_offset",
 )
 
 
@@ -67,7 +68,7 @@ def _normalized_protocol_value(name: str, value: Any) -> Any:
         if not isinstance(value, (list, tuple)):
             raise TypeError("Checkpoint field pair_ids must be a sequence")
         return tuple(str(item) for item in value)
-    if name in {"sample_count", "seed"}:
+    if name in {"sample_count", "seed", "condition_index_offset"}:
         return int(value)
     if name in {"residual_bound_fraction", "maximum_declared_abs_residual_px"}:
         return float(value)
@@ -212,6 +213,11 @@ def _resolve_protocol(
     if "target_hw" not in resolved:
         resolved["target_hw"] = TARGET_HW
         sources["target_hw"] = "protocol_v1.2_default"
+    if "condition_index_offset" not in resolved:
+        resolved["condition_index_offset"] = 0
+        sources["condition_index_offset"] = "protocol_v1.2_default"
+    if resolved["condition_index_offset"] < 0:
+        raise ValueError("Tiny condition_index_offset must be non-negative")
     maximum_residual = fraction * max(
         SCALE_SPECS[scale].max_delta_px for scale in expected_scales
     )
@@ -494,7 +500,7 @@ def run_checkpoint_audit(
         H0_values = [
             controlled_h0_from_ground_truth(
                 sample.H_gt_norm,
-                sample_index=index,
+                sample_index=int(protocol["condition_index_offset"]) + index,
                 max_abs_residual_px=float(
                     protocol["maximum_declared_abs_residual_px"]
                 ),
@@ -609,6 +615,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--precision", choices=("bf16", "fp32"))
     parser.add_argument("--seed", type=int)
     parser.add_argument("--residual-bound-fraction", type=float)
+    parser.add_argument("--condition-index-offset", type=int)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--overwrite", action="store_true")
     args = parser.parse_args(argv)
@@ -625,6 +632,7 @@ def main(argv: list[str] | None = None) -> int:
         "precision": args.precision,
         "seed": args.seed,
         "residual_bound_fraction": args.residual_bound_fraction,
+        "condition_index_offset": args.condition_index_offset,
     }
     report = run_checkpoint_audit(
         RuntimePaths.from_json(args.runtime),

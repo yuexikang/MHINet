@@ -160,6 +160,13 @@ MHIR iterator, verifies that the serialized/load/post-forward state hashes are
 identical, and emits H0, each H, decoder deltas, solve diagnostics, support and
 saturation per condition. Its `diagnostic_complete` status is not a P4 pass.
 
+For a failure-isolation run only, `tiny-overfit` also accepts
+`--condition-index-offset N`. With `--sample-count 1`, this selects the exact
+controlled condition `N` from the normal 32-condition sequence. Nonzero
+offsets are embedded in checkpoint/progress metadata and filenames and cannot
+be merged into the registered gate; the default zero keeps prior progress
+signatures exactly compatible.
+
 Run D8/D4/D2/TINY-8 with the same recipe but
 `--residual-bound-fraction 0.5`, distinct progress/output paths and the matching
 `--experiments` value. Long jobs may be merged only after all five artifacts

@@ -16,6 +16,7 @@ from mhinet.tiny_overfit import (
     _ParameterAverager,
     _jsonable,
     _preflight_tiny_progress,
+    _tiny_progress_signature,
     controlled_h0_from_ground_truth,
     evaluate_tiny_training_set,
     parse_experiments,
@@ -24,6 +25,35 @@ from mhinet.tiny_overfit import (
 
 
 class TinyOverfitProtocolTests(unittest.TestCase):
+    def test_nonzero_condition_offset_is_resume_bound_without_changing_default(self) -> None:
+        sample = CachedTinySample(
+            pair_id="pair",
+            parent_group="parent",
+            geo_group="geo",
+            H_gt_norm=torch.eye(3),
+            pyramid={1: torch.zeros((1, 2, 256, 1, 1))},
+        )
+        arguments = {
+            "name": "TINY-S-D1",
+            "active_scales": (1,),
+            "seed": 0,
+            "max_steps": 1,
+            "eval_interval": 1,
+            "threshold_mace_px": 0.1,
+            "cache": [sample],
+            "sample_protocol": "one_pair_residuals",
+            "residual_profile": "translation",
+            "precision": "bf16",
+            "weight_average_start_step": None,
+            "residual_bound_fraction": 1.0,
+            "max_residual": 2.0,
+            "resume_context": {},
+        }
+        registered = _tiny_progress_signature(**arguments)
+        isolated = _tiny_progress_signature(**arguments, condition_index_offset=2)
+        self.assertNotIn("condition_index_offset", registered)
+        self.assertEqual(isolated["condition_index_offset"], 2)
+
     @staticmethod
     def _endpoint_model() -> nn.Module:
         class EndpointIterator(nn.Module):

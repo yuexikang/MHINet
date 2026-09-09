@@ -438,10 +438,11 @@ def _tiny_progress_signature(
     residual_bound_fraction: float,
     max_residual: float,
     resume_context: Mapping[str, Any] | None,
+    condition_index_offset: int = 0,
 ) -> dict[str, Any]:
     """Bind a progress file to every choice that can change its trajectory."""
 
-    return {
+    signature = {
         "format": TINY_PROGRESS_FORMAT,
         "version": TINY_PROGRESS_VERSION,
         "diagnostic": name,
@@ -468,6 +469,11 @@ def _tiny_progress_signature(
         },
         "resume_context": dict(resume_context or {}),
     }
+    # Keep the default signature byte-for-byte compatible with progress files
+    # that were launched before the isolated-condition diagnostic existed.
+    if condition_index_offset:
+        signature["condition_index_offset"] = int(condition_index_offset)
+    return signature
 
 
 def _path_float_token(value: float) -> str:
@@ -717,11 +723,14 @@ def run_one_tiny_experiment(
     heartbeat_interval: int = 8,
     progress_callback: Callable[[dict[str, Any]], None] | None = None,
     resume_context: Mapping[str, Any] | None = None,
+    condition_index_offset: int = 0,
 ) -> dict[str, Any]:
     if not 0.0 < residual_bound_fraction <= 1.0:
         raise ValueError("residual_bound_fraction must be in (0, 1]")
     if heartbeat_interval <= 0:
         raise ValueError("heartbeat_interval must be positive")
+    if condition_index_offset < 0:
+        raise ValueError("condition_index_offset must be non-negative")
     device = torch.device(runtime.device)
     _fresh_new_modules(model, device, seed)
     for scale in ALL_SCALES:
@@ -757,7 +766,7 @@ def run_one_tiny_experiment(
     for index, sample in enumerate(cache):
         H0, actual = controlled_h0_from_ground_truth(
             sample.H_gt_norm,
-            sample_index=index,
+            sample_index=condition_index_offset + index,
             max_abs_residual_px=max_residual,
             seed=seed,
             residual_profile=residual_profile,
@@ -780,6 +789,7 @@ def run_one_tiny_experiment(
         residual_bound_fraction=residual_bound_fraction,
         max_residual=max_residual,
         resume_context=resume_context,
+        condition_index_offset=condition_index_offset,
     )
     resume_path = (
         None if resume_progress is None else Path(resume_progress).expanduser().resolve()
@@ -1326,6 +1336,11 @@ def run_one_tiny_experiment(
         if weight_average_start_step is None
         else f"weight-average-from-{weight_average_start_step}"
     )
+    condition_suffix = (
+        ""
+        if condition_index_offset == 0
+        else f"_condition-offset-{condition_index_offset}"
+    )
     checkpoint_path = (
         runtime.output_root
         / "tiny_overfit"
@@ -1333,7 +1348,7 @@ def run_one_tiny_experiment(
             f"{name.lower()}_{sample_protocol.replace('_', '-')}_"
             f"{residual_profile}_{precision}_{checkpoint_suffix}_"
             f"bound-{_path_float_token(residual_bound_fraction)}_"
-            f"budget-{max_steps}_seed{seed}.pt"
+            f"budget-{max_steps}_seed{seed}{condition_suffix}.pt"
         )
     )
     if checkpoint_path.exists() and not overwrite and resume_path is None:
@@ -1364,6 +1379,7 @@ def run_one_tiny_experiment(
             "precision": precision,
             "weight_average_start_step": weight_average_start_step,
             "residual_bound_fraction": residual_bound_fraction,
+            "condition_index_offset": condition_index_offset,
             "maximum_steps": max_steps,
             "evaluation_interval": eval_interval,
             "weight_average_count": (
@@ -1426,6 +1442,13 @@ def run_one_tiny_experiment(
             "profile": residual_profile,
             "formal_training_injection": False,
             "bound_fraction_of_coarsest_active_decoder": residual_bound_fraction,
+            "condition_index_offset": condition_index_offset,
+            "condition_indices": list(
+                range(
+                    condition_index_offset,
+                    condition_index_offset + len(cache),
+                )
+            ),
             "maximum_declared_abs_residual_px": max_residual,
             "actual_abs_residual_px": _statistics(residual_stack.abs().flatten()),
         },
@@ -1503,6 +1526,7 @@ def run_tiny_overfit(
     progress_checkpoint: Path | None = None,
     resume_progress: Path | None = None,
     heartbeat_interval: int = 8,
+    condition_index_offset: int = 0,
 ) -> dict[str, Any]:
     if sample_count <= 0:
         raise ValueError("sample_count must be positive")
@@ -1528,6 +1552,8 @@ def run_tiny_overfit(
         raise ValueError("residual_bound_fraction must be in (0, 1]")
     if heartbeat_interval <= 0:
         raise ValueError("heartbeat_interval must be positive")
+    if condition_index_offset < 0:
+        raise ValueError("condition_index_offset must be non-negative")
     if (progress_checkpoint is not None or resume_progress is not None) and len(
         experiments
     ) != 1:
@@ -1599,10 +1625,13 @@ def run_tiny_overfit(
             "unique_image_pair_count": unique_pair_count,
             "diagnostic_sample_count": len(cache),
             "diagnostic_sample_definition": (
-                "one exact image pair with 32 deterministic locally observable H0 residuals"
+                f"one exact image pair with {sample_count} deterministic locally "
+                "observable H0 residuals"
                 if sample_protocol == "one_pair_residuals"
-                else "32 distinct exact image pairs with one deterministic H0 residual each"
+                else f"{sample_count} distinct exact image pairs with one "
+                "deterministic H0 residual each"
             ),
+            "condition_index_offset": condition_index_offset,
         }
     )
     hash_cache: dict[Path, str] = {}
@@ -1646,6 +1675,7 @@ def run_tiny_overfit(
                 residual_bound_fraction=residual_bound_fraction,
                 max_residual=resume_max_residual,
                 resume_context=resume_context,
+                condition_index_offset=condition_index_offset,
             ),
         )
     model.feature_provider.to("cpu")
@@ -1670,6 +1700,7 @@ def run_tiny_overfit(
             "tiny_weight_average_start_step": weight_average_start_step,
             "tiny_progress_checkpoint_interval": heartbeat_interval,
             "tiny_progress_checkpoint_role": "raw optimizer boundary",
+            "condition_index_offset": condition_index_offset,
         },
         "runtime_config": str(runtime.source_path),
         "device": str(device),
@@ -1708,6 +1739,7 @@ def run_tiny_overfit(
             heartbeat_interval=heartbeat_interval,
             progress_callback=update_partial,
             resume_context=resume_context,
+            condition_index_offset=condition_index_offset,
         )
         report.pop("current_experiment", None)
         report["experiments"].append(result)
@@ -1774,6 +1806,15 @@ def main(argv: list[str] | None = None) -> int:
         ),
     )
     parser.add_argument(
+        "--condition-index-offset",
+        type=int,
+        default=0,
+        help=(
+            "Diagnostic-only starting controlled-H0 condition index; default 0 "
+            "is the registered gate and nonzero values isolate a failure mode"
+        ),
+    )
+    parser.add_argument(
         "--progress-checkpoint",
         type=Path,
         help=(
@@ -1834,6 +1875,7 @@ def main(argv: list[str] | None = None) -> int:
         progress_checkpoint=progress_checkpoint,
         resume_progress=resume_progress,
         heartbeat_interval=args.heartbeat_interval,
+        condition_index_offset=args.condition_index_offset,
     )
     _write_json(output, report)
     print(json.dumps(_jsonable(report), indent=2, ensure_ascii=False))

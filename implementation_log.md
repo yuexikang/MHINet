@@ -582,6 +582,15 @@ diagnostic-only and is never used by formal training.
   exact horizontal- or vertical-dominant H0 conditions from tiny-overfit can be
   reproduced.  Full-suite command unchanged; all 79 tests passed in 1.824
   seconds.  No production forward, loss, precision or training rule changed.
+- Added the diagnostic-only `--condition-index-offset` to tiny-overfit so a
+  vertical-dominant condition can be trained independently instead of silently
+  reusing condition 0.  A nonzero offset is bound into progress/final metadata
+  and the final checkpoint filename; the registered default zero deliberately
+  omits the new signature key, preserving exact resume compatibility with the
+  already-running jobs.  Checkpoint audit reconstructs the recorded offset.
+  The cache description now reports its actual sample count instead of always
+  saying 32.  Full suite: 80/80 passed in 1.796 seconds.  This option is failure
+  isolation only and cannot satisfy the 32-condition P4 gate.
 
 CUDA warns that `grid_sampler_2d_backward_cuda` and
 `adaptive_avg_pool2d_backward_cuda` have no deterministic implementation.

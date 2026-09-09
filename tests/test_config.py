@@ -9,11 +9,14 @@ from mhinet.config import RuntimePaths, load_architecture_config, load_training_
 
 
 class ConfigTests(unittest.TestCase):
-    def test_design_config_is_protocol_v12(self) -> None:
+    def test_active_project_config_is_protocol_v12(self) -> None:
         config = load_architecture_config()
-        self.assertEqual(config.scales, (8, 4, 2, 1))
+        self.assertEqual(config.scales, (8, 4, 2))
+        self.assertEqual(config.registered_scales, (8, 4, 2, 1))
         self.assertEqual(config.radii, (4, 4, 3, 2))
-        self.assertEqual(config.expected_new_parameters, 2_544_160)
+        self.assertEqual(config.decoder_input_channels, (81, 81, 49, 25))
+        self.assertEqual(config.down_blocks, (6, 7, 8, 9))
+        self.assertEqual(config.expected_new_parameters, 1_176_712)
 
     def test_training_profiles(self) -> None:
         profiles = load_training_profiles()

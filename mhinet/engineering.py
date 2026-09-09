@@ -1,4 +1,4 @@
-"""Real-resource P3 zero-initialization and full eight-round smoke checks."""
+"""Real-resource P3 zero-initialization and six-round mainline smoke checks."""
 
 from __future__ import annotations
 
@@ -39,12 +39,22 @@ def run_zero_init_smoke(runtime: RuntimePaths, pair_index: int = 0) -> dict[str,
     images = sample["images"].unsqueeze(0).to(device)
     H_gt = sample["H_gt_norm"].unsqueeze(0).to(device)
     model, build_report = build_model(runtime)
+    for group in build_report["training_parameters"]["groups"].values():
+        group.pop("optimizer_parameter_ids", None)
     model.eval()
     new_parameters = count_new_parameters(model.adapters, model.refinement_decoders)
-    fc2_nonzero = {
+    output_projection_nonzero = {
         scale: {
-            "weight": int(torch.count_nonzero(model.refinement_decoders[scale].fc2.weight)),
-            "bias": int(torch.count_nonzero(model.refinement_decoders[scale].fc2.bias)),
+            "weight": int(
+                torch.count_nonzero(
+                    model.refinement_decoders[scale].out_conv.weight
+                )
+            ),
+            "bias": int(
+                torch.count_nonzero(
+                    model.refinement_decoders[scale].out_conv.bias
+                )
+            ),
         }
         for scale in ("8", "4", "2", "1")
     }
@@ -72,7 +82,7 @@ def run_zero_init_smoke(runtime: RuntimePaths, pair_index: int = 0) -> dict[str,
         new_parameters == EXPECTED_NEW_PARAMETERS
         and not any(
             values[part]
-            for values in fc2_nonzero.values()
+            for values in output_projection_nonzero.values()
             for part in ("weight", "bias")
         )
         and bool(h0_valid.all())
@@ -81,15 +91,18 @@ def run_zero_init_smoke(runtime: RuntimePaths, pair_index: int = 0) -> dict[str,
         and bool(torch.isfinite(outputs["H_updates_norm"]).all())
         and outputs["shared_call_counts"].get("dino") == 1
         and outputs["shared_call_counts"].get("mvt") == 1
+        and outputs["shared_call_counts"].get("dedode_scale1") == 0
+        and outputs["H_updates_norm"].shape[1] == 6
+        and outputs["update_scale_schedule"] == (8, 8, 4, 4, 2, 2)
     )
     return {
-        "gate": "P3_real_zero_init_eight_round",
+        "gate": "P3_real_zero_init_six_round",
         "status": "passed" if passed else "failed",
         "pair_id": sample["pair_id"],
         "device": str(device),
         "new_parameters": new_parameters,
         "expected_new_parameters": EXPECTED_NEW_PARAMETERS,
-        "fc2_nonzero_elements": fc2_nonzero,
+        "output_projection_nonzero_elements": output_projection_nonzero,
         "H0_to_Hfinal_max_corner_projection_error_px": max_noop_error,
         "H0_to_Hfinal_mean_corner_projection_error_px": float(
             difference_px.mean().item()
@@ -102,13 +115,15 @@ def run_zero_init_smoke(runtime: RuntimePaths, pair_index: int = 0) -> dict[str,
         "condition_number": _jsonable(outputs["condition_number"]),
         "max_abs_delta_px": float(outputs["delta_px"].abs().max().item()),
         "shared_call_counts": outputs["shared_call_counts"],
+        "active_scales": list(outputs["active_scales"]),
+        "update_scale_schedule": list(outputs["update_scale_schedule"]),
         "forward_ms_single_unwarmed": elapsed_ms,
         "peak_allocated_bytes": int(
             torch.cuda.max_memory_allocated(device) if device.type == "cuda" else 0
         ),
         "build": build_report,
         "note": (
-            "Inference-mode engineering fixed-point smoke on one validation pair. "
+            "No-grad engineering fixed-point smoke on one validation pair. "
             "It is not an accuracy result, a latency benchmark, or training validation."
         ),
     }

@@ -10,6 +10,7 @@ from torch import nn
 
 from .config import (
     ArchitectureConfig,
+    DEFAULT_ARCHITECTURE_CONFIG,
     RuntimePaths,
     load_architecture_config,
     load_training_profiles,
@@ -17,14 +18,16 @@ from .config import (
 from .feature_provider import SharedFeatureProvider, build_feature_provider
 from .iterator import MultiScaleHIterator
 from .modules import (
+    EXPECTED_MAINLINE_TRAINABLE_NEW_PARAMETERS,
     EXPECTED_NEW_PARAMETERS,
+    MAINLINE_SCALES,
     build_multiscale_modules,
     count_new_parameters,
 )
 
 
 class MHINet(nn.Module):
-    """Run GHIM/CGMDP followed by MHIR's eight homography updates."""
+    """Run GHIM/CGMDP followed by six mainline MHIR homography updates."""
 
     def __init__(
         self,
@@ -53,6 +56,9 @@ class MHINet(nn.Module):
         if count_new_parameters(self.iterator.adapters, self.iterator.decoders) != EXPECTED_NEW_PARAMETERS:
             raise AssertionError("MHINet new parameter count changed from the v1 contract")
         self.training_profiles = load_training_profiles()
+        # D1 remains registered for controlled future experiments, but it is
+        # excluded from every current mainline optimizer group.
+        self._optional_d1_enabled = False
         self._training_phase = "heads"
         self.set_training_phase("heads")
 
@@ -74,10 +80,18 @@ class MHINet(nn.Module):
                 f"Unknown training profile {profile!r}; expected {tuple(self.training_profiles)}"
             )
         active = set(self.training_profiles[profile])
-        for parameter in self.adapters.parameters():
-            parameter.requires_grad = "adapters" in active
-        for parameter in self.refinement_decoders.parameters():
-            parameter.requires_grad = "refinement_decoders" in active
+        for scale, adapter in self.adapters.items():
+            enabled = "adapters" in active and (
+                scale != "1" or self._optional_d1_enabled
+            )
+            for parameter in adapter.parameters():
+                parameter.requires_grad = enabled
+        for scale, decoder in self.refinement_decoders.items():
+            enabled = "refinement_decoders" in active and (
+                scale != "1" or self._optional_d1_enabled
+            )
+            for parameter in decoder.parameters():
+                parameter.requires_grad = enabled
         self.feature_provider.set_training_groups(
             dedode="dedode" in active,
             vgg="vgg" in active,
@@ -91,6 +105,17 @@ class MHINet(nn.Module):
             raise AssertionError("DINOv3 must remain frozen")
         if report["stage1_head_trainable_parameters"] != 0:
             raise AssertionError("Stage1 head parameters must remain frozen")
+        if any(
+            parameter.requires_grad
+            for module in (self.adapters["1"], self.refinement_decoders["1"])
+            for parameter in module.parameters()
+        ):
+            raise AssertionError("D1 is registered but must remain inactive in mainline profiles")
+        if profile == "heads" and (
+            report["groups"]["new_modules"]["trainable_parameters"]
+            != EXPECTED_MAINLINE_TRAINABLE_NEW_PARAMETERS
+        ):
+            raise AssertionError("D1 must remain outside the mainline heads optimizer")
         return report
 
     def train(self, mode: bool = True) -> "MHINet":
@@ -200,7 +225,7 @@ class MHINet(nn.Module):
         cnn_autocast_enabled: bool = True,
     ) -> dict[str, Any]:
         selected_scales = (
-            self.iterator.scales
+            MAINLINE_SCALES
             if active_scales is None
             else tuple(int(scale) for scale in active_scales)
         )
@@ -240,14 +265,15 @@ def build_model(
     architecture = load_architecture_config(
         architecture_path
         if architecture_path is not None
-        else Path(__file__).resolve().parents[1]
-        / "MHINet_server_handoff_v1.2/configs/mhinet_v1.json"
+        else DEFAULT_ARCHITECTURE_CONFIG
     )
     provider, provider_report = build_feature_provider(runtime)
     model = MHINet(provider, architecture).to(torch.device(runtime.device))
     report = {
         "architecture_path": str(architecture.path),
         "architecture_sha256": architecture.sha256,
+        "mhir_revision": architecture.raw["mhir_revision"],
+        "mcnet_reference_commit": architecture.raw["mcnet_reference"]["commit"],
         "provider": provider_report,
         "training_parameters": model.training_parameter_report(),
     }

@@ -11,7 +11,7 @@ from typing import Any, Mapping
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DESIGN_ROOT = PROJECT_ROOT / "MHINet_server_handoff_v1.2"
-DEFAULT_ARCHITECTURE_CONFIG = DESIGN_ROOT / "configs/mhinet_v1.json"
+DEFAULT_ARCHITECTURE_CONFIG = PROJECT_ROOT / "configs/mhinet_mcnet_v1.2.json"
 DEFAULT_TRAINING_PROFILES = DESIGN_ROOT / "configs/training_profiles.json"
 
 
@@ -41,6 +41,10 @@ class ArchitectureConfig:
 
     @property
     def scales(self) -> tuple[int, ...]:
+        return tuple(int(value) for value in self.raw["iteration"]["primary_scales"])
+
+    @property
+    def registered_scales(self) -> tuple[int, ...]:
         return tuple(int(value) for value in self.raw["iteration"]["scales"])
 
     @property
@@ -54,6 +58,10 @@ class ArchitectureConfig:
     @property
     def down_blocks(self) -> tuple[int, ...]:
         return tuple(int(value) for value in self.raw["decoder"]["down_blocks"])
+
+    @property
+    def decoder_input_channels(self) -> tuple[int, ...]:
+        return tuple(int(value) for value in self.raw["decoder"]["input_channels"])
 
     @property
     def max_delta_px(self) -> tuple[float, ...]:
@@ -76,15 +84,100 @@ class ArchitectureConfig:
             errors.append("training_revision must be 1.2")
         if self.raw.get("loss_revision") != "1.1":
             errors.append("loss_revision must be 1.1")
-        if self.scales != (8, 4, 2, 1):
-            errors.append(f"scales must be (8,4,2,1), got {self.scales}")
+        if self.raw.get("mhir_revision") != "mcnet_correlation_decoder_784_v1":
+            errors.append("MHIR must use the registered MCNet-faithful decoder revision")
+        if self.raw.get("mcnet_reference", {}).get("commit") != (
+            "cc03479689b3cf40f0c384954f338b434765c155"
+        ):
+            errors.append("MCNet source reference commit is not pinned")
+        if self.scales != (8, 4, 2):
+            errors.append(f"mainline scales must be (8,4,2), got {self.scales}")
+        if self.registered_scales != (8, 4, 2, 1):
+            errors.append("registered scales must retain dormant D1")
         if tuple(self.raw["iteration"]["iterations_per_scale"]) != (2, 2, 2, 2):
-            errors.append("each scale must have exactly two updates")
+            errors.append("each registered scale must retain two-update support")
+        if self.raw["iteration"].get("primary_total_updates") != 6:
+            errors.append("the D8/D4/D2 mainline must have six updates")
+        pyramid = self.raw.get("pyramid", {})
+        if (
+            tuple(pyramid.get("mainline_scales", ())) != (8, 4, 2)
+            or tuple(pyramid.get("registered_optional_scales", ())) != (1,)
+            or pyramid.get("run_scale1_by_default") is not False
+        ):
+            errors.append("CGMDP mainline must stop at D2 while retaining optional D1")
         if self.radii != (4, 4, 3, 2):
             errors.append(f"correlation radii mismatch: {self.radii}")
         expected_candidates = tuple((2 * radius + 1) ** 2 for radius in self.radii)
         if tuple(self.raw["correlation"]["candidates"]) != expected_candidates:
             errors.append("candidate counts do not match radii")
+        decoder = self.raw["decoder"]
+        if decoder.get("family") != "MCNet_CorrelationDecoder_adapted_784":
+            errors.append("decoder family is not the registered MCNet adaptation")
+        if tuple(decoder.get("input_order", ())) != ("correlation",):
+            errors.append("MCNet-faithful decoder must consume correlation only")
+        if self.decoder_input_channels != expected_candidates:
+            errors.append("decoder input channels must equal correlation candidates")
+        if self.down_blocks != (6, 7, 8, 9):
+            errors.append("784 pyramid requires 6/7/8/9 MCNet downsample blocks")
+        if tuple(decoder.get("corner_grid_hw", ())) != (2, 2):
+            errors.append("MCNet corner-logit grid must be 2x2")
+        if decoder.get("down_block", {}).get("pool_ceil_mode") is not True:
+            errors.append("non-power-of-two pyramid adaptation requires ceil-mode pooling")
+        stem = decoder.get("stem", {})
+        if (
+            stem.get("kernel") != 1
+            or stem.get("channels") != 64
+            or stem.get("bias") is not True
+            or stem.get("activation") != "none"
+        ):
+            errors.append("decoder stem must be MCNet Conv1x1(K,64,bias=True)")
+        block = decoder.get("down_block", {})
+        if (
+            block.get("channels") != 64
+            or block.get("conv_kernel") != 3
+            or block.get("conv_stride") != 1
+            or block.get("padding") != 1
+            or block.get("conv_bias") is not True
+            or block.get("group_norm_groups") != 8
+            or block.get("activation") != "ReLU"
+            or block.get("pool") != "MaxPool2d"
+            or block.get("pool_kernel") != 2
+            or block.get("pool_stride") != 2
+        ):
+            errors.append("decoder block must be Conv3/GN8/ReLU/MaxPool2")
+        expected_paths = (
+            (98, 49, 25, 13, 7, 4, 2),
+            (196, 98, 49, 25, 13, 7, 4, 2),
+            (392, 196, 98, 49, 25, 13, 7, 4, 2),
+            (784, 392, 196, 98, 49, 25, 13, 7, 4, 2),
+        )
+        if tuple(tuple(path) for path in decoder.get("spatial_paths", ())) != expected_paths:
+            errors.append("decoder spatial paths do not match the 784 adaptation")
+        if decoder.get("adaptive_pool") is not False:
+            errors.append("registered MCNet path must not contain adaptive pooling")
+        output_conv = decoder.get("output_conv", {})
+        if (
+            output_conv.get("kernel") != 1
+            or output_conv.get("channels") != 2
+            or output_conv.get("bias") is not True
+            or output_conv.get("grid_to_corner_order")
+            != "permute_BCHW_to_BHWC_then_row_major_TL_TR_BL_BR"
+        ):
+            errors.append("decoder output must be Conv1x1(64,2) in TL/TR/BL/BR order")
+        if decoder.get("final_projection_init") != "all_zero":
+            errors.append("final two-channel projection must be zero initialized")
+        if decoder.get("output_activation") != "tanh":
+            errors.append("registered safety adaptation requires tanh-bounded deltas")
+        if self.max_delta_px != (32.0, 16.0, 6.0, 2.0):
+            errors.append("per-scale input-pixel residual bounds changed")
+        if self.expected_new_parameters != 1_176_712:
+            errors.append("MCNet-faithful MHINet new-parameter count mismatch")
+        if self.raw.get("expected_mainline_trainable_new_parameters") != 833_222:
+            errors.append("mainline D8/D4/D2 trainable new-parameter count mismatch")
+        if self.raw.get("d1_status") != (
+            "implemented_but_inactive_no_descriptor_decode_no_optimizer_membership"
+        ):
+            errors.append("D1 must be retained but inactive in the mainline")
         if self.raw["iteration"].get("detach_between_updates") is not False:
             errors.append("H/T detach between updates is forbidden")
         if self.raw["stage1"].get("detach_H0_in_joint") is not False:

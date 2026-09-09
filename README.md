@@ -1,36 +1,48 @@
 # MHINet
 
-This repository is the server implementation of the MHINet v1 architecture
-and training protocol v1.2 from `MHINet_server_handoff_v1.2/`. The model is
-described as three functional modules:
+This repository implements MHINet under training protocol v1.2. The current
+mainline is deliberately truncated at `D2`: it has three functional modules
+and six homography updates, not the former four-scale/eight-update path.
 
 1. **Global Homography Initialization Module (GHIM):** shared DINOv3 and MVT
-   infer the initial global homography `H0` and the cross-image context
+   infer the initial global homography `H0` and cross-image context
    `F_MVT = (F_MVT^A, F_MVT^B)`.
 2. **Cross-image Guided Multi-scale Descriptor Pyramid (CGMDP):** MVT context
-   and VGG multi-scale local features enter a DeDoDe-style cumulative decoder
-   to produce the matching descriptors `D8`, `D4`, `D2`, and `D1`.
+   and VGG local features enter a DeDoDe-style cumulative decoder with active
+   flow `F_MVT -> D16 -> D8 -> D4 -> D2`.
 3. **Multi-scale Homography Iterative Refinement Module (MHIR):** an adapter,
-   H-guided local correlation, and a refinement decoder perform two homography
-   updates at each scale, giving `H0 -> H1 -> ... -> H8 = H_final`.
+   H-guided local correlation, and an MCNet-style correlation decoder perform
+   two updates at each of `D8`, `D4`, and `D2`, giving
+   `H0 -> H1 -> ... -> H6 = H_final`.
 
-`Ds` means the fused matching descriptor at image scale `1/s`; it does not
-name a DeDoDe layer or a feature produced by DeDoDe alone. In particular,
-`D8/D4/D2/D1` are jointly generated from `F_MVT`, VGG features, and the
-DeDoDe-style cumulative decoder. See
-[`docs/model_architecture.md`](docs/model_architecture.md) for the complete
-data flow and terminology.
+`Ds` means a fused matching descriptor at image scale `1/s`; it does not name
+a DeDoDe layer or a feature produced by DeDoDe alone. The D1 implementation is
+retained for future controlled comparisons, but the main model neither asks
+CGMDP to decode `D1` nor executes the D1 adapter, correlation, or refinement
+decoder. Thus the inactive D1 code has no full-resolution feature or compute
+cost in a normal mainline forward. See
+[`docs/model_architecture.md`](docs/model_architecture.md) for the precise
+contracts and MCNet adaptation.
 
-The Python/config fields named `stage1_*` and the external LoRetta source names
-are retained as legacy compatibility aliases for GHIM. They do not denote an
-additional model stage. Planar, FGO, overlap, and auxiliary-correlation losses
-are not part of the mainline implementation.
+Python/config fields named `stage1_*` and external LoRetta source names remain
+legacy compatibility aliases for GHIM. They do not denote another model
+stage. Planar, FGO, overlap, and auxiliary-correlation losses remain disabled
+on the mainline.
 
-The implementation is not yet a validated model result.  P0--P3 and the P4
-gradient/profile checks pass; the staged tiny-overfit gate is still being
-completed.  E00/E01 must not run until the gate artifact says `passed` for all
-four TINY-S experiments and TINY-8.  The detailed evidence and known failures
-are in `implementation_log.md`.
+## Validation status
+
+The MCNet-style MHIR rewrite and the D2 truncation change the architecture
+identity. Therefore former D1, TINY-8, decoder zero-init, gradient-audit, and
+eight-update tiny-overfit artifacts are **legacy evidence only** and cannot
+open the current training gate. The current gate must be rerun as
+`TINY-S-D8`, `TINY-S-D4`, `TINY-S-D2`, and `TINY-6`, all against the same
+current architecture hash. E00/E01 remain blocked until the new P3/P4 checks
+and this four-artifact gate pass.
+
+An artifact saying a command completed is not evidence that the model is
+accurate. Model validation additionally requires the registered validation
+metrics, failure rates, resource measurements, and comparisons. Current and
+historical evidence is recorded in `implementation_log.md`.
 
 ## Server environment and resources
 
@@ -40,18 +52,19 @@ Run from `/home/disk1/MHINet` in the existing conda environment:
 conda run --no-capture-output -n loma-repro python -m mhinet.cli --help
 ```
 
-The resolved server paths live in `configs/runtime_paths.server.json`.  The
-current resources are:
+Resolved server paths live in `configs/runtime_paths.server.json`. The known
+resources are:
 
 - LoMa source: `/home/disk1/LoMa`
 - LoRetta source: `/home/disk1/LoMa/third_party/LoRetta`
 - data: `/home/disk1/Data/datasets/GoogleEarth_scale_pairs`
 - LoMa-B weights: `/root/.cache/torch/hub/checkpoints/loma_B.pt`
-- shared official LoRetta weights: the resolved snapshot path recorded in the
-  runtime config and its content-addressed blob/hash in `implementation_log.md`
+- shared official LoRetta weights: the resolved snapshot and content-addressed
+  hash recorded in `implementation_log.md`
 
-Do not silently substitute checkpoints.  The test split is sealed and is not
-used for model selection or the tiny diagnostics.
+Do not silently substitute checkpoints. The test split is sealed and is not
+used for implementation choices, tiny diagnostics, checkpoint selection, or
+ablation selection.
 
 ## Fast verification
 
@@ -65,188 +78,160 @@ conda run --no-capture-output -n loma-repro \
   --output artifacts/p2_reference_checks.json --overwrite
 ```
 
-The real-resource checks require a free RTX 4090.  Select one explicitly with
-`CUDA_VISIBLE_DEVICES`; the runtime then sees it as `cuda:0`.
+The real-resource checks require a free CUDA device. Select it explicitly
+with `CUDA_VISIBLE_DEVICES`; the process then sees that device as `cuda:0`.
+Use new artifact names so the MCNet/D2 results cannot overwrite or be confused
+with the superseded eight-update artifacts:
 
 ```bash
 CUDA_VISIBLE_DEVICES=3 conda run --no-capture-output -n loma-repro \
   python -m mhinet.cli preflight \
   --runtime configs/runtime_paths.server.json \
-  --output artifacts/p0_preflight.json --overwrite
+  --output artifacts/p0_preflight_mcnet_d2.json --overwrite
 
 CUDA_VISIBLE_DEVICES=3 conda run --no-capture-output -n loma-repro \
   python -m mhinet.cli alignment \
   --runtime configs/runtime_paths.server.json \
-  --output artifacts/p0_p1_alignment.json --overwrite
+  --output artifacts/p0_p1_alignment_mcnet_d2.json --overwrite
 
 CUDA_VISIBLE_DEVICES=3 conda run --no-capture-output -n loma-repro \
   python -m mhinet.cli zero-init-smoke \
   --runtime configs/runtime_paths.server.json \
-  --output artifacts/p3_zero_init_smoke.json --overwrite
+  --output artifacts/p3_zero_init_smoke_mcnet_d2.json --overwrite
 
 CUDA_VISIBLE_DEVICES=3 conda run --no-capture-output -n loma-repro \
   python -m mhinet.cli gradient-audit \
   --runtime configs/runtime_paths.server.json \
-  --output artifacts/p4_gradient_audit.json --overwrite
+  --output artifacts/p4_gradient_audit_mcnet_d2.json --overwrite
 ```
+
+Zero initialization can make gradients before the output projection zero on
+the first optimizer step. The audit must therefore check the second and later
+steps, both MVT gradient routes, and that freezing the GHIM head does not wrap
+its forward in `no_grad` or `inference_mode`. `H0` and the cumulative corner
+state must stay attached through all six updates.
 
 ## Tiny-overfit gate
 
-The baseline command keeps B=1, effective batch 4, AdamW lr 1e-3, zero weight
-decay, no scheduler, clip 1, and trains only adapters/refinement decoders.  It
-uses controlled H0 only inside the diagnostic, never in formal training.
+The current P4 gate contains four independent experiments:
 
-Long jobs are run one experiment at a time because D1 uses the full legal
-residual fraction while D8/D4/D2/TINY-8 use `0.5`. This is the registered dense
-D1 5x5 command:
+| Experiment | Active scales | Updates |
+| --- | --- | ---: |
+| `TINY-S-D8` | `D8` | 2 |
+| `TINY-S-D4` | `D4` | 2 |
+| `TINY-S-D2` | `D2` | 2 |
+| `TINY-6` | `D8 -> D4 -> D2` | 6 |
 
-```bash
-CUDA_VISIBLE_DEVICES=3 conda run --no-capture-output -n loma-repro \
-  python -u -m mhinet.cli tiny-overfit \
-  --runtime configs/runtime_paths.server.json --experiments D1 \
-  --sample-protocol one_pair_residuals \
-  --residual-profile translation --residual-bound-fraction 1.0 \
-  --precision bf16 --sample-count 32 --seed 0 \
-  --max-steps 2000 --eval-interval 32 --threshold-mace-px 0.1 \
-  --weight-average-start-step 1536 --heartbeat-interval 8 \
-  --progress-checkpoint outputs/tiny_overfit/d1_dense5_progress.pt \
-  --output artifacts/p4_tiny_s_d1_translation_swa.json --overwrite
-```
-
-If the process is interrupted, repeat every trajectory-defining argument and
-resume the raw optimizer boundary. Keep the same one-visible-GPU topology:
+The baseline diagnostic uses B=1, effective batch 4, AdamW lr `1e-3`, zero
+weight decay, no scheduler, clip 1, and only the adapters/refinement decoders.
+Controlled `H0` belongs only to this diagnostic and is never substituted into
+formal training. Run one experiment per process with distinct output and
+progress paths; for example:
 
 ```bash
 CUDA_VISIBLE_DEVICES=3 conda run --no-capture-output -n loma-repro \
   python -u -m mhinet.cli tiny-overfit \
-  --runtime configs/runtime_paths.server.json --experiments D1 \
+  --runtime configs/runtime_paths.server.json --experiments D2 \
   --sample-protocol one_pair_residuals \
-  --residual-profile translation --residual-bound-fraction 1.0 \
+  --residual-profile translation --residual-bound-fraction 0.5 \
   --precision bf16 --sample-count 32 --seed 0 \
   --max-steps 2000 --eval-interval 32 --threshold-mace-px 0.1 \
   --weight-average-start-step 1536 --heartbeat-interval 8 \
-  --resume-progress outputs/tiny_overfit/d1_dense5_progress.pt \
-  --output artifacts/p4_tiny_s_d1_translation_swa.json
+  --progress-checkpoint outputs/tiny_overfit/mcnet_d2_scale_d2_progress.pt \
+  --output artifacts/p4_tiny_s_d2_mcnet.json --overwrite
 ```
 
-The registered diagnostic uses `--weight-average-start-step 1536` to expose a
-tiny-only equal-weight parameter-average readout while preserving every raw
-endpoint metric.  It does not alter the optimizer, loss, or formal trainer and
-must be reported as such; an averaged final tiny checkpoint is marked
-non-resumable. The separate progress checkpoint is atomically written at raw
-optimizer boundaries, contains RNG/data cursor/history/averager state, and is
-strictly bound to architecture, data manifest, runtime and weight hashes.
-Omitting the averaging flag is useful for raw-endpoint failure isolation, but
-that output cannot be merged into the registered gate.
+Repeat with `D8`, `D4`, and `TINY-6`, changing both paths. If a process is
+interrupted, repeat every trajectory-defining argument and replace
+`--progress-checkpoint PATH --overwrite` with `--resume-progress PATH`. A
+progress checkpoint is accepted only when its architecture, data manifest,
+runtime, weight hashes, RNG/data cursor, and protocol signature match exactly.
+Never resume a pre-rewrite D1 or TINY-8 checkpoint into this model.
 
-A completed final or atomic progress checkpoint can be re-evaluated without an
-optimizer, RNG restoration, backward pass, or parameter update. Legacy tiny
-checkpoints must receive every protocol field that was not embedded in them;
-the command fails on conflicts with fields that were embedded:
-
-```bash
-CUDA_VISIBLE_DEVICES=0 conda run --no-capture-output -n loma-repro \
-  python -m mhinet.cli tiny-checkpoint-audit \
-  --runtime configs/runtime_paths.server.json \
-  --checkpoint outputs/tiny_overfit/tiny-s-d1_one-pair-residuals_translation_bf16_raw_seed0.pt \
-  --experiment D1 --sample-count 32 \
-  --sample-protocol one_pair_residuals --residual-profile translation \
-  --precision bf16 --seed 0 --residual-bound-fraction 1.0 \
-  --output artifacts/p4_tiny_s_d1_full_bound_bf16_checkpoint_audit.json
-```
-
-The audit snapshots the checkpoint before reading it, strictly loads only the
-MHIR iterator, verifies that the serialized/load/post-forward state hashes are
-identical, and emits H0, each H, decoder deltas, solve diagnostics, support and
-saturation per condition. Its `diagnostic_complete` status is not a P4 pass.
-
-For a failure-isolation run only, `tiny-overfit` also accepts
-`--condition-index-offset N`. With `--sample-count 1`, this selects the exact
-controlled condition `N` from the normal 32-condition sequence. Nonzero
-offsets are embedded in checkpoint/progress metadata and filenames and cannot
-be merged into the registered gate; the default zero keeps prior progress
-signatures exactly compatible.
-
-Run D8/D4/D2/TINY-8 with the same recipe but
-`--residual-bound-fraction 0.5`, distinct progress/output paths and the matching
-`--experiments` value. Long jobs may be merged only after all five artifacts
-pass. The merge fails closed on missing experiments, protocol
-differences, failed/rejected geometry, or a metric at/above 0.1 px:
+Merge only after all four current artifacts have completed and passed:
 
 ```bash
 conda run --no-capture-output -n loma-repro \
   python -m mhinet.cli tiny-gate-merge \
-  --inputs artifacts/p4_tiny_s_d8_translation_swa.json \
-           artifacts/p4_tiny_s_d4_translation_swa.json \
-           artifacts/p4_tiny_s_d2_translation_swa.json \
-           artifacts/p4_tiny_s_d1_translation_swa.json \
-           artifacts/p4_tiny_8_translation_swa.json \
-  --output artifacts/p4_tiny_gate.json --overwrite
+  --inputs artifacts/p4_tiny_s_d8_mcnet.json \
+           artifacts/p4_tiny_s_d4_mcnet.json \
+           artifacts/p4_tiny_s_d2_mcnet.json \
+           artifacts/p4_tiny_6_mcnet.json \
+  --output artifacts/p4_tiny_gate_mcnet_d2.json --overwrite
 ```
 
-## D1 efficiency ablations
+The merger must fail closed on a missing experiment, an architecture/protocol
+hash mismatch, rejected/non-finite geometry, or a registered metric that does
+not pass. Weight-averaged tiny readout is a diagnostic and remains
+non-resumable; raw endpoint metrics must still be retained.
 
-The implemented reference remains dense D1 correlation over all
-`784 x 784 = 614,656` source positions with a `5 x 5` target search window.
-Its results are the baseline for two planned, not-yet-implemented ablations:
-sparse D1 queries guided by D2 support, and a `3 x 3` D1 search window. The
-mainline tiny gate, E00/E01 and the equal-budget E02--E05 comparison must finish
-before either ablation is evaluated. The selected main checkpoint and grouped
-validation protocol must then be frozen. The comparison draft, trajectory
-metrics, query recall/coverage diagnostics, latency, and memory fields are in
-[`docs/experiment_plan.md`](docs/experiment_plan.md).
+## D1 is deferred, not deleted
+
+D1 adapter/correlation/decoder code remains available for a future explicitly
+selected experiment. It is not part of the current model, current P4 gate, or
+E00--E05. In particular, CGMDP stops after `D2`, so merely leaving D1 classes
+in the source does not allocate a `784 x 784` descriptor.
+
+The old dense-D1 5x5 runs, interrupted checkpoints, TINY-8 gate design, and
+sparse/3x3 proposals are archived as legacy/pending revalidation. If D1 is
+reactivated later, compare it against the frozen D2 mainline from a separately
+registered branch, report accuracy as well as latency/memory, and never use
+old D1 results as if they came from the MCNet-style decoder. The deferred plan
+is detailed in [`docs/experiment_plan.md`](docs/experiment_plan.md).
 
 ## Minimal training and exact-boundary resume
 
-The following two-step configuration is an entrypoint/resume smoke, not E01
-and not evidence of accuracy:
+The following two-step run checks the entrypoint and exact optimizer-boundary
+resume only; it is not E01 and is not accuracy evidence:
 
 ```bash
 CUDA_VISIBLE_DEVICES=3 conda run --no-capture-output -n loma-repro \
   python -u -m mhinet.cli train \
   --runtime configs/runtime_paths.server.json \
   --config configs/train_minimal_smoke.json \
-  --output-dir outputs/mhinet_resume_smoke \
+  --output-dir outputs/mhinet_resume_smoke_mcnet_d2 \
   --stop-after-optimizer-step 1 --overwrite
 
 CUDA_VISIBLE_DEVICES=3 conda run --no-capture-output -n loma-repro \
   python -u -m mhinet.cli resume \
   --runtime configs/runtime_paths.server.json \
   --config configs/train_minimal_smoke.json \
-  --output-dir outputs/mhinet_resume_smoke \
-  --resume outputs/mhinet_resume_smoke/checkpoints/step_0000001.pt
+  --output-dir outputs/mhinet_resume_smoke_mcnet_d2 \
+  --resume outputs/mhinet_resume_smoke_mcnet_d2/checkpoints/step_0000001.pt
 ```
 
-Formal E01 is gated.  Once and only once a complete tiny artifact has passed:
+Formal E01 is gated. Run it only after the current four-experiment gate is
+explicitly `passed`:
 
 ```bash
 CUDA_VISIBLE_DEVICES=3 conda run --no-capture-output -n loma-repro \
   python -u -m mhinet.cli train \
   --runtime configs/runtime_paths.server.json \
   --config configs/e01_heads_v1.2.json \
-  --tiny-gate-artifact artifacts/p4_tiny_gate.json \
-  --output-dir outputs/E01_heads_seed0
+  --tiny-gate-artifact artifacts/p4_tiny_gate_mcnet_d2.json \
+  --output-dir outputs/E01_heads_mcnet_d2_seed0
 ```
 
 ## Evaluation and profiling
 
-Evaluation reports H0, every H update, final H, failures, input/native-pixel
-geometry, per-pair rows, latency, and peak allocation.  Use `val` during model
-development.
+Evaluation must report `H0`, all six update states, explicit `H_final`, solve
+failures, input/native-pixel geometry, per-pair rows, latency, and peak memory.
+Use grouped `val` during development.
 
 ```bash
 CUDA_VISIBLE_DEVICES=3 conda run --no-capture-output -n loma-repro \
   python -m mhinet.cli evaluate \
   --runtime configs/runtime_paths.server.json --split val \
-  --checkpoint outputs/E01_heads_seed0/checkpoints/step_0010000.pt \
-  --output-dir outputs/E01_heads_seed0/final_val
+  --checkpoint outputs/E01_heads_mcnet_d2_seed0/checkpoints/step_0010000.pt \
+  --output-dir outputs/E01_heads_mcnet_d2_seed0/final_val
 
 CUDA_VISIBLE_DEVICES=3 conda run --no-capture-output -n loma-repro \
   python -m mhinet.cli profile \
   --runtime configs/runtime_paths.server.json --profile joint \
-  --optimizer-steps 2 --output artifacts/p4_profile_joint_784.json --overwrite
+  --optimizer-steps 2 \
+  --output artifacts/p4_profile_joint_mcnet_d2.json --overwrite
 ```
 
-`completed` in a training `run.json` means only that the requested optimizer
-budget finished.  Model validation requires the recorded validation metrics;
-code completion and checkpoint creation are never labeled as accuracy success.
+`completed` in `run.json` means only that the requested optimizer budget
+finished. It must never be relabeled as model validation success without the
+registered held-out evidence.

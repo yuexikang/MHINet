@@ -1,0 +1,364 @@
+{
+  "gate": "P4_gradient_audit",
+  "status": "passed",
+  "pair_id": "current__37.534900126.607065_pair0",
+  "device": "cuda:0",
+  "build": {
+    "architecture_path": "/home/disk1/MHINet/configs/mhinet_mcnet_v1.2.json",
+    "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+    "mhir_revision": "mcnet_correlation_decoder_784_v1",
+    "mcnet_reference_commit": "cc03479689b3cf40f0c384954f338b434765c155",
+    "provider": {
+      "loma_root": "/home/disk1/LoMa",
+      "loma_checkpoint": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+      "dino_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "selected_stage1_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "loretta_loaded_keys": 807,
+      "locator": {
+        "source": "official_loretta_checkpoint",
+        "overridden": false
+      },
+      "descriptor_initialization": {
+        "migrated_tensors": 364,
+        "vgg_tensors": 84,
+        "decoder_tensors": 280,
+        "top_refiner_mapping": "LoMa-B scale 14 -> DINOv3 scale 16"
+      },
+      "ownership": {
+        "dino_wrapper_instances": 1,
+        "mvt_object_references": 1,
+        "stage1_head_contains_dino": 0,
+        "stage1_head_contains_mvt": 0,
+        "decoder_scales": [
+          "16",
+          "8",
+          "4",
+          "2",
+          "1"
+        ]
+      },
+      "legacy_training_wrappers_reused": false,
+      "safe_stage1_fitter": true
+    },
+    "training_parameters": {
+      "profile": "heads",
+      "groups": {
+        "new_modules": {
+          "parameters": 1176712,
+          "trainable_parameters": 833222,
+          "tensor_count": 140,
+          "trainable_tensor_count": 99
+        },
+        "dedode": {
+          "parameters": 8219297,
+          "trainable_parameters": 0,
+          "tensor_count": 190,
+          "trainable_tensor_count": 0
+        },
+        "vgg": {
+          "parameters": 10592064,
+          "trainable_parameters": 0,
+          "tensor_count": 48,
+          "trainable_tensor_count": 0
+        },
+        "mvt": {
+          "parameters": 87417088,
+          "trainable_parameters": 0,
+          "tensor_count": 150,
+          "trainable_tensor_count": 0
+        },
+        "dino": {
+          "parameters": 227564544,
+          "trainable_parameters": 0,
+          "tensor_count": 259,
+          "trainable_tensor_count": 0
+        },
+        "stage1_head_parameters": {
+          "parameters": 2957572,
+          "trainable_parameters": 0,
+          "tensor_count": 10,
+          "trainable_tensor_count": 0
+        }
+      },
+      "total_trainable_parameters": 833222,
+      "new_parameters": 1176712,
+      "dino_trainable_parameters": 0,
+      "stage1_head_trainable_parameters": 0
+    }
+  },
+  "heads_cached_feature_two_steps": [
+    {
+      "adapters": {
+        "8": {
+          "parameter_tensors": 1,
+          "gradient_tensors": 1,
+          "finite": true,
+          "norm": 0.0,
+          "nonzero_elements": 0
+        },
+        "4": {
+          "parameter_tensors": 1,
+          "gradient_tensors": 1,
+          "finite": true,
+          "norm": 0.0,
+          "nonzero_elements": 0
+        },
+        "2": {
+          "parameter_tensors": 1,
+          "gradient_tensors": 1,
+          "finite": true,
+          "norm": 0.0,
+          "nonzero_elements": 0
+        }
+      },
+      "decoder_out_conv": {
+        "8": {
+          "parameter_tensors": 2,
+          "gradient_tensors": 2,
+          "finite": true,
+          "norm": 95.17706566250611,
+          "nonzero_elements": 120
+        },
+        "4": {
+          "parameter_tensors": 2,
+          "gradient_tensors": 2,
+          "finite": true,
+          "norm": 28.574515388497844,
+          "nonzero_elements": 122
+        },
+        "2": {
+          "parameter_tensors": 2,
+          "gradient_tensors": 2,
+          "finite": true,
+          "norm": 5.026110944781069,
+          "nonzero_elements": 118
+        }
+      },
+      "decoder_upstream": {
+        "8": {
+          "parameter_tensors": 26,
+          "gradient_tensors": 26,
+          "finite": true,
+          "norm": 0.0,
+          "nonzero_elements": 0
+        },
+        "4": {
+          "parameter_tensors": 30,
+          "gradient_tensors": 30,
+          "finite": true,
+          "norm": 0.0,
+          "nonzero_elements": 0
+        },
+        "2": {
+          "parameter_tensors": 34,
+          "gradient_tensors": 34,
+          "finite": true,
+          "norm": 0.0,
+          "nonzero_elements": 0
+        }
+      },
+      "step_before_optimizer": 0,
+      "loss": 4.003545761108398,
+      "all_update_H_requires_grad": true,
+      "all_proposals_require_grad": true
+    },
+    {
+      "adapters": {
+        "8": {
+          "parameter_tensors": 1,
+          "gradient_tensors": 1,
+          "finite": true,
+          "norm": 0.20862219970085416,
+          "nonzero_elements": 16384
+        },
+        "4": {
+          "parameter_tensors": 1,
+          "gradient_tensors": 1,
+          "finite": true,
+          "norm": 0.08164336254695502,
+          "nonzero_elements": 16384
+        },
+        "2": {
+          "parameter_tensors": 1,
+          "gradient_tensors": 1,
+          "finite": true,
+          "norm": 0.009645949893175543,
+          "nonzero_elements": 8192
+        }
+      },
+      "decoder_out_conv": {
+        "8": {
+          "parameter_tensors": 2,
+          "gradient_tensors": 2,
+          "finite": true,
+          "norm": 122.61030588565954,
+          "nonzero_elements": 122
+        },
+        "4": {
+          "parameter_tensors": 2,
+          "gradient_tensors": 2,
+          "finite": true,
+          "norm": 45.570702922423195,
+          "nonzero_elements": 124
+        },
+        "2": {
+          "parameter_tensors": 2,
+          "gradient_tensors": 2,
+          "finite": true,
+          "norm": 7.3437136385403,
+          "nonzero_elements": 121
+        }
+      },
+      "decoder_upstream": {
+        "8": {
+          "parameter_tensors": 26,
+          "gradient_tensors": 26,
+          "finite": true,
+          "norm": 5.732105985155314,
+          "nonzero_elements": 218475
+        },
+        "4": {
+          "parameter_tensors": 30,
+          "gradient_tensors": 30,
+          "finite": true,
+          "norm": 2.9763941233409463,
+          "nonzero_elements": 256558
+        },
+        "2": {
+          "parameter_tensors": 34,
+          "gradient_tensors": 34,
+          "finite": true,
+          "norm": 0.3369244594358379,
+          "nonzero_elements": 283225
+        }
+      },
+      "step_before_optimizer": 1,
+      "loss": 3.055187702178955,
+      "all_update_H_requires_grad": true,
+      "all_proposals_require_grad": true
+    }
+  ],
+  "final_only_decoder_gradients": {
+    "8": {
+      "parameter_tensors": 28,
+      "gradient_tensors": 28,
+      "finite": true,
+      "norm": 0.8526484710882154,
+      "nonzero_elements": 218479
+    },
+    "4": {
+      "parameter_tensors": 32,
+      "gradient_tensors": 32,
+      "finite": true,
+      "norm": 0.4317691547897385,
+      "nonzero_elements": 254630
+    },
+    "2": {
+      "parameter_tensors": 36,
+      "gradient_tensors": 36,
+      "finite": true,
+      "norm": 0.17068829374325611,
+      "nonzero_elements": 282774
+    }
+  },
+  "mvt_H0_route": {
+    "loss": 0.010213173925876617,
+    "mvt": {
+      "parameter_tensors": 150,
+      "gradient_tensors": 150,
+      "finite": true,
+      "norm": 0.08825396055627135,
+      "nonzero_elements": 87269365
+    },
+    "vgg": {
+      "parameter_tensors": 48,
+      "gradient_tensors": 0,
+      "finite": true,
+      "norm": 0.0,
+      "nonzero_elements": 0
+    },
+    "dedode": {
+      "parameter_tensors": 190,
+      "gradient_tensors": 0,
+      "finite": true,
+      "norm": 0.0,
+      "nonzero_elements": 0
+    },
+    "dino_grad_all_none": true,
+    "stage1_head_grad_all_none": true,
+    "call_counts": {
+      "dino": 1,
+      "mvt": 1,
+      "vgg": 0,
+      "dedode_decode_calls": 0,
+      "dedode_steps": 0,
+      "dedode_scale1": 0
+    }
+  },
+  "mvt_pyramid_route": {
+    "diagnostic_loss": -1.078125,
+    "mvt": {
+      "parameter_tensors": 150,
+      "gradient_tensors": 150,
+      "finite": true,
+      "norm": 5.70597208935233,
+      "nonzero_elements": 87274531
+    },
+    "vgg": {
+      "parameter_tensors": 48,
+      "gradient_tensors": 48,
+      "finite": true,
+      "norm": 29.72965262614817,
+      "nonzero_elements": 10592051
+    },
+    "dedode": {
+      "parameter_tensors": 190,
+      "gradient_tensors": 76,
+      "finite": true,
+      "norm": 20.862265484334195,
+      "nonzero_elements": 7335168
+    },
+    "adapter_D8": {
+      "parameter_tensors": 1,
+      "gradient_tensors": 1,
+      "finite": true,
+      "norm": 3.408970297789486,
+      "nonzero_elements": 16384
+    },
+    "decoder_D8": {
+      "parameter_tensors": 28,
+      "gradient_tensors": 28,
+      "finite": true,
+      "norm": 1334.3184261765332,
+      "nonzero_elements": 217882
+    },
+    "dino_grad_all_none": true,
+    "stage1_head_grad_all_none": true,
+    "call_counts": {
+      "dino": 1,
+      "mvt": 1,
+      "vgg": 1,
+      "dedode_decode_calls": 1,
+      "dedode_steps": 2,
+      "dedode_scale1": 0
+    },
+    "H0_detach_note": "H_gt.detach() is used only in this diagnostic to isolate the pyramid route; production joint forward does not detach H0/H/T."
+  },
+  "assertions": {
+    "step0_all_out_conv_nonzero": true,
+    "step0_all_upstream_zero_expected": true,
+    "step1_all_decoder_and_adapter_upstream_nonzero": true,
+    "final_only_reaches_all_scales": true,
+    "mvt_H0_route_nonzero": true,
+    "mvt_pyramid_route_nonzero": true,
+    "vgg_pyramid_route_nonzero": true,
+    "dedode_pyramid_route_nonzero": true,
+    "dino_and_stage1_head_parameter_grads_none": true,
+    "d1_registered_but_inactive_grad_none": true
+  },
+  "peak_allocated_bytes": {
+    "heads_cached_six_round": 3103597056,
+    "joint_branch_diagnostics": 5821080576
+  },
+  "scope_note": "This audits full cached-feature six-round heads backward and the two real MVT routes separately. A full 784 joint six-round backward is a separate smoke/profile gate."
+}

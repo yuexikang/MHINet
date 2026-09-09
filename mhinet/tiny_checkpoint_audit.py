@@ -41,6 +41,7 @@ _CANONICAL_EXPERIMENTS = {
     "TINY-S-D4": (4,),
     "TINY-S-D2": (2,),
     "TINY-S-D1": (1,),
+    "TINY-6": (8, 4, 2),
     "TINY-8": (8, 4, 2, 1),
 }
 _PROTOCOL_FIELDS = (
@@ -271,10 +272,12 @@ def _actual_resume_context(
     runtime: RuntimePaths,
     *,
     architecture_sha256: str,
+    mhir_revision: str,
     training_manifest_sha256: str,
 ) -> dict[str, Any]:
     return {
         "architecture_sha256": architecture_sha256,
+        "mhir_revision": mhir_revision,
         "training_manifest_sha256": training_manifest_sha256,
         "runtime_config": (
             None if runtime.source_path is None else _file_identity(runtime.source_path)
@@ -474,6 +477,7 @@ def run_checkpoint_audit(
         actual_context = _actual_resume_context(
             runtime,
             architecture_sha256=str(build_report["architecture_sha256"]),
+            mhir_revision=str(build_report["mhir_revision"]),
             training_manifest_sha256=str(cache_report["manifest_sha256"]),
         )
         recorded_context = header["signature"].get("resume_context")
@@ -491,6 +495,10 @@ def run_checkpoint_audit(
             map_location="cpu",
             strict=True,
             restore_rng=False,
+            expected_metadata={
+                "architecture_sha256": build_report["architecture_sha256"],
+                "mhir_revision": build_report["mhir_revision"],
+            },
         )
         load_report.pop("auxiliary_state", None)
         loaded_state_sha256 = _state_dict_sha256(model.iterator.state_dict())

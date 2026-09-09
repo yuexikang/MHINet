@@ -3,8 +3,9 @@
 This module deliberately calls the reusable LoMa components below their legacy
 ``inference_mode`` wrappers. DINOv3 remains frozen; the frozen GHIM homography
 head still participates in autograd with respect to its MVT input. CGMDP
-combines MVT context, VGG features, and a DeDoDe-style cumulative decoder; its
-D8/D4/D2/D1 outputs are fused matching descriptors, not DeDoDe-only features.
+combines MVT context, VGG features, and a DeDoDe-style cumulative decoder. The
+mainline stops after D2 and emits D8/D4/D2; D1 remains an explicit opt-in path.
+These are fused matching descriptors, not DeDoDe-only features.
 """
 
 from __future__ import annotations
@@ -280,10 +281,13 @@ class SharedFeatureProvider(nn.Module):
         expected = ["16", "8", "4", "2", "1"]
         if list(self.dedode.scales) != expected:
             raise AssertionError(f"Unexpected DeDoDe scales: {self.dedode.scales}")
-        self._call_counts["dedode_full_pyramid"] += 1
+        self._call_counts["dedode_decode_calls"] += 1
         for index, (feature_map, scale) in enumerate(
             zip(reversed(features), self.dedode.scales)
         ):
+            self._call_counts["dedode_steps"] += 1
+            if scale == "1":
+                self._call_counts["dedode_scale1"] += 1
             delta, context = self.dedode(feature_map, scale=scale, context=context)
             descriptions = descriptions + delta
             if not isinstance(descriptions, torch.Tensor):
@@ -312,7 +316,7 @@ class SharedFeatureProvider(nn.Module):
         self,
         images: torch.Tensor,
         *,
-        pyramid_scales: tuple[int, ...] = (8, 4, 2, 1),
+        pyramid_scales: tuple[int, ...] = (8, 4, 2),
         compute_stage1: bool = True,
     ) -> dict[str, Any]:
         if images.shape != (1, 2, 3, 784, 784):
@@ -327,7 +331,14 @@ class SharedFeatureProvider(nn.Module):
             raise ValueError(
                 "pyramid_scales must be a coarse-to-fine prefix of (8,4,2,1)"
             )
-        self._call_counts = {"dino": 1, "mvt": 0, "vgg": 0, "dedode_full_pyramid": 0}
+        self._call_counts = {
+            "dino": 1,
+            "mvt": 0,
+            "vgg": 0,
+            "dedode_decode_calls": 0,
+            "dedode_steps": 0,
+            "dedode_scale1": 0,
+        }
         # The reused extraction routine has no_grad only around DINO, which is required.
         pair_descriptors, token_size = self.shared_encoder.extract_pair_descriptors(
             flat_images

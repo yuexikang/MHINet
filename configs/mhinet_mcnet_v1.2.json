@@ -1,0 +1,175 @@
+{
+  "status": "implemented_pending_revalidation",
+  "model_name": "MHINet",
+  "version": "1.2-mcnet-mhir",
+  "base_commit": "899fdb99a4076e312196bbbf99a3c329739b5d7a",
+  "mhir_revision": "mcnet_correlation_decoder_784_v1",
+  "mcnet_reference": {
+    "repository": "https://github.com/zjuzhk/MCNet.git",
+    "commit": "cc03479689b3cf40f0c384954f338b434765c155",
+    "files": [
+      "update.py",
+      "network.py",
+      "utils/utils.py"
+    ]
+  },
+  "input": {
+    "size_hw": [784, 784],
+    "pair_batch_size": 1,
+    "color": "RGB",
+    "range": [0, 1]
+  },
+  "stage1": {
+    "module_name": "GHIM",
+    "reuse_existing": true,
+    "shared_dino_mvt": true,
+    "dino_frozen": true,
+    "mvt_trainable_in_joint": true,
+    "head_parameters_frozen": true,
+    "detach_H0_in_joint": false
+  },
+  "pyramid": {
+    "module_name": "CGMDP",
+    "mainline_scales": [8, 4, 2],
+    "registered_optional_scales": [1],
+    "cumulative_channels": 256,
+    "run_scale1_by_default": false,
+    "mainline_path": "F_MVT_to_D16_to_D8_to_D4_to_D2"
+  },
+  "adapter": {
+    "channels": [64, 64, 32, 32],
+    "kernel": 1,
+    "bias": false,
+    "activation": "none",
+    "normalize": "l2",
+    "epsilon": 1e-6,
+    "share_across_views": true
+  },
+  "iteration": {
+    "module_name": "MHIR",
+    "scales": [8, 4, 2, 1],
+    "primary_scales": [8, 4, 2],
+    "iterations_per_scale": [2, 2, 2, 2],
+    "primary_total_updates": 6,
+    "registered_optional_d1_updates": 2,
+    "share_within_scale": true,
+    "share_across_scales": false,
+    "detach_between_updates": false,
+    "state": "cumulative_four_corner_displacement_from_H0"
+  },
+  "correlation": {
+    "query_policy": "full_source_grid",
+    "sampling": "direct_H_query_plus_local_target_offset",
+    "radius": [4, 4, 3, 2],
+    "candidates": [81, 81, 49, 25],
+    "candidate_order": "dy_outer_dx_inner_ascending",
+    "renormalize_sampled_features": true,
+    "softmax": false,
+    "invalid_value": 0,
+    "query_chunk_size": 1024,
+    "activation_checkpoint_training": true,
+    "align_corners": false,
+    "decoder_consumes_valid_mask": false
+  },
+  "decoder": {
+    "family": "MCNet_CorrelationDecoder_adapted_784",
+    "input_order": ["correlation"],
+    "input_channels": [81, 81, 49, 25],
+    "stem": {
+      "kernel": 1,
+      "channels": 64,
+      "bias": true,
+      "activation": "none"
+    },
+    "down_blocks": [6, 7, 8, 9],
+    "down_block": {
+      "channels": 64,
+      "conv_kernel": 3,
+      "conv_stride": 1,
+      "padding": 1,
+      "conv_bias": true,
+      "group_norm_groups": 8,
+      "activation": "ReLU",
+      "pool": "MaxPool2d",
+      "pool_kernel": 2,
+      "pool_stride": 2,
+      "pool_ceil_mode": true
+    },
+    "spatial_paths": [
+      [98, 49, 25, 13, 7, 4, 2],
+      [196, 98, 49, 25, 13, 7, 4, 2],
+      [392, 196, 98, 49, 25, 13, 7, 4, 2],
+      [784, 392, 196, 98, 49, 25, 13, 7, 4, 2]
+    ],
+    "corner_grid_hw": [2, 2],
+    "dimension_adaptation": "ceil_mode_max_pool_for_non_power_of_two_784_pyramid",
+    "adaptive_pool": false,
+    "output_conv": {
+      "kernel": 1,
+      "channels": 2,
+      "bias": true,
+      "grid_to_corner_order": "permute_BCHW_to_BHWC_then_row_major_TL_TR_BL_BR"
+    },
+    "final_projection_init": "all_zero",
+    "output_activation": "tanh",
+    "max_delta_input_pixels": [32, 16, 6, 2],
+    "declared_differences_from_official_mcnet": [
+      "784_dimension_ceil_mode_pooling",
+      "per_scale_candidate_windows_9_9_7_5",
+      "zero_initialized_output_projection",
+      "tanh_per_scale_input_pixel_bounds",
+      "guarded_normalized_float32_homography_state"
+    ]
+  },
+  "geometry": {
+    "H_direction": "A_to_B_normalized",
+    "corner_order": ["TL", "TR", "BL", "BR"],
+    "state": "four_corner_normalized_displacement",
+    "update": "T_proposal_equals_T_plus_normalized_delta_then_four_point_DLT",
+    "solver": "8x8_solve_ex_h33_equals_1",
+    "dtype": "float32",
+    "minimum_supported_queries": 16,
+    "condition_max": 1000000,
+    "projection_denominator_min": 0.0001,
+    "validity_grid_hw": [9, 9],
+    "rejected_update": "retain_previous_H_and_T",
+    "solve_safety": "screen_before_differentiable_solve_then_postcheck"
+  },
+  "loss": {
+    "profile": "sequence_corner_l1",
+    "proposal_corner_weight": 1.0,
+    "sequence_gamma": 1.0,
+    "normalize_sequence_weights": true,
+    "error_units": "target_input_pixels_784",
+    "supervise_pre_guard_proposal": true,
+    "default_grid_loss_weight": 0.0,
+    "default_correlation_aux_weight": 0.0,
+    "fgo_enabled": false
+  },
+  "training": {
+    "initial_phase": "heads",
+    "target_phase": "joint",
+    "optimizer": "AdamW",
+    "learning_rates": {
+      "new_modules": 0.0001,
+      "dedode": 0.00001,
+      "vgg": 0.000005,
+      "mvt": 0.000001
+    },
+    "weight_decay": 0.0001,
+    "gradient_accumulation": 4,
+    "gradient_clip_norm": 1.0,
+    "feature_precision_cuda": "bfloat16",
+    "geometry_precision": "float32",
+    "freeze_dino_eval": true,
+    "default_h0_aux_loss_weight": 0
+  },
+  "expected_new_parameters": 1176712,
+  "expected_mainline_trainable_new_parameters": 833222,
+  "d1_status": "implemented_but_inactive_no_descriptor_decode_no_optimizer_membership",
+  "new_planar_or_confidence_heads": false,
+  "runtime_paths": "provided_separately_via_cli_no_hardcoded_paths",
+  "results": null,
+  "loss_revision": "1.1",
+  "training_revision": "1.2"
+}

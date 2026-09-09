@@ -1,12 +1,19 @@
 {
-  "registration_status": "draft_non_executable",
+  "registration_status": "deferred_non_executable_after_d2_mainline",
   "training_revision": "1.2",
-  "purpose": "post_mainline_D1_efficiency_comparison",
+  "purpose": "future_D1_accuracy_cost_comparison_against_frozen_D2_mainline",
+  "current_mainline": {
+    "active_scales": [8, 4, 2],
+    "updates": 6,
+    "cgmdp_stops_at": "D2",
+    "D1_executed": false
+  },
   "ordering_prerequisites": [
-    "P0_P4_dense_D1_tiny_gate_passed",
+    "P0_P4_MCNet_D2_TINY6_gate_passed",
     "E00_E01_completed",
     "E02_E05_equal_start_equal_budget_completed",
-    "main_configuration_selected_on_validation_only"
+    "main_D2_configuration_selected_on_validation_only",
+    "separate_D1_architecture_registration_and_hash_frozen"
   ],
   "baseline": {
     "variant_id": "D1-DENSE-5",

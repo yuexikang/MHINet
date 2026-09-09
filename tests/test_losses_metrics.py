@@ -23,8 +23,8 @@ class LossAndMetricTests(unittest.TestCase):
         corners = image_corners((784, 784)).reshape(1, 1, 4, 2)
         return {
             "H0_norm": torch.eye(3).reshape(1, 3, 3),
-            "H_updates_norm": torch.eye(3).reshape(1, 1, 3, 3).repeat(1, 8, 1, 1),
-            "proposal_Q_norm": corners.repeat(1, 8, 1, 1),
+            "H_updates_norm": torch.eye(3).reshape(1, 1, 3, 3).repeat(1, 6, 1, 1),
+            "proposal_Q_norm": corners.repeat(1, 6, 1, 1),
             "stage1_valid": torch.tensor([True]),
         }
 
@@ -34,10 +34,10 @@ class LossAndMetricTests(unittest.TestCase):
         outputs["proposal_Q_norm"][..., 0] += 4.0 / 784.0  # +2 target pixels in x
         result = sequence_corner_l1(outputs, torch.eye(3).reshape(1, 3, 3))
         self.assertFalse(bool(result["skip_step"]))
-        self.assertEqual(result["updates"], 8)
+        self.assertEqual(result["updates"], 6)
         torch.testing.assert_close(result["loss"], torch.tensor(1.0), atol=2e-5, rtol=0)
         torch.testing.assert_close(
-            result["per_update_corner_l1_px"], torch.ones(1, 8), atol=2e-5, rtol=0
+            result["per_update_corner_l1_px"], torch.ones(1, 6), atol=2e-5, rtol=0
         )
 
     def test_all_invalid_requests_skip(self) -> None:
@@ -54,9 +54,9 @@ class LossAndMetricTests(unittest.TestCase):
         metrics = homography_trajectory_metrics(
             outputs, torch.eye(3).reshape(1, 3, 3)
         )
-        torch.testing.assert_close(metrics["trajectory_mace_px"], torch.zeros(1, 9))
+        torch.testing.assert_close(metrics["trajectory_mace_px"], torch.zeros(1, 7))
         torch.testing.assert_close(
-            metrics["trajectory_grid5_error_px"], torch.zeros(1, 9)
+            metrics["trajectory_grid5_error_px"], torch.zeros(1, 7)
         )
 
 

@@ -6,6 +6,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
+from mhinet.config import load_architecture_config
 from mhinet.train import (
     DeterministicIndexStream,
     TrainConfig,
@@ -20,12 +21,14 @@ class TrainingProtocolTests(unittest.TestCase):
             "TINY-S-D8": [8],
             "TINY-S-D4": [4],
             "TINY-S-D2": [2],
-            "TINY-S-D1": [1],
-            "TINY-8": [8, 4, 2, 1],
+            "TINY-6": [8, 4, 2],
         }
         payload = {
-            "gate": "P4_TINY_S_TINY_8",
+            "gate": "P4_TINY_S_TINY_6",
             "status": "passed",
+            "data_and_resource_evidence": {
+                "architecture_sha256": load_architecture_config().sha256,
+            },
             "protocol": {
                 "training_revision": "1.2",
                 "loss": "uniform proposal-corner coordinate L1",
@@ -106,6 +109,15 @@ class TrainingProtocolTests(unittest.TestCase):
                 side_effect=metric_errors,
             ):
                 self.assertIsNotNone(_validate_tiny_gate(path, True))
+                payload["data_and_resource_evidence"]["architecture_sha256"] = (
+                    "f" * 64
+                )
+                path.write_text(json.dumps(payload), encoding="utf-8")
+                with self.assertRaises(RuntimeError):
+                    _validate_tiny_gate(path, True)
+                payload["data_and_resource_evidence"]["architecture_sha256"] = (
+                    load_architecture_config().sha256
+                )
                 payload["experiments"][0]["final"]["H_final_mace_px"][
                     "mean"
                 ] = 0.2
@@ -130,10 +142,10 @@ class TrainingProtocolTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 TrainConfig.from_json(path)
 
-    def test_formal_e01_requires_gate_and_full_eight_round_schedule(self) -> None:
+    def test_formal_e01_requires_gate_and_full_six_round_schedule(self) -> None:
         config = TrainConfig.from_json("configs/e01_heads_v1.2.json")
         self.assertTrue(config.raw["require_passed_tiny_gate"])
-        self.assertEqual(config.active_scales, (8, 4, 2, 1))
+        self.assertEqual(config.active_scales, (8, 4, 2))
         self.assertEqual(config.raw["iterations_per_scale"], 2)
 
     def test_deterministic_index_stream_resumes_at_exact_boundary(self) -> None:

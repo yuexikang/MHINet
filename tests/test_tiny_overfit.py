@@ -472,7 +472,7 @@ class TinyOverfitProtocolTests(unittest.TestCase):
                     else:
                         self.assertEqual(actual, expected)
 
-    def test_experiment_parser_has_four_single_scales_and_eight_round(self) -> None:
+    def test_default_experiment_parser_stops_at_d2_and_six_rounds(self) -> None:
         parsed = parse_experiments("all")
         self.assertEqual(
             parsed,
@@ -480,9 +480,12 @@ class TinyOverfitProtocolTests(unittest.TestCase):
                 ("TINY-S-D8", (8,)),
                 ("TINY-S-D4", (4,)),
                 ("TINY-S-D2", (2,)),
-                ("TINY-S-D1", (1,)),
-                ("TINY-8", (8, 4, 2, 1)),
+                ("TINY-6", (8, 4, 2)),
             ),
+        )
+        self.assertEqual(
+            parse_experiments("D1,TINY-8"),
+            (("TINY-S-D1", (1,)), ("TINY-8", (8, 4, 2, 1))),
         )
 
     def test_controlled_h0_is_deterministic_legal_and_inside_range(self) -> None:

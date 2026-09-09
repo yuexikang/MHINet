@@ -1,4 +1,4 @@
-"""P4 TINY-S/TINY-8 learnability checks on 32 fixed diagnostic samples.
+"""P4 TINY-S/TINY-6 learnability checks on 32 fixed diagnostic samples.
 
 The diagnostic deliberately differs from formal training in one documented
 way: H0 is constructed from the exact target homography plus a small,
@@ -46,9 +46,12 @@ from .modules import SCALE_SPECS, build_multiscale_modules
 
 
 TARGET_HW = (784, 784)
-ALL_SCALES = (8, 4, 2, 1)
+MAINLINE_SCALES = (8, 4, 2)
+REGISTERED_SCALES = (8, 4, 2, 1)
+# Compatibility alias used by optional D1 diagnostics and internal module reset.
+ALL_SCALES = REGISTERED_SCALES
 TINY_PROGRESS_FORMAT = "mhinet.tiny_progress"
-TINY_PROGRESS_VERSION = 1
+TINY_PROGRESS_VERSION = 2
 
 
 @dataclass
@@ -106,19 +109,27 @@ def parse_experiments(value: str) -> tuple[tuple[str, tuple[int, ...]], ...]:
         "1": (1,),
         "TINY-8": ALL_SCALES,
         "EIGHT": ALL_SCALES,
+        "TINY-6": MAINLINE_SCALES,
+        "SIX": MAINLINE_SCALES,
     }
     tokens = [token.strip().upper() for token in value.split(",") if token.strip()]
     if not tokens or tokens == ["ALL"]:
-        tokens = ["D8", "D4", "D2", "D1", "TINY-8"]
+        tokens = ["D8", "D4", "D2", "TINY-6"]
     parsed: list[tuple[str, tuple[int, ...]]] = []
     seen: set[str] = set()
     for token in tokens:
         if token not in aliases:
             raise ValueError(
-                f"Unknown tiny experiment {token!r}; use D8,D4,D2,D1,TINY-8 or all"
+                "Unknown tiny experiment "
+                f"{token!r}; use D8,D4,D2,TINY-6 or optional D1,TINY-8"
             )
         scales = aliases[token]
-        name = "TINY-8" if scales == ALL_SCALES else f"TINY-S-D{scales[0]}"
+        if scales == MAINLINE_SCALES:
+            name = "TINY-6"
+        elif scales == ALL_SCALES:
+            name = "TINY-8"
+        else:
+            name = f"TINY-S-D{scales[0]}"
         if name not in seen:
             parsed.append((name, scales))
             seen.add(name)
@@ -174,7 +185,14 @@ def cache_exact_training_features(
         torch.cuda.synchronize(device)
     started = time.perf_counter()
     cache: list[CachedTinySample] = []
-    aggregate_calls = {"dino": 0, "mvt": 0, "vgg": 0, "dedode_full_pyramid": 0}
+    aggregate_calls = {
+        "dino": 0,
+        "mvt": 0,
+        "vgg": 0,
+        "dedode_decode_calls": 0,
+        "dedode_steps": 0,
+        "dedode_scale1": 0,
+    }
     feature_shapes: dict[int, list[int]] = {}
     feature_dtypes: dict[int, str] = {}
     with torch.no_grad():
@@ -791,6 +809,13 @@ def run_one_tiny_experiment(
         resume_context=resume_context,
         condition_index_offset=condition_index_offset,
     )
+    signature_context = progress_signature["resume_context"]
+    architecture_sha256 = str(
+        signature_context.get("architecture_sha256", "unbound-test-context")
+    )
+    mhir_revision = str(
+        signature_context.get("mhir_revision", "unbound-test-context")
+    )
     resume_path = (
         None if resume_progress is None else Path(resume_progress).expanduser().resolve()
     )
@@ -1053,6 +1078,8 @@ def run_one_tiny_experiment(
                     "checkpoint_contains_weight_average": False,
                     "optimizer_resume_supported": True,
                     "tiny_progress_signature": progress_signature,
+                    "architecture_sha256": architecture_sha256,
+                    "mhir_revision": mhir_revision,
                 },
                 auxiliary_state={
                     "format": TINY_PROGRESS_FORMAT,
@@ -1341,12 +1368,14 @@ def run_one_tiny_experiment(
         if condition_index_offset == 0
         else f"_condition-offset-{condition_index_offset}"
     )
+    architecture_token = architecture_sha256[:12]
     checkpoint_path = (
         runtime.output_root
         / "tiny_overfit"
         / (
             f"{name.lower()}_{sample_protocol.replace('_', '-')}_"
             f"{residual_profile}_{precision}_{checkpoint_suffix}_"
+            f"arch-{architecture_token}_"
             f"bound-{_path_float_token(residual_bound_fraction)}_"
             f"budget-{max_steps}_seed{seed}{condition_suffix}.pt"
         )
@@ -1389,6 +1418,8 @@ def run_one_tiny_experiment(
             "optimizer_resume_supported": not primary_uses_weight_average,
             "pair_ids": [sample.pair_id for sample in cache],
             "tiny_progress_signature": progress_signature,
+            "architecture_sha256": architecture_sha256,
+            "mhir_revision": mhir_revision,
         },
     )
     checkpoint["sha256"] = sha256_file(checkpoint_path)
@@ -1637,6 +1668,7 @@ def run_tiny_overfit(
     hash_cache: dict[Path, str] = {}
     resume_context = {
         "architecture_sha256": build_report["architecture_sha256"],
+        "mhir_revision": build_report["mhir_revision"],
         "training_manifest_sha256": cache_report["manifest_sha256"],
         "runtime_config": (
             None
@@ -1683,7 +1715,7 @@ def run_tiny_overfit(
         torch.cuda.empty_cache()
 
     report: dict[str, Any] = {
-        "gate": "P4_TINY_S_TINY_8",
+        "gate": "P4_TINY_S_TINY_6",
         "status": "running",
         "protocol": {
             "training_revision": "1.2",
@@ -1760,7 +1792,10 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--experiments",
         default="all",
-        help="Comma-separated D8,D4,D2,D1,TINY-8, or all",
+        help=(
+            "Mainline: D8,D4,D2,TINY-6 or all; optional retained D1 path: "
+            "D1,TINY-8"
+        ),
     )
     parser.add_argument("--sample-count", type=int, default=32)
     parser.add_argument("--seed", type=int, default=0)
@@ -1802,7 +1837,7 @@ def main(argv: list[str] | None = None) -> int:
         default=0.5,
         help=(
             "Fraction of the coarsest active decoder update bound used for "
-            "controlled H0 residuals; the registered D1 diagnostic uses 1.0"
+            "controlled H0 residuals"
         ),
     )
     parser.add_argument(

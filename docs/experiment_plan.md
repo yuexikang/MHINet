@@ -1,182 +1,223 @@
-# D1 efficiency ablation plan
+# MHINet D2-mainline implementation and experiment plan
 
-Status: **pre-registration draft; not implemented or executable**. The current
-model remains the dense D1 reference. Selector thresholds, the validation
-subset and decision margins are intentionally unset in
-`configs/d1_efficiency_ablation_v1.2.json`; they must be frozen before the first
-comparison. This plan does not change training or inference logic.
+Status: **current plan; implementation and revalidation in progress**. Training
+protocol v1.2 remains authoritative. The active model is
 
-## Objective and ordering
+```text
+F_MVT -> D16 -> D8 -> D4 -> D2
+H0 -> H1 -> ... -> H6 = H_final.
+```
 
-D1 has `784 x 784 = 614,656` source query positions. The reference evaluates
-25 target candidates (a 5 x 5 window) for every position in each D1 refinement
-round. The ablations test whether that cost can be reduced without materially
-degrading homography accuracy or robustness.
+D1 code is retained but inactive. The current plan does not generate a D1
+descriptor, train D1 modules, execute D1 refinement, or require D1 to pass a
+gate. Former D1/TINY-8/eight-update artifacts are legacy evidence and cannot
+be merged with this architecture.
 
-The experiment order is fixed:
+## Non-negotiable protocol
 
-1. Complete the existing mainline P0--P4/TINY gate with dense D1. Do not use an
-   ablation to bypass or redefine a failed mainline gate.
-2. Run E00/E01, then the equal-start/equal-budget E02--E05 feature-group
-   comparisons (and E01-C if claiming a DeDoDe-unfreezing effect), using only
-   validation evidence for selection.
-3. Select the main configuration, then freeze its exact dense-D1 checkpoint,
-   data manifest, grouped validation pair IDs, seed and runtime protocol. A
-   partial/interrupted tiny diagnostic is not this comparison baseline.
-4. Fill every currently-null registration field in
-   `configs/d1_efficiency_ablation_v1.2.json`, save its SHA-256, and run the
-   frozen `D1-DENSE-5` reference under the profiling protocol below.
-5. Run sparse-query D1 and 3 x 3-window D1 separately against that reference.
-6. Consider a combined sparse + 3 x 3 variant only after both individual
-   effects have been reported.
+- DINOv3 is always frozen. MVT, VGG, the active DeDoDe-style cumulative
+  decoder, adapters, and MHIR decoders may be jointly trained in their
+  registered phases.
+- GHIM head parameters are frozen by default, but its inputs retain gradients.
+  Do not wrap the frozen head in `inference_mode` or `no_grad` and do not
+  detach `H0` in joint training.
+- The mainline uses two rounds each at D8/D4/D2. Do not detach `H` or `T`
+  between any of the six rounds; recompute H-guided correlation every round.
+- The default loss is equal-weight proposal-corner L1 in input-target pixels.
+  FGO, Planar, overlap, grid, and auxiliary-correlation losses are off.
+- Screen finite/support/condition validity before differentiable solve. Never
+  evaluate a singular inverse or unsafe division and hide its NaN afterward.
+- Data splits are grouped by parent image/geographic region. Test remains
+  sealed and never selects a model, checkpoint, loss, window, or D1 policy.
+- “Code complete,” “run complete,” and “model validated” are different states.
 
-The test split remains sealed. Development and selection use the same
-registered validation subset for every variant, grouped by parent image and
-geographic region. Seed 0 is the budget screen; after a variant is selected,
-the main configuration, dense reference and key comparison run seeds 0/1/2
-(reusing rather than repeating an existing seed-0 run). Only after the full
-registration is frozen may the final selected comparisons be evaluated once
-on test; test never tunes selectors, windows or decision margins.
+## Architecture identity and legacy cutoff
 
-## Registered variants
+The MHIR decoder is now correlation-only and structurally follows official
+MCNet commit `cc03479689b3cf40f0c384954f338b434765c155`: 1x1 input projection,
+repeated Conv3x3/GN/ReLU/MaxPool blocks, and a direct two-channel 2x2 corner
+output. For 784-derived grids it uses ceil pooling and 6/7/8 active blocks at
+D8/D4/D2. Zero output initialization, per-scale `tanh` bounds, and guarded
+normalized-FP32 DLT are declared MHINet adaptations.
 
-| ID | D1 query policy | D1 search window | Role |
+This rewrite and the D2 truncation define a new architecture hash. The
+following cannot serve as current pass evidence:
+
+- old 4x4-pool/MLP or mask/H-flow-input decoder checks;
+- any dense-D1, sparse-D1, or D1-3x3 run;
+- any `TINY-8` gate/result or checkpoint with four active scales;
+- any former P3 zero-init/gradient/profile artifact whose architecture hash
+  predates the MCNet decoder;
+- interrupted D1 progress checkpoints, including otherwise valid optimizer
+  and RNG state.
+
+Keep those files for provenance; label them `legacy` or `superseded` and do not
+overwrite them with current artifacts.
+
+## P0-P6 execution order
+
+| Phase | Current work | Required evidence before advancing | Stop condition |
 | --- | --- | --- | --- |
-| `D1-DENSE-5` | all 614,656 source positions | 5 x 5 (25 candidates) | implemented reference and accuracy baseline |
-| `D1-SPARSE-5` | deterministic subset selected from D2 evidence | 5 x 5 (25 candidates) | test sparse geometrically guided refinement |
-| `D1-DENSE-3` | all 614,656 source positions | 3 x 3 (9 candidates) | test narrower D1 micro-adjustment |
+| P0: resources and compatibility | Resolve actual LoMa/LoRetta/data/weight paths, environment versions, commits, hashes, grouped splits; audit old wrappers | Reproducible preflight; GHIM and shared DINO/MVT forward; selected checkpoint identity | Missing real resources are reported exactly; no fabricated result |
+| P1: active shared descriptors | Compute DINO/MVT once; CGMDP stops after D2 and exports real D8/D4/D2; D1 is not decoded | Old compatible GHIM/D8/D2 alignment where applicable; exact active shapes; freeze/train groups; proof D1 branch was not called | Any active shape/provenance or trainability mismatch |
+| P2: geometry and correlation | Four-corner state/DLT, coordinates, sampling, masks, chunked reference | Identity/translation/perspective; corner order; chunk equality; finite difference/gradcheck; unsafe branches isolated before solve | Any geometry/correlation failure; do not start training |
+| P3: MCNet-style updater and full forward | Correlation-only decoders; D8/D4/D2 x2; six-update diagnostics | Parameter/shape checks; exact zero-init no-op; FP32/BF16 forward/backward finite; `H0 -> H6` attached; D1 execution count zero | Any mismatch, non-finite, detach, or unexpected D1 compute |
+| P4: training mechanics and tiny | Loss, optimizer groups, second-step gradients, resume, four current tiny diagnostics | D8/D4/D2 single-scale tiny and TINY-6 all pass; two MVT gradient branches; VGG/active decoder gradients; full-invalid rule; profile | Gate remains closed on missing/mismatched/failed artifact |
+| P5: mainline training | Freeze data/seed/config; E00 then E01; profile before E02-E05 | Validation `H0`, all six `H`, final, failure rate, memory, latency and per-pair rows; genuine non-no-move improvement | Do not expand experiments if baseline fails |
+| P6: mechanisms and finalization | Equal-budget unfreezing; scale/round/resampling ablations; selected runs at three seeds | Main/ablation tables, trajectories, hard groups, commands and checkpoint hashes; one final frozen test evaluation | Training-only or single-mean gains are insufficient |
 
-`D1-DENSE-3` reduces D1 correlation candidates by
-`1 - 9/25 = 64%` in theory. Its search center is the position projected by the
-post-D2 homography (`H6`), so D1 is explicitly a local correction.
+P0-P2 checks whose mathematical/operator contract is unchanged may be reused
+as reference evidence, but only after confirming their recorded source/config
+identity. P3 and P4 must be rerun for the current architecture.
 
-### Sparse-query policy
+## P3 acceptance details
 
-The sparse selector must use inference-time evidence only; ground truth may be
-used to measure recall, never to select a query. Before the first comparison
-run, freeze these selector details in the run configuration:
+The registered new modules include dormant D1 parameters for state-dict/code
+stability, but the active D8/D4/D2 count and executed graph must be reported
+separately. P3 checks at least:
 
-- derive an eligible D1 mask from D2 valid support and the current-H projected
-  overlap;
-- rank eligible locations with D2 correlation confidence;
-- retain a fixed count or fraction while enforcing deterministic spatial
-  coverage, including locations with leverage on the four-corner update;
-- define tie-breaking, mask upsampling, boundary handling, and the behavior
-  when fewer than the requested number of valid queries exist;
-- keep the selected set fixed for both D1 rounds, or explicitly register a
-  per-round reselection policy before running either variant.
+1. decoder inputs are exactly correlation channels `81/81/49`;
+2. spatial paths are `98->49->25->13->7->4->2`,
+   `196->98->49->25->13->7->4->2`, and
+   `392->196->98->49->25->13->7->4->2`;
+3. output is `[B,2,2,2]`, then row-major `TL/TR/BL/BR` with `(x,y)` last;
+4. zero-initialized output projections make every initial delta zero and
+   `H_final` agree with accepted `H0` within the registered tolerance;
+5. each second round recomputes correlation from the preceding accepted `H`;
+6. no D1 descriptor/correlation/decoder forward occurs in the default model;
+7. FP32 and CUDA BF16-autocast paths remain finite, with geometry in FP32.
 
-The first ablation is same-checkpoint and inference-only: compute correlation
-only at selected queries, scatter the results back into the existing dense
-channel layout, mark unselected candidates invalid/zero, and reuse the
-unchanged D1 adapter and refinement decoder. This isolates correlation savings
-without attributing gains to retraining. A native sparse decoder would be a
-different architecture and requires a separately registered, matched-budget
-experiment.
+## P4 tiny-overfit gate
 
-### 3 x 3-window policy
+The current gate has exactly four required rows:
 
-The first 3 x 3 ablation is also same-checkpoint and inference-only. Compute
-only the central nine offsets, place them in their corresponding locations in
-the existing 25-candidate channel layout, and mark the other offsets
-invalid/zero. This keeps the D1 refinement-decoder checkpoint identical while
-measuring the correlation saving. A decoder whose input shape is changed to
-nine candidates is a later architecture/training experiment, not part of this
-direct comparison.
+| ID | Active scales | Update schedule | Role |
+| --- | --- | --- | --- |
+| `TINY-S-D8` | D8 | `8,8` | coarse decoder learnability |
+| `TINY-S-D4` | D4 | `4,4` | middle decoder learnability |
+| `TINY-S-D2` | D2 | `2,2` | fine active decoder learnability |
+| `TINY-6` | D8/D4/D2 | `8,8,4,4,2,2` | complete active-chain learnability |
 
-## Fair-comparison lock
+All four use the same architecture/config/data/resource hashes, seed policy,
+controlled-condition generator, optimizer recipe, metric threshold, and
+registered residual-bound policy. Each artifact records H0, every active H,
+proposal corners, delta magnitude/saturation, solve acceptance/reason/support,
+final MACE, peak memory, and latency.
 
-Every row in the direct comparison must have identical values for the
-following fields unless the field is the registered intervention itself:
+The merger fails closed on a missing row, name/schedule mismatch, legacy
+TINY-8 identity, protocol mismatch, non-finite result, rejected required
+geometry, or metric failure. A diagnostic checkpoint may resume only at an
+exact raw optimizer boundary with matching architecture and trajectory
+signature. Parameter averaging may expose a diagnostic readout, but never
+replaces raw endpoint reporting and its averaged checkpoint is non-resumable.
 
-- checkpoint path and SHA-256 (including identical GHIM, CGMDP, adapters, and
-  refinement-decoder weights);
-- code revision plus an explicit ablation patch/config identifier;
-- seed and deterministic settings;
-- data manifest hash, split, pair IDs, order, preprocessing, and sample count;
-- training/fine-tuning budget (`0` for the primary same-checkpoint ablations);
-- input size, batch size, precision, autocast policy, and query chunking;
-- GPU model and ID, software versions, power/performance settings when
-  available, warm-up count, timed repetitions, and synchronization method;
-- active scales, two iterations per scale, H direction, and all geometry
-  guards.
+FC2/output-projection zero initialization has a special gradient audit: before
+the first update, upstream decoder and adapter gradients may legitimately be
+zero. After the projection has changed, repeat the audit at step two and later.
+Separately verify both MVT routes:
 
-Run variants in an interleaved or counterbalanced order on the same otherwise
-idle device. Never compare a warm-cache ablation with a cold-start baseline.
-Keep every failed pair in denominators and preserve raw per-pair records.
+```text
+MVT -> GHIM -> H0 -> MHIR/loss
+MVT -> CGMDP -> descriptors -> MHIR/loss.
+```
 
-## Required output fields
+## Main training table
 
-Each artifact must record the following, with the dense and ablation values
-reported side by side and paired by pair ID.
+All continuation rows start from the same seed-specific frozen E01-W
+checkpoint and receive the same additional optimizer budget, data order, and
+restart policy. Do not continue E02 into E03 and call that equal-budget.
 
-### Accuracy and trajectory
+| ID | Active groups / intervention | Start | Budget | Primary comparison |
+| --- | --- | --- | ---: | --- |
+| E00 | evaluate GHIM `H0` only | selected original checkpoint | 0 | initialization baseline |
+| E01 | active adapters + D8/D4/D2 MHIR heads; six-update L1 | original checkpoint + new initialization | 10k | E00; must be non-no-move |
+| E01-C | continue only active heads | same E01-W | 10k | E02 attribution control |
+| E02 | active DeDoDe cumulative decoder + heads | same E01-W | 10k | E01-C when claiming decoder unfreezing gain |
+| E03 | E02 groups + VGG | same E01-W | 10k | E02; MVT frozen |
+| E04 | E02 groups + MVT | same E01-W | 10k | E02; audit both MVT routes |
+| E05 | active DeDoDe + VGG + MVT + heads | same E01-W | 10k | E02/E03/E04 |
 
-- `H0`, every refinement state `H1` through `H8`, and explicit `H_final`;
-- MACE in input and native-target pixels for `H0`, each `Hi`, and `H_final`;
-- grid error and the registered success rates/AUC metrics at the same states;
-- paired per-pair accuracy deltas relative to `D1-DENSE-5`, not only aggregate
-  means;
-- update acceptance/rejection and D1 delta magnitude/saturation for both D1
-  rounds.
+“Active DeDoDe” ends at D2. None of E00-E05 may silently instantiate or train
+the full-resolution CGMDP decode. E02 relative to E01 includes extra training;
+an isolated DeDoDe-unfreezing claim therefore requires E01-C.
 
-`H0` through `H6` should be numerically identical in a correct D1-only
-same-checkpoint comparison. Record and fail the comparison on an unexplained
-pre-D1 difference rather than treating it as ablation noise.
+Use seed 0 for the budget screen. Reuse that run, then add seeds 1 and 2 for
+the chosen main configuration and key controls. Select configurations and
+checkpoints on grouped validation only. Once registrations are frozen, run
+the selected preregistered rows once on sealed test.
 
-### Robustness
+## Scale, iteration, and resampling ablations
 
-- GHIM validity failure count/rate (serialized legacy field:
-  `stage1_failure_rate`);
-- D1 update rejection count/rate and reason-code histogram;
-- non-finite output count/rate;
-- overall invalid/failure count/rate and success denominator.
+Run structural comparisons only after the D2 mainline and equal-budget
+unfreezing screen are sound. With frozen feature-training policy and matched
+training budgets:
 
-### Resources and timing
+| ID | Active path | Updates | Comparison |
+| --- | --- | ---: | --- |
+| E06 | D8 only | 2 | E00/E01 |
+| E07 | D8 -> D4 | 4 | E06/E01 |
+| E01 | D8 -> D4 -> D2 | 6 | current full mainline |
+| E09-D2 | one round each at D8/D4/D2 | 3 | E01; report FLOPs/time |
+| E10-D2 | two rounds but reuse first-round correlation within each scale | 6 | E01; keep H/T graph attached |
 
-- peak CUDA allocated and reserved bytes;
-- end-to-end forward latency distribution (at least median and p95);
-- D1-only latency and D1-correlation latency using synchronized measurements;
-- warm-up/repetition counts and total evaluated pairs;
-- selected-query construction/scatter latency, which must not be excluded from
-  the sparse method's end-to-end latency;
-- theoretical and measured speedup relative to `D1-DENSE-5`.
+The old E08 row (“D8/D4/D2 as a prefix of a D1 mainline”) is now identical in
+architecture to E01 and is retired rather than rerun under a misleading new
+label. The former four-scale E01 and four-round E09/E10 results remain legacy.
+A free early-stop readout from a longer model is not a replacement for an
+independently trained truncated model.
 
-### Query recall and coverage
+Loss comparisons, if later justified, modify one factor at a time from the D2
+E01 baseline. SmoothL1 or sequence gamma can be registered as simple controls.
+FGO and extra losses stay disabled until the base L1 model passes; they must
+not conceal a geometry, gradient, or learnability failure.
 
-Record these fields for each D1 round, both per pair and in aggregate:
+## Required reporting for every train/eval row
 
-- selected query count and `query_fraction = selected / 614656`;
-- valid-support coverage: selected valid D1 queries divided by all valid dense
-  D1 queries;
-- evaluation-only overlap coverage: selected queries in ground-truth overlap
-  divided by dense queries in ground-truth overlap;
-- query recall: fraction of evaluable ground-truth correspondences retained by
-  the sparse selector;
-- window recall: fraction of evaluable ground-truth targets lying inside the
-  tested candidate window, reported for 3 x 3 and 5 x 5;
-- spatial coverage by fixed image bins/quadrants and coverage of each
-  corner-influence region;
-- empty/under-budget selector count and the fallback used.
+For each pair and aggregate, record:
 
-The exact evaluability mask, correspondence tolerance, confidence score,
-spatial bins, and corner-influence definition must be frozen in configuration
-before results are inspected. Recall/coverage diagnostics may use labels only
-after inference and must not alter the selected queries.
+- `H0`, `H1` through `H6`, and explicit `H_final`;
+- proposal-corner error and accepted-H error at every update, in input and
+  native-target pixels;
+- grid error, registered success/AUC metrics, update acceptance/rejection and
+  reason histograms;
+- GHIM validity, non-finite rate, overall failure rate, and denominators;
+- peak CUDA allocated/reserved memory and synchronized end-to-end latency
+  (median/p95, warm-up and repetition counts);
+- architecture/config/data/checkpoint hashes, code revision, environment,
+  command, seed, precision, active groups, and actual optimizer steps.
 
-## Decision and reporting rules
+Do not omit failed pairs or choose a configuration from final error alone.
+Inspect the full trajectory: a final improvement can coexist with unstable or
+systematically rejected intermediate updates.
 
-Before launching the ablations, register the allowed accuracy-loss margin and
-minimum useful latency/memory improvement. A variant is not an efficiency win
-if it crosses the accuracy or failure-rate margin, even if it is faster.
-Report confidence intervals for paired accuracy and latency deltas, all failed
-pairs, and both absolute and relative resource values.
+## Deferred D1 comparison
 
-The dense D1 result remains the primary reference. Do not overwrite its
-artifact, merge ablation results into the mainline gate, or present a projected
-64% candidate reduction as measured end-to-end speedup.
+D1 is no longer a near-term implementation phase. Its adapter, 25-channel
+correlation decoder, and nine-block MCNet-style path remain in source only so
+future work does not require physically deleting and reconstructing code. The
+present mainline saves both:
 
-The machine-readable registration draft is
-`configs/d1_efficiency_ablation_v1.2.json`. Its `null` fields are blockers, not
-defaults: a runner must reject the draft until `registration_status` is
-`frozen` and all required fields have concrete values.
+1. CGMDP's `D2 -> D1` full-resolution cumulative decode; and
+2. two D1 MHIR rounds over `784 x 784 = 614,656` source queries.
+
+If D1 is reactivated after P0-P6, create a separate frozen registration and a
+new architecture hash. The first question is whether adding trained dense D1
+improves accuracy enough to justify its measured cost relative to the D2/H6
+mainline. Only then compare these D1 variants:
+
+| Deferred ID | Query policy | Window | Purpose |
+| --- | --- | --- | --- |
+| `D1-DENSE-5` | all 614,656 positions | 5x5 (25) | trained D1 accuracy/cost reference |
+| `D1-SPARSE-5` | deterministic D2-support/overlap/confidence/leverage subset | 5x5 (25) | reduce query count |
+| `D1-DENSE-3` | all positions | 3x3 (9) | reduce candidates by theoretical 64% |
+
+That future comparison must account for the extra CGMDP D1 decode, not only
+D1 correlation. It must report H0-H6 identically before D1, H7/H8 afterward,
+paired accuracy deltas, failure rates, query/window recall, support/coverage,
+peak memory, end-to-end and module-only latency. Sparse selection overhead is
+included. Projected candidate reduction is not measured speedup.
+
+Old D1 long runs and partial checkpoints cannot supply this baseline because
+they used a superseded decoder/architecture and may be incomplete. Preserve
+them for history, never resume them into the D2 mainline, and do not call their
+partial progress a failed or successful current experiment.

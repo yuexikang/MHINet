@@ -8,10 +8,11 @@ instructions.
 Canonical model terminology from this point forward is GHIM (global
 homography initialization, producing `H0` and `F_MVT`), CGMDP (MVT-guided
 multi-scale descriptor pyramid, producing the fused matching descriptors
-`D8/D4/D2/D1`) and MHIR (eight-update homography refinement, producing
-`H_final`).  Historic `stage1_*` names below quote legacy code, checkpoints or
-artifacts and remain compatibility aliases; they do not denote an additional
-functional module.
+`D8/D4/D2` on the current mainline) and MHIR (six-update homography refinement,
+producing `H_final = H6`). D1 code remains registered but inactive and is not
+decoded, optimized, or executed by default. Historic `stage1_*` names below
+quote legacy code, checkpoints or artifacts and remain compatibility aliases;
+they do not denote an additional functional module.
 
 ## 2026-09-08 — design package and repository
 
@@ -738,3 +739,161 @@ corner-update magnitude and saturation.  Window recall remains explicitly
 unavailable rather than fabricated because the current forward contract does
 not retain GT-to-window membership.  Five CPU evaluation regression tests
 passed; this is output-contract engineering, not P5 validation evidence.
+
+## 2026-09-09 — MCNet-style MHIR rewrite and D2 mainline cutoff
+
+This section supersedes the **current applicability** of the earlier P3/P4,
+D1, TINY-8, parameter-count, and eight-update records; it does not erase their
+historical provenance. No model-validation claim is made here.
+
+### User decision and active architecture
+
+- Public module names remain GHIM, CGMDP, and MHIR. The active CGMDP path is
+  `F_MVT -> D16 -> D8 -> D4 -> D2`; it stops the cumulative decoder before
+  scale `1`. The active MHIR schedule is `(8,8,4,4,2,2)`, producing
+  `H0 -> H1 -> ... -> H6 = H_final`.
+- D1 was not physically deleted. Its adapter, 25-channel local correlation,
+  nine-block decoder, and explicit diagnostic entry remain registered. In all
+  mainline training profiles its parameters are frozen and absent from the
+  optimizer; a normal forward neither constructs `D1` nor calls D1 adapter,
+  correlation, or decoder.
+- Active architecture config:
+  `/home/disk1/MHINet/configs/mhinet_mcnet_v1.2.json`, 2026-09-09 SHA256
+  `92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a`.
+  The original handoff package was deliberately preserved instead of edited.
+  Verification command:
+
+  ```bash
+  /root/miniconda3/envs/loma-repro/bin/python \
+    MHINet_server_handoff_v1.2/verify_package.py \
+    MHINet_server_handoff_v1.2
+  ```
+
+  Result: 31 files checked, zero errors; original architecture-config SHA256
+  remains `4a859f413ee4be59acb1dc6c0cf189e80b8f4e7b3f54dc9f117acd1ac5cfe128`.
+
+### MCNet source pin and dimension adaptation
+
+- Structural reference: `https://github.com/zjuzhk/MCNet.git`, fixed commit
+  `cc03479689b3cf40f0c384954f338b434765c155`. On 2026-09-09,
+  `git ls-remote` resolved both remote `HEAD` and `refs/heads/master` to this
+  commit. Audited reference files were `update.py`, `network.py`, and the
+  four-point geometry utilities.
+- Each decoder now consumes correlation only. It applies
+  `Conv1x1(K,64,bias=True)`, repeated
+  `Conv3x3(s1,p1,bias=True) -> GroupNorm(8) -> ReLU -> MaxPool2(s2)`, then
+  `Conv1x1(64,2,bias=True)` directly on a `2x2` spatial corner grid. BCHW is
+  permuted to BHWC and flattened row-major as TL/TR/BL/BR, with x/y last.
+- MCNet's power-of-two inputs do not directly cover the current grids. Pooling
+  therefore uses `ceil_mode=True`: D8 uses 6 blocks
+  (`98->49->25->13->7->4->2`), D4 uses 7, D2 uses 8, and retained D1 uses 9.
+  There is no adaptive pool or MLP in the production path.
+- Search windows remain the previously registered 9x9, 9x9, 7x7, and dormant
+  5x5 windows (`K=81/81/49/25`). This avoids changing decoder topology and D1
+  window policy in the same experiment. Candidate-valid masks remain outside
+  the decoder and are used only for support/geometry guards.
+- Intentional MHINet differences from official MCNet are explicit: H0 rather
+  than identity initialization, normalized FP32 cumulative corner/H state,
+  zero-initialized output projections, per-scale tanh bounds
+  `32/16/6/(2 dormant) px`, direct H-guided sampling with invalid-zero masks,
+  and pre-screened differentiable DLT. A rejected update retains the preceding
+  H/T; no update detaches H or T.
+- Registered new parameters, including inactive D1, are `1,176,712`. The
+  mainline D8/D4/D2 trainable-new-parameter count is `833,222`. Counts include
+  the four retained adapters and scale-specific decoders; they do not imply
+  D1 activation/FLOP execution.
+
+### Runtime, checkpoint, and gate changes
+
+- `SharedFeatureProvider` defaults to `(8,4,2)` and breaks cumulative decoding
+  after scale `"2"`. It records `dedode_steps=4` and `dedode_scale1=0` for the
+  mainline; a unit test separately proves that explicit `(8,4,2,1)` still
+  reaches scale `"1"`.
+- Formal training configs reject D1-containing active schedules. E01 now uses
+  `(8,4,2)` twice. Evaluation and profiling default to the same six updates.
+- The required tiny gate is now TINY-S-D8, TINY-S-D4, TINY-S-D2, and TINY-6;
+  its identifier is `P4_TINY_S_TINY_6`. D1/TINY-8 remain optional diagnostics
+  and cannot satisfy or be merged into the current gate.
+- MHINet-owned checkpoint format was bumped from version 1 to version 2.
+  Version-1 decoder/optimizer/SWA state is rejected. Formal resume/evaluation
+  validates architecture SHA256 and `mhir_revision` before mutating model or
+  optimizer state. New tiny filenames contain an architecture-hash prefix and
+  progress signatures bind architecture, data, runtime, weights, and protocol.
+- In particular, the old step-184 D1 progress checkpoint with SHA256
+  `b046f763ea844087ec3803ecce24a347e11de1056cdcc27648b65b179f17f38e`
+  is not resumable under this architecture. The concurrently written
+  `/home/disk1/MHINet/artifacts/p4_tiny_s_d1_translation_swa.json` remains an
+  unstaged legacy heartbeat and is not current evidence.
+
+### Verification completed so far
+
+Targeted command:
+
+```bash
+/root/miniconda3/envs/loma-repro/bin/python -m unittest \
+  tests.test_model tests.test_feature_provider tests.test_modules \
+  tests.test_iterator tests.test_tiny_overfit tests.test_tiny_gate \
+  tests.test_train tests.test_checkpointing tests.test_config \
+  tests.test_losses_metrics -v
+```
+
+Result: 51/51 tests passed. This covers exact MCNet block topology and
+parameter counts, 784-derived meta shapes, TL/TR/BL/BR mapping, output
+zero-initialization, second-step upstream gradient, six-round no-op/update
+state, correlation recomputation, no-detach final gradients, default D1
+non-execution, explicit D1 availability, CGMDP scale-1 early stop, checkpoint
+metadata fail-closed behavior, TINY-6 protocol, and six-update loss/metrics.
+
+Full CPU regression command:
+
+```bash
+/root/miniconda3/envs/loma-repro/bin/python -m compileall -q mhinet tests
+/root/miniconda3/envs/loma-repro/bin/python -m unittest discover -s tests -v
+```
+
+Result: compileall succeeded and 88/88 tests passed in 1.440 seconds.
+
+Real-resource P3 command (physical GPU 1 exposed as `cuda:0`):
+
+```bash
+CUDA_VISIBLE_DEVICES=1 /root/miniconda3/envs/loma-repro/bin/python -u \
+  -m mhinet.cli zero-init-smoke \
+  --runtime configs/runtime_paths.server.json \
+  --output artifacts/p3_zero_init_smoke_mcnet_d2.json --overwrite
+```
+
+Result: `passed`. Six of six updates were accepted; schedule was
+`8,8,4,4,2,2`; all registered output-projection weights/biases and all deltas
+were exactly zero; DINO/MVT/VGG ran once, CGMDP executed scales 16/8/4/2 only
+(`dedode_steps=4`, `dedode_scale1=0`). H0-to-H6 maximum/mean corner difference
+was `6.103515625e-05/2.986308027175255e-05 px`. Single unwarmed forward was
+`742.833 ms` and peak allocated memory was `2,061,168,128` bytes; neither is a
+production benchmark. Artifact: 4,486 bytes, SHA256
+`29e90988578e1a1cb9ad32a75a0c0146a0282605c50da06c9806807bb53416be`.
+
+Real-resource P4 gradient command (physical GPU 2 exposed as `cuda:0`):
+
+```bash
+CUDA_VISIBLE_DEVICES=2 /root/miniconda3/envs/loma-repro/bin/python -u \
+  -m mhinet.cli gradient-audit \
+  --runtime configs/runtime_paths.server.json \
+  --output artifacts/p4_gradient_audit_mcnet_d2.json --overwrite
+```
+
+Result: `passed`. At step 0, all D8/D4/D2 output projections had nonzero finite
+gradient and all upstream decoder/adapter gradients were exactly zero as
+expected. At step 1, every active upstream decoder and adapter gradient was
+finite and nonzero. A final-H6-only loss reached all three earlier decoders.
+The MVT-to-GHIM and MVT-to-CGMDP routes both had nonzero finite MVT gradients;
+the CGMDP route also reached VGG and the active DeDoDe decoder. DINO and GHIM
+head parameter gradients remained absent, and registered D1 parameters stayed
+frozen with no gradients. Peak allocated memory was `3,103,597,056` bytes for
+the cached six-round heads check and `5,821,080,576` bytes for the separate
+joint-branch diagnostics. The artifact also embeds the active architecture,
+provider, and checkpoint provenance. Artifact: 10,308 bytes, SHA256
+`cca64b4f3573f9c40a70b980f4221b874fa6fe34c3dad06445ef5bf9c3be06fd`.
+
+Still pending for the new architecture: 784 heads/joint memory and latency
+profile, resume smoke, D8/D4/D2/TINY-6 tiny-overfit, E00, and E01.
+Earlier artifacts do not fill these gaps. E00/E01 remain blocked until the new
+P3/P4 and TINY-6 gate pass.

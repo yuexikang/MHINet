@@ -58,7 +58,11 @@ def run_profile(
     images = sample["images"].unsqueeze(0).to(device)
     H_gt = sample["H_gt_norm"].unsqueeze(0).to(device)
     model, build = build_model(runtime)
+    for group in build["training_parameters"]["groups"].values():
+        group.pop("optimizer_parameter_ids", None)
     parameter_report = model.set_training_phase(profile)
+    for group in parameter_report["groups"].values():
+        group.pop("optimizer_parameter_ids", None)
     model.train()
     optimizer = torch.optim.AdamW(
         model.optimizer_group_spec(),
@@ -93,6 +97,8 @@ def run_profile(
                 "forward_seconds": forward_seconds,
                 "backward_seconds": backward_seconds,
                 "shared_call_counts": outputs["shared_call_counts"],
+                "active_scales": list(outputs["active_scales"]),
+                "update_scale_schedule": list(outputs["update_scale_schedule"]),
                 "H_updates_require_grad": bool(
                     outputs["H_updates_norm"].requires_grad
                 ),
@@ -121,6 +127,7 @@ def run_profile(
     calls_ok = all(
         record["shared_call_counts"].get("dino") == 1
         and record["shared_call_counts"].get("mvt") == 1
+        and record["shared_call_counts"].get("dedode_scale1") == 0
         for record in records
     )
     return {
@@ -145,7 +152,8 @@ def run_profile(
         "build": build,
         "note": (
             "Single-pair contended-server engineering profile; timings are not a "
-            "production benchmark. Full joint is not inferred from a frozen-heads run."
+            "production benchmark. The mainline is six D8/D4/D2 updates; full joint "
+            "is not inferred from a frozen-heads run."
         ),
     }
 

@@ -1,4 +1,4 @@
-"""Merge independently run TINY-S/TINY-8 artifacts into one audited P4 gate."""
+"""Merge independently run TINY-S/TINY-6 artifacts into one audited P4 gate."""
 
 from __future__ import annotations
 
@@ -13,25 +13,21 @@ from typing import Any
 import torch
 
 from .checkpointing import CHECKPOINT_FORMAT, CHECKPOINT_VERSION
-from .config import sha256_file
+from .config import load_architecture_config, sha256_file
 
 
 REQUIRED_EXPERIMENTS = {
     "TINY-S-D8": (8,),
     "TINY-S-D4": (4,),
     "TINY-S-D2": (2,),
-    "TINY-S-D1": (1,),
-    "TINY-8": (8, 4, 2, 1),
+    "TINY-6": (8, 4, 2),
 }
 
 REGISTERED_MAX_RESIDUAL_PX = {
     "TINY-S-D8": 16.0,
     "TINY-S-D4": 8.0,
     "TINY-S-D2": 3.0,
-    # Half-bound D1 exposed only ~0.71 feature-pixel displacement and stalled;
-    # the full 2 px decoder bound remains legal and restores local observability.
-    "TINY-S-D1": 2.0,
-    "TINY-8": 16.0,
+    "TINY-6": 16.0,
 }
 
 REGISTERED_PROTOCOL = {
@@ -48,15 +44,10 @@ REGISTERED_PROTOCOL = {
 }
 
 
-# D8/D4 were produced before the checkpoint/readout flags below were added to
-# the artifact schema.  Their exact files have since been independently loaded
-# and evaluated against the recorded 32 diagnostic conditions.  Missing legacy
-# fields are accepted only for these immutable hashes; a new checkpoint must
-# always carry the complete schema.
-LEGACY_READOUT_CHECKPOINTS = {
-    "TINY-S-D8": "dc7360186b688c245909c5b0da01abf491f17234313754a0ea422b0c8cc1af98",
-    "TINY-S-D4": "9ff3d1f54fa0ef657907658d63baad70218aaa85489db9b9f5003a120eeb7650",
-}
+# The former D8/D4 exceptions belonged to the superseded 4x4-pool/MLP
+# refinement decoder.  No checkpoint from that architecture may satisfy the
+# current MCNet-topology gate.
+LEGACY_READOUT_CHECKPOINTS: dict[str, str] = {}
 
 
 def _exact_float(value: Any, expected: float) -> bool:
@@ -209,6 +200,7 @@ def _required_checkpoint_metadata_errors(
     if not isinstance(metadata, Mapping):
         return [f"{prefix} checkpoint metadata is not an object"]
     errors: list[str] = []
+    architecture = load_architecture_config()
     expected_values = {
         "diagnostic": name,
         "known_H0_residual_injected": True,
@@ -217,6 +209,8 @@ def _required_checkpoint_metadata_errors(
         "sample_protocol": "one_pair_residuals",
         "residual_profile": "translation",
         "precision": "bf16",
+        "architecture_sha256": architecture.sha256,
+        "mhir_revision": architecture.raw["mhir_revision"],
     }
     for key, expected in expected_values.items():
         if metadata.get(key) != expected:
@@ -228,6 +222,18 @@ def _required_checkpoint_metadata_errors(
         isinstance(value, str) and value for value in pair_ids
     ):
         errors.append(f"{prefix} checkpoint metadata does not contain 32 pair IDs")
+    signature = metadata.get("tiny_progress_signature")
+    if not isinstance(signature, Mapping):
+        errors.append(f"{prefix} checkpoint has no strict tiny-progress signature")
+    else:
+        resume_context = signature.get("resume_context")
+        expected_architecture_sha = architecture.sha256
+        if not isinstance(resume_context, Mapping) or resume_context.get(
+            "architecture_sha256"
+        ) != expected_architecture_sha:
+            errors.append(
+                f"{prefix} checkpoint architecture does not match the current MHIR"
+            )
     return errors
 
 
@@ -454,7 +460,7 @@ def registered_experiment_errors(
 
     controlled_h0 = experiment.get("controlled_H0", {})
     expected_max_residual = REGISTERED_MAX_RESIDUAL_PX[name]
-    expected_fraction = 1.0 if name == "TINY-S-D1" else 0.5
+    expected_fraction = 0.5
     if not isinstance(controlled_h0, Mapping) or not (
         controlled_h0.get("profile") == "translation"
         and controlled_h0.get("formal_training_injection") is False
@@ -472,10 +478,6 @@ def registered_experiment_errors(
             reported_fraction, expected_fraction
         ):
             errors.append(f"{prefix} controlled-H0 bound fraction is invalid")
-        if name == "TINY-S-D1" and not _exact_float(
-            reported_fraction, expected_fraction
-        ):
-            errors.append(f"{prefix} D1 must record its full-bound residual policy")
         actual_stats = controlled_h0.get("actual_abs_residual_px")
         actual_max = (
             _metric_float(actual_stats.get("max"))
@@ -601,6 +603,7 @@ def merge_tiny_gate_artifacts(paths: list[Path]) -> dict[str, Any]:
     errors: list[str] = []
     reference: dict[str, Any] | None = None
     evidence_reference: dict[str, Any] | None = None
+    current_architecture = load_architecture_config()
     legacy_readout_compatibility: list[dict[str, str]] = []
     for supplied in paths:
         path = supplied.expanduser().resolve()
@@ -612,7 +615,7 @@ def merge_tiny_gate_artifacts(paths: list[Path]) -> dict[str, Any]:
                 "status": payload.get("status"),
             }
         )
-        if payload.get("gate") != "P4_TINY_S_TINY_8":
+        if payload.get("gate") != "P4_TINY_S_TINY_6":
             errors.append(f"{path}: wrong gate identifier")
         if payload.get("status") != "passed":
             errors.append(f"{path}: source artifact is not passed")
@@ -662,6 +665,11 @@ def merge_tiny_gate_artifacts(paths: list[Path]) -> dict[str, Any]:
                 else None
             ),
         }
+        if evidence_comparable["architecture_sha256"] != current_architecture.sha256:
+            errors.append(
+                f"{path}: architecture SHA256 does not match the current "
+                "MCNet-topology MHIR"
+            )
         if reference is None:
             reference = comparable
         elif comparable != reference:
@@ -711,10 +719,15 @@ def merge_tiny_gate_artifacts(paths: list[Path]) -> dict[str, Any]:
         if reference != REGISTERED_PROTOCOL:
             errors.append("merged protocol does not match the registered tiny recipe")
     return {
-        "gate": "P4_TINY_S_TINY_8",
+        "gate": "P4_TINY_S_TINY_6",
         "status": "passed" if not errors else "failed",
         "protocol": reference,
         "data_and_resource_evidence": evidence_reference,
+        "current_architecture": {
+            "path": str(current_architecture.path),
+            "sha256": current_architecture.sha256,
+            "mhir_revision": current_architecture.raw.get("mhir_revision"),
+        },
         "sources": sources,
         "experiments": [
             experiments[name]

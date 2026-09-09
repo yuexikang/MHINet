@@ -12,13 +12,12 @@ from .correlation import HGuidedLocalCorrelation
 from .geometry import (
     GUARD_REASON_NAMES,
     count_supported_queries,
-    geometry_channels,
     guarded_four_point_dlt,
     image_corners,
     pixel_delta_to_normalized,
     safe_project_points,
 )
-from .modules import SCALE_SPECS
+from .modules import MAINLINE_SCALES, REGISTERED_SCALES, SCALE_SPECS
 
 
 class IteratorReason(IntEnum):
@@ -43,9 +42,10 @@ ITERATOR_REASON_NAMES = {
 
 
 class MultiScaleHIterator(nn.Module):
-    """Refine H twice per fused descriptor scale D8/D4/D2/D1 without detach."""
+    """Run the six-update D8/D4/D2 mainline; retain D1 as explicit opt-in."""
 
-    scales = (8, 4, 2, 1)
+    scales = REGISTERED_SCALES
+    mainline_scales = MAINLINE_SCALES
 
     def __init__(
         self,
@@ -121,7 +121,7 @@ class MultiScaleHIterator(nn.Module):
         cnn_autocast_enabled: bool = True,
     ) -> dict[str, Any]:
         selected_scales = (
-            self.scales
+            self.mainline_scales
             if active_scales is None
             else tuple(int(scale) for scale in active_scales)
         )
@@ -197,22 +197,15 @@ class MultiScaleHIterator(nn.Module):
             source_features = pair_features[:, 0]
             target_features = pair_features[:, 1]
             feature_valid_counts[scale] = adapter_valid.flatten(3).sum(dim=-1)
-            spatial_hw = tuple(int(value) for value in source_features.shape[-2:])
             for _iteration in range(iterations_per_scale):
                 update_scale_schedule.append(scale)
                 correlation, candidate_valid = self.correlations[str(scale)](
                     source_features, target_features, H
                 )
-                position, h_flow, _projection_valid = geometry_channels(H, spatial_hw)
-                decoder_input = torch.cat(
-                    (
-                        correlation,
-                        candidate_valid.to(dtype=correlation.dtype),
-                        position.to(dtype=correlation.dtype),
-                        h_flow.to(dtype=correlation.dtype),
-                    ),
-                    dim=1,
-                )
+                # MCNet's correlation decoder consumes the local-search tensor
+                # directly.  Invalid candidates are already exactly zero; the
+                # boolean mask remains available to the geometry support guard.
+                decoder_input = correlation
                 expected_channels = SCALE_SPECS[scale].decoder_input_channels
                 if decoder_input.shape[1] != expected_channels:
                     raise AssertionError(

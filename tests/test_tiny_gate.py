@@ -9,7 +9,7 @@ import unittest
 import torch
 
 from mhinet.checkpointing import CHECKPOINT_FORMAT, CHECKPOINT_VERSION
-from mhinet.config import sha256_file
+from mhinet.config import load_architecture_config, sha256_file
 from mhinet.tiny_gate import (
     REGISTERED_MAX_RESIDUAL_PX,
     REQUIRED_EXPERIMENTS,
@@ -54,6 +54,7 @@ class TinyGateMergeTests(unittest.TestCase):
         updates = 2 * len(scales)
         optimizer_steps = 400
         pair_ids = ["fixed-train-pair"] * 32
+        architecture_sha256 = load_architecture_config().sha256
         metadata = {
             "diagnostic": name,
             "active_scales": scales,
@@ -63,11 +64,18 @@ class TinyGateMergeTests(unittest.TestCase):
             "sample_protocol": "one_pair_residuals",
             "residual_profile": "translation",
             "precision": "bf16",
+            "architecture_sha256": architecture_sha256,
+            "mhir_revision": "mcnet_correlation_decoder_784_v1",
             "weight_average_start_step": 1536,
             "weight_average_count": 0,
             "checkpoint_contains_weight_average": False,
             "optimizer_resume_supported": True,
             "pair_ids": pair_ids,
+            "tiny_progress_signature": {
+                "resume_context": {
+                    "architecture_sha256": architecture_sha256,
+                }
+            },
         }
         torch.save(
             {
@@ -90,7 +98,7 @@ class TinyGateMergeTests(unittest.TestCase):
         initial = self._metric_block(updates, h0=1.0, final=1.0)
         final = self._metric_block(updates, h0=1.0, final=0.05)
         return {
-            "gate": "P4_TINY_S_TINY_8",
+            "gate": "P4_TINY_S_TINY_6",
             "status": "passed",
             "protocol": {
                 "training_revision": "1.2",
@@ -115,7 +123,7 @@ class TinyGateMergeTests(unittest.TestCase):
                 "shared_once_per_pair": True,
             },
             "build": {
-                "architecture_sha256": "2" * 64,
+                "architecture_sha256": architecture_sha256,
                 "provider": {
                     "loma_checkpoint": "/weights/loma.pt",
                     "dino_checkpoint": "/weights/dino.pt",
@@ -157,9 +165,7 @@ class TinyGateMergeTests(unittest.TestCase):
                     "controlled_H0": {
                         "profile": "translation",
                         "formal_training_injection": False,
-                        "bound_fraction_of_coarsest_active_decoder": (
-                            1.0 if name == "TINY-S-D1" else 0.5
-                        ),
+                        "bound_fraction_of_coarsest_active_decoder": 0.5,
                         "maximum_declared_abs_residual_px": (
                             REGISTERED_MAX_RESIDUAL_PX[name]
                         ),
@@ -222,6 +228,18 @@ class TinyGateMergeTests(unittest.TestCase):
             path.write_text(json.dumps(artifact))
             report = merge_tiny_gate_artifacts([path])
         self.assertTrue(any("optimizer recipe" in item for item in report["errors"]))
+
+    def test_superseded_architecture_fails_closed(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            artifact = self._artifact("TINY-S-D8", (8,), root / "d8.pt")
+            artifact["build"]["architecture_sha256"] = "2" * 64
+            path = root / "d8.json"
+            path.write_text(json.dumps(artifact))
+            report = merge_tiny_gate_artifacts([path])
+        self.assertTrue(
+            any("architecture SHA256" in item for item in report["errors"])
+        )
 
     def test_checkpoint_hash_and_metadata_tampering_fail_closed(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

@@ -13,6 +13,7 @@ from torch import nn
 
 from mhinet.checkpointing import (
     CHECKPOINT_FORMAT,
+    CHECKPOINT_VERSION,
     load_checkpoint,
     save_checkpoint,
 )
@@ -92,6 +93,7 @@ class CheckpointRoundTripTests(unittest.TestCase):
             # unpickler; no unsafe fallback is needed for our own checkpoints.
             raw = torch.load(path, map_location="cpu", weights_only=True)
             self.assertEqual(raw["format"], CHECKPOINT_FORMAT)
+            self.assertEqual(raw["version"], CHECKPOINT_VERSION)
             self.assertIn("torch_cpu", raw["rng"])
             self.assertIn("torch_cuda", raw["rng"])
             self.assertEqual(raw["auxiliary_state"]["averaged_snapshots"], 4)
@@ -185,6 +187,40 @@ class CheckpointRoundTripTests(unittest.TestCase):
             self.assertEqual(result["optimizer_step"], 0)
             self.assertFalse(result["restored"]["scheduler"])
             self.assertFalse(result["restored"]["scaler"])
+
+    def test_expected_metadata_is_checked_before_model_mutation(self) -> None:
+        model = nn.Linear(2, 1)
+        optimizer = torch.optim.SGD(model.parameters(), lr=0.1)
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            path = Path(temporary_directory) / "architecture-bound.pt"
+            save_checkpoint(
+                path,
+                model=model,
+                optimizer=optimizer,
+                optimizer_step=0,
+                metadata={
+                    "architecture_sha256": "old",
+                    "mhir_revision": "residual_mlp",
+                },
+            )
+            replacement = nn.Linear(2, 1)
+            before = {
+                key: value.detach().clone()
+                for key, value in replacement.state_dict().items()
+            }
+            with self.assertRaisesRegex(RuntimeError, "architecture_sha256"):
+                load_checkpoint(
+                    path,
+                    model=replacement,
+                    map_location="cpu",
+                    restore_rng=False,
+                    expected_metadata={
+                        "architecture_sha256": "current",
+                        "mhir_revision": "mcnet_correlation_decoder_784_v1",
+                    },
+                )
+            for key, value in replacement.state_dict().items():
+                torch.testing.assert_close(value, before[key])
 
 
 if __name__ == "__main__":

@@ -13,9 +13,12 @@ from torch import nn
 
 from .config import RuntimePaths
 from .data import HomographyPairDataset
-from .geometry import geometry_channels, image_corners, safe_project_points
+from .geometry import image_corners, safe_project_points
 from .losses import sequence_corner_l1
 from .model import build_model
+
+
+MAINLINE_SCALE_KEYS = ("8", "4", "2")
 
 
 def _grad_stats(parameters: Iterable[nn.Parameter]) -> dict[str, Any]:
@@ -39,7 +42,7 @@ def _decoder_upstream_parameters(decoder: nn.Module) -> list[nn.Parameter]:
     return [
         parameter
         for name, parameter in decoder.named_parameters()
-        if not name.startswith("fc2.")
+        if not name.startswith("out_conv.")
     ]
 
 
@@ -47,17 +50,17 @@ def _new_layer_gradient_snapshot(model: nn.Module) -> dict[str, Any]:
     return {
         "adapters": {
             scale: _grad_stats(model.adapters[scale].parameters())
-            for scale in ("8", "4", "2", "1")
+            for scale in MAINLINE_SCALE_KEYS
         },
-        "decoder_fc2": {
-            scale: _grad_stats(model.refinement_decoders[scale].fc2.parameters())
-            for scale in ("8", "4", "2", "1")
+        "decoder_out_conv": {
+            scale: _grad_stats(model.refinement_decoders[scale].out_conv.parameters())
+            for scale in MAINLINE_SCALE_KEYS
         },
         "decoder_upstream": {
             scale: _grad_stats(
                 _decoder_upstream_parameters(model.refinement_decoders[scale])
             )
-            for scale in ("8", "4", "2", "1")
+            for scale in MAINLINE_SCALE_KEYS
         },
     }
 
@@ -74,7 +77,9 @@ def run_gradient_audit(runtime: RuntimePaths, pair_index: int = 0) -> dict[str, 
     sample = dataset[pair_index]
     images = sample["images"].unsqueeze(0).to(device)
     H_gt = sample["H_gt_norm"].unsqueeze(0).to(device)
-    model, _build_report = build_model(runtime)
+    model, build_report = build_model(runtime)
+    for group in build_report["training_parameters"]["groups"].values():
+        group.pop("optimizer_parameter_ids", None)
     model.train()
     model.set_training_phase("heads")
 
@@ -91,8 +96,12 @@ def run_gradient_audit(runtime: RuntimePaths, pair_index: int = 0) -> dict[str, 
         torch.cuda.reset_peak_memory_stats(device)
 
     optimizer = torch.optim.AdamW(
-        list(model.adapters.parameters())
-        + list(model.refinement_decoders.parameters()),
+        [
+            parameter
+            for scale in MAINLINE_SCALE_KEYS
+            for module in (model.adapters[scale], model.refinement_decoders[scale])
+            for parameter in module.parameters()
+        ],
         lr=1e-3,
         weight_decay=0.0,
     )
@@ -132,7 +141,7 @@ def run_gradient_audit(runtime: RuntimePaths, pair_index: int = 0) -> dict[str, 
     final_only_loss.backward()
     final_only_decoder_grad = {
         scale: _grad_stats(model.refinement_decoders[scale].parameters())
-        for scale in ("8", "4", "2", "1")
+        for scale in MAINLINE_SCALE_KEYS
     }
     heads_peak = int(
         torch.cuda.max_memory_allocated(device) if device.type == "cuda" else 0
@@ -187,23 +196,13 @@ def run_gradient_audit(runtime: RuntimePaths, pair_index: int = 0) -> dict[str, 
             feature_branch["pyramid"][8]
         )
     # Deliberately use fixed GT H to isolate MVT->pyramid from MVT->H0.
-    correlation, candidate_valid = model.iterator.correlations["8"](
+    correlation, _candidate_valid = model.iterator.correlations["8"](
         adapted[:, 0], adapted[:, 1], H_gt.detach()
-    )
-    position, flow, _ = geometry_channels(H_gt.detach(), adapted.shape[-2:])
-    decoder_input = torch.cat(
-        (
-            correlation,
-            candidate_valid.to(correlation.dtype),
-            position.to(correlation.dtype),
-            flow.to(correlation.dtype),
-        ),
-        dim=1,
     )
     with torch.autocast(
         device.type, dtype=torch.bfloat16, enabled=device.type == "cuda"
     ):
-        feature_delta = model.refinement_decoders["8"](decoder_input)
+        feature_delta = model.refinement_decoders["8"](correlation)
     feature_branch_loss = feature_delta.float().sum()
     feature_branch_loss.backward()
     feature_branch_report = {
@@ -229,21 +228,27 @@ def run_gradient_audit(runtime: RuntimePaths, pair_index: int = 0) -> dict[str, 
 
     first = heads_steps[0]
     second = heads_steps[1]
-    first_fc2_nonzero = all(
-        first["decoder_fc2"][scale]["norm"] > 0 for scale in ("8", "4", "2", "1")
+    first_out_conv_nonzero = all(
+        first["decoder_out_conv"][scale]["norm"] > 0
+        for scale in MAINLINE_SCALE_KEYS
     )
     first_upstream_zero = all(
         first["decoder_upstream"][scale]["norm"] == 0
         and first["adapters"][scale]["norm"] == 0
-        for scale in ("8", "4", "2", "1")
+        for scale in MAINLINE_SCALE_KEYS
     )
     second_upstream_nonzero = all(
         second["decoder_upstream"][scale]["norm"] > 0
         and second["adapters"][scale]["norm"] > 0
-        for scale in ("8", "4", "2", "1")
+        for scale in MAINLINE_SCALE_KEYS
     )
     final_reaches_all = all(
-        final_only_decoder_grad[scale]["norm"] > 0 for scale in ("8", "4", "2", "1")
+        final_only_decoder_grad[scale]["norm"] > 0 for scale in MAINLINE_SCALE_KEYS
+    )
+    dormant_d1_ok = all(
+        parameter.grad is None and not parameter.requires_grad
+        for module in (model.adapters["1"], model.refinement_decoders["1"])
+        for parameter in module.parameters()
     )
     h0_mvt_ok = h0_branch_report["mvt"]["norm"] > 0
     feature_mvt_ok = feature_branch_report["mvt"]["norm"] > 0
@@ -255,7 +260,7 @@ def run_gradient_audit(runtime: RuntimePaths, pair_index: int = 0) -> dict[str, 
     )
     passed = all(
         (
-            first_fc2_nonzero,
+            first_out_conv_nonzero,
             first_upstream_zero,
             second_upstream_nonzero,
             final_reaches_all,
@@ -264,6 +269,7 @@ def run_gradient_audit(runtime: RuntimePaths, pair_index: int = 0) -> dict[str, 
             feature_vgg_ok,
             feature_dedode_ok,
             frozen_ok,
+            dormant_d1_ok,
         )
     )
     return {
@@ -271,12 +277,13 @@ def run_gradient_audit(runtime: RuntimePaths, pair_index: int = 0) -> dict[str, 
         "status": "passed" if passed else "failed",
         "pair_id": sample["pair_id"],
         "device": str(device),
+        "build": build_report,
         "heads_cached_feature_two_steps": heads_steps,
         "final_only_decoder_gradients": final_only_decoder_grad,
         "mvt_H0_route": h0_branch_report,
         "mvt_pyramid_route": feature_branch_report,
         "assertions": {
-            "step0_all_fc2_nonzero": first_fc2_nonzero,
+            "step0_all_out_conv_nonzero": first_out_conv_nonzero,
             "step0_all_upstream_zero_expected": first_upstream_zero,
             "step1_all_decoder_and_adapter_upstream_nonzero": second_upstream_nonzero,
             "final_only_reaches_all_scales": final_reaches_all,
@@ -285,14 +292,15 @@ def run_gradient_audit(runtime: RuntimePaths, pair_index: int = 0) -> dict[str, 
             "vgg_pyramid_route_nonzero": feature_vgg_ok,
             "dedode_pyramid_route_nonzero": feature_dedode_ok,
             "dino_and_stage1_head_parameter_grads_none": frozen_ok,
+            "d1_registered_but_inactive_grad_none": dormant_d1_ok,
         },
         "peak_allocated_bytes": {
-            "heads_cached_eight_round": heads_peak,
+            "heads_cached_six_round": heads_peak,
             "joint_branch_diagnostics": joint_branch_peak,
         },
         "scope_note": (
-            "This audits full cached-feature eight-round heads backward and the two "
-            "real MVT routes separately. A full 784 joint eight-round backward is a "
+            "This audits full cached-feature six-round heads backward and the two "
+            "real MVT routes separately. A full 784 joint six-round backward is a "
             "separate smoke/profile gate."
         ),
     }

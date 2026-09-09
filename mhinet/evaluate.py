@@ -201,7 +201,7 @@ def evaluate_model(
     *,
     device: torch.device,
     h0_only: bool = False,
-    active_scales: tuple[int, ...] = (8, 4, 2, 1),
+    active_scales: tuple[int, ...] = (8, 4, 2),
     iterations_per_scale: int = 2,
 ) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     """Evaluate every requested ID, retaining failed rows in the denominator."""
@@ -669,7 +669,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--split", default="val")
     parser.add_argument("--max-pairs", type=int)
     parser.add_argument("--h0-only", action="store_true")
-    parser.add_argument("--active-scales", default="8,4,2,1")
+    parser.add_argument("--active-scales", default="8,4,2")
     parser.add_argument("--iterations-per-scale", type=int, default=2)
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--overwrite", action="store_true")
@@ -686,6 +686,10 @@ def main(argv: list[str] | None = None) -> int:
             model=model,
             map_location=device,
             restore_rng=False,
+            expected_metadata={
+                "architecture_sha256": build_report["architecture_sha256"],
+                "mhir_revision": build_report["mhir_revision"],
+            },
         )
     manifest = _resolve_manifest(runtime, args.split)
     dataset = HomographyPairDataset(manifest, max_pairs=args.max_pairs)

@@ -8,6 +8,7 @@ import torch
 from torch import nn
 
 from mhinet.modules import (
+    EXPECTED_MAINLINE_TRAINABLE_NEW_PARAMETERS,
     EXPECTED_NEW_PARAMETERS,
     SCALE_SPECS,
     DownBlock,
@@ -56,7 +57,7 @@ class PyramidAdapterTests(unittest.TestCase):
 class DecoderStructureTests(unittest.TestCase):
     def test_down_block_contract_and_parameter_count(self) -> None:
         block = DownBlock()
-        self.assertEqual(sum(parameter.numel() for parameter in block.parameters()), 78_080)
+        self.assertEqual(sum(parameter.numel() for parameter in block.parameters()), 37_056)
         output = block(torch.randn(2, 64, 13, 17))
         self.assertEqual(output.shape, (2, 64, 7, 9))
 
@@ -65,23 +66,31 @@ class DecoderStructureTests(unittest.TestCase):
         self.assertEqual(tuple(adapters.keys()), ("8", "4", "2", "1"))
         self.assertEqual(tuple(decoders.keys()), ("8", "4", "2", "1"))
         self.assertEqual(count_new_parameters(adapters, decoders), EXPECTED_NEW_PARAMETERS)
+        self.assertEqual(
+            count_new_parameters(
+                *(adapters[str(scale)] for scale in (8, 4, 2)),
+                *(decoders[str(scale)] for scale in (8, 4, 2)),
+            ),
+            EXPECTED_MAINLINE_TRAINABLE_NEW_PARAMETERS,
+        )
 
         expected_counts = {
-            8: (16_384, 509_448),
-            4: (16_384, 587_528),
-            2: (8_192, 661_512),
-            1: (8_192, 736_520),
+            8: (16_384, 227_714),
+            4: (16_384, 264_770),
+            2: (8_192, 299_778),
+            1: (8_192, 335_298),
         }
         for scale, spec in SCALE_SPECS.items():
             adapter = adapters[str(scale)]
             decoder = decoders[str(scale)]
             self.assertEqual(
                 spec.decoder_input_channels,
-                2 * spec.correlation_candidates + 4,
+                spec.correlation_candidates,
             )
             self.assertEqual(adapter.out_channels, spec.adapter_channels)
             self.assertEqual(decoder.input_channels, spec.decoder_input_channels)
-            self.assertEqual(len(decoder.down_blocks), spec.down_blocks)
+            self.assertEqual(decoder.input_spatial_size, spec.spatial_size)
+            self.assertEqual(len(decoder.layers), spec.down_blocks)
             self.assertEqual(decoder.max_delta_px, spec.max_delta_px)
             self.assertEqual(
                 sum(parameter.numel() for parameter in adapter.parameters()),
@@ -91,17 +100,36 @@ class DecoderStructureTests(unittest.TestCase):
                 sum(parameter.numel() for parameter in decoder.parameters()),
                 expected_counts[scale][1],
             )
-            self.assertTrue(torch.equal(decoder.fc2.weight, torch.zeros_like(decoder.fc2.weight)))
-            self.assertTrue(torch.equal(decoder.fc2.bias, torch.zeros_like(decoder.fc2.bias)))
+            self.assertTrue(
+                torch.equal(
+                    decoder.out_conv.weight, torch.zeros_like(decoder.out_conv.weight)
+                )
+            )
+            self.assertTrue(
+                torch.equal(
+                    decoder.out_conv.bias, torch.zeros_like(decoder.out_conv.bias)
+                )
+            )
 
             for module in decoder.modules():
                 if isinstance(module, nn.GroupNorm):
                     self.assertTrue(torch.equal(module.weight, torch.ones_like(module.weight)))
                     self.assertTrue(torch.equal(module.bias, torch.zeros_like(module.bias)))
-                if isinstance(module, (nn.Conv2d, nn.Linear)) and module is not decoder.fc2:
+                if isinstance(module, nn.Conv2d) and module is not decoder.out_conv:
                     self.assertGreater(int(torch.count_nonzero(module.weight)), 0)
                     if module.bias is not None:
                         self.assertTrue(torch.equal(module.bias, torch.zeros_like(module.bias)))
+            self.assertTrue(decoder.in_conv.bias is not None)
+            for block in decoder.layers:
+                self.assertEqual(block.conv.kernel_size, (3, 3))
+                self.assertEqual(block.conv.stride, (1, 1))
+                self.assertEqual(block.conv.padding, (1, 1))
+                self.assertIsNotNone(block.conv.bias)
+                self.assertEqual(block.norm.num_groups, 8)
+                self.assertIsInstance(block.activation, nn.ReLU)
+                self.assertEqual(block.pool.kernel_size, 2)
+                self.assertEqual(block.pool.stride, 2)
+                self.assertTrue(block.pool.ceil_mode)
 
     def test_full_contract_shapes_on_meta_device(self) -> None:
         for scale, spec in SCALE_SPECS.items():
@@ -131,6 +159,7 @@ class DecoderStructureTests(unittest.TestCase):
                 spec.decoder_input_channels,
                 spec.down_blocks,
                 spec.max_delta_px,
+                input_spatial_size=spatial,
             ).to(device="meta")
             decoder_input = torch.empty(
                 1,
@@ -139,33 +168,59 @@ class DecoderStructureTests(unittest.TestCase):
                 spatial,
                 device="meta",
             )
-            encoded = decoder.stem_activation(
-                decoder.stem_norm(decoder.stem_conv(decoder_input))
-            )
-            for block in decoder.down_blocks:
+            encoded = decoder.in_conv(decoder_input)
+            for block in decoder.layers:
                 encoded = block(encoded)
-            self.assertEqual(encoded.shape[-2:], (13, 13), msg=f"decoder scale D{scale}")
+            self.assertEqual(encoded.shape[-2:], (2, 2), msg=f"decoder scale D{scale}")
             self.assertEqual(decoder(decoder_input).shape, (1, 4, 2))
 
     def test_all_scales_have_exact_zero_initial_output(self) -> None:
         torch.manual_seed(11)
-        _, decoders = build_multiscale_modules()
         with torch.no_grad():
             for scale, spec in SCALE_SPECS.items():
+                decoder = ResidualGeometryDecoder(
+                    spec.decoder_input_channels,
+                    2,
+                    spec.max_delta_px,
+                    input_spatial_size=8,
+                )
                 decoder_input = torch.randn(1, spec.decoder_input_channels, 8, 8)
-                output = decoders[str(scale)](decoder_input)
+                output = decoder(decoder_input)
                 self.assertEqual(output.shape, (1, 4, 2))
                 self.assertTrue(torch.equal(output, torch.zeros_like(output)))
 
+    def test_output_grid_maps_row_major_to_tl_tr_bl_br(self) -> None:
+        decoder = ResidualGeometryDecoder(2, 0, 1.0)
+        with torch.no_grad():
+            decoder.in_conv.weight.zero_()
+            decoder.in_conv.bias.zero_()
+            decoder.in_conv.weight[0, 0, 0, 0] = 1.0
+            decoder.in_conv.weight[1, 1, 0, 0] = 1.0
+            decoder.out_conv.weight.zero_()
+            decoder.out_conv.bias.zero_()
+            decoder.out_conv.weight[0, 0, 0, 0] = 1.0
+            decoder.out_conv.weight[1, 1, 0, 0] = 1.0
+        decoder_input = torch.tensor(
+            [[
+                [[0.1, 0.2], [0.3, 0.4]],
+                [[-0.1, -0.2], [-0.3, -0.4]],
+            ]]
+        )
+        expected = torch.tensor(
+            [[[0.1, -0.1], [0.2, -0.2], [0.3, -0.3], [0.4, -0.4]]]
+        ).tanh()
+        torch.testing.assert_close(decoder(decoder_input), expected)
+
 
 class ZeroInitializationGradientTests(unittest.TestCase):
-    def test_fc2_learns_first_then_upstream_receives_gradient(self) -> None:
+    def test_out_conv_learns_first_then_upstream_receives_gradient(self) -> None:
         torch.manual_seed(23)
         spec = SCALE_SPECS[8]
         decoder = ResidualGeometryDecoder(
             spec.decoder_input_channels,
-            spec.down_blocks,
+            3,
             spec.max_delta_px,
+            input_spatial_size=16,
         )
         optimizer = torch.optim.SGD(decoder.parameters(), lr=1e-5)
         decoder_input = torch.randn(2, spec.decoder_input_channels, 16, 16)
@@ -174,21 +229,20 @@ class ZeroInitializationGradientTests(unittest.TestCase):
         first_output = decoder(decoder_input)
         first_output.sum().backward()
 
-        self.assertGreater(float(decoder.fc2.weight.grad.norm()), 0.0)
-        self.assertGreater(float(decoder.fc2.bias.grad.norm()), 0.0)
-        self.assertEqual(float(decoder.fc1.weight.grad.abs().max()), 0.0)
-        self.assertEqual(float(decoder.stem_conv.weight.grad.abs().max()), 0.0)
+        self.assertGreater(float(decoder.out_conv.weight.grad.norm()), 0.0)
+        self.assertGreater(float(decoder.out_conv.bias.grad.norm()), 0.0)
+        self.assertEqual(float(decoder.layers[-1].conv.weight.grad.abs().max()), 0.0)
+        self.assertEqual(float(decoder.in_conv.weight.grad.abs().max()), 0.0)
         optimizer.step()
-        self.assertGreater(float(decoder.fc2.weight.detach().norm()), 0.0)
+        self.assertGreater(float(decoder.out_conv.weight.detach().norm()), 0.0)
 
         optimizer.zero_grad(set_to_none=True)
         second_output = decoder(decoder_input)
         second_output.sum().backward()
 
         for name, gradient in (
-            ("fc1", decoder.fc1.weight.grad),
-            ("last_downblock", decoder.down_blocks[-1].conv2.weight.grad),
-            ("stem", decoder.stem_conv.weight.grad),
+            ("last_downblock", decoder.layers[-1].conv.weight.grad),
+            ("stem", decoder.in_conv.weight.grad),
         ):
             self.assertIsNotNone(gradient, msg=name)
             self.assertTrue(bool(torch.isfinite(gradient).all()), msg=name)

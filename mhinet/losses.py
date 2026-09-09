@@ -15,7 +15,7 @@ def sequence_corner_l1(
     *,
     target_hw: tuple[int, int] = (784, 784),
 ) -> dict[str, torch.Tensor | int | bool]:
-    """Equal-weight L1 over all 8 proposal corners, before geometry guards."""
+    """Equal-weight L1 over every proposal's four corners, before guards."""
 
     proposals = outputs["proposal_Q_norm"].float()
     if proposals.ndim != 4 or proposals.shape[-2:] != (4, 2):

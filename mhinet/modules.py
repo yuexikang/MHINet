@@ -1,4 +1,4 @@
-"""Trainable feature adapters and residual geometry decoders for MHINet v1.
+"""Trainable feature adapters and MCNet-style correlation decoders for MHINet.
 
 This module intentionally contains no iteration or homography logic.  It only
 implements the new parameterized layers specified by the v1.2 design package.
@@ -15,8 +15,11 @@ from torch import nn
 
 PYRAMID_INPUT_CHANNELS: Final = 256
 DECODER_HIDDEN_CHANNELS: Final = 64
-ADAPTIVE_POOL_SIZE: Final = (4, 4)
-EXPECTED_NEW_PARAMETERS: Final = 2_544_160
+CORNER_GRID_SIZE: Final = (2, 2)
+EXPECTED_NEW_PARAMETERS: Final = 1_176_712
+EXPECTED_MAINLINE_TRAINABLE_NEW_PARAMETERS: Final = 833_222
+MAINLINE_SCALES: Final = (8, 4, 2)
+REGISTERED_SCALES: Final = (8, 4, 2, 1)
 
 
 @dataclass(frozen=True)
@@ -38,8 +41,8 @@ SCALE_SPECS: Final[dict[int, ScaleModuleSpec]] = {
         spatial_size=98,
         adapter_channels=64,
         correlation_candidates=81,
-        decoder_input_channels=166,
-        down_blocks=3,
+        decoder_input_channels=81,
+        down_blocks=6,
         max_delta_px=32.0,
     ),
     4: ScaleModuleSpec(
@@ -47,8 +50,8 @@ SCALE_SPECS: Final[dict[int, ScaleModuleSpec]] = {
         spatial_size=196,
         adapter_channels=64,
         correlation_candidates=81,
-        decoder_input_channels=166,
-        down_blocks=4,
+        decoder_input_channels=81,
+        down_blocks=7,
         max_delta_px=16.0,
     ),
     2: ScaleModuleSpec(
@@ -56,8 +59,8 @@ SCALE_SPECS: Final[dict[int, ScaleModuleSpec]] = {
         spatial_size=392,
         adapter_channels=32,
         correlation_candidates=49,
-        decoder_input_channels=102,
-        down_blocks=5,
+        decoder_input_channels=49,
+        down_blocks=8,
         max_delta_px=6.0,
     ),
     1: ScaleModuleSpec(
@@ -65,8 +68,8 @@ SCALE_SPECS: Final[dict[int, ScaleModuleSpec]] = {
         spatial_size=784,
         adapter_channels=32,
         correlation_candidates=25,
-        decoder_input_channels=54,
-        down_blocks=6,
+        decoder_input_channels=25,
+        down_blocks=9,
         max_delta_px=2.0,
     ),
 }
@@ -147,68 +150,63 @@ class PyramidAdapter(nn.Module):
 
 
 class DownBlock(nn.Module):
-    """The fixed 64-channel residual stride-2 block from the v1 design."""
+    """MCNet correlation-decoder block adapted to non-power-of-two grids.
+
+    MCNet uses ``Conv3x3 -> GroupNorm -> ReLU -> MaxPool2``.  MHINet's
+    98/196/392/784 descriptor sizes are not exact powers of two, so ceil-mode
+    pooling retains the boundary evidence and reaches a strict 2x2 corner grid
+    after 6/7/8/9 blocks respectively.
+    """
 
     def __init__(self, channels: int = DECODER_HIDDEN_CHANNELS) -> None:
         super().__init__()
         if channels <= 0 or channels % 8 != 0:
             raise ValueError("DownBlock channels must be positive and divisible by 8")
         self.channels = int(channels)
-        self.conv1 = nn.Conv2d(
-            self.channels,
-            self.channels,
-            kernel_size=3,
-            stride=2,
-            padding=1,
-            bias=False,
-        )
-        self.norm1 = nn.GroupNorm(8, self.channels)
-        self.activation1 = nn.GELU()
-        self.conv2 = nn.Conv2d(
+        self.conv = nn.Conv2d(
             self.channels,
             self.channels,
             kernel_size=3,
             stride=1,
             padding=1,
-            bias=False,
+            bias=True,
         )
-        self.norm2 = nn.GroupNorm(8, self.channels)
-        self.skip = nn.Conv2d(
-            self.channels,
-            self.channels,
-            kernel_size=1,
-            stride=2,
-            bias=False,
-        )
-        self.activation2 = nn.GELU()
+        self.norm = nn.GroupNorm(8, self.channels)
+        self.activation = nn.ReLU()
+        self.pool = nn.MaxPool2d(kernel_size=2, stride=2, ceil_mode=True)
         self.reset_parameters()
 
     def reset_parameters(self) -> None:
-        for layer in (self.conv1, self.conv2, self.skip):
-            _init_kaiming(layer)
-        for norm in (self.norm1, self.norm2):
-            nn.init.ones_(norm.weight)
-            nn.init.zeros_(norm.bias)
+        _init_kaiming(self.conv)
+        nn.init.ones_(self.norm.weight)
+        nn.init.zeros_(self.norm.bias)
 
     def forward(self, inputs: torch.Tensor) -> torch.Tensor:
         if inputs.ndim != 4 or inputs.shape[1] != self.channels:
             raise ValueError(
                 f"DownBlock expects N,{self.channels},H,W, got {tuple(inputs.shape)}"
             )
-        residual = self.skip(inputs)
-        output = self.activation1(self.norm1(self.conv1(inputs)))
-        output = self.norm2(self.conv2(output))
-        return self.activation2(output + residual)
+        return self.pool(self.activation(self.norm(self.conv(inputs))))
 
 
 class ResidualGeometryDecoder(nn.Module):
-    """Decode a dense correlation tensor into four bounded corner residuals."""
+    """MCNet-style correlation decoder with a direct 2x2 corner topology.
+
+    The learnable path deliberately mirrors MCNet's official decoder:
+    correlation-only 1x1 input projection, repeated Conv/GN/ReLU/MaxPool
+    blocks, then a two-channel 1x1 output on a 2x2 grid.  The grid is flattened
+    row-major after moving x/y to the last axis, giving TL/TR/BL/BR corner
+    order.  MHINet retains two safety adaptations: an all-zero final projection
+    and a scale-specific tanh bound in input-image pixels.
+    """
 
     def __init__(
         self,
         input_channels: int,
         down_blocks: int,
         max_delta_px: float,
+        *,
+        input_spatial_size: int | None = None,
     ) -> None:
         super().__init__()
         if input_channels <= 0:
@@ -221,35 +219,37 @@ class ResidualGeometryDecoder(nn.Module):
         self.input_channels = int(input_channels)
         self.num_down_blocks = int(down_blocks)
         self.max_delta_px = float(max_delta_px)
+        self.input_spatial_size = (
+            None if input_spatial_size is None else int(input_spatial_size)
+        )
+        if self.input_spatial_size is not None and self.input_spatial_size <= 0:
+            raise ValueError("Decoder input_spatial_size must be positive")
 
-        self.stem_conv = nn.Conv2d(
+        self.in_conv = nn.Conv2d(
             self.input_channels,
             DECODER_HIDDEN_CHANNELS,
             kernel_size=1,
-            bias=False,
+            bias=True,
         )
-        self.stem_norm = nn.GroupNorm(8, DECODER_HIDDEN_CHANNELS)
-        self.stem_activation = nn.GELU()
-        self.down_blocks = nn.ModuleList(
+        self.layers = nn.ModuleList(
             DownBlock(DECODER_HIDDEN_CHANNELS) for _ in range(self.num_down_blocks)
         )
-        self.pool = nn.AdaptiveAvgPool2d(ADAPTIVE_POOL_SIZE)
-        self.fc1 = nn.Linear(DECODER_HIDDEN_CHANNELS * 4 * 4, 256, bias=True)
-        self.fc1_activation = nn.GELU()
-        self.fc2 = nn.Linear(256, 8, bias=True)
+        self.out_conv = nn.Conv2d(
+            DECODER_HIDDEN_CHANNELS,
+            2,
+            kernel_size=1,
+            bias=True,
+        )
         self.reset_parameters()
 
     def reset_parameters(self) -> None:
-        _init_kaiming(self.stem_conv)
-        nn.init.ones_(self.stem_norm.weight)
-        nn.init.zeros_(self.stem_norm.bias)
+        _init_kaiming(self.in_conv)
         # DownBlock constructors own their initialization.  Reinitializing here
         # keeps reset_parameters() semantically complete when called explicitly.
-        for block in self.down_blocks:
+        for block in self.layers:
             block.reset_parameters()
-        _init_kaiming(self.fc1)
-        nn.init.zeros_(self.fc2.weight)
-        nn.init.zeros_(self.fc2.bias)
+        nn.init.zeros_(self.out_conv.weight)
+        nn.init.zeros_(self.out_conv.bias)
 
     def forward(self, decoder_input: torch.Tensor) -> torch.Tensor:
         if decoder_input.ndim != 4 or decoder_input.shape[1] != self.input_channels:
@@ -257,12 +257,29 @@ class ResidualGeometryDecoder(nn.Module):
                 f"Decoder expects N,{self.input_channels},H,W, got "
                 f"{tuple(decoder_input.shape)}"
             )
-        output = self.stem_activation(self.stem_norm(self.stem_conv(decoder_input)))
-        for block in self.down_blocks:
+        if self.input_spatial_size is not None and decoder_input.shape[-2:] != (
+            self.input_spatial_size,
+            self.input_spatial_size,
+        ):
+            raise ValueError(
+                "Decoder production input has the wrong spatial size: expected "
+                f"{self.input_spatial_size}x{self.input_spatial_size}, got "
+                f"{tuple(decoder_input.shape[-2:])}"
+            )
+        output = self.in_conv(decoder_input)
+        for block in self.layers:
             output = block(output)
-        output = self.pool(output).flatten(start_dim=1)
-        output = self.fc1_activation(self.fc1(output))
-        logits = self.fc2(output).reshape(-1, 4, 2)
+        if output.shape[-2:] != CORNER_GRID_SIZE:
+            raise ValueError(
+                "MCNet-style pooling path must terminate at 2x2; got "
+                f"{tuple(output.shape[-2:])}. Check the input size and block count."
+            )
+        logits_grid = self.out_conv(output)
+        if logits_grid.shape[-2:] != CORNER_GRID_SIZE:
+            raise AssertionError(
+                f"Corner logits must be 2x2, got {tuple(logits_grid.shape[-2:])}"
+            )
+        logits = logits_grid.permute(0, 2, 3, 1).contiguous().reshape(-1, 4, 2)
         return torch.tanh(logits) * self.max_delta_px
 
 
@@ -300,6 +317,7 @@ def build_multiscale_modules() -> tuple[nn.ModuleDict, nn.ModuleDict]:
                 input_channels=spec.decoder_input_channels,
                 down_blocks=spec.down_blocks,
                 max_delta_px=spec.max_delta_px,
+                input_spatial_size=spec.spatial_size,
             )
             for scale, spec in SCALE_SPECS.items()
         }
@@ -314,10 +332,13 @@ def build_multiscale_modules() -> tuple[nn.ModuleDict, nn.ModuleDict]:
 
 
 __all__ = [
-    "ADAPTIVE_POOL_SIZE",
+    "CORNER_GRID_SIZE",
     "DECODER_HIDDEN_CHANNELS",
+    "EXPECTED_MAINLINE_TRAINABLE_NEW_PARAMETERS",
     "EXPECTED_NEW_PARAMETERS",
+    "MAINLINE_SCALES",
     "PYRAMID_INPUT_CHANNELS",
+    "REGISTERED_SCALES",
     "SCALE_SPECS",
     "DownBlock",
     "PyramidAdapter",

@@ -15,7 +15,7 @@ import numpy as np
 import torch
 
 from .checkpointing import load_checkpoint, save_checkpoint
-from .config import RuntimePaths, sha256_file
+from .config import RuntimePaths, load_architecture_config, sha256_file
 from .data import HomographyPairDataset, iter_manifest, parse_geo_region
 from .evaluate import evaluate_model, write_evaluation
 from .losses import sequence_corner_l1
@@ -70,9 +70,8 @@ class TrainConfig:
             (8,),
             (8, 4),
             (8, 4, 2),
-            (8, 4, 2, 1),
         }:
-            errors.append("active_scales must be a coarse-to-fine prefix")
+            errors.append("mainline active_scales must stop at D2")
         if int(self.raw.get("iterations_per_scale", 0)) not in (1, 2):
             errors.append("iterations_per_scale must be 1 or 2")
         if str(self.raw.get("profile")) not in {
@@ -203,14 +202,22 @@ def _validate_tiny_gate(path: Path | None, required: bool) -> dict[str, Any] | N
         return None
     if path is None:
         raise RuntimeError(
-            "Formal training requires --tiny-gate-artifact with a passed TINY-S/TINY-8 report"
+            "Formal training requires --tiny-gate-artifact with a passed TINY-S/TINY-6 report"
         )
     source = path.expanduser().resolve()
     payload = json.loads(source.read_text(encoding="utf-8"))
-    if payload.get("gate") != "P4_TINY_S_TINY_8" or payload.get("status") != "passed":
+    if payload.get("gate") != "P4_TINY_S_TINY_6" or payload.get("status") != "passed":
         raise RuntimeError(f"Tiny gate is not passed: {source}")
     if payload.get("errors"):
         raise RuntimeError(f"Tiny gate contains merge errors: {payload['errors']}")
+    current_architecture = load_architecture_config()
+    evidence = payload.get("data_and_resource_evidence")
+    if not isinstance(evidence, Mapping) or evidence.get(
+        "architecture_sha256"
+    ) != current_architecture.sha256:
+        raise RuntimeError(
+            "Tiny gate architecture does not match the current MCNet-topology MHIR"
+        )
     protocol = payload.get("protocol", {})
     cache = payload.get("cache", {})
     sample_protocol = protocol.get(
@@ -378,6 +385,12 @@ def train(
             scheduler=scheduler,
             map_location=device,
             restore_rng=True,
+            expected_metadata={
+                "architecture_sha256": build_report["architecture_sha256"],
+                "mhir_revision": build_report["mhir_revision"],
+                "training_config_sha256": config.sha256,
+                "profile": config.profile,
+            },
         )
         metadata = resume_report.get("metadata", {})
         if metadata.get("training_config_sha256") != config.sha256:
@@ -410,6 +423,7 @@ def train(
         "training_config": str(config.path),
         "training_config_sha256": config.sha256,
         "architecture_sha256": build_report["architecture_sha256"],
+        "mhir_revision": build_report["mhir_revision"],
         "runtime_config": str(runtime.source_path),
         "profile": config.profile,
         "active_scales": active_scales,

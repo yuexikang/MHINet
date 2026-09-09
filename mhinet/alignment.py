@@ -95,7 +95,9 @@ def run_alignment(runtime: RuntimePaths, pair_index: int = 0) -> dict[str, objec
             "dino": 1,
             "mvt": 1,
             "vgg": 1,
-            "dedode_full_pyramid": 1,
+            "dedode_decode_calls": 1,
+            "dedode_steps": 4,
+            "dedode_scale1": 0,
         }
     )
     return {
@@ -110,7 +112,7 @@ def run_alignment(runtime: RuntimePaths, pair_index: int = 0) -> dict[str, objec
             "H0": list(output["H0_norm"].shape),
             **{
                 f"D{scale}": list(output["pyramid"][scale].shape)
-                for scale in (8, 4, 2, 1)
+                for scale in (8, 4, 2)
             },
         },
         "stage1_valid": bool(output["stage1_valid"][0].item()),

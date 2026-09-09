@@ -1,0 +1,169 @@
+{
+  "gate": "P3_real_zero_init_six_round",
+  "status": "passed",
+  "pair_id": "current__37.534900126.607065_pair0",
+  "device": "cuda:0",
+  "new_parameters": 1176712,
+  "expected_new_parameters": 1176712,
+  "output_projection_nonzero_elements": {
+    "8": {
+      "weight": 0,
+      "bias": 0
+    },
+    "4": {
+      "weight": 0,
+      "bias": 0
+    },
+    "2": {
+      "weight": 0,
+      "bias": 0
+    },
+    "1": {
+      "weight": 0,
+      "bias": 0
+    }
+  },
+  "H0_to_Hfinal_max_corner_projection_error_px": 6.103515625e-05,
+  "H0_to_Hfinal_mean_corner_projection_error_px": 2.986308027175255e-05,
+  "stage1_valid": true,
+  "overall_valid": true,
+  "accepted_updates": 6,
+  "failure_reason_codes": [
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  ],
+  "supported_query_count": [
+    [
+      6971,
+      6971,
+      26793,
+      26793,
+      104322,
+      104322
+    ]
+  ],
+  "condition_number": [
+    [
+      3.0340001583099365,
+      3.0340001583099365,
+      3.0340001583099365,
+      3.0340001583099365,
+      3.0340001583099365,
+      3.0340001583099365
+    ]
+  ],
+  "max_abs_delta_px": 0.0,
+  "shared_call_counts": {
+    "dino": 1,
+    "mvt": 1,
+    "vgg": 1,
+    "dedode_decode_calls": 1,
+    "dedode_steps": 4,
+    "dedode_scale1": 0
+  },
+  "active_scales": [
+    8,
+    4,
+    2
+  ],
+  "update_scale_schedule": [
+    8,
+    8,
+    4,
+    4,
+    2,
+    2
+  ],
+  "forward_ms_single_unwarmed": 716.326991096139,
+  "peak_allocated_bytes": 2061168128,
+  "build": {
+    "architecture_path": "/home/disk1/MHINet/configs/mhinet_mcnet_v1.2.json",
+    "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+    "mhir_revision": "mcnet_correlation_decoder_784_v1",
+    "mcnet_reference_commit": "cc03479689b3cf40f0c384954f338b434765c155",
+    "provider": {
+      "loma_root": "/home/disk1/LoMa",
+      "loma_checkpoint": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+      "dino_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "selected_stage1_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "loretta_loaded_keys": 807,
+      "locator": {
+        "source": "official_loretta_checkpoint",
+        "overridden": false
+      },
+      "descriptor_initialization": {
+        "migrated_tensors": 364,
+        "vgg_tensors": 84,
+        "decoder_tensors": 280,
+        "top_refiner_mapping": "LoMa-B scale 14 -> DINOv3 scale 16"
+      },
+      "ownership": {
+        "dino_wrapper_instances": 1,
+        "mvt_object_references": 1,
+        "stage1_head_contains_dino": 0,
+        "stage1_head_contains_mvt": 0,
+        "decoder_scales": [
+          "16",
+          "8",
+          "4",
+          "2",
+          "1"
+        ]
+      },
+      "legacy_training_wrappers_reused": false,
+      "safe_stage1_fitter": true
+    },
+    "training_parameters": {
+      "profile": "heads",
+      "groups": {
+        "new_modules": {
+          "parameters": 1176712,
+          "trainable_parameters": 833222,
+          "tensor_count": 140,
+          "trainable_tensor_count": 99
+        },
+        "dedode": {
+          "parameters": 8219297,
+          "trainable_parameters": 0,
+          "tensor_count": 190,
+          "trainable_tensor_count": 0
+        },
+        "vgg": {
+          "parameters": 10592064,
+          "trainable_parameters": 0,
+          "tensor_count": 48,
+          "trainable_tensor_count": 0
+        },
+        "mvt": {
+          "parameters": 87417088,
+          "trainable_parameters": 0,
+          "tensor_count": 150,
+          "trainable_tensor_count": 0
+        },
+        "dino": {
+          "parameters": 227564544,
+          "trainable_parameters": 0,
+          "tensor_count": 259,
+          "trainable_tensor_count": 0
+        },
+        "stage1_head_parameters": {
+          "parameters": 2957572,
+          "trainable_parameters": 0,
+          "tensor_count": 10,
+          "trainable_tensor_count": 0
+        }
+      },
+      "total_trainable_parameters": 833222,
+      "new_parameters": 1176712,
+      "dino_trainable_parameters": 0,
+      "stage1_head_trainable_parameters": 0
+    }
+  },
+  "note": "No-grad engineering fixed-point smoke on one validation pair. It is not an accuracy result, a latency benchmark, or training validation."
+}

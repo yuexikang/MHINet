@@ -3,7 +3,7 @@
   "purpose": "formal_E01_pilot_after_all_P0_P4_gates_pass",
   "training_revision": "1.2",
   "profile": "heads",
-  "active_scales": [8, 4, 2, 1],
+  "active_scales": [8, 4, 2],
   "iterations_per_scale": 2,
   "loss_profile": "sequence_corner_l1",
   "fgo_enabled": false,

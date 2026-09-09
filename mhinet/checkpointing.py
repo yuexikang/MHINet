@@ -20,7 +20,10 @@ from torch import nn
 
 
 CHECKPOINT_FORMAT: Final = "mhinet.training"
-CHECKPOINT_VERSION: Final = 1
+# Version 2 starts with the MCNet-style MHIR state-dict topology.  Version-1
+# optimizer/checkpoint tensors belong to the superseded residual-MLP decoder
+# and are intentionally rejected rather than partially migrated.
+CHECKPOINT_VERSION: Final = 2
 
 
 def _safe_value(value: Any, *, location: str) -> Any:
@@ -244,6 +247,7 @@ def load_checkpoint(
     map_location: Any,
     strict: bool = True,
     restore_rng: bool = True,
+    expected_metadata: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Load an MHINet-owned checkpoint with PyTorch's restricted loader.
 
@@ -264,6 +268,17 @@ def load_checkpoint(
     missing = [key for key in required if key not in payload]
     if missing:
         raise ValueError("Checkpoint is missing required fields: " + ", ".join(missing))
+
+    metadata = payload.get("metadata", {})
+    if not isinstance(metadata, Mapping):
+        raise ValueError("Checkpoint metadata must be a mapping")
+    for key, expected in dict(expected_metadata or {}).items():
+        actual = metadata.get(key)
+        if actual != expected:
+            raise RuntimeError(
+                f"Checkpoint metadata mismatch for {key}: "
+                f"expected {expected!r}, got {actual!r}"
+            )
 
     incompatible = model.load_state_dict(payload["model"], strict=strict)
     restored = {"model": True, "optimizer": False, "scheduler": False, "scaler": False}
@@ -295,7 +310,7 @@ def load_checkpoint(
         "optimizer_step": int(progress["optimizer_step"]),
         "microbatch_progress": progress.get("microbatch"),
         "data_progress": progress.get("data"),
-        "metadata": payload.get("metadata", {}),
+        "metadata": dict(metadata),
         "auxiliary_state": payload.get("auxiliary_state"),
         "missing_model_keys": list(incompatible.missing_keys),
         "unexpected_model_keys": list(incompatible.unexpected_keys),

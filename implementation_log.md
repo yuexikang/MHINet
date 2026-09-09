@@ -591,6 +591,63 @@ diagnostic-only and is never used by formal training.
   The cache description now reports its actual sample count instead of always
   saying 32.  Full suite: 80/80 passed in 1.796 seconds.  This option is failure
   isolation only and cannot satisfy the 32-condition P4 gate.
+- The completed dense-D1 BF16 step-256 checkpoint was reloaded read-only at Git
+  `018fb0a` using:
+  `CUDA_VISIBLE_DEVICES=2 /root/miniconda3/envs/loma-repro/bin/python -u -m mhinet.cli tiny-checkpoint-audit --runtime configs/runtime_paths.server.json --checkpoint outputs/tiny_overfit/tiny-s-d1_one-pair-residuals_translation_bf16_raw_seed0.pt --experiment D1 --sample-count 32 --sample-protocol one_pair_residuals --residual-profile translation --precision bf16 --seed 0 --residual-bound-fraction 1.0 --output artifacts/p4_tiny_s_d1_full_bound_bf16_checkpoint_audit.json --overwrite`.
+  The 16,250,961-byte snapshot SHA256 is the expected
+  `b33f3b148b58e96f7d5af4bfde1681f56c6a2c1be0dda803a51bd6e97b8dadd4`;
+  canonical serialized, loaded and post-forward iterator-state hashes all equal
+  `b0ae7b605211a74ebeaf64eb73d4f0f316a0d92c69173f2f878b0fa889c5a419`.
+  No optimizer/RNG/backward/step was used, the source inode did not change while
+  snapshotting, and DINO/MVT/VGG/CGMDP were each evaluated once for the one
+  exact pair.  Artifact: 178,948 bytes, SHA256
+  `3c9fde2cc1141dcb68afbb64ac7211c24b4ddafa6137d877622b7e6f97b8569a`;
+  stderr was empty.  This legacy checkpoint lacks embedded resource hashes and
+  seed/bound, so the artifact explicitly marks those two CLI supplements and
+  does not claim strict historical resource binding.
+- That audit reproduces H0/H1/H2 mean MACE
+  `1.858605 -> 0.931836 -> 0.930858 px`, with no failure/rejection or saturation
+  and well-conditioned DLT (`condition_number` mean about `3.438`).  It exposes
+  a directional failure: update 1 reduces mean absolute x residual from
+  `1.432011` to `0.083152 px`, but y changes from `0.915114` to
+  `0.920478 px`; update 2 leaves x/y at `0.120899/0.914302 px` and improves only
+  10/32 conditions.  Thus guards, saturation and a hidden state mutation are
+  ruled out for this checkpoint; the decoder learned mostly horizontal
+  correction and its shared second application added no aggregate benefit.
+- Real D1 correlation was then audited on the exact x-dominant condition 0 and
+  y-dominant conditions 2/14 with full legal residual bound.  Commands used
+  `python -m mhinet.cli real-correlation-audit --runtime
+  configs/runtime_paths.server.json --pair-index 0 --scale 1 --seed 0
+  --condition-index {0,2,14} --residual-bound-fraction 1.0` on GPU2.  Artifact
+  SHA256 values are respectively
+  `7d4cdc3ee38e4ba2732d5fe63bf63a63b1a1703eec7e35f1c4fcc7fba530950c`,
+  `9a2ad84fd78a764ce95bfa8a6cf4e8c5342fb0f3a78b27ca4c3f868e0270a69d`
+  and `08d29c365b8160896303533ce90a35c4b6f5111b869a39875bfe23876d26c600`;
+  all stderr files were empty.  Random-adapter nearest-candidate top-1 rates
+  were `0.2248/0.2946/0.2392`, while raw-descriptor rates were
+  `0.4071/0.5013/0.4521`; condition 2's y-positive correlation margin
+  (`0.01221`) was stronger than condition 0's x-dominant margin (`0.00870`).
+  Vertical evidence is therefore present before the decoder; this narrows, but
+  does not yet prove, the failure to learned representation/optimization or
+  multi-condition interference.
+- Two condition-0 one-sample D1 diagnostics launched at Git `e39d187` completed
+  128 raw steps in BF16 and FP32.  Exact commands matched the full-bound D1
+  recipe with `--sample-count 1 --max-steps 128 --eval-interval 16`, precision
+  `bf16` or `fp32`, and their separately recorded progress/output paths.  BF16
+  moved `1.418984 -> 0.065078 px` (best sampled endpoint `0.012468`); FP32 moved
+  `1.418984 -> 0.047024 px` (best `0.045429`).  Both had zero failure/rejection.
+  Their top-level status correctly remains `failed`, because one condition can
+  never meet the registered 32-condition criterion.  Artifact SHA256 values:
+  `0126f91ca908226dd34df7dcea86fb08223dd28102ee1079566a98cc9c0fe8fa`
+  and `9a0c5ab3934f9ae96abc6854ab2cb55b2a0826fddf7a03c3c4b9b0998383e00a`.
+  Final checkpoint SHA256 values:
+  `e2770fbc012d7d186940385f8952bc7b14e3ae3033dd3cfe4b651947e54cca2d`
+  and `a01ab71d2745710beaa5e7c2875ca3d855f60a6b38558e74427a434d4210b845`.
+  BF16/FP32 training elapsed was `1553.745/1498.777 s`; peak allocated/reserved
+  memory was `7,138,167,296/7,411,335,168` and
+  `7,921,545,728/8,204,058,624` bytes.  This proves only that the x-dominant
+  condition is individually learnable in either precision, not that D1 or P4
+  passes.  Separate y-positive/y-negative one-condition jobs are in progress.
 
 CUDA warns that `grid_sampler_2d_backward_cuda` and
 `adaptive_avg_pool2d_backward_cuda` have no deterministic implementation.

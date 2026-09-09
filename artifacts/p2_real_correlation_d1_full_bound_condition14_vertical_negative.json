@@ -1,0 +1,506 @@
+{
+  "gate": "P2_real_correlation_signal_audit",
+  "status": "diagnostic",
+  "pair_id": "current__34.801100126.376330_pair0",
+  "scale": 1,
+  "seed": 0,
+  "condition_index": 14,
+  "residual_bound_fraction": 1.0,
+  "maximum_declared_abs_residual_px": 2.0,
+  "controlled_corner_residual_input_px": [
+    [
+      -0.1165008544921875,
+      -1.4000244140625
+    ],
+    [
+      -0.116455078125,
+      -1.39996337890625
+    ],
+    [
+      -0.1165008544921875,
+      -1.4000244140625
+    ],
+    [
+      -0.11651611328125,
+      -1.39996337890625
+    ]
+  ],
+  "adapter_valid_points": 1229312,
+  "random_zero_init_adapter": {
+    "feature_shape": [
+      1,
+      2,
+      32,
+      784,
+      784
+    ],
+    "feature_dtype": "torch.float32",
+    "radius": 2,
+    "queries": 614656,
+    "observable_queries": 307506,
+    "selected_queries": 307446,
+    "selected_fraction": 0.5001919865608215,
+    "oracle_offset_feature_px": {
+      "mean": 1.404824137687683,
+      "median": 1.4048290252685547,
+      "p90": 1.4048645496368408,
+      "min": 1.4046111106872559,
+      "max": 1.4049962759017944
+    },
+    "argmax_endpoint_error_feature_px": {
+      "mean": 1.2416532039642334,
+      "median": 0.9698694348335266,
+      "p90": 2.402851104736328,
+      "min": 0.41639649868011475,
+      "max": 4.005100727081299
+    },
+    "argmax_within_0_75_feature_px": 0.43122369050979614,
+    "argmax_within_1_5_feature_px": 0.7187635898590088,
+    "nearest_integer_candidate_top1_fraction": 0.23921923339366913,
+    "nearest_integer_candidate_rank": {
+      "mean": 4.738116264343262,
+      "median": 3.0,
+      "p90": 11.0,
+      "min": 1.0,
+      "max": 25.0
+    },
+    "nearest_integer_candidate_correlation": {
+      "mean": 0.9068084359169006,
+      "median": 0.9578324556350708,
+      "p90": 0.9905468225479126,
+      "min": -0.35897237062454224,
+      "max": 0.9980049133300781
+    },
+    "center_candidate_correlation": {
+      "mean": 0.899791955947876,
+      "median": 0.9486448764801025,
+      "p90": 0.9849367141723633,
+      "min": -0.3826794922351837,
+      "max": 0.9974861741065979
+    },
+    "nearest_minus_center_correlation": {
+      "mean": 0.007016410119831562,
+      "median": 0.005659580230712891,
+      "p90": 0.019183725118637085,
+      "min": -0.1365581750869751,
+      "max": 0.13311296701431274
+    },
+    "bf16_decoder_input_roundtrip": {
+      "emulation": "FP32 correlation -> BF16 -> FP32 round-trip",
+      "valid_score_abs_quantization_error": {
+        "mean": 0.0009662442025728524,
+        "median": 0.0009585022926330566,
+        "p90": 0.0017544031143188477,
+        "min": 0.0,
+        "max": 0.001953125
+      },
+      "nearest_candidate_abs_quantization_error": {
+        "mean": 0.0009671690640971065,
+        "median": 0.0009609460830688477,
+        "p90": 0.0017552375793457031,
+        "min": 0.0,
+        "max": 0.001953125
+      },
+      "center_candidate_abs_quantization_error": {
+        "mean": 0.0009651582804508507,
+        "median": 0.0009578466415405273,
+        "p90": 0.0017536282539367676,
+        "min": 0.0,
+        "max": 0.001953125
+      },
+      "nearest_minus_center_raw": {
+        "mean": 0.007016410119831562,
+        "median": 0.005659580230712891,
+        "p90": 0.019183725118637085,
+        "min": -0.1365581750869751,
+        "max": 0.13311296701431274
+      },
+      "nearest_minus_center_after_bf16": {
+        "mean": 0.007018802687525749,
+        "median": 0.00390625,
+        "p90": 0.01953125,
+        "min": -0.138671875,
+        "max": 0.1328125
+      },
+      "nearest_center_equal_after_bf16_fraction": 0.15587127208709717,
+      "raw_positive_margin_fraction": 0.8280933499336243,
+      "positive_margin_fraction_after_bf16": 0.7246150374412537,
+      "raw_margin_sign_preserved_fraction": 0.8441287279129028,
+      "raw_positive_margin_retained_fraction": 0.8750402927398682,
+      "argmax_candidate_preserved_fraction": 0.5984823107719421,
+      "nearest_candidate_rank1_after_bf16_fraction": 0.42991939187049866
+    },
+    "valid_candidates_per_query": {
+      "mean": 24.970020294189453,
+      "median": 25.0,
+      "p90": 25.0,
+      "min": 12.0,
+      "max": 25.0
+    }
+  },
+  "raw_256d_descriptor": {
+    "feature_shape": [
+      1,
+      2,
+      256,
+      784,
+      784
+    ],
+    "feature_dtype": "torch.float32",
+    "radius": 2,
+    "queries": 614656,
+    "observable_queries": 307506,
+    "selected_queries": 307446,
+    "selected_fraction": 0.5001919865608215,
+    "oracle_offset_feature_px": {
+      "mean": 1.404824137687683,
+      "median": 1.4048290252685547,
+      "p90": 1.4048645496368408,
+      "min": 1.4046111106872559,
+      "max": 1.4049962759017944
+    },
+    "argmax_endpoint_error_feature_px": {
+      "mean": 0.816667377948761,
+      "median": 0.611199676990509,
+      "p90": 1.6554471254348755,
+      "min": 0.416379451751709,
+      "max": 4.005092620849609
+    },
+    "argmax_within_0_75_feature_px": 0.6719878911972046,
+    "argmax_within_1_5_feature_px": 0.8960662484169006,
+    "nearest_integer_candidate_top1_fraction": 0.4521346688270569,
+    "nearest_integer_candidate_rank": {
+      "mean": 2.686741590499878,
+      "median": 2.0,
+      "p90": 6.0,
+      "min": 1.0,
+      "max": 22.0
+    },
+    "nearest_integer_candidate_correlation": {
+      "mean": 0.9143221378326416,
+      "median": 0.9558919668197632,
+      "p90": 0.989534854888916,
+      "min": 0.08408352732658386,
+      "max": 0.9958939552307129
+    },
+    "center_candidate_correlation": {
+      "mean": 0.9072946906089783,
+      "median": 0.9479721784591675,
+      "p90": 0.9826744794845581,
+      "min": 0.0826658383011818,
+      "max": 0.9948736429214478
+    },
+    "nearest_minus_center_correlation": {
+      "mean": 0.007027396000921726,
+      "median": 0.005791723728179932,
+      "p90": 0.015421092510223389,
+      "min": -0.04028356075286865,
+      "max": 0.083834707736969
+    },
+    "bf16_decoder_input_roundtrip": {
+      "emulation": "FP32 correlation -> BF16 -> FP32 round-trip",
+      "valid_score_abs_quantization_error": {
+        "mean": 0.0009690925944596529,
+        "median": 0.0009632706642150879,
+        "p90": 0.0017547607421875,
+        "min": 0.0,
+        "max": 0.001953125
+      },
+      "nearest_candidate_abs_quantization_error": {
+        "mean": 0.0009727262076921761,
+        "median": 0.0009682178497314453,
+        "p90": 0.001757502555847168,
+        "min": 0.0,
+        "max": 0.001953125
+      },
+      "center_candidate_abs_quantization_error": {
+        "mean": 0.0009686780977062881,
+        "median": 0.000962376594543457,
+        "p90": 0.0017544031143188477,
+        "min": 0.0,
+        "max": 0.001953125
+      },
+      "nearest_minus_center_raw": {
+        "mean": 0.007027396000921726,
+        "median": 0.005791723728179932,
+        "p90": 0.015421092510223389,
+        "min": -0.04028356075286865,
+        "max": 0.083834707736969
+      },
+      "nearest_minus_center_after_bf16": {
+        "mean": 0.007018281612545252,
+        "median": 0.00390625,
+        "p90": 0.015625,
+        "min": -0.0390625,
+        "max": 0.0859375
+      },
+      "nearest_center_equal_after_bf16_fraction": 0.15332123637199402,
+      "raw_positive_margin_fraction": 0.9261333346366882,
+      "positive_margin_fraction_after_bf16": 0.809429943561554,
+      "raw_margin_sign_preserved_fraction": 0.8466820120811462,
+      "raw_positive_margin_retained_fraction": 0.8739885091781616,
+      "argmax_candidate_preserved_fraction": 0.48844024538993835,
+      "nearest_candidate_rank1_after_bf16_fraction": 0.7119753956794739
+    },
+    "valid_candidates_per_query": {
+      "mean": 24.970020294189453,
+      "median": 25.0,
+      "p90": 25.0,
+      "min": 12.0,
+      "max": 25.0
+    }
+  },
+  "shared_call_counts": {
+    "dino": 1,
+    "mvt": 1,
+    "vgg": 1,
+    "dedode_full_pyramid": 1
+  },
+  "build": {
+    "architecture_path": "/home/disk1/MHINet/MHINet_server_handoff_v1.2/configs/mhinet_v1.json",
+    "architecture_sha256": "4a859f413ee4be59acb1dc6c0cf189e80b8f4e7b3f54dc9f117acd1ac5cfe128",
+    "provider": {
+      "loma_root": "/home/disk1/LoMa",
+      "loma_checkpoint": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+      "dino_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "selected_stage1_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "loretta_loaded_keys": 807,
+      "locator": {
+        "source": "official_loretta_checkpoint",
+        "overridden": false
+      },
+      "descriptor_initialization": {
+        "migrated_tensors": 364,
+        "vgg_tensors": 84,
+        "decoder_tensors": 280,
+        "top_refiner_mapping": "LoMa-B scale 14 -> DINOv3 scale 16"
+      },
+      "ownership": {
+        "dino_wrapper_instances": 1,
+        "mvt_object_references": 1,
+        "stage1_head_contains_dino": 0,
+        "stage1_head_contains_mvt": 0,
+        "decoder_scales": [
+          "16",
+          "8",
+          "4",
+          "2",
+          "1"
+        ]
+      },
+      "legacy_training_wrappers_reused": false,
+      "safe_stage1_fitter": true
+    },
+    "training_parameters": {
+      "profile": "heads",
+      "groups": {
+        "new_modules": {
+          "parameters": 2544160,
+          "trainable_parameters": 2544160,
+          "tensor_count": 158,
+          "trainable_tensor_count": 158,
+          "optimizer_parameter_ids": [
+            134014187545248,
+            134008316149600,
+            134008316149280,
+            134008316148960,
+            134008316148800,
+            134008316148640,
+            134008316148480,
+            134008316147680,
+            134008316147520,
+            134008316147360,
+            134008316147040,
+            134008316146880,
+            134008316146720,
+            134008316146400,
+            134008316146080,
+            134008316145920,
+            134008316145760,
+            134008316145440,
+            134008316145280,
+            134008316145120,
+            134008316144800,
+            134008316144480,
+            134008316144320,
+            134008316144160,
+            134008316143840,
+            134008316143680,
+            134008316143520,
+            134008316143200,
+            134008316143040,
+            134008316142880,
+            134008316142720,
+            134008316142560,
+            134008316142240,
+            134008316142080,
+            134008316141920,
+            134008316141600,
+            134008316141440,
+            134008316141280,
+            134008316140960,
+            134008316140800,
+            134008316140640,
+            134008316140320,
+            134008316140000,
+            134008316139840,
+            134008316139680,
+            134008316139360,
+            134008316139200,
+            134008316139040,
+            134008316138720,
+            134008316138400,
+            134008316138240,
+            134008316138080,
+            134008316137760,
+            134008316137600,
+            134008316137440,
+            134008316137120,
+            134008316136800,
+            134008316136640,
+            134008316136480,
+            134008316136160,
+            134008316136000,
+            134008316135840,
+            134008316135520,
+            134008316135360,
+            134008316135200,
+            134008316135040,
+            134008316134880,
+            134008316134560,
+            134008316134400,
+            134008316134240,
+            134008316133920,
+            134008316133760,
+            134008316133600,
+            134008316133840,
+            134008316133520,
+            134008316134640,
+            134008316134000,
+            134008316134960,
+            134008316134480,
+            134008316134320,
+            134008316135280,
+            134008316135440,
+            134008316135600,
+            134008316135920,
+            134008316136240,
+            134008316136400,
+            134008316136560,
+            134008316136880,
+            134008316137040,
+            134008316137200,
+            134008316137520,
+            134008316137840,
+            134008316138000,
+            134008316138160,
+            134008316138480,
+            134008316138640,
+            134008316138800,
+            134008316139120,
+            134008316139440,
+            134008316139600,
+            134008316139760,
+            134008316140080,
+            134008316140240,
+            134008316140400,
+            134008316140720,
+            134008316140880,
+            134008316141040,
+            134008316141200,
+            134008316141360,
+            134008316141680,
+            134008316141840,
+            134008316142000,
+            134008316142320,
+            134008316142480,
+            134008316142640,
+            134008316142960,
+            134008316143120,
+            134008316143280,
+            134008316143600,
+            134008316143920,
+            134008316144080,
+            134008316144240,
+            134008316144560,
+            134008316144720,
+            134008316144880,
+            134008316145200,
+            134008316145520,
+            134008316145680,
+            134008316145840,
+            134008316146160,
+            134008316146320,
+            134008316146480,
+            134008316146800,
+            134008316147120,
+            134008316147280,
+            134008316147440,
+            134008316147760,
+            134008316147920,
+            134008316148080,
+            134008316148400,
+            134008316148720,
+            134008316148880,
+            134008316149040,
+            134008316149360,
+            134008316149520,
+            134008316149680,
+            134008316018368,
+            134008316018048,
+            134008316017888,
+            134008316017728,
+            134008316017408,
+            134008316017248,
+            134008316017088,
+            134008316016768,
+            134008316016608,
+            134008316016448,
+            134008316016288,
+            134008316016128
+          ]
+        },
+        "dedode": {
+          "parameters": 8219297,
+          "trainable_parameters": 0,
+          "tensor_count": 190,
+          "trainable_tensor_count": 0,
+          "optimizer_parameter_ids": []
+        },
+        "vgg": {
+          "parameters": 10592064,
+          "trainable_parameters": 0,
+          "tensor_count": 48,
+          "trainable_tensor_count": 0,
+          "optimizer_parameter_ids": []
+        },
+        "mvt": {
+          "parameters": 87417088,
+          "trainable_parameters": 0,
+          "tensor_count": 150,
+          "trainable_tensor_count": 0,
+          "optimizer_parameter_ids": []
+        },
+        "dino": {
+          "parameters": 227564544,
+          "trainable_parameters": 0,
+          "tensor_count": 259,
+          "trainable_tensor_count": 0,
+          "optimizer_parameter_ids": []
+        },
+        "stage1_head_parameters": {
+          "parameters": 2957572,
+          "trainable_parameters": 0,
+          "tensor_count": 10,
+          "trainable_tensor_count": 0,
+          "optimizer_parameter_ids": []
+        }
+      },
+      "total_trainable_parameters": 2544160,
+      "new_parameters": 2544160,
+      "dino_trainable_parameters": 0,
+      "stage1_head_trainable_parameters": 0
+    }
+  },
+  "interpretation": "This measures fixed-feature local retrieval signal only. It is not a training result or validation metric."
+}

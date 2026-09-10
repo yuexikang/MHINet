@@ -46,12 +46,19 @@ mhinet/
   __init__.py
 scripts/
   train_e01.sh      # formal E01, physical GPU 1 by default
-  test.sh           # CPU engineering unit tests; not held-out test evaluation
+  test.sh           # real-image accuracy evaluation with an explicit checkpoint
+  unit_tests.sh     # CPU engineering unit tests
 ```
 
 ```bash
 # Unit tests only; no real dataset or GPU required
-bash scripts/test.sh
+bash scripts/unit_tests.sh
+
+# Real-image accuracy, full validation split by default (replace with your checkpoint)
+bash scripts/test.sh /absolute/path/to/checkpoint.pt
+
+# Optional small validation subset; test split is reserved for final locked evaluation
+bash scripts/test.sh /absolute/path/to/checkpoint.pt --max-pairs 16
 
 # Inspect the command without training
 DRY_RUN=1 bash scripts/train_e01.sh
@@ -64,11 +71,20 @@ GPU_ID=2 bash scripts/train_e01.sh
 bash scripts/train_e01.sh --resume /absolute/path/to/step_0000500.pt
 ```
 
-Both scripts resolve the repository from their own location and can be invoked
+These scripts resolve the repository from their own location and can be invoked
 from another working directory. They use the existing `loma-repro` interpreter;
 override `MHINET_PYTHON` when relocating the environment. Training retains the
 existing configuration, tiny gate, progress bars and seven validation overlays.
 It does not silently overwrite output or automatically run E00.
+
+Real-image evaluation writes `report.md`, `metrics/summary.json`, per-pair
+CSV/JSONL and `visualizations/pair_0000/` (H0 + six updates). It reports MACE,
+5x5 grid error, all-pair success@1/3/5 px and normalized empirical-recall
+AUC@1/3/5 px, invalid/rejected rates, memory and latency. Metrics include H0
+through H6; failed outputs remain in the success/AUC denominator. Default
+`--split val` never uses the reserved test split for model selection. Explicit
+`--split test` is for final evaluation of a locked configuration. Full command
+examples and metric conventions: [real-image evaluation](docs/real_image_evaluation.md).
 
 `python -m mhinet.cli <command>` is unchanged. Direct Python imports now use
 the subpackages, e.g. `from mhinet.models.model import MHINet` and

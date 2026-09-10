@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import math
 from pathlib import Path
 import time
 from typing import Any
@@ -26,6 +27,18 @@ from mhinet.models.model import MHINet, build_model
 TARGET_HW = (784, 784)
 
 
+def _threshold_scores(values, valid):
+    """Exact normalized empirical recall area; failures remain in the denominator."""
+    if len(values) != len(valid) or not values:
+        raise ValueError("Threshold metrics need a nonempty aligned sample set")
+    eligible = [float(e) for e, ok in zip(values, valid) if ok and math.isfinite(e) and e >= 0]
+    count = len(values)
+    return {
+        "success": {str(t): sum(e <= t for e in eligible)/count for t in (1,3,5)},
+        "auc": {str(t): sum(max(0., 1.-e/t) for e in eligible)/count for t in (1,3,5)},
+    }
+
+
 def _finite_summary(values: list[float]) -> dict[str, float | int]:
     tensor = torch.tensor(values, dtype=torch.float64)
     finite = tensor[torch.isfinite(tensor)]
@@ -41,7 +54,7 @@ def _finite_summary(values: list[float]) -> dict[str, float | int]:
         "count": len(values),
         "finite_count": int(finite.numel()),
         "mean": float(finite.mean().item()),
-        "median": float(finite.median().item()),
+        "median": float(torch.quantile(finite, 0.5).item()),
         "p90": float(torch.quantile(finite, 0.9).item()),
     }
 
@@ -435,6 +448,11 @@ def evaluate_model(
         )
     )
     final_values = [row["H_final_mace_input_px"] for row in rows]
+    threshold_trajectory = [
+        _threshold_scores([r["trajectory_mace_input_px"][i] for r in rows],
+                          [r["trajectory_conditional_valid"][i] for r in rows])
+        for i in range(trajectory_length)
+    ] if rows else []
     final_valid = [bool(row["overall_valid"]) for row in rows]
     h0_values = [row["H0_mace_input_px"] for row in rows]
     h0_valid = [
@@ -454,12 +472,15 @@ def evaluate_model(
         for threshold in (1, 3, 5)
     }
     summary = {
+        "metrics_revision": "real_image_v2_ecdf_auc_quantile_median",
         "mode": "H0_only" if h0_only else "full_MHINet",
         "pairs": len(rows),
         "active_scales": [] if h0_only else list(active_scales),
         "iterations_per_scale": 0 if h0_only else int(iterations_per_scale),
         "update_scale_schedule": update_scale_schedule,
         "trajectory": {
+            "all_pair_threshold_scores_input_px": threshold_trajectory,
+            "auc_definition": "exact empirical recall integral / threshold: sum(valid * max(0,1-MACE/t))/N; thresholds 1,3,5 input pixels; not trapezoidal interpolation",
             "labels": (
                 ["H0"]
                 if h0_only
@@ -515,7 +536,8 @@ def evaluate_model(
         ),
         "shared_call_count_violations": shared_call_violations,
         "elapsed_seconds": elapsed,
-        "latency_ms_per_pair_single_pass": elapsed * 1000.0 / max(len(rows), 1),
+        "latency_ms_per_pair_single_pass": latency_summary["mean"],
+        "wall_time_ms_per_pair_including_io_visualization": elapsed * 1000.0 / max(len(rows), 1),
         "latency_ms_single_pass_distribution": latency_summary,
         "latency_scope": (
             "per-pair synchronized single pass; this evaluation entry is not the "
@@ -688,7 +710,15 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--overwrite", action="store_true")
     parser.add_argument("--no-progress", action="store_true")
+    parser.add_argument("--visualization-pairs", type=int, default=1)
     args = parser.parse_args(argv)
+    if args.max_pairs is not None and args.max_pairs < 1:
+        parser.error("--max-pairs must be positive")
+    if args.visualization_pairs < 0:
+        parser.error("--visualization-pairs must be non-negative")
+    args.output_dir = args.output_dir.expanduser().resolve()
+    if args.output_dir.exists() and any(args.output_dir.iterdir()) and not args.overwrite:
+        raise FileExistsError(f"Refusing non-empty evaluation directory: {args.output_dir}")
     runtime = RuntimePaths.from_json(args.runtime)
     device = torch.device(runtime.device)
     model, build_report = build_model(runtime)
@@ -708,6 +738,8 @@ def main(argv: list[str] | None = None) -> int:
         )
     manifest = _resolve_manifest(runtime, args.split)
     dataset = HomographyPairDataset(manifest, max_pairs=args.max_pairs)
+    if not len(dataset):
+        raise ValueError("Evaluation manifest contains no pairs")
     active_scales = tuple(
         int(value) for value in args.active_scales.split(",") if value.strip()
     )
@@ -719,6 +751,8 @@ def main(argv: list[str] | None = None) -> int:
         active_scales=active_scales,
         iterations_per_scale=args.iterations_per_scale,
         show_progress=not args.no_progress,
+        visualization_dir=args.output_dir / "visualizations",
+        visualization_pairs=args.visualization_pairs,
     )
     summary.update(
         {
@@ -727,6 +761,10 @@ def main(argv: list[str] | None = None) -> int:
             "manifest_sha256": sha256_file(manifest),
             "runtime_config": str(runtime.source_path),
             "checkpoint": checkpoint_report,
+            "checkpoint_sha256": None if args.checkpoint is None else sha256_file(args.checkpoint),
+            "checkpoint_role": None if checkpoint_report is None else checkpoint_report.get("metadata", {}).get("experiment_id"),
+            "test_used": manifest.parent.name == "test",
+            "max_pairs": args.max_pairs,
             "build": build_report,
             "selection_warning": (
                 "test must not be used to choose a configuration"
@@ -736,8 +774,10 @@ def main(argv: list[str] | None = None) -> int:
         }
     )
     files = write_evaluation(
-        args.output_dir, summary, rows, overwrite=args.overwrite
+        args.output_dir / "metrics", summary, rows, overwrite=args.overwrite
     )
+    from mhinet.engine.reporting import write_accuracy_report
+    files["report"] = str(write_accuracy_report(args.output_dir / "report.md", summary))
     print(json.dumps({"summary": summary, "files": files}, indent=2, ensure_ascii=False))
     return 0
 

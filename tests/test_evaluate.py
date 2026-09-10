@@ -10,10 +10,22 @@ from mhinet.engine.evaluate import (
     _trajectory_errors,
     _trajectory_metric_summaries,
     evaluate_model,
+    _threshold_scores,
+    _finite_summary,
 )
 
 
 class EvaluationGeometryTests(unittest.TestCase):
+    def test_even_count_median_is_midpoint_not_lower_middle(self):
+        self.assertEqual(_finite_summary([1., 3.])['median'], 2.)
+
+    def test_auc_and_success_keep_failed_samples_in_denominator(self):
+        scores = _threshold_scores([0., 1., 0., float('inf')], [True, True, False, False])
+        self.assertEqual(scores['success']['1'], .5)
+        self.assertEqual(scores['auc']['1'], .25)
+        self.assertAlmostEqual(scores['auc']['3'], (1+2/3)/4)
+        self.assertEqual(_threshold_scores([0.], [False])['auc']['5'], 0.)
+
     def test_identity_trajectory_has_zero_input_and_native_error(self) -> None:
         trajectory = torch.eye(3).reshape(1, 1, 3, 3).repeat(1, 3, 1, 1)
         result = _trajectory_errors(

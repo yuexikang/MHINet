@@ -3,6 +3,7 @@ import importlib
 import os
 from pathlib import Path
 import subprocess
+import tempfile
 import unittest
 
 from mhinet.cli import COMMAND_MODULES
@@ -11,6 +12,21 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class EntryPointTests(unittest.TestCase):
+    def test_accuracy_shell_requires_checkpoint_and_runs_evaluate_not_unittest(self):
+        with tempfile.TemporaryDirectory() as temp:
+            checkpoint = Path(temp)/'model with spaces.pt'
+            checkpoint.touch()
+            result = subprocess.run(['bash', str(ROOT/'scripts/test.sh'), str(checkpoint),
+                                     '--max-pairs', '16'], cwd='/tmp',
+                env=dict(os.environ, DRY_RUN='1', GPU_ID='0'), text=True, capture_output=True, check=True)
+            self.assertIn('mhinet.cli evaluate', result.stdout)
+            self.assertIn('--split val', result.stdout)
+            self.assertIn('--checkpoint', result.stdout)
+            self.assertNotIn('unittest', result.stdout)
+        failed = subprocess.run(['bash', str(ROOT/'scripts/test.sh'), '/missing/mhinet.pt'],
+                                capture_output=True)
+        self.assertEqual(failed.returncode, 2)
+
     def test_all_cli_targets_resolve_after_reorganization(self):
         for command, module in COMMAND_MODULES.items():
             with self.subTest(command=command):

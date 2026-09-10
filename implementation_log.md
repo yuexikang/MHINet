@@ -1128,3 +1128,29 @@ export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 CUDA_VISIBLE_DEVICES=0
 额外只读AST审计：逐一用 `git show HEAD:mhinet/<原文件名>` 与25个迁移后的文件比较，移除import节点后AST完全一致，结果 `PASS: all 25 moved modules have identical non-import AST`。因此本次没有修改模型属性/state_dict键、优化器逻辑或checkpoint格式；单元测试仍覆盖checkpoint round-trip。未执行真实GPU重载或训练，不将此记录成新的模型精度验证。原架构SHA256仍为 `92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a`，tiny gate仍为 `13719169eaed0d1d887a18d846f4a824525231f427dc8ec3d3456edad6a60ea3`。未生成或修改checkpoint，权重实际路径/hash沿用上一条归档。环境仍为Python3.10.20、PyTorch2.11.0+cu128、conda loma-repro；本次不使用GPU。
 
 README新增目录树与启动/测试/切卡/续训示例，更新当前batch说明文档中的源码路径；保留原来无关的 `artifacts/p4_tiny_s_d1_translation_swa.json` 工作区修改，不纳入本次提交。
+
+## 2026-09-10：真实影像精度评估入口与16对val实测
+
+用户明确需要真实影像精度评估，而非仅工程测试。将原单元测试入口移动到 `scripts/unit_tests.sh`，`scripts/test.sh`改为必须指定checkpoint的真实影像评估：默认物理GPU1、完整val、七阶段指标、首个验证pair的7张图；支持 `--max-pairs`、`--output-dir`、`--visualization-pairs`、显式 `--split test`。test只用于锁定配置后的最终评估，脚本不默认读取test、不默认选择checkpoint、不缺权重退回随机初始化。
+
+修改 `mhinet/engine/evaluate.py`，新增 `mhinet/engine/reporting.py`。独立CLI输出改为 `OUTPUT/metrics/{summary.json,pair_metrics.csv,pair_metrics.jsonl}`、`OUTPUT/report.md`、`OUTPUT/visualizations/pair_0000/`；训练内部原有validation输出位置不变。默认检查非空输出目录，防止跑完后发现不能保存。汇总绑定checkpoint SHA256、manifest SHA256与checkpoint角色，不将两步工程权重误称正式训练权重。
+
+真实指标新增每阶段success/AUC@1/3/5输入像素，AUC精确定义为 `sum(valid*max(0,1-MACE/t))/N`；失败保留分母、贡献零。这是归一化经验CDF积分，不冒称其他论文的梯形插值口径。修正偶数样本中位数：使用0.5分位数而非torch.median的较小中间项。修正原 `latency_ms_per_pair_single_pass` 实际混入I/O/绘图的问题，改为已记录的单对同步计时均值，并另存 `wall_time_ms_per_pair_including_io_visualization`。原历史文件不改写；新指标版本 `real_image_v2_ecdf_auc_quantile_median`。正式warmup/重复性能基准仍另做，window recall仍未实现、不造值。
+
+环境沿用 `/root/miniconda3/envs/loma-repro/bin/python`，Python3.10.20、PyTorch2.11.0+cu128、RTX4090。实际数据为 `/home/disk1/Data/datasets/GoogleEarth_scale_pairs/val/pairs.jsonl` 前16对；未访问test。GPU1有其他负载，因此本次短评估指定GPU0。完整命令：
+
+```bash
+cd /home/disk1/MHINet
+GPU_ID=0 bash scripts/test.sh outputs/engineering_visualization_seven_smoke/checkpoints/step_0000002.pt --max-pairs 16 --output-dir outputs/real_image_accuracy_val16_verified
+bash scripts/unit_tests.sh
+```
+
+checkpoint SHA256=`20ee388f5914850287c8237f45e0ad273c73a6e7d7ce539baa5d6a0c72b003c8`；它仅训练过两步，本次真实影像实测是入口验证和该权重的实际测量，绝不是完整正式训练效果或最终test结果。首次输出 `outputs/real_image_accuracy_val16` 保留旧中位数口径；补齐hash和中位数修正后复跑到新的 `outputs/real_image_accuracy_val16_verified`，没有覆盖旧证据。
+
+| 状态 | H0 | H1 | H2 | H3 | H4 | H5 | H6 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 16对平均MACE px | 4.157159 | 4.100831 | 4.057889 | 4.038963 | 4.023873 | 4.020474 | 4.017675 |
+
+最终success@1/3/5px=`0/0.375/0.75`，AUC@1/3/5px=`0/约0.0828/约0.2691`；失败率和拒绝率0。H6平均MACE相对H0下降约0.1395px，但P90从6.154736增至6.292036，不能声称所有样本改善。峰值allocated/reserved=2060819968/2675965952 bytes；单次延迟367.961ms、含I/O/绘图墙钟均摊591.850ms（共享服务器短测，不是正式性能基准）。七张PNG已生成并在artifact计数核验。
+
+完整表格与文字解读 `docs/results_real_image_val16.md`，机器可读归档 `artifacts/real_image_accuracy_val16.json` 含所有七阶段、manifest/checkpoint/report/summary hash与实际输出目录；操作说明 `docs/real_image_evaluation.md`。102项单元测试通过（1.804s），新增AUC失败分母、标准中位数、真实评估Shell必须checkpoint且调用evaluate的检查；日志 `outputs/real_image_evaluation_unit_tests.log`。真实评估日志 `outputs/real_image_accuracy_val16_verified.log`。本轮无反向传播/权重更新，未启动正式训练；当前未发现E01正式训练checkpoint，后续应由用户显式传入实际训练权重路径进行完整val/test评估。

@@ -1,0 +1,470 @@
+[
+  {
+    "name": "TINY-S-D8",
+    "status": "passed",
+    "source": "/home/disk1/MHINet/artifacts/p4_tiny_s_d8_mcnet.json",
+    "sha256": "7c2f1fae0cf576c7b753fce0c2875c88746101b8b78d3723b85127adc386f294",
+    "primary_readout": "equal_weight_parameter_average",
+    "groups": {
+      "raw_final": {
+        "x+": {
+          "count": 12,
+          "trajectory_mean_mace_px": [
+            14.629835446675619,
+            0.9133350004752477,
+            0.3471895332137744
+          ],
+          "worst_final_mace_px": 0.5105933547019958,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 5256
+        },
+        "x-": {
+          "count": 12,
+          "trajectory_mean_mace_px": [
+            14.96200998624166,
+            0.6585354916751385,
+            0.24452276652057967
+          ],
+          "worst_final_mace_px": 0.3234264850616455,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 5067
+        },
+        "y+": {
+          "count": 5,
+          "trajectory_mean_mace_px": [
+            15.8387300491333,
+            0.8897301912307739,
+            0.27282082438468935
+          ],
+          "worst_final_mace_px": 0.3203520178794861,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 5012
+        },
+        "y-": {
+          "count": 3,
+          "trajectory_mean_mace_px": [
+            13.836221059163412,
+            0.9617990652720133,
+            0.27248262365659076
+          ],
+          "worst_final_mace_px": 0.3533704876899719,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 5269
+        }
+      },
+      "final": {
+        "x+": {
+          "count": 12,
+          "trajectory_mean_mace_px": [
+            14.629835446675619,
+            0.18994229100644588,
+            0.09029902207354705
+          ],
+          "worst_final_mace_px": 0.1284562349319458,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 5256
+        },
+        "x-": {
+          "count": 12,
+          "trajectory_mean_mace_px": [
+            14.96200998624166,
+            0.29937115994592506,
+            0.08768000639975071
+          ],
+          "worst_final_mace_px": 0.13163860142230988,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 5067
+        },
+        "y+": {
+          "count": 5,
+          "trajectory_mean_mace_px": [
+            15.8387300491333,
+            0.4985541641712189,
+            0.12936752438545226
+          ],
+          "worst_final_mace_px": 0.16643962264060974,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 5012
+        },
+        "y-": {
+          "count": 3,
+          "trajectory_mean_mace_px": [
+            13.836221059163412,
+            0.32285910348097485,
+            0.12021578848361969
+          ],
+          "worst_final_mace_px": 0.178075909614563,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 5270
+        }
+      }
+    }
+  },
+  {
+    "name": "TINY-S-D4",
+    "status": "passed",
+    "source": "/home/disk1/MHINet/artifacts/p4_tiny_s_d4_mcnet.json",
+    "sha256": "962b3874ea296074e34b2306ebee967a1715921670a7efb466868d69e656243e",
+    "primary_readout": "equal_weight_parameter_average",
+    "groups": {
+      "raw_final": {
+        "x+": {
+          "count": 12,
+          "trajectory_mean_mace_px": [
+            7.314913312594096,
+            0.5592933545509974,
+            0.31987237681945163
+          ],
+          "worst_final_mace_px": 0.4214414954185486,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 20140
+        },
+        "x-": {
+          "count": 12,
+          "trajectory_mean_mace_px": [
+            7.481009046236674,
+            0.2792953836421172,
+            0.23770546292265257
+          ],
+          "worst_final_mace_px": 0.27602899074554443,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 19712
+        },
+        "y+": {
+          "count": 5,
+          "trajectory_mean_mace_px": [
+            7.919365692138672,
+            0.4992519021034241,
+            0.26539324820041654
+          ],
+          "worst_final_mace_px": 0.302487850189209,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 19681
+        },
+        "y-": {
+          "count": 3,
+          "trajectory_mean_mace_px": [
+            6.918103218078613,
+            0.5024751623471578,
+            0.2386893928050995
+          ],
+          "worst_final_mace_px": 0.27981293201446533,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 20144
+        }
+      },
+      "final": {
+        "x+": {
+          "count": 12,
+          "trajectory_mean_mace_px": [
+            7.314913312594096,
+            0.2193604620794455,
+            0.11225657661755879
+          ],
+          "worst_final_mace_px": 0.1650363802909851,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 20151
+        },
+        "x-": {
+          "count": 12,
+          "trajectory_mean_mace_px": [
+            7.481009046236674,
+            0.1608373342702786,
+            0.0888940617442131
+          ],
+          "worst_final_mace_px": 0.12610727548599243,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 19712
+        },
+        "y+": {
+          "count": 5,
+          "trajectory_mean_mace_px": [
+            7.919365692138672,
+            0.21970323324203492,
+            0.09013425335288047
+          ],
+          "worst_final_mace_px": 0.1363997459411621,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 19681
+        },
+        "y-": {
+          "count": 3,
+          "trajectory_mean_mace_px": [
+            6.918103218078613,
+            0.1604005346695582,
+            0.10558109482129414
+          ],
+          "worst_final_mace_px": 0.12834885716438293,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 20159
+        }
+      }
+    }
+  },
+  {
+    "name": "TINY-S-D2",
+    "status": "passed",
+    "source": "/home/disk1/MHINet/artifacts/p4_tiny_s_d2_mcnet.json",
+    "sha256": "e35ed757acc633b30dad9af5a791cb17a846352f57f366d3e8911a3a72ef305c",
+    "primary_readout": "raw_parameters",
+    "groups": {
+      "raw_final": {
+        "x+": {
+          "count": 12,
+          "trajectory_mean_mace_px": [
+            2.74309511979421,
+            0.25654926771918934,
+            0.09610170684754848
+          ],
+          "worst_final_mace_px": 0.11004332453012466,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 78287
+        },
+        "x-": {
+          "count": 12,
+          "trajectory_mean_mace_px": [
+            2.8053870797157288,
+            0.19317839543024698,
+            0.10142314620316029
+          ],
+          "worst_final_mace_px": 0.11800377815961838,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 77629
+        },
+        "y+": {
+          "count": 5,
+          "trajectory_mean_mace_px": [
+            2.969776916503906,
+            0.1841331385076046,
+            0.1032905101776123
+          ],
+          "worst_final_mace_px": 0.12100493907928467,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 77618
+        },
+        "y-": {
+          "count": 3,
+          "trajectory_mean_mace_px": [
+            2.594303607940674,
+            0.16503154238065085,
+            0.10329535106817882
+          ],
+          "worst_final_mace_px": 0.11345964670181274,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 78275
+        }
+      },
+      "final": {
+        "x+": {
+          "count": 12,
+          "trajectory_mean_mace_px": [
+            2.74309511979421,
+            0.25654926771918934,
+            0.09610170684754848
+          ],
+          "worst_final_mace_px": 0.11004332453012466,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 78287
+        },
+        "x-": {
+          "count": 12,
+          "trajectory_mean_mace_px": [
+            2.8053870797157288,
+            0.19317839543024698,
+            0.10142314620316029
+          ],
+          "worst_final_mace_px": 0.11800377815961838,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 77629
+        },
+        "y+": {
+          "count": 5,
+          "trajectory_mean_mace_px": [
+            2.969776916503906,
+            0.1841331385076046,
+            0.1032905101776123
+          ],
+          "worst_final_mace_px": 0.12100493907928467,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 77618
+        },
+        "y-": {
+          "count": 3,
+          "trajectory_mean_mace_px": [
+            2.594303607940674,
+            0.16503154238065085,
+            0.10329535106817882
+          ],
+          "worst_final_mace_px": 0.11345964670181274,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 78275
+        }
+      }
+    }
+  },
+  {
+    "name": "TINY-6",
+    "status": "passed",
+    "source": "/home/disk1/MHINet/artifacts/p4_tiny_6_mcnet.json",
+    "sha256": "0f60415c4f3c03f235249f2b0cf6eb23a4fdd6ff4c3ec43bc09e9ef2a1546ed2",
+    "primary_readout": "equal_weight_parameter_average",
+    "groups": {
+      "raw_final": {
+        "x+": {
+          "count": 12,
+          "trajectory_mean_mace_px": [
+            14.629835446675619,
+            1.3406323790550232,
+            0.4646439775824547,
+            0.49834563583135605,
+            0.5552489658196768,
+            0.2067088708281517,
+            0.21818811570604643
+          ],
+          "worst_final_mace_px": 0.25928428769111633,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 5256
+        },
+        "x-": {
+          "count": 12,
+          "trajectory_mean_mace_px": [
+            14.96200998624166,
+            1.2539334446191788,
+            0.43205448240041733,
+            0.49104052782058716,
+            0.5950959821542104,
+            0.14004892172912756,
+            0.18757063274582228
+          ],
+          "worst_final_mace_px": 0.226520836353302,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 5067
+        },
+        "y+": {
+          "count": 5,
+          "trajectory_mean_mace_px": [
+            15.8387300491333,
+            1.3321230173110963,
+            0.5430222988128662,
+            0.5828898668289184,
+            0.6892038941383362,
+            0.18416759073734285,
+            0.22655683755874634
+          ],
+          "worst_final_mace_px": 0.24278712272644043,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 5012
+        },
+        "y-": {
+          "count": 3,
+          "trajectory_mean_mace_px": [
+            13.836221059163412,
+            0.7662773430347443,
+            0.4815249542395274,
+            0.5012734731038412,
+            0.5877770781517029,
+            0.1926294962565104,
+            0.23309319217999777
+          ],
+          "worst_final_mace_px": 0.23642635345458984,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 5261
+        }
+      },
+      "final": {
+        "x+": {
+          "count": 12,
+          "trajectory_mean_mace_px": [
+            14.629835446675619,
+            1.3054013028740883,
+            0.1575387561072906,
+            0.1451414804905653,
+            0.10662143304944038,
+            0.06479155272245407,
+            0.05744461280604204
+          ],
+          "worst_final_mace_px": 0.08017772436141968,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 5256
+        },
+        "x-": {
+          "count": 12,
+          "trajectory_mean_mace_px": [
+            14.96200998624166,
+            1.4358641803264618,
+            0.2709367163479328,
+            0.22644968082507452,
+            0.17540234016875425,
+            0.08241717113802831,
+            0.09222164036085208
+          ],
+          "worst_final_mace_px": 0.12818294763565063,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 5067
+        },
+        "y+": {
+          "count": 5,
+          "trajectory_mean_mace_px": [
+            15.8387300491333,
+            1.1197840929031373,
+            0.18936897516250611,
+            0.1582700401544571,
+            0.1402243047952652,
+            0.11849940419197083,
+            0.11323044300079346
+          ],
+          "worst_final_mace_px": 0.14138607680797577,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 5012
+        },
+        "y-": {
+          "count": 3,
+          "trajectory_mean_mace_px": [
+            13.836221059163412,
+            1.0821195443471272,
+            0.19053482512633005,
+            0.21305128435293832,
+            0.1495394508043925,
+            0.07823340098063152,
+            0.07869016875823338
+          ],
+          "worst_final_mace_px": 0.10329820215702057,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 5253
+        }
+      }
+    }
+  }
+]

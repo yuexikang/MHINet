@@ -1,0 +1,7973 @@
+{
+  "audit": "P4_tiny_checkpoint_endpoint",
+  "status": "diagnostic_complete",
+  "checkpoint": {
+    "source_path": "/home/disk1/MHINet/outputs/tiny_overfit/tiny-s-d4_one-pair-residuals_translation_bf16_weight-average-from-1536_arch-92095ffe16a5_bound-0p5_budget-2000_seed0.pt",
+    "source_stat_before_snapshot": {
+      "device": 37,
+      "inode": 69866688,
+      "bytes": 7052635,
+      "mtime_ns": 1789007895057869561
+    },
+    "source_stat_after_snapshot": {
+      "device": 37,
+      "inode": 69866688,
+      "bytes": 7052635,
+      "mtime_ns": 1789007895057869561
+    },
+    "source_replaced_while_copying": false,
+    "snapshot_isolated_before_preflight": true,
+    "audited_snapshot_bytes": 7052635,
+    "audited_snapshot_sha256": "10838c6a8ae15dbf4ac44d24588c37f577c3113a598e0490074491729d5372d7",
+    "format": "mhinet.training",
+    "version": 2,
+    "role": "tiny_final_evidence",
+    "legacy_checkpoint": false,
+    "optimizer_step": 1568,
+    "checkpoint_contains_weight_average": true,
+    "serialized_iterator_state_sha256": "8198dddf01f3082b49f769713d69dbd9eb9aeb7b692b7f54a0bcea2d6b3d96c3",
+    "loaded_iterator_state_sha256": "8198dddf01f3082b49f769713d69dbd9eb9aeb7b692b7f54a0bcea2d6b3d96c3",
+    "post_forward_iterator_state_sha256": "8198dddf01f3082b49f769713d69dbd9eb9aeb7b692b7f54a0bcea2d6b3d96c3"
+  },
+  "protocol": {
+    "diagnostic": "TINY-S-D4",
+    "active_scales": [
+      4
+    ],
+    "sample_count": 32,
+    "sample_protocol": "one_pair_residuals",
+    "residual_profile": "translation",
+    "precision": "bf16",
+    "seed": 0,
+    "residual_bound_fraction": 0.5,
+    "pair_ids": [
+      "current__34.801100126.376330_pair0",
+      "current__34.801100126.376330_pair0",
+      "current__34.801100126.376330_pair0",
+      "current__34.801100126.376330_pair0",
+      "current__34.801100126.376330_pair0",
+      "current__34.801100126.376330_pair0",
+      "current__34.801100126.376330_pair0",
+      "current__34.801100126.376330_pair0",
+      "current__34.801100126.376330_pair0",
+      "current__34.801100126.376330_pair0",
+      "current__34.801100126.376330_pair0",
+      "current__34.801100126.376330_pair0",
+      "current__34.801100126.376330_pair0",
+      "current__34.801100126.376330_pair0",
+      "current__34.801100126.376330_pair0",
+      "current__34.801100126.376330_pair0",
+      "current__34.801100126.376330_pair0",
+      "current__34.801100126.376330_pair0",
+      "current__34.801100126.376330_pair0",
+      "current__34.801100126.376330_pair0",
+      "current__34.801100126.376330_pair0",
+      "current__34.801100126.376330_pair0",
+      "current__34.801100126.376330_pair0",
+      "current__34.801100126.376330_pair0",
+      "current__34.801100126.376330_pair0",
+      "current__34.801100126.376330_pair0",
+      "current__34.801100126.376330_pair0",
+      "current__34.801100126.376330_pair0",
+      "current__34.801100126.376330_pair0",
+      "current__34.801100126.376330_pair0",
+      "current__34.801100126.376330_pair0",
+      "current__34.801100126.376330_pair0"
+    ],
+    "target_hw": [
+      784,
+      784
+    ],
+    "maximum_declared_abs_residual_px": 8.0,
+    "condition_index_offset": 0,
+    "field_sources": {
+      "diagnostic": "tiny_progress_signature+metadata+explicit_cli",
+      "active_scales": "tiny_progress_signature+metadata+explicit_cli",
+      "sample_count": "tiny_progress_signature+metadata+explicit_cli",
+      "sample_protocol": "tiny_progress_signature+metadata+explicit_cli",
+      "residual_profile": "tiny_progress_signature+metadata+explicit_cli",
+      "precision": "tiny_progress_signature+metadata+explicit_cli",
+      "seed": "tiny_progress_signature+explicit_cli",
+      "residual_bound_fraction": "tiny_progress_signature+metadata+explicit_cli",
+      "pair_ids": "tiny_progress_signature+metadata",
+      "target_hw": "tiny_progress_signature",
+      "maximum_declared_abs_residual_px": "tiny_progress_signature",
+      "condition_index_offset": "metadata"
+    },
+    "legacy_supplemented_fields": []
+  },
+  "resource_binding": "strict_signature_match",
+  "actual_resources": {
+    "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+    "mhir_revision": "mcnet_correlation_decoder_784_v1",
+    "training_manifest_sha256": "3eed3d3d425caf8465afb5121dfd85960f00932fccc343f37187e14ce27d499c",
+    "runtime_config": {
+      "path": "/home/disk1/MHINet/configs/runtime_paths.server.json",
+      "bytes": 1068,
+      "sha256": "485c41935c83d8e7ed0b248fed794844abfd48a62c28d90b5328cafa24bc179d"
+    },
+    "dino_checkpoint": {
+      "path": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "bytes": 1294957584,
+      "sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e"
+    },
+    "selected_ghim_checkpoint": {
+      "path": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "bytes": 1294957584,
+      "sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e"
+    },
+    "pyramid_checkpoint": {
+      "path": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+      "bytes": 757888113,
+      "sha256": "3a38824391e22b33bb3e10377c7736243fd8a2fbf1561446e7e133e497c35758"
+    }
+  },
+  "build": {
+    "architecture_path": "/home/disk1/MHINet/configs/mhinet_mcnet_v1.2.json",
+    "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+    "mhir_revision": "mcnet_correlation_decoder_784_v1",
+    "mcnet_reference_commit": "cc03479689b3cf40f0c384954f338b434765c155",
+    "provider": {
+      "loma_root": "/home/disk1/LoMa",
+      "loma_checkpoint": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+      "dino_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "selected_stage1_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "loretta_loaded_keys": 807,
+      "locator": {
+        "source": "official_loretta_checkpoint",
+        "overridden": false
+      },
+      "descriptor_initialization": {
+        "migrated_tensors": 364,
+        "vgg_tensors": 84,
+        "decoder_tensors": 280,
+        "top_refiner_mapping": "LoMa-B scale 14 -> DINOv3 scale 16"
+      },
+      "ownership": {
+        "dino_wrapper_instances": 1,
+        "mvt_object_references": 1,
+        "stage1_head_contains_dino": 0,
+        "stage1_head_contains_mvt": 0,
+        "decoder_scales": [
+          "16",
+          "8",
+          "4",
+          "2",
+          "1"
+        ]
+      },
+      "legacy_training_wrappers_reused": false,
+      "safe_stage1_fitter": true
+    },
+    "training_parameters": {
+      "profile": "heads",
+      "groups": {
+        "new_modules": {
+          "parameters": 1176712,
+          "trainable_parameters": 833222,
+          "tensor_count": 140,
+          "trainable_tensor_count": 99
+        },
+        "dedode": {
+          "parameters": 8219297,
+          "trainable_parameters": 0,
+          "tensor_count": 190,
+          "trainable_tensor_count": 0
+        },
+        "vgg": {
+          "parameters": 10592064,
+          "trainable_parameters": 0,
+          "tensor_count": 48,
+          "trainable_tensor_count": 0
+        },
+        "mvt": {
+          "parameters": 87417088,
+          "trainable_parameters": 0,
+          "tensor_count": 150,
+          "trainable_tensor_count": 0
+        },
+        "dino": {
+          "parameters": 227564544,
+          "trainable_parameters": 0,
+          "tensor_count": 259,
+          "trainable_tensor_count": 0
+        },
+        "stage1_head_parameters": {
+          "parameters": 2957572,
+          "trainable_parameters": 0,
+          "tensor_count": 10,
+          "trainable_tensor_count": 0
+        }
+      },
+      "total_trainable_parameters": 833222,
+      "new_parameters": 1176712,
+      "dino_trainable_parameters": 0,
+      "stage1_head_trainable_parameters": 0
+    }
+  },
+  "cache": {
+    "source": "leakage-safe train split; exact single-image homography pairs",
+    "manifest": "/home/disk1/Data/datasets/GoogleEarth_scale_pairs/train/pairs.jsonl",
+    "manifest_sha256": "3eed3d3d425caf8465afb5121dfd85960f00932fccc343f37187e14ce27d499c",
+    "sample_count": 1,
+    "pair_ids": [
+      "current__34.801100126.376330_pair0"
+    ],
+    "parent_groups": [
+      "parent:current/Train/34.801100126.376330.jpg"
+    ],
+    "geo_groups": [
+      "geo_0.01:3480:12637"
+    ],
+    "validation_geo_groups_used_only_for_exclusion": 190,
+    "test_used": false,
+    "provider_prefix_computed": [
+      8,
+      4
+    ],
+    "stored_scales": [
+      4
+    ],
+    "feature_shapes": {
+      "4": [
+        1,
+        2,
+        256,
+        196,
+        196
+      ]
+    },
+    "feature_dtypes": {
+      "4": "torch.bfloat16"
+    },
+    "cache_bytes_cpu": 39337984,
+    "shared_call_counts_total": {
+      "dino": 1,
+      "mvt": 1,
+      "vgg": 1,
+      "dedode_decode_calls": 1,
+      "dedode_steps": 3,
+      "dedode_scale1": 0
+    },
+    "shared_once_per_pair": true,
+    "elapsed_seconds": 0.9118268946185708,
+    "pairs_per_second": 1.096699390971916,
+    "peak_allocated_bytes": 1921200640,
+    "peak_reserved_bytes": 2176843776
+  },
+  "load": {
+    "path": "/tmp/mhinet_tiny_checkpoint_audit_eop9v6el/checkpoint_snapshot.pt",
+    "format": "mhinet.training",
+    "version": 2,
+    "optimizer_step": 1568,
+    "microbatch_progress": null,
+    "data_progress": {
+      "epoch": 195,
+      "position": 32,
+      "order_seed": 195
+    },
+    "metadata": {
+      "checkpoint_role": "tiny_final_evidence",
+      "diagnostic": "TINY-S-D4",
+      "active_scales": [
+        4
+      ],
+      "known_H0_residual_injected": true,
+      "formal_training_checkpoint": false,
+      "sample_count": 32,
+      "sample_protocol": "one_pair_residuals",
+      "residual_profile": "translation",
+      "precision": "bf16",
+      "weight_average_start_step": 1536,
+      "residual_bound_fraction": 0.5,
+      "condition_index_offset": 0,
+      "maximum_steps": 2000,
+      "evaluation_interval": 32,
+      "weight_average_count": 33,
+      "checkpoint_contains_weight_average": true,
+      "optimizer_resume_supported": false,
+      "pair_ids": [
+        "current__34.801100126.376330_pair0",
+        "current__34.801100126.376330_pair0",
+        "current__34.801100126.376330_pair0",
+        "current__34.801100126.376330_pair0",
+        "current__34.801100126.376330_pair0",
+        "current__34.801100126.376330_pair0",
+        "current__34.801100126.376330_pair0",
+        "current__34.801100126.376330_pair0",
+        "current__34.801100126.376330_pair0",
+        "current__34.801100126.376330_pair0",
+        "current__34.801100126.376330_pair0",
+        "current__34.801100126.376330_pair0",
+        "current__34.801100126.376330_pair0",
+        "current__34.801100126.376330_pair0",
+        "current__34.801100126.376330_pair0",
+        "current__34.801100126.376330_pair0",
+        "current__34.801100126.376330_pair0",
+        "current__34.801100126.376330_pair0",
+        "current__34.801100126.376330_pair0",
+        "current__34.801100126.376330_pair0",
+        "current__34.801100126.376330_pair0",
+        "current__34.801100126.376330_pair0",
+        "current__34.801100126.376330_pair0",
+        "current__34.801100126.376330_pair0",
+        "current__34.801100126.376330_pair0",
+        "current__34.801100126.376330_pair0",
+        "current__34.801100126.376330_pair0",
+        "current__34.801100126.376330_pair0",
+        "current__34.801100126.376330_pair0",
+        "current__34.801100126.376330_pair0",
+        "current__34.801100126.376330_pair0",
+        "current__34.801100126.376330_pair0"
+      ],
+      "tiny_progress_signature": {
+        "format": "mhinet.tiny_progress",
+        "version": 2,
+        "diagnostic": "TINY-S-D4",
+        "active_scales": [
+          4
+        ],
+        "seed": 0,
+        "maximum_steps": 2000,
+        "evaluation_interval": 32,
+        "threshold_mace_px": 0.1,
+        "sample_count": 32,
+        "sample_protocol": "one_pair_residuals",
+        "residual_profile": "translation",
+        "precision": "bf16",
+        "weight_average_start_step": 1536,
+        "residual_bound_fraction": 0.5,
+        "maximum_declared_abs_residual_px": 8.0,
+        "target_hw": [
+          784,
+          784
+        ],
+        "pair_ids": [
+          "current__34.801100126.376330_pair0",
+          "current__34.801100126.376330_pair0",
+          "current__34.801100126.376330_pair0",
+          "current__34.801100126.376330_pair0",
+          "current__34.801100126.376330_pair0",
+          "current__34.801100126.376330_pair0",
+          "current__34.801100126.376330_pair0",
+          "current__34.801100126.376330_pair0",
+          "current__34.801100126.376330_pair0",
+          "current__34.801100126.376330_pair0",
+          "current__34.801100126.376330_pair0",
+          "current__34.801100126.376330_pair0",
+          "current__34.801100126.376330_pair0",
+          "current__34.801100126.376330_pair0",
+          "current__34.801100126.376330_pair0",
+          "current__34.801100126.376330_pair0",
+          "current__34.801100126.376330_pair0",
+          "current__34.801100126.376330_pair0",
+          "current__34.801100126.376330_pair0",
+          "current__34.801100126.376330_pair0",
+          "current__34.801100126.376330_pair0",
+          "current__34.801100126.376330_pair0",
+          "current__34.801100126.376330_pair0",
+          "current__34.801100126.376330_pair0",
+          "current__34.801100126.376330_pair0",
+          "current__34.801100126.376330_pair0",
+          "current__34.801100126.376330_pair0",
+          "current__34.801100126.376330_pair0",
+          "current__34.801100126.376330_pair0",
+          "current__34.801100126.376330_pair0",
+          "current__34.801100126.376330_pair0",
+          "current__34.801100126.376330_pair0"
+        ],
+        "optimizer": {
+          "name": "AdamW",
+          "learning_rate": 0.001,
+          "weight_decay": 0.0,
+          "gradient_accumulation": 4,
+          "gradient_clip_norm": 1.0
+        },
+        "resume_context": {
+          "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+          "mhir_revision": "mcnet_correlation_decoder_784_v1",
+          "training_manifest_sha256": "3eed3d3d425caf8465afb5121dfd85960f00932fccc343f37187e14ce27d499c",
+          "runtime_config": {
+            "path": "/home/disk1/MHINet/configs/runtime_paths.server.json",
+            "bytes": 1068,
+            "sha256": "485c41935c83d8e7ed0b248fed794844abfd48a62c28d90b5328cafa24bc179d"
+          },
+          "dino_checkpoint": {
+            "path": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+            "bytes": 1294957584,
+            "sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e"
+          },
+          "selected_ghim_checkpoint": {
+            "path": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+            "bytes": 1294957584,
+            "sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e"
+          },
+          "pyramid_checkpoint": {
+            "path": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+            "bytes": 757888113,
+            "sha256": "3a38824391e22b33bb3e10377c7736243fd8a2fbf1561446e7e133e497c35758"
+          }
+        }
+      },
+      "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+      "mhir_revision": "mcnet_correlation_decoder_784_v1"
+    },
+    "missing_model_keys": [],
+    "unexpected_model_keys": [],
+    "restored": {
+      "model": true,
+      "optimizer": false,
+      "scheduler": false,
+      "scaler": false
+    },
+    "rng_restored": {
+      "cpu": false,
+      "cuda": false
+    }
+  },
+  "endpoint": {
+    "trajectory_mean_mace_px": [
+      7.434444427490234,
+      0.19194035232067108,
+      0.099413201212883
+    ],
+    "trajectory_median_mace_px": [
+      7.146836757659912,
+      0.15180516242980957,
+      0.09123968333005905
+    ],
+    "H0_mace_px": {
+      "mean": 7.434443950653076,
+      "median": 7.146836757659912,
+      "p90": 9.355621337890625,
+      "max": 10.128366470336914
+    },
+    "H_final_mace_px": {
+      "mean": 0.0994131937623024,
+      "median": 0.09123968333005905,
+      "p90": 0.13559465110301971,
+      "max": 0.1650363802909851
+    },
+    "failed_pairs": 0,
+    "failure_rate": 0.0,
+    "rejected_updates": 0,
+    "rejected_update_rate": 0.0,
+    "elapsed_seconds": 3.912848126143217,
+    "latency_ms_per_pair_single_pass": 122.27650394197553,
+    "per_pair": [
+      {
+        "diagnostic_sample_index": 0,
+        "pair_id": "current__34.801100126.376330_pair0",
+        "trajectory_mace_px": [
+          5.6759748458862305,
+          0.14502505958080292,
+          0.08724150061607361
+        ],
+        "H0_mace_px": 5.6759748458862305,
+        "H_updates_mace_px": [
+          0.14502505958080292,
+          0.08724150061607361
+        ],
+        "H_final_mace_px": 0.08724150061607361,
+        "update_accepted": [
+          true,
+          true
+        ],
+        "failure_reason_codes": [
+          0,
+          0
+        ],
+        "decoder_output_finite": [
+          true,
+          true
+        ],
+        "H0_corner_residual_px": [
+          [
+            -5.60003662109375,
+            0.925537109375
+          ],
+          [
+            -5.599853515625,
+            0.925537109375
+          ],
+          [
+            -5.600067138671875,
+            0.9256591796875
+          ],
+          [
+            -5.60003662109375,
+            0.92559814453125
+          ]
+        ],
+        "H_updates_corner_residual_px": [
+          [
+            [
+              -0.16253662109375,
+              0.0152587890625
+            ],
+            [
+              -0.131103515625,
+              -0.1290283203125
+            ],
+            [
+              -0.13128662109375,
+              -0.01580810546875
+            ],
+            [
+              -0.0999755859375,
+              -0.01177978515625
+            ]
+          ],
+          [
+            [
+              -0.0258026123046875,
+              0.0107421875
+            ],
+            [
+              0.03662109375,
+              -0.1494140625
+            ],
+            [
+              0.0836181640625,
+              0.0115966796875
+            ],
+            [
+              0.08160400390625,
+              -0.0137939453125
+            ]
+          ]
+        ],
+        "H_updates_corner_projection_valid": [
+          [
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true
+          ]
+        ],
+        "delta_px": [
+          [
+            [
+              -5.4375,
+              0.91015625
+            ],
+            [
+              -5.46875,
+              1.0546875
+            ],
+            [
+              -5.46875,
+              0.94140625
+            ],
+            [
+              -5.5,
+              0.9375
+            ]
+          ],
+          [
+            [
+              -0.13671875,
+              0.004638671875
+            ],
+            [
+              -0.16796875,
+              0.020263671875
+            ],
+            [
+              -0.21484375,
+              -0.02734375
+            ],
+            [
+              -0.181640625,
+              0.001953125
+            ]
+          ]
+        ],
+        "tanh_saturation_fraction": [
+          0.0,
+          0.0
+        ],
+        "supported_query_count": [
+          19955,
+          20165
+        ],
+        "condition_number": [
+          3.4380452632904053,
+          3.4375104904174805
+        ],
+        "solve_info": [
+          0,
+          0
+        ],
+        "H0_norm": [
+          [
+            1.0632367134094238,
+            -0.0027239497285336256,
+            0.5587237477302551
+          ],
+          [
+            0.010467768646776676,
+            1.0585441589355469,
+            -0.5694274306297302
+          ],
+          [
+            -0.01563998870551586,
+            0.016515767201781273,
+            1.0
+          ]
+        ],
+        "H_updates_norm": [
+          [
+            [
+              1.063463568687439,
+              -0.0029951988253742456,
+              0.5448654294013977
+            ],
+            [
+              0.01046677865087986,
+              1.0585319995880127,
+              -0.5669772028923035
+            ],
+            [
+              -0.01555339340120554,
+              0.01651681587100029,
+              1.0
+            ]
+          ],
+          [
+            [
+              1.0634682178497314,
+              -0.003083884483203292,
+              0.5444080829620361
+            ],
+            [
+              0.010500449687242508,
+              1.0585227012634277,
+              -0.5670205354690552
+            ],
+            [
+              -0.01556242723017931,
+              0.016477392986416817,
+              1.0
+            ]
+          ]
+        ],
+        "H_final_norm": [
+          [
+            1.0634682178497314,
+            -0.003083884483203292,
+            0.5444080829620361
+          ],
+          [
+            0.010500449687242508,
+            1.0585227012634277,
+            -0.5670205354690552
+          ],
+          [
+            -0.01556242723017931,
+            0.016477392986416817,
+            1.0
+          ]
+        ],
+        "update_scale_schedule": [
+          4,
+          4
+        ],
+        "cnn_precision": "bf16_autocast"
+      },
+      {
+        "diagnostic_sample_index": 1,
+        "pair_id": "current__34.801100126.376330_pair0",
+        "trajectory_mace_px": [
+          6.218038082122803,
+          0.13546119630336761,
+          0.07839852571487427
+        ],
+        "H0_mace_px": 6.218038082122803,
+        "H_updates_mace_px": [
+          0.13546119630336761,
+          0.07839852571487427
+        ],
+        "H_final_mace_px": 0.07839852571487427,
+        "update_accepted": [
+          true,
+          true
+        ],
+        "failure_reason_codes": [
+          0,
+          0
+        ],
+        "decoder_output_finite": [
+          true,
+          true
+        ],
+        "H0_corner_residual_px": [
+          [
+            -6.0,
+            -1.6322021484375
+          ],
+          [
+            -6.0,
+            -1.63226318359375
+          ],
+          [
+            -6.0000152587890625,
+            -1.63214111328125
+          ],
+          [
+            -5.99993896484375,
+            -1.63226318359375
+          ]
+        ],
+        "H_updates_corner_residual_px": [
+          [
+            [
+              -0.0624847412109375,
+              0.094482421875
+            ],
+            [
+              -0.0623779296875,
+              -0.06195068359375
+            ],
+            [
+              -0.15631103515625,
+              0.0943603515625
+            ],
+            [
+              -0.15625,
+              0.02392578125
+            ]
+          ],
+          [
+            [
+              0.0356292724609375,
+              0.01995849609375
+            ],
+            [
+              0.05810546875,
+              -0.15960693359375
+            ],
+            [
+              0.0195159912109375,
+              0.0548095703125
+            ],
+            [
+              0.001953125,
+              -0.044677734375
+            ]
+          ]
+        ],
+        "H_updates_corner_projection_valid": [
+          [
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true
+          ]
+        ],
+        "delta_px": [
+          [
+            [
+              -5.9375,
+              -1.7265625
+            ],
+            [
+              -5.9375,
+              -1.5703125
+            ],
+            [
+              -5.84375,
+              -1.7265625
+            ],
+            [
+              -5.84375,
+              -1.65625
+            ]
+          ],
+          [
+            [
+              -0.09814453125,
+              0.07421875
+            ],
+            [
+              -0.12060546875,
+              0.09765625
+            ],
+            [
+              -0.17578125,
+              0.03955078125
+            ],
+            [
+              -0.158203125,
+              0.06884765625
+            ]
+          ]
+        ],
+        "tanh_saturation_fraction": [
+          0.0,
+          0.0
+        ],
+        "supported_query_count": [
+          20006,
+          20162
+        ],
+        "condition_number": [
+          3.438218593597412,
+          3.437589406967163
+        ],
+        "solve_info": [
+          0,
+          0
+        ],
+        "H0_norm": [
+          [
+            1.063220739364624,
+            -0.0027071197982877493,
+            0.559744119644165
+          ],
+          [
+            0.010365833528339863,
+            1.0586521625518799,
+            -0.5629025101661682
+          ],
+          [
+            -0.015639986842870712,
+            0.016515767201781273,
+            1.0
+          ]
+        ],
+        "H_updates_norm": [
+          [
+            [
+              1.0634828805923462,
+              -0.0028351349756121635,
+              0.5447707176208496
+            ],
+            [
+              0.010547949932515621,
+              1.0585272312164307,
+              -0.5671631097793579
+            ],
+            [
+              -0.015591575764119625,
+              0.01651810295879841,
+              1.0
+            ]
+          ],
+          [
+            [
+              1.0634835958480835,
+              -0.0029288935475051403,
+              0.5444124937057495
+            ],
+            [
+              0.010580924339592457,
+              1.0585038661956787,
+              -0.5670121312141418
+            ],
+            [
+              -0.015596183016896248,
+              0.01649315096437931,
+              1.0
+            ]
+          ]
+        ],
+        "H_final_norm": [
+          [
+            1.0634835958480835,
+            -0.0029288935475051403,
+            0.5444124937057495
+          ],
+          [
+            0.010580924339592457,
+            1.0585038661956787,
+            -0.5670121312141418
+          ],
+          [
+            -0.015596183016896248,
+            0.01649315096437931,
+            1.0
+          ]
+        ],
+        "update_scale_schedule": [
+          4,
+          4
+        ],
+        "cnn_precision": "bf16_autocast"
+      },
+      {
+        "diagnostic_sample_index": 2,
+        "pair_id": "current__34.801100126.376330_pair0",
+        "trajectory_mace_px": [
+          6.4084625244140625,
+          0.14432305097579956,
+          0.08169689774513245
+        ],
+        "H0_mace_px": 6.4084625244140625,
+        "H_updates_mace_px": [
+          0.14432305097579956,
+          0.08169689774513245
+        ],
+        "H_final_mace_px": 0.08169689774513245,
+        "update_accepted": [
+          true,
+          true
+        ],
+        "failure_reason_codes": [
+          0,
+          0
+        ],
+        "decoder_output_finite": [
+          true,
+          true
+        ],
+        "H0_corner_residual_px": [
+          [
+            0.329071044921875,
+            6.39990234375
+          ],
+          [
+            0.3291015625,
+            6.40008544921875
+          ],
+          [
+            0.3290557861328125,
+            6.39996337890625
+          ],
+          [
+            0.3289794921875,
+            6.40008544921875
+          ]
+        ],
+        "H_updates_corner_residual_px": [
+          [
+            [
+              -0.14556884765625,
+              -0.16253662109375
+            ],
+            [
+              0.0224609375,
+              -0.06866455078125
+            ],
+            [
+              -0.0889434814453125,
+              -0.19384765625
+            ],
+            [
+              -0.02642822265625,
+              -0.06866455078125
+            ]
+          ],
+          [
+            [
+              -0.13800048828125,
+              -0.03662109375
+            ],
+            [
+              0.04931640625,
+              0.0191650390625
+            ],
+            [
+              0.015045166015625,
+              -0.06982421875
+            ],
+            [
+              0.0130615234375,
+              0.0582275390625
+            ]
+          ]
+        ],
+        "H_updates_corner_projection_valid": [
+          [
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true
+          ]
+        ],
+        "delta_px": [
+          [
+            [
+              0.474609375,
+              6.5625
+            ],
+            [
+              0.306640625,
+              6.46875
+            ],
+            [
+              0.41796875,
+              6.59375
+            ],
+            [
+              0.35546875,
+              6.46875
+            ]
+          ],
+          [
+            [
+              -0.007568359375,
+              -0.1259765625
+            ],
+            [
+              -0.02685546875,
+              -0.087890625
+            ],
+            [
+              -0.10400390625,
+              -0.1240234375
+            ],
+            [
+              -0.03955078125,
+              -0.126953125
+            ]
+          ]
+        ],
+        "tanh_saturation_fraction": [
+          0.0,
+          0.0
+        ],
+        "supported_query_count": [
+          19941,
+          20169
+        ],
+        "condition_number": [
+          3.4374706745147705,
+          3.4376730918884277
+        ],
+        "solve_info": [
+          0,
+          0
+        ],
+        "H0_norm": [
+          [
+            1.0634733438491821,
+            -0.002973773516714573,
+            0.5435985922813416
+          ],
+          [
+            0.01068596076220274,
+            1.0583136081695557,
+            -0.5833927989006042
+          ],
+          [
+            -0.015639986842870712,
+            0.016515767201781273,
+            1.0
+          ]
+        ],
+        "H_updates_norm": [
+          [
+            [
+              1.0633248090744019,
+              -0.0029977650847285986,
+              0.5446158051490784
+            ],
+            [
+              0.010272195562720299,
+              1.058644413948059,
+              -0.5668133497238159
+            ],
+            [
+              -0.01561877690255642,
+              0.01645529456436634,
+              1.0
+            ]
+          ],
+          [
+            [
+              1.0633705854415894,
+              -0.0030992820393294096,
+              0.5445269346237183
+            ],
+            [
+              0.010284247808158398,
+              1.0586466789245605,
+              -0.567164957523346
+            ],
+            [
+              -0.015594903379678726,
+              0.01640419103205204,
+              1.0
+            ]
+          ]
+        ],
+        "H_final_norm": [
+          [
+            1.0633705854415894,
+            -0.0030992820393294096,
+            0.5445269346237183
+          ],
+          [
+            0.010284247808158398,
+            1.0586466789245605,
+            -0.567164957523346
+          ],
+          [
+            -0.015594903379678726,
+            0.01640419103205204,
+            1.0
+          ]
+        ],
+        "update_scale_schedule": [
+          4,
+          4
+        ],
+        "cnn_precision": "bf16_autocast"
+      },
+      {
+        "diagnostic_sample_index": 3,
+        "pair_id": "current__34.801100126.376330_pair0",
+        "trajectory_mace_px": [
+          7.761044025421143,
+          0.2537599205970764,
+          0.10769593715667725
+        ],
+        "H0_mace_px": 7.761044025421143,
+        "H_updates_mace_px": [
+          0.2537599205970764,
+          0.10769593715667725
+        ],
+        "H_final_mace_px": 0.10769593715667725,
+        "update_accepted": [
+          true,
+          true
+        ],
+        "failure_reason_codes": [
+          0,
+          0
+        ],
+        "decoder_output_finite": [
+          true,
+          true
+        ],
+        "H0_corner_residual_px": [
+          [
+            -6.800048828125,
+            -3.74078369140625
+          ],
+          [
+            -6.800048828125,
+            -3.74078369140625
+          ],
+          [
+            -6.800048828125,
+            -3.74072265625
+          ],
+          [
+            -6.79998779296875,
+            -3.74078369140625
+          ]
+        ],
+        "H_updates_corner_residual_px": [
+          [
+            [
+              0.04376220703125,
+              -0.05340576171875
+            ],
+            [
+              -0.018798828125,
+              -0.27197265625
+            ],
+            [
+              -0.175048828125,
+              -0.30322265625
+            ],
+            [
+              -0.17498779296875,
+              -0.27178955078125
+            ]
+          ],
+          [
+            [
+              0.1623077392578125,
+              0.1927490234375
+            ],
+            [
+              0.105712890625,
+              -0.03179931640625
+            ],
+            [
+              0.037811279296875,
+              -0.02587890625
+            ],
+            [
+              -0.0225830078125,
+              -0.00048828125
+            ]
+          ]
+        ],
+        "H_updates_corner_projection_valid": [
+          [
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true
+          ]
+        ],
+        "delta_px": [
+          [
+            [
+              -6.84375,
+              -3.6875
+            ],
+            [
+              -6.78125,
+              -3.46875
+            ],
+            [
+              -6.625,
+              -3.4375
+            ],
+            [
+              -6.625,
+              -3.46875
+            ]
+          ],
+          [
+            [
+              -0.11865234375,
+              -0.24609375
+            ],
+            [
+              -0.12451171875,
+              -0.240234375
+            ],
+            [
+              -0.212890625,
+              -0.27734375
+            ],
+            [
+              -0.15234375,
+              -0.271484375
+            ]
+          ]
+        ],
+        "tanh_saturation_fraction": [
+          0.0,
+          0.0
+        ],
+        "supported_query_count": [
+          20066,
+          20170
+        ],
+        "condition_number": [
+          3.4371354579925537,
+          3.4375228881835938
+        ],
+        "solve_info": [
+          0,
+          0
+        ],
+        "H0_norm": [
+          [
+            1.0631887912750244,
+            -0.0026734001003205776,
+            0.5617849826812744
+          ],
+          [
+            0.01028156466782093,
+            1.0587409734725952,
+            -0.5575235486030579
+          ],
+          [
+            -0.015639958903193474,
+            0.016515769064426422,
+            1.0
+          ]
+        ],
+        "H_updates_norm": [
+          [
+            [
+              1.0635796785354614,
+              -0.0026956014335155487,
+              0.5448086261749268
+            ],
+            [
+              0.010451721958816051,
+              1.0587327480316162,
+              -0.5664464831352234
+            ],
+            [
+              -0.015489963814616203,
+              0.0165576059371233,
+              1.0
+            ]
+          ],
+          [
+            [
+              1.0636216402053833,
+              -0.0028037428855895996,
+              0.5444186329841614
+            ],
+            [
+              0.010469420813024044,
+              1.0587061643600464,
+              -0.5671513080596924
+            ],
+            [
+              -0.015490641817450523,
+              0.01651637814939022,
+              1.0
+            ]
+          ]
+        ],
+        "H_final_norm": [
+          [
+            1.0636216402053833,
+            -0.0028037428855895996,
+            0.5444186329841614
+          ],
+          [
+            0.010469420813024044,
+            1.0587061643600464,
+            -0.5671513080596924
+          ],
+          [
+            -0.015490641817450523,
+            0.01651637814939022,
+            1.0
+          ]
+        ],
+        "update_scale_schedule": [
+          4,
+          4
+        ],
+        "cnn_precision": "bf16_autocast"
+      },
+      {
+        "diagnostic_sample_index": 4,
+        "pair_id": "current__34.801100126.376330_pair0",
+        "trajectory_mace_px": [
+          8.623976707458496,
+          0.1452464610338211,
+          0.12834885716438293
+        ],
+        "H0_mace_px": 8.623976707458496,
+        "H_updates_mace_px": [
+          0.1452464610338211,
+          0.12834885716438293
+        ],
+        "H_final_mace_px": 0.12834885716438293,
+        "update_accepted": [
+          true,
+          true
+        ],
+        "failure_reason_codes": [
+          0,
+          0
+        ],
+        "decoder_output_finite": [
+          true,
+          true
+        ],
+        "H0_corner_residual_px": [
+          [
+            4.746856689453125,
+            -7.199951171875
+          ],
+          [
+            4.7469482421875,
+            -7.20001220703125
+          ],
+          [
+            4.74688720703125,
+            -7.20001220703125
+          ],
+          [
+            4.74688720703125,
+            -7.20001220703125
+          ]
+        ],
+        "H_updates_corner_residual_px": [
+          [
+            [
+              0.0594329833984375,
+              0.112548828125
+            ],
+            [
+              -0.0029296875,
+              -0.043701171875
+            ],
+            [
+              0.09063720703125,
+              0.2061767578125
+            ],
+            [
+              0.18426513671875,
+              -0.01251220703125
+            ]
+          ],
+          [
+            [
+              -0.075408935546875,
+              0.0352783203125
+            ],
+            [
+              -0.1339111328125,
+              -0.14923095703125
+            ],
+            [
+              -0.015838623046875,
+              0.13397216796875
+            ],
+            [
+              0.03594970703125,
+              -0.087646484375
+            ]
+          ]
+        ],
+        "H_updates_corner_projection_valid": [
+          [
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true
+          ]
+        ],
+        "delta_px": [
+          [
+            [
+              4.6875,
+              -7.3125
+            ],
+            [
+              4.75,
+              -7.15625
+            ],
+            [
+              4.65625,
+              -7.40625
+            ],
+            [
+              4.5625,
+              -7.1875
+            ]
+          ],
+          [
+            [
+              0.134765625,
+              0.0771484375
+            ],
+            [
+              0.130859375,
+              0.10546875
+            ],
+            [
+              0.1064453125,
+              0.072265625
+            ],
+            [
+              0.1484375,
+              0.0751953125
+            ]
+          ]
+        ],
+        "tanh_saturation_fraction": [
+          0.0,
+          0.0
+        ],
+        "supported_query_count": [
+          20543,
+          20170
+        ],
+        "condition_number": [
+          3.4379985332489014,
+          3.4381139278411865
+        ],
+        "solve_info": [
+          0,
+          0
+        ],
+        "H0_norm": [
+          [
+            1.0636495351791382,
+            -0.0031599176581948996,
+            0.5323286056518555
+          ],
+          [
+            0.010143582709133625,
+            1.0588867664337158,
+            -0.5486989617347717
+          ],
+          [
+            -0.015639957040548325,
+            0.016515767201781273,
+            1.0
+          ]
+        ],
+        "H_updates_norm": [
+          [
+            [
+              1.063416600227356,
+              -0.003049747087061405,
+              0.5441782474517822
+            ],
+            [
+              0.010699762031435966,
+              1.0584462881088257,
+              -0.5671419501304626
+            ],
+            [
+              -0.01568235270678997,
+              0.016606612130999565,
+              1.0
+            ]
+          ],
+          [
+            [
+              1.06344473361969,
+              -0.003067352809011936,
+              0.544525682926178
+            ],
+            [
+              0.01070716604590416,
+              1.0584439039230347,
+              -0.5669615864753723
+            ],
+            [
+              -0.01566777192056179,
+              0.016578979790210724,
+              1.0
+            ]
+          ]
+        ],
+        "H_final_norm": [
+          [
+            1.06344473361969,
+            -0.003067352809011936,
+            0.544525682926178
+          ],
+          [
+            0.01070716604590416,
+            1.0584439039230347,
+            -0.5669615864753723
+          ],
+          [
+            -0.01566777192056179,
+            0.016578979790210724,
+            1.0
+          ]
+        ],
+        "update_scale_schedule": [
+          4,
+          4
+        ],
+        "cnn_precision": "bf16_autocast"
+      },
+      {
+        "diagnostic_sample_index": 5,
+        "pair_id": "current__34.801100126.376330_pair0",
+        "trajectory_mace_px": [
+          10.128366470336914,
+          0.22796909511089325,
+          0.061486173421144485
+        ],
+        "H0_mace_px": 10.128366470336914,
+        "H_updates_mace_px": [
+          0.22796909511089325,
+          0.061486173421144485
+        ],
+        "H_final_mace_px": 0.061486173421144485,
+        "update_accepted": [
+          true,
+          true
+        ],
+        "failure_reason_codes": [
+          0,
+          0
+        ],
+        "decoder_output_finite": [
+          true,
+          true
+        ],
+        "H0_corner_residual_px": [
+          [
+            -6.695068359375,
+            7.599853515625
+          ],
+          [
+            -6.695068359375,
+            7.5999755859375
+          ],
+          [
+            -6.6951446533203125,
+            7.5999755859375
+          ],
+          [
+            -6.69512939453125,
+            7.60003662109375
+          ]
+        ],
+        "H_updates_corner_residual_px": [
+          [
+            [
+              -0.0075225830078125,
+              0.2559814453125
+            ],
+            [
+              0.086181640625,
+              0.1937255859375
+            ],
+            [
+              0.0549163818359375,
+              0.2249755859375
+            ],
+            [
+              0.08612060546875,
+              0.19390869140625
+            ]
+          ],
+          [
+            [
+              -0.1194000244140625,
+              -0.003662109375
+            ],
+            [
+              0.0042724609375,
+              -0.0914306640625
+            ],
+            [
+              -0.003387451171875,
+              0.00238037109375
+            ],
+            [
+              -0.002685546875,
+              -0.03070068359375
+            ]
+          ]
+        ],
+        "H_updates_corner_projection_valid": [
+          [
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true
+          ]
+        ],
+        "delta_px": [
+          [
+            [
+              -6.6875,
+              7.34375
+            ],
+            [
+              -6.78125,
+              7.40625
+            ],
+            [
+              -6.75,
+              7.375
+            ],
+            [
+              -6.78125,
+              7.40625
+            ]
+          ],
+          [
+            [
+              0.11181640625,
+              0.259765625
+            ],
+            [
+              0.08203125,
+              0.28515625
+            ],
+            [
+              0.05810546875,
+              0.22265625
+            ],
+            [
+              0.0888671875,
+              0.224609375
+            ]
+          ]
+        ],
+        "tanh_saturation_fraction": [
+          0.0,
+          0.0
+        ],
+        "supported_query_count": [
+          19681,
+          20159
+        ],
+        "condition_number": [
+          3.438239097595215,
+          3.4376964569091797
+        ],
+        "solve_info": [
+          0,
+          0
+        ],
+        "H0_norm": [
+          [
+            1.0631930828094482,
+            -0.0026778164319694042,
+            0.5615173578262329
+          ],
+          [
+            0.010733944363892078,
+            1.0582629442214966,
+            -0.5864539742469788
+          ],
+          [
+            -0.015639986842870712,
+            0.016515765339136124,
+            1.0
+          ]
+        ],
+        "H_updates_norm": [
+          [
+            [
+              1.0633940696716309,
+              -0.0030234279111027718,
+              0.5443183183670044
+            ],
+            [
+              0.01048756018280983,
+              1.058615803718567,
+              -0.5676596760749817
+            ],
+            [
+              -0.015621903352439404,
+              0.01647934876382351,
+              1.0
+            ]
+          ],
+          [
+            [
+              1.0633995532989502,
+              -0.003070993348956108,
+              0.5445494651794434
+            ],
+            [
+              0.01048688217997551,
+              1.0585856437683105,
+              -0.56706702709198
+            ],
+            [
+              -0.015609010122716427,
+              0.016442976891994476,
+              1.0
+            ]
+          ]
+        ],
+        "H_final_norm": [
+          [
+            1.0633995532989502,
+            -0.003070993348956108,
+            0.5445494651794434
+          ],
+          [
+            0.01048688217997551,
+            1.0585856437683105,
+            -0.56706702709198
+          ],
+          [
+            -0.015609010122716427,
+            0.016442976891994476,
+            1.0
+          ]
+        ],
+        "update_scale_schedule": [
+          4,
+          4
+        ],
+        "cnn_precision": "bf16_autocast"
+      },
+      {
+        "diagnostic_sample_index": 6,
+        "pair_id": "current__34.801100126.376330_pair0",
+        "trajectory_mace_px": [
+          8.242355346679688,
+          0.181879922747612,
+          0.10105979442596436
+        ],
+        "H0_mace_px": 8.242355346679688,
+        "H_updates_mace_px": [
+          0.181879922747612,
+          0.10105979442596436
+        ],
+        "H_final_mace_px": 0.10105979442596436,
+        "update_accepted": [
+          true,
+          true
+        ],
+        "failure_reason_codes": [
+          0,
+          0
+        ],
+        "decoder_output_finite": [
+          true,
+          true
+        ],
+        "H0_corner_residual_px": [
+          [
+            -8.000030517578125,
+            -1.9840087890625
+          ],
+          [
+            -8.0,
+            -1.98406982421875
+          ],
+          [
+            -8.000045776367188,
+            -1.98394775390625
+          ],
+          [
+            -7.99993896484375,
+            -1.98406982421875
+          ]
+        ],
+        "H_updates_corner_residual_px": [
+          [
+            [
+              -0.125,
+              0.18780517578125
+            ],
+            [
+              -0.15625,
+              -0.00750732421875
+            ],
+            [
+              -0.156280517578125,
+              0.09417724609375
+            ],
+            [
+              -0.15625,
+              -0.0465087890625
+            ]
+          ],
+          [
+            [
+              0.0117034912109375,
+              0.099853515625
+            ],
+            [
+              0.017578125,
+              -0.11004638671875
+            ],
+            [
+              0.050750732421875,
+              0.04827880859375
+            ],
+            [
+              0.02154541015625,
+              -0.12030029296875
+            ]
+          ]
+        ],
+        "H_updates_corner_projection_valid": [
+          [
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true
+          ]
+        ],
+        "delta_px": [
+          [
+            [
+              -7.875,
+              -2.171875
+            ],
+            [
+              -7.84375,
+              -1.9765625
+            ],
+            [
+              -7.84375,
+              -2.078125
+            ],
+            [
+              -7.84375,
+              -1.9375
+            ]
+          ],
+          [
+            [
+              -0.13671875,
+              0.087890625
+            ],
+            [
+              -0.173828125,
+              0.1025390625
+            ],
+            [
+              -0.20703125,
+              0.0458984375
+            ],
+            [
+              -0.177734375,
+              0.07373046875
+            ]
+          ]
+        ],
+        "tanh_saturation_fraction": [
+          0.0,
+          0.0
+        ],
+        "supported_query_count": [
+          19945,
+          20161
+        ],
+        "condition_number": [
+          3.4383978843688965,
+          3.437626600265503
+        ],
+        "solve_info": [
+          0,
+          0
+        ],
+        "H0_norm": [
+          [
+            1.0631409883499146,
+            -0.0026228504721075296,
+            0.5648461580276489
+          ],
+          [
+            0.010351749137043953,
+            1.0586669445037842,
+            -0.5620051026344299
+          ],
+          [
+            -0.015639986842870712,
+            0.016515767201781273,
+            1.0
+          ]
+        ],
+        "H_updates_norm": [
+          [
+            [
+              1.063490629196167,
+              -0.0029233430977910757,
+              0.544849157333374
+            ],
+            [
+              0.010629548691213131,
+              1.0586556196212769,
+              -0.5671933889389038
+            ],
+            [
+              -0.015609395690262318,
+              0.016534743830561638,
+              1.0
+            ]
+          ],
+          [
+            [
+              1.0634889602661133,
+              -0.0030011071357876062,
+              0.544395923614502
+            ],
+            [
+              0.010658219456672668,
+              1.0586369037628174,
+              -0.5670397281646729
+            ],
+            [
+              -0.015618372708559036,
+              0.016494441777467728,
+              1.0
+            ]
+          ]
+        ],
+        "H_final_norm": [
+          [
+            1.0634889602661133,
+            -0.0030011071357876062,
+            0.544395923614502
+          ],
+          [
+            0.010658219456672668,
+            1.0586369037628174,
+            -0.5670397281646729
+          ],
+          [
+            -0.015618372708559036,
+            0.016494441777467728,
+            1.0
+          ]
+        ],
+        "update_scale_schedule": [
+          4,
+          4
+        ],
+        "cnn_precision": "bf16_autocast"
+      },
+      {
+        "diagnostic_sample_index": 7,
+        "pair_id": "current__34.801100126.376330_pair0",
+        "trajectory_mace_px": [
+          6.279782295227051,
+          0.15180516242980957,
+          0.07481548935174942
+        ],
+        "H0_mace_px": 6.279782295227051,
+        "H_updates_mace_px": [
+          0.15180516242980957,
+          0.07481548935174942
+        ],
+        "H_final_mace_px": 0.07481548935174942,
+        "update_accepted": [
+          true,
+          true
+        ],
+        "failure_reason_codes": [
+          0,
+          0
+        ],
+        "decoder_output_finite": [
+          true,
+          true
+        ],
+        "H0_corner_residual_px": [
+          [
+            5.60003662109375,
+            -2.84185791015625
+          ],
+          [
+            5.60009765625,
+            -2.841796875
+          ],
+          [
+            5.5999603271484375,
+            -2.84173583984375
+          ],
+          [
+            5.59991455078125,
+            -2.8416748046875
+          ]
+        ],
+        "H_updates_corner_residual_px": [
+          [
+            [
+              -0.08746337890625,
+              0.0643310546875
+            ],
+            [
+              -0.05615234375,
+              0.09576416015625
+            ],
+            [
+              -0.1187896728515625,
+              0.158203125
+            ],
+            [
+              0.00616455078125,
+              0.189697265625
+            ]
+          ],
+          [
+            [
+              -0.07647705078125,
+              -0.0595703125
+            ],
+            [
+              -0.028076171875,
+              -0.05560302734375
+            ],
+            [
+              -0.058685302734375,
+              0.03814697265625
+            ],
+            [
+              0.047119140625,
+              0.05181884765625
+            ]
+          ]
+        ],
+        "H_updates_corner_projection_valid": [
+          [
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true
+          ]
+        ],
+        "delta_px": [
+          [
+            [
+              5.6875,
+              -2.90625
+            ],
+            [
+              5.65625,
+              -2.9375
+            ],
+            [
+              5.71875,
+              -3.0
+            ],
+            [
+              5.59375,
+              -3.03125
+            ]
+          ],
+          [
+            [
+              -0.010986328125,
+              0.1240234375
+            ],
+            [
+              -0.028076171875,
+              0.1513671875
+            ],
+            [
+              -0.06005859375,
+              0.1201171875
+            ],
+            [
+              -0.041015625,
+              0.1376953125
+            ]
+          ]
+        ],
+        "tanh_saturation_fraction": [
+          0.0,
+          0.0
+        ],
+        "supported_query_count": [
+          20429,
+          20162
+        ],
+        "condition_number": [
+          3.438527822494507,
+          3.4379889965057373
+        ],
+        "solve_info": [
+          0,
+          0
+        ],
+        "H0_norm": [
+          [
+            1.0636836290359497,
+            -0.0031958455219864845,
+            0.5301523208618164
+          ],
+          [
+            0.010317373089492321,
+            1.0587029457092285,
+            -0.5598168969154358
+          ],
+          [
+            -0.01563998870551586,
+            0.016515765339136124,
+            1.0
+          ]
+        ],
+        "H_updates_norm": [
+          [
+            [
+              1.0633553266525269,
+              -0.002944052452221513,
+              0.544600784778595
+            ],
+            [
+              0.010397328063845634,
+              1.0584245920181274,
+              -0.5673307776451111
+            ],
+            [
+              -0.015641145408153534,
+              0.0165728610008955,
+              1.0
+            ]
+          ],
+          [
+            [
+              1.063361644744873,
+              -0.002998003736138344,
+              0.5445165634155273
+            ],
+            [
+              0.010417371056973934,
+              1.0584322214126587,
+              -0.5670148730278015
+            ],
+            [
+              -0.01563594490289688,
+              0.016550786793231964,
+              1.0
+            ]
+          ]
+        ],
+        "H_final_norm": [
+          [
+            1.063361644744873,
+            -0.002998003736138344,
+            0.5445165634155273
+          ],
+          [
+            0.010417371056973934,
+            1.0584322214126587,
+            -0.5670148730278015
+          ],
+          [
+            -0.01563594490289688,
+            0.016550786793231964,
+            1.0
+          ]
+        ],
+        "update_scale_schedule": [
+          4,
+          4
+        ],
+        "cnn_precision": "bf16_autocast"
+      },
+      {
+        "diagnostic_sample_index": 8,
+        "pair_id": "current__34.801100126.376330_pair0",
+        "trajectory_mace_px": [
+          6.079036712646484,
+          0.1401996910572052,
+          0.09123968333005905
+        ],
+        "H0_mace_px": 6.079036712646484,
+        "H_updates_mace_px": [
+          0.1401996910572052,
+          0.09123968333005905
+        ],
+        "H_final_mace_px": 0.09123968333005905,
+        "update_accepted": [
+          true,
+          true
+        ],
+        "failure_reason_codes": [
+          0,
+          0
+        ],
+        "decoder_output_finite": [
+          true,
+          true
+        ],
+        "H0_corner_residual_px": [
+          [
+            5.999969482421875,
+            0.97711181640625
+          ],
+          [
+            6.0,
+            0.9771728515625
+          ],
+          [
+            5.999969482421875,
+            0.9771728515625
+          ],
+          [
+            6.0,
+            0.97723388671875
+          ]
+        ],
+        "H_updates_corner_residual_px": [
+          [
+            [
+              0.0624542236328125,
+              -0.08538818359375
+            ],
+            [
+              0.21875,
+              0.0826416015625
+            ],
+            [
+              0.0936737060546875,
+              0.0084228515625
+            ],
+            [
+              0.12506103515625,
+              -0.02276611328125
+            ]
+          ],
+          [
+            [
+              -0.144561767578125,
+              -0.10540771484375
+            ],
+            [
+              0.001953125,
+              0.048095703125
+            ],
+            [
+              -0.0507659912109375,
+              0.005126953125
+            ],
+            [
+              -0.083984375,
+              -0.02227783203125
+            ]
+          ]
+        ],
+        "H_updates_corner_projection_valid": [
+          [
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true
+          ]
+        ],
+        "delta_px": [
+          [
+            [
+              5.9375,
+              1.0625
+            ],
+            [
+              5.78125,
+              0.89453125
+            ],
+            [
+              5.90625,
+              0.96875
+            ],
+            [
+              5.875,
+              1.0
+            ]
+          ],
+          [
+            [
+              0.20703125,
+              0.02001953125
+            ],
+            [
+              0.216796875,
+              0.03466796875
+            ],
+            [
+              0.14453125,
+              0.003173828125
+            ],
+            [
+              0.208984375,
+              -0.00048828125
+            ]
+          ]
+        ],
+        "tanh_saturation_fraction": [
+          0.0,
+          0.0
+        ],
+        "supported_query_count": [
+          20322,
+          20169
+        ],
+        "condition_number": [
+          3.4374444484710693,
+          3.4380218982696533
+        ],
+        "solve_info": [
+          0,
+          0
+        ],
+        "H0_norm": [
+          [
+            1.0636996030807495,
+            -0.00321273528970778,
+            0.5291318893432617
+          ],
+          [
+            0.010469677858054638,
+            1.058542013168335,
+            -0.5695590376853943
+          ],
+          [
+            -0.015639986842870712,
+            0.016515765339136124,
+            1.0
+          ]
+        ],
+        "H_updates_norm": [
+          [
+            [
+              1.0632818937301636,
+              -0.0029656568076461554,
+              0.5439966917037964
+            ],
+            [
+              0.010412821546196938,
+              1.0586298704147339,
+              -0.567132294178009
+            ],
+            [
+              -0.015757668763399124,
+              0.016442323103547096,
+              1.0
+            ]
+          ],
+          [
+            [
+              1.063328742980957,
+              -0.003022174583747983,
+              0.5445025563240051
+            ],
+            [
+              0.010412360541522503,
+              1.0586174726486206,
+              -0.5671324133872986
+            ],
+            [
+              -0.015747275203466415,
+              0.016408462077379227,
+              1.0
+            ]
+          ]
+        ],
+        "H_final_norm": [
+          [
+            1.063328742980957,
+            -0.003022174583747983,
+            0.5445025563240051
+          ],
+          [
+            0.010412360541522503,
+            1.0586174726486206,
+            -0.5671324133872986
+          ],
+          [
+            -0.015747275203466415,
+            0.016408462077379227,
+            1.0
+          ]
+        ],
+        "update_scale_schedule": [
+          4,
+          4
+        ],
+        "cnn_precision": "bf16_autocast"
+      },
+      {
+        "diagnostic_sample_index": 9,
+        "pair_id": "current__34.801100126.376330_pair0",
+        "trajectory_mace_px": [
+          6.711635589599609,
+          0.2260245680809021,
+          0.07587647438049316
+        ],
+        "H0_mace_px": 6.711635589599609,
+        "H_updates_mace_px": [
+          0.2260245680809021,
+          0.07587647438049316
+        ],
+        "H_final_mace_px": 0.07587647438049316,
+        "update_accepted": [
+          true,
+          true
+        ],
+        "failure_reason_codes": [
+          0,
+          0
+        ],
+        "decoder_output_finite": [
+          true,
+          true
+        ],
+        "H0_corner_residual_px": [
+          [
+            6.4000091552734375,
+            2.0213623046875
+          ],
+          [
+            6.4000244140625,
+            2.02142333984375
+          ],
+          [
+            6.4000091552734375,
+            2.0213623046875
+          ],
+          [
+            6.39996337890625,
+            2.02142333984375
+          ]
+        ],
+        "H_updates_corner_residual_px": [
+          [
+            [
+              0.118743896484375,
+              0.02923583984375
+            ],
+            [
+              0.275146484375,
+              0.2010498046875
+            ],
+            [
+              0.1811676025390625,
+              0.0916748046875
+            ],
+            [
+              0.2125244140625,
+              0.10711669921875
+            ]
+          ],
+          [
+            [
+              -0.1410064697265625,
+              -0.1055908203125
+            ],
+            [
+              0.019287109375,
+              0.0408935546875
+            ],
+            [
+              -0.0141143798828125,
+              -0.0206298828125
+            ],
+            [
+              -0.0570068359375,
+              0.00384521484375
+            ]
+          ]
+        ],
+        "H_updates_corner_projection_valid": [
+          [
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true
+          ]
+        ],
+        "delta_px": [
+          [
+            [
+              6.28125,
+              1.9921875
+            ],
+            [
+              6.125,
+              1.8203125
+            ],
+            [
+              6.21875,
+              1.9296875
+            ],
+            [
+              6.1875,
+              1.9140625
+            ]
+          ],
+          [
+            [
+              0.259765625,
+              0.134765625
+            ],
+            [
+              0.255859375,
+              0.16015625
+            ],
+            [
+              0.1953125,
+              0.1123046875
+            ],
+            [
+              0.26953125,
+              0.103515625
+            ]
+          ]
+        ],
+        "tanh_saturation_fraction": [
+          0.0,
+          0.0
+        ],
+        "supported_query_count": [
+          20292,
+          20166
+        ],
+        "condition_number": [
+          3.437567710876465,
+          3.437908411026001
+        ],
+        "solve_info": [
+          0,
+          0
+        ],
+        "H0_norm": [
+          [
+            1.0637155771255493,
+            -0.003229565219953656,
+            0.528111457824707
+          ],
+          [
+            0.010511454194784164,
+            1.0584981441497803,
+            -0.572222888469696
+          ],
+          [
+            -0.01563998870551586,
+            0.016515765339136124,
+            1.0
+          ]
+        ],
+        "H_updates_norm": [
+          [
+            [
+              1.063299536705017,
+              -0.0030091640073806047,
+              0.5438408255577087
+            ],
+            [
+              0.010369362309575081,
+              1.0586389303207397,
+              -0.5674164891242981
+            ],
+            [
+              -0.015731342136859894,
+              0.01644201949238777,
+              1.0
+            ]
+          ],
+          [
+            [
+              1.0633474588394165,
+              -0.0030591764952987432,
+              0.5444865226745605
+            ],
+            [
+              0.010361983440816402,
+              1.0586220026016235,
+              -0.5671424269676208
+            ],
+            [
+              -0.01571168564260006,
+              0.016394497826695442,
+              1.0
+            ]
+          ]
+        ],
+        "H_final_norm": [
+          [
+            1.0633474588394165,
+            -0.0030591764952987432,
+            0.5444865226745605
+          ],
+          [
+            0.010361983440816402,
+            1.0586220026016235,
+            -0.5671424269676208
+          ],
+          [
+            -0.01571168564260006,
+            0.016394497826695442,
+            1.0
+          ]
+        ],
+        "update_scale_schedule": [
+          4,
+          4
+        ],
+        "cnn_precision": "bf16_autocast"
+      },
+      {
+        "diagnostic_sample_index": 10,
+        "pair_id": "current__34.801100126.376330_pair0",
+        "trajectory_mace_px": [
+          7.637503147125244,
+          0.18455389142036438,
+          0.08872701972723007
+        ],
+        "H0_mace_px": 7.637503147125244,
+        "H_updates_mace_px": [
+          0.18455389142036438,
+          0.08872701972723007
+        ],
+        "H_final_mace_px": 0.08872701972723007,
+        "update_accepted": [
+          true,
+          true
+        ],
+        "failure_reason_codes": [
+          0,
+          0
+        ],
+        "decoder_output_finite": [
+          true,
+          true
+        ],
+        "H0_corner_residual_px": [
+          [
+            -6.8000640869140625,
+            3.4771728515625
+          ],
+          [
+            -6.800048828125,
+            3.47723388671875
+          ],
+          [
+            -6.800048828125,
+            3.4771728515625
+          ],
+          [
+            -6.79998779296875,
+            3.47723388671875
+          ]
+        ],
+        "H_updates_corner_residual_px": [
+          [
+            [
+              0.1061859130859375,
+              -0.08538818359375
+            ],
+            [
+              0.137451171875,
+              -0.210205078125
+            ],
+            [
+              0.1061248779296875,
+              -0.0853271484375
+            ],
+            [
+              0.04364013671875,
+              -0.21014404296875
+            ]
+          ],
+          [
+            [
+              -0.024627685546875,
+              0.0079345703125
+            ],
+            [
+              0.000732421875,
+              -0.129638671875
+            ],
+            [
+              0.051483154296875,
+              0.0582275390625
+            ],
+            [
+              -0.096923828125,
+              -0.07354736328125
+            ]
+          ]
+        ],
+        "H_updates_corner_projection_valid": [
+          [
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true
+          ]
+        ],
+        "delta_px": [
+          [
+            [
+              -6.90625,
+              3.5625
+            ],
+            [
+              -6.9375,
+              3.6875
+            ],
+            [
+              -6.90625,
+              3.5625
+            ],
+            [
+              -6.84375,
+              3.6875
+            ]
+          ],
+          [
+            [
+              0.130859375,
+              -0.09326171875
+            ],
+            [
+              0.13671875,
+              -0.08056640625
+            ],
+            [
+              0.0546875,
+              -0.1435546875
+            ],
+            [
+              0.140625,
+              -0.13671875
+            ]
+          ]
+        ],
+        "tanh_saturation_fraction": [
+          0.0,
+          0.0
+        ],
+        "supported_query_count": [
+          19817,
+          20175
+        ],
+        "condition_number": [
+          3.437018394470215,
+          3.4377787113189697
+        ],
+        "solve_info": [
+          0,
+          0
+        ],
+        "H0_norm": [
+          [
+            1.0631887912750244,
+            -0.0026734001003205776,
+            0.5617849826812744
+          ],
+          [
+            0.010569464415311813,
+            1.0584367513656616,
+            -0.5759367346763611
+          ],
+          [
+            -0.015639986842870712,
+            0.016515767201781273,
+            1.0
+          ]
+        ],
+        "H_updates_norm": [
+          [
+            [
+              1.0634845495224,
+              -0.002936114789918065,
+              0.5441858172416687
+            ],
+            [
+              0.010584712959825993,
+              1.0586217641830444,
+              -0.5667508244514465
+            ],
+            [
+              -0.01564239338040352,
+              0.016460422426462173,
+              1.0
+            ]
+          ],
+          [
+            [
+              1.0635417699813843,
+              -0.0030059413984417915,
+              0.5444824695587158
+            ],
+            [
+              0.01059968862682581,
+              1.0585780143737793,
+              -0.5670942068099976
+            ],
+            [
+              -0.015640055760741234,
+              0.016411133110523224,
+              1.0
+            ]
+          ]
+        ],
+        "H_final_norm": [
+          [
+            1.0635417699813843,
+            -0.0030059413984417915,
+            0.5444824695587158
+          ],
+          [
+            0.01059968862682581,
+            1.0585780143737793,
+            -0.5670942068099976
+          ],
+          [
+            -0.015640055760741234,
+            0.016411133110523224,
+            1.0
+          ]
+        ],
+        "update_scale_schedule": [
+          4,
+          4
+        ],
+        "cnn_precision": "bf16_autocast"
+      },
+      {
+        "diagnostic_sample_index": 11,
+        "pair_id": "current__34.801100126.376330_pair0",
+        "trajectory_mace_px": [
+          9.999726295471191,
+          0.22862352430820465,
+          0.1650363802909851
+        ],
+        "H0_mace_px": 9.999726295471191,
+        "H_updates_mace_px": [
+          0.22862352430820465,
+          0.1650363802909851
+        ],
+        "H_final_mace_px": 0.1650363802909851,
+        "update_accepted": [
+          true,
+          true
+        ],
+        "failure_reason_codes": [
+          0,
+          0
+        ],
+        "decoder_output_finite": [
+          true,
+          true
+        ],
+        "H0_corner_residual_px": [
+          [
+            7.2000274658203125,
+            6.9393310546875
+          ],
+          [
+            7.199951171875,
+            6.93939208984375
+          ],
+          [
+            7.2000732421875,
+            6.9393310546875
+          ],
+          [
+            7.19989013671875,
+            6.93939208984375
+          ]
+        ],
+        "H_updates_corner_residual_px": [
+          [
+            [
+              0.168731689453125,
+              -0.21685791015625
+            ],
+            [
+              0.262451171875,
+              0.18939208984375
+            ],
+            [
+              0.075103759765625,
+              -0.12310791015625
+            ],
+            [
+              0.16864013671875,
+              0.03314208984375
+            ]
+          ],
+          [
+            [
+              -0.079254150390625,
+              -0.1539306640625
+            ],
+            [
+              -0.003173828125,
+              0.22052001953125
+            ],
+            [
+              -0.1124267578125,
+              -0.03424072265625
+            ],
+            [
+              -0.09503173828125,
+              0.11468505859375
+            ]
+          ]
+        ],
+        "H_updates_corner_projection_valid": [
+          [
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true
+          ]
+        ],
+        "delta_px": [
+          [
+            [
+              7.03125,
+              7.15625
+            ],
+            [
+              6.9375,
+              6.75
+            ],
+            [
+              7.125,
+              7.0625
+            ],
+            [
+              7.03125,
+              6.90625
+            ]
+          ],
+          [
+            [
+              0.248046875,
+              -0.06298828125
+            ],
+            [
+              0.265625,
+              -0.0311279296875
+            ],
+            [
+              0.1875,
+              -0.0888671875
+            ],
+            [
+              0.263671875,
+              -0.08154296875
+            ]
+          ]
+        ],
+        "tanh_saturation_fraction": [
+          0.0,
+          0.0
+        ],
+        "supported_query_count": [
+          20151,
+          20171
+        ],
+        "condition_number": [
+          3.4374141693115234,
+          3.438384771347046
+        ],
+        "solve_info": [
+          0,
+          0
+        ],
+        "H0_norm": [
+          [
+            1.0637476444244385,
+            -0.003263284917920828,
+            0.5260707139968872
+          ],
+          [
+            0.01070768479257822,
+            1.058290958404541,
+            -0.5847687125205994
+          ],
+          [
+            -0.015639986842870712,
+            0.016515765339136124,
+            1.0
+          ]
+        ],
+        "H_updates_norm": [
+          [
+            [
+              1.0632668733596802,
+              -0.002843788592144847,
+              0.5438579320907593
+            ],
+            [
+              0.010156924836337566,
+              1.058618426322937,
+              -0.566983163356781
+            ],
+            [
+              -0.01578344590961933,
+              0.016517670825123787,
+              1.0
+            ]
+          ],
+          [
+            [
+              1.0633260011672974,
+              -0.002894636709243059,
+              0.5444866418838501
+            ],
+            [
+              0.010175822302699089,
+              1.0585886240005493,
+              -0.5671917200088501
+            ],
+            [
+              -0.015769880264997482,
+              0.01648137904703617,
+              1.0
+            ]
+          ]
+        ],
+        "H_final_norm": [
+          [
+            1.0633260011672974,
+            -0.002894636709243059,
+            0.5444866418838501
+          ],
+          [
+            0.010175822302699089,
+            1.0585886240005493,
+            -0.5671917200088501
+          ],
+          [
+            -0.015769880264997482,
+            0.01648137904703617,
+            1.0
+          ]
+        ],
+        "update_scale_schedule": [
+          4,
+          4
+        ],
+        "cnn_precision": "bf16_autocast"
+      },
+      {
+        "diagnostic_sample_index": 12,
+        "pair_id": "current__34.801100126.376330_pair0",
+        "trajectory_mace_px": [
+          7.600187301635742,
+          0.32913416624069214,
+          0.1053880825638771
+        ],
+        "H0_mace_px": 7.600187301635742,
+        "H_updates_mace_px": [
+          0.32913416624069214,
+          0.1053880825638771
+        ],
+        "H_final_mace_px": 0.1053880825638771,
+        "update_accepted": [
+          true,
+          true
+        ],
+        "failure_reason_codes": [
+          0,
+          0
+        ],
+        "decoder_output_finite": [
+          true,
+          true
+        ],
+        "H0_corner_residual_px": [
+          [
+            7.600006103515625,
+            -0.052490234375
+          ],
+          [
+            7.60009765625,
+            -0.05255126953125
+          ],
+          [
+            7.599945068359375,
+            -0.05242919921875
+          ],
+          [
+            7.5999755859375,
+            -0.05255126953125
+          ]
+        ],
+        "H_updates_corner_residual_px": [
+          [
+            [
+              0.2875518798828125,
+              0.00311279296875
+            ],
+            [
+              0.31884765625,
+              0.240478515625
+            ],
+            [
+              0.287445068359375,
+              0.084228515625
+            ],
+            [
+              0.318603515625,
+              0.08624267578125
+            ]
+          ],
+          [
+            [
+              -0.1031646728515625,
+              -0.10614013671875
+            ],
+            [
+              -0.07177734375,
+              0.107666015625
+            ],
+            [
+              -0.04852294921875,
+              0.01104736328125
+            ],
+            [
+              -0.09136962890625,
+              0.02362060546875
+            ]
+          ]
+        ],
+        "H_updates_corner_projection_valid": [
+          [
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true
+          ]
+        ],
+        "delta_px": [
+          [
+            [
+              7.3125,
+              -0.0556640625
+            ],
+            [
+              7.28125,
+              -0.29296875
+            ],
+            [
+              7.3125,
+              -0.13671875
+            ],
+            [
+              7.28125,
+              -0.138671875
+            ]
+          ],
+          [
+            [
+              0.390625,
+              0.109375
+            ],
+            [
+              0.390625,
+              0.1328125
+            ],
+            [
+              0.3359375,
+              0.0732421875
+            ],
+            [
+              0.41015625,
+              0.0625
+            ]
+          ]
+        ],
+        "tanh_saturation_fraction": [
+          0.0,
+          0.0
+        ],
+        "supported_query_count": [
+          20424,
+          20170
+        ],
+        "condition_number": [
+          3.437469482421875,
+          3.438342571258545
+        ],
+        "solve_info": [
+          0,
+          0
+        ],
+        "H0_norm": [
+          [
+            1.0637633800506592,
+            -0.003280114848166704,
+            0.5250502824783325
+          ],
+          [
+            0.010428856126964092,
+            1.058585524559021,
+            -0.5669323801994324
+          ],
+          [
+            -0.015639986842870712,
+            0.016515765339136124,
+            1.0
+          ]
+        ],
+        "H_updates_norm": [
+          [
+            [
+              1.0633552074432373,
+              -0.0029706701170653105,
+              0.5435180068016052
+            ],
+            [
+              0.010365087538957596,
+              1.0586215257644653,
+              -0.5673283934593201
+            ],
+            [
+              -0.01577778346836567,
+              0.016514774411916733,
+              1.0
+            ]
+          ],
+          [
+            [
+              1.0633994340896606,
+              -0.003003434743732214,
+              0.5445122122764587
+            ],
+            [
+              0.010357256047427654,
+              1.0585846900939941,
+              -0.5671366453170776
+            ],
+            [
+              -0.015758434310555458,
+              0.01646970398724079,
+              1.0
+            ]
+          ]
+        ],
+        "H_final_norm": [
+          [
+            1.0633994340896606,
+            -0.003003434743732214,
+            0.5445122122764587
+          ],
+          [
+            0.010357256047427654,
+            1.0585846900939941,
+            -0.5671366453170776
+          ],
+          [
+            -0.015758434310555458,
+            0.01646970398724079,
+            1.0
+          ]
+        ],
+        "update_scale_schedule": [
+          4,
+          4
+        ],
+        "cnn_precision": "bf16_autocast"
+      },
+      {
+        "diagnostic_sample_index": 13,
+        "pair_id": "current__34.801100126.376330_pair0",
+        "trajectory_mace_px": [
+          9.381189346313477,
+          0.38643309473991394,
+          0.15407145023345947
+        ],
+        "H0_mace_px": 9.381189346313477,
+        "H_updates_mace_px": [
+          0.38643309473991394,
+          0.15407145023345947
+        ],
+        "H_final_mace_px": 0.15407145023345947,
+        "update_accepted": [
+          true,
+          true
+        ],
+        "failure_reason_codes": [
+          0,
+          0
+        ],
+        "decoder_output_finite": [
+          true,
+          true
+        ],
+        "H0_corner_residual_px": [
+          [
+            8.0,
+            -4.8997802734375
+          ],
+          [
+            8.0,
+            -4.89971923828125
+          ],
+          [
+            8.0,
+            -4.899658203125
+          ],
+          [
+            7.99993896484375,
+            -4.89959716796875
+          ]
+        ],
+        "H_updates_corner_residual_px": [
+          [
+            [
+              0.281219482421875,
+              0.16265869140625
+            ],
+            [
+              0.40625,
+              -0.1497802734375
+            ],
+            [
+              0.374969482421875,
+              0.162841796875
+            ],
+            [
+              0.37493896484375,
+              -0.05584716796875
+            ]
+          ],
+          [
+            [
+              -0.117156982421875,
+              0.04449462890625
+            ],
+            [
+              0.017578125,
+              -0.27374267578125
+            ],
+            [
+              0.037200927734375,
+              0.085693359375
+            ],
+            [
+              -0.02935791015625,
+              -0.11968994140625
+            ]
+          ]
+        ],
+        "H_updates_corner_projection_valid": [
+          [
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true
+          ]
+        ],
+        "delta_px": [
+          [
+            [
+              7.71875,
+              -5.0625
+            ],
+            [
+              7.59375,
+              -4.75
+            ],
+            [
+              7.625,
+              -5.0625
+            ],
+            [
+              7.625,
+              -4.84375
+            ]
+          ],
+          [
+            [
+              0.3984375,
+              0.1181640625
+            ],
+            [
+              0.388671875,
+              0.1240234375
+            ],
+            [
+              0.337890625,
+              0.0771484375
+            ],
+            [
+              0.404296875,
+              0.06396484375
+            ]
+          ]
+        ],
+        "tanh_saturation_fraction": [
+          0.0,
+          0.0
+        ],
+        "supported_query_count": [
+          20583,
+          20176
+        ],
+        "condition_number": [
+          3.436594009399414,
+          3.437453031539917
+        ],
+        "solve_info": [
+          0,
+          0
+        ],
+        "H0_norm": [
+          [
+            1.063779354095459,
+            -0.0032969447784125805,
+            0.5240298509597778
+          ],
+          [
+            0.010235251858830452,
+            1.058789610862732,
+            -0.5545670390129089
+          ],
+          [
+            -0.015639986842870712,
+            0.016515767201781273,
+            1.0
+          ]
+        ],
+        "H_updates_norm": [
+          [
+            [
+              1.0634254217147827,
+              -0.0030581620521843433,
+              0.5435763597488403
+            ],
+            [
+              0.010739713907241821,
+              1.058566689491272,
+              -0.5672271251678467
+            ],
+            [
+              -0.015589917078614235,
+              0.016442446038126945,
+              1.0
+            ]
+          ],
+          [
+            [
+              1.0634541511535645,
+              -0.0030977304559201,
+              0.544562578201294
+            ],
+            [
+              0.010723881423473358,
+              1.0585334300994873,
+              -0.5670329928398132
+            ],
+            [
+              -0.015579292550683022,
+              0.016396163031458855,
+              1.0
+            ]
+          ]
+        ],
+        "H_final_norm": [
+          [
+            1.0634541511535645,
+            -0.0030977304559201,
+            0.544562578201294
+          ],
+          [
+            0.010723881423473358,
+            1.0585334300994873,
+            -0.5670329928398132
+          ],
+          [
+            -0.015579292550683022,
+            0.016396163031458855,
+            1.0
+          ]
+        ],
+        "update_scale_schedule": [
+          4,
+          4
+        ],
+        "cnn_precision": "bf16_autocast"
+      },
+      {
+        "diagnostic_sample_index": 14,
+        "pair_id": "current__34.801100126.376330_pair0",
+        "trajectory_mace_px": [
+          5.619349479675293,
+          0.20824579894542694,
+          0.09050360321998596
+        ],
+        "H0_mace_px": 5.619349479675293,
+        "H_updates_mace_px": [
+          0.20824579894542694,
+          0.09050360321998596
+        ],
+        "H_final_mace_px": 0.09050360321998596,
+        "update_accepted": [
+          true,
+          true
+        ],
+        "failure_reason_codes": [
+          0,
+          0
+        ],
+        "decoder_output_finite": [
+          true,
+          true
+        ],
+        "H0_corner_residual_px": [
+          [
+            -0.466064453125,
+            -5.60003662109375
+          ],
+          [
+            -0.466064453125,
+            -5.5999755859375
+          ],
+          [
+            -0.4660186767578125,
+            -5.5999755859375
+          ],
+          [
+            -0.46600341796875,
+            -5.5999755859375
+          ]
+        ],
+        "H_updates_corner_residual_px": [
+          [
+            [
+              -0.0226898193359375,
+              0.24371337890625
+            ],
+            [
+              -0.059814453125,
+              0.1500244140625
+            ],
+            [
+              -0.026580810546875,
+              0.30621337890625
+            ],
+            [
+              -0.010986328125,
+              0.11883544921875
+            ]
+          ],
+          [
+            [
+              -0.0533447265625,
+              -0.0042724609375
+            ],
+            [
+              -0.056640625,
+              -0.1019287109375
+            ],
+            [
+              0.006561279296875,
+              0.08551025390625
+            ],
+            [
+              -0.0086669921875,
+              -0.10577392578125
+            ]
+          ]
+        ],
+        "H_updates_corner_projection_valid": [
+          [
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true
+          ]
+        ],
+        "delta_px": [
+          [
+            [
+              -0.443359375,
+              -5.84375
+            ],
+            [
+              -0.40625,
+              -5.75
+            ],
+            [
+              -0.439453125,
+              -5.90625
+            ],
+            [
+              -0.455078125,
+              -5.71875
+            ]
+          ],
+          [
+            [
+              0.0306396484375,
+              0.248046875
+            ],
+            [
+              -0.003173828125,
+              0.251953125
+            ],
+            [
+              -0.033203125,
+              0.220703125
+            ],
+            [
+              -0.0023193359375,
+              0.224609375
+            ]
+          ]
+        ],
+        "tanh_saturation_fraction": [
+          0.0,
+          0.0
+        ],
+        "supported_query_count": [
+          20310,
+          20159
+        ],
+        "condition_number": [
+          3.438706636428833,
+          3.4379448890686035
+        ],
+        "solve_info": [
+          0,
+          0
+        ],
+        "H0_norm": [
+          [
+            1.0634416341781616,
+            -0.0029402924701571465,
+            0.5456268787384033
+          ],
+          [
+            0.010207321494817734,
+            1.0588191747665405,
+            -0.5527805685997009
+          ],
+          [
+            -0.015639986842870712,
+            0.016515767201781273,
+            1.0
+          ]
+        ],
+        "H_updates_norm": [
+          [
+            [
+              1.0634385347366333,
+              -0.0029688796494156122,
+              0.5444502830505371
+            ],
+            [
+              0.010654529556632042,
+              1.058535099029541,
+              -0.5675595998764038
+            ],
+            [
+              -0.015699127689003944,
+              0.016545897349715233,
+              1.0
+            ]
+          ],
+          [
+            [
+              1.0634377002716064,
+              -0.003031783038750291,
+              0.5444443821907043
+            ],
+            [
+              0.010649758391082287,
+              1.0585330724716187,
+              -0.566999077796936
+            ],
+            [
+              -0.015699727460741997,
+              0.016506772488355637,
+              1.0
+            ]
+          ]
+        ],
+        "H_final_norm": [
+          [
+            1.0634377002716064,
+            -0.003031783038750291,
+            0.5444443821907043
+          ],
+          [
+            0.010649758391082287,
+            1.0585330724716187,
+            -0.566999077796936
+          ],
+          [
+            -0.015699727460741997,
+            0.016506772488355637,
+            1.0
+          ]
+        ],
+        "update_scale_schedule": [
+          4,
+          4
+        ],
+        "cnn_precision": "bf16_autocast"
+      },
+      {
+        "diagnostic_sample_index": 15,
+        "pair_id": "current__34.801100126.376330_pair0",
+        "trajectory_mace_px": [
+          6.111882209777832,
+          0.1514648050069809,
+          0.10169068723917007
+        ],
+        "H0_mace_px": 6.111882209777832,
+        "H_updates_mace_px": [
+          0.1514648050069809,
+          0.10169068723917007
+        ],
+        "H_final_mace_px": 0.10169068723917007,
+        "update_accepted": [
+          true,
+          true
+        ],
+        "failure_reason_codes": [
+          0,
+          0
+        ],
+        "decoder_output_finite": [
+          true,
+          true
+        ],
+        "H0_corner_residual_px": [
+          [
+            5.999969482421875,
+            1.1640625
+          ],
+          [
+            6.0,
+            1.16424560546875
+          ],
+          [
+            5.999969482421875,
+            1.16412353515625
+          ],
+          [
+            6.0,
+            1.16424560546875
+          ]
+        ],
+        "H_updates_corner_residual_px": [
+          [
+            [
+              0.062469482421875,
+              -0.09375
+            ],
+            [
+              0.21875,
+              0.08612060546875
+            ],
+            [
+              0.09368896484375,
+              0.0313720703125
+            ],
+            [
+              0.15625,
+              -0.03106689453125
+            ]
+          ],
+          [
+            [
+              -0.1757965087890625,
+              -0.10479736328125
+            ],
+            [
+              -0.0194091796875,
+              0.03668212890625
+            ],
+            [
+              -0.068450927734375,
+              0.0306396484375
+            ],
+            [
+              -0.0799560546875,
+              -0.03057861328125
+            ]
+          ]
+        ],
+        "H_updates_corner_projection_valid": [
+          [
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true
+          ]
+        ],
+        "delta_px": [
+          [
+            [
+              5.9375,
+              1.2578125
+            ],
+            [
+              5.78125,
+              1.078125
+            ],
+            [
+              5.90625,
+              1.1328125
+            ],
+            [
+              5.84375,
+              1.1953125
+            ]
+          ],
+          [
+            [
+              0.23828125,
+              0.010986328125
+            ],
+            [
+              0.23828125,
+              0.04931640625
+            ],
+            [
+              0.162109375,
+              0.000732421875
+            ],
+            [
+              0.236328125,
+              -0.00048828125
+            ]
+          ]
+        ],
+        "tanh_saturation_fraction": [
+          0.0,
+          0.0
+        ],
+        "supported_query_count": [
+          20314,
+          20171
+        ],
+        "condition_number": [
+          3.4374752044677734,
+          3.4380862712860107
+        ],
+        "solve_info": [
+          0,
+          0
+        ],
+        "H0_norm": [
+          [
+            1.0636996030807495,
+            -0.00321273528970778,
+            0.5291318893432617
+          ],
+          [
+            0.010477078147232533,
+            1.0585341453552246,
+            -0.5700361132621765
+          ],
+          [
+            -0.015639986842870712,
+            0.016515765339136124,
+            1.0
+          ]
+        ],
+        "H_updates_norm": [
+          [
+            [
+              1.0632470846176147,
+              -0.002974847564473748,
+              0.5439485907554626
+            ],
+            [
+              0.010441499762237072,
+              1.0586057901382446,
+              -0.5671194195747375
+            ],
+            [
+              -0.01578381285071373,
+              0.016460644081234932,
+              1.0
+            ]
+          ],
+          [
+            [
+              1.0632998943328857,
+              -0.003042167518287897,
+              0.5445299744606018
+            ],
+            [
+              0.010450106114149094,
+              1.0585952997207642,
+              -0.5671301484107971
+            ],
+            [
+              -0.01576104573905468,
+              0.01641520857810974,
+              1.0
+            ]
+          ]
+        ],
+        "H_final_norm": [
+          [
+            1.0632998943328857,
+            -0.003042167518287897,
+            0.5445299744606018
+          ],
+          [
+            0.010450106114149094,
+            1.0585952997207642,
+            -0.5671301484107971
+          ],
+          [
+            -0.01576104573905468,
+            0.01641520857810974,
+            1.0
+          ]
+        ],
+        "update_scale_schedule": [
+          4,
+          4
+        ],
+        "cnn_precision": "bf16_autocast"
+      },
+      {
+        "diagnostic_sample_index": 16,
+        "pair_id": "current__34.801100126.376330_pair0",
+        "trajectory_mace_px": [
+          6.510983467102051,
+          0.12770934402942657,
+          0.09789082407951355
+        ],
+        "H0_mace_px": 6.510983467102051,
+        "H_updates_mace_px": [
+          0.12770934402942657,
+          0.09789082407951355
+        ],
+        "H_final_mace_px": 0.09789082407951355,
+        "update_accepted": [
+          true,
+          true
+        ],
+        "failure_reason_codes": [
+          0,
+          0
+        ],
+        "decoder_output_finite": [
+          true,
+          true
+        ],
+        "H0_corner_residual_px": [
+          [
+            1.1970062255859375,
+            -6.40008544921875
+          ],
+          [
+            1.197021484375,
+            -6.39996337890625
+          ],
+          [
+            1.1969757080078125,
+            -6.4000244140625
+          ],
+          [
+            1.19696044921875,
+            -6.39996337890625
+          ]
+        ],
+        "H_updates_corner_residual_px": [
+          [
+            [
+              -0.0607757568359375,
+              0.0687255859375
+            ],
+            [
+              -0.162353515625,
+              0.0062255859375
+            ],
+            [
+              -0.045166015625,
+              0.1624755859375
+            ],
+            [
+              -0.0843505859375,
+              -0.0250244140625
+            ]
+          ],
+          [
+            [
+              -0.0129241943359375,
+              -0.023193359375
+            ],
+            [
+              -0.096923828125,
+              -0.09332275390625
+            ],
+            [
+              0.0645599365234375,
+              0.0887451171875
+            ],
+            [
+              -0.0052490234375,
+              -0.12060546875
+            ]
+          ]
+        ],
+        "H_updates_corner_projection_valid": [
+          [
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true
+          ]
+        ],
+        "delta_px": [
+          [
+            [
+              1.2578125,
+              -6.46875
+            ],
+            [
+              1.359375,
+              -6.40625
+            ],
+            [
+              1.2421875,
+              -6.5625
+            ],
+            [
+              1.28125,
+              -6.375
+            ]
+          ],
+          [
+            [
+              -0.0478515625,
+              0.091796875
+            ],
+            [
+              -0.0654296875,
+              0.099609375
+            ],
+            [
+              -0.10986328125,
+              0.07373046875
+            ],
+            [
+              -0.0791015625,
+              0.095703125
+            ]
+          ]
+        ],
+        "tanh_saturation_fraction": [
+          0.0,
+          0.0
+        ],
+        "supported_query_count": [
+          20395,
+          20164
+        ],
+        "condition_number": [
+          3.4385502338409424,
+          3.4380507469177246
+        ],
+        "solve_info": [
+          0,
+          0
+        ],
+        "H0_norm": [
+          [
+            1.0635080337524414,
+            -0.003010357730090618,
+            0.5413844585418701
+          ],
+          [
+            0.010175332427024841,
+            1.0588529109954834,
+            -0.5507397055625916
+          ],
+          [
+            -0.01563998870551586,
+            0.016515765339136124,
+            1.0
+          ]
+        ],
+        "H_updates_norm": [
+          [
+            [
+              1.0635015964508057,
+              -0.002994840731844306,
+              0.5445768237113953
+            ],
+            [
+              0.010639989748597145,
+              1.0585187673568726,
+              -0.5671687126159668
+            ],
+            [
+              -0.015717850998044014,
+              0.016549812629818916,
+              1.0
+            ]
+          ],
+          [
+            [
+              1.0635089874267578,
+              -0.0030633541755378246,
+              0.5443739295005798
+            ],
+            [
+              0.01066015288233757,
+              1.0585254430770874,
+              -0.5669708251953125
+            ],
+            [
+              -0.01572681963443756,
+              0.016520122066140175,
+              1.0
+            ]
+          ]
+        ],
+        "H_final_norm": [
+          [
+            1.0635089874267578,
+            -0.0030633541755378246,
+            0.5443739295005798
+          ],
+          [
+            0.01066015288233757,
+            1.0585254430770874,
+            -0.5669708251953125
+          ],
+          [
+            -0.01572681963443756,
+            0.016520122066140175,
+            1.0
+          ]
+        ],
+        "update_scale_schedule": [
+          4,
+          4
+        ],
+        "cnn_precision": "bf16_autocast"
+      },
+      {
+        "diagnostic_sample_index": 17,
+        "pair_id": "current__34.801100126.376330_pair0",
+        "trajectory_mace_px": [
+          9.125509262084961,
+          0.15363067388534546,
+          0.09325234591960907
+        ],
+        "H0_mace_px": 9.125509262084961,
+        "H_updates_mace_px": [
+          0.15363067388534546,
+          0.09325234591960907
+        ],
+        "H_final_mace_px": 0.09325234591960907,
+        "update_accepted": [
+          true,
+          true
+        ],
+        "failure_reason_codes": [
+          0,
+          0
+        ],
+        "decoder_output_finite": [
+          true,
+          true
+        ],
+        "H0_corner_residual_px": [
+          [
+            -6.085601806640625,
+            6.800048828125
+          ],
+          [
+            -6.085693359375,
+            6.800048828125
+          ],
+          [
+            -6.0855865478515625,
+            6.79998779296875
+          ],
+          [
+            -6.08563232421875,
+            6.7999267578125
+          ]
+        ],
+        "H_updates_corner_residual_px": [
+          [
+            [
+              0.0394439697265625,
+              -0.04345703125
+            ],
+            [
+              0.0394287109375,
+              -0.168701171875
+            ],
+            [
+              0.1331787109375,
+              -0.106201171875
+            ],
+            [
+              0.0706787109375,
+              -0.20013427734375
+            ]
+          ],
+          [
+            [
+              -0.07000732421875,
+              0.050048828125
+            ],
+            [
+              -0.062255859375,
+              -0.086669921875
+            ],
+            [
+              0.0933990478515625,
+              0.03045654296875
+            ],
+            [
+              -0.0440673828125,
+              -0.06915283203125
+            ]
+          ]
+        ],
+        "H_updates_corner_projection_valid": [
+          [
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true
+          ]
+        ],
+        "delta_px": [
+          [
+            [
+              -6.125,
+              6.84375
+            ],
+            [
+              -6.125,
+              6.96875
+            ],
+            [
+              -6.21875,
+              6.90625
+            ],
+            [
+              -6.15625,
+              7.0
+            ]
+          ],
+          [
+            [
+              0.109375,
+              -0.09375
+            ],
+            [
+              0.1015625,
+              -0.08203125
+            ],
+            [
+              0.039794921875,
+              -0.13671875
+            ],
+            [
+              0.11474609375,
+              -0.130859375
+            ]
+          ]
+        ],
+        "tanh_saturation_fraction": [
+          0.0,
+          0.0
+        ],
+        "supported_query_count": [
+          19729,
+          20174
+        ],
+        "condition_number": [
+          3.4372081756591797,
+          3.4378533363342285
+        ],
+        "solve_info": [
+          0,
+          0
+        ],
+        "H0_norm": [
+          [
+            1.0632174015045166,
+            -0.0027035388629883528,
+            0.5599625110626221
+          ],
+          [
+            0.010702194646000862,
+            1.0582969188690186,
+            -0.5844132304191589
+          ],
+          [
+            -0.01563998870551586,
+            0.016515765339136124,
+            1.0
+          ]
+        ],
+        "H_updates_norm": [
+          [
+            [
+              1.063514232635498,
+              -0.0030655027367174625,
+              0.5442750453948975
+            ],
+            [
+              0.010554449632763863,
+              1.0586721897125244,
+              -0.5667781233787537
+            ],
+            [
+              -0.01562249194830656,
+              0.01647694781422615,
+              1.0
+            ]
+          ],
+          [
+            [
+              1.0635565519332886,
+              -0.003126914147287607,
+              0.5445101857185364
+            ],
+            [
+              0.010567383840680122,
+              1.058638334274292,
+              -0.5671157836914062
+            ],
+            [
+              -0.015620025806128979,
+              0.016426406800746918,
+              1.0
+            ]
+          ]
+        ],
+        "H_final_norm": [
+          [
+            1.0635565519332886,
+            -0.003126914147287607,
+            0.5445101857185364
+          ],
+          [
+            0.010567383840680122,
+            1.058638334274292,
+            -0.5671157836914062
+          ],
+          [
+            -0.015620025806128979,
+            0.016426406800746918,
+            1.0
+          ]
+        ],
+        "update_scale_schedule": [
+          4,
+          4
+        ],
+        "cnn_precision": "bf16_autocast"
+      },
+      {
+        "diagnostic_sample_index": 18,
+        "pair_id": "current__34.801100126.376330_pair0",
+        "trajectory_mace_px": [
+          7.872680187225342,
+          0.12575474381446838,
+          0.08296144008636475
+        ],
+        "H0_mace_px": 7.872680187225342,
+        "H_updates_mace_px": [
+          0.12575474381446838,
+          0.08296144008636475
+        ],
+        "H_final_mace_px": 0.08296144008636475,
+        "update_accepted": [
+          true,
+          true
+        ],
+        "failure_reason_codes": [
+          0,
+          0
+        ],
+        "decoder_output_finite": [
+          true,
+          true
+        ],
+        "H0_corner_residual_px": [
+          [
+            -7.2000274658203125,
+            -3.18414306640625
+          ],
+          [
+            -7.199951171875,
+            -3.18414306640625
+          ],
+          [
+            -7.2000732421875,
+            -3.1842041015625
+          ],
+          [
+            -7.20001220703125,
+            -3.18414306640625
+          ]
+        ],
+        "H_updates_corner_residual_px": [
+          [
+            [
+              0.081207275390625,
+              0.05029296875
+            ],
+            [
+              0.081298828125,
+              -0.1060791015625
+            ],
+            [
+              -0.0438232421875,
+              -0.1060791015625
+            ],
+            [
+              -0.043701171875,
+              -0.1529541015625
+            ]
+          ],
+          [
+            [
+              0.0659332275390625,
+              0.11761474609375
+            ],
+            [
+              0.0869140625,
+              -0.06182861328125
+            ],
+            [
+              0.028533935546875,
+              0.00189208984375
+            ],
+            [
+              -0.028564453125,
+              -0.05474853515625
+            ]
+          ]
+        ],
+        "H_updates_corner_projection_valid": [
+          [
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true
+          ]
+        ],
+        "delta_px": [
+          [
+            [
+              -7.28125,
+              -3.234375
+            ],
+            [
+              -7.28125,
+              -3.078125
+            ],
+            [
+              -7.15625,
+              -3.078125
+            ],
+            [
+              -7.15625,
+              -3.03125
+            ]
+          ],
+          [
+            [
+              0.0152587890625,
+              -0.0673828125
+            ],
+            [
+              -0.005615234375,
+              -0.044189453125
+            ],
+            [
+              -0.072265625,
+              -0.10791015625
+            ],
+            [
+              -0.01513671875,
+              -0.09814453125
+            ]
+          ]
+        ],
+        "tanh_saturation_fraction": [
+          0.0,
+          0.0
+        ],
+        "supported_query_count": [
+          20027,
+          20170
+        ],
+        "condition_number": [
+          3.437342643737793,
+          3.4375383853912354
+        ],
+        "solve_info": [
+          0,
+          0
+        ],
+        "H0_norm": [
+          [
+            1.0631728172302246,
+            -0.0026565701700747013,
+            0.5628053545951843
+          ],
+          [
+            0.010303765535354614,
+            1.0587174892425537,
+            -0.5589434504508972
+          ],
+          [
+            -0.01563998870551586,
+            0.016515767201781273,
+            1.0
+          ]
+        ],
+        "H_updates_norm": [
+          [
+            [
+              1.0634974241256714,
+              -0.0028004604391753674,
+              0.5444627404212952
+            ],
+            [
+              0.010518107563257217,
+              1.0587167739868164,
+              -0.5668621063232422
+            ],
+            [
+              -0.015574613586068153,
+              0.0165188517421484,
+              1.0
+            ]
+          ],
+          [
+            [
+              1.06352698802948,
+              -0.0028909961692988873,
+              0.5444196462631226
+            ],
+            [
+              0.010537369176745415,
+              1.0586812496185303,
+              -0.5671168565750122
+            ],
+            [
+              -0.01556776836514473,
+              0.016471151262521744,
+              1.0
+            ]
+          ]
+        ],
+        "H_final_norm": [
+          [
+            1.06352698802948,
+            -0.0028909961692988873,
+            0.5444196462631226
+          ],
+          [
+            0.010537369176745415,
+            1.0586812496185303,
+            -0.5671168565750122
+          ],
+          [
+            -0.01556776836514473,
+            0.016471151262521744,
+            1.0
+          ]
+        ],
+        "update_scale_schedule": [
+          4,
+          4
+        ],
+        "cnn_precision": "bf16_autocast"
+      },
+      {
+        "diagnostic_sample_index": 19,
+        "pair_id": "current__34.801100126.376330_pair0",
+        "trajectory_mace_px": [
+          7.7587995529174805,
+          0.13838618993759155,
+          0.08184969425201416
+        ],
+        "H0_mace_px": 7.7587995529174805,
+        "H_updates_mace_px": [
+          0.13838618993759155,
+          0.08184969425201416
+        ],
+        "H_final_mace_px": 0.08184969425201416,
+        "update_accepted": [
+          true,
+          true
+        ],
+        "failure_reason_codes": [
+          0,
+          0
+        ],
+        "decoder_output_finite": [
+          true,
+          true
+        ],
+        "H0_corner_residual_px": [
+          [
+            -7.600006103515625,
+            1.5615234375
+          ],
+          [
+            -7.60009765625,
+            1.56158447265625
+          ],
+          [
+            -7.5999603271484375,
+            1.5616455078125
+          ],
+          [
+            -7.60003662109375,
+            1.5616455078125
+          ]
+        ],
+        "H_updates_corner_residual_px": [
+          [
+            [
+              0.0249481201171875,
+              -0.02447509765625
+            ],
+            [
+              0.087646484375,
+              -0.17291259765625
+            ],
+            [
+              0.1186981201171875,
+              -0.0946044921875
+            ],
+            [
+              0.0875244140625,
+              -0.149169921875
+            ]
+          ],
+          [
+            [
+              -0.0849151611328125,
+              0.032470703125
+            ],
+            [
+              -0.0072021484375,
+              -0.11077880859375
+            ],
+            [
+              0.0820770263671875,
+              0.00885009765625
+            ],
+            [
+              -0.01116943359375,
+              -0.04144287109375
+            ]
+          ]
+        ],
+        "H_updates_corner_projection_valid": [
+          [
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true
+          ]
+        ],
+        "delta_px": [
+          [
+            [
+              -7.625,
+              1.5859375
+            ],
+            [
+              -7.6875,
+              1.734375
+            ],
+            [
+              -7.71875,
+              1.65625
+            ],
+            [
+              -7.6875,
+              1.7109375
+            ]
+          ],
+          [
+            [
+              0.10986328125,
+              -0.056884765625
+            ],
+            [
+              0.0947265625,
+              -0.06201171875
+            ],
+            [
+              0.03662109375,
+              -0.103515625
+            ],
+            [
+              0.0986328125,
+              -0.10791015625
+            ]
+          ]
+        ],
+        "tanh_saturation_fraction": [
+          0.0,
+          0.0
+        ],
+        "supported_query_count": [
+          19854,
+          20173
+        ],
+        "condition_number": [
+          3.4371180534362793,
+          3.437662363052368
+        ],
+        "solve_info": [
+          0,
+          0
+        ],
+        "H0_norm": [
+          [
+            1.063157081604004,
+            -0.002639740239828825,
+            0.563825786113739
+          ],
+          [
+            0.010493072681128979,
+            1.0585174560546875,
+            -0.5710499882698059
+          ],
+          [
+            -0.01563998870551586,
+            0.016515765339136124,
+            1.0
+          ]
+        ],
+        "H_updates_norm": [
+          [
+            [
+              1.0634759664535522,
+              -0.0030564311891794205,
+              0.544293224811554
+            ],
+            [
+              0.010522247292101383,
+              1.0586521625518799,
+              -0.5668459534645081
+            ],
+            [
+              -0.015585372224450111,
+              0.016459928825497627,
+              1.0
+            ]
+          ],
+          [
+            [
+              1.0635035037994385,
+              -0.0031243478879332542,
+              0.5445080995559692
+            ],
+            [
+              0.010519308038055897,
+              1.0586172342300415,
+              -0.567107617855072
+            ],
+            [
+              -0.015586593188345432,
+              0.01641281507909298,
+              1.0
+            ]
+          ]
+        ],
+        "H_final_norm": [
+          [
+            1.0635035037994385,
+            -0.0031243478879332542,
+            0.5445080995559692
+          ],
+          [
+            0.010519308038055897,
+            1.0586172342300415,
+            -0.567107617855072
+          ],
+          [
+            -0.015586593188345432,
+            0.01641281507909298,
+            1.0
+          ]
+        ],
+        "update_scale_schedule": [
+          4,
+          4
+        ],
+        "cnn_precision": "bf16_autocast"
+      },
+      {
+        "diagnostic_sample_index": 20,
+        "pair_id": "current__34.801100126.376330_pair0",
+        "trajectory_mace_px": [
+          8.003087997436523,
+          0.46427232027053833,
+          0.1363997459411621
+        ],
+        "H0_mace_px": 8.003087997436523,
+        "H_updates_mace_px": [
+          0.46427232027053833,
+          0.1363997459411621
+        ],
+        "H_final_mace_px": 0.1363997459411621,
+        "update_accepted": [
+          true,
+          true
+        ],
+        "failure_reason_codes": [
+          0,
+          0
+        ],
+        "decoder_output_finite": [
+          true,
+          true
+        ],
+        "H0_corner_residual_px": [
+          [
+            0.223419189453125,
+            7.99993896484375
+          ],
+          [
+            0.223388671875,
+            7.99993896484375
+          ],
+          [
+            0.223419189453125,
+            8.0
+          ],
+          [
+            0.223388671875,
+            8.0
+          ]
+        ],
+        "H_updates_corner_residual_px": [
+          [
+            [
+              -0.2961273193359375,
+              0.31243896484375
+            ],
+            [
+              -0.083251953125,
+              0.5
+            ],
+            [
+              -0.2687835693359375,
+              0.3125
+            ],
+            [
+              -0.087158203125,
+              0.5
+            ]
+          ],
+          [
+            [
+              -0.1940765380859375,
+              -0.0723876953125
+            ],
+            [
+              0.063232421875,
+              0.07415771484375
+            ],
+            [
+              -0.1008148193359375,
+              -0.03125
+            ],
+            [
+              0.07110595703125,
+              0.11529541015625
+            ]
+          ]
+        ],
+        "H_updates_corner_projection_valid": [
+          [
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true
+          ]
+        ],
+        "delta_px": [
+          [
+            [
+              0.51953125,
+              7.6875
+            ],
+            [
+              0.306640625,
+              7.5
+            ],
+            [
+              0.4921875,
+              7.6875
+            ],
+            [
+              0.310546875,
+              7.5
+            ]
+          ],
+          [
+            [
+              -0.10205078125,
+              0.384765625
+            ],
+            [
+              -0.146484375,
+              0.42578125
+            ],
+            [
+              -0.16796875,
+              0.34375
+            ],
+            [
+              -0.158203125,
+              0.384765625
+            ]
+          ]
+        ],
+        "tanh_saturation_fraction": [
+          0.0,
+          0.0
+        ],
+        "supported_query_count": [
+          19896,
+          20144
+        ],
+        "condition_number": [
+          3.4395081996917725,
+          3.4378414154052734
+        ],
+        "solve_info": [
+          0,
+          0
+        ],
+        "H0_norm": [
+          [
+            1.0634691715240479,
+            -0.0029693569522351027,
+            0.5438681244850159
+          ],
+          [
+            0.010749938897788525,
+            1.0582462549209595,
+            -0.5874744057655334
+          ],
+          [
+            -0.015639986842870712,
+            0.016515767201781273,
+            1.0
+          ]
+        ],
+        "H_updates_norm": [
+          [
+            [
+              1.0632035732269287,
+              -0.002975921845063567,
+              0.5449147820472717
+            ],
+            [
+              0.010205083526670933,
+              1.0585750341415405,
+              -0.5681147575378418
+            ],
+            [
+              -0.015636272728443146,
+              0.01650085672736168,
+              1.0
+            ]
+          ],
+          [
+            [
+              1.0631874799728394,
+              -0.0030504034366458654,
+              0.5445465445518494
+            ],
+            [
+              0.010242464952170849,
+              1.0585578680038452,
+              -0.5671697854995728
+            ],
+            [
+              -0.015637826174497604,
+              0.016468079760670662,
+              1.0
+            ]
+          ]
+        ],
+        "H_final_norm": [
+          [
+            1.0631874799728394,
+            -0.0030504034366458654,
+            0.5445465445518494
+          ],
+          [
+            0.010242464952170849,
+            1.0585578680038452,
+            -0.5671697854995728
+          ],
+          [
+            -0.015637826174497604,
+            0.016468079760670662,
+            1.0
+          ]
+        ],
+        "update_scale_schedule": [
+          4,
+          4
+        ],
+        "cnn_precision": "bf16_autocast"
+      },
+      {
+        "diagnostic_sample_index": 21,
+        "pair_id": "current__34.801100126.376330_pair0",
+        "trajectory_mace_px": [
+          5.7197699546813965,
+          0.09790229052305222,
+          0.0714564323425293
+        ],
+        "H0_mace_px": 5.7197699546813965,
+        "H_updates_mace_px": [
+          0.09790229052305222,
+          0.0714564323425293
+        ],
+        "H_final_mace_px": 0.0714564323425293,
+        "update_accepted": [
+          true,
+          true
+        ],
+        "failure_reason_codes": [
+          0,
+          0
+        ],
+        "decoder_output_finite": [
+          true,
+          true
+        ],
+        "H0_corner_residual_px": [
+          [
+            -5.60003662109375,
+            -1.1644287109375
+          ],
+          [
+            -5.599853515625,
+            -1.16436767578125
+          ],
+          [
+            -5.600067138671875,
+            -1.1644287109375
+          ],
+          [
+            -5.60003662109375,
+            -1.164306640625
+          ]
+        ],
+        "H_updates_corner_residual_px": [
+          [
+            [
+              -0.037628173828125,
+              0.06982421875
+            ],
+            [
+              -0.0687255859375,
+              -0.10186767578125
+            ],
+            [
+              -0.10009765625,
+              0.05438232421875
+            ],
+            [
+              -0.06866455078125,
+              -0.0313720703125
+            ]
+          ],
+          [
+            [
+              0.001556396484375,
+              0.03363037109375
+            ],
+            [
+              -0.0018310546875,
+              -0.13751220703125
+            ],
+            [
+              0.0176849365234375,
+              0.0654296875
+            ],
+            [
+              0.01373291015625,
+              -0.0447998046875
+            ]
+          ]
+        ],
+        "H_updates_corner_projection_valid": [
+          [
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true
+          ]
+        ],
+        "delta_px": [
+          [
+            [
+              -5.5625,
+              -1.234375
+            ],
+            [
+              -5.53125,
+              -1.0625
+            ],
+            [
+              -5.5,
+              -1.21875
+            ],
+            [
+              -5.53125,
+              -1.1328125
+            ]
+          ],
+          [
+            [
+              -0.0390625,
+              0.0361328125
+            ],
+            [
+              -0.06689453125,
+              0.03564453125
+            ],
+            [
+              -0.11767578125,
+              -0.0111083984375
+            ],
+            [
+              -0.08251953125,
+              0.013427734375
+            ]
+          ]
+        ],
+        "tanh_saturation_fraction": [
+          0.0,
+          0.0
+        ],
+        "supported_query_count": [
+          20001,
+          20167
+        ],
+        "condition_number": [
+          3.438028335571289,
+          3.4377541542053223
+        ],
+        "solve_info": [
+          0,
+          0
+        ],
+        "H0_norm": [
+          [
+            1.0632367134094238,
+            -0.0027239497285336256,
+            0.5587237477302551
+          ],
+          [
+            0.010384215041995049,
+            1.058632254600525,
+            -0.5640959143638611
+          ],
+          [
+            -0.015639986842870712,
+            0.016515767201781273,
+            1.0
+          ]
+        ],
+        "H_updates_norm": [
+          [
+            [
+              1.0634829998016357,
+              -0.0028957705944776535,
+              0.5446652770042419
+            ],
+            [
+              0.010566570796072483,
+              1.0585274696350098,
+              -0.5670226812362671
+            ],
+            [
+              -0.015591682866215706,
+              0.01655416004359722,
+              1.0
+            ]
+          ],
+          [
+            [
+              1.063483476638794,
+              -0.002981293248012662,
+              0.5444525480270386
+            ],
+            [
+              0.010589992627501488,
+              1.0585060119628906,
+              -0.5670176148414612
+            ],
+            [
+              -0.015607462264597416,
+              0.016515474766492844,
+              1.0
+            ]
+          ]
+        ],
+        "H_final_norm": [
+          [
+            1.063483476638794,
+            -0.002981293248012662,
+            0.5444525480270386
+          ],
+          [
+            0.010589992627501488,
+            1.0585060119628906,
+            -0.5670176148414612
+          ],
+          [
+            -0.015607462264597416,
+            0.016515474766492844,
+            1.0
+          ]
+        ],
+        "update_scale_schedule": [
+          4,
+          4
+        ],
+        "cnn_precision": "bf16_autocast"
+      },
+      {
+        "diagnostic_sample_index": 22,
+        "pair_id": "current__34.801100126.376330_pair0",
+        "trajectory_mace_px": [
+          6.0463056564331055,
+          0.09539991617202759,
+          0.09299717843532562
+        ],
+        "H0_mace_px": 6.0463056564331055,
+        "H_updates_mace_px": [
+          0.09539991617202759,
+          0.09299717843532562
+        ],
+        "H_final_mace_px": 0.09299717843532562,
+        "update_accepted": [
+          true,
+          true
+        ],
+        "failure_reason_codes": [
+          0,
+          0
+        ],
+        "decoder_output_finite": [
+          true,
+          true
+        ],
+        "H0_corner_residual_px": [
+          [
+            5.999969482421875,
+            -0.7469482421875
+          ],
+          [
+            6.0,
+            -0.74700927734375
+          ],
+          [
+            5.999969482421875,
+            -0.7469482421875
+          ],
+          [
+            6.0,
+            -0.7470703125
+          ]
+        ],
+        "H_updates_corner_residual_px": [
+          [
+            [
+              -0.0312957763671875,
+              -0.1220703125
+            ],
+            [
+              0.0625,
+              0.0810546875
+            ],
+            [
+              0.0624847412109375,
+              -0.0360107421875
+            ],
+            [
+              0.0625,
+              -0.05169677734375
+            ]
+          ],
+          [
+            [
+              -0.16412353515625,
+              -0.09893798828125
+            ],
+            [
+              -0.0673828125,
+              0.07794189453125
+            ],
+            [
+              -0.0068206787109375,
+              0.0028076171875
+            ],
+            [
+              -0.0654296875,
+              -0.02471923828125
+            ]
+          ]
+        ],
+        "H_updates_corner_projection_valid": [
+          [
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true
+          ]
+        ],
+        "delta_px": [
+          [
+            [
+              6.03125,
+              -0.625
+            ],
+            [
+              5.9375,
+              -0.828125
+            ],
+            [
+              5.9375,
+              -0.7109375
+            ],
+            [
+              5.9375,
+              -0.6953125
+            ]
+          ],
+          [
+            [
+              0.1328125,
+              -0.02294921875
+            ],
+            [
+              0.1298828125,
+              0.003173828125
+            ],
+            [
+              0.0693359375,
+              -0.038818359375
+            ],
+            [
+              0.1279296875,
+              -0.027099609375
+            ]
+          ]
+        ],
+        "tanh_saturation_fraction": [
+          0.0,
+          0.0
+        ],
+        "supported_query_count": [
+          20373,
+          20168
+        ],
+        "condition_number": [
+          3.4377541542053223,
+          3.438178062438965
+        ],
+        "solve_info": [
+          0,
+          0
+        ],
+        "H0_norm": [
+          [
+            1.0636996030807495,
+            -0.00321273528970778,
+            0.5291318893432617
+          ],
+          [
+            0.010401164181530476,
+            1.0586148500442505,
+            -0.5651606917381287
+          ],
+          [
+            -0.015639986842870712,
+            0.016515765339136124,
+            1.0
+          ]
+        ],
+        "H_updates_norm": [
+          [
+            [
+              1.0633317232131958,
+              -0.003052313346415758,
+              0.5442014932632446
+            ],
+            [
+              0.01038630586117506,
+              1.0586436986923218,
+              -0.567043125629425
+            ],
+            [
+              -0.015768568962812424,
+              0.01645839400589466,
+              1.0
+            ]
+          ],
+          [
+            [
+              1.063368320465088,
+              -0.0031112779397517443,
+              0.5445024371147156
+            ],
+            [
+              0.01040612906217575,
+              1.0586358308792114,
+              -0.5671388506889343
+            ],
+            [
+              -0.01576070301234722,
+              0.01642066426575184,
+              1.0
+            ]
+          ]
+        ],
+        "H_final_norm": [
+          [
+            1.063368320465088,
+            -0.0031112779397517443,
+            0.5445024371147156
+          ],
+          [
+            0.01040612906217575,
+            1.0586358308792114,
+            -0.5671388506889343
+          ],
+          [
+            -0.01576070301234722,
+            0.01642066426575184,
+            1.0
+          ]
+        ],
+        "update_scale_schedule": [
+          4,
+          4
+        ],
+        "cnn_precision": "bf16_autocast"
+      },
+      {
+        "diagnostic_sample_index": 23,
+        "pair_id": "current__34.801100126.376330_pair0",
+        "trajectory_mace_px": [
+          8.529995918273926,
+          0.3900342881679535,
+          0.14355191588401794
+        ],
+        "H0_mace_px": 8.529995918273926,
+        "H_updates_mace_px": [
+          0.3900342881679535,
+          0.14355191588401794
+        ],
+        "H_final_mace_px": 0.14355191588401794,
+        "update_accepted": [
+          true,
+          true
+        ],
+        "failure_reason_codes": [
+          0,
+          0
+        ],
+        "decoder_output_finite": [
+          true,
+          true
+        ],
+        "H0_corner_residual_px": [
+          [
+            6.4000091552734375,
+            -5.63922119140625
+          ],
+          [
+            6.4000244140625,
+            -5.6392822265625
+          ],
+          [
+            6.4000091552734375,
+            -5.63916015625
+          ],
+          [
+            6.39996337890625,
+            -5.63922119140625
+          ]
+        ],
+        "H_updates_corner_residual_px": [
+          [
+            [
+              0.024993896484375,
+              0.48583984375
+            ],
+            [
+              -0.0687255859375,
+              0.2044677734375
+            ],
+            [
+              -0.0062408447265625,
+              0.51702880859375
+            ],
+            [
+              0.08746337890625,
+              0.3294677734375
+            ]
+          ],
+          [
+            [
+              -0.001220703125,
+              0.09521484375
+            ],
+            [
+              -0.0504150390625,
+              -0.21746826171875
+            ],
+            [
+              0.0182342529296875,
+              0.13427734375
+            ],
+            [
+              0.09844970703125,
+              -0.06903076171875
+            ]
+          ]
+        ],
+        "H_updates_corner_projection_valid": [
+          [
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true
+          ]
+        ],
+        "delta_px": [
+          [
+            [
+              6.375,
+              -6.125
+            ],
+            [
+              6.46875,
+              -5.84375
+            ],
+            [
+              6.40625,
+              -6.15625
+            ],
+            [
+              6.3125,
+              -5.96875
+            ]
+          ],
+          [
+            [
+              0.0262451171875,
+              0.390625
+            ],
+            [
+              -0.018310546875,
+              0.421875
+            ],
+            [
+              -0.0244140625,
+              0.3828125
+            ],
+            [
+              -0.010986328125,
+              0.3984375
+            ]
+          ]
+        ],
+        "tanh_saturation_fraction": [
+          0.0,
+          0.0
+        ],
+        "supported_query_count": [
+          20539,
+          20154
+        ],
+        "condition_number": [
+          3.43911075592041,
+          3.43778395652771
+        ],
+        "solve_info": [
+          0,
+          0
+        ],
+        "H0_norm": [
+          [
+            1.0637155771255493,
+            -0.003229565219953656,
+            0.528111457824707
+          ],
+          [
+            0.010205889120697975,
+            1.0588208436965942,
+            -0.5526805520057678
+          ],
+          [
+            -0.01563998870551586,
+            0.016515765339136124,
+            1.0
+          ]
+        ],
+        "H_updates_norm": [
+          [
+            [
+              1.0634846687316895,
+              -0.002976757474243641,
+              0.5444648265838623
+            ],
+            [
+              0.010717242956161499,
+              1.0584040880203247,
+              -0.5679342150688171
+            ],
+            [
+              -0.015590054914355278,
+              0.01662689819931984,
+              1.0
+            ]
+          ],
+          [
+            [
+              1.0634711980819702,
+              -0.0030248600523918867,
+              0.5444567799568176
+            ],
+            [
+              0.010725576430559158,
+              1.0584214925765991,
+              -0.5669553875923157
+            ],
+            [
+              -0.015581430867314339,
+              0.01659235917031765,
+              1.0
+            ]
+          ]
+        ],
+        "H_final_norm": [
+          [
+            1.0634711980819702,
+            -0.0030248600523918867,
+            0.5444567799568176
+          ],
+          [
+            0.010725576430559158,
+            1.0584214925765991,
+            -0.5669553875923157
+          ],
+          [
+            -0.015581430867314339,
+            0.01659235917031765,
+            1.0
+          ]
+        ],
+        "update_scale_schedule": [
+          4,
+          4
+        ],
+        "cnn_precision": "bf16_autocast"
+      },
+      {
+        "diagnostic_sample_index": 24,
+        "pair_id": "current__34.801100126.376330_pair0",
+        "trajectory_mace_px": [
+          6.800034046173096,
+          0.1340377926826477,
+          0.12706968188285828
+        ],
+        "H0_mace_px": 6.800034046173096,
+        "H_updates_mace_px": [
+          0.1340377926826477,
+          0.12706968188285828
+        ],
+        "H_final_mace_px": 0.12706968188285828,
+        "update_accepted": [
+          true,
+          true
+        ],
+        "failure_reason_codes": [
+          0,
+          0
+        ],
+        "decoder_output_finite": [
+          true,
+          true
+        ],
+        "H0_corner_residual_px": [
+          [
+            6.79998779296875,
+            -0.01898193359375
+          ],
+          [
+            6.800048828125,
+            -0.01922607421875
+          ],
+          [
+            6.7999420166015625,
+            -0.0191650390625
+          ],
+          [
+            6.800048828125,
+            -0.01934814453125
+          ]
+        ],
+        "H_updates_corner_residual_px": [
+          [
+            [
+              0.01873779296875,
+              -0.03857421875
+            ],
+            [
+              0.175048828125,
+              0.22784423828125
+            ],
+            [
+              0.0812225341796875,
+              0.03302001953125
+            ],
+            [
+              0.11260986328125,
+              0.0361328125
+            ]
+          ],
+          [
+            [
+              -0.184356689453125,
+              -0.10931396484375
+            ],
+            [
+              -0.024169921875,
+              0.13800048828125
+            ],
+            [
+              -0.0574951171875,
+              -0.0142822265625
+            ],
+            [
+              -0.092529296875,
+              -0.01971435546875
+            ]
+          ]
+        ],
+        "H_updates_corner_projection_valid": [
+          [
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true
+          ]
+        ],
+        "delta_px": [
+          [
+            [
+              6.78125,
+              0.01953125
+            ],
+            [
+              6.625,
+              -0.2470703125
+            ],
+            [
+              6.71875,
+              -0.05224609375
+            ],
+            [
+              6.6875,
+              -0.055419921875
+            ]
+          ],
+          [
+            [
+              0.203125,
+              0.07080078125
+            ],
+            [
+              0.19921875,
+              0.08984375
+            ],
+            [
+              0.138671875,
+              0.04736328125
+            ],
+            [
+              0.205078125,
+              0.0556640625
+            ]
+          ]
+        ],
+        "tanh_saturation_fraction": [
+          0.0,
+          0.0
+        ],
+        "supported_query_count": [
+          20395,
+          20165
+        ],
+        "condition_number": [
+          3.437802314758301,
+          3.438169240951538
+        ],
+        "solve_info": [
+          0,
+          0
+        ],
+        "H0_norm": [
+          [
+            1.0637314319610596,
+            -0.0032463951501995325,
+            0.5270910859107971
+          ],
+          [
+            0.01043028850108385,
+            1.0585843324661255,
+            -0.5670172572135925
+          ],
+          [
+            -0.015639958903193474,
+            0.016515769064426422,
+            1.0
+          ]
+        ],
+        "H_updates_norm": [
+          [
+            [
+              1.0632606744766235,
+              -0.0030042703729122877,
+              0.5440292358398438
+            ],
+            [
+              0.010352698154747486,
+              1.058695673942566,
+              -0.567306637763977
+            ],
+            [
+              -0.015793707221746445,
+              0.01644131727516651,
+              1.0
+            ]
+          ],
+          [
+            [
+              1.0632976293563843,
+              -0.003058758797124028,
+              0.5445103049278259
+            ],
+            [
+              0.010363571345806122,
+              1.0586870908737183,
+              -0.5671851634979248
+            ],
+            [
+              -0.015788136050105095,
+              0.016398295760154724,
+              1.0
+            ]
+          ]
+        ],
+        "H_final_norm": [
+          [
+            1.0632976293563843,
+            -0.003058758797124028,
+            0.5445103049278259
+          ],
+          [
+            0.010363571345806122,
+            1.0586870908737183,
+            -0.5671851634979248
+          ],
+          [
+            -0.015788136050105095,
+            0.016398295760154724,
+            1.0
+          ]
+        ],
+        "update_scale_schedule": [
+          4,
+          4
+        ],
+        "cnn_precision": "bf16_autocast"
+      },
+      {
+        "diagnostic_sample_index": 25,
+        "pair_id": "current__34.801100126.376330_pair0",
+        "trajectory_mace_px": [
+          8.13348388671875,
+          0.21584227681159973,
+          0.09108220785856247
+        ],
+        "H0_mace_px": 8.13348388671875,
+        "H_updates_mace_px": [
+          0.21584227681159973,
+          0.09108220785856247
+        ],
+        "H_final_mace_px": 0.09108220785856247,
+        "update_accepted": [
+          true,
+          true
+        ],
+        "failure_reason_codes": [
+          0,
+          0
+        ],
+        "decoder_output_finite": [
+          true,
+          true
+        ],
+        "H0_corner_residual_px": [
+          [
+            -7.2000274658203125,
+            3.7833251953125
+          ],
+          [
+            -7.199951171875,
+            3.78326416015625
+          ],
+          [
+            -7.2000732421875,
+            3.7833251953125
+          ],
+          [
+            -7.20001220703125,
+            3.78326416015625
+          ]
+        ],
+        "H_updates_corner_residual_px": [
+          [
+            [
+              0.143707275390625,
+              -0.0760498046875
+            ],
+            [
+              0.175048828125,
+              -0.21673583984375
+            ],
+            [
+              0.1749420166015625,
+              -0.1072998046875
+            ],
+            [
+              0.08123779296875,
+              -0.201171875
+            ]
+          ],
+          [
+            [
+              -0.0125732421875,
+              0.02069091796875
+            ],
+            [
+              0.021728515625,
+              -0.13275146484375
+            ],
+            [
+              0.0953369140625,
+              0.02362060546875
+            ],
+            [
+              -0.07208251953125,
+              -0.07958984375
+            ]
+          ]
+        ],
+        "H_updates_corner_projection_valid": [
+          [
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true
+          ]
+        ],
+        "delta_px": [
+          [
+            [
+              -7.34375,
+              3.859375
+            ],
+            [
+              -7.375,
+              4.0
+            ],
+            [
+              -7.375,
+              3.890625
+            ],
+            [
+              -7.28125,
+              3.984375
+            ]
+          ],
+          [
+            [
+              0.15625,
+              -0.0966796875
+            ],
+            [
+              0.1533203125,
+              -0.083984375
+            ],
+            [
+              0.07958984375,
+              -0.130859375
+            ],
+            [
+              0.1533203125,
+              -0.12158203125
+            ]
+          ]
+        ],
+        "tanh_saturation_fraction": [
+          0.0,
+          0.0
+        ],
+        "supported_query_count": [
+          19802,
+          20177
+        ],
+        "condition_number": [
+          3.436847448348999,
+          3.4376258850097656
+        ],
+        "solve_info": [
+          0,
+          0
+        ],
+        "H0_norm": [
+          [
+            1.0631728172302246,
+            -0.0026565701700747013,
+            0.5628053545951843
+          ],
+          [
+            0.010581878013908863,
+            1.0584238767623901,
+            -0.5767175555229187
+          ],
+          [
+            -0.015639986842870712,
+            0.016515767201781273,
+            1.0
+          ]
+        ],
+        "H_updates_norm": [
+          [
+            [
+              1.0635229349136353,
+              -0.0029693569522351027,
+              0.5440999865531921
+            ],
+            [
+              0.010557708330452442,
+              1.0586439371109009,
+              -0.5667641758918762
+            ],
+            [
+              -0.015614082105457783,
+              0.01644146628677845,
+              1.0
+            ]
+          ],
+          [
+            [
+              1.0635650157928467,
+              -0.0030398997478187084,
+              0.5444464087486267
+            ],
+            [
+              0.010574567131698132,
+              1.0586211681365967,
+              -0.5670915842056274
+            ],
+            [
+              -0.015612820163369179,
+              0.016394419595599174,
+              1.0
+            ]
+          ]
+        ],
+        "H_final_norm": [
+          [
+            1.0635650157928467,
+            -0.0030398997478187084,
+            0.5444464087486267
+          ],
+          [
+            0.010574567131698132,
+            1.0586211681365967,
+            -0.5670915842056274
+          ],
+          [
+            -0.015612820163369179,
+            0.016394419595599174,
+            1.0
+          ]
+        ],
+        "update_scale_schedule": [
+          4,
+          4
+        ],
+        "cnn_precision": "bf16_autocast"
+      },
+      {
+        "diagnostic_sample_index": 26,
+        "pair_id": "current__34.801100126.376330_pair0",
+        "trajectory_mace_px": [
+          7.895977020263672,
+          0.16015230119228363,
+          0.08301888406276703
+        ],
+        "H0_mace_px": 7.895977020263672,
+        "H_updates_mace_px": [
+          0.16015230119228363,
+          0.08301888406276703
+        ],
+        "H_final_mace_px": 0.08301888406276703,
+        "update_accepted": [
+          true,
+          true
+        ],
+        "failure_reason_codes": [
+          0,
+          0
+        ],
+        "decoder_output_finite": [
+          true,
+          true
+        ],
+        "H0_corner_residual_px": [
+          [
+            -7.600006103515625,
+            -2.14154052734375
+          ],
+          [
+            -7.60009765625,
+            -2.14141845703125
+          ],
+          [
+            -7.5999603271484375,
+            -2.14154052734375
+          ],
+          [
+            -7.60003662109375,
+            -2.14154052734375
+          ]
+        ],
+        "H_updates_corner_residual_px": [
+          [
+            [
+              0.1812591552734375,
+              0.15533447265625
+            ],
+            [
+              0.18115234375,
+              -0.00079345703125
+            ],
+            [
+              0.0875244140625,
+              0.09283447265625
+            ],
+            [
+              0.08740234375,
+              -0.0322265625
+            ]
+          ],
+          [
+            [
+              0.024932861328125,
+              0.06451416015625
+            ],
+            [
+              0.0328369140625,
+              -0.10430908203125
+            ],
+            [
+              -0.00677490234375,
+              0.05181884765625
+            ],
+            [
+              -0.06585693359375,
+              -0.07696533203125
+            ]
+          ]
+        ],
+        "H_updates_corner_projection_valid": [
+          [
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true
+          ]
+        ],
+        "delta_px": [
+          [
+            [
+              -7.78125,
+              -2.296875
+            ],
+            [
+              -7.78125,
+              -2.140625
+            ],
+            [
+              -7.6875,
+              -2.234375
+            ],
+            [
+              -7.6875,
+              -2.109375
+            ]
+          ],
+          [
+            [
+              0.15625,
+              0.0908203125
+            ],
+            [
+              0.1484375,
+              0.103515625
+            ],
+            [
+              0.09423828125,
+              0.041015625
+            ],
+            [
+              0.1533203125,
+              0.044921875
+            ]
+          ]
+        ],
+        "tanh_saturation_fraction": [
+          0.0,
+          0.0
+        ],
+        "supported_query_count": [
+          19968,
+          20169
+        ],
+        "condition_number": [
+          3.4375009536743164,
+          3.4377291202545166
+        ],
+        "solve_info": [
+          0,
+          0
+        ],
+        "H0_norm": [
+          [
+            1.063157081604004,
+            -0.002639740239828825,
+            0.563825786113739
+          ],
+          [
+            0.01034530345350504,
+            1.058673620223999,
+            -0.5616032481193542
+          ],
+          [
+            -0.015639986842870712,
+            0.016515765339136124,
+            1.0
+          ]
+        ],
+        "H_updates_norm": [
+          [
+            [
+              1.0634750127792358,
+              -0.0028451017569750547,
+              0.5441151261329651
+            ],
+            [
+              0.010602354072034359,
+              1.058640480041504,
+              -0.5672032833099365
+            ],
+            [
+              -0.015623261220753193,
+              0.016517674550414085,
+              1.0
+            ]
+          ],
+          [
+            [
+              1.063506007194519,
+              -0.0028994111344218254,
+              0.544471263885498
+            ],
+            [
+              0.010606943629682064,
+              1.0585981607437134,
+              -0.5670694708824158
+            ],
+            [
+              -0.015619080513715744,
+              0.016476769000291824,
+              1.0
+            ]
+          ]
+        ],
+        "H_final_norm": [
+          [
+            1.063506007194519,
+            -0.0028994111344218254,
+            0.544471263885498
+          ],
+          [
+            0.010606943629682064,
+            1.0585981607437134,
+            -0.5670694708824158
+          ],
+          [
+            -0.015619080513715744,
+            0.016476769000291824,
+            1.0
+          ]
+        ],
+        "update_scale_schedule": [
+          4,
+          4
+        ],
+        "cnn_precision": "bf16_autocast"
+      },
+      {
+        "diagnostic_sample_index": 27,
+        "pair_id": "current__34.801100126.376330_pair0",
+        "trajectory_mace_px": [
+          9.740325927734375,
+          0.1392519474029541,
+          0.12610727548599243
+        ],
+        "H0_mace_px": 9.740325927734375,
+        "H_updates_mace_px": [
+          0.1392519474029541,
+          0.12610727548599243
+        ],
+        "H_final_mace_px": 0.12610727548599243,
+        "update_accepted": [
+          true,
+          true
+        ],
+        "failure_reason_codes": [
+          0,
+          0
+        ],
+        "decoder_output_finite": [
+          true,
+          true
+        ],
+        "H0_corner_residual_px": [
+          [
+            -8.000030517578125,
+            5.556396484375
+          ],
+          [
+            -8.0,
+            5.556396484375
+          ],
+          [
+            -8.000045776367188,
+            5.55645751953125
+          ],
+          [
+            -7.99993896484375,
+            5.55645751953125
+          ]
+        ],
+        "H_updates_corner_residual_px": [
+          [
+            [
+              -0.1250457763671875,
+              0.15008544921875
+            ],
+            [
+              -0.125,
+              -0.099853515625
+            ],
+            [
+              -0.0312652587890625,
+              0.05645751953125
+            ],
+            [
+              -0.125,
+              0.056396484375
+            ]
+          ],
+          [
+            [
+              0.01751708984375,
+              0.02911376953125
+            ],
+            [
+              0.056640625,
+              -0.215087890625
+            ],
+            [
+              0.1776885986328125,
+              -0.031494140625
+            ],
+            [
+              0.05279541015625,
+              -0.04217529296875
+            ]
+          ]
+        ],
+        "H_updates_corner_projection_valid": [
+          [
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true
+          ]
+        ],
+        "delta_px": [
+          [
+            [
+              -7.875,
+              5.40625
+            ],
+            [
+              -7.875,
+              5.65625
+            ],
+            [
+              -7.96875,
+              5.5
+            ],
+            [
+              -7.875,
+              5.5
+            ]
+          ],
+          [
+            [
+              -0.142578125,
+              0.12109375
+            ],
+            [
+              -0.181640625,
+              0.115234375
+            ],
+            [
+              -0.208984375,
+              0.087890625
+            ],
+            [
+              -0.177734375,
+              0.0986328125
+            ]
+          ]
+        ],
+        "tanh_saturation_fraction": [
+          0.0,
+          0.0
+        ],
+        "supported_query_count": [
+          19712,
+          20162
+        ],
+        "condition_number": [
+          3.4381370544433594,
+          3.4372613430023193
+        ],
+        "solve_info": [
+          0,
+          0
+        ],
+        "H0_norm": [
+          [
+            1.0631409883499146,
+            -0.0026228504721075296,
+            0.5648461580276489
+          ],
+          [
+            0.010652540251612663,
+            1.0583491325378418,
+            -0.5812408328056335
+          ],
+          [
+            -0.01563998870551586,
+            0.016515767201781273,
+            1.0
+          ]
+        ],
+        "H_updates_norm": [
+          [
+            [
+              1.0636003017425537,
+              -0.0030504632741212845,
+              0.5448526740074158
+            ],
+            [
+              0.010502885095775127,
+              1.0585793256759644,
+              -0.5672329664230347
+            ],
+            [
+              -0.015493425540626049,
+              0.016459781676530838,
+              1.0
+            ]
+          ],
+          [
+            [
+              1.0635979175567627,
+              -0.00312219955958426,
+              0.5443882346153259
+            ],
+            [
+              0.010507305152714252,
+              1.0585765838623047,
+              -0.5670092105865479
+            ],
+            [
+              -0.015503729693591595,
+              0.016417264938354492,
+              1.0
+            ]
+          ]
+        ],
+        "H_final_norm": [
+          [
+            1.0635979175567627,
+            -0.00312219955958426,
+            0.5443882346153259
+          ],
+          [
+            0.010507305152714252,
+            1.0585765838623047,
+            -0.5670092105865479
+          ],
+          [
+            -0.015503729693591595,
+            0.016417264938354492,
+            1.0
+          ]
+        ],
+        "update_scale_schedule": [
+          4,
+          4
+        ],
+        "cnn_precision": "bf16_autocast"
+      },
+      {
+        "diagnostic_sample_index": 28,
+        "pair_id": "current__34.801100126.376330_pair0",
+        "trajectory_mace_px": [
+          5.931402206420898,
+          0.10832102596759796,
+          0.07783610373735428
+        ],
+        "H0_mace_px": 5.931402206420898,
+        "H_updates_mace_px": [
+          0.10832102596759796,
+          0.07783610373735428
+        ],
+        "H_final_mace_px": 0.07783610373735428,
+        "update_accepted": [
+          true,
+          true
+        ],
+        "failure_reason_codes": [
+          0,
+          0
+        ],
+        "decoder_output_finite": [
+          true,
+          true
+        ],
+        "H0_corner_residual_px": [
+          [
+            1.9549407958984375,
+            5.59991455078125
+          ],
+          [
+            1.9549560546875,
+            5.5999755859375
+          ],
+          [
+            1.954925537109375,
+            5.5999755859375
+          ],
+          [
+            1.9549560546875,
+            5.60003662109375
+          ]
+        ],
+        "H_updates_corner_residual_px": [
+          [
+            [
+              -0.0450439453125,
+              -0.118896484375
+            ],
+            [
+              0.1502685546875,
+              -0.0562744140625
+            ],
+            [
+              -0.0216522216796875,
+              -0.0562744140625
+            ],
+            [
+              0.06427001953125,
+              -0.05621337890625
+            ]
+          ],
+          [
+            [
+              -0.1436767578125,
+              -0.0716552734375
+            ],
+            [
+              0.0472412109375,
+              -0.0299072265625
+            ],
+            [
+              -0.057525634765625,
+              0.01513671875
+            ],
+            [
+              -0.0343017578125,
+              0.00872802734375
+            ]
+          ]
+        ],
+        "H_updates_corner_projection_valid": [
+          [
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true
+          ]
+        ],
+        "delta_px": [
+          [
+            [
+              2.0,
+              5.71875
+            ],
+            [
+              1.8046875,
+              5.65625
+            ],
+            [
+              1.9765625,
+              5.65625
+            ],
+            [
+              1.890625,
+              5.65625
+            ]
+          ],
+          [
+            [
+              0.0986328125,
+              -0.047119140625
+            ],
+            [
+              0.10302734375,
+              -0.0263671875
+            ],
+            [
+              0.035888671875,
+              -0.0712890625
+            ],
+            [
+              0.0986328125,
+              -0.06494140625
+            ]
+          ]
+        ],
+        "tanh_saturation_fraction": [
+          0.0,
+          0.0
+        ],
+        "supported_query_count": [
+          20037,
+          20171
+        ],
+        "condition_number": [
+          3.437349796295166,
+          3.4377973079681396
+        ],
+        "solve_info": [
+          0,
+          0
+        ],
+        "H0_norm": [
+          [
+            1.0635381937026978,
+            -0.0030422869604080915,
+            0.5394508838653564
+          ],
+          [
+            0.010654211044311523,
+            1.058347225189209,
+            -0.5813519358634949
+          ],
+          [
+            -0.015639986842870712,
+            0.016515767201781273,
+            1.0
+          ]
+        ],
+        "H_updates_norm": [
+          [
+            [
+              1.0632634162902832,
+              -0.0029568837489932775,
+              0.5443080067634583
+            ],
+            [
+              0.010409422218799591,
+              1.0585814714431763,
+              -0.5669492483139038
+            ],
+            [
+              -0.015677370131015778,
+              0.016453510150313377,
+              1.0
+            ]
+          ],
+          [
+            [
+              1.0633084774017334,
+              -0.003017221111804247,
+              0.5445297956466675
+            ],
+            [
+              0.010423652827739716,
+              1.0585604906082153,
+              -0.5671223998069763
+            ],
+            [
+              -0.015669522807002068,
+              0.0164174921810627,
+              1.0
+            ]
+          ]
+        ],
+        "H_final_norm": [
+          [
+            1.0633084774017334,
+            -0.003017221111804247,
+            0.5445297956466675
+          ],
+          [
+            0.010423652827739716,
+            1.0585604906082153,
+            -0.5671223998069763
+          ],
+          [
+            -0.015669522807002068,
+            0.0164174921810627,
+            1.0
+          ]
+        ],
+        "update_scale_schedule": [
+          4,
+          4
+        ],
+        "cnn_precision": "bf16_autocast"
+      },
+      {
+        "diagnostic_sample_index": 29,
+        "pair_id": "current__34.801100126.376330_pair0",
+        "trajectory_mace_px": [
+          7.116156578063965,
+          0.1520782709121704,
+          0.06713002920150757
+        ],
+        "H0_mace_px": 7.116156578063965,
+        "H_updates_mace_px": [
+          0.1520782709121704,
+          0.06713002920150757
+        ],
+        "H_final_mace_px": 0.06713002920150757,
+        "update_accepted": [
+          true,
+          true
+        ],
+        "failure_reason_codes": [
+          0,
+          0
+        ],
+        "decoder_output_finite": [
+          true,
+          true
+        ],
+        "H0_corner_residual_px": [
+          [
+            -6.0,
+            -3.826171875
+          ],
+          [
+            -6.0,
+            -3.82623291015625
+          ],
+          [
+            -6.0000152587890625,
+            -3.826171875
+          ],
+          [
+            -5.99993896484375,
+            -3.82623291015625
+          ]
+        ],
+        "H_updates_corner_residual_px": [
+          [
+            [
+              -0.03125,
+              0.0018310546875
+            ],
+            [
+              -0.0625,
+              -0.138671875
+            ],
+            [
+              -0.1874847412109375,
+              -0.107421875
+            ],
+            [
+              -0.15618896484375,
+              -0.13861083984375
+            ]
+          ],
+          [
+            [
+              0.0776214599609375,
+              0.09381103515625
+            ],
+            [
+              0.06201171875,
+              -0.0606689453125
+            ],
+            [
+              0.017578125,
+              0.0078125
+            ],
+            [
+              -0.00384521484375,
+              -0.04058837890625
+            ]
+          ]
+        ],
+        "H_updates_corner_projection_valid": [
+          [
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true
+          ]
+        ],
+        "delta_px": [
+          [
+            [
+              -5.96875,
+              -3.828125
+            ],
+            [
+              -5.9375,
+              -3.6875
+            ],
+            [
+              -5.8125,
+              -3.71875
+            ],
+            [
+              -5.84375,
+              -3.6875
+            ]
+          ],
+          [
+            [
+              -0.10888671875,
+              -0.091796875
+            ],
+            [
+              -0.12451171875,
+              -0.078125
+            ],
+            [
+              -0.205078125,
+              -0.115234375
+            ],
+            [
+              -0.15234375,
+              -0.09814453125
+            ]
+          ]
+        ],
+        "tanh_saturation_fraction": [
+          0.0,
+          0.0
+        ],
+        "supported_query_count": [
+          20099,
+          20168
+        ],
+        "condition_number": [
+          3.4377574920654297,
+          3.4376296997070312
+        ],
+        "solve_info": [
+          0,
+          0
+        ],
+        "H0_norm": [
+          [
+            1.063220739364624,
+            -0.0027071197982877493,
+            0.559744119644165
+          ],
+          [
+            0.010278222151100636,
+            1.0587445497512817,
+            -0.5573055148124695
+          ],
+          [
+            -0.015639986842870712,
+            0.016515767201781273,
+            1.0
+          ]
+        ],
+        "H_updates_norm": [
+          [
+            [
+              1.0634907484054565,
+              -0.0027736041229218245,
+              0.5447883009910583
+            ],
+            [
+              0.01049827691167593,
+              1.0586355924606323,
+              -0.5667795538902283
+            ],
+            [
+              -0.015575272962450981,
+              0.016556115821003914,
+              1.0
+            ]
+          ],
+          [
+            [
+              1.0635203123092651,
+              -0.002883416833356023,
+              0.5444075465202332
+            ],
+            [
+              0.0105228740721941,
+              1.0586286783218384,
+              -0.5670698285102844
+            ],
+            [
+              -0.01557795237749815,
+              0.01651383936405182,
+              1.0
+            ]
+          ]
+        ],
+        "H_final_norm": [
+          [
+            1.0635203123092651,
+            -0.002883416833356023,
+            0.5444075465202332
+          ],
+          [
+            0.0105228740721941,
+            1.0586286783218384,
+            -0.5670698285102844
+          ],
+          [
+            -0.01557795237749815,
+            0.01651383936405182,
+            1.0
+          ]
+        ],
+        "update_scale_schedule": [
+          4,
+          4
+        ],
+        "cnn_precision": "bf16_autocast"
+      },
+      {
+        "diagnostic_sample_index": 30,
+        "pair_id": "current__34.801100126.376330_pair0",
+        "trajectory_mace_px": [
+          7.092347621917725,
+          0.2895047962665558,
+          0.096856489777565
+        ],
+        "H0_mace_px": 7.092347621917725,
+        "H_updates_mace_px": [
+          0.2895047962665558,
+          0.096856489777565
+        ],
+        "H_final_mace_px": 0.096856489777565,
+        "update_accepted": [
+          true,
+          true
+        ],
+        "failure_reason_codes": [
+          0,
+          0
+        ],
+        "decoder_output_finite": [
+          true,
+          true
+        ],
+        "H0_corner_residual_px": [
+          [
+            6.4000091552734375,
+            3.05633544921875
+          ],
+          [
+            6.4000244140625,
+            3.05633544921875
+          ],
+          [
+            6.4000091552734375,
+            3.056396484375
+          ],
+          [
+            6.39996337890625,
+            3.056396484375
+          ]
+        ],
+        "H_updates_corner_residual_px": [
+          [
+            [
+              0.087432861328125,
+              0.181396484375
+            ],
+            [
+              0.2125244140625,
+              0.36883544921875
+            ],
+            [
+              0.08746337890625,
+              0.1815185546875
+            ],
+            [
+              0.18133544921875,
+              0.27508544921875
+            ]
+          ],
+          [
+            [
+              -0.125396728515625,
+              -0.0704345703125
+            ],
+            [
+              0.0074462890625,
+              0.1031494140625
+            ],
+            [
+              -0.0706787109375,
+              -0.02655029296875
+            ],
+            [
+              -0.02386474609375,
+              0.06011962890625
+            ]
+          ]
+        ],
+        "H_updates_corner_projection_valid": [
+          [
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true
+          ]
+        ],
+        "delta_px": [
+          [
+            [
+              6.3125,
+              2.875
+            ],
+            [
+              6.1875,
+              2.6875
+            ],
+            [
+              6.3125,
+              2.875
+            ],
+            [
+              6.21875,
+              2.78125
+            ]
+          ],
+          [
+            [
+              0.212890625,
+              0.251953125
+            ],
+            [
+              0.205078125,
+              0.265625
+            ],
+            [
+              0.158203125,
+              0.2080078125
+            ],
+            [
+              0.205078125,
+              0.21484375
+            ]
+          ]
+        ],
+        "tanh_saturation_fraction": [
+          0.0,
+          0.0
+        ],
+        "supported_query_count": [
+          20246,
+          20158
+        ],
+        "condition_number": [
+          3.438176155090332,
+          3.43805193901062
+        ],
+        "solve_info": [
+          0,
+          0
+        ],
+        "H0_norm": [
+          [
+            1.0637155771255493,
+            -0.003229565219953656,
+            0.528111457824707
+          ],
+          [
+            0.010552753694355488,
+            1.0584543943405151,
+            -0.5748631358146667
+          ],
+          [
+            -0.01563998870551586,
+            0.016515765339136124,
+            1.0
+          ]
+        ],
+        "H_updates_norm": [
+          [
+            [
+              1.0632972717285156,
+              -0.0029547351878136396,
+              0.5440219044685364
+            ],
+            [
+              0.010292730294167995,
+              1.058640480041504,
+              -0.5677225589752197
+            ],
+            [
+              -0.015692468732595444,
+              0.016498956829309464,
+              1.0
+            ]
+          ],
+          [
+            [
+              1.0633174180984497,
+              -0.003000868484377861,
+              0.5445228815078735
+            ],
+            [
+              0.010294201783835888,
+              1.0586098432540894,
+              -0.5671597123146057
+            ],
+            [
+              -0.015689393505454063,
+              0.0164654441177845,
+              1.0
+            ]
+          ]
+        ],
+        "H_final_norm": [
+          [
+            1.0633174180984497,
+            -0.003000868484377861,
+            0.5445228815078735
+          ],
+          [
+            0.010294201783835888,
+            1.0586098432540894,
+            -0.5671597123146057
+          ],
+          [
+            -0.015689393505454063,
+            0.0164654441177845,
+            1.0
+          ]
+        ],
+        "update_scale_schedule": [
+          4,
+          4
+        ],
+        "cnn_precision": "bf16_autocast"
+      },
+      {
+        "diagnostic_sample_index": 31,
+        "pair_id": "current__34.801100126.376330_pair0",
+        "trajectory_mace_px": [
+          7.146836757659912,
+          0.10966373980045319,
+          0.11848540604114532
+        ],
+        "H0_mace_px": 7.146836757659912,
+        "H_updates_mace_px": [
+          0.10966373980045319,
+          0.11848540604114532
+        ],
+        "H_final_mace_px": 0.11848540604114532,
+        "update_accepted": [
+          true,
+          true
+        ],
+        "failure_reason_codes": [
+          0,
+          0
+        ],
+        "decoder_output_finite": [
+          true,
+          true
+        ],
+        "H0_corner_residual_px": [
+          [
+            6.7999725341796875,
+            -2.1993408203125
+          ],
+          [
+            6.800048828125,
+            -2.19940185546875
+          ],
+          [
+            6.7999420166015625,
+            -2.1993408203125
+          ],
+          [
+            6.800048828125,
+            -2.19940185546875
+          ]
+        ],
+        "H_updates_corner_residual_px": [
+          [
+            [
+              -0.1375579833984375,
+              -0.0899658203125
+            ],
+            [
+              0.018798828125,
+              0.1287841796875
+            ],
+            [
+              -0.0750885009765625,
+              0.0662841796875
+            ],
+            [
+              -0.0438232421875,
+              0.00372314453125
+            ]
+          ],
+          [
+            [
+              -0.1951446533203125,
+              -0.13739013671875
+            ],
+            [
+              -0.03271484375,
+              0.05462646484375
+            ],
+            [
+              -0.0687103271484375,
+              0.0450439453125
+            ],
+            [
+              -0.07965087890625,
+              -0.04071044921875
+            ]
+          ]
+        ],
+        "H_updates_corner_projection_valid": [
+          [
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true
+          ]
+        ],
+        "delta_px": [
+          [
+            [
+              6.9375,
+              -2.109375
+            ],
+            [
+              6.78125,
+              -2.328125
+            ],
+            [
+              6.875,
+              -2.265625
+            ],
+            [
+              6.84375,
+              -2.203125
+            ]
+          ],
+          [
+            [
+              0.0576171875,
+              0.04736328125
+            ],
+            [
+              0.051513671875,
+              0.07421875
+            ],
+            [
+              -0.00634765625,
+              0.021240234375
+            ],
+            [
+              0.035888671875,
+              0.04443359375
+            ]
+          ]
+        ],
+        "tanh_saturation_fraction": [
+          0.0,
+          0.0
+        ],
+        "supported_query_count": [
+          20446,
+          20163
+        ],
+        "condition_number": [
+          3.43818998336792,
+          3.4381661415100098
+        ],
+        "solve_info": [
+          0,
+          0
+        ],
+        "H0_norm": [
+          [
+            1.0637314319610596,
+            -0.0032463951501995325,
+            0.5270910859107971
+          ],
+          [
+            0.010343154892325401,
+            1.05867600440979,
+            -0.5614556670188904
+          ],
+          [
+            -0.015639986842870712,
+            0.016515767201781273,
+            1.0
+          ]
+        ],
+        "H_updates_norm": [
+          [
+            [
+              1.0632468461990356,
+              -0.0029975264333188534,
+              0.5444136261940002
+            ],
+            [
+              0.010431479662656784,
+              1.0586003065109253,
+              -0.5672141909599304
+            ],
+            [
+              -0.01580701395869255,
+              0.01644108258187771,
+              1.0
+            ]
+          ],
+          [
+            [
+              1.0632702112197876,
+              -0.0030641898047178984,
+              0.5445024371147156
+            ],
+            [
+              0.0104603860527277,
+              1.0585840940475464,
+              -0.5671276450157166
+            ],
+            [
+              -0.015805883333086967,
+              0.016411209478974342,
+              1.0
+            ]
+          ]
+        ],
+        "H_final_norm": [
+          [
+            1.0632702112197876,
+            -0.0030641898047178984,
+            0.5445024371147156
+          ],
+          [
+            0.0104603860527277,
+            1.0585840940475464,
+            -0.5671276450157166
+          ],
+          [
+            -0.015805883333086967,
+            0.016411209478974342,
+            1.0
+          ]
+        ],
+        "update_scale_schedule": [
+          4,
+          4
+        ],
+        "cnn_precision": "bf16_autocast"
+      }
+    ]
+  },
+  "delta_diagnostics": {
+    "updates": [
+      {
+        "update_index": 0,
+        "scale": 4,
+        "accepted_fraction": 1.0,
+        "desired_before_abs_px": {
+          "mean": 4.694259166717529,
+          "median": 5.60003662109375,
+          "p90": 7.5999755859375,
+          "min": 0.01898193359375,
+          "max": 8.000045776367188
+        },
+        "decoder_delta_abs_px": {
+          "mean": 4.680939674377441,
+          "median": 5.71875,
+          "p90": 7.40625,
+          "min": 0.01953125,
+          "max": 7.96875
+        },
+        "delta_minus_desired_abs_px": {
+          "mean": 0.12287026643753052,
+          "median": 0.09417724609375,
+          "p90": 0.249908447265625,
+          "min": 0.00079345703125,
+          "max": 0.51708984375
+        },
+        "desired_after_abs_px": {
+          "mean": 0.12286657094955444,
+          "median": 0.09417724609375,
+          "p90": 0.249847412109375,
+          "min": 0.00079345703125,
+          "max": 0.51702880859375
+        },
+        "corner_l1_improvement_px_per_condition": {
+          "mean": 4.571393013000488,
+          "median": 4.4291839599609375,
+          "p90": 6.3287739753723145,
+          "min": 2.9156570434570312,
+          "max": 7.009614944458008
+        },
+        "improved_condition_fraction": 1.0,
+        "delta_to_desired_cosine_per_condition": {
+          "mean": 0.9998242259025574,
+          "median": 0.999872088432312,
+          "p90": 0.9999306201934814,
+          "min": 0.9993147253990173,
+          "max": 0.9999639391899109
+        },
+        "coordinate_axes": {
+          "x": {
+            "desired_before_abs_px": {
+              "mean": 5.728066921234131,
+              "median": 6.4000091552734375,
+              "p90": 7.60009765625,
+              "min": 0.223388671875,
+              "max": 8.000045776367188
+            },
+            "decoder_delta_abs_px": {
+              "mean": 5.6837615966796875,
+              "median": 6.21875,
+              "p90": 7.6875,
+              "min": 0.306640625,
+              "max": 7.96875
+            },
+            "delta_minus_desired_abs_px": {
+              "mean": 0.11593067646026611,
+              "median": 0.0875091552734375,
+              "p90": 0.21875,
+              "min": 0.0030517578125,
+              "max": 0.40625
+            },
+            "desired_after_abs_px": {
+              "mean": 0.11593234539031982,
+              "median": 0.0875244140625,
+              "p90": 0.21875,
+              "min": 0.0029296875,
+              "max": 0.40625
+            },
+            "delta_target_sign_agreement_fraction": 1.0
+          },
+          "y": {
+            "desired_before_abs_px": {
+              "mean": 3.660452365875244,
+              "median": 3.1842041015625,
+              "p90": 6.93939208984375,
+              "min": 0.01898193359375,
+              "max": 8.0
+            },
+            "decoder_delta_abs_px": {
+              "mean": 3.6781177520751953,
+              "median": 3.234375,
+              "p90": 7.090624809265137,
+              "min": 0.01953125,
+              "max": 7.6875
+            },
+            "delta_minus_desired_abs_px": {
+              "mean": 0.12980985641479492,
+              "median": 0.099853515625,
+              "p90": 0.26088249683380127,
+              "min": 0.00079345703125,
+              "max": 0.51708984375
+            },
+            "desired_after_abs_px": {
+              "mean": 0.12980079650878906,
+              "median": 0.099853515625,
+              "p90": 0.2607237994670868,
+              "min": 0.00079345703125,
+              "max": 0.51702880859375
+            },
+            "delta_target_sign_agreement_fraction": 0.9921875
+          }
+        },
+        "tanh_saturation_fraction": {
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "supported_query_count": {
+          "mean": 20134.3125,
+          "median": 20066.0,
+          "p90": 20444.30078125,
+          "min": 19681.0,
+          "max": 20583.0
+        },
+        "condition_number": {
+          "mean": 3.4378156661987305,
+          "median": 3.4377541542053223,
+          "p90": 3.4385480880737305,
+          "min": 3.436594009399414,
+          "max": 3.4395081996917725
+        }
+      },
+      {
+        "update_index": 1,
+        "scale": 4,
+        "accepted_fraction": 1.0,
+        "desired_before_abs_px": {
+          "mean": 0.12286657094955444,
+          "median": 0.09417724609375,
+          "p90": 0.249847412109375,
+          "min": 0.00079345703125,
+          "max": 0.51702880859375
+        },
+        "decoder_delta_abs_px": {
+          "mean": 0.12820816040039062,
+          "median": 0.1064453125,
+          "p90": 0.25390625,
+          "min": 0.00048828125,
+          "max": 0.42578125
+        },
+        "delta_minus_desired_abs_px": {
+          "mean": 0.06294995546340942,
+          "median": 0.0545654296875,
+          "p90": 0.133270263671875,
+          "min": 0.00030517578125,
+          "max": 0.2738037109375
+        },
+        "desired_after_abs_px": {
+          "mean": 0.06294882297515869,
+          "median": 0.05462646484375,
+          "p90": 0.133331298828125,
+          "min": 0.00048828125,
+          "max": 0.27374267578125
+        },
+        "corner_l1_improvement_px_per_condition": {
+          "mean": 0.05991774797439575,
+          "median": 0.04723167419433594,
+          "p90": 0.13260917365550995,
+          "min": -0.0112457275390625,
+          "max": 0.204742431640625
+        },
+        "improved_condition_fraction": 0.96875,
+        "delta_to_desired_cosine_per_condition": {
+          "mean": 0.7925758957862854,
+          "median": 0.8500248193740845,
+          "p90": 0.9446167945861816,
+          "min": -0.03783844783902168,
+          "max": 0.9675895571708679
+        },
+        "coordinate_axes": {
+          "x": {
+            "desired_before_abs_px": {
+              "mean": 0.11593234539031982,
+              "median": 0.0875244140625,
+              "p90": 0.21875,
+              "min": 0.0029296875,
+              "max": 0.40625
+            },
+            "decoder_delta_abs_px": {
+              "mean": 0.13962173461914062,
+              "median": 0.130859375,
+              "p90": 0.25039058923721313,
+              "min": 0.0023193359375,
+              "max": 0.41015625
+            },
+            "delta_minus_desired_abs_px": {
+              "mean": 0.057612061500549316,
+              "median": 0.0508575439453125,
+              "p90": 0.12117459625005722,
+              "min": 0.000732421875,
+              "max": 0.1951751708984375
+            },
+            "desired_after_abs_px": {
+              "mean": 0.057611703872680664,
+              "median": 0.0507659912109375,
+              "p90": 0.12119901180267334,
+              "min": 0.000732421875,
+              "max": 0.1951446533203125
+            },
+            "delta_target_sign_agreement_fraction": 0.8984375
+          },
+          "y": {
+            "desired_before_abs_px": {
+              "mean": 0.12980079650878906,
+              "median": 0.099853515625,
+              "p90": 0.2607237994670868,
+              "min": 0.00079345703125,
+              "max": 0.51702880859375
+            },
+            "decoder_delta_abs_px": {
+              "mean": 0.11679458618164062,
+              "median": 0.091796875,
+              "p90": 0.25429683923721313,
+              "min": 0.00048828125,
+              "max": 0.42578125
+            },
+            "delta_minus_desired_abs_px": {
+              "mean": 0.06828784942626953,
+              "median": 0.05560302734375,
+              "p90": 0.134002685546875,
+              "min": 0.00030517578125,
+              "max": 0.2738037109375
+            },
+            "desired_after_abs_px": {
+              "mean": 0.06828594207763672,
+              "median": 0.05560302734375,
+              "p90": 0.134063720703125,
+              "min": 0.00048828125,
+              "max": 0.27374267578125
+            },
+            "delta_target_sign_agreement_fraction": 0.8125
+          }
+        },
+        "tanh_saturation_fraction": {
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "supported_query_count": {
+          "mean": 20166.3125,
+          "median": 20168.0,
+          "p90": 20173.900390625,
+          "min": 20144.0,
+          "max": 20177.0
+        },
+        "condition_number": {
+          "mean": 3.437835693359375,
+          "median": 3.43778395652771,
+          "p90": 3.438169002532959,
+          "min": 3.4372613430023193,
+          "max": 3.438384771347046
+        }
+      }
+    ]
+  },
+  "peak_allocated_bytes": 286295040,
+  "peak_reserved_bytes": 316669952,
+  "safety": {
+    "optimizer_constructed": false,
+    "optimizer_or_scheduler_restored": false,
+    "rng_restored": false,
+    "backward_or_optimizer_step_executed": false,
+    "iterator_requires_grad": false,
+    "test_split_used": false
+  },
+  "scope_note": "Read-only endpoint diagnosis on controlled training conditions. It is not a P4 gate pass, validation result, configuration-selection result, or formal training checkpoint. Reported endpoint latency includes the extra diagnostic tensor transfers and is not comparable to profiler output."
+}

@@ -1023,3 +1023,54 @@ CUDA_VISIBLE_DEVICES=2 /root/miniconda3/envs/loma-repro/bin/python -u -m mhinet.
 ```
 
 运行完成32步，梯度有限，H0/H1/H2均值为14.868890/9.773121/7.634817 px，零失败和零拒绝。未达到0.1 px，按失败结果保存，不填补正式 tiny gate。新记录仅执行 D8，未启动 D1。原有 `artifacts/p4_tiny_s_d1_translation_swa.json` 用户工作区改动继续保留且不提交。
+
+## 2026-09-10：正式训练前检查完成，按要求停止
+
+截至07:18 UTC，D8/D4/D2/TINY-6均正常结束并通过登记门槛，四份checkpoint独立重载完成，合并审计与训练入口的只读门槛校验通过。P0–P4当前检查已完成；未执行E00/E01、解冻比较、结构消融或test评估，不启动后续训练进程。
+
+| 实验 | 步数 | H0→每轮H均值 MACE px | 原始终点 px | 主读出来源 | 失败/拒绝 | 峰值allocated GB | 训练循环 s |
+| --- | ---: | --- | ---: | --- | --- | ---: | ---: |
+| D8 | 1664 | 14.868890→0.291660→0.098226 | 0.290066 | 129次参数平均 | 0/0 | 0.572 | 617.205 |
+| D4 | 1568 | 7.434444→0.191940→0.099413 | 0.272937 | 33次参数平均 | 0/0 | 1.982 | 1459.628 |
+| D2 | 1152 | 2.787924→0.212890→0.099895 | 0.099895 | 原始参数 | 0/0 | 2.821 | 2639.150 |
+| TINY-6 | 1568 | 14.868889→1.304389→0.208130→0.184050→0.141688→0.081053→0.081194 | 0.209412 | 33次参数平均 | 0/0 | 3.099 | 4864.561 |
+
+每项失败率分母为32；单尺度拒绝率分母64，TINY-6为192。梯度均有限。缓存描述子后的主读出前向时间分别为56.555/64.281/109.516/163.817 ms，详情见 `docs/pretraining_mcnet_d2_summary.md`。这些时间在共享GPU运行，且不包含GHIM/CGMDP，不能用于独占端到端速度结论。原始/平均读出和方向诊断均保留。
+
+平均从预登记1536步开始。D2在1152步已由原始参数通过，所以虽checkpoint文件名包含 `weight-average-from-1536`，其metadata明确 `checkpoint_contains_weight_average=false`；文件名不作为读出判断依据。其余三项原始终点均高于0.1 px，不能声称原始优化器状态也通过。D4/D2接近门槛，未来跨种子/跨图像稳健性仍待正式实验。TINY-6的平均H6比H5回退约0.000141 px，原始读出的中尺度也有回退，后续必须继续报告完整轨迹。
+
+| 实验 | artifact SHA256 | 最终checkpoint SHA256 |
+| --- | --- | --- |
+| D8 | `7c2f1fae0cf576c7b753fce0c2875c88746101b8b78d3723b85127adc386f294` | `0da998f748cb901d0674e2767931603bbff2987e38aea08cc9591a460c39a15b` |
+| D4 | `962b3874ea296074e34b2306ebee967a1715921670a7efb466868d69e656243e` | `10838c6a8ae15dbf4ac44d24588c37f577c3113a598e0490074491729d5372d7` |
+| D2 | `e35ed757acc633b30dad9af5a791cb17a846352f57f366d3e8911a3a72ef305c` | `00ec15456650d17869beb2a48c45919b7365b307b14336ba6f80da920098ef2c` |
+| TINY-6 | `0f60415c4f3c03f235249f2b0cf6eb23a4fdd6ff4c3ec43bc09e9ef2a1546ed2` | `61a1b7c8e131762887084c4dec14d741fc7d7a51a9515829c2374814a647afc1` |
+
+四个checkpoint的绝对路径、完整协议和原始progress路径都保存在 `artifacts/pretraining_mcnet_d2_summary.json`。权重文件位于服务器 `outputs/tiny_overfit`，不将大权重加入Git。
+
+D4/D2/TINY-6的重载均使用物理GPU3、`OMP_NUM_THREADS=1 MKL_NUM_THREADS=1`，执行与D8相同的 `tiny-checkpoint-audit` 参数，分别替换 `--experiment D4/D2/TINY-6`、对应checkpoint路径及 `--output artifacts/p4_tiny_s_d4_mcnet_checkpoint_audit.json` / `p4_tiny_s_d2_mcnet_checkpoint_audit.json` / `p4_tiny_6_mcnet_checkpoint_audit.json`。三份重载artifact SHA256依次为：
+
+- `b50471457d6835d34afea21ad8c3069232cf6201ea1256d578713b45bc4783ad`
+- `a94cbb25dc3fbdbb52e81003da7c3aa746132b43895c7345e5b757520fddb229`
+- `2a796335daf71d12953d0051f3b58a750fa2e9bfeeb132ad302eb254846f1b28`
+
+四次重载均 `strict_signature_match`，序列化/加载/前向后权重SHA一致，轨迹最大绝对差0。重载仅做forward，未构造optimizer、未恢复optimizer/RNG、未backward、未访问test。
+
+合并及只读正式入口检查：
+
+```bash
+/root/miniconda3/envs/loma-repro/bin/python -m mhinet.cli tiny-gate-merge --inputs artifacts/p4_tiny_s_d8_mcnet.json artifacts/p4_tiny_s_d4_mcnet.json artifacts/p4_tiny_s_d2_mcnet.json artifacts/p4_tiny_6_mcnet.json --output artifacts/p4_tiny_gate_mcnet_d2.json
+/root/miniconda3/envs/loma-repro/bin/python -c 'from pathlib import Path; from mhinet.train import _validate_tiny_gate; print(_validate_tiny_gate(Path("artifacts/p4_tiny_gate_mcnet_d2.json"), True))'
+```
+
+合并status=`passed`、errors为空，SHA256 `13719169eaed0d1d887a18d846f4a824525231f427dc8ec3d3456edad6a60ea3`；训练入口接受该gate。89/89 unittest通过（1.571 s），此前设计包31项验证通过。架构配置内容继续保持原SHA，不修改配置中的历史status字段来伪造新身份；完成状态记录在本日志与gate中。
+
+D2平台期附加诊断命令：
+
+```bash
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 CUDA_VISIBLE_DEVICES=3 /root/miniconda3/envs/loma-repro/bin/python -m mhinet.cli real-correlation-audit --runtime configs/runtime_paths.server.json --scale 2 --seed 0 --condition-index 2 --residual-bound-fraction 0.5 --output artifacts/p2_real_correlation_mcnet_d2_condition2.json
+```
+
+该纵向条件下256维原描述子/随机32维adapter的最近候选top1比例为0.755147/0.498455，存在可用局部匹配信号。artifact SHA256 `164d6b80cb6b62cf217b73d765b650ca19c9cd33aa19405e39cfeafd91559ac8`。D2随后在原定预算和损失下突破平台，无需更换损失或放宽门槛。全部方向表由 `scripts/analyze_tiny_conditions.py` 生成至 `artifacts/p4_mcnet_d2_all_condition_analysis.json/.md`。
+
+交付边界：本轮证明工程正确性和登记受控条件的可学习性，不代表真实GHIM初始化上的泛化验证或联合训练成功。下一阶段建议从登记E00/E01开始，使用新的正式初始化；保持test封存、D1不执行、DINO冻结、GHIM head输入梯度保留。用户明确要求在正式训练前停止，本轮到此结束。

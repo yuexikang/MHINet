@@ -1,6 +1,6 @@
 {
   "scope": "pretraining controlled-H0 learnability only; no E00/E01",
-  "all_reported_passed": false,
+  "all_reported_passed": true,
   "gate_note": "This table does not replace tiny-gate-merge validation.",
   "experiments": [
     {
@@ -25,6 +25,143 @@
       "peak_allocated_bytes": 571810816,
       "cached_forward_ms": 56.55472323996946,
       "training_elapsed_seconds": 617.20532460697,
+      "progress": {
+        "checkpoint": {
+          "path": "/home/disk1/MHINet/outputs/tiny_overfit/mcnet_d8_full_progress.pt",
+          "format": "mhinet.training",
+          "version": 2,
+          "bytes": 7911289,
+          "optimizer_step": 1664,
+          "sha256": "c9f0ccf42d4ddd71ad712ade160e32e33b5a4aa78355ad840044b9420ce704c3"
+        },
+        "heartbeat_interval_optimizer_steps": 64,
+        "last_evaluated_step": 1664,
+        "resume_segments": 1,
+        "raw_model_and_optimizer_boundary": true
+      },
+      "resume": {
+        "path": "/home/disk1/MHINet/outputs/tiny_overfit/mcnet_d8_full_progress.pt",
+        "format": "mhinet.training",
+        "version": 2,
+        "optimizer_step": 448,
+        "microbatch_progress": {
+          "accumulated_valid": 0
+        },
+        "data_progress": {
+          "epoch": 55,
+          "position": 32,
+          "order_seed": 55,
+          "length": 32
+        },
+        "metadata": {
+          "checkpoint_role": "tiny_progress",
+          "checkpoint_contains_weight_average": false,
+          "optimizer_resume_supported": true,
+          "tiny_progress_signature": {
+            "format": "mhinet.tiny_progress",
+            "version": 2,
+            "diagnostic": "TINY-S-D8",
+            "active_scales": [
+              8
+            ],
+            "seed": 0,
+            "maximum_steps": 2000,
+            "evaluation_interval": 32,
+            "threshold_mace_px": 0.1,
+            "sample_count": 32,
+            "sample_protocol": "one_pair_residuals",
+            "residual_profile": "translation",
+            "precision": "bf16",
+            "weight_average_start_step": 1536,
+            "residual_bound_fraction": 0.5,
+            "maximum_declared_abs_residual_px": 16.0,
+            "target_hw": [
+              784,
+              784
+            ],
+            "pair_ids": [
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0"
+            ],
+            "optimizer": {
+              "name": "AdamW",
+              "learning_rate": 0.001,
+              "weight_decay": 0.0,
+              "gradient_accumulation": 4,
+              "gradient_clip_norm": 1.0
+            },
+            "resume_context": {
+              "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+              "mhir_revision": "mcnet_correlation_decoder_784_v1",
+              "training_manifest_sha256": "3eed3d3d425caf8465afb5121dfd85960f00932fccc343f37187e14ce27d499c",
+              "runtime_config": {
+                "path": "/home/disk1/MHINet/configs/runtime_paths.server.json",
+                "bytes": 1068,
+                "sha256": "485c41935c83d8e7ed0b248fed794844abfd48a62c28d90b5328cafa24bc179d"
+              },
+              "dino_checkpoint": {
+                "path": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+                "bytes": 1294957584,
+                "sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e"
+              },
+              "selected_ghim_checkpoint": {
+                "path": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+                "bytes": 1294957584,
+                "sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e"
+              },
+              "pyramid_checkpoint": {
+                "path": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+                "bytes": 757888113,
+                "sha256": "3a38824391e22b33bb3e10377c7736243fd8a2fbf1561446e7e133e497c35758"
+              }
+            }
+          },
+          "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+          "mhir_revision": "mcnet_correlation_decoder_784_v1"
+        },
+        "missing_model_keys": [],
+        "unexpected_model_keys": [],
+        "restored": {
+          "model": true,
+          "optimizer": true,
+          "scheduler": false,
+          "scaler": false
+        },
+        "rng_restored": {
+          "cpu": true,
+          "cuda": true
+        }
+      },
       "checkpoint": {
         "path": "/home/disk1/MHINet/outputs/tiny_overfit/tiny-s-d8_one-pair-residuals_translation_bf16_weight-average-from-1536_arch-92095ffe16a5_bound-0p5_budget-2000_seed0.pt",
         "format": "mhinet.training",
@@ -189,18 +326,764 @@
     },
     {
       "name": "D4",
-      "status": "running",
-      "path": "/home/disk1/MHINet/artifacts/p4_tiny_s_d4_mcnet.json"
+      "status": "passed",
+      "path": "/home/disk1/MHINet/artifacts/p4_tiny_s_d4_mcnet.json",
+      "sha256": "962b3874ea296074e34b2306ebee967a1715921670a7efb466868d69e656243e",
+      "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+      "optimizer_steps": 1568,
+      "primary_readout": "equal_weight_parameter_average",
+      "trajectory_mean_mace_px": [
+        7.434444427490234,
+        0.19194035232067108,
+        0.099413201212883
+      ],
+      "raw_final_mean_mace_px": 0.27293652296066284,
+      "final_mean_mace_px": 0.0994131937623024,
+      "failed_pairs": 0,
+      "sample_count": 32,
+      "rejected_updates": 0,
+      "gradient_finite": true,
+      "peak_allocated_bytes": 1982401024,
+      "cached_forward_ms": 64.28119356860407,
+      "training_elapsed_seconds": 1459.6278626956046,
+      "progress": {
+        "checkpoint": {
+          "path": "/home/disk1/MHINet/outputs/tiny_overfit/mcnet_d4_full_progress.pt",
+          "format": "mhinet.training",
+          "version": 2,
+          "bytes": 8357849,
+          "optimizer_step": 1568,
+          "sha256": "89cbc181d7ea4ac4b29582e79ff1369338bb2896f959285034b80af8f9f9f784"
+        },
+        "heartbeat_interval_optimizer_steps": 64,
+        "last_evaluated_step": 1568,
+        "resume_segments": 1,
+        "raw_model_and_optimizer_boundary": true
+      },
+      "resume": {
+        "path": "/home/disk1/MHINet/outputs/tiny_overfit/mcnet_d4_full_progress.pt",
+        "format": "mhinet.training",
+        "version": 2,
+        "optimizer_step": 160,
+        "microbatch_progress": {
+          "accumulated_valid": 0
+        },
+        "data_progress": {
+          "epoch": 19,
+          "position": 32,
+          "order_seed": 19,
+          "length": 32
+        },
+        "metadata": {
+          "checkpoint_role": "tiny_progress",
+          "checkpoint_contains_weight_average": false,
+          "optimizer_resume_supported": true,
+          "tiny_progress_signature": {
+            "format": "mhinet.tiny_progress",
+            "version": 2,
+            "diagnostic": "TINY-S-D4",
+            "active_scales": [
+              4
+            ],
+            "seed": 0,
+            "maximum_steps": 2000,
+            "evaluation_interval": 32,
+            "threshold_mace_px": 0.1,
+            "sample_count": 32,
+            "sample_protocol": "one_pair_residuals",
+            "residual_profile": "translation",
+            "precision": "bf16",
+            "weight_average_start_step": 1536,
+            "residual_bound_fraction": 0.5,
+            "maximum_declared_abs_residual_px": 8.0,
+            "target_hw": [
+              784,
+              784
+            ],
+            "pair_ids": [
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0"
+            ],
+            "optimizer": {
+              "name": "AdamW",
+              "learning_rate": 0.001,
+              "weight_decay": 0.0,
+              "gradient_accumulation": 4,
+              "gradient_clip_norm": 1.0
+            },
+            "resume_context": {
+              "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+              "mhir_revision": "mcnet_correlation_decoder_784_v1",
+              "training_manifest_sha256": "3eed3d3d425caf8465afb5121dfd85960f00932fccc343f37187e14ce27d499c",
+              "runtime_config": {
+                "path": "/home/disk1/MHINet/configs/runtime_paths.server.json",
+                "bytes": 1068,
+                "sha256": "485c41935c83d8e7ed0b248fed794844abfd48a62c28d90b5328cafa24bc179d"
+              },
+              "dino_checkpoint": {
+                "path": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+                "bytes": 1294957584,
+                "sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e"
+              },
+              "selected_ghim_checkpoint": {
+                "path": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+                "bytes": 1294957584,
+                "sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e"
+              },
+              "pyramid_checkpoint": {
+                "path": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+                "bytes": 757888113,
+                "sha256": "3a38824391e22b33bb3e10377c7736243fd8a2fbf1561446e7e133e497c35758"
+              }
+            }
+          },
+          "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+          "mhir_revision": "mcnet_correlation_decoder_784_v1"
+        },
+        "missing_model_keys": [],
+        "unexpected_model_keys": [],
+        "restored": {
+          "model": true,
+          "optimizer": true,
+          "scheduler": false,
+          "scaler": false
+        },
+        "rng_restored": {
+          "cpu": true,
+          "cuda": true
+        }
+      },
+      "checkpoint": {
+        "path": "/home/disk1/MHINet/outputs/tiny_overfit/tiny-s-d4_one-pair-residuals_translation_bf16_weight-average-from-1536_arch-92095ffe16a5_bound-0p5_budget-2000_seed0.pt",
+        "format": "mhinet.training",
+        "version": 2,
+        "bytes": 7052635,
+        "optimizer_step": 1568,
+        "microbatch_progress": null,
+        "data_progress": {
+          "epoch": 195,
+          "position": 32,
+          "order_seed": 195
+        },
+        "metadata": {
+          "checkpoint_role": "tiny_final_evidence",
+          "diagnostic": "TINY-S-D4",
+          "active_scales": [
+            4
+          ],
+          "known_H0_residual_injected": true,
+          "formal_training_checkpoint": false,
+          "sample_count": 32,
+          "sample_protocol": "one_pair_residuals",
+          "residual_profile": "translation",
+          "precision": "bf16",
+          "weight_average_start_step": 1536,
+          "residual_bound_fraction": 0.5,
+          "condition_index_offset": 0,
+          "maximum_steps": 2000,
+          "evaluation_interval": 32,
+          "weight_average_count": 33,
+          "checkpoint_contains_weight_average": true,
+          "optimizer_resume_supported": false,
+          "pair_ids": [
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0"
+          ],
+          "tiny_progress_signature": {
+            "format": "mhinet.tiny_progress",
+            "version": 2,
+            "diagnostic": "TINY-S-D4",
+            "active_scales": [
+              4
+            ],
+            "seed": 0,
+            "maximum_steps": 2000,
+            "evaluation_interval": 32,
+            "threshold_mace_px": 0.1,
+            "sample_count": 32,
+            "sample_protocol": "one_pair_residuals",
+            "residual_profile": "translation",
+            "precision": "bf16",
+            "weight_average_start_step": 1536,
+            "residual_bound_fraction": 0.5,
+            "maximum_declared_abs_residual_px": 8.0,
+            "target_hw": [
+              784,
+              784
+            ],
+            "pair_ids": [
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0"
+            ],
+            "optimizer": {
+              "name": "AdamW",
+              "learning_rate": 0.001,
+              "weight_decay": 0.0,
+              "gradient_accumulation": 4,
+              "gradient_clip_norm": 1.0
+            },
+            "resume_context": {
+              "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+              "mhir_revision": "mcnet_correlation_decoder_784_v1",
+              "training_manifest_sha256": "3eed3d3d425caf8465afb5121dfd85960f00932fccc343f37187e14ce27d499c",
+              "runtime_config": {
+                "path": "/home/disk1/MHINet/configs/runtime_paths.server.json",
+                "bytes": 1068,
+                "sha256": "485c41935c83d8e7ed0b248fed794844abfd48a62c28d90b5328cafa24bc179d"
+              },
+              "dino_checkpoint": {
+                "path": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+                "bytes": 1294957584,
+                "sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e"
+              },
+              "selected_ghim_checkpoint": {
+                "path": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+                "bytes": 1294957584,
+                "sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e"
+              },
+              "pyramid_checkpoint": {
+                "path": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+                "bytes": 757888113,
+                "sha256": "3a38824391e22b33bb3e10377c7736243fd8a2fbf1561446e7e133e497c35758"
+              }
+            }
+          },
+          "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+          "mhir_revision": "mcnet_correlation_decoder_784_v1"
+        },
+        "cuda_rng_captured": true,
+        "sha256": "10838c6a8ae15dbf4ac44d24588c37f577c3113a598e0490074491729d5372d7"
+      }
     },
     {
       "name": "D2",
-      "status": "running",
-      "path": "/home/disk1/MHINet/artifacts/p4_tiny_s_d2_mcnet.json"
+      "status": "passed",
+      "path": "/home/disk1/MHINet/artifacts/p4_tiny_s_d2_mcnet.json",
+      "sha256": "e35ed757acc633b30dad9af5a791cb17a846352f57f366d3e8911a3a72ef305c",
+      "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+      "optimizer_steps": 1152,
+      "primary_readout": "raw_parameters",
+      "trajectory_mean_mace_px": [
+        2.787924289703369,
+        0.2128903865814209,
+        0.09989490360021591
+      ],
+      "raw_final_mean_mace_px": 0.09989491105079651,
+      "final_mean_mace_px": 0.09989491105079651,
+      "failed_pairs": 0,
+      "sample_count": 32,
+      "rejected_updates": 0,
+      "gradient_finite": true,
+      "peak_allocated_bytes": 2821431296,
+      "cached_forward_ms": 109.51605334412307,
+      "training_elapsed_seconds": 2639.150073468685,
+      "progress": {
+        "checkpoint": {
+          "path": "/home/disk1/MHINet/outputs/tiny_overfit/mcnet_d2_full_progress.pt",
+          "format": "mhinet.training",
+          "version": 2,
+          "bytes": 8674553,
+          "optimizer_step": 1152,
+          "sha256": "938b4c11a794473a919a227f382c69cbbf7de33af2360387f1a9a59d4d899b51"
+        },
+        "heartbeat_interval_optimizer_steps": 64,
+        "last_evaluated_step": 1152,
+        "resume_segments": 0,
+        "raw_model_and_optimizer_boundary": true
+      },
+      "resume": null,
+      "checkpoint": {
+        "path": "/home/disk1/MHINet/outputs/tiny_overfit/tiny-s-d2_one-pair-residuals_translation_bf16_weight-average-from-1536_arch-92095ffe16a5_bound-0p5_budget-2000_seed0.pt",
+        "format": "mhinet.training",
+        "version": 2,
+        "bytes": 7270147,
+        "optimizer_step": 1152,
+        "microbatch_progress": null,
+        "data_progress": {
+          "epoch": 143,
+          "position": 32,
+          "order_seed": 143
+        },
+        "metadata": {
+          "checkpoint_role": "tiny_final_evidence",
+          "diagnostic": "TINY-S-D2",
+          "active_scales": [
+            2
+          ],
+          "known_H0_residual_injected": true,
+          "formal_training_checkpoint": false,
+          "sample_count": 32,
+          "sample_protocol": "one_pair_residuals",
+          "residual_profile": "translation",
+          "precision": "bf16",
+          "weight_average_start_step": 1536,
+          "residual_bound_fraction": 0.5,
+          "condition_index_offset": 0,
+          "maximum_steps": 2000,
+          "evaluation_interval": 32,
+          "weight_average_count": 0,
+          "checkpoint_contains_weight_average": false,
+          "optimizer_resume_supported": true,
+          "pair_ids": [
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0"
+          ],
+          "tiny_progress_signature": {
+            "format": "mhinet.tiny_progress",
+            "version": 2,
+            "diagnostic": "TINY-S-D2",
+            "active_scales": [
+              2
+            ],
+            "seed": 0,
+            "maximum_steps": 2000,
+            "evaluation_interval": 32,
+            "threshold_mace_px": 0.1,
+            "sample_count": 32,
+            "sample_protocol": "one_pair_residuals",
+            "residual_profile": "translation",
+            "precision": "bf16",
+            "weight_average_start_step": 1536,
+            "residual_bound_fraction": 0.5,
+            "maximum_declared_abs_residual_px": 3.0,
+            "target_hw": [
+              784,
+              784
+            ],
+            "pair_ids": [
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0"
+            ],
+            "optimizer": {
+              "name": "AdamW",
+              "learning_rate": 0.001,
+              "weight_decay": 0.0,
+              "gradient_accumulation": 4,
+              "gradient_clip_norm": 1.0
+            },
+            "resume_context": {
+              "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+              "mhir_revision": "mcnet_correlation_decoder_784_v1",
+              "training_manifest_sha256": "3eed3d3d425caf8465afb5121dfd85960f00932fccc343f37187e14ce27d499c",
+              "runtime_config": {
+                "path": "/home/disk1/MHINet/configs/runtime_paths.server.json",
+                "bytes": 1068,
+                "sha256": "485c41935c83d8e7ed0b248fed794844abfd48a62c28d90b5328cafa24bc179d"
+              },
+              "dino_checkpoint": {
+                "path": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+                "bytes": 1294957584,
+                "sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e"
+              },
+              "selected_ghim_checkpoint": {
+                "path": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+                "bytes": 1294957584,
+                "sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e"
+              },
+              "pyramid_checkpoint": {
+                "path": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+                "bytes": 757888113,
+                "sha256": "3a38824391e22b33bb3e10377c7736243fd8a2fbf1561446e7e133e497c35758"
+              }
+            }
+          },
+          "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+          "mhir_revision": "mcnet_correlation_decoder_784_v1"
+        },
+        "cuda_rng_captured": true,
+        "sha256": "00ec15456650d17869beb2a48c45919b7365b307b14336ba6f80da920098ef2c"
+      }
     },
     {
       "name": "TINY-6",
-      "status": "running",
-      "path": "/home/disk1/MHINet/artifacts/p4_tiny_6_mcnet.json"
+      "status": "passed",
+      "path": "/home/disk1/MHINet/artifacts/p4_tiny_6_mcnet.json",
+      "sha256": "0f60415c4f3c03f235249f2b0cf6eb23a4fdd6ff4c3ec43bc09e9ef2a1546ed2",
+      "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+      "optimizer_steps": 1568,
+      "primary_readout": "equal_weight_parameter_average",
+      "trajectory_mean_mace_px": [
+        14.868888854980469,
+        1.304389476776123,
+        0.2081298530101776,
+        0.18404993414878845,
+        0.1416882872581482,
+        0.08105318993330002,
+        0.08119430392980576
+      ],
+      "raw_final_mean_mace_px": 0.20941151678562164,
+      "final_mean_mace_px": 0.08119430392980576,
+      "failed_pairs": 0,
+      "sample_count": 32,
+      "rejected_updates": 0,
+      "gradient_finite": true,
+      "peak_allocated_bytes": 3098866176,
+      "cached_forward_ms": 163.81728486157954,
+      "training_elapsed_seconds": 4864.5614825626835,
+      "progress": {
+        "checkpoint": {
+          "path": "/home/disk1/MHINet/outputs/tiny_overfit/mcnet_6_full_progress.pt",
+          "format": "mhinet.training",
+          "version": 2,
+          "bytes": 15217865,
+          "optimizer_step": 1568,
+          "sha256": "8bdc526cbad2a2130ca788d15a5274d6324b1b41519c979c89c752ca39b5fe73"
+        },
+        "heartbeat_interval_optimizer_steps": 64,
+        "last_evaluated_step": 1568,
+        "resume_segments": 0,
+        "raw_model_and_optimizer_boundary": true
+      },
+      "resume": null,
+      "checkpoint": {
+        "path": "/home/disk1/MHINet/outputs/tiny_overfit/tiny-6_one-pair-residuals_translation_bf16_weight-average-from-1536_arch-92095ffe16a5_bound-0p5_budget-2000_seed0.pt",
+        "format": "mhinet.training",
+        "version": 2,
+        "bytes": 11524239,
+        "optimizer_step": 1568,
+        "microbatch_progress": null,
+        "data_progress": {
+          "epoch": 195,
+          "position": 32,
+          "order_seed": 195
+        },
+        "metadata": {
+          "checkpoint_role": "tiny_final_evidence",
+          "diagnostic": "TINY-6",
+          "active_scales": [
+            8,
+            4,
+            2
+          ],
+          "known_H0_residual_injected": true,
+          "formal_training_checkpoint": false,
+          "sample_count": 32,
+          "sample_protocol": "one_pair_residuals",
+          "residual_profile": "translation",
+          "precision": "bf16",
+          "weight_average_start_step": 1536,
+          "residual_bound_fraction": 0.5,
+          "condition_index_offset": 0,
+          "maximum_steps": 2000,
+          "evaluation_interval": 32,
+          "weight_average_count": 33,
+          "checkpoint_contains_weight_average": true,
+          "optimizer_resume_supported": false,
+          "pair_ids": [
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0",
+            "current__34.801100126.376330_pair0"
+          ],
+          "tiny_progress_signature": {
+            "format": "mhinet.tiny_progress",
+            "version": 2,
+            "diagnostic": "TINY-6",
+            "active_scales": [
+              8,
+              4,
+              2
+            ],
+            "seed": 0,
+            "maximum_steps": 2000,
+            "evaluation_interval": 32,
+            "threshold_mace_px": 0.1,
+            "sample_count": 32,
+            "sample_protocol": "one_pair_residuals",
+            "residual_profile": "translation",
+            "precision": "bf16",
+            "weight_average_start_step": 1536,
+            "residual_bound_fraction": 0.5,
+            "maximum_declared_abs_residual_px": 16.0,
+            "target_hw": [
+              784,
+              784
+            ],
+            "pair_ids": [
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0",
+              "current__34.801100126.376330_pair0"
+            ],
+            "optimizer": {
+              "name": "AdamW",
+              "learning_rate": 0.001,
+              "weight_decay": 0.0,
+              "gradient_accumulation": 4,
+              "gradient_clip_norm": 1.0
+            },
+            "resume_context": {
+              "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+              "mhir_revision": "mcnet_correlation_decoder_784_v1",
+              "training_manifest_sha256": "3eed3d3d425caf8465afb5121dfd85960f00932fccc343f37187e14ce27d499c",
+              "runtime_config": {
+                "path": "/home/disk1/MHINet/configs/runtime_paths.server.json",
+                "bytes": 1068,
+                "sha256": "485c41935c83d8e7ed0b248fed794844abfd48a62c28d90b5328cafa24bc179d"
+              },
+              "dino_checkpoint": {
+                "path": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+                "bytes": 1294957584,
+                "sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e"
+              },
+              "selected_ghim_checkpoint": {
+                "path": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+                "bytes": 1294957584,
+                "sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e"
+              },
+              "pyramid_checkpoint": {
+                "path": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+                "bytes": 757888113,
+                "sha256": "3a38824391e22b33bb3e10377c7736243fd8a2fbf1561446e7e133e497c35758"
+              }
+            }
+          },
+          "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+          "mhir_revision": "mcnet_correlation_decoder_784_v1"
+        },
+        "cuda_rng_captured": true,
+        "sha256": "61a1b7c8e131762887084c4dec14d741fc7d7a51a9515829c2374814a647afc1"
+      }
     }
-  ]
+  ],
+  "merged_gate": {
+    "path": "/home/disk1/MHINet/artifacts/p4_tiny_gate_mcnet_d2.json",
+    "sha256": "13719169eaed0d1d887a18d846f4a824525231f427dc8ec3d3456edad6a60ea3",
+    "status": "passed",
+    "current_sources_match": true,
+    "passed_with_current_sources": true
+  },
+  "checkpoint_replay_audits": [
+    {
+      "name": "D8",
+      "path": "/home/disk1/MHINet/artifacts/p4_tiny_s_d8_mcnet_checkpoint_audit.json",
+      "sha256": "3a96402d0273aa835d8ebcd1299428d10ae18d0ea08846640589dbda5873cccf",
+      "source_and_trajectory_match": true
+    },
+    {
+      "name": "D4",
+      "path": "/home/disk1/MHINet/artifacts/p4_tiny_s_d4_mcnet_checkpoint_audit.json",
+      "sha256": "b50471457d6835d34afea21ad8c3069232cf6201ea1256d578713b45bc4783ad",
+      "source_and_trajectory_match": true
+    },
+    {
+      "name": "D2",
+      "path": "/home/disk1/MHINet/artifacts/p4_tiny_s_d2_mcnet_checkpoint_audit.json",
+      "sha256": "a94cbb25dc3fbdbb52e81003da7c3aa746132b43895c7345e5b757520fddb229",
+      "source_and_trajectory_match": true
+    },
+    {
+      "name": "TINY-6",
+      "path": "/home/disk1/MHINet/artifacts/p4_tiny_6_mcnet_checkpoint_audit.json",
+      "sha256": "2a796335daf71d12953d0051f3b58a750fa2e9bfeeb132ad302eb254846f1b28",
+      "source_and_trajectory_match": true
+    }
+  ],
+  "all_checkpoint_replays_match": true
 }

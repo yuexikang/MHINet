@@ -1,12 +1,18 @@
 # MHINet D2-mainline implementation and experiment plan
 
-Status: **current plan; implementation and revalidation in progress**. Training
+Status: **P0–P4 mainline checks and merged tiny gate passed; stopped before E00/E01**. Training
 protocol v1.2 remains authoritative. The active model is
 
 ```text
 F_MVT -> D16 -> D8 -> D4 -> D2
 H0 -> H1 -> ... -> H6 = H_final.
 ```
+
+Completed evidence is summarized in [pretraining_mcnet_d2_summary.md](pretraining_mcnet_d2_summary.md).
+The current controlled-H0 tiny gate passes using registered parameter averaging
+for D8/D4/TINY-6 and raw parameters for D2; this is learnability evidence, not
+held-out accuracy. Formal training has not started. The tables below retain
+P5/P6 as future work, outside the current requested stopping boundary.
 
 D1 code is retained but inactive. The current plan does not generate a D1
 descriptor, train D1 modules, execute D1 refinement, or require D1 to pass a

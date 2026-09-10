@@ -45,6 +45,8 @@ def main() -> None:
             "peak_allocated_bytes": result["peak_allocated_bytes"],
             "cached_forward_ms": result["final"]["latency_ms_per_pair_single_pass"],
             "training_elapsed_seconds": result["training_elapsed_seconds"],
+            "progress": result["progress"],
+            "resume": result["resume"],
             "checkpoint": result["checkpoint"],
         })
     report = {
@@ -53,6 +55,48 @@ def main() -> None:
         "gate_note": "This table does not replace tiny-gate-merge validation.",
         "experiments": rows,
     }
+    gate_path = ROOT / "artifacts/p4_tiny_gate_mcnet_d2.json"
+    if gate_path.exists():
+        gate = json.loads(gate_path.read_text())
+        source_hashes = {s["path"]: s["sha256"] for s in gate.get("sources", [])}
+        bound = len(source_hashes) == len(rows) and all(
+            r.get("sha256") is not None and source_hashes.get(r.get("path")) == r["sha256"]
+            for r in rows
+        )
+        report["merged_gate"] = {
+            "path": str(gate_path),
+            "sha256": hashlib.sha256(gate_path.read_bytes()).hexdigest(),
+            "status": gate.get("status"),
+            "current_sources_match": bound,
+            "passed_with_current_sources": bool(bound and gate.get("status") == "passed"
+                                                 and gate.get("errors") == []),
+        }
+    audits = []
+    for row in rows:
+        if "path" not in row or "checkpoint" not in row:
+            continue
+        audit_path = Path(row["path"]).with_name(Path(row["path"]).stem + "_checkpoint_audit.json")
+        if not audit_path.exists():
+            continue
+        audit = json.loads(audit_path.read_text())
+        checkpoint = audit["checkpoint"]
+        original = row["trajectory_mean_mace_px"]
+        replay = audit["endpoint"]["trajectory_mean_mace_px"]
+        matching = (
+            audit["resource_binding"] == "strict_signature_match"
+            and checkpoint["audited_snapshot_sha256"] == row["checkpoint"]["sha256"]
+            and checkpoint["serialized_iterator_state_sha256"]
+            == checkpoint["loaded_iterator_state_sha256"]
+            == checkpoint["post_forward_iterator_state_sha256"]
+            and len(original) == len(replay)
+            and all(abs(a - b) <= 1e-6 for a, b in zip(original, replay))
+        )
+        audits.append({"name": row["name"], "path": str(audit_path),
+                       "sha256": hashlib.sha256(audit_path.read_bytes()).hexdigest(),
+                       "source_and_trajectory_match": matching})
+    report["checkpoint_replay_audits"] = audits
+    report["all_checkpoint_replays_match"] = len(audits) == len(rows) and all(
+        a["source_and_trajectory_match"] for a in audits)
     (ROOT / "artifacts/pretraining_mcnet_d2_summary.json").write_text(
         json.dumps(report, indent=2, ensure_ascii=False) + "\n"
     )
@@ -76,8 +120,15 @@ def main() -> None:
             f"{row['peak_allocated_bytes']/1e9:.3f} | {row['cached_forward_ms']:.3f} |"
         )
     lines += ["", "通过要求为平均最终 MACE < 0.1 px、零失败、零拒绝更新，并满足梯度和协议审计。"]
-    lines.append("四项均报告通过，仍须执行合并器核验资源及协议一致性。" if report["all_reported_passed"]
-                 else "尚有缺失、进行中或未通过项；正式实验门槛保持关闭。")
+    merged = report.get("merged_gate", {})
+    if merged.get("passed_with_current_sources"):
+        lines.append("四项与合并审计均已通过，合并结果绑定当前四份artifact。按用户要求停止在正式训练前，未执行 E00/E01。")
+        lines.append(f"合并gate SHA256：`{merged['sha256']}`。")
+        if report["all_checkpoint_replays_match"]:
+            lines.append("四个checkpoint独立重载均匹配资源签名及保存的轨迹；序列化、加载和前向后权重身份一致。")
+    else:
+        lines.append("四项均报告通过，仍须执行合并器核验资源及协议一致性。" if report["all_reported_passed"]
+                     else "尚有缺失、进行中或未通过项；正式实验门槛保持关闭。")
     lines += ["", "## 证据", ""]
     for row in rows:
         if "sha256" in row:

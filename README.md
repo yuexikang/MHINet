@@ -34,10 +34,15 @@ on the mainline.
 The MCNet-style MHIR rewrite and the D2 truncation change the architecture
 identity. Therefore former D1, TINY-8, decoder zero-init, gradient-audit, and
 eight-update tiny-overfit artifacts are **legacy evidence only** and cannot
-open the current training gate. The current gate must be rerun as
-`TINY-S-D8`, `TINY-S-D4`, `TINY-S-D2`, and `TINY-6`, all against the same
-current architecture hash. E00/E01 remain blocked until the new P3/P4 checks
-and this four-artifact gate pass.
+open the current training gate. The current `TINY-S-D8`, `TINY-S-D4`,
+`TINY-S-D2`, and `TINY-6` checks have passed, together with P0–P4 engineering
+checks, independent checkpoint replays, and the merged gate. Work is stopped
+before E00/E01 as requested. D8/D4/TINY-6 use the preregistered averaged
+diagnostic readout; D2 passes with raw parameters. See the full
+[pretraining results table](docs/pretraining_mcnet_d2_summary.md) and
+[interpretation](docs/results_mcnet_d2.md). These checks use one exact training
+image pair with 32 controlled H0 conditions; they do not demonstrate held-out
+accuracy or joint-training convergence.
 
 An artifact saying a command completed is not evidence that the model is
 accurate. Model validation additionally requires the registered validation

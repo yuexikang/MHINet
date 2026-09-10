@@ -943,3 +943,23 @@ Still pending for the new architecture: checkpoint-v2 exact-boundary resume
 smoke, D8/D4/D2/TINY-6 tiny-overfit, E00, and E01. Earlier artifacts do not
 fill these gaps. E00/E01 remain blocked until the new P3/P4 and TINY-6 gate
 pass.
+
+## 2026-09-10：补齐续训对照与 D8 短程结果
+
+新增 `docs/results_mcnet_d2.md`，用表格与文字同时记录六轮资源、checkpoint-v2 对照和 D8 32步诊断。复核此前保存的两条运行记录及最终权重：恢复边界、RNG、数据游标正确，但 adapter 的119个权重元素存在最大1.9595e-6的差异，不能声明逐位一致。详情、原始目录和 checkpoint SHA256 均见结果表。
+
+此前续训命令（工作目录 `/home/disk1/MHINet`，物理 GPU1）：
+
+```bash
+CUDA_VISIBLE_DEVICES=1 /root/miniconda3/envs/loma-repro/bin/python -u -m mhinet.cli train --runtime configs/runtime_paths.server.json --config configs/train_minimal_smoke.json --output-dir outputs/mhinet_resume_smoke_mcnet_d2_v2 --stop-after-optimizer-step 1 --overwrite
+CUDA_VISIBLE_DEVICES=1 /root/miniconda3/envs/loma-repro/bin/python -u -m mhinet.cli resume --runtime configs/runtime_paths.server.json --config configs/train_minimal_smoke.json --output-dir outputs/mhinet_resume_smoke_mcnet_d2_v2 --resume outputs/mhinet_resume_smoke_mcnet_d2_v2/checkpoints/step_0000001.pt
+CUDA_VISIBLE_DEVICES=1 /root/miniconda3/envs/loma-repro/bin/python -u -m mhinet.cli train --runtime configs/runtime_paths.server.json --config configs/train_minimal_smoke.json --output-dir outputs/mhinet_uninterrupted_smoke_mcnet_d2_v2 --overwrite
+```
+
+本次 D8 命令（物理 GPU2，独立新输出路径）：
+
+```bash
+CUDA_VISIBLE_DEVICES=2 /root/miniconda3/envs/loma-repro/bin/python -u -m mhinet.cli tiny-overfit --runtime configs/runtime_paths.server.json --experiments D8 --sample-protocol one_pair_residuals --residual-profile translation --residual-bound-fraction 0.5 --precision bf16 --sample-count 32 --seed 0 --max-steps 32 --eval-interval 32 --threshold-mace-px 0.1 --heartbeat-interval 16 --progress-checkpoint outputs/tiny_overfit/mcnet_d8_probe32_progress.pt --output artifacts/p4_tiny_s_d8_mcnet_probe32.json
+```
+
+运行完成32步，梯度有限，H0/H1/H2均值为14.868890/9.773121/7.634817 px，零失败和零拒绝。未达到0.1 px，按失败结果保存，不填补正式 tiny gate。新记录仅执行 D8，未启动 D1。原有 `artifacts/p4_tiny_s_d1_translation_swa.json` 用户工作区改动继续保留且不提交。

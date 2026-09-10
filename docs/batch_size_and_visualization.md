@@ -27,7 +27,7 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 CUDA_VISIBLE_DEVICES=1 /root/miniconda3/envs
 
 ## 训练入口与验证图
 
-`mhinet/train.py` 支持真实组批；损失按有效图像对数归一化，遇到无效GHIM样本补足有效batch，而非误把微批次数当样本数。BS>1必须显式填写 `allow_experimental_batch: true`，避免误把未通过对齐的路径用于正式主线。DINO/MVT共享输出供两个分支使用；D1保持不执行。
+`mhinet/engine/train.py` 支持真实组批；损失按有效图像对数归一化，遇到无效GHIM样本补足有效batch，而非误把微批次数当样本数。BS>1必须显式填写 `allow_experimental_batch: true`，避免误把未通过对齐的路径用于正式主线。DINO/MVT共享输出供两个分支使用；D1保持不执行。
 
 训练和验证均有tqdm进度条。默认 `visualization_pairs=1`：每次验证固定第一个验证pair，输出H0和每轮一张图，共7张；设置N则输出7N张。不是只验证这一对：正式配置仍计算前2500个验证pair的完整指标。输出位置为：
 
@@ -67,6 +67,8 @@ python -u -m mhinet.cli train --runtime configs/runtime_paths.server.json --conf
 ```
 
 `CUDA_VISIBLE_DEVICES=1`后，配置里的`cuda:0`正确对应物理卡1，不要再改为cuda:1。BS=1建议至少留6 GiB空闲，仍应为其他进程/临时分配留余量。
+
+目录整理后，完成E00即可直接运行 `bash scripts/train_e01.sh`，其默认参数与上面的E01命令一致。`DRY_RUN=1 bash scripts/train_e01.sh`只显示命令；`bash scripts/test.sh`运行CPU单元测试，不访问保留的test影像。新代码位置见README目录树；统一CLI命令保持不变。
 
 续训使用完全相同的配置和输出目录，额外传 `--resume outputs/E01_heads_seed0/checkpoints/step_0000500.pt`（换成实际最后完成的checkpoint）。从头初始化与resume不可混用；配置hash不同会拒绝恢复。
 

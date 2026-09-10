@@ -38,8 +38,8 @@ def main():
         'environment':{'python':'/root/miniconda3/envs/loma-repro/bin/python',
                        'torch':probes[0]['torch'], 'gpu':probes[0]['device']},
         'source_files':{str(p.relative_to(ROOT)):digest(p) for p in
-                        [ROOT/'mhinet/train.py',ROOT/'mhinet/feature_provider.py',
-                         ROOT/'mhinet/visualization.py',ROOT/'mhinet/evaluate.py']},
+                        [ROOT/'mhinet/engine/train.py',ROOT/'mhinet/models/feature_provider.py',
+                         ROOT/'mhinet/visualization/visualization.py',ROOT/'mhinet/engine/evaluate.py']},
         'test_used':False,
         'warning':'Two validation pairs and two engineering optimizer steps do not establish accuracy or generalization.'}
     destination = ROOT/'artifacts/batch_visualization_summary.json'

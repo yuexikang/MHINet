@@ -8,8 +8,8 @@ from typing import Any, Mapping
 import torch
 from torch import nn
 
-from .correlation import HGuidedLocalCorrelation
-from .geometry import (
+from mhinet.ops.correlation import HGuidedLocalCorrelation
+from mhinet.ops.geometry import (
     GUARD_REASON_NAMES,
     count_supported_queries,
     guarded_four_point_dlt,
@@ -17,7 +17,7 @@ from .geometry import (
     pixel_delta_to_normalized,
     safe_project_points,
 )
-from .modules import MAINLINE_SCALES, REGISTERED_SCALES, SCALE_SPECS
+from mhinet.models.modules import MAINLINE_SCALES, REGISTERED_SCALES, SCALE_SPECS
 
 
 class IteratorReason(IntEnum):

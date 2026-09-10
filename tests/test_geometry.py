@@ -7,7 +7,7 @@ from unittest import mock
 
 import torch
 
-from mhinet.geometry import (
+from mhinet.ops.geometry import (
     GuardReason,
     build_four_point_system,
     four_point_dlt,

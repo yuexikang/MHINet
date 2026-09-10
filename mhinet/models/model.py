@@ -8,16 +8,16 @@ from typing import Any
 import torch
 from torch import nn
 
-from .config import (
+from mhinet.config import (
     ArchitectureConfig,
     DEFAULT_ARCHITECTURE_CONFIG,
     RuntimePaths,
     load_architecture_config,
     load_training_profiles,
 )
-from .feature_provider import SharedFeatureProvider, build_feature_provider
-from .iterator import MultiScaleHIterator
-from .modules import (
+from mhinet.models.feature_provider import SharedFeatureProvider, build_feature_provider
+from mhinet.models.iterator import MultiScaleHIterator
+from mhinet.models.modules import (
     EXPECTED_MAINLINE_TRAINABLE_NEW_PARAMETERS,
     EXPECTED_NEW_PARAMETERS,
     MAINLINE_SCALES,

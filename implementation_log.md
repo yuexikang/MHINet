@@ -1113,3 +1113,18 @@ export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 CUDA_VISIBLE_DEVICES=0
 失败率0，最终验证单对含指标准备的同步单次延迟1714.687ms（绘图不计入该值，其他GPU作业影响较大）；训练step2峰值allocated3.999976GB、reserved4.888461GB。最终H略差于H0，不能将两步冒烟称为精度提升或模型验证成功。7图重放checkpoint：`outputs/engineering_visualization_seven_smoke/checkpoints/step_0000002.pt`，SHA256=`20ee388f5914850287c8237f45e0ad273c73a6e7d7ce539baa5d6a0c72b003c8`。重复恢复的细小数值差符合此前记录的CUDA grid_sample反传非逐位确定性，不声称bitwise一致。
 
 归档命令 `python -m scripts.summarize_batch_visualization`。正式建议仍为 `configs/e01_heads_v1.2.json`：BS1×4、heads-only、lr1e-4、AdamW wd1e-4、clip1、10000步、500步warmup/cosine到1e-5、每500步验证2500对并输出固定1对的7张图。用户在GPU1自行启动的完整命令见上述文档；本轮未占用GPU1启动正式任务。后续较大batch先修复BF16批量对齐、同卡复测，再升级正式配置。
+
+## 2026-09-10：代码按职责分包，新增两个Shell入口
+
+按用户要求整理 `/home/disk1/MHINet/mhinet`，一级目录只保留 `__init__.py`、`config.py`、`cli.py`，25个原实现文件迁入 `models/`、`ops/`、`engine/`、`dataio/`、`diagnostics/`、`visualization/`；各目录含独立包声明。模型仍为GHIM→CGMDP→MHIR，D2截止、D1保留不执行；没有拆改算法或重新初始化权重。所有源码/测试/辅助脚本导入与mock目标更新；统一 `python -m mhinet.cli <command>` 路径和子命令不变。直接Python导入改用子包路径。历史日志、artifact内的源文件路径和hash保持原样，不伪造迁移后的旧证据。
+
+新增且仅新增两个 `.sh`：
+
+- `/home/disk1/MHINet/scripts/train_e01.sh`：默认物理GPU1，使用 `/root/miniconda3/envs/loma-repro/bin/python`；固定现有runtime/E01/gate/output默认值，支持 `GPU_ID`、`MHINET_PYTHON`、`DRY_RUN=1` 和额外CLI参数（包括 `--resume`）。不自动执行E00，不自动覆盖已存在输出。脚本从自身位置解析项目根，可从其他cwd调用。
+- `/home/disk1/MHINet/scripts/test.sh`：同一conda Python，显式隐藏CUDA设备，运行CPU unittest；不访问真实train/val/test影像、不启动正式训练。支持附加unittest参数，例如 `-p test_geometry.py`。
+
+验证：`bash -n scripts/train_e01.sh scripts/test.sh`通过；`bash scripts/test.sh`的99项测试全部通过，含原95项和新增4项入口/导入测试；完整复跑日志为 `/home/disk1/MHINet/outputs/code_reorganization_tests.log`。新增检查覆盖所有14个CLI子命令目标可导入、从 `/tmp` 调用默认GPU1、GPU2覆盖与含空格resume路径、拒绝多GPU编号。`DRY_RUN=1 bash scripts/train_e01.sh`输出预期命令而不构建模型；`bash scripts/train_e01.sh --help`安全退出。
+
+额外只读AST审计：逐一用 `git show HEAD:mhinet/<原文件名>` 与25个迁移后的文件比较，移除import节点后AST完全一致，结果 `PASS: all 25 moved modules have identical non-import AST`。因此本次没有修改模型属性/state_dict键、优化器逻辑或checkpoint格式；单元测试仍覆盖checkpoint round-trip。未执行真实GPU重载或训练，不将此记录成新的模型精度验证。原架构SHA256仍为 `92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a`，tiny gate仍为 `13719169eaed0d1d887a18d846f4a824525231f427dc8ec3d3456edad6a60ea3`。未生成或修改checkpoint，权重实际路径/hash沿用上一条归档。环境仍为Python3.10.20、PyTorch2.11.0+cu128、conda loma-repro；本次不使用GPU。
+
+README新增目录树与启动/测试/切卡/续训示例，更新当前batch说明文档中的源码路径；保留原来无关的 `artifacts/p4_tiny_s_d1_translation_swa.json` 工作区修改，不纳入本次提交。

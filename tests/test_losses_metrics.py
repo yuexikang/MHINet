@@ -4,9 +4,9 @@ import unittest
 
 import torch
 
-from mhinet.geometry import image_corners
-from mhinet.losses import sequence_corner_l1
-from mhinet.metrics import homography_trajectory_metrics
+from mhinet.ops.geometry import image_corners
+from mhinet.engine.losses import sequence_corner_l1
+from mhinet.engine.metrics import homography_trajectory_metrics
 
 
 class LossAndMetricTests(unittest.TestCase):

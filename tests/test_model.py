@@ -5,8 +5,8 @@ import unittest
 import torch
 from torch import nn
 
-from mhinet.model import MHINet
-from mhinet.modules import EXPECTED_MAINLINE_TRAINABLE_NEW_PARAMETERS
+from mhinet.models.model import MHINet
+from mhinet.models.modules import EXPECTED_MAINLINE_TRAINABLE_NEW_PARAMETERS
 
 
 class FakeFeatureProvider(nn.Module):

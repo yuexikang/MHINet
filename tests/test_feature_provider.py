@@ -5,7 +5,7 @@ import unittest
 
 import torch
 
-from mhinet.feature_provider import SharedFeatureProvider
+from mhinet.models.feature_provider import SharedFeatureProvider
 
 
 class RecordingCumulativeDecoder:

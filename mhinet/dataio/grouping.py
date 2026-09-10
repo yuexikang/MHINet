@@ -6,8 +6,8 @@ import argparse
 import json
 from pathlib import Path
 
-from .config import RuntimePaths
-from .data import grouping_audit
+from mhinet.config import RuntimePaths
+from mhinet.dataio.data import grouping_audit
 
 
 def main(argv: list[str] | None = None) -> int:

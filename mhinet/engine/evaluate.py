@@ -11,16 +11,16 @@ from typing import Any
 
 import torch
 
-from .checkpointing import load_checkpoint
-from .config import RuntimePaths, sha256_file
-from .data import HomographyPairDataset
-from .geometry import (
+from mhinet.engine.checkpointing import load_checkpoint
+from mhinet.config import RuntimePaths, sha256_file
+from mhinet.dataio.data import HomographyPairDataset
+from mhinet.ops.geometry import (
     image_corners,
     normalized_grid,
     normalized_to_pixel,
     safe_project_points,
 )
-from .model import MHINet, build_model
+from mhinet.models.model import MHINet, build_model
 
 
 TARGET_HW = (784, 784)
@@ -307,7 +307,7 @@ def evaluate_model(
             torch.cuda.synchronize(device)
         pair_elapsed_ms = (time.perf_counter() - pair_started) * 1000.0
         if visualization_dir is not None and index < visualization_pairs and not h0_only:
-            from .visualization import write_iteration_overlays
+            from mhinet.visualization.visualization import write_iteration_overlays
             write_iteration_overlays(
                 sample["images"], sample["H_gt_norm"], outputs["H_updates_norm"][0],
                 update_scale_schedule, visualization_dir / f"pair_{index:04d}",

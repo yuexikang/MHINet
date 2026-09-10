@@ -16,7 +16,7 @@ from torch import Tensor, nn
 import torch.nn.functional as F
 from torch.utils.checkpoint import checkpoint
 
-from .geometry import (
+from mhinet.ops.geometry import (
     normalized_homography_to_pixel,
     pixel_grid,
     pixel_to_normalized,

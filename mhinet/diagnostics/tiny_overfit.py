@@ -24,25 +24,25 @@ from typing import Any, Callable, Iterable, Mapping
 
 import torch
 
-from .checkpointing import (
+from mhinet.engine.checkpointing import (
     CHECKPOINT_FORMAT,
     CHECKPOINT_VERSION,
     load_checkpoint,
     save_checkpoint,
 )
-from .config import RuntimePaths, sha256_file
-from .data import HomographyPairDataset, iter_manifest, parse_geo_region
-from .geometry import (
+from mhinet.config import RuntimePaths, sha256_file
+from mhinet.dataio.data import HomographyPairDataset, iter_manifest, parse_geo_region
+from mhinet.ops.geometry import (
     four_point_dlt,
     image_corners,
     normalized_to_pixel,
     pixel_delta_to_normalized,
     safe_project_points,
 )
-from .losses import sequence_corner_l1
-from .metrics import homography_trajectory_metrics
-from .model import MHINet, build_model
-from .modules import SCALE_SPECS, build_multiscale_modules
+from mhinet.engine.losses import sequence_corner_l1
+from mhinet.engine.metrics import homography_trajectory_metrics
+from mhinet.models.model import MHINet, build_model
+from mhinet.models.modules import SCALE_SPECS, build_multiscale_modules
 
 
 TARGET_HW = (784, 784)

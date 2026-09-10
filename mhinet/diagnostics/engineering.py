@@ -10,11 +10,11 @@ from typing import Any
 
 import torch
 
-from .config import RuntimePaths
-from .data import HomographyPairDataset
-from .geometry import image_corners, normalized_to_pixel, safe_project_points
-from .model import build_model
-from .modules import EXPECTED_NEW_PARAMETERS, count_new_parameters
+from mhinet.config import RuntimePaths
+from mhinet.dataio.data import HomographyPairDataset
+from mhinet.ops.geometry import image_corners, normalized_to_pixel, safe_project_points
+from mhinet.models.model import build_model
+from mhinet.models.modules import EXPECTED_NEW_PARAMETERS, count_new_parameters
 
 
 def _jsonable(value: Any) -> Any:

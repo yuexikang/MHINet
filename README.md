@@ -29,6 +29,52 @@ legacy compatibility aliases for GHIM. They do not denote another model
 stage. Planar, FGO, overlap, and auxiliary-correlation losses remain disabled
 on the mainline.
 
+## Code layout and shell entry points
+
+The Python source is organized by responsibility (not experiment run):
+
+```text
+mhinet/
+  models/          # GHIM/CGMDP provider, MHIR layers/iteration, complete model
+  ops/             # guarded homography geometry and local correlation
+  engine/          # training, evaluation, losses, metrics, checkpoints
+  dataio/          # pair loading and geographic grouping
+  diagnostics/     # alignment, gradients, profiling, tiny-overfit and gates
+  visualization/   # H0 plus six refinement overlay images
+  config.py        # configuration and resource paths
+  cli.py           # stable unified command dispatcher
+  __init__.py
+scripts/
+  train_e01.sh      # formal E01, physical GPU 1 by default
+  test.sh           # CPU engineering unit tests; not held-out test evaluation
+```
+
+```bash
+# Unit tests only; no real dataset or GPU required
+bash scripts/test.sh
+
+# Inspect the command without training
+DRY_RUN=1 bash scripts/train_e01.sh
+
+# Start formal E01 on physical GPU 1 (run E00 separately first)
+bash scripts/train_e01.sh
+
+# Optional GPU override or resume from an existing checkpoint
+GPU_ID=2 bash scripts/train_e01.sh
+bash scripts/train_e01.sh --resume /absolute/path/to/step_0000500.pt
+```
+
+Both scripts resolve the repository from their own location and can be invoked
+from another working directory. They use the existing `loma-repro` interpreter;
+override `MHINET_PYTHON` when relocating the environment. Training retains the
+existing configuration, tiny gate, progress bars and seven validation overlays.
+It does not silently overwrite output or automatically run E00.
+
+`python -m mhinet.cli <command>` is unchanged. Direct Python imports now use
+the subpackages, e.g. `from mhinet.models.model import MHINet` and
+`from mhinet.engine.train import TrainConfig`. Historical logs/artifacts retain
+their original paths and hashes; they are not rewritten as new evidence.
+
 ## Validation status
 
 The MCNet-style MHIR rewrite and the D2 truncation change the architecture

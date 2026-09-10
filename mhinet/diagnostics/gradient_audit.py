@@ -11,11 +11,11 @@ from typing import Any, Iterable
 import torch
 from torch import nn
 
-from .config import RuntimePaths
-from .data import HomographyPairDataset
-from .geometry import image_corners, safe_project_points
-from .losses import sequence_corner_l1
-from .model import build_model
+from mhinet.config import RuntimePaths
+from mhinet.dataio.data import HomographyPairDataset
+from mhinet.ops.geometry import image_corners, safe_project_points
+from mhinet.engine.losses import sequence_corner_l1
+from mhinet.models.model import build_model
 
 
 MAINLINE_SCALE_KEYS = ("8", "4", "2")

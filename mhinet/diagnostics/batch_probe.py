@@ -8,10 +8,10 @@ import time
 
 import torch
 
-from .config import RuntimePaths
-from .losses import sequence_corner_l1
-from .model import build_model
-from .train import _safe_train_dataset, _seed_everything
+from mhinet.config import RuntimePaths
+from mhinet.engine.losses import sequence_corner_l1
+from mhinet.models.model import build_model
+from mhinet.engine.train import _safe_train_dataset, _seed_everything
 
 
 def run(runtime, batch, steps, warmup, profile):

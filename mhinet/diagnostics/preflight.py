@@ -13,7 +13,7 @@ import subprocess
 import sys
 from typing import Any, Iterable
 
-from .config import (
+from mhinet.config import (
     DEFAULT_ARCHITECTURE_CONFIG,
     ArchitectureConfig,
     RuntimePaths,

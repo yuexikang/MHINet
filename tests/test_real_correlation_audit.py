@@ -4,7 +4,7 @@ import unittest
 
 import torch
 
-from mhinet.real_correlation_audit import _bf16_signal_diagnostics, run_audit
+from mhinet.diagnostics.real_correlation_audit import _bf16_signal_diagnostics, run_audit
 
 
 class CorrelationPrecisionAuditTests(unittest.TestCase):

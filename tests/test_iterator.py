@@ -5,9 +5,9 @@ import unittest
 import torch
 from torch import nn
 
-from mhinet.geometry import image_corners, normalized_to_pixel, safe_project_points
-from mhinet.iterator import IteratorReason, MultiScaleHIterator
-from mhinet.modules import (
+from mhinet.ops.geometry import image_corners, normalized_to_pixel, safe_project_points
+from mhinet.models.iterator import IteratorReason, MultiScaleHIterator
+from mhinet.models.modules import (
     SCALE_SPECS,
     ResidualGeometryDecoder,
     build_multiscale_modules,

@@ -7,7 +7,7 @@ import unittest
 from unittest.mock import patch
 
 from mhinet.config import load_architecture_config
-from mhinet.train import (
+from mhinet.engine.train import (
     DeterministicIndexStream,
     TrainConfig,
     _validate_tiny_gate,
@@ -105,7 +105,7 @@ class TrainingProtocolTests(unittest.TestCase):
                 return [] if mean < 0.1 else [f"{source}: {name} metric failed"]
 
             with patch(
-                "mhinet.train.registered_experiment_errors",
+                "mhinet.engine.train.registered_experiment_errors",
                 side_effect=metric_errors,
             ):
                 self.assertIsNotNone(_validate_tiny_gate(path, True))

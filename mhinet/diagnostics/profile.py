@@ -12,10 +12,10 @@ from typing import Any, Iterable
 import torch
 from torch import nn
 
-from .config import RuntimePaths
-from .data import HomographyPairDataset
-from .losses import sequence_corner_l1
-from .model import build_model
+from mhinet.config import RuntimePaths
+from mhinet.dataio.data import HomographyPairDataset
+from mhinet.engine.losses import sequence_corner_l1
+from mhinet.models.model import build_model
 
 
 def _grad_stats(parameters: Iterable[nn.Parameter]) -> dict[str, Any]:

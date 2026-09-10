@@ -9,9 +9,9 @@ import time
 
 import torch
 
-from .config import RuntimePaths
-from .data import HomographyPairDataset
-from .feature_provider import build_feature_provider, make_loma_importable
+from mhinet.config import RuntimePaths
+from mhinet.dataio.data import HomographyPairDataset
+from mhinet.models.feature_provider import build_feature_provider, make_loma_importable
 
 
 def _difference(actual: torch.Tensor, expected: torch.Tensor) -> dict[str, object]:

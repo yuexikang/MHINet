@@ -8,20 +8,20 @@ from typing import Callable
 
 
 COMMAND_MODULES = {
-    "preflight": "mhinet.preflight",
-    "alignment": "mhinet.alignment",
-    "zero-init-smoke": "mhinet.engineering",
-    "gradient-audit": "mhinet.gradient_audit",
-    "real-correlation-audit": "mhinet.real_correlation_audit",
-    "tiny-overfit": "mhinet.tiny_overfit",
-    "tiny-checkpoint-audit": "mhinet.tiny_checkpoint_audit",
-    "tiny-gate-merge": "mhinet.tiny_gate",
-    "train": "mhinet.train",
-    "resume": "mhinet.train",
-    "evaluate": "mhinet.evaluate",
-    "profile": "mhinet.profile",
-    "batch-probe": "mhinet.batch_probe",
-    "geometry-corr-check": "mhinet.reference_checks",
+    "preflight": "mhinet.diagnostics.preflight",
+    "alignment": "mhinet.diagnostics.alignment",
+    "zero-init-smoke": "mhinet.diagnostics.engineering",
+    "gradient-audit": "mhinet.diagnostics.gradient_audit",
+    "real-correlation-audit": "mhinet.diagnostics.real_correlation_audit",
+    "tiny-overfit": "mhinet.diagnostics.tiny_overfit",
+    "tiny-checkpoint-audit": "mhinet.diagnostics.tiny_checkpoint_audit",
+    "tiny-gate-merge": "mhinet.diagnostics.tiny_gate",
+    "train": "mhinet.engine.train",
+    "resume": "mhinet.engine.train",
+    "evaluate": "mhinet.engine.evaluate",
+    "profile": "mhinet.diagnostics.profile",
+    "batch-probe": "mhinet.diagnostics.batch_probe",
+    "geometry-corr-check": "mhinet.diagnostics.reference_checks",
 }
 
 

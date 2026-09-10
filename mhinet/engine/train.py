@@ -15,14 +15,14 @@ import numpy as np
 import torch
 from tqdm.auto import tqdm
 
-from .checkpointing import load_checkpoint, save_checkpoint
-from .config import RuntimePaths, load_architecture_config, sha256_file
-from .data import HomographyPairDataset, iter_manifest, parse_geo_region
-from .evaluate import evaluate_model, write_evaluation
-from .losses import sequence_corner_l1
-from .metrics import homography_trajectory_metrics
-from .model import MHINet, build_model
-from .tiny_gate import (
+from mhinet.engine.checkpointing import load_checkpoint, save_checkpoint
+from mhinet.config import RuntimePaths, load_architecture_config, sha256_file
+from mhinet.dataio.data import HomographyPairDataset, iter_manifest, parse_geo_region
+from mhinet.engine.evaluate import evaluate_model, write_evaluation
+from mhinet.engine.losses import sequence_corner_l1
+from mhinet.engine.metrics import homography_trajectory_metrics
+from mhinet.models.model import MHINet, build_model
+from mhinet.diagnostics.tiny_gate import (
     REGISTERED_PROTOCOL,
     REQUIRED_EXPERIMENTS,
     registered_experiment_errors,

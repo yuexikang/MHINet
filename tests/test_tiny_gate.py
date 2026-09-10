@@ -8,9 +8,9 @@ import unittest
 
 import torch
 
-from mhinet.checkpointing import CHECKPOINT_FORMAT, CHECKPOINT_VERSION
+from mhinet.engine.checkpointing import CHECKPOINT_FORMAT, CHECKPOINT_VERSION
 from mhinet.config import load_architecture_config, sha256_file
-from mhinet.tiny_gate import (
+from mhinet.diagnostics.tiny_gate import (
     REGISTERED_MAX_RESIDUAL_PX,
     REQUIRED_EXPERIMENTS,
     merge_tiny_gate_artifacts,

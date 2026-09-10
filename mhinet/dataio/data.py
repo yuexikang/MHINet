@@ -14,7 +14,7 @@ from PIL import Image
 import torch
 from torch.utils.data import Dataset
 
-from .geometry import pixel_homography_to_normalized
+from mhinet.ops.geometry import pixel_homography_to_normalized
 
 
 _KOREA_COORDINATE = re.compile(r"(?P<lat>\d{2}\.\d{6})(?P<lon>\d{3}\.\d+)")

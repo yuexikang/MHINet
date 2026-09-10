@@ -4,8 +4,8 @@ import unittest
 
 import torch
 
-from mhinet.checkpointing import CHECKPOINT_FORMAT, CHECKPOINT_VERSION
-from mhinet.tiny_checkpoint_audit import (
+from mhinet.engine.checkpointing import CHECKPOINT_FORMAT, CHECKPOINT_VERSION
+from mhinet.diagnostics.tiny_checkpoint_audit import (
     _inspect_checkpoint_payload,
     _resolve_protocol,
     _state_dict_sha256,

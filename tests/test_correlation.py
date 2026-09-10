@@ -9,12 +9,12 @@ import torch
 import torch.nn.functional as F
 from torch.utils.checkpoint import checkpoint as torch_checkpoint
 
-from mhinet.correlation import (
+from mhinet.ops.correlation import (
     HGuidedLocalCorrelation,
     candidate_offsets,
     h_guided_local_correlation,
 )
-from mhinet.geometry import (
+from mhinet.ops.geometry import (
     normalized_homography_to_pixel,
     pixel_grid,
     pixel_to_normalized,
@@ -182,7 +182,7 @@ class CorrelationAutogradTests(unittest.TestCase):
         target = torch.randn(1, 3, 4, 5, requires_grad=True)
         homography = torch.eye(3).unsqueeze(0).requires_grad_()
         with mock.patch(
-            "mhinet.correlation.checkpoint", wraps=torch_checkpoint
+            "mhinet.ops.correlation.checkpoint", wraps=torch_checkpoint
         ) as checkpoint_call:
             correlation, _ = h_guided_local_correlation(
                 source,

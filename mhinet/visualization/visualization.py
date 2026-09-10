@@ -8,7 +8,7 @@ import numpy as np
 from PIL import Image, ImageDraw
 import torch
 
-from .geometry import normalized_homography_to_pixel
+from mhinet.ops.geometry import normalized_homography_to_pixel
 
 
 def _project(h, corners):

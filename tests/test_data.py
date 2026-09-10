@@ -9,7 +9,7 @@ import numpy as np
 from PIL import Image
 import torch
 
-from mhinet.data import HomographyPairDataset, parent_group, parse_geo_region
+from mhinet.dataio.data import HomographyPairDataset, parent_group, parse_geo_region
 
 
 class DataTests(unittest.TestCase):

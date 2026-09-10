@@ -9,17 +9,17 @@ from typing import Any
 
 import torch
 
-from .config import RuntimePaths
-from .correlation import candidate_offsets, h_guided_local_correlation
-from .data import HomographyPairDataset
-from .geometry import (
+from mhinet.config import RuntimePaths
+from mhinet.ops.correlation import candidate_offsets, h_guided_local_correlation
+from mhinet.dataio.data import HomographyPairDataset
+from mhinet.ops.geometry import (
     normalized_homography_to_pixel,
     pixel_grid,
     safe_project_points,
 )
-from .model import build_model
-from .modules import PyramidAdapter, SCALE_SPECS
-from .tiny_overfit import controlled_h0_from_ground_truth
+from mhinet.models.model import build_model
+from mhinet.models.modules import PyramidAdapter, SCALE_SPECS
+from mhinet.diagnostics.tiny_overfit import controlled_h0_from_ground_truth
 
 
 RADII = {8: 4, 4: 4, 2: 3, 1: 2}

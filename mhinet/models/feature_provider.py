@@ -21,7 +21,7 @@ import torch.nn.functional as F
 from torch import nn
 from torch.torch_version import TorchVersion
 
-from .config import RuntimePaths
+from mhinet.config import RuntimePaths
 
 
 def make_loma_importable(loma_root: str | Path, loretta_root: str | Path) -> None:

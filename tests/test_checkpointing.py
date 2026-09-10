@@ -11,7 +11,7 @@ import numpy as np
 import torch
 from torch import nn
 
-from mhinet.checkpointing import (
+from mhinet.engine.checkpointing import (
     CHECKPOINT_FORMAT,
     CHECKPOINT_VERSION,
     load_checkpoint,

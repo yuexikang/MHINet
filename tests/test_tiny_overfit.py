@@ -10,8 +10,8 @@ from unittest.mock import patch
 import torch
 from torch import nn
 
-from mhinet.geometry import image_corners, normalized_to_pixel, safe_project_points
-from mhinet.tiny_overfit import (
+from mhinet.ops.geometry import image_corners, normalized_to_pixel, safe_project_points
+from mhinet.diagnostics.tiny_overfit import (
     CachedTinySample,
     _ParameterAverager,
     _jsonable,
@@ -231,16 +231,16 @@ class TinyOverfitProtocolTests(unittest.TestCase):
             return {"skip_step": False, "loss": parameter.square().sum()}
 
         with TemporaryDirectory() as directory, patch(
-            "mhinet.tiny_overfit._fresh_new_modules"
+            "mhinet.diagnostics.tiny_overfit._fresh_new_modules"
         ), patch(
-            "mhinet.tiny_overfit.evaluate_tiny_training_set",
+            "mhinet.diagnostics.tiny_overfit.evaluate_tiny_training_set",
             side_effect=fake_evaluate,
         ), patch(
-            "mhinet.tiny_overfit.sequence_corner_l1", side_effect=fake_loss
+            "mhinet.diagnostics.tiny_overfit.sequence_corner_l1", side_effect=fake_loss
         ), patch(
-            "mhinet.tiny_overfit.save_checkpoint", return_value={}
+            "mhinet.diagnostics.tiny_overfit.save_checkpoint", return_value={}
         ), patch(
-            "mhinet.tiny_overfit.sha256_file", return_value="test-sha256"
+            "mhinet.diagnostics.tiny_overfit.sha256_file", return_value="test-sha256"
         ):
             report = run_one_tiny_experiment(
                 model,  # type: ignore[arg-type]
@@ -368,11 +368,11 @@ class TinyOverfitProtocolTests(unittest.TestCase):
                 )
                 return {"skip_step": False, "loss": loss}
 
-            with patch("mhinet.tiny_overfit._fresh_new_modules"), patch(
-                "mhinet.tiny_overfit.evaluate_tiny_training_set",
+            with patch("mhinet.diagnostics.tiny_overfit._fresh_new_modules"), patch(
+                "mhinet.diagnostics.tiny_overfit.evaluate_tiny_training_set",
                 side_effect=fake_evaluate,
             ), patch(
-                "mhinet.tiny_overfit.sequence_corner_l1", side_effect=fake_loss
+                "mhinet.diagnostics.tiny_overfit.sequence_corner_l1", side_effect=fake_loss
             ):
                 return run_one_tiny_experiment(
                     model,  # type: ignore[arg-type]

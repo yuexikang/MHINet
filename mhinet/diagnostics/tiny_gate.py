@@ -12,8 +12,8 @@ from typing import Any
 
 import torch
 
-from .checkpointing import CHECKPOINT_FORMAT, CHECKPOINT_VERSION
-from .config import load_architecture_config, sha256_file
+from mhinet.engine.checkpointing import CHECKPOINT_FORMAT, CHECKPOINT_VERSION
+from mhinet.config import load_architecture_config, sha256_file
 
 
 REQUIRED_EXPERIMENTS = {

@@ -20,11 +20,11 @@ from typing import Any
 
 import torch
 
-from .checkpointing import CHECKPOINT_FORMAT, CHECKPOINT_VERSION, load_checkpoint
-from .config import RuntimePaths, sha256_file
-from .model import build_model
-from .modules import SCALE_SPECS
-from .tiny_overfit import (
+from mhinet.engine.checkpointing import CHECKPOINT_FORMAT, CHECKPOINT_VERSION, load_checkpoint
+from mhinet.config import RuntimePaths, sha256_file
+from mhinet.models.model import build_model
+from mhinet.models.modules import SCALE_SPECS
+from mhinet.diagnostics.tiny_overfit import (
     TARGET_HW,
     _requested_provider_prefix,
     _write_json,

@@ -6,7 +6,7 @@ from typing import Any
 
 import torch
 
-from .geometry import (
+from mhinet.ops.geometry import (
     image_corners,
     normalized_grid,
     normalized_to_pixel,

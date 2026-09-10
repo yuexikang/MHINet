@@ -7,9 +7,9 @@ import numpy as np
 from PIL import Image
 import torch
 
-from mhinet.train import TrainConfig
-from mhinet.feature_provider import SharedFeatureProvider
-from mhinet.visualization import write_iteration_overlays
+from mhinet.engine.train import TrainConfig
+from mhinet.models.feature_provider import SharedFeatureProvider
+from mhinet.visualization.visualization import write_iteration_overlays
 from types import SimpleNamespace
 from tests.test_feature_provider import RecordingCumulativeDecoder
 

@@ -6,7 +6,7 @@ from typing import Any
 
 import torch
 
-from .geometry import image_corners, normalized_to_pixel, safe_project_points
+from mhinet.ops.geometry import image_corners, normalized_to_pixel, safe_project_points
 
 
 def sequence_corner_l1(

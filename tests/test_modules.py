@@ -7,7 +7,7 @@ import unittest
 import torch
 from torch import nn
 
-from mhinet.modules import (
+from mhinet.models.modules import (
     EXPECTED_MAINLINE_TRAINABLE_NEW_PARAMETERS,
     EXPECTED_NEW_PARAMETERS,
     SCALE_SPECS,

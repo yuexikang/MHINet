@@ -5,9 +5,9 @@ from pathlib import Path
 
 import torch
 from mhinet.config import RuntimePaths
-from mhinet.model import build_model
-from mhinet.train import _safe_train_dataset, _seed_everything
-from mhinet.geometry import image_corners, safe_project_points, normalized_to_pixel
+from mhinet.models.model import build_model
+from mhinet.engine.train import _safe_train_dataset, _seed_everything
+from mhinet.ops.geometry import image_corners, safe_project_points, normalized_to_pixel
 
 
 def main():

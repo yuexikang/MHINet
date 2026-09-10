@@ -46,6 +46,7 @@ mhinet/
   __init__.py
 scripts/
   train_e01.sh      # formal E01, physical GPU 1 by default
+  test_e00.sh       # pretrained H0 baseline, same first 2500 val pairs as E01
   test.sh           # real-image accuracy evaluation with an explicit checkpoint
   unit_tests.sh     # CPU engineering unit tests
 ```
@@ -62,6 +63,9 @@ bash scripts/test.sh /absolute/path/to/checkpoint.pt --max-pairs 16
 
 # Inspect the command without training
 DRY_RUN=1 bash scripts/train_e01.sh
+
+# Independent E00 H0 baseline (no training checkpoint needed)
+bash scripts/test_e00.sh
 
 # Start formal E01 on physical GPU 1 (run E00 separately first)
 bash scripts/train_e01.sh

@@ -1,5 +1,7 @@
 # 真实影像精度评估
 
+独立E00初始化基线使用 `bash scripts/test_e00.sh`：默认卡1、val前2500对（与E01一致），读取runtime登记的原始预训练GHIM，不需要训练checkpoint，不执行CGMDP/MHIR，不产生七轮图。输出 `outputs/E00_h0_seed0/report.md` 和 `metrics/`。`DRY_RUN=1 bash scripts/test_e00.sh`可先查看命令；小样本检查用 `bash scripts/test_e00.sh --max-pairs 16 --output-dir outputs/E00_h0_val16`，不要把小样本输出当完整基线。
+
 `scripts/test.sh`现在是模型精度评估入口，不再是单元测试。`scripts/unit_tests.sh`单独运行工程检查。正式精度必须使用实际训练checkpoint，脚本不会自动挑选“最新”权重，也不会在缺少权重时退回随机初始化。
 
 ```bash

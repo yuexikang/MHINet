@@ -1154,3 +1154,9 @@ checkpoint SHA256=`20ee388f5914850287c8237f45e0ad273c73a6e7d7ce539baa5d6a0c72b00
 最终success@1/3/5px=`0/0.375/0.75`，AUC@1/3/5px=`0/约0.0828/约0.2691`；失败率和拒绝率0。H6平均MACE相对H0下降约0.1395px，但P90从6.154736增至6.292036，不能声称所有样本改善。峰值allocated/reserved=2060819968/2675965952 bytes；单次延迟367.961ms、含I/O/绘图墙钟均摊591.850ms（共享服务器短测，不是正式性能基准）。七张PNG已生成并在artifact计数核验。
 
 完整表格与文字解读 `docs/results_real_image_val16.md`，机器可读归档 `artifacts/real_image_accuracy_val16.json` 含所有七阶段、manifest/checkpoint/report/summary hash与实际输出目录；操作说明 `docs/real_image_evaluation.md`。102项单元测试通过（1.804s），新增AUC失败分母、标准中位数、真实评估Shell必须checkpoint且调用evaluate的检查；日志 `outputs/real_image_evaluation_unit_tests.log`。真实评估日志 `outputs/real_image_accuracy_val16_verified.log`。本轮无反向传播/权重更新，未启动正式训练；当前未发现E01正式训练checkpoint，后续应由用户显式传入实际训练权重路径进行完整val/test评估。
+
+## 2026-09-10：独立E00 H0基线Shell入口
+
+新增 `/home/disk1/MHINet/scripts/test_e00.sh`，默认物理GPU1、`loma-repro`的实际Python、runtime登记的预训练权重，执行 `mhinet.cli evaluate --split val --max-pairs 2500 --h0-only --visualization-pairs 0`。这里选择与E01相同的val前2500对，而不是不同规模的完整val，以便公平对照。默认结果为 `outputs/E00_h0_seed0/report.md` 与 `metrics/`，不生成精修七轮图；只有GHIM前向，不训练、不执行CGMDP/MHIR。拒绝传入训练checkpoint，已训练模型请用原 `scripts/test.sh`。支持切卡、`DRY_RUN=1`、样本数与输出目录参数；不自动覆盖目录、不读取test。
+
+`bash -n scripts/test_e00.sh`、dry-run、从/tmp调用的参数契约检查均通过；`bash scripts/unit_tests.sh`为103/103通过（1.594s），日志 `outputs/e00_entrypoint_unit_tests.log`。README和真实评估说明同步更新。本轮只创建并检查入口，未启动E00长评估或训练，未生成/修改checkpoint；环境、真实资源路径和checkpoint hash沿用现有登记。

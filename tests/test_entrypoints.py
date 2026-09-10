@@ -12,15 +12,16 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class EntryPointTests(unittest.TestCase):
-    def test_e00_shell_uses_pretrained_h0_and_e01_validation_subset(self):
+    def test_e00_shell_uses_pretrained_h0_and_full_test_split(self):
         env = dict(os.environ, DRY_RUN='1')
         env.pop('GPU_ID', None)
         result = subprocess.run(['bash', str(ROOT/'scripts/test_e00.sh')],
             cwd='/tmp', env=env, text=True, capture_output=True, check=True)
         for value in ('CUDA_VISIBLE_DEVICES=1', 'mhinet.cli evaluate', '--h0-only',
-                      '--split val', '--max-pairs 2500', 'outputs/E00_h0_seed0'):
+                      '--split test', 'outputs/E00_h0_seed0'):
             self.assertIn(value, result.stdout)
         self.assertNotIn('--checkpoint', result.stdout)
+        self.assertNotIn('--max-pairs', result.stdout)
         rejected = subprocess.run(['bash', str(ROOT/'scripts/test_e00.sh'),
                                    '--checkpoint=/tmp/model.pt'], env=env, capture_output=True)
         self.assertEqual(rejected.returncode, 2)
@@ -33,7 +34,7 @@ class EntryPointTests(unittest.TestCase):
                                      '--max-pairs', '16'], cwd='/tmp',
                 env=dict(os.environ, DRY_RUN='1', GPU_ID='0'), text=True, capture_output=True, check=True)
             self.assertIn('mhinet.cli evaluate', result.stdout)
-            self.assertIn('--split val', result.stdout)
+            self.assertIn('--split test', result.stdout)
             self.assertIn('--checkpoint', result.stdout)
             self.assertNotIn('unittest', result.stdout)
         failed = subprocess.run(['bash', str(ROOT/'scripts/test.sh'), '/missing/mhinet.pt'],

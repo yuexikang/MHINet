@@ -1,5 +1,11 @@
 # MHINet D2-mainline implementation and experiment plan
 
+Data-split clarification (user instruction, 2026-09-10): training uses train
+(36000 pairs); in-training validation uses val (2500 pairs); independent
+evaluation, including E00, uses the full test split (1000 pairs). Test results
+must not select hyperparameters or checkpoints. E00 is not a hard prerequisite
+for starting E01. This clarification supersedes any earlier val-default wording.
+
 Status: **P0–P4 mainline checks and merged tiny gate passed; stopped before E00/E01**. Training
 protocol v1.2 remains authoritative. The active model is
 

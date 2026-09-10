@@ -51,7 +51,7 @@ A按每轮预测H投影到B坐标系并半透明叠加；绿色是真值投影�
 
 E01只训练D8/D4/D2 adapter和MHIR解码器（833222个参数）；DINO、MVT、GHIM head、VGG、CGMDP累计解码器冻结。后续联合阶段冻结GHIM head参数不切断其输入梯度，H0/H/T不detach。
 
-先在同一验证子集登记E00（无反传），再运行E01。这里仅提供命令，不自动启动正式评估或训练。请在tmux终端执行；若输出目录已存在，先确认其用途，不直接加overwrite。
+E00独立评估用完整test（无反传）；E01训练用train，训练中验证用val。E00不是训练入口的硬性前置条件，test结果不得用于选择超参或checkpoint。这里仅提供命令，不自动启动正式评估或训练。请在tmux终端执行；若输出目录已存在，先确认其用途，不直接加overwrite。
 
 ```bash
 cd /home/disk1/MHINet
@@ -61,14 +61,14 @@ export OMP_NUM_THREADS=1
 export MKL_NUM_THREADS=1
 nvidia-smi -i 1
 
-python -u -m mhinet.cli evaluate --runtime configs/runtime_paths.server.json --split val --max-pairs 2500 --h0-only --output-dir outputs/E00_h0_seed0
+python -u -m mhinet.cli evaluate --runtime configs/runtime_paths.server.json --split test --h0-only --output-dir outputs/E00_h0_seed0
 
 python -u -m mhinet.cli train --runtime configs/runtime_paths.server.json --config configs/e01_heads_v1.2.json --tiny-gate-artifact artifacts/p4_tiny_gate_mcnet_d2.json --output-dir outputs/E01_heads_seed0
 ```
 
 `CUDA_VISIBLE_DEVICES=1`后，配置里的`cuda:0`正确对应物理卡1，不要再改为cuda:1。BS=1建议至少留6 GiB空闲，仍应为其他进程/临时分配留余量。
 
-目录整理后，完成E00即可直接运行 `bash scripts/train_e01.sh`，其默认参数与上面的E01命令一致。`DRY_RUN=1 bash scripts/train_e01.sh`只显示命令；`bash scripts/unit_tests.sh`运行CPU单元测试。`bash scripts/test.sh CHECKPOINT`执行真实影像精度评估，默认完整val，详见 `docs/real_image_evaluation.md`。新代码位置见README目录树；统一CLI命令保持不变。
+目录整理后可直接运行 `bash scripts/train_e01.sh`，其默认参数与上面的E01命令一致。`DRY_RUN=1 bash scripts/train_e01.sh`只显示命令；`bash scripts/unit_tests.sh`运行CPU单元测试。`bash scripts/test.sh CHECKPOINT`执行真实影像精度评估，默认完整test，详见 `docs/real_image_evaluation.md`。新代码位置见README目录树；统一CLI命令保持不变。
 
 续训使用完全相同的配置和输出目录，额外传 `--resume outputs/E01_heads_seed0/checkpoints/step_0000500.pt`（换成实际最后完成的checkpoint）。从头初始化与resume不可混用；配置hash不同会拒绝恢复。
 

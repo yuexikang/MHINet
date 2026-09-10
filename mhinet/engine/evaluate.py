@@ -702,7 +702,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--runtime", type=Path, required=True)
     parser.add_argument("--checkpoint", type=Path)
-    parser.add_argument("--split", default="val")
+    parser.add_argument("--split", default="test")
     parser.add_argument("--max-pairs", type=int)
     parser.add_argument("--h0-only", action="store_true")
     parser.add_argument("--active-scales", default="8,4,2")

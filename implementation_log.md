@@ -1160,3 +1160,13 @@ checkpoint SHA256=`20ee388f5914850287c8237f45e0ad273c73a6e7d7ce539baa5d6a0c72b00
 新增 `/home/disk1/MHINet/scripts/test_e00.sh`，默认物理GPU1、`loma-repro`的实际Python、runtime登记的预训练权重，执行 `mhinet.cli evaluate --split val --max-pairs 2500 --h0-only --visualization-pairs 0`。这里选择与E01相同的val前2500对，而不是不同规模的完整val，以便公平对照。默认结果为 `outputs/E00_h0_seed0/report.md` 与 `metrics/`，不生成精修七轮图；只有GHIM前向，不训练、不执行CGMDP/MHIR。拒绝传入训练checkpoint，已训练模型请用原 `scripts/test.sh`。支持切卡、`DRY_RUN=1`、样本数与输出目录参数；不自动覆盖目录、不读取test。
 
 `bash -n scripts/test_e00.sh`、dry-run、从/tmp调用的参数契约检查均通过；`bash scripts/unit_tests.sh`为103/103通过（1.594s），日志 `outputs/e00_entrypoint_unit_tests.log`。README和真实评估说明同步更新。本轮只创建并检查入口，未启动E00长评估或训练，未生成/修改checkpoint；环境、真实资源路径和checkpoint hash沿用现有登记。
+
+## 2026-09-10：按用户要求更正独立评估划分，检查误跑val结果
+
+用户明确规定train用于训练、val用于训练中验证、test用于独立评估（包含E00）。服务器逐条JSON清单统计：train=36000对、val=2500对、test=1000对。先前未统计就把2500解释为截取上限不准确，此处纠正；现行独立评估不得再默认val。
+
+修改 `scripts/test_e00.sh`、`scripts/test.sh` 和 `mhinet/engine/evaluate.py` 的CLI默认值为test；两个脚本默认均不设置max-pairs，评估完整1000对。保留用户此前对E00脚本删除max-pairs的修改。训练实现与配置不改，仍读取train与val。帮助、README、当前操作文档和实验计划同步说明，test结果不得参与模型选择。历史val16诊断是历史证据，不冒充test结果、不改写记录。
+
+用户要求如这次误跑E00的val有结果则删除。两次只读检查均未发现 `/home/disk1/MHINet/outputs/E00_h0_seed0`；扫描outputs内summary.json也没有mode=H0_only的结果；进程列表中未发现E00/evaluate进程。因此没有可确认属于本次误跑的输出可删，未删除任何文件、未终止其他作业，未触碰历史val16、训练验证或无关D1结果。
+
+`DRY_RUN=1 bash scripts/test_e00.sh`确认实际命令含 `--split test` 且没有 `--max-pairs`；Shell语法检查通过；103项单元测试通过（1.592s），日志 `outputs/test_split_entrypoint_unit_tests.log`。未启动重新评估，由用户执行脚本；无新增模型结果或checkpoint。环境和资源路径/hash沿用前述登记。

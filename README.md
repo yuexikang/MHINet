@@ -46,7 +46,7 @@ mhinet/
   __init__.py
 scripts/
   train_e01.sh      # formal E01, physical GPU 1 by default
-  test_e00.sh       # pretrained H0 baseline, same first 2500 val pairs as E01
+  test_e00.sh       # pretrained H0 baseline on the full test split (1000 pairs)
   test.sh           # real-image accuracy evaluation with an explicit checkpoint
   unit_tests.sh     # CPU engineering unit tests
 ```
@@ -55,10 +55,10 @@ scripts/
 # Unit tests only; no real dataset or GPU required
 bash scripts/unit_tests.sh
 
-# Real-image accuracy, full validation split by default (replace with your checkpoint)
+# Real-image accuracy, full test split by default (replace with your checkpoint)
 bash scripts/test.sh /absolute/path/to/checkpoint.pt
 
-# Optional small validation subset; test split is reserved for final locked evaluation
+# Optional small evaluation subset; not a replacement for full test results
 bash scripts/test.sh /absolute/path/to/checkpoint.pt --max-pairs 16
 
 # Inspect the command without training
@@ -67,7 +67,7 @@ DRY_RUN=1 bash scripts/train_e01.sh
 # Independent E00 H0 baseline (no training checkpoint needed)
 bash scripts/test_e00.sh
 
-# Start formal E01 on physical GPU 1 (run E00 separately first)
+# Start formal E01 on physical GPU 1 (train=train, in-training validation=val)
 bash scripts/train_e01.sh
 
 # Optional GPU override or resume from an existing checkpoint
@@ -85,9 +85,10 @@ Real-image evaluation writes `report.md`, `metrics/summary.json`, per-pair
 CSV/JSONL and `visualizations/pair_0000/` (H0 + six updates). It reports MACE,
 5x5 grid error, all-pair success@1/3/5 px and normalized empirical-recall
 AUC@1/3/5 px, invalid/rejected rates, memory and latency. Metrics include H0
-through H6; failed outputs remain in the success/AUC denominator. Default
-`--split val` never uses the reserved test split for model selection. Explicit
-`--split test` is for final evaluation of a locked configuration. Full command
+through H6; failed outputs remain in the success/AUC denominator. Training uses
+train (36000 pairs), in-training validation uses val (2500 pairs), and independent
+evaluation (including E00) defaults to test (1000 pairs). Test results must not
+be used to select hyperparameters or checkpoints. Full command
 examples and metric conventions: [real-image evaluation](docs/real_image_evaluation.md).
 
 `python -m mhinet.cli <command>` is unchanged. Direct Python imports now use

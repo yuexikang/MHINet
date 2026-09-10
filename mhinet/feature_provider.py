@@ -222,6 +222,9 @@ class SharedFeatureProvider(nn.Module):
         self._set_requires_grad(self.mvt, mvt)
         self._set_requires_grad(self.vgg, vgg)
         self._set_requires_grad(self.dedode, dedode)
+        # Keep the full-resolution compatibility branch registered, but exclude
+        # its parameters from every mainline optimizer even during joint training.
+        self._set_requires_grad(self.dedode.layers["1"], False)
         self._mvt_trainable = bool(mvt)
         self._vgg_trainable = bool(vgg)
         self._dedode_trainable = bool(dedode)
@@ -237,6 +240,7 @@ class SharedFeatureProvider(nn.Module):
             if isinstance(module, nn.modules.batchnorm._BatchNorm):
                 module.eval()
         self.dedode.train(bool(mode and self._dedode_trainable))
+        self.dedode.layers["1"].eval()
 
     def train(self, mode: bool = True) -> "SharedFeatureProvider":
         # Some reused wrappers override train(); repair each independently afterward.

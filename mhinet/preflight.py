@@ -163,6 +163,8 @@ def collect_preflight(runtime: RuntimePaths, architecture: ArchitectureConfig) -
         "data": audit_splits(runtime.data_root),
         "environment": {
             "python": sys.version.replace("\n", " "),
+            "python_executable": sys.executable,
+            "python_prefix": sys.prefix,
             "platform": platform.platform(),
             "conda_prefix": os.environ.get("CONDA_PREFIX"),
             "torch": torch.__version__,

@@ -29,6 +29,29 @@ class RecordingCumulativeDecoder:
 
 
 class CgmdpEarlyStopTests(unittest.TestCase):
+    def test_joint_training_keeps_registered_d1_decoder_frozen_and_in_eval(self) -> None:
+        descriptor = torch.nn.Module()
+        descriptor.encoder = torch.nn.Module()
+        descriptor.encoder.frozen_dinov3 = torch.nn.Module()
+        descriptor.encoder.frozen_dinov3.model = torch.nn.Linear(2, 2)
+        descriptor.encoder.frozen_dinov3.multi_view_transformer = torch.nn.Linear(2, 2)
+        descriptor.encoder.vgg = torch.nn.Linear(2, 2)
+        descriptor.decoder = torch.nn.Module()
+        descriptor.decoder.layers = torch.nn.ModuleDict({
+            scale: torch.nn.Linear(2, 2) for scale in ("16", "8", "4", "2", "1")
+        })
+        provider = SharedFeatureProvider(descriptor, torch.nn.Linear(2, 2))
+        provider.set_training_groups(mvt=True, vgg=True, dedode=True)
+        provider.eval()
+        provider.train()
+        inactive = list(provider.dedode.layers["1"].parameters())
+        self.assertTrue(all(not p.requires_grad for p in inactive))
+        self.assertFalse(provider.dedode.layers["1"].training)
+        self.assertTrue(all(p.requires_grad for p in provider.dedode.layers["2"].parameters()))
+        optimizer_ids = {id(p) for p in provider.parameters() if p.requires_grad}
+        self.assertTrue(all(id(p) not in optimizer_ids for p in inactive))
+        self.assertIn("descriptor.decoder.layers.1.weight", provider.state_dict())
+
     def test_mainline_cumulative_decode_stops_at_d2_without_scale1_call(self) -> None:
         decoder = RecordingCumulativeDecoder()
         owner = SimpleNamespace(

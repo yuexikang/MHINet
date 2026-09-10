@@ -939,10 +939,54 @@ H0. At step 1, DeDoDe/VGG/MVT gradient norms were respectively
 GHIM head still had no gradients. Artifact: 8,707 bytes, SHA256
 `92a67d98bee23f1de71e8c3d468c6f00442737b65e8357d76b8ff92b1a391fe4`.
 
-Still pending for the new architecture: checkpoint-v2 exact-boundary resume
+Still pending at that checkpoint for the new architecture: checkpoint-v2 exact-boundary resume
 smoke, D8/D4/D2/TINY-6 tiny-overfit, E00, and E01. Earlier artifacts do not
 fill these gaps. E00/E01 remain blocked until the new P3/P4 and TINY-6 gate
 pass.
+
+## 2026-09-10：执行正式训练前完整检查（进行中）
+
+停止边界：完成 P0–P4 审查及 tiny gate 后停止，不执行 E00/E01，也不执行解冻或结构消融。
+
+发现并修复两个入口问题：alignment 的样本来源由 test 改为 train 并显式记录 split/test_used；CGMDP 的 scale1 decoder 虽然已被 forward 截断，但联合 profile 仍将其参数标记为可训练，现强制冻结并保持 eval，同时保留 state_dict。新增回归测试确认 scale1 参数不进入 optimizer，重复 train/eval 不会重新激活。89/89测试通过，原始设计包31项校验通过。
+
+| 检查 | 本次结果 | 证据 |
+| --- | --- | --- |
+| P0真实资源与环境 | passed | `artifacts/p0_preflight_mcnet_d2.json` |
+| P1 train样本旧输出对齐 | H0/D8/D2逐元素一致；D1调用0 | `artifacts/p1_alignment_mcnet_d2_train.json` |
+| P2几何和相关性reference | 20/20 passed | `artifacts/p2_reference_mcnet_d2.json` |
+| joint双步复测 | passed；活跃参数107,039,206；峰值10,934,943,232 bytes | `artifacts/p4_profile_joint_mcnet_d2_frozen_d1.json` |
+
+上述四项SHA256依次为：
+
+- `b867ee4753f890ee138fdef037e4908d722877e3cb7ff03b88b9d2978ec47659`
+- `633faf7a7ffa98053999578f2a27567a9accf87a6c5e48bb6d76c52ca8a50977`
+- `32e4861895df398a31951eece97eb1e382de4a7e238b041c26e03ebaa9c787be`
+- `773f79164c3fa95469adbb585f82d5523d7f6649e83a947a57e0ba868e4ded67`
+
+真实Python为 `/root/miniconda3/envs/loma-repro/bin/python`，3.10.20；PyTorch2.11.0+cu128、CUDA12.8、cuDNN91900、torchvision0.26.0、NumPy2.2.6、GPU驱动565.57.01。父shell继承的CONDA_PREFIX为base，preflight新增 sys.executable/sys.prefix 以消除歧义。可选pytest/openpyxl不可导入，timm导入触发NumPy旧API错误；当前已执行入口使用unittest和现有LoMa加载路径正常运行，不据此声称全部可选依赖可用。
+
+复测命令（工作目录 `/home/disk1/MHINet`）：
+
+```bash
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 CUDA_VISIBLE_DEVICES=2 /root/miniconda3/envs/loma-repro/bin/python -m mhinet.cli preflight --runtime configs/runtime_paths.server.json --output artifacts/p0_preflight_mcnet_d2.json --overwrite
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 CUDA_VISIBLE_DEVICES=2 /root/miniconda3/envs/loma-repro/bin/python -m mhinet.cli alignment --runtime configs/runtime_paths.server.json --output artifacts/p1_alignment_mcnet_d2_train.json
+/root/miniconda3/envs/loma-repro/bin/python -m mhinet.cli geometry-corr-check --output artifacts/p2_reference_mcnet_d2.json
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 CUDA_VISIBLE_DEVICES=2 /root/miniconda3/envs/loma-repro/bin/python -m mhinet.cli profile --runtime configs/runtime_paths.server.json --profile joint --optimizer-steps 2 --output artifacts/p4_profile_joint_mcnet_d2_frozen_d1.json
+```
+
+四项tiny共用参数：`--sample-protocol one_pair_residuals --residual-profile translation --residual-bound-fraction 0.5 --precision bf16 --sample-count 32 --seed 0 --max-steps 2000 --eval-interval 32 --threshold-mace-px 0.1 --weight-average-start-step 1536 --heartbeat-interval 64`。均为 `python -u -m mhinet.cli tiny-overfit --runtime configs/runtime_paths.server.json`，不改变L1或加入额外损失。
+
+| experiments | 物理GPU | progress路径（outputs/tiny_overfit下） | artifact（artifacts下） |
+| --- | ---: | --- | --- |
+| D8 | 2 | mcnet_d8_full_progress.pt | p4_tiny_s_d8_mcnet.json |
+| D4 | 3 | mcnet_d4_full_progress.pt | p4_tiny_s_d4_mcnet.json |
+| D2 | 3 | mcnet_d2_full_progress.pt | p4_tiny_s_d2_mcnet.json |
+| TINY-6 | 2 | mcnet_6_full_progress.pt | p4_tiny_6_mcnet.json |
+
+D8/D4初次启动未限制线程，观察到各162线程；随后SIGINT结束这两个已确认身份的进程，从各自原始边界以 `--resume-progress` 恢复，设置 `OMP_NUM_THREADS=1 MKL_NUM_THREADS=1`。D2/TINY-6自启动即使用相同线程限制。此调整为资源配置，未变更预算/优化器/样本顺序，不宣称跨线程设置逐位相同。源码冻结修复不改变heads tiny的执行图或权重。
+
+`scripts/summarize_pretraining.py` 从现有artifact生成 `docs/pretraining_mcnet_d2_summary.md` 与JSON索引，包含每轮误差、原始/平均读出、显存、缓存前向时间和checkpoint身份；缺失或运行中项不会被推定通过。运行时序及最终状态以原始artifact和progress为准。
 
 ## 2026-09-10：补齐续训对照与 D8 短程结果
 

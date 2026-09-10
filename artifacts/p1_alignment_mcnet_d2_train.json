@@ -1,0 +1,136 @@
+{
+  "gate": "P0_P1_live_alignment",
+  "status": "passed",
+  "pair_id": "current__34.801100126.376330_pair0",
+  "split": "train",
+  "test_used": false,
+  "device": "cuda:0",
+  "shapes": {
+    "images": [
+      1,
+      2,
+      3,
+      784,
+      784
+    ],
+    "pair_descriptors": [
+      1,
+      2,
+      49,
+      49,
+      2048
+    ],
+    "context": [
+      1,
+      2,
+      49,
+      49,
+      1024
+    ],
+    "H0": [
+      1,
+      3,
+      3
+    ],
+    "D8": [
+      1,
+      2,
+      256,
+      98,
+      98
+    ],
+    "D4": [
+      1,
+      2,
+      256,
+      196,
+      196
+    ],
+    "D2": [
+      1,
+      2,
+      256,
+      392,
+      392
+    ]
+  },
+  "stage1_valid": true,
+  "stage1_valid_correspondences": 1224,
+  "legacy_valid_correspondences": 1224,
+  "comparisons": {
+    "safe_vs_legacy_H0": {
+      "shape_equal": true,
+      "max_abs": 0.0,
+      "mean_abs": 0.0,
+      "exact_fraction": 1.0
+    },
+    "new_vs_legacy_D8": {
+      "shape_equal": true,
+      "max_abs": 0.0,
+      "mean_abs": 0.0,
+      "exact_fraction": 1.0
+    },
+    "new_vs_legacy_D2": {
+      "shape_equal": true,
+      "max_abs": 0.0,
+      "mean_abs": 0.0,
+      "exact_fraction": 1.0
+    }
+  },
+  "call_counts": {
+    "dino": 1,
+    "mvt": 1,
+    "vgg": 1,
+    "dedode_decode_calls": 1,
+    "dedode_steps": 4,
+    "dedode_scale1": 0
+  },
+  "ownership": {
+    "dino_wrapper_instances": 1,
+    "mvt_object_references": 1,
+    "stage1_head_contains_dino": 0,
+    "stage1_head_contains_mvt": 0,
+    "decoder_scales": [
+      "16",
+      "8",
+      "4",
+      "2",
+      "1"
+    ]
+  },
+  "build": {
+    "loma_root": "/home/disk1/LoMa",
+    "loma_checkpoint": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+    "dino_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+    "selected_stage1_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+    "loretta_loaded_keys": 807,
+    "locator": {
+      "source": "official_loretta_checkpoint",
+      "overridden": false
+    },
+    "descriptor_initialization": {
+      "migrated_tensors": 364,
+      "vgg_tensors": 84,
+      "decoder_tensors": 280,
+      "top_refiner_mapping": "LoMa-B scale 14 -> DINOv3 scale 16"
+    },
+    "ownership": {
+      "dino_wrapper_instances": 1,
+      "mvt_object_references": 1,
+      "stage1_head_contains_dino": 0,
+      "stage1_head_contains_mvt": 0,
+      "decoder_scales": [
+        "16",
+        "8",
+        "4",
+        "2",
+        "1"
+      ]
+    },
+    "legacy_training_wrappers_reused": false,
+    "safe_stage1_fitter": true
+  },
+  "forward_ms_single_unwarmed": 392.1755896881223,
+  "peak_allocated_bytes": 2607108608,
+  "note": "Single unwarmed engineering alignment; not a latency benchmark or training result."
+}

@@ -41,7 +41,7 @@ def run_alignment(runtime: RuntimePaths, pair_index: int = 0) -> dict[str, objec
     )
 
     device = torch.device(runtime.device)
-    dataset = HomographyPairDataset(runtime.data_root / "test/pairs.jsonl")
+    dataset = HomographyPairDataset(runtime.data_root / "train/pairs.jsonl")
     sample = dataset[pair_index]
     images = sample["images"].unsqueeze(0).to(device)
     provider, build_report = build_feature_provider(runtime)
@@ -104,6 +104,8 @@ def run_alignment(runtime: RuntimePaths, pair_index: int = 0) -> dict[str, objec
         "gate": "P0_P1_live_alignment",
         "status": "passed" if passed else "failed",
         "pair_id": sample["pair_id"],
+        "split": "train",
+        "test_used": False,
         "device": str(device),
         "shapes": {
             "images": list(images.shape),

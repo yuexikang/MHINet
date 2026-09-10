@@ -13,6 +13,7 @@ from typing import Any, Mapping
 
 import numpy as np
 import torch
+from tqdm.auto import tqdm
 
 from .checkpointing import load_checkpoint, save_checkpoint
 from .config import RuntimePaths, load_architecture_config, sha256_file
@@ -82,8 +83,15 @@ class TrainConfig:
             "joint",
         }:
             errors.append("profile is not a protocol-v1.2 training group")
-        if int(self.raw.get("gradient_accumulation", 0)) != 4:
-            errors.append("gradient_accumulation must be 4")
+        batch_size = int(self.raw.get("batch_size", 1))
+        accumulation = int(self.raw.get("gradient_accumulation", 0))
+        effective_batch = int(self.raw.get("effective_batch_size", 4))
+        if batch_size < 1 or accumulation < 1 or batch_size * accumulation != effective_batch:
+            errors.append("batch_size * gradient_accumulation must equal effective_batch_size (default 4)")
+        if batch_size > 1 and self.raw.get("allow_experimental_batch") is not True:
+            errors.append("batch_size > 1 requires allow_experimental_batch=true: BF16 serial H0 alignment is not yet passed")
+        if int(self.raw.get("visualization_pairs", 1)) < 0:
+            errors.append("visualization_pairs must be non-negative")
         if not math.isclose(
             float(self.raw.get("gradient_clip_norm", 0)), 1.0, rel_tol=0, abs_tol=1e-12
         ):
@@ -413,6 +421,8 @@ def train(
     active_scales = config.active_scales
     iterations_per_scale = int(config.raw["iterations_per_scale"])
     accumulation = int(config.raw["gradient_accumulation"])
+    batch_size = int(config.raw.get("batch_size", 1))
+    effective_batch_size = batch_size * accumulation
     clip_norm = float(config.raw["gradient_clip_norm"])
     validation_interval = int(config.raw["validation_interval"])
     checkpoint_interval = int(config.raw["checkpoint_interval"])
@@ -428,6 +438,9 @@ def train(
         "profile": config.profile,
         "active_scales": active_scales,
         "iterations_per_scale": iterations_per_scale,
+        "batch_size": batch_size,
+        "effective_batch_size": effective_batch_size,
+        "gradient_accumulation": accumulation,
         "tiny_gate": tiny_gate,
         "test_used": False,
     }
@@ -453,7 +466,10 @@ def train(
     training_started = time.perf_counter()
     trainable = [parameter for parameter in model.parameters() if parameter.requires_grad]
 
-    with log_path.open(log_mode, encoding="utf-8") as log_stream:
+    with log_path.open(log_mode, encoding="utf-8") as log_stream, tqdm(
+        total=total_steps, initial=optimizer_step, desc=config.experiment_id,
+        unit="step", dynamic_ncols=True, mininterval=2.0,
+    ) as progress:
         while optimizer_step < run_limit:
             model.train()
             optimizer.zero_grad(set_to_none=True)
@@ -461,16 +477,17 @@ def train(
             trajectories: list[torch.Tensor] = []
             accepted_fractions: list[float] = []
             valid_microbatches = 0
+            valid_pairs = 0
             step_attempts = 0
             step_started = time.perf_counter()
-            while valid_microbatches < accumulation:
-                if step_attempts >= max(1000, accumulation * 100):
+            while valid_pairs < effective_batch_size:
+                if step_attempts >= max(1000, effective_batch_size * 100):
                     raise RuntimeError("Too many invalid Stage1 samples for one optimizer step")
-                step_attempts += 1
-                index = data_stream.next()
-                sample = train_dataset[index]
-                images = sample["images"].unsqueeze(0).to(device)
-                H_gt = sample["H_gt_norm"].unsqueeze(0).to(device)
+                requested = min(batch_size, effective_batch_size - valid_pairs)
+                samples = [train_dataset[data_stream.next()] for _ in range(requested)]
+                step_attempts += requested
+                images = torch.stack([sample["images"] for sample in samples]).to(device)
+                H_gt = torch.stack([sample["H_gt_norm"] for sample in samples]).to(device)
                 outputs = model(
                     images,
                     active_scales=active_scales,
@@ -481,22 +498,23 @@ def train(
                     or outputs["shared_call_counts"].get("mvt") != 1
                 )
                 loss_result = sequence_corner_l1(outputs, H_gt)
+                count_valid = int(loss_result["valid_pairs"])
+                invalid_attempts_total += requested - count_valid
                 if loss_result["skip_step"]:
-                    invalid_attempts_total += 1
                     del images, H_gt, outputs, loss_result
                     continue
                 loss = loss_result["loss"]
                 if not bool(torch.isfinite(loss)):
                     raise FloatingPointError("Training loss became non-finite")
-                (loss / accumulation).backward()
+                (loss * count_valid / effective_batch_size).backward()
                 with torch.no_grad():
                     metrics = homography_trajectory_metrics(outputs, H_gt)
-                    trajectories.append(metrics["trajectory_mace_px"][0].cpu())
-                    accepted_fractions.append(
-                        float(outputs["update_accepted"].float().mean().item())
-                    )
-                losses.append(float(loss.detach().item()))
+                    valid_mask = outputs["stage1_valid"].bool()
+                    trajectories.extend(metrics["trajectory_mace_px"][valid_mask].cpu().unbind(0))
+                    accepted_fractions.extend(outputs["update_accepted"][valid_mask].float().mean(dim=1).cpu().tolist())
+                losses.extend([float(loss.detach().item())] * count_valid)
                 valid_microbatches += 1
+                valid_pairs += count_valid
                 del images, H_gt, outputs, loss_result, loss, metrics
 
             preclip_norm = torch.nn.utils.clip_grad_norm_(
@@ -518,7 +536,10 @@ def train(
                 "accepted_update_fraction": sum(accepted_fractions)
                 / len(accepted_fractions),
                 "valid_microbatches": valid_microbatches,
-                "invalid_attempts_this_step": step_attempts - valid_microbatches,
+                "valid_pairs": valid_pairs,
+                "batch_size": batch_size,
+                "effective_batch_size": effective_batch_size,
+                "invalid_attempts_this_step": step_attempts - valid_pairs,
                 "invalid_attempts_total": invalid_attempts_total,
                 "preclip_gradient_norm": float(preclip_norm.detach().item()),
                 "learning_rates": {
@@ -540,11 +561,12 @@ def train(
             }
             log_stream.write(json.dumps(log_row, ensure_ascii=False) + "\n")
             log_stream.flush()
-            print(
+            progress.update(1)
+            progress.set_postfix(loss=f"{log_row['loss_sequence_corner_l1_px']:.4f}", Hfinal=f"{trajectory_mean[-1]:.3f}")
+            tqdm.write(
                 f"step={optimizer_step}/{total_steps} "
                 f"loss={log_row['loss_sequence_corner_l1_px']:.6f}px "
                 f"H0={trajectory_mean[0]:.4f}px Hfinal={trajectory_mean[-1]:.4f}px",
-                flush=True,
             )
 
             checkpoint_due = optimizer_step % checkpoint_interval == 0
@@ -569,6 +591,9 @@ def train(
                     device=device,
                     active_scales=active_scales,
                     iterations_per_scale=iterations_per_scale,
+                    visualization_dir=output_dir / "visualizations" / f"step_{optimizer_step:07d}",
+                    visualization_pairs=int(config.raw.get("visualization_pairs", 1)),
+                    show_progress=True,
                 )
                 validation_summary.update(
                     {

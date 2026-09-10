@@ -1,6 +1,6 @@
 {
-  "experiment_id": "E01_heads_seed0",
-  "purpose": "formal_E01_pilot_after_all_P0_P4_gates_pass",
+  "experiment_id": "engineering_batch_visualization_smoke",
+  "purpose": "two_step_engineering_only_not_formal_E01",
   "training_revision": "1.2",
   "profile": "heads",
   "active_scales": [8, 4, 2],
@@ -9,7 +9,7 @@
   "fgo_enabled": false,
   "extra_losses_enabled": false,
   "seed": 0,
-  "max_optimizer_steps": 10000,
+  "max_optimizer_steps": 2,
   "batch_size": 1,
   "effective_batch_size": 4,
   "gradient_accumulation": 4,
@@ -17,10 +17,10 @@
   "weight_decay": 0.0001,
   "warmup_fraction": 0.05,
   "minimum_lr_ratio": 0.1,
-  "validation_interval": 500,
-  "checkpoint_interval": 500,
+  "validation_interval": 1,
+  "checkpoint_interval": 1,
   "visualization_pairs": 1,
-  "max_train_pairs": null,
-  "max_val_pairs": 2500,
+  "max_train_pairs": 32,
+  "max_val_pairs": 2,
   "require_passed_tiny_gate": true
 }

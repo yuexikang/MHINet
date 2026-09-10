@@ -1074,3 +1074,42 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 CUDA_VISIBLE_DEVICES=3 /root/miniconda3/envs
 该纵向条件下256维原描述子/随机32维adapter的最近候选top1比例为0.755147/0.498455，存在可用局部匹配信号。artifact SHA256 `164d6b80cb6b62cf217b73d765b650ca19c9cd33aa19405e39cfeafd91559ac8`。D2随后在原定预算和损失下突破平台，无需更换损失或放宽门槛。全部方向表由 `scripts/analyze_tiny_conditions.py` 生成至 `artifacts/p4_mcnet_d2_all_condition_analysis.json/.md`。
 
 交付边界：本轮证明工程正确性和登记受控条件的可学习性，不代表真实GHIM初始化上的泛化验证或联合训练成功。下一阶段建议从登记E00/E01开始，使用新的正式初始化；保持test封存、D1不执行、DINO冻结、GHIM head输入梯度保留。用户明确要求在正式训练前停止，本轮到此结束。
+
+## 2026-09-10：单卡batch短测、进度条、H0+六轮验证叠加图
+
+用户要求真实batch尝试、训练进度条、每次验证输出绿框GT/红框预测叠加图，并追加H0形成7张；提供物理GPU1训练命令，但不代启动正式训练。代码、结果表、超参、冻结范围、三模块解释和正式启动/恢复命令见 `docs/batch_size_and_visualization.md`。本轮只执行工程短测/两步冒烟；E00/E01未运行，test未访问。
+
+修改实际文件：`mhinet/feature_provider.py`支持真实B对共享DINO/MVT及累计decoder形状；`mhinet/train.py`按有效pair加权累积并补足无效样本，接入tqdm和每次验证图；`mhinet/evaluate.py`接入验证图及CLI进度；新增 `mhinet/visualization.py`、`mhinet/batch_probe.py`、`tests/test_batch_visualization.py`、三个batch检查/汇总脚本。D1不计算、不删除；原架构hash不变。较大batch尚未通过串行H0对齐，正式配置明确保留BS=1×累积4，BS>1需显式实验性opt-in，不放宽阈值宣称通过。
+
+环境：`/root/miniconda3/envs/loma-repro/bin/python`，Python3.10.20、PyTorch2.11.0+cu128、tqdm4.67.3，RTX4090；所有GPU命令设 `OMP_NUM_THREADS=1 MKL_NUM_THREADS=1`。项目 `/home/disk1/MHINet`，复用源码 `/home/disk1/LoMa`；数据 `/home/disk1/Data/datasets/GoogleEarth_scale_pairs`。实际资源路径、逐个checkpoint SHA256、源文件hash、可视化PNG hash、恢复状态均归档到 `artifacts/batch_visualization_summary.json`；原始probe分别是 `artifacts/batch_probe_heads_bs1.json` / `bs2.json` / `bs4.json`（完整文件名前缀均为batch_probe_heads_）。
+
+| BS | 累积 | GPU | allocated GB | reserved GB | 中位pair/s | 解释 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | 4 | 3 | 4.001 | 5.098 | 0.779 | 2次预热+5次计时完成 |
+| 2 | 2 | 3 | 7.112 | 9.028 | 1.111 | 2次预热+5次计时完成；对齐未通过 |
+| 4 | 1 | 0 | 13.361 | 16.624 | 0.934 | 2次预热+5次计时完成；实验路径 |
+
+这些是heads profile工程吞吐，不是精度结果；其他GPU作业负载明显，BS4不同卡，不能据此确认稳定加速比。命令为 `python -u -m mhinet.batch_probe --runtime configs/runtime_paths.server.json --batch-size B --output artifacts/batch_probe_heads_bsB.json`，B依次1/2/4，对应CUDA_VISIBLE_DEVICES依表；日志在 `outputs/batch_probe_heads_bsB.log`。
+
+批内反序H0差0；BS2对比逐对运行H0最大角坐标差0.36767578125px，超过检查脚本预设0.1px，保留 `artifacts/batch_forward_isolation.json` 的failed状态。命令 `CUDA_VISIBLE_DEVICES=0 python -m scripts.check_batched_forward --runtime configs/runtime_paths.server.json --output artifacts/batch_forward_isolation.json`。随后GPU3执行 `python -m scripts.diagnose_batch_precision`，日志 `outputs/batch_precision_diagnosis_fp32_position.log`：DINO最大特征差0.927975，MVT最大差1.25；固定串行DINO/MVT再批量head，四角差0.004883px。仅拆分head不能修复上游差异，尚未定位到第一个差异算子。初版诊断脚本忘记显式传旧头的FP32位置dtype而报错，修正诊断参数后重跑；未为此更改GHIM算法或权重。
+
+第一次BS2真实训练入口冒烟在GPU3外部显存占用增长后OOM（进程allocated6.47GiB、剩余58MiB），日志 `outputs/engineering_batch_visualization_smoke_start.log`。失败输出目录保留不覆盖；最终冒烟配置改为正式推荐的BS1，在GPU0重新执行：
+
+```bash
+cd /home/disk1/MHINet
+export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 CUDA_VISIBLE_DEVICES=0
+/root/miniconda3/envs/loma-repro/bin/python -u -m mhinet.cli train --runtime configs/runtime_paths.server.json --config configs/batch_visualization_smoke.json --output-dir outputs/engineering_batch_visualization_smoke_bs1 --tiny-gate-artifact artifacts/p4_tiny_gate_mcnet_d2.json --stop-after-optimizer-step 1
+/root/miniconda3/envs/loma-repro/bin/python -u -m mhinet.cli train --runtime configs/runtime_paths.server.json --config configs/batch_visualization_smoke.json --output-dir outputs/engineering_batch_visualization_smoke_bs1 --tiny-gate-artifact artifacts/p4_tiny_gate_mcnet_d2.json --resume outputs/engineering_batch_visualization_smoke_bs1/checkpoints/step_0000001.pt
+```
+
+2步完成，数据流位置4→8，无invalid、无共享调用违规，日志确认训练和验证进度条。该次最终checkpoint SHA256=`15a7feaf142bf72a25a54c057a7909661ddcec9fd0a10316b6c20a295b02469a`。随后按用户追加要求加入H0，用同一step1 checkpoint在新目录重放step2，命令第二行仅将output-dir改为 `outputs/engineering_visualization_seven_smoke`；不覆盖先前6张图的原始证据。
+
+7张图实际输出于 `/home/disk1/MHINet/outputs/engineering_visualization_seven_smoke/visualizations/step_0000002/pair_0000`，H0及D8/D4/D2各2张；manifest记录同一验证pair和每轮H。已目视检查真实叠加图，绿色GT/红色预测一致；不是用GT warp冒充预测。新增非法投影隔离、七张计数、缺失迭代拒绝、batch预算及实验opt-in测试，95/95 unittest通过（1.919s），`git diff --check`通过。
+
+| 7图重放（2对val，仅工程检查） | H0 | H1 | H2 | H3 | H4 | H5 | H6 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 平均MACE px | 6.611870 | 6.601425 | 6.599621 | 6.601795 | 6.606786 | 6.609659 | 6.612917 |
+
+失败率0，最终验证单对含指标准备的同步单次延迟1714.687ms（绘图不计入该值，其他GPU作业影响较大）；训练step2峰值allocated3.999976GB、reserved4.888461GB。最终H略差于H0，不能将两步冒烟称为精度提升或模型验证成功。7图重放checkpoint：`outputs/engineering_visualization_seven_smoke/checkpoints/step_0000002.pt`，SHA256=`20ee388f5914850287c8237f45e0ad273c73a6e7d7ce539baa5d6a0c72b003c8`。重复恢复的细小数值差符合此前记录的CUDA grid_sample反传非逐位确定性，不声称bitwise一致。
+
+归档命令 `python -m scripts.summarize_batch_visualization`。正式建议仍为 `configs/e01_heads_v1.2.json`：BS1×4、heads-only、lr1e-4、AdamW wd1e-4、clip1、10000步、500步warmup/cosine到1e-5、每500步验证2500对并输出固定1对的7张图。用户在GPU1自行启动的完整命令见上述文档；本轮未占用GPU1启动正式任务。后续较大batch先修复BF16批量对齐、同卡复测，再升级正式配置。

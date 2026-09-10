@@ -268,6 +268,31 @@ class SharedFeatureProvider(nn.Module):
         self._call_counts["mvt"] += 1
         return self.mvt(descriptors)
 
+    def _extract_batched_descriptors(self, images: torch.Tensor):
+        """Pinned LoMa L11/L17 extraction, generalized to independent A/B pairs.
+
+        The B=1 reference path is retained verbatim. For larger B all 2B images
+        pass through DINO once; only the view axis is joined by MVT attention.
+        """
+        batch = images.shape[0]
+        flat = images.flatten(0, 1)
+        encoder = self.shared_encoder
+        if batch == 1:
+            return encoder.extract_pair_descriptors(flat)
+        normalized = (flat - encoder.imagenet_mean.to(flat)) / encoder.imagenet_std.to(flat)
+        with torch.no_grad(), torch.autocast(flat.device.type, dtype=torch.bfloat16,
+                                             enabled=flat.device.type == "cuda"):
+            tokens, (height, width) = self.dino.prepare_tokens_with_masks(normalized)
+            features = []
+            for index, block in enumerate(self.dino.blocks):
+                tokens = block(tokens, self.dino.rope_embed(H=height, W=width))
+                if index in encoder.layer_indices:
+                    patch = self.dino.norm(tokens)[:, self.dino.n_storage_tokens + 1:]
+                    features.append(patch.reshape(batch, 2, height, width, 1024))
+            if len(features) != len(encoder.layer_indices):
+                raise RuntimeError("Missing pinned DINO intermediate layers")
+            return torch.cat(features, dim=-1), (height, width)
+
     def _decode_pyramid(
         self,
         vgg_features: list[torch.Tensor],
@@ -275,7 +300,8 @@ class SharedFeatureProvider(nn.Module):
         contextualized: torch.Tensor,
         requested_scales: tuple[int, ...],
     ) -> dict[int, torch.Tensor]:
-        shared_feature = contextualized.squeeze(0).permute(0, 3, 1, 2).contiguous()
+        batch = contextualized.shape[0]
+        shared_feature = contextualized.flatten(0, 1).permute(0, 3, 1, 2).contiguous()
         features = vgg_features + [shared_feature]
         sizes = vgg_sizes + [tuple(shared_feature.shape[-2:])]
         descriptions: torch.Tensor | float = 0.0
@@ -299,7 +325,7 @@ class SharedFeatureProvider(nn.Module):
             if scale in scale_to_output:
                 selected_scale = scale_to_output[scale]
                 if selected_scale in requested_scales:
-                    outputs[selected_scale] = descriptions.unsqueeze(0)
+                    outputs[selected_scale] = descriptions.reshape(batch, 2, *descriptions.shape[1:])
                 if selected_scale == requested_scales[-1]:
                     break
             if index < len(self.dedode.scales) - 1:
@@ -323,12 +349,13 @@ class SharedFeatureProvider(nn.Module):
         pyramid_scales: tuple[int, ...] = (8, 4, 2),
         compute_stage1: bool = True,
     ) -> dict[str, Any]:
-        if images.shape != (1, 2, 3, 784, 784):
+        if images.ndim != 5 or images.shape[0] < 1 or images.shape[1:] != (2, 3, 784, 784):
             raise ValueError(
-                "MHINet v1 provider requires B=1 and shape 1x2x3x784x784, got "
+                "MHINet provider requires shape Bx2x3x784x784, got "
                 f"{tuple(images.shape)}"
             )
-        flat_images = images.squeeze(0)
+        batch = images.shape[0]
+        flat_images = images.flatten(0, 1)
         allowed_scale_sets = {(8,), (8, 4), (8, 4, 2), (8, 4, 2, 1)}
         pyramid_scales = tuple(int(scale) for scale in pyramid_scales)
         if pyramid_scales and pyramid_scales not in allowed_scale_sets:
@@ -344,9 +371,7 @@ class SharedFeatureProvider(nn.Module):
             "dedode_scale1": 0,
         }
         # The reused extraction routine has no_grad only around DINO, which is required.
-        pair_descriptors, token_size = self.shared_encoder.extract_pair_descriptors(
-            flat_images
-        )
+        pair_descriptors, token_size = self._extract_batched_descriptors(images)
         # Bypass legacy contextualize_pair(): it hard-codes torch.no_grad().
         amp_enabled = pair_descriptors.device.type == "cuda"
         with torch.autocast(
@@ -374,10 +399,10 @@ class SharedFeatureProvider(nn.Module):
                     vgg_features, vgg_sizes, contextualized, pyramid_scales
                 )
         expected_shapes = {
-            8: (1, 2, 256, 98, 98),
-            4: (1, 2, 256, 196, 196),
-            2: (1, 2, 256, 392, 392),
-            1: (1, 2, 256, 784, 784),
+            8: (batch, 2, 256, 98, 98),
+            4: (batch, 2, 256, 196, 196),
+            2: (batch, 2, 256, 392, 392),
+            1: (batch, 2, 256, 784, 784),
         }
         for scale in pyramid_scales:
             expected = expected_shapes[scale]

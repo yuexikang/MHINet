@@ -20,6 +20,7 @@ COMMAND_MODULES = {
     "resume": "mhinet.train",
     "evaluate": "mhinet.evaluate",
     "profile": "mhinet.profile",
+    "batch-probe": "mhinet.batch_probe",
     "geometry-corr-check": "mhinet.reference_checks",
 }
 

@@ -203,6 +203,9 @@ def evaluate_model(
     h0_only: bool = False,
     active_scales: tuple[int, ...] = (8, 4, 2),
     iterations_per_scale: int = 2,
+    visualization_dir: Path | None = None,
+    visualization_pairs: int = 0,
+    show_progress: bool = False,
 ) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     """Evaluate every requested ID, retaining failed rows in the denominator."""
 
@@ -224,7 +227,9 @@ def evaluate_model(
             for _ in range(iterations_per_scale)
         ]
     )
-    for index in range(len(dataset)):
+    from tqdm.auto import tqdm
+    for index in tqdm(range(len(dataset)), desc="Validation", unit="pair", disable=not show_progress,
+                      dynamic_ncols=True, mininterval=2.0, leave=False):
         sample = dataset[index]
         images = sample["images"].unsqueeze(0).to(device)
         H_gt = sample["H_gt_norm"].unsqueeze(0).to(device)
@@ -301,6 +306,15 @@ def evaluate_model(
         if device.type == "cuda":
             torch.cuda.synchronize(device)
         pair_elapsed_ms = (time.perf_counter() - pair_started) * 1000.0
+        if visualization_dir is not None and index < visualization_pairs and not h0_only:
+            from .visualization import write_iteration_overlays
+            write_iteration_overlays(
+                sample["images"], sample["H_gt_norm"], outputs["H_updates_norm"][0],
+                update_scale_schedule, visualization_dir / f"pair_{index:04d}",
+                pair_id=str(sample["pair_id"]), accepted=accepted,
+                ghim_valid=bool(stage1_valid[0].item()),
+                h0=outputs["H0_norm"][0],
+            )
         shared_call_violations += int(
             call_counts.get("dino") != 1 or call_counts.get("mvt") != 1
         )
@@ -673,6 +687,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--iterations-per-scale", type=int, default=2)
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--overwrite", action="store_true")
+    parser.add_argument("--no-progress", action="store_true")
     args = parser.parse_args(argv)
     runtime = RuntimePaths.from_json(args.runtime)
     device = torch.device(runtime.device)
@@ -703,6 +718,7 @@ def main(argv: list[str] | None = None) -> int:
         h0_only=args.h0_only,
         active_scales=active_scales,
         iterations_per_scale=args.iterations_per_scale,
+        show_progress=not args.no_progress,
     )
     summary.update(
         {

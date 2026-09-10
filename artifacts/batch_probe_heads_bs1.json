@@ -1,0 +1,90 @@
+{
+  "status": "passed",
+  "profile": "heads",
+  "batch_size": 1,
+  "effective_batch_size": 4,
+  "gradient_accumulation": 4,
+  "warmup_steps": 2,
+  "measured_steps": 5,
+  "median_pairs_per_second": 0.7793307104073577,
+  "peak_allocated_bytes": 4001239552,
+  "peak_reserved_bytes": 5098176512,
+  "free_before_bytes": 22738763776,
+  "total_device_bytes": 25278087168,
+  "device": "NVIDIA GeForce RTX 4090",
+  "torch": "2.11.0+cu128",
+  "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+  "pair_ids": [
+    "current__34.801100126.376330_pair0",
+    "current__34.801100126.376330_pair1",
+    "current__34.801100126.37983_pair0",
+    "current__34.801100126.37983_pair1"
+  ],
+  "test_used": false,
+  "scope": "timed forward/loss/backward/clip/optimizer with CPU-prefetched real train images; excludes disk I/O, validation, checkpoint writes",
+  "records": [
+    {
+      "step": 0,
+      "warmup": true,
+      "seconds": 5.7206597831100225,
+      "pairs_per_second": 0.6992200465774614,
+      "loss": 4.907974720001221,
+      "preclip_norm": 82.91775512695312,
+      "accepted_updates": 24
+    },
+    {
+      "step": 1,
+      "warmup": true,
+      "seconds": 5.002870531752706,
+      "pairs_per_second": 0.7995409784467559,
+      "loss": 4.848331987857819,
+      "preclip_norm": 51.14137268066406,
+      "accepted_updates": 24
+    },
+    {
+      "step": 2,
+      "warmup": false,
+      "seconds": 4.993417243473232,
+      "pairs_per_second": 0.8010546295181517,
+      "loss": 4.780259728431702,
+      "preclip_norm": 55.49689865112305,
+      "accepted_updates": 24
+    },
+    {
+      "step": 3,
+      "warmup": false,
+      "seconds": 5.252255193889141,
+      "pairs_per_second": 0.7615776180589804,
+      "loss": 4.708437740802765,
+      "preclip_norm": 38.26757049560547,
+      "accepted_updates": 24
+    },
+    {
+      "step": 4,
+      "warmup": false,
+      "seconds": 5.132609233260155,
+      "pairs_per_second": 0.7793307104073577,
+      "loss": 4.663534700870514,
+      "preclip_norm": 42.057498931884766,
+      "accepted_updates": 24
+    },
+    {
+      "step": 5,
+      "warmup": false,
+      "seconds": 5.054469130001962,
+      "pairs_per_second": 0.7913788564375794,
+      "loss": 4.612775921821594,
+      "preclip_norm": 43.08940124511719,
+      "accepted_updates": 24
+    },
+    {
+      "step": 6,
+      "warmup": false,
+      "seconds": 5.173564224503934,
+      "pairs_per_second": 0.7731613693040679,
+      "loss": 4.551706314086914,
+      "preclip_norm": 46.2946891784668,
+      "accepted_updates": 24
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "status": "failed",
+  "serial_H0_corner_max_abs_px": 0.36767578125,
+  "reversed_order_H0_corner_max_abs_px": 0.0,
+  "H_shape": [
+    2,
+    6,
+    3,
+    3
+  ],
+  "call_counts": {
+    "dino": 1,
+    "mvt": 1,
+    "vgg": 1,
+    "dedode_decode_calls": 1,
+    "dedode_steps": 4,
+    "dedode_scale1": 0
+  },
+  "pair_ids": [
+    "current__34.801100126.376330_pair0",
+    "current__34.801100126.376330_pair1"
+  ],
+  "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+  "scope": "heads eval, zero initialized MHIR; pair isolation and BF16 batch arithmetic drift"
+}

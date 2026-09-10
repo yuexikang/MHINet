@@ -988,6 +988,22 @@ D8/D4初次启动未限制线程，观察到各162线程；随后SIGINT结束这
 
 `scripts/summarize_pretraining.py` 从现有artifact生成 `docs/pretraining_mcnet_d2_summary.md` 与JSON索引，包含每轮误差、原始/平均读出、显存、缓存前向时间和checkpoint身份；缺失或运行中项不会被推定通过。运行时序及最终状态以原始artifact和progress为准。
 
+### D8完整预算与checkpoint重载（已完成）
+
+1664步达到登记门槛并提前停止。1536–1664共129次参数平均后的H0/H1/H2为14.868890/0.291660/0.098226 px，失败0/32、拒绝0/64；原始终点H2为0.290066 px，单独保留。训练循环累计617.205 s，峰值571,810,816 bytes；共享GPU下缓存前向56.555 ms/样本，不能视作独占端到端基准。结果表见 `docs/pretraining_mcnet_d2_summary.md`。
+
+原始artifact SHA256：`7c2f1fae0cf576c7b753fce0c2875c88746101b8b78d3723b85127adc386f294`。平均checkpoint为 `outputs/tiny_overfit/tiny-s-d8_one-pair-residuals_translation_bf16_weight-average-from-1536_arch-92095ffe16a5_bound-0p5_budget-2000_seed0.pt`，SHA256 `0da998f748cb901d0674e2767931603bbff2987e38aea08cc9591a460c39a15b`，不能用于优化器续训。
+
+独立重载命令：
+
+```bash
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 CUDA_VISIBLE_DEVICES=2 /root/miniconda3/envs/loma-repro/bin/python -m mhinet.cli tiny-checkpoint-audit --runtime configs/runtime_paths.server.json --checkpoint outputs/tiny_overfit/tiny-s-d8_one-pair-residuals_translation_bf16_weight-average-from-1536_arch-92095ffe16a5_bound-0p5_budget-2000_seed0.pt --experiment D8 --sample-count 32 --sample-protocol one_pair_residuals --residual-profile translation --precision bf16 --seed 0 --residual-bound-fraction 0.5 --output artifacts/p4_tiny_s_d8_mcnet_checkpoint_audit.json
+```
+
+重载资源签名严格匹配，序列化/载入/前向后权重哈希一致，重新计算的轨迹与原始artifact一致。重载artifact SHA256：`3a96402d0273aa835d8ebcd1299428d10ae18d0ea08846640589dbda5873cccf`。
+
+`scripts/analyze_tiny_conditions.py` 按H0平均残差的主轴与符号分组，生成表格及JSON。D8平均读出 x+/x-/y+/y- 的最终误差分别为0.090299/0.087680/0.129368/0.120216 px。总体均值门槛通过并不表示每方向或每样本均低于0.1 px。饱和比例和拒绝更新均为0。32步probe与完整结果均保存对应分方向证据；其余三个完整实验仍在运行，合并gate尚未通过。
+
 ## 2026-09-10：补齐续训对照与 D8 短程结果
 
 新增 `docs/results_mcnet_d2.md`，用表格与文字同时记录六轮资源、checkpoint-v2 对照和 D8 32步诊断。复核此前保存的两条运行记录及最终权重：恢复边界、RNG、数据游标正确，但 adapter 的119个权重元素存在最大1.9595e-6的差异，不能声明逐位一致。详情、原始目录和 checkpoint SHA256 均见结果表。

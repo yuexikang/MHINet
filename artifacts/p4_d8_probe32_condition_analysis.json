@@ -1,0 +1,111 @@
+[
+  {
+    "name": "TINY-S-D8",
+    "status": "failed",
+    "source": "/home/disk1/MHINet/artifacts/p4_tiny_s_d8_mcnet_probe32.json",
+    "sha256": "2ad74875dcbbc4c640b17f978f4ad5bad8e210f3216cbe7b6a67e04b2e11827c",
+    "primary_readout": "raw_parameters",
+    "groups": {
+      "raw_final": {
+        "x+": {
+          "count": 12,
+          "trajectory_mean_mace_px": [
+            14.629835446675619,
+            8.475724458694458,
+            5.6275361975034075
+          ],
+          "worst_final_mace_px": 13.806119918823242,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 5210
+        },
+        "x-": {
+          "count": 12,
+          "trajectory_mean_mace_px": [
+            14.96200998624166,
+            8.283618052800497,
+            5.765975991884868
+          ],
+          "worst_final_mace_px": 11.689701080322266,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 5067
+        },
+        "y+": {
+          "count": 5,
+          "trajectory_mean_mace_px": [
+            15.8387300491333,
+            14.328702545166015,
+            13.8088773727417
+          ],
+          "worst_final_mace_px": 15.790882110595703,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 5012
+        },
+        "y-": {
+          "count": 3,
+          "trajectory_mean_mace_px": [
+            13.836221059163412,
+            13.328075726826986,
+            12.84920597076416
+          ],
+          "worst_final_mace_px": 14.745962142944336,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 5295
+        }
+      },
+      "final": {
+        "x+": {
+          "count": 12,
+          "trajectory_mean_mace_px": [
+            14.629835446675619,
+            8.475724458694458,
+            5.6275361975034075
+          ],
+          "worst_final_mace_px": 13.806119918823242,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 5210
+        },
+        "x-": {
+          "count": 12,
+          "trajectory_mean_mace_px": [
+            14.96200998624166,
+            8.283618052800497,
+            5.765975991884868
+          ],
+          "worst_final_mace_px": 11.689701080322266,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 5067
+        },
+        "y+": {
+          "count": 5,
+          "trajectory_mean_mace_px": [
+            15.8387300491333,
+            14.328702545166015,
+            13.8088773727417
+          ],
+          "worst_final_mace_px": 15.790882110595703,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 5012
+        },
+        "y-": {
+          "count": 3,
+          "trajectory_mean_mace_px": [
+            13.836221059163412,
+            13.328075726826986,
+            12.84920597076416
+          ],
+          "worst_final_mace_px": 14.745962142944336,
+          "rejected_updates": 0,
+          "mean_saturation_fraction": 0.0,
+          "minimum_supported_queries": 5295
+        }
+      }
+    }
+  }
+]

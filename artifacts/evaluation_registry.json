@@ -1,0 +1,5528 @@
+{
+  "version": 1,
+  "records": [
+    {
+      "id": "678f86c4f197ab3b",
+      "registered_at_utc": "2026-09-10T14:04:31.277889+00:00",
+      "source_mtime_utc": "2026-09-10T13:48:12.711504+00:00",
+      "source_summary": "/home/disk1/MHINet/outputs/E00_h0_seed0/metrics/summary.json",
+      "source_summary_sha256": "13b73010b1d7e68c3b547d4a0a96ccc27d61f10471e24d23ca45e8cf4aec6af2",
+      "run": "E00_h0_seed0",
+      "scope": "独立评估 / 预训练H0",
+      "split": "test",
+      "pairs": 1000,
+      "mode": "H0_only",
+      "labels": [
+        "H0"
+      ],
+      "trajectory_mace_px": [
+        15.412560706496238
+      ],
+      "H0_mace_px": 15.412560706496238,
+      "final_mace_px": 15.412560706496238,
+      "final_median_px": 9.490782737731934,
+      "final_p90_px": 25.342169570922852,
+      "success": {
+        "1": 0.0,
+        "3": 0.029,
+        "5": 0.137
+      },
+      "auc": {
+        "1": 0.0,
+        "3": 0.004009674986203513,
+        "5": 0.03147904236316682
+      },
+      "failure_rate": 0.0,
+      "rejected_update_rate": 0.0,
+      "peak_allocated_bytes": 1137818624,
+      "peak_reserved_bytes": 1327497216,
+      "latency_ms": 47.849023641087115,
+      "wall_ms": 108.63106825668365,
+      "metrics_revision": "real_image_v2_ecdf_auc_quantile_median",
+      "checkpoint_path": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "checkpoint_sha256": null,
+      "weight_note": "运行摘要未记录权重hash",
+      "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+      "manifest_sha256": "3db0eca8c64a23cb1000d6905cbcf82dd221f653033e3b8463cd9484601dfb06",
+      "snapshot": {
+        "metrics_revision": "real_image_v2_ecdf_auc_quantile_median",
+        "mode": "H0_only",
+        "pairs": 1000,
+        "active_scales": [],
+        "iterations_per_scale": 0,
+        "update_scale_schedule": [],
+        "trajectory": {
+          "all_pair_threshold_scores_input_px": [
+            {
+              "success": {
+                "1": 0.0,
+                "3": 0.029,
+                "5": 0.137
+              },
+              "auc": {
+                "1": 0.0,
+                "3": 0.004009674986203513,
+                "5": 0.03147904236316682
+              }
+            }
+          ],
+          "auc_definition": "exact empirical recall integral / threshold: sum(valid * max(0,1-MACE/t))/N; thresholds 1,3,5 input pixels; not trapezoidal interpolation",
+          "labels": [
+            "H0"
+          ],
+          "conditional_validity_policy": {
+            "H0": "stage1_valid and geometry_valid",
+            "H_updates": "valid GHIM owner and guarded state geometry; rejected proposals retain the previous legal H and remain in the trajectory",
+            "reported_H_final": "overall_valid and geometry_valid",
+            "rejected_updates": "reported separately; a retained prior legal H may remain a valid final output"
+          },
+          "mace_input_px_all_finite_geometry": [
+            {
+              "count": 1000,
+              "finite_count": 1000,
+              "mean": 15.412560706496238,
+              "median": 9.490782737731934,
+              "p90": 25.342169570922852
+            }
+          ],
+          "mace_input_px_conditional_valid": [
+            {
+              "count": 1000,
+              "finite_count": 1000,
+              "mean": 15.412560706496238,
+              "median": 9.490782737731934,
+              "p90": 25.342169570922852,
+              "total_pair_count": 1000,
+              "conditional_valid_count": 1000,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            }
+          ],
+          "mace_native_target_px_all_finite_geometry": [
+            {
+              "count": 1000,
+              "finite_count": 1000,
+              "mean": 14.770054913043976,
+              "median": 8.834843635559082,
+              "p90": 23.707316970825197
+            }
+          ],
+          "mace_native_target_px_conditional_valid": [
+            {
+              "count": 1000,
+              "finite_count": 1000,
+              "mean": 14.770054913043976,
+              "median": 8.834843635559082,
+              "p90": 23.707316970825197,
+              "total_pair_count": 1000,
+              "conditional_valid_count": 1000,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            }
+          ],
+          "grid5_input_px_all_finite_geometry": [
+            {
+              "count": 1000,
+              "finite_count": 1000,
+              "mean": 9.705978413939476,
+              "median": 5.142473220825195,
+              "p90": 13.674088001251226
+            }
+          ],
+          "grid5_input_px_conditional_valid": [
+            {
+              "count": 1000,
+              "finite_count": 1000,
+              "mean": 9.705978413939476,
+              "median": 5.142473220825195,
+              "p90": 13.674088001251226,
+              "total_pair_count": 1000,
+              "conditional_valid_count": 1000,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            }
+          ],
+          "grid5_native_target_px_all_finite_geometry": [
+            {
+              "count": 1000,
+              "finite_count": 1000,
+              "mean": 9.330616801857948,
+              "median": 4.751517295837402,
+              "p90": 13.696739768981933
+            }
+          ],
+          "grid5_native_target_px_conditional_valid": [
+            {
+              "count": 1000,
+              "finite_count": 1000,
+              "mean": 9.330616801857948,
+              "median": 4.751517295837402,
+              "p90": 13.696739768981933,
+              "total_pair_count": 1000,
+              "conditional_valid_count": 1000,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            }
+          ]
+        },
+        "H0_mace_input_px_all_finite_geometry": {
+          "count": 1000,
+          "finite_count": 1000,
+          "mean": 15.412560706496238,
+          "median": 9.490782737731934,
+          "p90": 25.342169570922852
+        },
+        "H0_mace_input_px_conditional_valid": {
+          "count": 1000,
+          "finite_count": 1000,
+          "mean": 15.412560706496238,
+          "median": 9.490782737731934,
+          "p90": 25.342169570922852,
+          "total_pair_count": 1000,
+          "conditional_valid_count": 1000,
+          "conditional_invalid_count": 0,
+          "conditional_failure_rate": 0.0
+        },
+        "H_final_mace_input_px_all_finite_geometry": {
+          "count": 1000,
+          "finite_count": 1000,
+          "mean": 15.412560706496238,
+          "median": 9.490782737731934,
+          "p90": 25.342169570922852
+        },
+        "H_final_mace_input_px_conditional_valid": {
+          "count": 1000,
+          "finite_count": 1000,
+          "mean": 15.412560706496238,
+          "median": 9.490782737731934,
+          "p90": 25.342169570922852,
+          "total_pair_count": 1000,
+          "conditional_valid_count": 1000,
+          "conditional_invalid_count": 0,
+          "conditional_failure_rate": 0.0
+        },
+        "H_final_mace_native_target_px_conditional_valid": {
+          "count": 1000,
+          "finite_count": 1000,
+          "mean": 14.770054913043976,
+          "median": 8.834843635559082,
+          "p90": 23.707316970825197,
+          "total_pair_count": 1000,
+          "conditional_valid_count": 1000,
+          "conditional_invalid_count": 0,
+          "conditional_failure_rate": 0.0
+        },
+        "stage1_failures": 0,
+        "stage1_failure_rate": 0.0,
+        "valid_outputs": 1000,
+        "failure_rate": 0.0,
+        "all_pair_success_at_input_px": {
+          "1": 0.0,
+          "3": 0.029,
+          "5": 0.137
+        },
+        "rejected_updates": 0,
+        "rejected_update_rate": 0.0,
+        "shared_call_count_violations": 0,
+        "elapsed_seconds": 108.63106825668365,
+        "latency_ms_per_pair_single_pass": 47.849023641087115,
+        "wall_time_ms_per_pair_including_io_visualization": 108.63106825668365,
+        "latency_ms_single_pass_distribution": {
+          "count": 1000,
+          "finite_count": 1000,
+          "mean": 47.849023641087115,
+          "median": 47.51503374427557,
+          "p90": 47.87017377093434
+        },
+        "latency_scope": "per-pair synchronized single pass; this evaluation entry is not the 20-warmup/100-pair formal latency benchmark",
+        "peak_allocated_bytes": 1137818624,
+        "peak_reserved_bytes": 1327497216,
+        "diagnostic_availability": {
+          "window_recall": {
+            "available": false,
+            "reason": "The current forward contract does not retain GT-to-window membership; no window-recall value is inferred or fabricated."
+          }
+        },
+        "status": "completed",
+        "manifest": "/home/disk1/Data/datasets/GoogleEarth_scale_pairs/test/pairs.jsonl",
+        "manifest_sha256": "3db0eca8c64a23cb1000d6905cbcf82dd221f653033e3b8463cd9484601dfb06",
+        "runtime_config": "/home/disk1/MHINet/configs/runtime_paths.server.json",
+        "checkpoint": null,
+        "checkpoint_sha256": null,
+        "checkpoint_role": null,
+        "test_used": true,
+        "max_pairs": null,
+        "build": {
+          "architecture_path": "/home/disk1/MHINet/configs/mhinet_mcnet_v1.2.json",
+          "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+          "mhir_revision": "mcnet_correlation_decoder_784_v1",
+          "mcnet_reference_commit": "cc03479689b3cf40f0c384954f338b434765c155",
+          "provider": {
+            "loma_root": "/home/disk1/LoMa",
+            "loma_checkpoint": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+            "dino_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+            "selected_stage1_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+            "loretta_loaded_keys": 807,
+            "locator": {
+              "source": "official_loretta_checkpoint",
+              "overridden": false
+            },
+            "descriptor_initialization": {
+              "migrated_tensors": 364,
+              "vgg_tensors": 84,
+              "decoder_tensors": 280,
+              "top_refiner_mapping": "LoMa-B scale 14 -> DINOv3 scale 16"
+            },
+            "ownership": {
+              "dino_wrapper_instances": 1,
+              "mvt_object_references": 1,
+              "stage1_head_contains_dino": 0,
+              "stage1_head_contains_mvt": 0,
+              "decoder_scales": [
+                "16",
+                "8",
+                "4",
+                "2",
+                "1"
+              ]
+            },
+            "legacy_training_wrappers_reused": false,
+            "safe_stage1_fitter": true
+          },
+          "training_parameters": {
+            "profile": "heads",
+            "groups": {
+              "new_modules": {
+                "parameters": 1176712,
+                "trainable_parameters": 833222,
+                "tensor_count": 140,
+                "trainable_tensor_count": 99
+              },
+              "dedode": {
+                "parameters": 8219297,
+                "trainable_parameters": 0,
+                "tensor_count": 190,
+                "trainable_tensor_count": 0
+              },
+              "vgg": {
+                "parameters": 10592064,
+                "trainable_parameters": 0,
+                "tensor_count": 48,
+                "trainable_tensor_count": 0
+              },
+              "mvt": {
+                "parameters": 87417088,
+                "trainable_parameters": 0,
+                "tensor_count": 150,
+                "trainable_tensor_count": 0
+              },
+              "dino": {
+                "parameters": 227564544,
+                "trainable_parameters": 0,
+                "tensor_count": 259,
+                "trainable_tensor_count": 0
+              },
+              "stage1_head_parameters": {
+                "parameters": 2957572,
+                "trainable_parameters": 0,
+                "tensor_count": 10,
+                "trainable_tensor_count": 0
+              }
+            },
+            "total_trainable_parameters": 833222,
+            "new_parameters": 1176712,
+            "dino_trainable_parameters": 0,
+            "stage1_head_trainable_parameters": 0
+          }
+        },
+        "selection_warning": "test must not be used to choose a configuration"
+      }
+    },
+    {
+      "id": "ea4902ea3eed7a41",
+      "registered_at_utc": "2026-09-10T14:04:31.279675+00:00",
+      "source_mtime_utc": "2026-09-10T12:54:18.805041+00:00",
+      "source_summary": "/home/disk1/MHINet/outputs/engineering_batch_visualization_smoke_bs1/validation/step_0000001/summary.json",
+      "source_summary_sha256": "732ca23d89db3b80189fa9a00d4128a91937f6c8768aed9b1bfb82e452cafb99",
+      "run": "engineering_batch_visualization_smoke_bs1",
+      "scope": "训练中验证 / 工程权重",
+      "split": "val",
+      "pairs": 2,
+      "mode": "full_MHINet",
+      "labels": [
+        "H0",
+        "H1",
+        "H2",
+        "H3",
+        "H4",
+        "H5",
+        "H6"
+      ],
+      "trajectory_mace_px": [
+        6.61186957359314,
+        6.604370832443237,
+        6.60154390335083,
+        6.601332664489746,
+        6.602505922317505,
+        6.603604316711426,
+        6.604751825332642
+      ],
+      "H0_mace_px": 6.61186957359314,
+      "final_mace_px": 6.604751825332642,
+      "final_median_px": 5.916981220245361,
+      "final_p90_px": 7.154968309402466,
+      "success": {
+        "1": 0.0,
+        "3": 0.0,
+        "5": 0.0
+      },
+      "auc": {},
+      "failure_rate": 0.0,
+      "rejected_update_rate": 0.0,
+      "peak_allocated_bytes": 2079396864,
+      "peak_reserved_bytes": 2705326080,
+      "latency_ms": null,
+      "wall_ms": 1602.1446269005537,
+      "metrics_revision": "legacy_lower_median",
+      "checkpoint_path": "/home/disk1/MHINet/outputs/engineering_batch_visualization_smoke_bs1/checkpoints/step_0000001.pt",
+      "checkpoint_sha256": "89aa5fb9a868cbecb7f9dd6ccb434d2dd8ffb66cb094720228fc3205ee9304e8",
+      "weight_note": "运行摘要记录的hash",
+      "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+      "manifest_sha256": null,
+      "snapshot": {
+        "mode": "full_MHINet",
+        "pairs": 2,
+        "active_scales": [
+          8,
+          4,
+          2
+        ],
+        "iterations_per_scale": 2,
+        "update_scale_schedule": [
+          8,
+          8,
+          4,
+          4,
+          2,
+          2
+        ],
+        "trajectory": {
+          "labels": [
+            "H0",
+            "H1",
+            "H2",
+            "H3",
+            "H4",
+            "H5",
+            "H6"
+          ],
+          "conditional_validity_policy": {
+            "H0": "stage1_valid and geometry_valid",
+            "H_updates": "valid GHIM owner and guarded state geometry; rejected proposals retain the previous legal H and remain in the trajectory",
+            "reported_H_final": "overall_valid and geometry_valid",
+            "rejected_updates": "reported separately; a retained prior legal H may remain a valid final output"
+          },
+          "mace_input_px_all_finite_geometry": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.61186957359314,
+              "median": 6.063833713531494,
+              "p90": 7.050298261642456
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.604370832443237,
+              "median": 6.017223834991455,
+              "p90": 7.074088430404663
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.60154390335083,
+              "median": 5.9751739501953125,
+              "p90": 7.102639865875244
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.601332664489746,
+              "median": 5.951625823974609,
+              "p90": 7.121098136901855
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.602505922317505,
+              "median": 5.929080009460449,
+              "p90": 7.141246652603149
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.603604316711426,
+              "median": 5.923068046569824,
+              "p90": 7.148033332824707
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.604751825332642,
+              "median": 5.916981220245361,
+              "p90": 7.154968309402466
+            }
+          ],
+          "mace_input_px_conditional_valid": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.61186957359314,
+              "median": 6.063833713531494,
+              "p90": 7.050298261642456,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.604370832443237,
+              "median": 6.017223834991455,
+              "p90": 7.074088430404663,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.60154390335083,
+              "median": 5.9751739501953125,
+              "p90": 7.102639865875244,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.601332664489746,
+              "median": 5.951625823974609,
+              "p90": 7.121098136901855,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.602505922317505,
+              "median": 5.929080009460449,
+              "p90": 7.141246652603149,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.603604316711426,
+              "median": 5.923068046569824,
+              "p90": 7.148033332824707,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.604751825332642,
+              "median": 5.916981220245361,
+              "p90": 7.154968309402466,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            }
+          ],
+          "mace_native_target_px_all_finite_geometry": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.533251762390137,
+              "median": 4.840235710144043,
+              "p90": 6.087664604187012
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.520010232925415,
+              "median": 4.861619472503662,
+              "p90": 6.046722841262818
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.510717391967773,
+              "median": 4.886209964752197,
+              "p90": 6.010323333740234
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.50644063949585,
+              "median": 4.901844024658203,
+              "p90": 5.990117931365967
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.503293037414551,
+              "median": 4.918679237365723,
+              "p90": 5.970984077453613
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.5029685497283936,
+              "median": 4.924230098724365,
+              "p90": 5.965959310531616
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.502666473388672,
+              "median": 4.929884910583496,
+              "p90": 5.9608917236328125
+            }
+          ],
+          "mace_native_target_px_conditional_valid": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.533251762390137,
+              "median": 4.840235710144043,
+              "p90": 6.087664604187012,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.520010232925415,
+              "median": 4.861619472503662,
+              "p90": 6.046722841262818,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.510717391967773,
+              "median": 4.886209964752197,
+              "p90": 6.010323333740234,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.50644063949585,
+              "median": 4.901844024658203,
+              "p90": 5.990117931365967,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.503293037414551,
+              "median": 4.918679237365723,
+              "p90": 5.970984077453613,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.5029685497283936,
+              "median": 4.924230098724365,
+              "p90": 5.965959310531616,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.502666473388672,
+              "median": 4.929884910583496,
+              "p90": 5.9608917236328125,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            }
+          ],
+          "grid5_input_px_all_finite_geometry": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.9639581441879272,
+              "median": 2.6842432022094727,
+              "p90": 3.187730097770691
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.9525325298309326,
+              "median": 2.709392547607422,
+              "p90": 3.1470445156097413
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.952956199645996,
+              "median": 2.7473998069763184,
+              "p90": 3.1174013137817385
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.9600497484207153,
+              "median": 2.776561737060547,
+              "p90": 3.10684015750885
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.9732863903045654,
+              "median": 2.812546968460083,
+              "p90": 3.1018779277801514
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.9795299768447876,
+              "median": 2.826425790786743,
+              "p90": 3.1020133256912232
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.986395835876465,
+              "median": 2.841078519821167,
+              "p90": 3.102649688720703
+            }
+          ],
+          "grid5_input_px_conditional_valid": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.9639581441879272,
+              "median": 2.6842432022094727,
+              "p90": 3.187730097770691,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.9525325298309326,
+              "median": 2.709392547607422,
+              "p90": 3.1470445156097413,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.952956199645996,
+              "median": 2.7473998069763184,
+              "p90": 3.1174013137817385,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.9600497484207153,
+              "median": 2.776561737060547,
+              "p90": 3.10684015750885,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.9732863903045654,
+              "median": 2.812546968460083,
+              "p90": 3.1018779277801514,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.9795299768447876,
+              "median": 2.826425790786743,
+              "p90": 3.1020133256912232,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.986395835876465,
+              "median": 2.841078519821167,
+              "p90": 3.102649688720703,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            }
+          ],
+          "grid5_native_target_px_all_finite_geometry": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.572580337524414,
+              "median": 1.8146004676818848,
+              "p90": 3.1789642333984376
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.556440830230713,
+              "median": 1.831604242324829,
+              "p90": 3.13631010055542
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.5502063632011414,
+              "median": 1.8572908639907837,
+              "p90": 3.1045387625694274
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.5523828268051147,
+              "median": 1.8770101070404053,
+              "p90": 3.0926810026168825
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.5596553683280945,
+              "median": 1.9013339281082153,
+              "p90": 3.0863125205039976
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.5636359453201294,
+              "median": 1.9107167720794678,
+              "p90": 3.0859712839126585
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.5681101083755493,
+              "median": 1.920623779296875,
+              "p90": 3.0860991716384887
+            }
+          ],
+          "grid5_native_target_px_conditional_valid": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.572580337524414,
+              "median": 1.8146004676818848,
+              "p90": 3.1789642333984376,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.556440830230713,
+              "median": 1.831604242324829,
+              "p90": 3.13631010055542,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.5502063632011414,
+              "median": 1.8572908639907837,
+              "p90": 3.1045387625694274,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.5523828268051147,
+              "median": 1.8770101070404053,
+              "p90": 3.0926810026168825,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.5596553683280945,
+              "median": 1.9013339281082153,
+              "p90": 3.0863125205039976,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.5636359453201294,
+              "median": 1.9107167720794678,
+              "p90": 3.0859712839126585,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.5681101083755493,
+              "median": 1.920623779296875,
+              "p90": 3.0860991716384887,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            }
+          ]
+        },
+        "H0_mace_input_px_all_finite_geometry": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 6.61186957359314,
+          "median": 6.063833713531494,
+          "p90": 7.050298261642456
+        },
+        "H0_mace_input_px_conditional_valid": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 6.61186957359314,
+          "median": 6.063833713531494,
+          "p90": 7.050298261642456,
+          "total_pair_count": 2,
+          "conditional_valid_count": 2,
+          "conditional_invalid_count": 0,
+          "conditional_failure_rate": 0.0
+        },
+        "H_final_mace_input_px_all_finite_geometry": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 6.604751825332642,
+          "median": 5.916981220245361,
+          "p90": 7.154968309402466
+        },
+        "H_final_mace_input_px_conditional_valid": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 6.604751825332642,
+          "median": 5.916981220245361,
+          "p90": 7.154968309402466,
+          "total_pair_count": 2,
+          "conditional_valid_count": 2,
+          "conditional_invalid_count": 0,
+          "conditional_failure_rate": 0.0
+        },
+        "H_final_mace_native_target_px_conditional_valid": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 5.502666473388672,
+          "median": 4.929884910583496,
+          "p90": 5.9608917236328125,
+          "total_pair_count": 2,
+          "conditional_valid_count": 2,
+          "conditional_invalid_count": 0,
+          "conditional_failure_rate": 0.0
+        },
+        "stage1_failures": 0,
+        "stage1_failure_rate": 0.0,
+        "valid_outputs": 2,
+        "failure_rate": 0.0,
+        "all_pair_success_at_input_px": {
+          "1": 0.0,
+          "3": 0.0,
+          "5": 0.0
+        },
+        "rejected_updates": 0,
+        "rejected_update_rate": 0.0,
+        "shared_call_count_violations": 0,
+        "elapsed_seconds": 3.2042892538011074,
+        "latency_ms_per_pair_single_pass": 1602.1446269005537,
+        "latency_ms_single_pass_distribution": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 354.3314589187503,
+          "median": 331.44798409193754,
+          "p90": 372.6382387802005
+        },
+        "latency_scope": "per-pair synchronized single pass; this evaluation entry is not the 20-warmup/100-pair formal latency benchmark",
+        "peak_allocated_bytes": 2079396864,
+        "peak_reserved_bytes": 2705326080,
+        "diagnostic_availability": {
+          "window_recall": {
+            "available": false,
+            "reason": "The current forward contract does not retain GT-to-window membership; no window-recall value is inferred or fabricated."
+          }
+        },
+        "optimizer_step": 1,
+        "checkpoint": {
+          "path": "/home/disk1/MHINet/outputs/engineering_batch_visualization_smoke_bs1/checkpoints/step_0000001.pt",
+          "format": "mhinet.training",
+          "version": 2,
+          "bytes": 903972217,
+          "optimizer_step": 1,
+          "microbatch_progress": {
+            "accumulated_valid": 0
+          },
+          "data_progress": {
+            "length": 32,
+            "seed": 0,
+            "epoch": 0,
+            "position": 4,
+            "invalid_attempts_total": 0,
+            "shared_call_count_violations": 0
+          },
+          "metadata": {
+            "experiment_id": "engineering_batch_visualization_smoke",
+            "training_revision": "1.2",
+            "loss_revision": "1.1",
+            "training_config": "/home/disk1/MHINet/configs/batch_visualization_smoke.json",
+            "training_config_sha256": "68867a32bd530eb1f45bd42779344ac85f3936d3d3ffae6e43d3f381bb79efbf",
+            "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+            "mhir_revision": "mcnet_correlation_decoder_784_v1",
+            "runtime_config": "/home/disk1/MHINet/configs/runtime_paths.server.json",
+            "profile": "heads",
+            "active_scales": [
+              8,
+              4,
+              2
+            ],
+            "iterations_per_scale": 2,
+            "batch_size": 1,
+            "effective_batch_size": 4,
+            "gradient_accumulation": 4,
+            "tiny_gate": {
+              "path": "/home/disk1/MHINet/artifacts/p4_tiny_gate_mcnet_d2.json",
+              "sha256": "13719169eaed0d1d887a18d846f4a824525231f427dc8ec3d3456edad6a60ea3"
+            },
+            "test_used": false
+          },
+          "cuda_rng_captured": true,
+          "sha256": "89aa5fb9a868cbecb7f9dd6ccb434d2dd8ffb66cb094720228fc3205ee9304e8"
+        },
+        "split": "val",
+        "test_used": false
+      }
+    },
+    {
+      "id": "69a49b547a666116",
+      "registered_at_utc": "2026-09-10T14:04:31.298937+00:00",
+      "source_mtime_utc": "2026-09-10T12:56:14.369629+00:00",
+      "source_summary": "/home/disk1/MHINet/outputs/engineering_batch_visualization_smoke_bs1/validation/step_0000002/summary.json",
+      "source_summary_sha256": "7b3a11508e547588db092074af0590e5c8960e66a843606a840f8ff90298987b",
+      "run": "engineering_batch_visualization_smoke_bs1",
+      "scope": "训练中验证 / 工程权重",
+      "split": "val",
+      "pairs": 2,
+      "mode": "full_MHINet",
+      "labels": [
+        "H0",
+        "H1",
+        "H2",
+        "H3",
+        "H4",
+        "H5",
+        "H6"
+      ],
+      "trajectory_mace_px": [
+        6.61186957359314,
+        6.601425409317017,
+        6.599621057510376,
+        6.6015589237213135,
+        6.606512069702148,
+        6.609407186508179,
+        6.612704753875732
+      ],
+      "H0_mace_px": 6.61186957359314,
+      "final_mace_px": 6.612704753875732,
+      "final_median_px": 5.8317155838012695,
+      "final_p90_px": 7.237496089935303,
+      "success": {
+        "1": 0.0,
+        "3": 0.0,
+        "5": 0.0
+      },
+      "auc": {},
+      "failure_rate": 0.0,
+      "rejected_update_rate": 0.0,
+      "peak_allocated_bytes": 2079447552,
+      "peak_reserved_bytes": 2707423232,
+      "latency_ms": null,
+      "wall_ms": 1550.2309314906597,
+      "metrics_revision": "legacy_lower_median",
+      "checkpoint_path": "/home/disk1/MHINet/outputs/engineering_batch_visualization_smoke_bs1/checkpoints/step_0000002.pt",
+      "checkpoint_sha256": "15a7feaf142bf72a25a54c057a7909661ddcec9fd0a10316b6c20a295b02469a",
+      "weight_note": "运行摘要记录的hash",
+      "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+      "manifest_sha256": null,
+      "snapshot": {
+        "mode": "full_MHINet",
+        "pairs": 2,
+        "active_scales": [
+          8,
+          4,
+          2
+        ],
+        "iterations_per_scale": 2,
+        "update_scale_schedule": [
+          8,
+          8,
+          4,
+          4,
+          2,
+          2
+        ],
+        "trajectory": {
+          "labels": [
+            "H0",
+            "H1",
+            "H2",
+            "H3",
+            "H4",
+            "H5",
+            "H6"
+          ],
+          "conditional_validity_policy": {
+            "H0": "stage1_valid and geometry_valid",
+            "H_updates": "valid GHIM owner and guarded state geometry; rejected proposals retain the previous legal H and remain in the trajectory",
+            "reported_H_final": "overall_valid and geometry_valid",
+            "rejected_updates": "reported separately; a retained prior legal H may remain a valid final output"
+          },
+          "mace_input_px_all_finite_geometry": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.61186957359314,
+              "median": 6.063833713531494,
+              "p90": 7.050298261642456
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.601425409317017,
+              "median": 5.987943172454834,
+              "p90": 7.092211198806763
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.599621057510376,
+              "median": 5.919910430908203,
+              "p90": 7.143389558792114
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.6015589237213135,
+              "median": 5.883528232574463,
+              "p90": 7.175983476638794
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.606512069702148,
+              "median": 5.849827766418457,
+              "p90": 7.211859512329101
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.609407186508179,
+              "median": 5.840526580810547,
+              "p90": 7.224511671066284
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.612704753875732,
+              "median": 5.8317155838012695,
+              "p90": 7.237496089935303
+            }
+          ],
+          "mace_input_px_conditional_valid": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.61186957359314,
+              "median": 6.063833713531494,
+              "p90": 7.050298261642456,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.601425409317017,
+              "median": 5.987943172454834,
+              "p90": 7.092211198806763,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.599621057510376,
+              "median": 5.919910430908203,
+              "p90": 7.143389558792114,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.6015589237213135,
+              "median": 5.883528232574463,
+              "p90": 7.175983476638794,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.606512069702148,
+              "median": 5.849827766418457,
+              "p90": 7.211859512329101,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.609407186508179,
+              "median": 5.840526580810547,
+              "p90": 7.224511671066284,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.612704753875732,
+              "median": 5.8317155838012695,
+              "p90": 7.237496089935303,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            }
+          ],
+          "mace_native_target_px_all_finite_geometry": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.533251762390137,
+              "median": 4.840235710144043,
+              "p90": 6.087664604187012
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.512866020202637,
+              "median": 4.877414226531982,
+              "p90": 6.02122745513916
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.4997148513793945,
+              "median": 4.920967102050781,
+              "p90": 5.962713050842285
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.494648218154907,
+              "median": 4.9481730461120605,
+              "p90": 5.931828355789184
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.492094278335571,
+              "median": 4.977668762207031,
+              "p90": 5.903634691238404
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.492413759231567,
+              "median": 4.987873077392578,
+              "p90": 5.896046304702759
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.49310564994812,
+              "median": 4.998287200927734,
+              "p90": 5.8889604091644285
+            }
+          ],
+          "mace_native_target_px_conditional_valid": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.533251762390137,
+              "median": 4.840235710144043,
+              "p90": 6.087664604187012,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.512866020202637,
+              "median": 4.877414226531982,
+              "p90": 6.02122745513916,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.4997148513793945,
+              "median": 4.920967102050781,
+              "p90": 5.962713050842285,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.494648218154907,
+              "median": 4.9481730461120605,
+              "p90": 5.931828355789184,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.492094278335571,
+              "median": 4.977668762207031,
+              "p90": 5.903634691238404,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.492413759231567,
+              "median": 4.987873077392578,
+              "p90": 5.896046304702759,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.49310564994812,
+              "median": 4.998287200927734,
+              "p90": 5.8889604091644285,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            }
+          ],
+          "grid5_input_px_all_finite_geometry": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.9639581441879272,
+              "median": 2.6842432022094727,
+              "p90": 3.187730097770691
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.951292872428894,
+              "median": 2.728945255279541,
+              "p90": 3.1291709661483766
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.9635075330734253,
+              "median": 2.799898386001587,
+              "p90": 3.094394850730896
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.986578345298767,
+              "median": 2.8575780391693115,
+              "p90": 3.0897785902023314
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 3.019705653190613,
+              "median": 2.9279682636260986,
+              "p90": 3.093095564842224
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 3.033646583557129,
+              "median": 2.954888343811035,
+              "p90": 3.096653175354004
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 3.0486109256744385,
+              "median": 2.9830124378204346,
+              "p90": 3.1010897159576416
+            }
+          ],
+          "grid5_input_px_conditional_valid": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.9639581441879272,
+              "median": 2.6842432022094727,
+              "p90": 3.187730097770691,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.951292872428894,
+              "median": 2.728945255279541,
+              "p90": 3.1291709661483766,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.9635075330734253,
+              "median": 2.799898386001587,
+              "p90": 3.094394850730896,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.986578345298767,
+              "median": 2.8575780391693115,
+              "p90": 3.0897785902023314,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 3.019705653190613,
+              "median": 2.9279682636260986,
+              "p90": 3.093095564842224,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 3.033646583557129,
+              "median": 2.954888343811035,
+              "p90": 3.096653175354004,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 3.0486109256744385,
+              "median": 2.9830124378204346,
+              "p90": 3.1010897159576416,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            }
+          ],
+          "grid5_native_target_px_all_finite_geometry": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.572580337524414,
+              "median": 1.8146004676818848,
+              "p90": 3.1789642333984376
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.551737606525421,
+              "median": 1.8448199033737183,
+              "p90": 3.1172717690467833
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.551832377910614,
+              "median": 1.8927847146987915,
+              "p90": 3.079070508480072
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.5654134154319763,
+              "median": 1.9317811727523804,
+              "p90": 3.072319209575653
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.5870777368545532,
+              "median": 1.9793636798858643,
+              "p90": 3.0732489824295044
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.596669614315033,
+              "median": 1.9975634813308716,
+              "p90": 3.075954520702362
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.6071003675460815,
+              "median": 2.0165719985961914,
+              "p90": 3.0795230627059937
+            }
+          ],
+          "grid5_native_target_px_conditional_valid": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.572580337524414,
+              "median": 1.8146004676818848,
+              "p90": 3.1789642333984376,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.551737606525421,
+              "median": 1.8448199033737183,
+              "p90": 3.1172717690467833,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.551832377910614,
+              "median": 1.8927847146987915,
+              "p90": 3.079070508480072,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.5654134154319763,
+              "median": 1.9317811727523804,
+              "p90": 3.072319209575653,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.5870777368545532,
+              "median": 1.9793636798858643,
+              "p90": 3.0732489824295044,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.596669614315033,
+              "median": 1.9975634813308716,
+              "p90": 3.075954520702362,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.6071003675460815,
+              "median": 2.0165719985961914,
+              "p90": 3.0795230627059937,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            }
+          ]
+        },
+        "H0_mace_input_px_all_finite_geometry": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 6.61186957359314,
+          "median": 6.063833713531494,
+          "p90": 7.050298261642456
+        },
+        "H0_mace_input_px_conditional_valid": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 6.61186957359314,
+          "median": 6.063833713531494,
+          "p90": 7.050298261642456,
+          "total_pair_count": 2,
+          "conditional_valid_count": 2,
+          "conditional_invalid_count": 0,
+          "conditional_failure_rate": 0.0
+        },
+        "H_final_mace_input_px_all_finite_geometry": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 6.612704753875732,
+          "median": 5.8317155838012695,
+          "p90": 7.237496089935303
+        },
+        "H_final_mace_input_px_conditional_valid": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 6.612704753875732,
+          "median": 5.8317155838012695,
+          "p90": 7.237496089935303,
+          "total_pair_count": 2,
+          "conditional_valid_count": 2,
+          "conditional_invalid_count": 0,
+          "conditional_failure_rate": 0.0
+        },
+        "H_final_mace_native_target_px_conditional_valid": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 5.49310564994812,
+          "median": 4.998287200927734,
+          "p90": 5.8889604091644285,
+          "total_pair_count": 2,
+          "conditional_valid_count": 2,
+          "conditional_invalid_count": 0,
+          "conditional_failure_rate": 0.0
+        },
+        "stage1_failures": 0,
+        "stage1_failure_rate": 0.0,
+        "valid_outputs": 2,
+        "failure_rate": 0.0,
+        "all_pair_success_at_input_px": {
+          "1": 0.0,
+          "3": 0.0,
+          "5": 0.0
+        },
+        "rejected_updates": 0,
+        "rejected_update_rate": 0.0,
+        "shared_call_count_violations": 0,
+        "elapsed_seconds": 3.1004618629813194,
+        "latency_ms_per_pair_single_pass": 1550.2309314906597,
+        "latency_ms_single_pass_distribution": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 350.2513258717954,
+          "median": 325.2130076289177,
+          "p90": 370.2819804660976
+        },
+        "latency_scope": "per-pair synchronized single pass; this evaluation entry is not the 20-warmup/100-pair formal latency benchmark",
+        "peak_allocated_bytes": 2079447552,
+        "peak_reserved_bytes": 2707423232,
+        "diagnostic_availability": {
+          "window_recall": {
+            "available": false,
+            "reason": "The current forward contract does not retain GT-to-window membership; no window-recall value is inferred or fabricated."
+          }
+        },
+        "optimizer_step": 2,
+        "checkpoint": {
+          "path": "/home/disk1/MHINet/outputs/engineering_batch_visualization_smoke_bs1/checkpoints/step_0000002.pt",
+          "format": "mhinet.training",
+          "version": 2,
+          "bytes": 903973305,
+          "optimizer_step": 2,
+          "microbatch_progress": {
+            "accumulated_valid": 0
+          },
+          "data_progress": {
+            "length": 32,
+            "seed": 0,
+            "epoch": 0,
+            "position": 8,
+            "invalid_attempts_total": 0,
+            "shared_call_count_violations": 0
+          },
+          "metadata": {
+            "experiment_id": "engineering_batch_visualization_smoke",
+            "training_revision": "1.2",
+            "loss_revision": "1.1",
+            "training_config": "/home/disk1/MHINet/configs/batch_visualization_smoke.json",
+            "training_config_sha256": "68867a32bd530eb1f45bd42779344ac85f3936d3d3ffae6e43d3f381bb79efbf",
+            "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+            "mhir_revision": "mcnet_correlation_decoder_784_v1",
+            "runtime_config": "/home/disk1/MHINet/configs/runtime_paths.server.json",
+            "profile": "heads",
+            "active_scales": [
+              8,
+              4,
+              2
+            ],
+            "iterations_per_scale": 2,
+            "batch_size": 1,
+            "effective_batch_size": 4,
+            "gradient_accumulation": 4,
+            "tiny_gate": {
+              "path": "/home/disk1/MHINet/artifacts/p4_tiny_gate_mcnet_d2.json",
+              "sha256": "13719169eaed0d1d887a18d846f4a824525231f427dc8ec3d3456edad6a60ea3"
+            },
+            "test_used": false
+          },
+          "cuda_rng_captured": true,
+          "sha256": "15a7feaf142bf72a25a54c057a7909661ddcec9fd0a10316b6c20a295b02469a"
+        },
+        "split": "val",
+        "test_used": false
+      }
+    },
+    {
+      "id": "3204e56bb20ded80",
+      "registered_at_utc": "2026-09-10T14:04:31.302527+00:00",
+      "source_mtime_utc": "2026-09-10T12:57:30.510017+00:00",
+      "source_summary": "/home/disk1/MHINet/outputs/engineering_visualization_seven_smoke/validation/step_0000002/summary.json",
+      "source_summary_sha256": "70dee203cf8129729d1498089ddac731026bd64a34f81bbbc48149ec82bff269",
+      "run": "engineering_visualization_seven_smoke",
+      "scope": "训练中验证 / 工程权重",
+      "split": "val",
+      "pairs": 2,
+      "mode": "full_MHINet",
+      "labels": [
+        "H0",
+        "H1",
+        "H2",
+        "H3",
+        "H4",
+        "H5",
+        "H6"
+      ],
+      "trajectory_mace_px": [
+        6.61186957359314,
+        6.601425409317017,
+        6.599621057510376,
+        6.601794719696045,
+        6.606785535812378,
+        6.609658718109131,
+        6.612916946411133
+      ],
+      "H0_mace_px": 6.61186957359314,
+      "final_mace_px": 6.612916946411133,
+      "final_median_px": 5.831919193267822,
+      "final_p90_px": 7.237715148925782,
+      "success": {
+        "1": 0.0,
+        "3": 0.0,
+        "5": 0.0
+      },
+      "auc": {},
+      "failure_rate": 0.0,
+      "rejected_update_rate": 0.0,
+      "peak_allocated_bytes": 2079447552,
+      "peak_reserved_bytes": 2707423232,
+      "latency_ms": null,
+      "wall_ms": 1714.6872342564166,
+      "metrics_revision": "legacy_lower_median",
+      "checkpoint_path": "/home/disk1/MHINet/outputs/engineering_visualization_seven_smoke/checkpoints/step_0000002.pt",
+      "checkpoint_sha256": "20ee388f5914850287c8237f45e0ad273c73a6e7d7ce539baa5d6a0c72b003c8",
+      "weight_note": "运行摘要记录的hash",
+      "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+      "manifest_sha256": null,
+      "snapshot": {
+        "mode": "full_MHINet",
+        "pairs": 2,
+        "active_scales": [
+          8,
+          4,
+          2
+        ],
+        "iterations_per_scale": 2,
+        "update_scale_schedule": [
+          8,
+          8,
+          4,
+          4,
+          2,
+          2
+        ],
+        "trajectory": {
+          "labels": [
+            "H0",
+            "H1",
+            "H2",
+            "H3",
+            "H4",
+            "H5",
+            "H6"
+          ],
+          "conditional_validity_policy": {
+            "H0": "stage1_valid and geometry_valid",
+            "H_updates": "valid GHIM owner and guarded state geometry; rejected proposals retain the previous legal H and remain in the trajectory",
+            "reported_H_final": "overall_valid and geometry_valid",
+            "rejected_updates": "reported separately; a retained prior legal H may remain a valid final output"
+          },
+          "mace_input_px_all_finite_geometry": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.61186957359314,
+              "median": 6.063833713531494,
+              "p90": 7.050298261642456
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.601425409317017,
+              "median": 5.987943172454834,
+              "p90": 7.092211198806763
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.599621057510376,
+              "median": 5.919910430908203,
+              "p90": 7.143389558792114
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.601794719696045,
+              "median": 5.8837480545043945,
+              "p90": 7.176232051849365
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.606785535812378,
+              "median": 5.850050926208496,
+              "p90": 7.212173223495483
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.609658718109131,
+              "median": 5.840756416320801,
+              "p90": 7.224780559539795
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.612916946411133,
+              "median": 5.831919193267822,
+              "p90": 7.237715148925782
+            }
+          ],
+          "mace_input_px_conditional_valid": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.61186957359314,
+              "median": 6.063833713531494,
+              "p90": 7.050298261642456,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.601425409317017,
+              "median": 5.987943172454834,
+              "p90": 7.092211198806763,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.599621057510376,
+              "median": 5.919910430908203,
+              "p90": 7.143389558792114,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.601794719696045,
+              "median": 5.8837480545043945,
+              "p90": 7.176232051849365,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.606785535812378,
+              "median": 5.850050926208496,
+              "p90": 7.212173223495483,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.609658718109131,
+              "median": 5.840756416320801,
+              "p90": 7.224780559539795,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.612916946411133,
+              "median": 5.831919193267822,
+              "p90": 7.237715148925782,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            }
+          ],
+          "mace_native_target_px_all_finite_geometry": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.533251762390137,
+              "median": 4.840235710144043,
+              "p90": 6.087664604187012
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.512866020202637,
+              "median": 4.877414226531982,
+              "p90": 6.02122745513916
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.4997148513793945,
+              "median": 4.920967102050781,
+              "p90": 5.962713050842285
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.494856595993042,
+              "median": 4.948369979858398,
+              "p90": 5.932045888900757
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.492304801940918,
+              "median": 4.977872848510742,
+              "p90": 5.903850364685058
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.492630243301392,
+              "median": 4.98805570602417,
+              "p90": 5.896289873123169
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.493274211883545,
+              "median": 4.9984331130981445,
+              "p90": 5.889147090911865
+            }
+          ],
+          "mace_native_target_px_conditional_valid": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.533251762390137,
+              "median": 4.840235710144043,
+              "p90": 6.087664604187012,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.512866020202637,
+              "median": 4.877414226531982,
+              "p90": 6.02122745513916,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.4997148513793945,
+              "median": 4.920967102050781,
+              "p90": 5.962713050842285,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.494856595993042,
+              "median": 4.948369979858398,
+              "p90": 5.932045888900757,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.492304801940918,
+              "median": 4.977872848510742,
+              "p90": 5.903850364685058,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.492630243301392,
+              "median": 4.98805570602417,
+              "p90": 5.896289873123169,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.493274211883545,
+              "median": 4.9984331130981445,
+              "p90": 5.889147090911865,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            }
+          ],
+          "grid5_input_px_all_finite_geometry": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.9639581441879272,
+              "median": 2.6842432022094727,
+              "p90": 3.187730097770691
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.951292872428894,
+              "median": 2.728945255279541,
+              "p90": 3.1291709661483766
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.9635075330734253,
+              "median": 2.799898386001587,
+              "p90": 3.094394850730896
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.986751079559326,
+              "median": 2.857806921005249,
+              "p90": 3.089906406402588
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 3.0198556184768677,
+              "median": 2.928149461746216,
+              "p90": 3.0932205438613893
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 3.0337804555892944,
+              "median": 2.9550280570983887,
+              "p90": 3.096782374382019
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 3.048721432685852,
+              "median": 2.983128070831299,
+              "p90": 3.101196122169495
+            }
+          ],
+          "grid5_input_px_conditional_valid": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.9639581441879272,
+              "median": 2.6842432022094727,
+              "p90": 3.187730097770691,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.951292872428894,
+              "median": 2.728945255279541,
+              "p90": 3.1291709661483766,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.9635075330734253,
+              "median": 2.799898386001587,
+              "p90": 3.094394850730896,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.986751079559326,
+              "median": 2.857806921005249,
+              "p90": 3.089906406402588,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 3.0198556184768677,
+              "median": 2.928149461746216,
+              "p90": 3.0932205438613893,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 3.0337804555892944,
+              "median": 2.9550280570983887,
+              "p90": 3.096782374382019,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 3.048721432685852,
+              "median": 2.983128070831299,
+              "p90": 3.101196122169495,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            }
+          ],
+          "grid5_native_target_px_all_finite_geometry": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.572580337524414,
+              "median": 1.8146004676818848,
+              "p90": 3.1789642333984376
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.551737606525421,
+              "median": 1.8448199033737183,
+              "p90": 3.1172717690467833
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.551832377910614,
+              "median": 1.8927847146987915,
+              "p90": 3.079070508480072
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.56554639339447,
+              "median": 1.9319303035736084,
+              "p90": 3.07243926525116
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.587207794189453,
+              "median": 1.9794890880584717,
+              "p90": 3.073382759094238
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.5967793464660645,
+              "median": 1.9976563453674316,
+              "p90": 3.0760777473449705
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.607201337814331,
+              "median": 2.016655921936035,
+              "p90": 3.0796376705169677
+            }
+          ],
+          "grid5_native_target_px_conditional_valid": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.572580337524414,
+              "median": 1.8146004676818848,
+              "p90": 3.1789642333984376,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.551737606525421,
+              "median": 1.8448199033737183,
+              "p90": 3.1172717690467833,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.551832377910614,
+              "median": 1.8927847146987915,
+              "p90": 3.079070508480072,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.56554639339447,
+              "median": 1.9319303035736084,
+              "p90": 3.07243926525116,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.587207794189453,
+              "median": 1.9794890880584717,
+              "p90": 3.073382759094238,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.5967793464660645,
+              "median": 1.9976563453674316,
+              "p90": 3.0760777473449705,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.607201337814331,
+              "median": 2.016655921936035,
+              "p90": 3.0796376705169677,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            }
+          ]
+        },
+        "H0_mace_input_px_all_finite_geometry": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 6.61186957359314,
+          "median": 6.063833713531494,
+          "p90": 7.050298261642456
+        },
+        "H0_mace_input_px_conditional_valid": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 6.61186957359314,
+          "median": 6.063833713531494,
+          "p90": 7.050298261642456,
+          "total_pair_count": 2,
+          "conditional_valid_count": 2,
+          "conditional_invalid_count": 0,
+          "conditional_failure_rate": 0.0
+        },
+        "H_final_mace_input_px_all_finite_geometry": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 6.612916946411133,
+          "median": 5.831919193267822,
+          "p90": 7.237715148925782
+        },
+        "H_final_mace_input_px_conditional_valid": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 6.612916946411133,
+          "median": 5.831919193267822,
+          "p90": 7.237715148925782,
+          "total_pair_count": 2,
+          "conditional_valid_count": 2,
+          "conditional_invalid_count": 0,
+          "conditional_failure_rate": 0.0
+        },
+        "H_final_mace_native_target_px_conditional_valid": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 5.493274211883545,
+          "median": 4.9984331130981445,
+          "p90": 5.889147090911865,
+          "total_pair_count": 2,
+          "conditional_valid_count": 2,
+          "conditional_invalid_count": 0,
+          "conditional_failure_rate": 0.0
+        },
+        "stage1_failures": 0,
+        "stage1_failure_rate": 0.0,
+        "valid_outputs": 2,
+        "failure_rate": 0.0,
+        "all_pair_success_at_input_px": {
+          "1": 0.0,
+          "3": 0.0,
+          "5": 0.0
+        },
+        "rejected_updates": 0,
+        "rejected_update_rate": 0.0,
+        "shared_call_count_violations": 0,
+        "elapsed_seconds": 3.429374468512833,
+        "latency_ms_per_pair_single_pass": 1714.6872342564166,
+        "latency_ms_single_pass_distribution": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 346.06854943558574,
+          "median": 329.4465793296695,
+          "p90": 359.36612552031875
+        },
+        "latency_scope": "per-pair synchronized single pass; this evaluation entry is not the 20-warmup/100-pair formal latency benchmark",
+        "peak_allocated_bytes": 2079447552,
+        "peak_reserved_bytes": 2707423232,
+        "diagnostic_availability": {
+          "window_recall": {
+            "available": false,
+            "reason": "The current forward contract does not retain GT-to-window membership; no window-recall value is inferred or fabricated."
+          }
+        },
+        "optimizer_step": 2,
+        "checkpoint": {
+          "path": "/home/disk1/MHINet/outputs/engineering_visualization_seven_smoke/checkpoints/step_0000002.pt",
+          "format": "mhinet.training",
+          "version": 2,
+          "bytes": 903973305,
+          "optimizer_step": 2,
+          "microbatch_progress": {
+            "accumulated_valid": 0
+          },
+          "data_progress": {
+            "length": 32,
+            "seed": 0,
+            "epoch": 0,
+            "position": 8,
+            "invalid_attempts_total": 0,
+            "shared_call_count_violations": 0
+          },
+          "metadata": {
+            "experiment_id": "engineering_batch_visualization_smoke",
+            "training_revision": "1.2",
+            "loss_revision": "1.1",
+            "training_config": "/home/disk1/MHINet/configs/batch_visualization_smoke.json",
+            "training_config_sha256": "68867a32bd530eb1f45bd42779344ac85f3936d3d3ffae6e43d3f381bb79efbf",
+            "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+            "mhir_revision": "mcnet_correlation_decoder_784_v1",
+            "runtime_config": "/home/disk1/MHINet/configs/runtime_paths.server.json",
+            "profile": "heads",
+            "active_scales": [
+              8,
+              4,
+              2
+            ],
+            "iterations_per_scale": 2,
+            "batch_size": 1,
+            "effective_batch_size": 4,
+            "gradient_accumulation": 4,
+            "tiny_gate": {
+              "path": "/home/disk1/MHINet/artifacts/p4_tiny_gate_mcnet_d2.json",
+              "sha256": "13719169eaed0d1d887a18d846f4a824525231f427dc8ec3d3456edad6a60ea3"
+            },
+            "test_used": false
+          },
+          "cuda_rng_captured": true,
+          "sha256": "20ee388f5914850287c8237f45e0ad273c73a6e7d7ce539baa5d6a0c72b003c8"
+        },
+        "split": "val",
+        "test_used": false
+      }
+    },
+    {
+      "id": "7bc01f3e8b53ca9a",
+      "registered_at_utc": "2026-09-10T14:04:31.306815+00:00",
+      "source_mtime_utc": "2026-09-08T02:38:29.480446+00:00",
+      "source_summary": "/home/disk1/MHINet/outputs/mhinet_minimal_smoke/validation/step_0000002/summary.json",
+      "source_summary_sha256": "113d0c2abdde39dadcabee5dc1f4e7fe6a008b53fd33f4a75db5ecbd9a39be9f",
+      "run": "mhinet_minimal_smoke",
+      "scope": "训练中验证 / 工程权重",
+      "split": "val",
+      "pairs": 2,
+      "mode": "full_MHINet",
+      "labels": [
+        "H0",
+        "H1",
+        "H2"
+      ],
+      "trajectory_mace_px": [],
+      "H0_mace_px": null,
+      "final_mace_px": null,
+      "final_median_px": null,
+      "final_p90_px": null,
+      "success": {
+        "1": 0.0,
+        "3": 0.0,
+        "5": 0.0
+      },
+      "auc": {},
+      "failure_rate": 0.0,
+      "rejected_update_rate": 0.0,
+      "peak_allocated_bytes": 1647965696,
+      "peak_reserved_bytes": null,
+      "latency_ms": null,
+      "wall_ms": 255.1748608238995,
+      "metrics_revision": "legacy_lower_median",
+      "checkpoint_path": "/home/disk1/MHINet/outputs/mhinet_minimal_smoke/checkpoints/step_0000002.pt",
+      "checkpoint_sha256": "fb3f0bdd23c9b8807965ddee7471e13d0b4d234f7f8094946e80a83831c75a75",
+      "weight_note": "运行摘要记录的hash",
+      "architecture_sha256": "4a859f413ee4be59acb1dc6c0cf189e80b8f4e7b3f54dc9f117acd1ac5cfe128",
+      "manifest_sha256": null,
+      "snapshot": {
+        "mode": "full_MHINet",
+        "pairs": 2,
+        "trajectory": {
+          "labels": [
+            "H0",
+            "H1",
+            "H2"
+          ],
+          "mace_input_px": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.61186957359314,
+              "median": 6.063833713531494,
+              "p90": 7.050298261642456
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.624992847442627,
+              "median": 5.681090354919434,
+              "p90": 7.3801148414611815
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.659734725952148,
+              "median": 5.327299118041992,
+              "p90": 7.725683212280273
+            }
+          ]
+        },
+        "H0_mace_input_px": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 6.61186957359314,
+          "median": 6.063833713531494,
+          "p90": 7.050298261642456
+        },
+        "H_final_mace_input_px_all_finite_geometry": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 6.659734725952148,
+          "median": 5.327299118041992,
+          "p90": 7.725683212280273
+        },
+        "H_final_mace_input_px_conditional_valid": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 6.659734725952148,
+          "median": 5.327299118041992,
+          "p90": 7.725683212280273
+        },
+        "H_final_mace_native_target_px_conditional_valid": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 5.436427593231201,
+          "median": 5.402870178222656,
+          "p90": 5.463273525238037
+        },
+        "stage1_failures": 0,
+        "stage1_failure_rate": 0.0,
+        "valid_outputs": 2,
+        "failure_rate": 0.0,
+        "all_pair_success_at_input_px": {
+          "1": 0.0,
+          "3": 0.0,
+          "5": 0.0
+        },
+        "rejected_updates": 0,
+        "rejected_update_rate": 0.0,
+        "shared_call_count_violations": 0,
+        "elapsed_seconds": 0.510349721647799,
+        "latency_ms_per_pair_single_pass": 255.1748608238995,
+        "peak_allocated_bytes": 1647965696,
+        "optimizer_step": 2,
+        "checkpoint": {
+          "path": "/home/disk1/MHINet/outputs/mhinet_minimal_smoke/checkpoints/step_0000002.pt",
+          "format": "mhinet.training",
+          "version": 1,
+          "bytes": 906932089,
+          "optimizer_step": 2,
+          "microbatch_progress": {
+            "accumulated_valid": 0
+          },
+          "data_progress": {
+            "length": 32,
+            "seed": 0,
+            "epoch": 0,
+            "position": 8
+          },
+          "metadata": {
+            "experiment_id": "mhinet_minimal_smoke",
+            "training_revision": "1.2",
+            "loss_revision": "1.1",
+            "training_config": "/home/disk1/MHINet/configs/train_minimal_smoke.json",
+            "training_config_sha256": "6946de077ed11b5f3a5dcf495003fe073a7c7e424815597b1cd716a66f0239c4",
+            "architecture_sha256": "4a859f413ee4be59acb1dc6c0cf189e80b8f4e7b3f54dc9f117acd1ac5cfe128",
+            "runtime_config": "/home/disk1/MHINet/configs/runtime_paths.server.json",
+            "profile": "heads",
+            "active_scales": [
+              8
+            ],
+            "iterations_per_scale": 2,
+            "tiny_gate": null,
+            "test_used": false
+          },
+          "cuda_rng_captured": true,
+          "sha256": "fb3f0bdd23c9b8807965ddee7471e13d0b4d234f7f8094946e80a83831c75a75"
+        },
+        "split": "val",
+        "test_used": false
+      }
+    },
+    {
+      "id": "d4c0375fa4f473b8",
+      "registered_at_utc": "2026-09-10T14:04:31.311226+00:00",
+      "source_mtime_utc": "2026-09-08T02:43:14.187498+00:00",
+      "source_summary": "/home/disk1/MHINet/outputs/mhinet_resume_smoke/validation/step_0000002/summary.json",
+      "source_summary_sha256": "0cb7c108c7d7271e8f52455f9b9ada2f8f4825e4465fc4b3f802a1513d7a3aae",
+      "run": "mhinet_resume_smoke",
+      "scope": "训练中验证 / 工程权重",
+      "split": "val",
+      "pairs": 2,
+      "mode": "full_MHINet",
+      "labels": [
+        "H0",
+        "H1",
+        "H2"
+      ],
+      "trajectory_mace_px": [],
+      "H0_mace_px": null,
+      "final_mace_px": null,
+      "final_median_px": null,
+      "final_p90_px": null,
+      "success": {
+        "1": 0.0,
+        "3": 0.0,
+        "5": 0.0
+      },
+      "auc": {},
+      "failure_rate": 0.0,
+      "rejected_update_rate": 0.0,
+      "peak_allocated_bytes": 1647010816,
+      "peak_reserved_bytes": null,
+      "latency_ms": null,
+      "wall_ms": 393.35542591288686,
+      "metrics_revision": "legacy_lower_median",
+      "checkpoint_path": "/home/disk1/MHINet/outputs/mhinet_resume_smoke/checkpoints/step_0000002.pt",
+      "checkpoint_sha256": "5b339a7a8f81c77b2998ce078ce79dcc6d3a0d68f6f817ea5a1ccb3ee534021a",
+      "weight_note": "运行摘要记录的hash",
+      "architecture_sha256": "4a859f413ee4be59acb1dc6c0cf189e80b8f4e7b3f54dc9f117acd1ac5cfe128",
+      "manifest_sha256": null,
+      "snapshot": {
+        "mode": "full_MHINet",
+        "pairs": 2,
+        "trajectory": {
+          "labels": [
+            "H0",
+            "H1",
+            "H2"
+          ],
+          "mace_input_px": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.61186957359314,
+              "median": 6.063833713531494,
+              "p90": 7.050298261642456
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.62494158744812,
+              "median": 5.681090354919434,
+              "p90": 7.380022573471069
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.659663677215576,
+              "median": 5.327299118041992,
+              "p90": 7.725555324554444
+            }
+          ]
+        },
+        "H0_mace_input_px": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 6.61186957359314,
+          "median": 6.063833713531494,
+          "p90": 7.050298261642456
+        },
+        "H_final_mace_input_px_all_finite_geometry": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 6.659663677215576,
+          "median": 5.327299118041992,
+          "p90": 7.725555324554444
+        },
+        "H_final_mace_input_px_conditional_valid": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 6.659663677215576,
+          "median": 5.327299118041992,
+          "p90": 7.725555324554444
+        },
+        "H_final_mace_native_target_px_conditional_valid": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 5.436371564865112,
+          "median": 5.4027581214904785,
+          "p90": 5.463262319564819
+        },
+        "stage1_failures": 0,
+        "stage1_failure_rate": 0.0,
+        "valid_outputs": 2,
+        "failure_rate": 0.0,
+        "all_pair_success_at_input_px": {
+          "1": 0.0,
+          "3": 0.0,
+          "5": 0.0
+        },
+        "rejected_updates": 0,
+        "rejected_update_rate": 0.0,
+        "shared_call_count_violations": 0,
+        "elapsed_seconds": 0.7867108518257737,
+        "latency_ms_per_pair_single_pass": 393.35542591288686,
+        "peak_allocated_bytes": 1647010816,
+        "optimizer_step": 2,
+        "checkpoint": {
+          "path": "/home/disk1/MHINet/outputs/mhinet_resume_smoke/checkpoints/step_0000002.pt",
+          "format": "mhinet.training",
+          "version": 1,
+          "bytes": 906932409,
+          "optimizer_step": 2,
+          "microbatch_progress": {
+            "accumulated_valid": 0
+          },
+          "data_progress": {
+            "length": 32,
+            "seed": 0,
+            "epoch": 0,
+            "position": 8
+          },
+          "metadata": {
+            "experiment_id": "mhinet_minimal_smoke",
+            "training_revision": "1.2",
+            "loss_revision": "1.1",
+            "training_config": "/home/disk1/MHINet/configs/train_minimal_smoke.json",
+            "training_config_sha256": "6946de077ed11b5f3a5dcf495003fe073a7c7e424815597b1cd716a66f0239c4",
+            "architecture_sha256": "4a859f413ee4be59acb1dc6c0cf189e80b8f4e7b3f54dc9f117acd1ac5cfe128",
+            "runtime_config": "/home/disk1/MHINet/configs/runtime_paths.server.json",
+            "profile": "heads",
+            "active_scales": [
+              8
+            ],
+            "iterations_per_scale": 2,
+            "tiny_gate": null,
+            "test_used": false
+          },
+          "cuda_rng_captured": true,
+          "sha256": "5b339a7a8f81c77b2998ce078ce79dcc6d3a0d68f6f817ea5a1ccb3ee534021a"
+        },
+        "split": "val",
+        "test_used": false
+      }
+    },
+    {
+      "id": "c509a69f05a932de",
+      "registered_at_utc": "2026-09-10T14:04:31.315738+00:00",
+      "source_mtime_utc": "2026-09-09T18:31:23.622163+00:00",
+      "source_summary": "/home/disk1/MHINet/outputs/mhinet_resume_smoke_mcnet_d2_v2/validation/step_0000002/summary.json",
+      "source_summary_sha256": "69831d7c7fb2fc2247157a9757fa16d4192808562cf3c2bb5899473b873ee54f",
+      "run": "mhinet_resume_smoke_mcnet_d2_v2",
+      "scope": "训练中验证 / 工程权重",
+      "split": "val",
+      "pairs": 2,
+      "mode": "full_MHINet",
+      "labels": [
+        "H0",
+        "H1",
+        "H2"
+      ],
+      "trajectory_mace_px": [
+        6.61186957359314,
+        6.600273132324219,
+        6.59821629524231
+      ],
+      "H0_mace_px": 6.61186957359314,
+      "final_mace_px": 6.59821629524231,
+      "final_median_px": 5.918881416320801,
+      "final_p90_px": 7.141684198379517,
+      "success": {
+        "1": 0.0,
+        "3": 0.0,
+        "5": 0.0
+      },
+      "auc": {},
+      "failure_rate": 0.0,
+      "rejected_update_rate": 0.0,
+      "peak_allocated_bytes": 1638170112,
+      "peak_reserved_bytes": 1990197248,
+      "latency_ms": null,
+      "wall_ms": 138.22341803461313,
+      "metrics_revision": "legacy_lower_median",
+      "checkpoint_path": "/home/disk1/MHINet/outputs/mhinet_resume_smoke_mcnet_d2_v2/checkpoints/step_0000002.pt",
+      "checkpoint_sha256": "e9dca3f40173d1a8e252aa212e7ede91fd45ea4560a05b91213a0ae4de081681",
+      "weight_note": "运行摘要记录的hash",
+      "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+      "manifest_sha256": null,
+      "snapshot": {
+        "mode": "full_MHINet",
+        "pairs": 2,
+        "active_scales": [
+          8
+        ],
+        "iterations_per_scale": 2,
+        "update_scale_schedule": [
+          8,
+          8
+        ],
+        "trajectory": {
+          "labels": [
+            "H0",
+            "H1",
+            "H2"
+          ],
+          "conditional_validity_policy": {
+            "H0": "stage1_valid and geometry_valid",
+            "H_updates": "valid GHIM owner and guarded state geometry; rejected proposals retain the previous legal H and remain in the trajectory",
+            "reported_H_final": "overall_valid and geometry_valid",
+            "rejected_updates": "reported separately; a retained prior legal H may remain a valid final output"
+          },
+          "mace_input_px_all_finite_geometry": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.61186957359314,
+              "median": 6.063833713531494,
+              "p90": 7.050298261642456
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.600273132324219,
+              "median": 5.986981391906738,
+              "p90": 7.0909065246582035
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.59821629524231,
+              "median": 5.918881416320801,
+              "p90": 7.141684198379517
+            }
+          ],
+          "mace_input_px_conditional_valid": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.61186957359314,
+              "median": 6.063833713531494,
+              "p90": 7.050298261642456,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.600273132324219,
+              "median": 5.986981391906738,
+              "p90": 7.0909065246582035,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.59821629524231,
+              "median": 5.918881416320801,
+              "p90": 7.141684198379517,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            }
+          ],
+          "mace_native_target_px_all_finite_geometry": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.533251762390137,
+              "median": 4.840235710144043,
+              "p90": 6.087664604187012
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.511930465698242,
+              "median": 4.876503944396973,
+              "p90": 6.020271682739258
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.498582363128662,
+              "median": 4.919760704040527,
+              "p90": 5.96163969039917
+            }
+          ],
+          "mace_native_target_px_conditional_valid": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.533251762390137,
+              "median": 4.840235710144043,
+              "p90": 6.087664604187012,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.511930465698242,
+              "median": 4.876503944396973,
+              "p90": 6.020271682739258,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.498582363128662,
+              "median": 4.919760704040527,
+              "p90": 5.96163969039917,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            }
+          ],
+          "grid5_input_px_all_finite_geometry": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.9639581441879272,
+              "median": 2.6842432022094727,
+              "p90": 3.187730097770691
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.950542688369751,
+              "median": 2.728093147277832,
+              "p90": 3.1285023212432863
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.963930130004883,
+              "median": 2.800196409225464,
+              "p90": 3.094917106628418
+            }
+          ],
+          "grid5_input_px_conditional_valid": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.9639581441879272,
+              "median": 2.6842432022094727,
+              "p90": 3.187730097770691,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.950542688369751,
+              "median": 2.728093147277832,
+              "p90": 3.1285023212432863,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.963930130004883,
+              "median": 2.800196409225464,
+              "p90": 3.094917106628418,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            }
+          ],
+          "grid5_native_target_px_all_finite_geometry": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.572580337524414,
+              "median": 1.8146004676818848,
+              "p90": 3.1789642333984376
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.55111825466156,
+              "median": 1.8442437648773193,
+              "p90": 3.1166178464889525
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.5522199869155884,
+              "median": 1.8929903507232666,
+              "p90": 3.0796036958694457
+            }
+          ],
+          "grid5_native_target_px_conditional_valid": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.572580337524414,
+              "median": 1.8146004676818848,
+              "p90": 3.1789642333984376,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.55111825466156,
+              "median": 1.8442437648773193,
+              "p90": 3.1166178464889525,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.5522199869155884,
+              "median": 1.8929903507232666,
+              "p90": 3.0796036958694457,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            }
+          ]
+        },
+        "H0_mace_input_px_all_finite_geometry": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 6.61186957359314,
+          "median": 6.063833713531494,
+          "p90": 7.050298261642456
+        },
+        "H0_mace_input_px_conditional_valid": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 6.61186957359314,
+          "median": 6.063833713531494,
+          "p90": 7.050298261642456,
+          "total_pair_count": 2,
+          "conditional_valid_count": 2,
+          "conditional_invalid_count": 0,
+          "conditional_failure_rate": 0.0
+        },
+        "H_final_mace_input_px_all_finite_geometry": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 6.59821629524231,
+          "median": 5.918881416320801,
+          "p90": 7.141684198379517
+        },
+        "H_final_mace_input_px_conditional_valid": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 6.59821629524231,
+          "median": 5.918881416320801,
+          "p90": 7.141684198379517,
+          "total_pair_count": 2,
+          "conditional_valid_count": 2,
+          "conditional_invalid_count": 0,
+          "conditional_failure_rate": 0.0
+        },
+        "H_final_mace_native_target_px_conditional_valid": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 5.498582363128662,
+          "median": 4.919760704040527,
+          "p90": 5.96163969039917,
+          "total_pair_count": 2,
+          "conditional_valid_count": 2,
+          "conditional_invalid_count": 0,
+          "conditional_failure_rate": 0.0
+        },
+        "stage1_failures": 0,
+        "stage1_failure_rate": 0.0,
+        "valid_outputs": 2,
+        "failure_rate": 0.0,
+        "all_pair_success_at_input_px": {
+          "1": 0.0,
+          "3": 0.0,
+          "5": 0.0
+        },
+        "rejected_updates": 0,
+        "rejected_update_rate": 0.0,
+        "shared_call_count_violations": 0,
+        "elapsed_seconds": 0.27644683606922626,
+        "latency_ms_per_pair_single_pass": 138.22341803461313,
+        "latency_ms_single_pass_distribution": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 83.84530246257782,
+          "median": 79.8229780048132,
+          "p90": 87.06316202878952
+        },
+        "latency_scope": "per-pair synchronized single pass; this evaluation entry is not the 20-warmup/100-pair formal latency benchmark",
+        "peak_allocated_bytes": 1638170112,
+        "peak_reserved_bytes": 1990197248,
+        "diagnostic_availability": {
+          "window_recall": {
+            "available": false,
+            "reason": "The current forward contract does not retain GT-to-window membership; no window-recall value is inferred or fabricated."
+          }
+        },
+        "optimizer_step": 2,
+        "checkpoint": {
+          "path": "/home/disk1/MHINet/outputs/mhinet_resume_smoke_mcnet_d2_v2/checkpoints/step_0000002.pt",
+          "format": "mhinet.training",
+          "version": 2,
+          "bytes": 899200267,
+          "optimizer_step": 2,
+          "microbatch_progress": {
+            "accumulated_valid": 0
+          },
+          "data_progress": {
+            "length": 32,
+            "seed": 0,
+            "epoch": 0,
+            "position": 8,
+            "invalid_attempts_total": 0,
+            "shared_call_count_violations": 0
+          },
+          "metadata": {
+            "experiment_id": "mhinet_minimal_smoke",
+            "training_revision": "1.2",
+            "loss_revision": "1.1",
+            "training_config": "/home/disk1/MHINet/configs/train_minimal_smoke.json",
+            "training_config_sha256": "6946de077ed11b5f3a5dcf495003fe073a7c7e424815597b1cd716a66f0239c4",
+            "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+            "mhir_revision": "mcnet_correlation_decoder_784_v1",
+            "runtime_config": "/home/disk1/MHINet/configs/runtime_paths.server.json",
+            "profile": "heads",
+            "active_scales": [
+              8
+            ],
+            "iterations_per_scale": 2,
+            "tiny_gate": null,
+            "test_used": false
+          },
+          "cuda_rng_captured": true,
+          "sha256": "e9dca3f40173d1a8e252aa212e7ede91fd45ea4560a05b91213a0ae4de081681"
+        },
+        "split": "val",
+        "test_used": false
+      }
+    },
+    {
+      "id": "350c1924d3323cd0",
+      "registered_at_utc": "2026-09-10T14:04:31.328193+00:00",
+      "source_mtime_utc": "2026-09-09T18:31:54.531320+00:00",
+      "source_summary": "/home/disk1/MHINet/outputs/mhinet_uninterrupted_smoke_mcnet_d2_v2/validation/step_0000002/summary.json",
+      "source_summary_sha256": "6103672321011b532b6eed11c6ba96d5c7d32de797dad9d77dfa3aaf4b71d3ef",
+      "run": "mhinet_uninterrupted_smoke_mcnet_d2_v2",
+      "scope": "训练中验证 / 工程权重",
+      "split": "val",
+      "pairs": 2,
+      "mode": "full_MHINet",
+      "labels": [
+        "H0",
+        "H1",
+        "H2"
+      ],
+      "trajectory_mace_px": [
+        6.61186957359314,
+        6.600273132324219,
+        6.59821629524231
+      ],
+      "H0_mace_px": 6.61186957359314,
+      "final_mace_px": 6.59821629524231,
+      "final_median_px": 5.918881416320801,
+      "final_p90_px": 7.141684198379517,
+      "success": {
+        "1": 0.0,
+        "3": 0.0,
+        "5": 0.0
+      },
+      "auc": {},
+      "failure_rate": 0.0,
+      "rejected_update_rate": 0.0,
+      "peak_allocated_bytes": 1638155264,
+      "peak_reserved_bytes": 1988100096,
+      "latency_ms": null,
+      "wall_ms": 121.65280524641275,
+      "metrics_revision": "legacy_lower_median",
+      "checkpoint_path": "/home/disk1/MHINet/outputs/mhinet_uninterrupted_smoke_mcnet_d2_v2/checkpoints/step_0000002.pt",
+      "checkpoint_sha256": "705da3ea80ade2394f4eefb85b822d6b3f55719f92ab48f518292d02b6af1d15",
+      "weight_note": "运行摘要记录的hash",
+      "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+      "manifest_sha256": null,
+      "snapshot": {
+        "mode": "full_MHINet",
+        "pairs": 2,
+        "active_scales": [
+          8
+        ],
+        "iterations_per_scale": 2,
+        "update_scale_schedule": [
+          8,
+          8
+        ],
+        "trajectory": {
+          "labels": [
+            "H0",
+            "H1",
+            "H2"
+          ],
+          "conditional_validity_policy": {
+            "H0": "stage1_valid and geometry_valid",
+            "H_updates": "valid GHIM owner and guarded state geometry; rejected proposals retain the previous legal H and remain in the trajectory",
+            "reported_H_final": "overall_valid and geometry_valid",
+            "rejected_updates": "reported separately; a retained prior legal H may remain a valid final output"
+          },
+          "mace_input_px_all_finite_geometry": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.61186957359314,
+              "median": 6.063833713531494,
+              "p90": 7.050298261642456
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.600273132324219,
+              "median": 5.986981391906738,
+              "p90": 7.0909065246582035
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.59821629524231,
+              "median": 5.918881416320801,
+              "p90": 7.141684198379517
+            }
+          ],
+          "mace_input_px_conditional_valid": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.61186957359314,
+              "median": 6.063833713531494,
+              "p90": 7.050298261642456,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.600273132324219,
+              "median": 5.986981391906738,
+              "p90": 7.0909065246582035,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 6.59821629524231,
+              "median": 5.918881416320801,
+              "p90": 7.141684198379517,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            }
+          ],
+          "mace_native_target_px_all_finite_geometry": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.533251762390137,
+              "median": 4.840235710144043,
+              "p90": 6.087664604187012
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.511930465698242,
+              "median": 4.876503944396973,
+              "p90": 6.020271682739258
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.498582363128662,
+              "median": 4.919760704040527,
+              "p90": 5.96163969039917
+            }
+          ],
+          "mace_native_target_px_conditional_valid": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.533251762390137,
+              "median": 4.840235710144043,
+              "p90": 6.087664604187012,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.511930465698242,
+              "median": 4.876503944396973,
+              "p90": 6.020271682739258,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 5.498582363128662,
+              "median": 4.919760704040527,
+              "p90": 5.96163969039917,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            }
+          ],
+          "grid5_input_px_all_finite_geometry": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.9639581441879272,
+              "median": 2.6842432022094727,
+              "p90": 3.187730097770691
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.950542688369751,
+              "median": 2.728093147277832,
+              "p90": 3.1285023212432863
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.963930130004883,
+              "median": 2.800196409225464,
+              "p90": 3.094917106628418
+            }
+          ],
+          "grid5_input_px_conditional_valid": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.9639581441879272,
+              "median": 2.6842432022094727,
+              "p90": 3.187730097770691,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.950542688369751,
+              "median": 2.728093147277832,
+              "p90": 3.1285023212432863,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.963930130004883,
+              "median": 2.800196409225464,
+              "p90": 3.094917106628418,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            }
+          ],
+          "grid5_native_target_px_all_finite_geometry": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.572580337524414,
+              "median": 1.8146004676818848,
+              "p90": 3.1789642333984376
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.55111825466156,
+              "median": 1.8442437648773193,
+              "p90": 3.1166178464889525
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.5522199869155884,
+              "median": 1.8929903507232666,
+              "p90": 3.0796036958694457
+            }
+          ],
+          "grid5_native_target_px_conditional_valid": [
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.572580337524414,
+              "median": 1.8146004676818848,
+              "p90": 3.1789642333984376,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.55111825466156,
+              "median": 1.8442437648773193,
+              "p90": 3.1166178464889525,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 2,
+              "finite_count": 2,
+              "mean": 2.5522199869155884,
+              "median": 1.8929903507232666,
+              "p90": 3.0796036958694457,
+              "total_pair_count": 2,
+              "conditional_valid_count": 2,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            }
+          ]
+        },
+        "H0_mace_input_px_all_finite_geometry": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 6.61186957359314,
+          "median": 6.063833713531494,
+          "p90": 7.050298261642456
+        },
+        "H0_mace_input_px_conditional_valid": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 6.61186957359314,
+          "median": 6.063833713531494,
+          "p90": 7.050298261642456,
+          "total_pair_count": 2,
+          "conditional_valid_count": 2,
+          "conditional_invalid_count": 0,
+          "conditional_failure_rate": 0.0
+        },
+        "H_final_mace_input_px_all_finite_geometry": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 6.59821629524231,
+          "median": 5.918881416320801,
+          "p90": 7.141684198379517
+        },
+        "H_final_mace_input_px_conditional_valid": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 6.59821629524231,
+          "median": 5.918881416320801,
+          "p90": 7.141684198379517,
+          "total_pair_count": 2,
+          "conditional_valid_count": 2,
+          "conditional_invalid_count": 0,
+          "conditional_failure_rate": 0.0
+        },
+        "H_final_mace_native_target_px_conditional_valid": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 5.498582363128662,
+          "median": 4.919760704040527,
+          "p90": 5.96163969039917,
+          "total_pair_count": 2,
+          "conditional_valid_count": 2,
+          "conditional_invalid_count": 0,
+          "conditional_failure_rate": 0.0
+        },
+        "stage1_failures": 0,
+        "stage1_failure_rate": 0.0,
+        "valid_outputs": 2,
+        "failure_rate": 0.0,
+        "all_pair_success_at_input_px": {
+          "1": 0.0,
+          "3": 0.0,
+          "5": 0.0
+        },
+        "rejected_updates": 0,
+        "rejected_update_rate": 0.0,
+        "shared_call_count_violations": 0,
+        "elapsed_seconds": 0.2433056104928255,
+        "latency_ms_per_pair_single_pass": 121.65280524641275,
+        "latency_ms_single_pass_distribution": {
+          "count": 2,
+          "finite_count": 2,
+          "mean": 83.34434032440186,
+          "median": 78.83783522993326,
+          "p90": 86.94954439997673
+        },
+        "latency_scope": "per-pair synchronized single pass; this evaluation entry is not the 20-warmup/100-pair formal latency benchmark",
+        "peak_allocated_bytes": 1638155264,
+        "peak_reserved_bytes": 1988100096,
+        "diagnostic_availability": {
+          "window_recall": {
+            "available": false,
+            "reason": "The current forward contract does not retain GT-to-window membership; no window-recall value is inferred or fabricated."
+          }
+        },
+        "optimizer_step": 2,
+        "checkpoint": {
+          "path": "/home/disk1/MHINet/outputs/mhinet_uninterrupted_smoke_mcnet_d2_v2/checkpoints/step_0000002.pt",
+          "format": "mhinet.training",
+          "version": 2,
+          "bytes": 899199947,
+          "optimizer_step": 2,
+          "microbatch_progress": {
+            "accumulated_valid": 0
+          },
+          "data_progress": {
+            "length": 32,
+            "seed": 0,
+            "epoch": 0,
+            "position": 8,
+            "invalid_attempts_total": 0,
+            "shared_call_count_violations": 0
+          },
+          "metadata": {
+            "experiment_id": "mhinet_minimal_smoke",
+            "training_revision": "1.2",
+            "loss_revision": "1.1",
+            "training_config": "/home/disk1/MHINet/configs/train_minimal_smoke.json",
+            "training_config_sha256": "6946de077ed11b5f3a5dcf495003fe073a7c7e424815597b1cd716a66f0239c4",
+            "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+            "mhir_revision": "mcnet_correlation_decoder_784_v1",
+            "runtime_config": "/home/disk1/MHINet/configs/runtime_paths.server.json",
+            "profile": "heads",
+            "active_scales": [
+              8
+            ],
+            "iterations_per_scale": 2,
+            "tiny_gate": null,
+            "test_used": false
+          },
+          "cuda_rng_captured": true,
+          "sha256": "705da3ea80ade2394f4eefb85b822d6b3f55719f92ab48f518292d02b6af1d15"
+        },
+        "split": "val",
+        "test_used": false
+      }
+    },
+    {
+      "id": "0abd3f01bde14a46",
+      "registered_at_utc": "2026-09-10T14:04:31.350895+00:00",
+      "source_mtime_utc": "2026-09-10T13:25:29.999567+00:00",
+      "source_summary": "/home/disk1/MHINet/outputs/real_image_accuracy_val16/metrics/summary.json",
+      "source_summary_sha256": "79845096f8fe17d45fdc098e18ec0e9cbda4c8191bc58f327eff59bc4a4b0f5a",
+      "run": "real_image_accuracy_val16",
+      "scope": "独立评估 / 工程权重",
+      "split": "val",
+      "pairs": 16,
+      "mode": "full_MHINet",
+      "labels": [
+        "H0",
+        "H1",
+        "H2",
+        "H3",
+        "H4",
+        "H5",
+        "H6"
+      ],
+      "trajectory_mace_px": [
+        4.157158598303795,
+        4.100830890238285,
+        4.057889483869076,
+        4.0389629527926445,
+        4.02387261390686,
+        4.020473897457123,
+        4.017675280570984
+      ],
+      "H0_mace_px": 4.157158598303795,
+      "final_mace_px": 4.017675280570984,
+      "final_median_px": 3.7782604694366455,
+      "final_p90_px": 6.292035818099976,
+      "success": {
+        "1": 0.0,
+        "3": 0.375,
+        "5": 0.75
+      },
+      "auc": {
+        "1": 0.0,
+        "3": 0.08276828626791638,
+        "5": 0.2690887629985809
+      },
+      "failure_rate": 0.0,
+      "rejected_update_rate": 0.0,
+      "peak_allocated_bytes": 2060819968,
+      "peak_reserved_bytes": 2675965952,
+      "latency_ms": 405.0538928131573,
+      "wall_ms": 644.7195839136839,
+      "metrics_revision": "legacy_lower_median",
+      "checkpoint_path": "/home/disk1/MHINet/outputs/engineering_visualization_seven_smoke/checkpoints/step_0000002.pt",
+      "checkpoint_sha256": null,
+      "weight_note": "运行摘要未记录权重hash",
+      "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+      "manifest_sha256": "a5e6f58bc46cef2dcc49db4e859e2a845755d6aee13be88c998f14a0386b5503",
+      "snapshot": {
+        "mode": "full_MHINet",
+        "pairs": 16,
+        "active_scales": [
+          8,
+          4,
+          2
+        ],
+        "iterations_per_scale": 2,
+        "update_scale_schedule": [
+          8,
+          8,
+          4,
+          4,
+          2,
+          2
+        ],
+        "trajectory": {
+          "all_pair_threshold_scores_input_px": [
+            {
+              "success": {
+                "1": 0.0,
+                "3": 0.375,
+                "5": 0.6875
+              },
+              "auc": {
+                "1": 0.0,
+                "3": 0.0632405380407969,
+                "5": 0.24198246896266934
+              }
+            },
+            {
+              "success": {
+                "1": 0.0,
+                "3": 0.375,
+                "5": 0.6875
+              },
+              "auc": {
+                "1": 0.0,
+                "3": 0.07217924545208612,
+                "5": 0.2520484432578087
+              }
+            },
+            {
+              "success": {
+                "1": 0.0,
+                "3": 0.375,
+                "5": 0.6875
+              },
+              "auc": {
+                "1": 0.0,
+                "3": 0.07843286047379175,
+                "5": 0.2599605277180672
+              }
+            },
+            {
+              "success": {
+                "1": 0.0,
+                "3": 0.375,
+                "5": 0.6875
+              },
+              "auc": {
+                "1": 0.0,
+                "3": 0.0807525192697843,
+                "5": 0.2635455623269081
+              }
+            },
+            {
+              "success": {
+                "1": 0.0,
+                "3": 0.375,
+                "5": 0.75
+              },
+              "auc": {
+                "1": 0.0,
+                "3": 0.0822902371486028,
+                "5": 0.2671894669532776
+              }
+            },
+            {
+              "success": {
+                "1": 0.0,
+                "3": 0.375,
+                "5": 0.75
+              },
+              "auc": {
+                "1": 0.0,
+                "3": 0.08258304993311563,
+                "5": 0.26819238662719724
+              }
+            },
+            {
+              "success": {
+                "1": 0.0,
+                "3": 0.375,
+                "5": 0.75
+              },
+              "auc": {
+                "1": 0.0,
+                "3": 0.08276828626791638,
+                "5": 0.2690887629985809
+              }
+            }
+          ],
+          "auc_definition": "exact empirical recall integral / threshold: sum(valid * max(0,1-MACE/t))/N; thresholds 1,3,5 input pixels; not trapezoidal interpolation",
+          "labels": [
+            "H0",
+            "H1",
+            "H2",
+            "H3",
+            "H4",
+            "H5",
+            "H6"
+          ],
+          "conditional_validity_policy": {
+            "H0": "stage1_valid and geometry_valid",
+            "H_updates": "valid GHIM owner and guarded state geometry; rejected proposals retain the previous legal H and remain in the trajectory",
+            "reported_H_final": "overall_valid and geometry_valid",
+            "rejected_updates": "reported separately; a retained prior legal H may remain a valid final output"
+          },
+          "mace_input_px_all_finite_geometry": [
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 4.157158598303795,
+              "median": 3.721829891204834,
+              "p90": 6.154736042022705
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 4.100830890238285,
+              "median": 3.7257490158081055,
+              "p90": 6.186898231506348
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 4.057889483869076,
+              "median": 3.7410435676574707,
+              "p90": 6.22647500038147
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 4.0389629527926445,
+              "median": 3.7507355213165283,
+              "p90": 6.2481255531311035
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 4.02387261390686,
+              "median": 3.7630622386932373,
+              "p90": 6.271774053573608
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 4.020473897457123,
+              "median": 3.770446300506592,
+              "p90": 6.281827926635742
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 4.017675280570984,
+              "median": 3.7782604694366455,
+              "p90": 6.292035818099976
+            }
+          ],
+          "mace_input_px_conditional_valid": [
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 4.157158598303795,
+              "median": 3.721829891204834,
+              "p90": 6.154736042022705,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 4.100830890238285,
+              "median": 3.7257490158081055,
+              "p90": 6.186898231506348,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 4.057889483869076,
+              "median": 3.7410435676574707,
+              "p90": 6.22647500038147,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 4.0389629527926445,
+              "median": 3.7507355213165283,
+              "p90": 6.2481255531311035,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 4.02387261390686,
+              "median": 3.7630622386932373,
+              "p90": 6.271774053573608,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 4.020473897457123,
+              "median": 3.770446300506592,
+              "p90": 6.281827926635742,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 4.017675280570984,
+              "median": 3.7782604694366455,
+              "p90": 6.292035818099976,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            }
+          ],
+          "mace_native_target_px_all_finite_geometry": [
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 4.022163942456245,
+              "median": 3.6021323204040527,
+              "p90": 6.291186094284058
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 3.966771215200424,
+              "median": 3.5552477836608887,
+              "p90": 6.310431718826294
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 3.9248975217342377,
+              "median": 3.5402181148529053,
+              "p90": 6.237637519836426
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 3.9066481217741966,
+              "median": 3.537135362625122,
+              "p90": 6.178907632827759
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 3.8921629264950752,
+              "median": 3.5405101776123047,
+              "p90": 6.1230950355529785
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 3.8890013843774796,
+              "median": 3.5436103343963623,
+              "p90": 6.105790376663208
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 3.886404614895582,
+              "median": 3.547074794769287,
+              "p90": 6.088957786560059
+            }
+          ],
+          "mace_native_target_px_conditional_valid": [
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 4.022163942456245,
+              "median": 3.6021323204040527,
+              "p90": 6.291186094284058,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 3.966771215200424,
+              "median": 3.5552477836608887,
+              "p90": 6.310431718826294,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 3.9248975217342377,
+              "median": 3.5402181148529053,
+              "p90": 6.237637519836426,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 3.9066481217741966,
+              "median": 3.537135362625122,
+              "p90": 6.178907632827759,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 3.8921629264950752,
+              "median": 3.5405101776123047,
+              "p90": 6.1230950355529785,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 3.8890013843774796,
+              "median": 3.5436103343963623,
+              "p90": 6.105790376663208,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 3.886404614895582,
+              "median": 3.547074794769287,
+              "p90": 6.088957786560059,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            }
+          ],
+          "grid5_input_px_all_finite_geometry": [
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 2.1241926103830338,
+              "median": 1.969569206237793,
+              "p90": 2.907142400741577
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 2.04560799151659,
+              "median": 1.8662570714950562,
+              "p90": 2.9380407333374023
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 2.0006880536675453,
+              "median": 1.898091435432434,
+              "p90": 2.9635075330734253
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.990399058908224,
+              "median": 1.9284063577651978,
+              "p90": 2.986751079559326
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.9908178932964802,
+              "median": 1.966652750968933,
+              "p90": 3.0198556184768677
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.9941281117498875,
+              "median": 1.9833333492279053,
+              "p90": 3.0337804555892944
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.999152921140194,
+              "median": 2.001121759414673,
+              "p90": 3.048721432685852
+            }
+          ],
+          "grid5_input_px_conditional_valid": [
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 2.1241926103830338,
+              "median": 1.969569206237793,
+              "p90": 2.907142400741577,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 2.04560799151659,
+              "median": 1.8662570714950562,
+              "p90": 2.9380407333374023,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 2.0006880536675453,
+              "median": 1.898091435432434,
+              "p90": 2.9635075330734253,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.990399058908224,
+              "median": 1.9284063577651978,
+              "p90": 2.986751079559326,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.9908178932964802,
+              "median": 1.966652750968933,
+              "p90": 3.0198556184768677,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.9941281117498875,
+              "median": 1.9833333492279053,
+              "p90": 3.0337804555892944,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.999152921140194,
+              "median": 2.001121759414673,
+              "p90": 3.048721432685852,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            }
+          ],
+          "grid5_native_target_px_all_finite_geometry": [
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 2.063642829656601,
+              "median": 1.8796470165252686,
+              "p90": 2.8682154417037964
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.981610082089901,
+              "median": 1.8448199033737183,
+              "p90": 2.8342639207839966
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.9333087056875229,
+              "median": 1.8927847146987915,
+              "p90": 2.794794797897339
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.9213207103312016,
+              "median": 1.8186020851135254,
+              "p90": 2.785979151725769
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.9199628792703152,
+              "median": 1.8013662099838257,
+              "p90": 2.7866628170013428
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.922603901475668,
+              "median": 1.8126963376998901,
+              "p90": 2.790747880935669
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.9269796200096607,
+              "median": 1.8259443044662476,
+              "p90": 2.7963160276412964
+            }
+          ],
+          "grid5_native_target_px_conditional_valid": [
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 2.063642829656601,
+              "median": 1.8796470165252686,
+              "p90": 2.8682154417037964,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.981610082089901,
+              "median": 1.8448199033737183,
+              "p90": 2.8342639207839966,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.9333087056875229,
+              "median": 1.8927847146987915,
+              "p90": 2.794794797897339,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.9213207103312016,
+              "median": 1.8186020851135254,
+              "p90": 2.785979151725769,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.9199628792703152,
+              "median": 1.8013662099838257,
+              "p90": 2.7866628170013428,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.922603901475668,
+              "median": 1.8126963376998901,
+              "p90": 2.790747880935669,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.9269796200096607,
+              "median": 1.8259443044662476,
+              "p90": 2.7963160276412964,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            }
+          ]
+        },
+        "H0_mace_input_px_all_finite_geometry": {
+          "count": 16,
+          "finite_count": 16,
+          "mean": 4.157158598303795,
+          "median": 3.721829891204834,
+          "p90": 6.154736042022705
+        },
+        "H0_mace_input_px_conditional_valid": {
+          "count": 16,
+          "finite_count": 16,
+          "mean": 4.157158598303795,
+          "median": 3.721829891204834,
+          "p90": 6.154736042022705,
+          "total_pair_count": 16,
+          "conditional_valid_count": 16,
+          "conditional_invalid_count": 0,
+          "conditional_failure_rate": 0.0
+        },
+        "H_final_mace_input_px_all_finite_geometry": {
+          "count": 16,
+          "finite_count": 16,
+          "mean": 4.017675280570984,
+          "median": 3.7782604694366455,
+          "p90": 6.292035818099976
+        },
+        "H_final_mace_input_px_conditional_valid": {
+          "count": 16,
+          "finite_count": 16,
+          "mean": 4.017675280570984,
+          "median": 3.7782604694366455,
+          "p90": 6.292035818099976,
+          "total_pair_count": 16,
+          "conditional_valid_count": 16,
+          "conditional_invalid_count": 0,
+          "conditional_failure_rate": 0.0
+        },
+        "H_final_mace_native_target_px_conditional_valid": {
+          "count": 16,
+          "finite_count": 16,
+          "mean": 3.886404614895582,
+          "median": 3.547074794769287,
+          "p90": 6.088957786560059,
+          "total_pair_count": 16,
+          "conditional_valid_count": 16,
+          "conditional_invalid_count": 0,
+          "conditional_failure_rate": 0.0
+        },
+        "stage1_failures": 0,
+        "stage1_failure_rate": 0.0,
+        "valid_outputs": 16,
+        "failure_rate": 0.0,
+        "all_pair_success_at_input_px": {
+          "1": 0.0,
+          "3": 0.375,
+          "5": 0.75
+        },
+        "rejected_updates": 0,
+        "rejected_update_rate": 0.0,
+        "shared_call_count_violations": 0,
+        "elapsed_seconds": 10.315513342618942,
+        "latency_ms_per_pair_single_pass": 405.0538928131573,
+        "wall_time_ms_per_pair_including_io_visualization": 644.7195839136839,
+        "latency_ms_single_pass_distribution": {
+          "count": 16,
+          "finite_count": 16,
+          "mean": 405.0538928131573,
+          "median": 370.6810660660267,
+          "p90": 475.58951657265425
+        },
+        "latency_scope": "per-pair synchronized single pass; this evaluation entry is not the 20-warmup/100-pair formal latency benchmark",
+        "peak_allocated_bytes": 2060819968,
+        "peak_reserved_bytes": 2675965952,
+        "diagnostic_availability": {
+          "window_recall": {
+            "available": false,
+            "reason": "The current forward contract does not retain GT-to-window membership; no window-recall value is inferred or fabricated."
+          }
+        },
+        "status": "completed",
+        "manifest": "/home/disk1/Data/datasets/GoogleEarth_scale_pairs/val/pairs.jsonl",
+        "manifest_sha256": "a5e6f58bc46cef2dcc49db4e859e2a845755d6aee13be88c998f14a0386b5503",
+        "runtime_config": "/home/disk1/MHINet/configs/runtime_paths.server.json",
+        "checkpoint": {
+          "path": "/home/disk1/MHINet/outputs/engineering_visualization_seven_smoke/checkpoints/step_0000002.pt",
+          "format": "mhinet.training",
+          "version": 2,
+          "optimizer_step": 2,
+          "microbatch_progress": {
+            "accumulated_valid": 0
+          },
+          "data_progress": {
+            "length": 32,
+            "seed": 0,
+            "epoch": 0,
+            "position": 8,
+            "invalid_attempts_total": 0,
+            "shared_call_count_violations": 0
+          },
+          "metadata": {
+            "experiment_id": "engineering_batch_visualization_smoke",
+            "training_revision": "1.2",
+            "loss_revision": "1.1",
+            "training_config": "/home/disk1/MHINet/configs/batch_visualization_smoke.json",
+            "training_config_sha256": "68867a32bd530eb1f45bd42779344ac85f3936d3d3ffae6e43d3f381bb79efbf",
+            "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+            "mhir_revision": "mcnet_correlation_decoder_784_v1",
+            "runtime_config": "/home/disk1/MHINet/configs/runtime_paths.server.json",
+            "profile": "heads",
+            "active_scales": [
+              8,
+              4,
+              2
+            ],
+            "iterations_per_scale": 2,
+            "batch_size": 1,
+            "effective_batch_size": 4,
+            "gradient_accumulation": 4,
+            "tiny_gate": {
+              "path": "/home/disk1/MHINet/artifacts/p4_tiny_gate_mcnet_d2.json",
+              "sha256": "13719169eaed0d1d887a18d846f4a824525231f427dc8ec3d3456edad6a60ea3"
+            },
+            "test_used": false
+          },
+          "auxiliary_state": null,
+          "missing_model_keys": [],
+          "unexpected_model_keys": [],
+          "restored": {
+            "model": true,
+            "optimizer": false,
+            "scheduler": false,
+            "scaler": false
+          },
+          "rng_restored": {
+            "cpu": false,
+            "cuda": false
+          }
+        },
+        "checkpoint_role": "engineering_batch_visualization_smoke",
+        "test_used": false,
+        "max_pairs": 16,
+        "build": {
+          "architecture_path": "/home/disk1/MHINet/configs/mhinet_mcnet_v1.2.json",
+          "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+          "mhir_revision": "mcnet_correlation_decoder_784_v1",
+          "mcnet_reference_commit": "cc03479689b3cf40f0c384954f338b434765c155",
+          "provider": {
+            "loma_root": "/home/disk1/LoMa",
+            "loma_checkpoint": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+            "dino_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+            "selected_stage1_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+            "loretta_loaded_keys": 807,
+            "locator": {
+              "source": "official_loretta_checkpoint",
+              "overridden": false
+            },
+            "descriptor_initialization": {
+              "migrated_tensors": 364,
+              "vgg_tensors": 84,
+              "decoder_tensors": 280,
+              "top_refiner_mapping": "LoMa-B scale 14 -> DINOv3 scale 16"
+            },
+            "ownership": {
+              "dino_wrapper_instances": 1,
+              "mvt_object_references": 1,
+              "stage1_head_contains_dino": 0,
+              "stage1_head_contains_mvt": 0,
+              "decoder_scales": [
+                "16",
+                "8",
+                "4",
+                "2",
+                "1"
+              ]
+            },
+            "legacy_training_wrappers_reused": false,
+            "safe_stage1_fitter": true
+          },
+          "training_parameters": {
+            "profile": "heads",
+            "groups": {
+              "new_modules": {
+                "parameters": 1176712,
+                "trainable_parameters": 833222,
+                "tensor_count": 140,
+                "trainable_tensor_count": 99
+              },
+              "dedode": {
+                "parameters": 8219297,
+                "trainable_parameters": 0,
+                "tensor_count": 190,
+                "trainable_tensor_count": 0
+              },
+              "vgg": {
+                "parameters": 10592064,
+                "trainable_parameters": 0,
+                "tensor_count": 48,
+                "trainable_tensor_count": 0
+              },
+              "mvt": {
+                "parameters": 87417088,
+                "trainable_parameters": 0,
+                "tensor_count": 150,
+                "trainable_tensor_count": 0
+              },
+              "dino": {
+                "parameters": 227564544,
+                "trainable_parameters": 0,
+                "tensor_count": 259,
+                "trainable_tensor_count": 0
+              },
+              "stage1_head_parameters": {
+                "parameters": 2957572,
+                "trainable_parameters": 0,
+                "tensor_count": 10,
+                "trainable_tensor_count": 0
+              }
+            },
+            "total_trainable_parameters": 833222,
+            "new_parameters": 1176712,
+            "dino_trainable_parameters": 0,
+            "stage1_head_trainable_parameters": 0
+          }
+        },
+        "selection_warning": null
+      }
+    },
+    {
+      "id": "01f85434cc6b96ae",
+      "registered_at_utc": "2026-09-10T14:04:31.362051+00:00",
+      "source_mtime_utc": "2026-09-10T13:27:14.499099+00:00",
+      "source_summary": "/home/disk1/MHINet/outputs/real_image_accuracy_val16_verified/metrics/summary.json",
+      "source_summary_sha256": "a70530d85867492c535b31ab43fc38167d22e52587aa7a25b5cd4bda5348a013",
+      "run": "real_image_accuracy_val16_verified",
+      "scope": "独立评估 / 工程权重",
+      "split": "val",
+      "pairs": 16,
+      "mode": "full_MHINet",
+      "labels": [
+        "H0",
+        "H1",
+        "H2",
+        "H3",
+        "H4",
+        "H5",
+        "H6"
+      ],
+      "trajectory_mace_px": [
+        4.157158598303795,
+        4.100830890238285,
+        4.057889483869076,
+        4.0389629527926445,
+        4.02387261390686,
+        4.020473897457123,
+        4.017675280570984
+      ],
+      "H0_mace_px": 4.157158598303795,
+      "final_mace_px": 4.017675280570984,
+      "final_median_px": 3.913286805152893,
+      "final_p90_px": 6.292035818099976,
+      "success": {
+        "1": 0.0,
+        "3": 0.375,
+        "5": 0.75
+      },
+      "auc": {
+        "1": 0.0,
+        "3": 0.08276828626791638,
+        "5": 0.2690887629985809
+      },
+      "failure_rate": 0.0,
+      "rejected_update_rate": 0.0,
+      "peak_allocated_bytes": 2060819968,
+      "peak_reserved_bytes": 2675965952,
+      "latency_ms": 367.96093569137156,
+      "wall_ms": 591.8500800034963,
+      "metrics_revision": "real_image_v2_ecdf_auc_quantile_median",
+      "checkpoint_path": "/home/disk1/MHINet/outputs/engineering_visualization_seven_smoke/checkpoints/step_0000002.pt",
+      "checkpoint_sha256": "20ee388f5914850287c8237f45e0ad273c73a6e7d7ce539baa5d6a0c72b003c8",
+      "weight_note": "运行摘要记录的hash",
+      "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+      "manifest_sha256": "a5e6f58bc46cef2dcc49db4e859e2a845755d6aee13be88c998f14a0386b5503",
+      "snapshot": {
+        "metrics_revision": "real_image_v2_ecdf_auc_quantile_median",
+        "mode": "full_MHINet",
+        "pairs": 16,
+        "active_scales": [
+          8,
+          4,
+          2
+        ],
+        "iterations_per_scale": 2,
+        "update_scale_schedule": [
+          8,
+          8,
+          4,
+          4,
+          2,
+          2
+        ],
+        "trajectory": {
+          "all_pair_threshold_scores_input_px": [
+            {
+              "success": {
+                "1": 0.0,
+                "3": 0.375,
+                "5": 0.6875
+              },
+              "auc": {
+                "1": 0.0,
+                "3": 0.0632405380407969,
+                "5": 0.24198246896266934
+              }
+            },
+            {
+              "success": {
+                "1": 0.0,
+                "3": 0.375,
+                "5": 0.6875
+              },
+              "auc": {
+                "1": 0.0,
+                "3": 0.07217924545208612,
+                "5": 0.2520484432578087
+              }
+            },
+            {
+              "success": {
+                "1": 0.0,
+                "3": 0.375,
+                "5": 0.6875
+              },
+              "auc": {
+                "1": 0.0,
+                "3": 0.07843286047379175,
+                "5": 0.2599605277180672
+              }
+            },
+            {
+              "success": {
+                "1": 0.0,
+                "3": 0.375,
+                "5": 0.6875
+              },
+              "auc": {
+                "1": 0.0,
+                "3": 0.0807525192697843,
+                "5": 0.2635455623269081
+              }
+            },
+            {
+              "success": {
+                "1": 0.0,
+                "3": 0.375,
+                "5": 0.75
+              },
+              "auc": {
+                "1": 0.0,
+                "3": 0.0822902371486028,
+                "5": 0.2671894669532776
+              }
+            },
+            {
+              "success": {
+                "1": 0.0,
+                "3": 0.375,
+                "5": 0.75
+              },
+              "auc": {
+                "1": 0.0,
+                "3": 0.08258304993311563,
+                "5": 0.26819238662719724
+              }
+            },
+            {
+              "success": {
+                "1": 0.0,
+                "3": 0.375,
+                "5": 0.75
+              },
+              "auc": {
+                "1": 0.0,
+                "3": 0.08276828626791638,
+                "5": 0.2690887629985809
+              }
+            }
+          ],
+          "auc_definition": "exact empirical recall integral / threshold: sum(valid * max(0,1-MACE/t))/N; thresholds 1,3,5 input pixels; not trapezoidal interpolation",
+          "labels": [
+            "H0",
+            "H1",
+            "H2",
+            "H3",
+            "H4",
+            "H5",
+            "H6"
+          ],
+          "conditional_validity_policy": {
+            "H0": "stage1_valid and geometry_valid",
+            "H_updates": "valid GHIM owner and guarded state geometry; rejected proposals retain the previous legal H and remain in the trajectory",
+            "reported_H_final": "overall_valid and geometry_valid",
+            "rejected_updates": "reported separately; a retained prior legal H may remain a valid final output"
+          },
+          "mace_input_px_all_finite_geometry": [
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 4.157158598303795,
+              "median": 3.983966827392578,
+              "p90": 6.154736042022705
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 4.100830890238285,
+              "median": 3.976327419281006,
+              "p90": 6.186898231506348
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 4.057889483869076,
+              "median": 3.980666399002075,
+              "p90": 6.22647500038147
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 4.0389629527926445,
+              "median": 3.972295641899109,
+              "p90": 6.2481255531311035
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 4.02387261390686,
+              "median": 3.934883952140808,
+              "p90": 6.271774053573608
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 4.020473897457123,
+              "median": 3.923891544342041,
+              "p90": 6.281827926635742
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 4.017675280570984,
+              "median": 3.913286805152893,
+              "p90": 6.292035818099976
+            }
+          ],
+          "mace_input_px_conditional_valid": [
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 4.157158598303795,
+              "median": 3.983966827392578,
+              "p90": 6.154736042022705,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 4.100830890238285,
+              "median": 3.976327419281006,
+              "p90": 6.186898231506348,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 4.057889483869076,
+              "median": 3.980666399002075,
+              "p90": 6.22647500038147,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 4.0389629527926445,
+              "median": 3.972295641899109,
+              "p90": 6.2481255531311035,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 4.02387261390686,
+              "median": 3.934883952140808,
+              "p90": 6.271774053573608,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 4.020473897457123,
+              "median": 3.923891544342041,
+              "p90": 6.281827926635742,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 4.017675280570984,
+              "median": 3.913286805152893,
+              "p90": 6.292035818099976,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            }
+          ],
+          "mace_native_target_px_all_finite_geometry": [
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 4.022163942456245,
+              "median": 3.821218490600586,
+              "p90": 6.291186094284058
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 3.966771215200424,
+              "median": 3.7886316776275635,
+              "p90": 6.310431718826294
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 3.9248975217342377,
+              "median": 3.777960181236267,
+              "p90": 6.237637519836426
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 3.9066481217741966,
+              "median": 3.7781556844711304,
+              "p90": 6.178907632827759
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 3.8921629264950752,
+              "median": 3.783073663711548,
+              "p90": 6.1230950355529785
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 3.8890013843774796,
+              "median": 3.788168787956238,
+              "p90": 6.105790376663208
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 3.886404614895582,
+              "median": 3.7936673164367676,
+              "p90": 6.088957786560059
+            }
+          ],
+          "mace_native_target_px_conditional_valid": [
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 4.022163942456245,
+              "median": 3.821218490600586,
+              "p90": 6.291186094284058,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 3.966771215200424,
+              "median": 3.7886316776275635,
+              "p90": 6.310431718826294,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 3.9248975217342377,
+              "median": 3.777960181236267,
+              "p90": 6.237637519836426,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 3.9066481217741966,
+              "median": 3.7781556844711304,
+              "p90": 6.178907632827759,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 3.8921629264950752,
+              "median": 3.783073663711548,
+              "p90": 6.1230950355529785,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 3.8890013843774796,
+              "median": 3.788168787956238,
+              "p90": 6.105790376663208,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 3.886404614895582,
+              "median": 3.7936673164367676,
+              "p90": 6.088957786560059,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            }
+          ],
+          "grid5_input_px_all_finite_geometry": [
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 2.1241926103830338,
+              "median": 2.005247473716736,
+              "p90": 2.907142400741577
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 2.04560799151659,
+              "median": 1.9477868676185608,
+              "p90": 2.9380407333374023
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 2.0006880536675453,
+              "median": 1.9501355290412903,
+              "p90": 2.9635075330734253
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.990399058908224,
+              "median": 1.9648937582969666,
+              "p90": 2.986751079559326
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.9908178932964802,
+              "median": 1.9876020550727844,
+              "p90": 3.0198556184768677
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.9941281117498875,
+              "median": 1.9980123043060303,
+              "p90": 3.0337804555892944
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.999152921140194,
+              "median": 2.0095627307891846,
+              "p90": 3.048721432685852
+            }
+          ],
+          "grid5_input_px_conditional_valid": [
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 2.1241926103830338,
+              "median": 2.005247473716736,
+              "p90": 2.907142400741577,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 2.04560799151659,
+              "median": 1.9477868676185608,
+              "p90": 2.9380407333374023,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 2.0006880536675453,
+              "median": 1.9501355290412903,
+              "p90": 2.9635075330734253,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.990399058908224,
+              "median": 1.9648937582969666,
+              "p90": 2.986751079559326,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.9908178932964802,
+              "median": 1.9876020550727844,
+              "p90": 3.0198556184768677,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.9941281117498875,
+              "median": 1.9980123043060303,
+              "p90": 3.0337804555892944,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.999152921140194,
+              "median": 2.0095627307891846,
+              "p90": 3.048721432685852,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            }
+          ],
+          "grid5_native_target_px_all_finite_geometry": [
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 2.063642829656601,
+              "median": 2.007129192352295,
+              "p90": 2.8682154417037964
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.981610082089901,
+              "median": 1.9411060214042664,
+              "p90": 2.8342639207839966
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.9333087056875229,
+              "median": 1.9072962403297424,
+              "p90": 2.794794797897339
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.9213207103312016,
+              "median": 1.875266194343567,
+              "p90": 2.785979151725769
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.9199628792703152,
+              "median": 1.8904276490211487,
+              "p90": 2.7866628170013428
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.922603901475668,
+              "median": 1.9027501940727234,
+              "p90": 2.790747880935669
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.9269796200096607,
+              "median": 1.9120811820030212,
+              "p90": 2.7963160276412964
+            }
+          ],
+          "grid5_native_target_px_conditional_valid": [
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 2.063642829656601,
+              "median": 2.007129192352295,
+              "p90": 2.8682154417037964,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.981610082089901,
+              "median": 1.9411060214042664,
+              "p90": 2.8342639207839966,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.9333087056875229,
+              "median": 1.9072962403297424,
+              "p90": 2.794794797897339,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.9213207103312016,
+              "median": 1.875266194343567,
+              "p90": 2.785979151725769,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.9199628792703152,
+              "median": 1.8904276490211487,
+              "p90": 2.7866628170013428,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.922603901475668,
+              "median": 1.9027501940727234,
+              "p90": 2.790747880935669,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            },
+            {
+              "count": 16,
+              "finite_count": 16,
+              "mean": 1.9269796200096607,
+              "median": 1.9120811820030212,
+              "p90": 2.7963160276412964,
+              "total_pair_count": 16,
+              "conditional_valid_count": 16,
+              "conditional_invalid_count": 0,
+              "conditional_failure_rate": 0.0
+            }
+          ]
+        },
+        "H0_mace_input_px_all_finite_geometry": {
+          "count": 16,
+          "finite_count": 16,
+          "mean": 4.157158598303795,
+          "median": 3.983966827392578,
+          "p90": 6.154736042022705
+        },
+        "H0_mace_input_px_conditional_valid": {
+          "count": 16,
+          "finite_count": 16,
+          "mean": 4.157158598303795,
+          "median": 3.983966827392578,
+          "p90": 6.154736042022705,
+          "total_pair_count": 16,
+          "conditional_valid_count": 16,
+          "conditional_invalid_count": 0,
+          "conditional_failure_rate": 0.0
+        },
+        "H_final_mace_input_px_all_finite_geometry": {
+          "count": 16,
+          "finite_count": 16,
+          "mean": 4.017675280570984,
+          "median": 3.913286805152893,
+          "p90": 6.292035818099976
+        },
+        "H_final_mace_input_px_conditional_valid": {
+          "count": 16,
+          "finite_count": 16,
+          "mean": 4.017675280570984,
+          "median": 3.913286805152893,
+          "p90": 6.292035818099976,
+          "total_pair_count": 16,
+          "conditional_valid_count": 16,
+          "conditional_invalid_count": 0,
+          "conditional_failure_rate": 0.0
+        },
+        "H_final_mace_native_target_px_conditional_valid": {
+          "count": 16,
+          "finite_count": 16,
+          "mean": 3.886404614895582,
+          "median": 3.7936673164367676,
+          "p90": 6.088957786560059,
+          "total_pair_count": 16,
+          "conditional_valid_count": 16,
+          "conditional_invalid_count": 0,
+          "conditional_failure_rate": 0.0
+        },
+        "stage1_failures": 0,
+        "stage1_failure_rate": 0.0,
+        "valid_outputs": 16,
+        "failure_rate": 0.0,
+        "all_pair_success_at_input_px": {
+          "1": 0.0,
+          "3": 0.375,
+          "5": 0.75
+        },
+        "rejected_updates": 0,
+        "rejected_update_rate": 0.0,
+        "shared_call_count_violations": 0,
+        "elapsed_seconds": 9.46960128005594,
+        "latency_ms_per_pair_single_pass": 367.96093569137156,
+        "wall_time_ms_per_pair_including_io_visualization": 591.8500800034963,
+        "latency_ms_single_pass_distribution": {
+          "count": 16,
+          "finite_count": 16,
+          "mean": 367.96093569137156,
+          "median": 310.38693990558386,
+          "p90": 394.7287010960281
+        },
+        "latency_scope": "per-pair synchronized single pass; this evaluation entry is not the 20-warmup/100-pair formal latency benchmark",
+        "peak_allocated_bytes": 2060819968,
+        "peak_reserved_bytes": 2675965952,
+        "diagnostic_availability": {
+          "window_recall": {
+            "available": false,
+            "reason": "The current forward contract does not retain GT-to-window membership; no window-recall value is inferred or fabricated."
+          }
+        },
+        "status": "completed",
+        "manifest": "/home/disk1/Data/datasets/GoogleEarth_scale_pairs/val/pairs.jsonl",
+        "manifest_sha256": "a5e6f58bc46cef2dcc49db4e859e2a845755d6aee13be88c998f14a0386b5503",
+        "runtime_config": "/home/disk1/MHINet/configs/runtime_paths.server.json",
+        "checkpoint": {
+          "path": "/home/disk1/MHINet/outputs/engineering_visualization_seven_smoke/checkpoints/step_0000002.pt",
+          "format": "mhinet.training",
+          "version": 2,
+          "optimizer_step": 2,
+          "microbatch_progress": {
+            "accumulated_valid": 0
+          },
+          "data_progress": {
+            "length": 32,
+            "seed": 0,
+            "epoch": 0,
+            "position": 8,
+            "invalid_attempts_total": 0,
+            "shared_call_count_violations": 0
+          },
+          "metadata": {
+            "experiment_id": "engineering_batch_visualization_smoke",
+            "training_revision": "1.2",
+            "loss_revision": "1.1",
+            "training_config": "/home/disk1/MHINet/configs/batch_visualization_smoke.json",
+            "training_config_sha256": "68867a32bd530eb1f45bd42779344ac85f3936d3d3ffae6e43d3f381bb79efbf",
+            "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+            "mhir_revision": "mcnet_correlation_decoder_784_v1",
+            "runtime_config": "/home/disk1/MHINet/configs/runtime_paths.server.json",
+            "profile": "heads",
+            "active_scales": [
+              8,
+              4,
+              2
+            ],
+            "iterations_per_scale": 2,
+            "batch_size": 1,
+            "effective_batch_size": 4,
+            "gradient_accumulation": 4,
+            "tiny_gate": {
+              "path": "/home/disk1/MHINet/artifacts/p4_tiny_gate_mcnet_d2.json",
+              "sha256": "13719169eaed0d1d887a18d846f4a824525231f427dc8ec3d3456edad6a60ea3"
+            },
+            "test_used": false
+          },
+          "auxiliary_state": null,
+          "missing_model_keys": [],
+          "unexpected_model_keys": [],
+          "restored": {
+            "model": true,
+            "optimizer": false,
+            "scheduler": false,
+            "scaler": false
+          },
+          "rng_restored": {
+            "cpu": false,
+            "cuda": false
+          }
+        },
+        "checkpoint_sha256": "20ee388f5914850287c8237f45e0ad273c73a6e7d7ce539baa5d6a0c72b003c8",
+        "checkpoint_role": "engineering_batch_visualization_smoke",
+        "test_used": false,
+        "max_pairs": 16,
+        "build": {
+          "architecture_path": "/home/disk1/MHINet/configs/mhinet_mcnet_v1.2.json",
+          "architecture_sha256": "92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a",
+          "mhir_revision": "mcnet_correlation_decoder_784_v1",
+          "mcnet_reference_commit": "cc03479689b3cf40f0c384954f338b434765c155",
+          "provider": {
+            "loma_root": "/home/disk1/LoMa",
+            "loma_checkpoint": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+            "dino_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+            "selected_stage1_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+            "loretta_loaded_keys": 807,
+            "locator": {
+              "source": "official_loretta_checkpoint",
+              "overridden": false
+            },
+            "descriptor_initialization": {
+              "migrated_tensors": 364,
+              "vgg_tensors": 84,
+              "decoder_tensors": 280,
+              "top_refiner_mapping": "LoMa-B scale 14 -> DINOv3 scale 16"
+            },
+            "ownership": {
+              "dino_wrapper_instances": 1,
+              "mvt_object_references": 1,
+              "stage1_head_contains_dino": 0,
+              "stage1_head_contains_mvt": 0,
+              "decoder_scales": [
+                "16",
+                "8",
+                "4",
+                "2",
+                "1"
+              ]
+            },
+            "legacy_training_wrappers_reused": false,
+            "safe_stage1_fitter": true
+          },
+          "training_parameters": {
+            "profile": "heads",
+            "groups": {
+              "new_modules": {
+                "parameters": 1176712,
+                "trainable_parameters": 833222,
+                "tensor_count": 140,
+                "trainable_tensor_count": 99
+              },
+              "dedode": {
+                "parameters": 8219297,
+                "trainable_parameters": 0,
+                "tensor_count": 190,
+                "trainable_tensor_count": 0
+              },
+              "vgg": {
+                "parameters": 10592064,
+                "trainable_parameters": 0,
+                "tensor_count": 48,
+                "trainable_tensor_count": 0
+              },
+              "mvt": {
+                "parameters": 87417088,
+                "trainable_parameters": 0,
+                "tensor_count": 150,
+                "trainable_tensor_count": 0
+              },
+              "dino": {
+                "parameters": 227564544,
+                "trainable_parameters": 0,
+                "tensor_count": 259,
+                "trainable_tensor_count": 0
+              },
+              "stage1_head_parameters": {
+                "parameters": 2957572,
+                "trainable_parameters": 0,
+                "tensor_count": 10,
+                "trainable_tensor_count": 0
+              }
+            },
+            "total_trainable_parameters": 833222,
+            "new_parameters": 1176712,
+            "dino_trainable_parameters": 0,
+            "stage1_head_trainable_parameters": 0
+          }
+        },
+        "selection_warning": null
+      }
+    }
+  ]
+}

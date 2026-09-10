@@ -8,6 +8,7 @@ import json
 import math
 from pathlib import Path
 import random
+import re
 import time
 from typing import Any, Mapping
 
@@ -160,6 +161,22 @@ class DeterministicIndexStream:
             "epoch": self.epoch,
             "position": self.position,
         }
+
+
+def _latest_checkpoint(output_dir: Path) -> Path | None:
+    """Return the newest numbered checkpoint in an existing run directory."""
+
+    checkpoint_dir = Path(output_dir) / "checkpoints"
+    candidates = sorted(
+        (path for path in checkpoint_dir.glob("step_*.pt")
+         if re.fullmatch(r"step_(\d+)\.pt", path.name)),
+        key=lambda path: (
+            int(match.group(1)) if (match := re.fullmatch(r"step_(\d+)\.pt", path.name)) else -1,
+            path.stat().st_mtime_ns,
+            path.name,
+        ),
+    ) if checkpoint_dir.is_dir() else []
+    return candidates[-1] if candidates else None
 
 
 def warmup_cosine_factor(
@@ -332,10 +349,16 @@ def train(
     stop_after_optimizer_step: int | None = None,
 ) -> dict[str, Any]:
     output_dir = output_dir.expanduser().resolve()
-    if output_dir.exists() and any(output_dir.iterdir()) and resume is None and not overwrite:
-        raise FileExistsError(
-            f"Refusing to start in non-empty {output_dir}; pass --overwrite or --resume"
-        )
+    auto_resume = False
+    if resume is None and output_dir.exists() and any(output_dir.iterdir()) and not overwrite:
+        resume = _latest_checkpoint(output_dir)
+        if resume is not None:
+            auto_resume = True
+        else:
+            raise FileExistsError(
+                f"Non-empty training directory has no checkpoint to resume: {output_dir}. "
+                "Use a new output directory for a new run, or --overwrite only after checking it."
+            )
     output_dir.mkdir(parents=True, exist_ok=True)
     tiny_gate = _validate_tiny_gate(
         tiny_gate_artifact, bool(config.raw.get("require_passed_tiny_gate", True))
@@ -443,6 +466,7 @@ def train(
         "gradient_accumulation": accumulation,
         "tiny_gate": tiny_gate,
         "test_used": False,
+        "resume_mode": "auto_latest" if auto_resume else ("explicit" if resume is not None else "new_run"),
     }
     run_record = {
         "status": "running",
@@ -609,6 +633,8 @@ def train(
                     validation_rows,
                     overwrite=overwrite or resume is not None,
                 )
+                from mhinet.engine.evaluation_registry import register_evaluation
+                validation_files["registry_id"] = register_evaluation(validation_files["summary"])
                 last_validation = {
                     "summary": validation_summary,
                     "files": validation_files,

@@ -45,7 +45,7 @@ mhinet/
   cli.py           # stable unified command dispatcher
   __init__.py
 scripts/
-  train_e01.sh      # formal E01, physical GPU 1 by default
+  train_e01.sh      # E01 training, physical GPU 1 by default
   test_e00.sh       # pretrained H0 baseline on the full test split (1000 pairs)
   test.sh           # real-image accuracy evaluation with an explicit checkpoint
   unit_tests.sh     # CPU engineering unit tests
@@ -75,6 +75,20 @@ GPU_ID=2 bash scripts/train_e01.sh
 bash scripts/train_e01.sh --resume /absolute/path/to/step_0000500.pt
 ```
 
+训练输出目录的语义是自动的：新目录或空目录从头训练；非空目录若有
+`checkpoints/step_*.pt`，且未提供 `--resume`，自动从最新checkpoint继续。
+恢复仍强制检查配置、架构和profile hash。非空但没有checkpoint会安全报错；
+要开始新实验请使用新的输出目录。`--overwrite`是显式例外，只应在确认目录后使用。
+
+当前脚本默认使用 `configs/e01_heads_v1.2 bs_2.json`（BS2、有效batch8，已显式
+标记为实验性，因为批量H0对齐尚未通过）。若要运行协议主线的BS1配置，请执行：
+
+```bash
+MHINET_CONFIG="$PWD/configs/e01_heads_v1.2.json" \
+MHINET_OUTPUT_DIR="$PWD/outputs/E01_heads_seed0" \
+bash scripts/train_e01.sh
+```
+
 These scripts resolve the repository from their own location and can be invoked
 from another working directory. They use the existing `loma-repro` interpreter;
 override `MHINET_PYTHON` when relocating the environment. Training retains the
@@ -90,6 +104,10 @@ train (36000 pairs), in-training validation uses val (2500 pairs), and independe
 evaluation (including E00) defaults to test (1000 pairs). Test results must not
 be used to select hyperparameters or checkpoints. Full command
 examples and metric conventions: [real-image evaluation](docs/real_image_evaluation.md).
+
+每次发现的评估summary都会登记到[评估总表](docs/evaluation_summary.md)和机器可读的
+`artifacts/evaluation_registry.json`；重新扫描已有输出可运行
+`python -m mhinet.engine.evaluation_registry --scan outputs`。
 
 `python -m mhinet.cli <command>` is unchanged. Direct Python imports now use
 the subpackages, e.g. `from mhinet.models.model import MHINet` and

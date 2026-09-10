@@ -51,7 +51,7 @@ A按每轮预测H投影到B坐标系并半透明叠加；绿色是真值投影�
 
 E01只训练D8/D4/D2 adapter和MHIR解码器（833222个参数）；DINO、MVT、GHIM head、VGG、CGMDP累计解码器冻结。后续联合阶段冻结GHIM head参数不切断其输入梯度，H0/H/T不detach。
 
-E00独立评估用完整test（无反传）；E01训练用train，训练中验证用val。E00不是训练入口的硬性前置条件，test结果不得用于选择超参或checkpoint。这里仅提供命令，不自动启动正式评估或训练。请在tmux终端执行；若输出目录已存在，先确认其用途，不直接加overwrite。
+E00独立评估用完整test（无反传）；E01训练用train，训练中验证用val。E00不是训练入口的硬性前置条件，test结果不得用于选择超参或checkpoint。这里仅提供命令，不自动启动正式评估或训练。请在tmux终端执行；同一输出目录含checkpoint时再次执行会自动续训；新的输出目录会开启新run。非空但无checkpoint会报错，不直接加overwrite。
 
 ```bash
 cd /home/disk1/MHINet
@@ -70,7 +70,7 @@ python -u -m mhinet.cli train --runtime configs/runtime_paths.server.json --conf
 
 目录整理后可直接运行 `bash scripts/train_e01.sh`，其默认参数与上面的E01命令一致。`DRY_RUN=1 bash scripts/train_e01.sh`只显示命令；`bash scripts/unit_tests.sh`运行CPU单元测试。`bash scripts/test.sh CHECKPOINT`执行真实影像精度评估，默认完整test，详见 `docs/real_image_evaluation.md`。新代码位置见README目录树；统一CLI命令保持不变。
 
-续训使用完全相同的配置和输出目录，额外传 `--resume outputs/E01_heads_seed0/checkpoints/step_0000500.pt`（换成实际最后完成的checkpoint）。从头初始化与resume不可混用；配置hash不同会拒绝恢复。
+续训可直接重复同一命令，脚本会从该输出目录最新checkpoint自动恢复；也可显式传 `--resume outputs/E01_heads_seed0/checkpoints/step_0000500.pt`（换成实际最后完成的checkpoint）。从头初始化与resume不可混用；配置hash不同会拒绝恢复。若希望开始全新实验，请换新的`MHINET_OUTPUT_DIR`。
 
 ## 三个解码/预测部分
 

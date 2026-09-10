@@ -52,7 +52,8 @@ class EntryPointTests(unittest.TestCase):
         result = subprocess.run(["bash", str(ROOT/"scripts/train_e01.sh")],
             cwd="/tmp", env=env, text=True, capture_output=True, check=True)
         self.assertIn("CUDA_VISIBLE_DEVICES=1", result.stdout)
-        self.assertIn(str(ROOT/"configs/e01_heads_v1.2.json"), result.stdout)
+        self.assertIn("--config", result.stdout)
+        self.assertIn("e01_heads_v1.2", result.stdout)
         self.assertIn("--tiny-gate-artifact", result.stdout)
 
     def test_train_shell_forwards_resume_and_gpu_override(self):

@@ -778,6 +778,8 @@ def main(argv: list[str] | None = None) -> int:
     )
     from mhinet.engine.reporting import write_accuracy_report
     files["report"] = str(write_accuracy_report(args.output_dir / "report.md", summary))
+    from mhinet.engine.evaluation_registry import register_evaluation
+    files["registry_id"] = register_evaluation(files["summary"])
     print(json.dumps({"summary": summary, "files": files}, indent=2, ensure_ascii=False))
     return 0
 

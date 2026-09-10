@@ -11,11 +11,24 @@ from mhinet.engine.train import (
     DeterministicIndexStream,
     TrainConfig,
     _validate_tiny_gate,
+    _latest_checkpoint,
     warmup_cosine_factor,
 )
 
 
 class TrainingProtocolTests(unittest.TestCase):
+    def test_latest_checkpoint_is_selected_for_same_output_directory(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            self.assertIsNone(_latest_checkpoint(root))
+            checkpoint_dir = root / "checkpoints"
+            checkpoint_dir.mkdir()
+            first = checkpoint_dir / "step_0000001.pt"
+            second = checkpoint_dir / "step_0000010.pt"
+            first.write_bytes(b"first")
+            second.write_bytes(b"second")
+            self.assertEqual(_latest_checkpoint(root), second)
+
     def test_formal_gate_validator_checks_metrics_not_only_top_level_status(self) -> None:
         scales = {
             "TINY-S-D8": [8],

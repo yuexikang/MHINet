@@ -31,6 +31,13 @@ MACE是四个源图角点经预测H与GT投影后的平均欧氏距离；网格�
 
 AUC范围[0,1]，失败输出贡献0但保留在N中。这是明确登记的经验CDF面积定义，不声称等同于其他论文使用的梯形插值实现。更新被拒绝后保留合法H，该状态仍评估；拒绝率另报。单对同步计时与包含影像I/O/绘图的墙钟均摊分开，不作为统一warmup/重复计时的正式性能基准。
 
+训练输出目录语义：新目录或空目录从头训练；同一非空目录含编号checkpoint且未传`--resume`时自动从最新checkpoint继续。配置、架构、profile hash仍必须匹配；非空无checkpoint会报错，使用新目录开始新实验。
+
+每次真实评估完成后自动登记到 `docs/evaluation_summary.md`（机器记录在
+`artifacts/evaluation_registry.json/.csv`）；已有结果可运行
+`python -m mhinet.engine.evaluation_registry --scan outputs` 重新扫描。表中保留
+独立test、训练中val和工程冒烟的类型标签，不把不同split或工程权重混作排名。
+
 当前指标版本 `real_image_v2_ecdf_auc_quantile_median`：中位数采用0.5分位数，偶数样本取中间两项均值；修正此前torch.median取较小中间项的行为。旧报告保留原值，不与新中位数口径混用。
 
 本轮实际入口检查使用现存的 `outputs/engineering_visualization_seven_smoke/checkpoints/step_0000002.pt`，只训练过两步，不是正式训练模型。评估前16对真实val，最终输出 `outputs/real_image_accuracy_val16_verified`；这是带真实影像/标签的准确率测量和入口验证，不是最终test结果，也不证明正式训练精度达标。当前工作区未发现E01正式训练checkpoint，后续请显式提供训练得到的权重路径。

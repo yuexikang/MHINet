@@ -1170,3 +1170,13 @@ checkpoint SHA256=`20ee388f5914850287c8237f45e0ad273c73a6e7d7ce539baa5d6a0c72b00
 用户要求如这次误跑E00的val有结果则删除。两次只读检查均未发现 `/home/disk1/MHINet/outputs/E00_h0_seed0`；扫描outputs内summary.json也没有mode=H0_only的结果；进程列表中未发现E00/evaluate进程。因此没有可确认属于本次误跑的输出可删，未删除任何文件、未终止其他作业，未触碰历史val16、训练验证或无关D1结果。
 
 `DRY_RUN=1 bash scripts/test_e00.sh`确认实际命令含 `--split test` 且没有 `--max-pairs`；Shell语法检查通过；103项单元测试通过（1.592s），日志 `outputs/test_split_entrypoint_unit_tests.log`。未启动重新评估，由用户执行脚本；无新增模型结果或checkpoint。环境和资源路径/hash沿用前述登记。
+
+## 2026-09-10：训练同目录自动续训
+
+用户要求：输出目录相同则接着训练，新的输出目录则开始新训练。`mhinet/engine/train.py`现在在未传`--resume`时检查输出目录：空/新目录初始化新run；非空且存在`checkpoints/step_*.pt`自动选择最新编号checkpoint并恢复模型、optimizer、scheduler、RNG和数据流；非空无checkpoint安全报错，避免覆盖未知结果。显式`--resume`优先；恢复仍校验training config SHA、architecture SHA和profile。训练元数据写入`resume_mode=auto_latest|explicit|new_run`。`--overwrite`仍是用户明确的例外，不会被自动启用。
+
+此次用户本地尝试的脚本已选择 `e01_heads_v1.2 bs_2.json` 和 `outputs/E01_heads_bs_2`；补入`allow_experimental_batch=true`后可通过实验性batch保护。该配置为BS2、累积4、有效batch8，保持与文件内参数一致；其H0批量数值对齐尚未通过，不能与正式BS1主线混比。该配置随代码一并保存，确保远程clone的默认脚本可运行；规范BS1配置`configs/e01_heads_v1.2.json`仍保留，脚本支持`MHINET_CONFIG`和`MHINET_OUTPUT_DIR`显式切换配置/实验目录。未启动或终止用户训练。
+
+验证：`bash -n scripts/train_e01.sh scripts/test.sh scripts/test_e00.sh scripts/unit_tests.sh`通过；103项原有单元测试加最新checkpoint选择测试共104项通过。`DRY_RUN=1 bash scripts/train_e01.sh`确认默认路径、GPU1和参数转发；无新增checkpoint、无删除输出。当前工作区中的`artifacts/p4_tiny_s_d1_translation_swa.json`仍为用户无关修改，不纳入提交。
+
+评估总表同步：扫描服务器现有outputs中的10份真实评估summary（含刚完成的E00完整test/1000对），生成 `docs/evaluation_summary.md`、`artifacts/evaluation_registry.json` 和 `.csv`。每条记录绑定源summary SHA、split/对数、模式、H0/最终轨迹、成功率/AUC、失败率、显存、延迟、manifest与checkpoint信息；工程val冒烟和独立test分开标注。评估入口已自动登记新summary，`python -m mhinet.engine.evaluation_registry --scan outputs`可重扫。表不删旧记录，不把tiny/性能探测视为精度评估。

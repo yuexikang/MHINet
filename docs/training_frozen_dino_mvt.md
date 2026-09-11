@@ -1,5 +1,15 @@
 # 冻结 DINO/MVT 的完整 D2 主线训练
 
+2026-09-11入口更新：`train_frozen_dino_mvt.sh` 现在默认使用
+`configs/runtime_paths.temporal4.server.json` 和 `configs/train_frozen_dino_mvt_temporal4.json`，
+数据根 `/home/disk1/Data/datasets/GoogleEarth_temporal4_v1`，输出
+`outputs/GHIM_joint_frozen_dino_mvt_temporal4_seed0`。下文旧输出路径为上一版记录。
+冻结、损失、学习率、10k步预算均不变；全量新val预计3,848对，不再是旧val的2,500对。
+启动前检查完成状态、非smoke、实际产量、四对组成、影像/mask文件、地理和母图隔离。
+数据未完成时明确报错，退出后待生成完成再运行同一命令即可。不会自动启动训练。
+如需定制，使用 `MHINET_RUNTIME` / `MHINET_CONFIG` / `MHINET_OUTPUT_DIR` 环境变量。
+`DRY_RUN=1`只打印命令，不代表数据已通过启动检查。
+
 这是用户指定的新实验，不冒充原 E02/E03 等预算对照；不覆盖已完成的 E01。
 初始权重由 `configs/runtime_paths.server.json` 指定：GHIM/DINO 使用原 LoRetta，
 VGG/累计解码器使用 LoMa-B；新增 Adapter/MHIR 初始化，MHIR 输出投影为零。

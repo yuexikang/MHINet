@@ -1,5 +1,22 @@
 # MHINet implementation log
 
+## 2026-09-11：训练入口切换新 temporal4 数据集
+
+用户正在生成新数据，要求训练脚本准备就绪。新增独立runtime与training config：
+`configs/runtime_paths.temporal4.server.json`、`configs/train_frozen_dino_mvt_temporal4.json`。
+`scripts/train_frozen_dino_mvt.sh` 默认物理卡1、数据根
+`/home/disk1/Data/datasets/GoogleEarth_temporal4_v1`，输出
+`outputs/GHIM_joint_frozen_dino_mvt_temporal4_seed0`。原预训练权重、冻结组、损失、学习率、
+有效batch4、10k步不变；max_val_pairs=null使用全部新val，不固定2500。
+新配置experiment_id带temporal4，旧checkpoint配置hash不匹配，避免误接旧数据实验。
+脚本独立构造命令，不改用户已修改的train_e01.sh。
+
+新增启动检查 `mhinet/dataio/check_temporal_ready.py`：必须completed且非smoke，
+核对train/val四对组成、实际数量与摘要、影像/mask存在、母图/地理组无交集和test入口存在。
+检查只读，不启动GPU、不修改数据。当前实际目录仍处于planned，仅train已创建；实测检查
+正确退出2，提示等待生成完成。DRY_RUN确认新runtime/config/output三处路径正确。
+新增配置/脚本默认、未完成/smoke拒绝、完整清单/缺图拒绝测试。未启动任何训练。
+
 ## 2026-09-11：双时相四对数据生成与分组9:1
 
 用户要求每组past/current母图生成same_past、same_current各1对及跨时相独立2对，

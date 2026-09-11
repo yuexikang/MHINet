@@ -1,0 +1,13 @@
+{
+  "repo_root": "/home/disk1/MHINet",
+  "loma_root": "/home/disk1/LoMa",
+  "loretta_source_root": "/home/disk1/LoMa/third_party/LoRetta",
+  "dino_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/snapshots/95bf3670465cc80ffca8b1edf94b5eb651211194/loretta.pth",
+  "selected_stage1_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/snapshots/95bf3670465cc80ffca8b1edf94b5eb651211194/loretta.pth",
+  "pyramid_checkpoint": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+  "data_root": "/home/disk1/Data/datasets/GoogleEarth_temporal4_v1",
+  "split_manifest": "/home/disk1/Data/datasets/GoogleEarth_temporal4_v1/train/pairs.jsonl",
+  "output_root": "/home/disk1/MHINet/outputs",
+  "device": "cuda:0",
+  "selection_note": "The official LoRetta checkpoint is the checkpoint used by the current shared Stage1/pyramid reference outputs. Trained 784 Stage1 checkpoints remain candidates and must be treated as explicit checkpoint ablations, not silently substituted."
+}

@@ -25,6 +25,7 @@ from mhinet.engine.losses import sequence_corner_l1
 from mhinet.engine.ghim_losses import ghim_loss
 from mhinet.engine.metrics import homography_trajectory_metrics
 from mhinet.models.model import MHINet, build_model
+from mhinet.ops.correlation import HGuidedLocalCorrelation
 from mhinet.diagnostics.tiny_gate import (
     REGISTERED_PROTOCOL,
     REQUIRED_EXPERIMENTS,
@@ -388,6 +389,7 @@ def train(
     tiny_gate_artifact: Path | None,
     overwrite: bool,
     stop_after_optimizer_step: int | None = None,
+    correlation_checkpoint: bool = True,
 ) -> dict[str, Any]:
     output_dir = output_dir.expanduser().resolve()
     resume, resume_mode = _resolve_start(output_dir, resume, overwrite)
@@ -404,6 +406,9 @@ def train(
     for group in build_report["training_parameters"]["groups"].values():
         group.pop("optimizer_parameter_ids", None)
     model.set_training_phase(config.profile)
+    for module in model.modules():
+        if isinstance(module, HGuidedLocalCorrelation):
+            module.activation_checkpoint_training = correlation_checkpoint
     optimizer_groups = model.optimizer_group_spec()
     if config.raw.get("ghim_supervision"):
         for group in optimizer_groups:
@@ -505,6 +510,7 @@ def train(
         "tiny_gate": tiny_gate,
         "test_used": False,
         "resume_mode": resume_mode,
+        "correlation_activation_checkpoint": correlation_checkpoint,
     }
     run_record = {
         "status": "running",
@@ -740,6 +746,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--tiny-gate-artifact", type=Path)
     parser.add_argument("--stop-after-optimizer-step", type=int)
     parser.add_argument("--overwrite", action="store_true")
+    parser.add_argument("--no-correlation-checkpoint", action="store_true",
+                        help="Disable correlation activation recomputation; use more GPU memory. Does not disable checkpoint saving.")
     args = parser.parse_args(argv)
     runtime = RuntimePaths.from_json(args.runtime)
     config = TrainConfig.from_json(args.config)
@@ -756,6 +764,7 @@ def main(argv: list[str] | None = None) -> int:
         tiny_gate_artifact=args.tiny_gate_artifact,
         overwrite=args.overwrite,
         stop_after_optimizer_step=args.stop_after_optimizer_step,
+        correlation_checkpoint=not args.no_correlation_checkpoint,
     )
     print(json.dumps(report, indent=2, ensure_ascii=False))
     return 0

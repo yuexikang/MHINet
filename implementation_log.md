@@ -1,5 +1,13 @@
 # MHINet implementation log
 
+## 2026-09-11：接入已验证的关闭相关性重计算训练开关
+
+训练CLI新增 `--no-correlation-checkpoint`，对HGuidedLocalCorrelation设置
+activation_checkpoint_training=False；默认不传仍保持原设置。metadata记录实际模式。
+这是已通过短测的执行/显存策略，不改变参数结构或损失配置，允许原同目录checkpoint续训；
+训练checkpoint保存仍正常。用户命令维持BS1×累积8，输出目录保持原temporal4_ebs8目录。
+本次只接入命令，不启动正式训练。
+
 ## 2026-09-11：BS1关闭相关性重计算测试
 
 保持BS1×累积8，独立物理GPU0 RTX4090顺序off/on，同数据/初始化/损失/优化器，

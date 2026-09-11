@@ -12,11 +12,35 @@ from mhinet.engine.train import (
     TrainConfig,
     _validate_tiny_gate,
     _latest_checkpoint,
+    _resolve_start,
+    _archive_previous_records,
     warmup_cosine_factor,
 )
 
 
 class TrainingProtocolTests(unittest.TestCase):
+    def test_no_checkpoint_restarts_and_preserves_unrelated_files(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            self.assertEqual(_resolve_start(root, None, False), (None, 'new_run'))
+            (root/'run.json').write_text('{}')
+            (root/'train.jsonl').write_text('old training records')
+            (root/'notes.txt').write_text('user notes')
+            (root/'validation').mkdir()
+            (root/'validation/summary.json').write_text('{}')
+            self.assertEqual(_resolve_start(root, None, False), (None, 'restart_no_checkpoint'))
+            archive = Path(_archive_previous_records(root))
+            self.assertEqual((archive/'train.jsonl').read_text(), 'old training records')
+            self.assertTrue((archive/'validation/summary.json').is_file())
+            self.assertFalse((root/'train.jsonl').exists())
+            self.assertEqual((root/'notes.txt').read_text(), 'user notes')
+            (root/'checkpoints').mkdir()
+            checkpoint = root/'checkpoints/step_0000500.pt'
+            checkpoint.touch()
+            self.assertEqual(_resolve_start(root, None, False), (checkpoint, 'auto_latest'))
+            explicit = root/'external.pt'
+            self.assertEqual(_resolve_start(root, explicit, False), (explicit, 'explicit'))
+
     def test_latest_checkpoint_is_selected_for_same_output_directory(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)

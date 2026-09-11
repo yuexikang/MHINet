@@ -1,5 +1,14 @@
 # MHINet implementation log
 
+## 2026-09-11：无checkpoint同目录从头训练
+
+按用户明确要求修改启动规则：同目录存在checkpoint则自动续训；没有checkpoint则
+`restart_no_checkpoint`，重新初始化模型/optimizer/scheduler/数据流，从第0步训练，
+替换run.json/train.jsonl。为避免丢失证据，旧运行记录及validation/visualizations先移入
+同目录 `previous_no_checkpoint_*` 备份；无关文件不动。替换推迟到模型、配置、数据初始化成功后。
+新增临时目录回归检查：新目录、无checkpoint重启、有checkpoint续训、显式resume优先、
+旧记录可恢复、无关文件保留。未启动用户训练，原103步记录此刻尚未覆盖；下次运行时生效。
+
 ## 2026-09-11：有效 batch 翻倍至8
 
 新增 `configs/train_frozen_dino_mvt_temporal4_ebs8.json`：真实BS1、累积8、有效batch8；

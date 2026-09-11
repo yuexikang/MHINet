@@ -1,5 +1,8 @@
 # 冻结 DINO/MVT 的完整 D2 主线训练
 
+同目录重启规则更新：有checkpoint自动续训；无checkpoint自动从头训练并替换当前运行记录，
+无需改目录或传--overwrite。旧记录移入 `previous_no_checkpoint_*` 留作恢复，其他文件保留。
+
 2026-09-11入口更新：`train_frozen_dino_mvt.sh` 现在默认使用
 `configs/runtime_paths.temporal4.server.json` 和 `configs/train_frozen_dino_mvt_temporal4.json`，
 数据根 `/home/disk1/Data/datasets/GoogleEarth_temporal4_v1`，输出

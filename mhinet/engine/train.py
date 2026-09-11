@@ -10,6 +10,7 @@ from pathlib import Path
 import random
 import re
 import time
+import tempfile
 from typing import Any, Mapping
 
 import numpy as np
@@ -178,6 +179,29 @@ class DeterministicIndexStream:
             "epoch": self.epoch,
             "position": self.position,
         }
+
+
+def _resolve_start(output_dir: Path, resume: Path | None, overwrite: bool):
+    if resume is not None:
+        return resume, "explicit"
+    if output_dir.exists() and any(output_dir.iterdir()) and not overwrite:
+        latest = _latest_checkpoint(output_dir)
+        if latest is not None:
+            return latest, "auto_latest"
+        return None, "restart_no_checkpoint"
+    return None, "new_run"
+
+
+def _archive_previous_records(output_dir: Path) -> str | None:
+    """Replace active run records while retaining a recoverable local backup."""
+    paths = [output_dir / name for name in ('run.json', 'train.jsonl', 'validation', 'visualizations')]
+    existing = [path for path in paths if path.exists() or path.is_symlink()]
+    if not existing:
+        return None
+    archive = Path(tempfile.mkdtemp(prefix='previous_no_checkpoint_', dir=output_dir))
+    for path in existing:
+        path.rename(archive / path.name)
+    return str(archive)
 
 
 def _latest_checkpoint(output_dir: Path) -> Path | None:
@@ -366,16 +390,9 @@ def train(
     stop_after_optimizer_step: int | None = None,
 ) -> dict[str, Any]:
     output_dir = output_dir.expanduser().resolve()
-    auto_resume = False
-    if resume is None and output_dir.exists() and any(output_dir.iterdir()) and not overwrite:
-        resume = _latest_checkpoint(output_dir)
-        if resume is not None:
-            auto_resume = True
-        else:
-            raise FileExistsError(
-                f"Non-empty training directory has no checkpoint to resume: {output_dir}. "
-                "Use a new output directory for a new run, or --overwrite only after checking it."
-            )
+    resume, resume_mode = _resolve_start(output_dir, resume, overwrite)
+    if resume_mode == "restart_no_checkpoint":
+        print(f"输出目录没有checkpoint，将从第0步重新训练并替换旧运行记录：{output_dir}", flush=True)
     output_dir.mkdir(parents=True, exist_ok=True)
     tiny_gate = _validate_tiny_gate(
         tiny_gate_artifact, bool(config.raw.get("require_passed_tiny_gate", True))
@@ -487,7 +504,7 @@ def train(
         "gradient_accumulation": accumulation,
         "tiny_gate": tiny_gate,
         "test_used": False,
-        "resume_mode": "auto_latest" if auto_resume else ("explicit" if resume is not None else "new_run"),
+        "resume_mode": resume_mode,
     }
     run_record = {
         "status": "running",
@@ -499,6 +516,10 @@ def train(
         "parameter_report": _compact_parameter_report(model),
         "resume": resume_report,
     }
+    if resume_mode == "restart_no_checkpoint":
+        # Defer replacement until model/config/data initialization has succeeded.
+        run_record["previous_records_backup"] = _archive_previous_records(output_dir)
+        print(f"旧运行记录备份：{run_record['previous_records_backup']}", flush=True)
     _write_json(output_dir / "run.json", run_record)
     log_path = output_dir / "train.jsonl"
     log_mode = "a" if resume is not None else "w"

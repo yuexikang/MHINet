@@ -1,5 +1,28 @@
 # MHINet implementation log
 
+## 2026-09-11：双时相四对数据生成与分组9:1
+
+用户要求每组past/current母图生成same_past、same_current各1对及跨时相独立2对，
+val与train约1:9；用户确认母图基本严格配准。新增 `mhinet/dataio/generate_temporal.py`、
+`scripts/generate_temporal_dataset.sh`，复用LoMa实际生成函数，不修改LoMa或旧数据。
+跨时相按近似identity母图关系组合H，并记录近似标签来源；不宣称严格真实配准标签。
+母图根 `/home/disk1/Data/datasets/GoogleEarth/training_data`，原Train/Val池合并后按stem配对
+9,625组，先做完整0.01度地理格划分：train8,663组/34,652对，val962组/3,848对。
+test不改，复用 `/home/disk1/Data/datasets/GoogleEarth_scale_pairs/test` 符号链接；manifest SHA256
+`3db0eca8c64a23cb1000d6905cbcf82dd221f653033e3b8463cd9484601dfb06`。
+LoMa生成器SHA256 `4a4aea0fc2dffa6739d72700da3cf1dbba4d25b8ccb4f0a5086eff754ca2087a`。
+
+默认命令 `bash scripts/generate_temporal_dataset.sh` 仅计划，不写目录；显式 `--generate`
+才生成到 `/home/disk1/Data/datasets/GoogleEarth_temporal4_v1`，不覆盖非空目录。
+小样本命令 `MHINET_DATA_OUTPUT=/home/disk1/MHINet/outputs/diagnostics/temporal4_generation_smoke_v2 bash scripts/generate_temporal_dataset.sh --smoke --generate`。
+环境沿用conda loma-repro。分组/配方新增3项单元测试通过；真实母图小样本验证与产量清单
+保存在smoke目录。此处没有新模型checkpoint，也没有执行全量生成或切换训练数据。
+重分母图意味着旧E01不能作为新val独立性前提下的继续训练起点。说明见
+`docs/temporal_dataset_v1.md`。
+最终复核：111项单元测试通过。smoke的train/val各4对、各4张预览；现有MHINet loader
+可读取全部8对影像、H及overlap mask（784输入）。地理格交集为空，test manifest hash未变。
+合成矩阵最大自洽误差分别4.10e-13、6.92e-13px；不将该自洽值等同真实跨时相标注精度。
+
 ## 2026-09-11：新增只冻结 DINO/MVT 的完整训练入口
 
 用户指定覆盖原默认冻结策略：GHIM head、VGG、CGMDP 活跃累计解码层、Adapter/MHIR

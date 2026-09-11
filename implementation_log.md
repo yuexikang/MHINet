@@ -1,5 +1,18 @@
 # MHINet implementation log
 
+## 2026-09-11：BS2×累积4性能与数值对照
+
+用户要求测试以更多显存换速度。新增独立 `scripts/probe_temporal_batch.py`，同一物理GPU0
+顺序测BS1×8和BS2×4；新train前16对、真实预训练、frozen_dino_mvt、GHIM四项监督，
+3步性能预热+6步计时，含读取/完整前反向/优化，不触碰正式输出、不存checkpoint、不访问test。
+实际记录 `artifacts/temporal4_ebs8_bs1_probe.json`、`artifacts/temporal4_ebs8_bs2_probe.json`。
+BS1平均6.7933秒/步、1.1776pair/s、allocated8.393GB；BS2平均5.5323秒/步、1.4461pair/s、
+allocated15.555GB、reserved19.212GB。吞吐+22.79%，步耗时-18.56%，无OOM与非有限梯度。
+DINO/MVT无梯度，第二步后活跃解冻组非零，D1不执行，共享调用每microbatch各一次。
+16对初始H0跨BS最大四角坐标差0.3831177px，既有门槛0.1px未通过；没有放宽门槛或
+改正式默认batch。另记录geo/mat跨microbatch的归一化权重差异，后续公平性修复需单独测试。
+结果表、命令、边界与建议见 `docs/temporal4_batch_probe.md`。没有改变正在使用的训练配置。
+
 ## 2026-09-11：无checkpoint同目录从头训练
 
 按用户明确要求修改启动规则：同目录存在checkpoint则自动续训；没有checkpoint则

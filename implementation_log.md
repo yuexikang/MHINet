@@ -1,5 +1,15 @@
 # MHINet implementation log
 
+## 2026-09-11：卡0有效BS4等样本预算对照
+
+用户同意增加有效BS4对照。新增 `configs/train_frozen_dino_mvt_temporal4_ebs4_20k.json`：
+真实BS1×累积4，20k优化步，80k样本次数，与BS8×10k等样本预算；seed0及初始化、冻结组、
+损失和峰值学习率保持一致。warmup_fraction=.05对应1000步，每1000步验证和保存，对齐
+BS8实验的4000样本warmup及每4000样本验证。使用独立输出
+`outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0`，GPU_ID=0，传
+`--no-correlation-checkpoint`。优化器更新次数增加，因此AdamW动量/衰减累计也随之变化，
+这是不同有效batch训练方案的比较，不声称完全相同优化轨迹。仅准备配置/命令，未启动训练。
+
 ## 2026-09-11：接入已验证的关闭相关性重计算训练开关
 
 训练CLI新增 `--no-correlation-checkpoint`，对HGuidedLocalCorrelation设置

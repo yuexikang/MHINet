@@ -216,9 +216,10 @@ class SharedFeatureProvider(nn.Module):
         for parameter in module.parameters():
             parameter.requires_grad = bool(enabled)
 
-    def set_training_groups(self, *, mvt: bool, vgg: bool, dedode: bool) -> None:
+    def set_training_groups(self, *, mvt: bool, vgg: bool, dedode: bool, ghim_head: bool = False) -> None:
         self._set_requires_grad(self.dino, False)
-        self._set_requires_grad(self.stage1_head, False)
+        self._set_requires_grad(self.stage1_head, ghim_head)
+        self._ghim_head_trainable = bool(ghim_head)
         self._set_requires_grad(self.mvt, mvt)
         self._set_requires_grad(self.vgg, vgg)
         self._set_requires_grad(self.dedode, dedode)
@@ -233,6 +234,11 @@ class SharedFeatureProvider(nn.Module):
     def _restore_modes(self, mode: bool) -> None:
         self.dino.eval()
         self.stage1_head.eval()
+        # The legacy head overrides train() to force eval. Restore descendants
+        # explicitly without changing the adjacent LoMa repository.
+        head_mode = bool(mode and getattr(self, "_ghim_head_trainable", False))
+        for module in self.stage1_head.modules():
+            module.training = head_mode
         self.mvt.train(bool(mode and self._mvt_trainable))
         self.vgg.train(bool(mode and self._vgg_trainable))
         # Protocol v1.2 fixes VGG running statistics while allowing BN affine grads.

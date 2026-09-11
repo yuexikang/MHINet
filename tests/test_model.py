@@ -19,13 +19,13 @@ class FakeFeatureProvider(nn.Module):
         self.head = nn.Linear(1, 1)
         self.last_pyramid_scales: tuple[int, ...] | None = None
 
-    def set_training_groups(self, *, mvt: bool, vgg: bool, dedode: bool) -> None:
+    def set_training_groups(self, *, mvt: bool, vgg: bool, dedode: bool, ghim_head: bool = False) -> None:
         for module, enabled in (
             (self.mvt, mvt),
             (self.vgg, vgg),
             (self.dedode, dedode),
             (self.dino, False),
-            (self.head, False),
+            (self.head, ghim_head),
         ):
             for parameter in module.parameters():
                 parameter.requires_grad = enabled
@@ -51,6 +51,7 @@ class FakeFeatureProvider(nn.Module):
             "H0_norm": torch.eye(3).unsqueeze(0),
             "stage1_valid": torch.tensor([True]),
             "stage1_valid_correspondences": torch.tensor([16]),
+            "stage1": {},
             "call_counts": {
                 "dino": 1,
                 "mvt": 1,
@@ -73,6 +74,16 @@ class RecordingIterator(nn.Module):
 
 
 class MainlineCutoffTests(unittest.TestCase):
+    def test_frozen_dino_mvt_profile(self) -> None:
+        model = MHINet(FakeFeatureProvider())
+        model.set_training_phase("frozen_dino_mvt")
+        groups = model.trainable_parameter_groups()
+        self.assertEqual(set(groups), {"new_modules", "dedode", "vgg", "stage1_head_parameters"})
+        self.assertEqual({g['name'] for g in model.optimizer_group_spec()}, set(groups))
+        self.assertFalse(any(p.requires_grad for p in model.adapters['1'].parameters()))
+        model.set_training_phase('heads')
+        self.assertFalse(any(p.requires_grad for p in model.feature_provider.head.parameters()))
+
     def test_d1_is_registered_but_not_in_mainline_optimizer(self) -> None:
         model = MHINet(FakeFeatureProvider())
         report = model.set_training_phase("heads")

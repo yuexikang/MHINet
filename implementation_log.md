@@ -1,5 +1,48 @@
 # MHINet implementation log
 
+## 2026-09-11：新增只冻结 DINO/MVT 的完整训练入口
+
+用户指定覆盖原默认冻结策略：GHIM head、VGG、CGMDP 活跃累计解码层、Adapter/MHIR
+全部可训练；仅冻结 DINO/MVT，D1 仍作为不执行的兼容分支。新增
+`configs/train_frozen_dino_mvt.json`、`scripts/train_frozen_dino_mvt.sh`，默认物理卡1，
+新目录 `outputs/GHIM_joint_frozen_dino_mvt_seed0`，原始预训练初始化，不继承 E01。
+完整配置和冻结/学习率表见 `docs/training_frozen_dino_mvt.md`。
+
+修复原 provider 强制冻结 head 和旧 head.train() 强制 eval 的包装限制；head 参数组
+独立学习率1e-6，保留原 profiles 的冻结行为。总可训练参数22,579,690。
+加入 `mhinet/engine/ghim_losses.py`：LoMa 四项公式，权重 total=1、mat=.01、cls=.0001、H=.05；
+真实 overlap mask 来自 `/home/disk1/Data/datasets/GoogleEarth_scale_pairs/train`。
+非法拟合在归一化除法前隔离，失败样本仍训练 coarse 分支；记录各项损失，H0/H/T 不detach。
+安全输入对照 `/home/disk1/LoMa/experiments/loretta_stage1_h/losses.py`，五项值差均0。
+训练仍是train，验证全量val/2500，test不参与选择；每500步验证并输出七张图。
+
+资源继承 `configs/runtime_paths.server.json`：LoMa `/home/disk1/LoMa`，LoRetta权重blob
+SHA256 `09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e`，
+VGG/decoder `/root/.cache/torch/hub/checkpoints/loma_B.pt`。环境 `loma-repro`，
+Python3.10.20、torch2.11.0+cu128。新配置SHA256
+`1e9b5d0f3f37052e84224babd7f99959991d81117f602012941e30aac17f4648`。
+
+验证命令：`OMP_NUM_THREADS=1 /root/miniconda3/envs/loma-repro/bin/python -m unittest discover -s tests -q`
+（108项通过）；`DRY_RUN=1 bash scripts/train_frozen_dino_mvt.sh`；
+`CUDA_VISIBLE_DEVICES=1 PYTHONPATH=/home/disk1/MHINet /root/miniconda3/envs/loma-repro/bin/python scripts/check_frozen_dino_mvt.py`。
+结果 `artifacts/frozen_dino_mvt_two_step.json`：DINO/MVT无梯度，head有梯度，第二步VGG/decoder
+梯度非零，共享各一次，D1零调用，峰值allocated8,294,526,976字节。
+首次无warmup/head LR1e-5探测两步loss4.746→138.607；这是不稳定警示，不标记精度通过。
+正式head LR1e-6 + 500步warmup复查，同一训练样本两步loss4.746→4.725。
+
+正式入口冒烟：`GPU_ID=1 MHINET_OUTPUT_DIR=/home/disk1/MHINet/outputs/diagnostics/frozen_dino_mvt_trainer_smoke_v2 bash scripts/train_frozen_dino_mvt.sh --stop-after-optimizer-step 2`。
+真实BS1累积4，两步共8对，成功保存checkpoint SHA256
+`b5fb5cb4567670c6ee06a29c276cf07995b114c89ce9f3ef5f1df74f4e1c53ba`。
+同目录再执行 `--stop-after-optimizer-step 3`，确认 `resume_mode=auto_latest`，从step2
+恢复到step3，总loss1.85819，checkpoint SHA256
+`537d11d4b11ca1bd75c5dbfece9b1bfa1498127270bc277186f8b554ae0d46db`。
+此前v1 smoke目录保留，添加显式学习率配置前的记录不能用于新配置续训。
+未启动正式10k长训练；原P4 tiny gate仅证明原精修模块，不作为新增GHIM监督收敛证据。
+
+原E01独立test已完成1000对，输出 `outputs/E01_heads_test_step10000` 并自动进入评估总表：
+H0 MACE15.41256→最终13.58886px，最终成功@5px26.2%，几何无效0；
+val成绩不能当作test泛化通过。本次配置来自用户冻结/损失指令，不根据test调权重。
+
 This is an evidence log, not a claim that the model has been validated.  The
 active requirements are the server handoff package training protocol v1.2 and
 loss revision 1.1.  Files under `history/` were not used as implementation

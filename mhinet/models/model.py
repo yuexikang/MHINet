@@ -56,6 +56,9 @@ class MHINet(nn.Module):
         if count_new_parameters(self.iterator.adapters, self.iterator.decoders) != EXPECTED_NEW_PARAMETERS:
             raise AssertionError("MHINet new parameter count changed from the v1 contract")
         self.training_profiles = load_training_profiles()
+        self.training_profiles["frozen_dino_mvt"] = (
+            "adapters", "refinement_decoders", "dedode", "vgg", "ghim_head"
+        )
         # D1 remains registered for controlled future experiments, but it is
         # excluded from every current mainline optimizer group.
         self._optional_d1_enabled = False
@@ -96,6 +99,7 @@ class MHINet(nn.Module):
             dedode="dedode" in active,
             vgg="vgg" in active,
             mvt="mvt" in active,
+            ghim_head="ghim_head" in active,
         )
         self._training_phase = profile
         # Restore mode after changing group flags; requires_grad alone is not train().
@@ -103,7 +107,7 @@ class MHINet(nn.Module):
         report = self.training_parameter_report()
         if report["dino_trainable_parameters"] != 0:
             raise AssertionError("DINOv3 must remain frozen")
-        if report["stage1_head_trainable_parameters"] != 0:
+        if "ghim_head" not in active and report["stage1_head_trainable_parameters"] != 0:
             raise AssertionError("Stage1 head parameters must remain frozen")
         if any(
             parameter.requires_grad
@@ -202,6 +206,7 @@ class MHINet(nn.Module):
             "dedode": "dedode",
             "vgg": "vgg",
             "mvt": "mvt",
+            "stage1_head_parameters": "ghim_head",
         }
         groups = self.trainable_parameter_groups()
         unexpected = set(groups) - set(lr_names)
@@ -211,7 +216,7 @@ class MHINet(nn.Module):
             {
                 "name": name,
                 "params": parameters,
-                "lr": float(learning_rates[lr_names[name]]),
+                "lr": float(learning_rates.get(lr_names[name], 1e-6)),
             }
             for name, parameters in groups.items()
         ]
@@ -249,6 +254,8 @@ class MHINet(nn.Module):
                     "stage1_valid_correspondences"
                 ],
                 "shared_call_counts": shared["call_counts"],
+                "ghim_outputs": (shared["stage1"]
+                                 if self.training_phase == "frozen_dino_mvt" else None),
                 "runtime_diagnostics": {
                     "shared_call_counts": shared["call_counts"],
                     "feature_valid_counts": refinement["feature_valid_counts"],

@@ -134,11 +134,13 @@ class HomographyPairDataset(Dataset[dict[str, Any]]):
         max_pairs: int | None = None,
         exclude_geo_groups: Iterable[str] = (),
         geo_cell_degrees: float = 0.01,
+        include_overlap_mask: bool = False,
     ) -> None:
         super().__init__()
         self.manifest = Path(manifest).resolve()
         self.split_root = self.manifest.parent
         self.image_size = int(image_size)
+        self.include_overlap_mask = include_overlap_mask
         excluded = set(exclude_geo_groups)
         self.index: list[_IndexEntry] = []
         with self.manifest.open("rb") as stream:
@@ -187,7 +189,7 @@ class HomographyPairDataset(Dataset[dict[str, Any]]):
         normalized_h = pixel_homography_to_normalized(
             native_h, (height_a, width_a), (height_b, width_b)
         ).float()
-        return {
+        result = {
             "images": torch.stack((image_a, image_b), dim=0),
             "H_gt_norm": normalized_h,
             "pair_id": entry.pair_id,
@@ -196,3 +198,10 @@ class HomographyPairDataset(Dataset[dict[str, Any]]):
             "size_A": torch.tensor(record["size_A"], dtype=torch.float32),
             "size_B": torch.tensor(record["size_B"], dtype=torch.float32),
         }
+        if self.include_overlap_mask:
+            with Image.open(self.split_root / record["mask_A_overlap"]) as mask:
+                array = np.asarray(mask.convert("L").resize(
+                    (self.image_size, self.image_size), Image.Resampling.NEAREST
+                )).copy()
+            result["mask_A_overlap"] = torch.from_numpy(array).unsqueeze(0).float().div_(255)
+        return result

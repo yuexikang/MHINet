@@ -1,0 +1,145 @@
+{
+  "status": "passed",
+  "scope": "two-step real train-pair smoke, not model accuracy validation",
+  "torch": "2.11.0+cu128",
+  "cuda": "12.8",
+  "parameter_report": {
+    "profile": "frozen_dino_mvt",
+    "groups": {
+      "new_modules": {
+        "parameters": 1176712,
+        "trainable_parameters": 833222,
+        "tensor_count": 140,
+        "trainable_tensor_count": 99
+      },
+      "dedode": {
+        "parameters": 8219297,
+        "trainable_parameters": 8196832,
+        "tensor_count": 190,
+        "trainable_tensor_count": 152
+      },
+      "vgg": {
+        "parameters": 10592064,
+        "trainable_parameters": 10592064,
+        "tensor_count": 48,
+        "trainable_tensor_count": 48
+      },
+      "mvt": {
+        "parameters": 87417088,
+        "trainable_parameters": 0,
+        "tensor_count": 150,
+        "trainable_tensor_count": 0
+      },
+      "dino": {
+        "parameters": 227564544,
+        "trainable_parameters": 0,
+        "tensor_count": 259,
+        "trainable_tensor_count": 0
+      },
+      "stage1_head_parameters": {
+        "parameters": 2957572,
+        "trainable_parameters": 2957572,
+        "tensor_count": 10,
+        "trainable_tensor_count": 10
+      }
+    },
+    "total_trainable_parameters": 22579690,
+    "new_parameters": 1176712,
+    "dino_trainable_parameters": 0,
+    "stage1_head_trainable_parameters": 2957572
+  },
+  "steps": [
+    {
+      "step": 1,
+      "loss_total": 4.746136665344238,
+      "sequence_l1_px": 4.727434158325195,
+      "ghim": {
+        "total": 0.01870269700884819,
+        "geo": 0.01583818532526493,
+        "mat": 0.23021870851516724,
+        "cls": 5.6013593673706055,
+        "H": 4.377072400529869e-05,
+        "valid_H_pairs": 1.0
+      },
+      "gradient_norms": {
+        "new_modules": 164.7916989152429,
+        "dedode": 0.0,
+        "vgg": 0.0,
+        "mvt": 0.0,
+        "dino": 0.0,
+        "stage1_head_parameters": 11902.869550885925
+      },
+      "calls": {
+        "dino": 1,
+        "mvt": 1,
+        "vgg": 1,
+        "dedode_decode_calls": 1,
+        "dedode_steps": 4,
+        "dedode_scale1": 0
+      }
+    },
+    {
+      "step": 2,
+      "loss_total": 4.725219249725342,
+      "sequence_l1_px": 4.706517696380615,
+      "ghim": {
+        "total": 0.018701480701565742,
+        "geo": 0.015836967155337334,
+        "mat": 0.23021982610225677,
+        "cls": 5.6013593673706055,
+        "H": 4.3578540498856455e-05,
+        "valid_H_pairs": 1.0
+      },
+      "gradient_norms": {
+        "new_modules": 164.94807325023365,
+        "dedode": 0.0008465308110771867,
+        "vgg": 0.0011653615784987248,
+        "mvt": 0.0,
+        "dino": 0.0,
+        "stage1_head_parameters": 11903.552019502784
+      },
+      "calls": {
+        "dino": 1,
+        "mvt": 1,
+        "vgg": 1,
+        "dedode_decode_calls": 1,
+        "dedode_steps": 4,
+        "dedode_scale1": 0
+      }
+    }
+  ],
+  "recipe": "head LR 1e-6; formal 500-step warmup; BS1 diagnostic (formal accumulation 4)",
+  "peak_allocated_bytes": 8294526976,
+  "provider": {
+    "loma_root": "/home/disk1/LoMa",
+    "loma_checkpoint": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+    "dino_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+    "selected_stage1_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+    "loretta_loaded_keys": 807,
+    "locator": {
+      "source": "official_loretta_checkpoint",
+      "overridden": false
+    },
+    "descriptor_initialization": {
+      "migrated_tensors": 364,
+      "vgg_tensors": 84,
+      "decoder_tensors": 280,
+      "top_refiner_mapping": "LoMa-B scale 14 -> DINOv3 scale 16"
+    },
+    "ownership": {
+      "dino_wrapper_instances": 1,
+      "mvt_object_references": 1,
+      "stage1_head_contains_dino": 0,
+      "stage1_head_contains_mvt": 0,
+      "decoder_scales": [
+        "16",
+        "8",
+        "4",
+        "2",
+        "1"
+      ]
+    },
+    "legacy_training_wrappers_reused": false,
+    "safe_stage1_fitter": true
+  }
+}

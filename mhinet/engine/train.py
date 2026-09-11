@@ -21,6 +21,7 @@ from mhinet.config import RuntimePaths, load_architecture_config, sha256_file
 from mhinet.dataio.data import HomographyPairDataset, iter_manifest, parse_geo_region
 from mhinet.engine.evaluate import evaluate_model, write_evaluation
 from mhinet.engine.losses import sequence_corner_l1
+from mhinet.engine.ghim_losses import ghim_loss
 from mhinet.engine.metrics import homography_trajectory_metrics
 from mhinet.models.model import MHINet, build_model
 from mhinet.diagnostics.tiny_gate import (
@@ -66,7 +67,22 @@ class TrainConfig:
             errors.append("only sequence_corner_l1 is a mainline training loss")
         if self.raw.get("fgo_enabled") is not False:
             errors.append("FGO must be disabled in the mainline config")
-        if self.raw.get("extra_losses_enabled") is not False:
+        ghim_enabled = self.raw.get("ghim_supervision") is True
+        if ghim_enabled != (self.raw.get("profile") == "frozen_dino_mvt"):
+            errors.append("GHIM supervision requires the explicit frozen_dino_mvt profile")
+        if ghim_enabled:
+            rates = self.raw.get("learning_rates", {})
+            expected_rates = {"new_modules", "dedode", "vgg", "stage1_head_parameters"}
+            if set(rates) != expected_rates or any(
+                not math.isfinite(float(v)) or float(v) <= 0 for v in rates.values()
+            ):
+                errors.append("frozen_dino_mvt requires positive explicit learning_rates for all four groups")
+            weights = self.raw.get("ghim_loss_weights", {})
+            for key in ("total", "mat", "cls", "H"):
+                value = float(weights.get(key, -1))
+                if not math.isfinite(value) or value <= 0:
+                    errors.append(f"ghim_loss_weights.{key} must be finite and positive")
+        if self.raw.get("extra_losses_enabled") is not ghim_enabled:
             errors.append("extra losses must be disabled in the mainline config")
         if self.active_scales not in {
             (8,),
@@ -82,6 +98,7 @@ class TrainConfig:
             "vgg_finetune",
             "mvt_finetune",
             "joint",
+            "frozen_dino_mvt",
         }:
             errors.append("profile is not a protocol-v1.2 training group")
         batch_size = int(self.raw.get("batch_size", 1))
@@ -371,6 +388,9 @@ def train(
         group.pop("optimizer_parameter_ids", None)
     model.set_training_phase(config.profile)
     optimizer_groups = model.optimizer_group_spec()
+    if config.raw.get("ghim_supervision"):
+        for group in optimizer_groups:
+            group["lr"] = float(config.raw["learning_rates"][group["name"]])
     optimizer = torch.optim.AdamW(
         optimizer_groups,
         weight_decay=float(config.raw["weight_decay"]),
@@ -399,6 +419,7 @@ def train(
         runtime,
         max_pairs=None if max_train_pairs is None else int(max_train_pairs),
     )
+    train_dataset.include_overlap_mask = bool(config.raw.get("ghim_supervision", False))
     max_val_pairs = config.raw.get("max_val_pairs")
     validation_dataset = HomographyPairDataset(
         runtime.data_root / "val/pairs.jsonl",
@@ -452,7 +473,7 @@ def train(
     metadata = {
         "experiment_id": config.experiment_id,
         "training_revision": "1.2",
-        "loss_revision": "1.1",
+        "loss_revision": "1.2-ghim-four-term" if config.raw.get("ghim_supervision") else "1.1",
         "training_config": str(config.path),
         "training_config_sha256": config.sha256,
         "architecture_sha256": build_report["architecture_sha256"],
@@ -498,11 +519,14 @@ def train(
             model.train()
             optimizer.zero_grad(set_to_none=True)
             losses: list[float] = []
+            refinement_losses: list[float] = []
+            ghim_components: list[dict[str, float]] = []
             trajectories: list[torch.Tensor] = []
             accepted_fractions: list[float] = []
             valid_microbatches = 0
             valid_pairs = 0
             step_attempts = 0
+            invalid_this_step = 0
             step_started = time.perf_counter()
             while valid_pairs < effective_batch_size:
                 if step_attempts >= max(1000, effective_batch_size * 100):
@@ -524,10 +548,25 @@ def train(
                 loss_result = sequence_corner_l1(outputs, H_gt)
                 count_valid = int(loss_result["valid_pairs"])
                 invalid_attempts_total += requested - count_valid
-                if loss_result["skip_step"]:
+                invalid_this_step += requested - count_valid
+                ghim_result = None
+                if config.raw.get("ghim_supervision"):
+                    weights = config.raw["ghim_loss_weights"]
+                    masks = torch.stack([s["mask_A_overlap"] for s in samples]).to(device)
+                    ghim_result = ghim_loss(outputs["ghim_outputs"], H_gt, masks,
+                        mat_weight=float(weights["mat"]), cls_weight=float(weights["cls"]),
+                        h_weight=float(weights["H"]))
+                    del masks
+                if loss_result["skip_step"] and ghim_result is None:
                     del images, H_gt, outputs, loss_result
                     continue
                 loss = loss_result["loss"]
+                refinement_losses.append(float(loss.detach().item()))
+                if ghim_result is not None:
+                    loss = loss + float(weights["total"]) * ghim_result["total"]
+                    ghim_components.append({k: float(v.detach().item()) for k, v in ghim_result.items()})
+                    # Coarse losses still train GHIM when the H0 fit fails.
+                    count_valid = requested
                 if not bool(torch.isfinite(loss)):
                     raise FloatingPointError("Training loss became non-finite")
                 (loss * count_valid / effective_batch_size).backward()
@@ -549,21 +588,26 @@ def train(
             optimizer_step += 1
             if device.type == "cuda":
                 torch.cuda.synchronize(device)
-            trajectory_mean = torch.stack(trajectories).mean(dim=0).tolist()
+            trajectory_mean = (torch.stack(trajectories).mean(dim=0).tolist() if trajectories
+                               else [None] * (1 + len(active_scales) * iterations_per_scale))
             log_row = {
                 "optimizer_step": optimizer_step,
                 "profile": config.profile,
-                "loss_sequence_corner_l1_px": sum(losses) / len(losses),
+                "loss_sequence_corner_l1_px": sum(refinement_losses) / len(refinement_losses),
+                "loss_total": sum(losses) / len(losses),
+                "ghim_losses": ({k: sum(r[k] for r in ghim_components) / len(ghim_components)
+                                 for k in ghim_components[0]} if ghim_components else None),
+                "trajectory_valid_pairs": len(trajectories),
                 "microbatch_trajectory_mean_mace_px": trajectory_mean,
                 "microbatch_H0_mean_mace_px": trajectory_mean[0],
                 "microbatch_Hfinal_mean_mace_px": trajectory_mean[-1],
                 "accepted_update_fraction": sum(accepted_fractions)
-                / len(accepted_fractions),
+                / len(accepted_fractions) if accepted_fractions else None,
                 "valid_microbatches": valid_microbatches,
                 "valid_pairs": valid_pairs,
                 "batch_size": batch_size,
                 "effective_batch_size": effective_batch_size,
-                "invalid_attempts_this_step": step_attempts - valid_pairs,
+                "invalid_attempts_this_step": invalid_this_step,
                 "invalid_attempts_total": invalid_attempts_total,
                 "preclip_gradient_norm": float(preclip_norm.detach().item()),
                 "learning_rates": {
@@ -586,11 +630,12 @@ def train(
             log_stream.write(json.dumps(log_row, ensure_ascii=False) + "\n")
             log_stream.flush()
             progress.update(1)
-            progress.set_postfix(loss=f"{log_row['loss_sequence_corner_l1_px']:.4f}", Hfinal=f"{trajectory_mean[-1]:.3f}")
+            progress.set_postfix(loss=f"{log_row['loss_total']:.4f}", Hfinal=(
+                f"{trajectory_mean[-1]:.3f}" if trajectory_mean[-1] is not None else "invalid"))
             tqdm.write(
                 f"step={optimizer_step}/{total_steps} "
                 f"loss={log_row['loss_sequence_corner_l1_px']:.6f}px "
-                f"H0={trajectory_mean[0]:.4f}px Hfinal={trajectory_mean[-1]:.4f}px",
+                f"H0={trajectory_mean[0]}px Hfinal={trajectory_mean[-1]}px",
             )
 
             checkpoint_due = optimizer_step % checkpoint_interval == 0

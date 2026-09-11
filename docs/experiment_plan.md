@@ -1,5 +1,11 @@
 # MHINet D2-mainline implementation and experiment plan
 
+最新状态（2026-09-11）：E01 heads/seed0 的10k步与20次val验证已完成；独立test/1000
+已登记。用户指定下一项为 `frozen_dino_mvt`：冻结DINO/MVT，其余活跃模块（含GHIM head）
+解冻，并加入GHIM四项监督。见 [training_frozen_dino_mvt.md](training_frozen_dino_mvt.md)。
+这是新注册实验，不属于下方原有等预算E02–E05，不能混淆实验归因。
+下方“正式训练尚未开始”的状态为前期计划快照，已由本段更新。
+
 Data-split clarification (user instruction, 2026-09-10): training uses train
 (36000 pairs); in-training validation uses val (2500 pairs); independent
 evaluation, including E00, uses the full test split (1000 pairs). Test results

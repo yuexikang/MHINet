@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "scope": "same weights after one optimizer step; one real train pair; all parameter gradients",
+  "loss_on": 4.911818504333496,
+  "loss_off": 4.911818504333496,
+  "H_max_abs_diff": 0.0,
+  "gradient_max_abs_diff": 9.5367431640625e-07,
+  "gradient_relative_l2_diff": 8.246437727751886e-10,
+  "gradient_tolerance": {
+    "rtol": 0.001,
+    "atol": 1e-05
+  },
+  "failed_parameter_names": [],
+  "gradient_tensor_count": 309
+}

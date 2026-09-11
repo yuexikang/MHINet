@@ -1,5 +1,19 @@
 # MHINet implementation log
 
+## 2026-09-11：BS1关闭相关性重计算测试
+
+保持BS1×累积8，独立物理GPU0 RTX4090顺序off/on，同数据/初始化/损失/优化器，
+3步预热+6步计时。新增probe诊断开关，未改正式训练默认。
+off平均5.08554秒/步、1.57309pair/s、allocated14.752GB、reserved15.680GB；
+on平均6.82331秒/步、1.17245pair/s、allocated8.393GB、reserved9.783GB。
+吞吐+34.17%，步耗时-25.47%；两组无OOM，16对初始H0一致。
+GPU1另做同权重、一次更新后的梯度复核：loss均4.9118185，H0-H6差0，309梯度张量
+通过rtol1e-3/atol1e-5，最大绝对差9.54e-7、相对L2差8.25e-10。
+结果见 `docs/temporal4_correlation_recompute_probe.md` 与三份temporal4 checkpoint probe JSON。
+新增 `scripts/check_correlation_recompute.py`；脚本py_compile通过。首次probe导入类名错误
+已改为实际HGuidedLocalCorrelation后重跑成功。此次没有训练checkpoint，只有诊断JSON；
+不把短测通过当作长训练精度/稳定性验证，也未启动正式训练。
+
 ## 2026-09-11：BS2×累积4性能与数值对照
 
 用户要求测试以更多显存换速度。新增独立 `scripts/probe_temporal_batch.py`，同一物理GPU0

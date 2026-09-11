@@ -1,5 +1,13 @@
 # MHINet implementation log
 
+## 2026-09-11：有效 batch 翻倍至8
+
+新增 `configs/train_frozen_dino_mvt_temporal4_ebs8.json`：真实BS1、累积8、有效batch8；
+独立experiment_id/output使用 `GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0`。
+原有效batch4配置不修改。学习率、冻结组、监督与10k optimizer步保持不变，因此总训练
+样本次数由40k变为80k，不是等样本预算对照，预计训练计算时间增加。
+TrainConfig.validate及脚本DRY_RUN检查通过；本次未启动训练、未新增checkpoint。
+
 ## 2026-09-11：训练入口切换新 temporal4 数据集
 
 用户正在生成新数据，要求训练脚本准备就绪。新增独立runtime与training config：

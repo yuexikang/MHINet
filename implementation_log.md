@@ -1,5 +1,26 @@
 # MHINet implementation log
 
+## 2026-09-13：仅冻结DINOv3的完整训练准备
+
+新增frozen_dino profile，解冻MVT并保留GHIM head/VGG/CGMDP/Adapter/MHIR训练，
+D1依旧不执行。新增 `configs/train_frozen_dino_temporal4_ebs4_20k.json`、
+`scripts/train_frozen_dino.sh`，BS1×累积4、20k步、80k样本预算、seed0，
+MVT LR1e-6；其他LR及四项GHIM监督沿用原BS4对照。默认关闭相关性重计算。
+输出 `outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0`；从原始预训练开始。
+runtime/权重/新train-val沿用 `configs/runtime_paths.temporal4.server.json`；
+新训练配置SHA256 `9e24d2c22c45172e0b4fa2d1c6821d1bf2f680d71ca3d5c6d6f1ac8875a261bc`。
+
+116项单元测试通过，DRY_RUN确认新配置与独立输出。
+命令 `CUDA_VISIBLE_DEVICES=0 OMP_NUM_THREADS=1 PYTHONPATH=/home/disk1/MHINet /root/miniconda3/envs/loma-repro/bin/python scripts/check_frozen_dino.py`
+真实两步审计通过：DINO无梯度，其他活跃组第二步均非零；MVT的H0/descriptor两路
+MHIR损失梯度分别0.06225586/2.354383e-6。参数109,996,778，审计峰值allocated17.754GB，
+reserved18.902GB。证据 `artifacts/frozen_dino_two_step.json`。
+完整训练入口另在 `outputs/diagnostics/frozen_dino_trainer_smoke` 使用
+`GPU_ID=0 MHINET_OUTPUT_DIR=/home/disk1/MHINet/outputs/diagnostics/frozen_dino_trainer_smoke bash scripts/train_frozen_dino.sh --stop-after-optimizer-step 2`
+做两步冒烟；不是正式20k长训练。说明见 `docs/training_frozen_dino.md`。
+冒烟正常结束（status=paused），保存 `outputs/diagnostics/frozen_dino_trainer_smoke/checkpoints/step_0000002.pt`，
+SHA256 `49eec986f9d17460baee6ddbd1f2ee2b46754c29e525495493b24c7b7da9e7eb`。
+
 ## 2026-09-11：卡0有效BS4等样本预算对照
 
 用户同意增加有效BS4对照。新增 `configs/train_frozen_dino_mvt_temporal4_ebs4_20k.json`：

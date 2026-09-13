@@ -59,6 +59,7 @@ class MHINet(nn.Module):
         self.training_profiles["frozen_dino_mvt"] = (
             "adapters", "refinement_decoders", "dedode", "vgg", "ghim_head"
         )
+        self.training_profiles["frozen_dino"] = self.training_profiles["frozen_dino_mvt"] + ("mvt",)
         # D1 remains registered for controlled future experiments, but it is
         # excluded from every current mainline optimizer group.
         self._optional_d1_enabled = False
@@ -255,7 +256,7 @@ class MHINet(nn.Module):
                 ],
                 "shared_call_counts": shared["call_counts"],
                 "ghim_outputs": (shared["stage1"]
-                                 if self.training_phase == "frozen_dino_mvt" else None),
+                                 if self.training_phase in ("frozen_dino_mvt", "frozen_dino") else None),
                 "runtime_diagnostics": {
                     "shared_call_counts": shared["call_counts"],
                     "feature_valid_counts": refinement["feature_valid_counts"],

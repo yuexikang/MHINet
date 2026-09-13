@@ -70,15 +70,17 @@ class TrainConfig:
         if self.raw.get("fgo_enabled") is not False:
             errors.append("FGO must be disabled in the mainline config")
         ghim_enabled = self.raw.get("ghim_supervision") is True
-        if ghim_enabled != (self.raw.get("profile") == "frozen_dino_mvt"):
-            errors.append("GHIM supervision requires the explicit frozen_dino_mvt profile")
+        if ghim_enabled != (self.raw.get("profile") in ("frozen_dino_mvt", "frozen_dino")):
+            errors.append("GHIM supervision requires an explicit GHIM-training profile")
         if ghim_enabled:
             rates = self.raw.get("learning_rates", {})
             expected_rates = {"new_modules", "dedode", "vgg", "stage1_head_parameters"}
+            if self.raw.get("profile") == "frozen_dino":
+                expected_rates.add("mvt")
             if set(rates) != expected_rates or any(
                 not math.isfinite(float(v)) or float(v) <= 0 for v in rates.values()
             ):
-                errors.append("frozen_dino_mvt requires positive explicit learning_rates for all four groups")
+                errors.append("GHIM training requires positive explicit learning_rates for every active group")
             weights = self.raw.get("ghim_loss_weights", {})
             for key in ("total", "mat", "cls", "H"):
                 value = float(weights.get(key, -1))
@@ -101,6 +103,7 @@ class TrainConfig:
             "mvt_finetune",
             "joint",
             "frozen_dino_mvt",
+            "frozen_dino",
         }:
             errors.append("profile is not a protocol-v1.2 training group")
         batch_size = int(self.raw.get("batch_size", 1))

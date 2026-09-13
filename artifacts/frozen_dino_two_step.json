@@ -1,0 +1,117 @@
+{
+  "status": "passed",
+  "scope": "two real-data BS1 updates with branch audit; not long-run accuracy evidence",
+  "parameter_report": {
+    "profile": "frozen_dino",
+    "groups": {
+      "new_modules": {
+        "parameters": 1176712,
+        "trainable_parameters": 833222,
+        "tensor_count": 140,
+        "trainable_tensor_count": 99
+      },
+      "dedode": {
+        "parameters": 8219297,
+        "trainable_parameters": 8196832,
+        "tensor_count": 190,
+        "trainable_tensor_count": 152
+      },
+      "vgg": {
+        "parameters": 10592064,
+        "trainable_parameters": 10592064,
+        "tensor_count": 48,
+        "trainable_tensor_count": 48
+      },
+      "mvt": {
+        "parameters": 87417088,
+        "trainable_parameters": 87417088,
+        "tensor_count": 150,
+        "trainable_tensor_count": 150
+      },
+      "dino": {
+        "parameters": 227564544,
+        "trainable_parameters": 0,
+        "tensor_count": 259,
+        "trainable_tensor_count": 0
+      },
+      "stage1_head_parameters": {
+        "parameters": 2957572,
+        "trainable_parameters": 2957572,
+        "tensor_count": 10,
+        "trainable_tensor_count": 10
+      }
+    },
+    "total_trainable_parameters": 109996778,
+    "new_parameters": 1176712,
+    "dino_trainable_parameters": 0,
+    "stage1_head_trainable_parameters": 2957572
+  },
+  "steps": [
+    {
+      "step": 1,
+      "loss": 4.926276206970215,
+      "gradient_norms": {
+        "new_modules": 177.53565979003906,
+        "dedode": 0.0,
+        "vgg": 0.0,
+        "mvt": 75.28226470947266,
+        "dino": 0.0,
+        "stage1_head_parameters": 9731.4541015625
+      },
+      "routes": {}
+    },
+    {
+      "step": 2,
+      "loss": 4.894511699676514,
+      "gradient_norms": {
+        "new_modules": 177.43136596679688,
+        "dedode": 0.0005702789640054107,
+        "vgg": 0.0007065096287988126,
+        "mvt": 74.89103698730469,
+        "dino": 0.0,
+        "stage1_head_parameters": 9735.3876953125
+      },
+      "routes": {
+        "MHIR_loss_via_H0_to_MVT_context": 0.062255859375,
+        "MHIR_loss_via_CGMDP_to_MVT_context": 2.3543834686279297e-06
+      }
+    }
+  ],
+  "peak_allocated_bytes": 17754085376,
+  "peak_reserved_bytes": 18901630976,
+  "config_sha256": "9e24d2c22c45172e0b4fa2d1c6821d1bf2f680d71ca3d5c6d6f1ac8875a261bc",
+  "manifest_sha256": "2b5c850c9673a767f8a9eb8b5d3c5f211e57ae8cdc44ce64860311c4bf944294",
+  "provider": {
+    "loma_root": "/home/disk1/LoMa",
+    "loma_checkpoint": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+    "dino_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+    "selected_stage1_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+    "loretta_loaded_keys": 807,
+    "locator": {
+      "source": "official_loretta_checkpoint",
+      "overridden": false
+    },
+    "descriptor_initialization": {
+      "migrated_tensors": 364,
+      "vgg_tensors": 84,
+      "decoder_tensors": 280,
+      "top_refiner_mapping": "LoMa-B scale 14 -> DINOv3 scale 16"
+    },
+    "ownership": {
+      "dino_wrapper_instances": 1,
+      "mvt_object_references": 1,
+      "stage1_head_contains_dino": 0,
+      "stage1_head_contains_mvt": 0,
+      "decoder_scales": [
+        "16",
+        "8",
+        "4",
+        "2",
+        "1"
+      ]
+    },
+    "legacy_training_wrappers_reused": false,
+    "safe_stage1_fitter": true
+  },
+  "torch": "2.11.0+cu128"
+}

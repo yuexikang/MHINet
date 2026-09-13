@@ -74,6 +74,15 @@ class RecordingIterator(nn.Module):
 
 
 class MainlineCutoffTests(unittest.TestCase):
+    def test_only_dino_frozen_profile(self) -> None:
+        model = MHINet(FakeFeatureProvider())
+        model.set_training_phase('frozen_dino')
+        self.assertEqual(set(model.trainable_parameter_groups()),
+                         {'new_modules', 'dedode', 'vgg', 'mvt', 'stage1_head_parameters'})
+        self.assertFalse(any(p.requires_grad for p in model.feature_provider.dino.parameters()))
+        self.assertFalse(any(p.requires_grad for p in model.adapters['1'].parameters()))
+        self.assertEqual({g['name'] for g in model.optimizer_group_spec()}, set(model.trainable_parameter_groups()))
+
     def test_frozen_dino_mvt_profile(self) -> None:
         model = MHINet(FakeFeatureProvider())
         model.set_training_phase("frozen_dino_mvt")

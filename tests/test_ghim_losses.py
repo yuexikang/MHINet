@@ -38,4 +38,6 @@ class GHIMLossTests(unittest.TestCase):
     def test_new_configuration(self):
         cfg = TrainConfig.from_json('configs/train_frozen_dino_mvt.json')
         self.assertEqual(cfg.profile, 'frozen_dino_mvt')
-
+        full = TrainConfig.from_json('configs/train_frozen_dino_temporal4_ebs4_20k.json')
+        self.assertEqual(full.profile, 'frozen_dino')
+        self.assertEqual(full.raw['learning_rates']['mvt'], 1e-6)

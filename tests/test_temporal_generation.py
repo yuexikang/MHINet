@@ -8,8 +8,8 @@ class TemporalGenerationTests(unittest.TestCase):
         rows = recipes('example', SimpleNamespace(derive_seed=lambda *args: 12), 42)
         self.assertEqual(len(rows), 4)
         self.assertEqual([(a, b) for _, a, b, _ in rows],
-                         [('past', 'past'), ('current', 'current'),
-                          ('past', 'current'), ('current', 'past')])
+                         [('past', 'past'), ('past', 'past'),
+                          ('current', 'current'), ('current', 'current')])
         self.assertEqual(sorted(r[-1] for r in rows), [0, 0, 1, 1])
 
     def test_grouped_ratio_and_reproducibility(self):

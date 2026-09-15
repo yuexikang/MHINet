@@ -5,8 +5,8 @@ set -euo pipefail
 MHINET_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 MHINET_PYTHON="${MHINET_PYTHON:-/root/miniconda3/envs/loma-repro/bin/python}"
 MHINET_CONFIG="${MHINET_CONFIG:-$MHINET_ROOT/configs/train_frozen_dino_mvt_temporal4.json}"
-MHINET_RUNTIME="${MHINET_RUNTIME:-$MHINET_ROOT/configs/runtime_paths.temporal4.server.json}"
-MHINET_OUTPUT_DIR="${MHINET_OUTPUT_DIR:-$MHINET_ROOT/outputs/GHIM_joint_frozen_dino_mvt_temporal4_seed0}"
+MHINET_RUNTIME="${MHINET_RUNTIME:-$MHINET_ROOT/configs/runtime_paths.single_parent.server.json}"
+MHINET_OUTPUT_DIR="${MHINET_OUTPUT_DIR:-$MHINET_ROOT/outputs/GHIM_joint_frozen_dino_mvt_single_parent_seed0}"
 GPU_ID="${GPU_ID:-1}"
 [[ "$GPU_ID" =~ ^[0-9]+$ ]] || { echo 'GPU_ID必须是单个物理卡编号' >&2; exit 2; }
 for arg in "$@"; do

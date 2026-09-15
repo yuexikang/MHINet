@@ -1,7 +1,6 @@
-"""Four-pair temporal groups, geographically split before augmentation.
+"""Single-parent synthetic pairs; geographic split before augmentation.
 
-Reuses LoMa's generator without modifying it. Cross-time H labels assume the
-user-confirmed approximately coregistered parent frame; not exact physical GT.
+Historical module name retained for command compatibility. No cross-time labels.
 """
 from __future__ import annotations
 
@@ -88,20 +87,17 @@ def split_groups(groups, seed=42, val_fraction=.1):
 
 
 def recipes(group_id, legacy, seed):
-    # Balance difficulty without assigning current imagery systematically harder
-    # supervision than past. Cross-time pairs use independent draws/directions.
-    flip = legacy.derive_seed(seed, group_id, 'same_time_difficulty') % 2
-    return [('same_past', 'past', 'past', flip),
-            ('same_current', 'current', 'current', 1-flip),
-            ('cross_past_current', 'past', 'current', 0),
-            ('cross_current_past', 'current', 'past', 1)]
+    # Two independent synthetic draws per individual parent, never cross-time.
+    return [('same_past_normal', 'past', 'past', 0),
+            ('same_past_hard', 'past', 'past', 1),
+            ('same_current_normal', 'current', 'current', 0),
+            ('same_current_hard', 'current', 'current', 1)]
 
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--loma-root', type=Path, default=Path('/home/disk1/LoMa'))
     parser.add_argument('--dataset-root', type=Path, default=Path('/home/disk1/Data/datasets/GoogleEarth'))
-    parser.add_argument('--existing-test', type=Path, default=Path('/home/disk1/Data/datasets/GoogleEarth_scale_pairs/test'))
     parser.add_argument('--output-dir', type=Path, required=True)
     parser.add_argument('--seed', type=int, default=42)
     parser.add_argument('--generate', action='store_true', help='Without this flag, print plan only (no writes).')
@@ -113,28 +109,27 @@ def main(argv=None):
     splits = split_groups(groups, args.seed)
     if args.smoke:
         splits = {key: value[:1] for key, value in splits.items()}
-    test_root = args.existing_test.resolve()
-    if not (test_root / 'pairs.jsonl').is_file():
-        raise FileNotFoundError(test_root / 'pairs.jsonl')
+    test_root = args.dataset_root.resolve() / 'evaluation_data'
+    test_rows = legacy.load_evaluation_rows(test_root)
     config = legacy.SamplingConfig(enable_photometric_aug=True)
     summary = {
-        'version': 'temporal_four_pairs_v1', 'status': 'planned',
+        'version': 'single_parent_v2', 'status': 'planned',
         'smoke_only': args.smoke, 'seed': args.seed,
         'dataset_root': str(args.dataset_root.resolve()), 'training_root': str(training_root),
         'output_dir': str(args.output_dir.resolve()),
         'generator_reference': str(args.loma_root.resolve() / 'generate_pairs.py'),
         'generator_reference_sha256': hashlib.sha256((args.loma_root / 'generate_pairs.py').read_bytes()).hexdigest(),
         'generator_implementation_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-        'sampling_config': {**asdict(config), 'pairs_per_temporal_group': 4, 'pairs_per_image': None},
-        'parent_coordinate_assumption': 'user-confirmed approximately coregistered; base_H=identity; no exact cross-time GT claim',
+        'sampling_config': {**asdict(config), 'pairs_per_temporal_group': 4, 'pairs_per_image': 2},
+        'parent_coordinate_assumption': 'A and B always generated from the identical parent image',
         'csv_affine_fields_used': False,
         'split_policy': 'merge original Train/Val parent pool; whole 0.01-degree cells; nearest attainable val fraction 0.1',
         'source_parent_groups': len(groups),
         'planned': {k: {'parent_groups': len(v), 'pairs': 4*len(v), 'geo_groups': len({g['geo_group'] for g in v})} for k,v in splits.items()},
         'actual_val_fraction': len(splits['val']) / sum(map(len, splits.values())),
-        'test_policy': 'unchanged reuse via symlink; generator never writes to test; no test resampling or repartition',
+        'test_policy': 'original CSV pairs, visualization only, no ground truth or precision metrics',
         'existing_test': str(test_root),
-        'test_manifest_sha256': hashlib.sha256((test_root / 'pairs.jsonl').read_bytes()).hexdigest(),
+        'test_csv_sha256': hashlib.sha256((test_root / 'test_pairs.csv').read_bytes()).hexdigest(),
     }
     print(json.dumps(summary, ensure_ascii=False, indent=2), flush=True)
     if not args.generate:
@@ -177,7 +172,13 @@ def main(argv=None):
         for index, path in enumerate(previews.metadata_paths):
             legacy.visualize_pair(path, split_out, index, legacy.derive_seed(args.seed, split, 'preview', index))
         summary['planned'][split]['visualizations'] = len(previews.metadata_paths)
-    (out / 'test').symlink_to(test_root, target_is_directory=True)
+    (out / 'test').mkdir()
+    with (out / 'test/pairs.jsonl').open('w') as stream:
+        for index, row in enumerate(test_rows):
+            stream.write(json.dumps({'pair_id': f'original_{index:04d}', 'split': 'test',
+                'input_pair_row_index': index, 'image_A': str(test_root / row['Target']),
+                'image_B': str(test_root / row['Source']), 'has_ground_truth': False,
+                'evaluation_policy': 'visualization_only'})+'\n')
     summary['status'] = 'completed'
     (out / 'dataset_summary.json').write_text(json.dumps(summary, ensure_ascii=False, indent=2)+'\n')
     return 0

@@ -46,8 +46,8 @@ def write_iteration_overlays(images, h_gt, updates, schedule, output_dir, *, pai
         return normalized_homography_to_pixel(h.detach().cpu().double().reshape(1, 3, 3),
                                              (height, width), (height, width))[0].numpy()
 
-    gt = pixel_h(h_gt)
-    gt_points = _project(gt, corners)
+    gt = pixel_h(h_gt) if h_gt is not None else None
+    gt_points = _project(gt, corners) if gt is not None else None
     if gt_points is not None and np.abs(gt_points).max() >= 1e6:
         gt_points = None
     records = []
@@ -84,7 +84,7 @@ def write_iteration_overlays(images, h_gt, updates, schedule, output_dir, *, pai
         scale_rounds[scale] = scale_rounds.get(scale, 0) + 1
         accepted_state = bool(accepted[index]) if accepted is not None and index >= 0 else None
         label = "GHIM initialization / H0" if index < 0 else f"D{scale} round {scale_rounds[scale]} / H{index+1}"
-        title = f"{label} | green=GT red=prediction"
+        title = f"{label} | " + ("green=GT red=prediction" if gt is not None else "NO GT / red=prediction only")
         canvas = Image.new("RGB", (base.shape[1], base.shape[0]+44), "black")
         canvas.paste(Image.fromarray(base), (0, 44))
         painter = ImageDraw.Draw(canvas)
@@ -95,9 +95,9 @@ def write_iteration_overlays(images, h_gt, updates, schedule, output_dir, *, pai
         canvas.save(path)
         records.append({"path": str(path.resolve()), "scale": None if scale is None else int(scale), "iteration": index+1,
                         "update_accepted": accepted_state, "warp_valid": bool(safe),
-                        "H_pred_pixel": predicted.tolist(), "H_gt_pixel": gt.tolist()})
+                        "H_pred_pixel": predicted.tolist(), "H_gt_pixel": gt.tolist() if gt is not None else None})
     metadata = {"pair_id": pair_id, "ghim_valid": bool(ghim_valid),
-                "coordinate_system": "target input pixels; A warped by prediction, GT green, prediction red",
+                "coordinate_system": "target input pixels; A warped by prediction; red prediction; green GT only when supplied",
                 "images": records}
     (directory / "manifest.json").write_text(json.dumps(metadata, indent=2) + "\n")
     return metadata

@@ -720,6 +720,8 @@ def main(argv: list[str] | None = None) -> int:
     if args.output_dir.exists() and any(args.output_dir.iterdir()) and not args.overwrite:
         raise FileExistsError(f"Refusing non-empty evaluation directory: {args.output_dir}")
     runtime = RuntimePaths.from_json(args.runtime)
+    if args.split == 'test' and 'googleearth' in str(runtime.data_root).lower():
+        raise ValueError('GoogleEarth test无可靠H真值，禁止精度评估；请运行scripts/test.sh做母图视觉测试')
     device = torch.device(runtime.device)
     model, build_report = build_model(runtime)
     for group in build_report["training_parameters"]["groups"].values():

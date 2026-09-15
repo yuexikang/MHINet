@@ -1,5 +1,27 @@
 # MHINet implementation log
 
+## 2026-09-15：撤销跨时相监督，恢复单母图合成与无真值视觉测试
+
+不同母图未严格配准，旧temporal4及旧合成test的单位母图变换不成立；旧精度结论暂停使用。
+未删除旧数据、结果或权重。generate_temporal历史入口现仅生成same_past/current各normal/hard两对，
+每对两侧来自同一母图。地理分组9:1不变。新输出GoogleEarth_single_parent_v2；
+dry-run核实train34652/val3848；原始test CSV500对直接引用，无H标签、不额外合成。
+check_ready拒绝旧跨时相数据。冻结训练脚本切换新runtime和独立输出，超参保持。
+test.sh改为visual_test，原始图仅网络输入resize；七张图仅红框预测，NO GT；
+无精度指标，不写精度总表。evaluate CLI禁止GoogleEarth test精度评价，val不受影响。
+
+环境沿用loma-repro；LoMa生成器SHA256
+4a4aea0fc2dffa6739d72700da3cf1dbba4d25b8ccb4f0a5086eff754ca2087a。
+原始CSV SHA256 f7214f38a37347bc1ba3d44b62e39b0f2b0e9cb95ad37d15b0197e4d631b1b72。
+生成冒烟：`bash scripts/generate_temporal_dataset.sh --generate --smoke --output-dir /home/disk1/MHINet/outputs/diagnostics/single_parent_v2_smoke`，
+train4/val4成功，loader读取全部8对通过；test清单500对无H。冒烟后只调整了摘要pairs_per_image=2和注释。
+视觉冒烟：`GPU_ID=0 bash scripts/test.sh outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/checkpoints/step_0017000.pt --max-pairs 1 --output-dir outputs/diagnostics/original_visual_test_smoke`成功。
+checkpoint SHA256 1920ff8ab8059801f7c79e58330fb1834ef91199dfe53c661613c0319013fbce。
+旧checkpoint仅用于验证可视化入口，不代表认可旧训练监督。未启动完整数据生成或训练。
+详细新协议与命令见docs/single_parent_v2.md。
+117项单元测试通过（包含无GT叠加与单母图配方检查）；首次测试发现旧test.sh精度契约断言，
+已更新为无GT可视化契约并恢复DRY_RUN支持，重跑全部通过。
+
 ## 2026-09-13：仅冻结DINOv3的完整训练准备
 
 新增frozen_dino profile，解冻MVT并保留GHIM head/VGG/CGMDP/Adapter/MHIR训练，

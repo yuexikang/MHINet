@@ -33,9 +33,9 @@ class EntryPointTests(unittest.TestCase):
             result = subprocess.run(['bash', str(ROOT/'scripts/test.sh'), str(checkpoint),
                                      '--max-pairs', '16'], cwd='/tmp',
                 env=dict(os.environ, DRY_RUN='1', GPU_ID='0'), text=True, capture_output=True, check=True)
-            self.assertIn('mhinet.cli evaluate', result.stdout)
-            self.assertIn('--split test', result.stdout)
-            self.assertIn('--checkpoint', result.stdout)
+            self.assertIn('mhinet.engine.visual_test', result.stdout)
+            self.assertNotIn('--split', result.stdout)
+            self.assertNotIn('mhinet.cli evaluate', result.stdout)
             self.assertNotIn('unittest', result.stdout)
         failed = subprocess.run(['bash', str(ROOT/'scripts/test.sh'), '/missing/mhinet.pt'],
                                 capture_output=True)

@@ -3,7 +3,7 @@
 set -euo pipefail
 MHINET_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 MHINET_PYTHON="${MHINET_PYTHON:-/root/miniconda3/envs/loma-repro/bin/python}"
-MHINET_DATA_OUTPUT="${MHINET_DATA_OUTPUT:-/home/disk1/Data/datasets/GoogleEarth_temporal4_v1}"
+MHINET_DATA_OUTPUT="${MHINET_DATA_OUTPUT:-/home/disk1/Data/datasets/GoogleEarth_single_parent_v2}"
 cd "$MHINET_ROOT"
 export OMP_NUM_THREADS="${OMP_NUM_THREADS:-1}"
 exec "$MHINET_PYTHON" -u -m mhinet.dataio.generate_temporal --output-dir "$MHINET_DATA_OUTPUT" "$@"

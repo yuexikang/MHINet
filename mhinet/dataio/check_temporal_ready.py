@@ -11,10 +11,10 @@ def check_ready(root):
     summary = json.loads((root / 'dataset_summary.json').read_text())
     if summary.get('status') != 'completed' or summary.get('smoke_only') is not False:
         raise ValueError('数据尚未生成完成，或是smoke数据；请等待完整生成结束后再启动训练')
-    if summary.get('version') != 'temporal_four_pairs_v1':
-        raise ValueError('不是预期的 temporal_four_pairs_v1 数据集')
+    if summary.get('version') != 'single_parent_v2':
+        raise ValueError('只接受 single_parent_v2；旧跨时相标签数据已停用')
     regions, parents, counts = {}, {}, {}
-    kinds = {'same_past', 'same_current', 'cross_past_current', 'cross_current_past'}
+    kinds = {'same_past_normal', 'same_past_hard', 'same_current_normal', 'same_current_hard'}
     for split in ('train', 'val'):
         regions[split], parents[split] = set(), set()
         groups = {}
@@ -22,6 +22,8 @@ def check_ready(root):
         with (root / split / 'pairs.jsonl').open() as stream:
             for line in stream:
                 row = json.loads(line)
+                if row['parent_image_A'] != row['parent_image_B']:
+                    raise ValueError('禁止跨母图监督')
                 if row['pair_id'] in ids:
                     raise ValueError(f'{split}存在重复pair_id')
                 ids.add(row['pair_id'])

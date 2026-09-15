@@ -11,10 +11,13 @@ def check_ready(root):
     summary = json.loads((root / 'dataset_summary.json').read_text())
     if summary.get('status') != 'completed' or summary.get('smoke_only') is not False:
         raise ValueError('数据尚未生成完成，或是smoke数据；请等待完整生成结束后再启动训练')
-    if summary.get('version') != 'single_parent_v2':
+    if summary.get('version') not in ('single_parent_v2', 'quadrant_three_tiers_v1'):
         raise ValueError('只接受 single_parent_v2；旧跨时相标签数据已停用')
     regions, parents, counts = {}, {}, {}
     kinds = {'same_past_normal', 'same_past_hard', 'same_current_normal', 'same_current_hard'}
+    if summary['version']=='quadrant_three_tiers_v1':
+        kinds={f'{domain}_tier{tier}_{j}' for domain in ('past','current')
+               for tier,n in ((1,3),(2,2),(3,2)) for j in range(n)}
     for split in ('train', 'val'):
         regions[split], parents[split] = set(), set()
         groups = {}

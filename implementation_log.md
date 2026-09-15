@@ -1,5 +1,17 @@
 # MHINet implementation log
 
+## 2026-09-15：三档四象限数据生成后台任务
+
+新增quadrant_tiers.py和generate_three_tiers.sh，配方见docs/quadrant_three_tiers.md。
+118项单元测试通过，含9种tier/ratio组合、H组合及双侧遮挡可见性掩码精确核验。
+真实母图smoke：outputs/diagnostics/quadrant_tiers_smoke，train14/val14生成及loader读取通过。
+命令：`bash scripts/generate_three_tiers.sh --generate --smoke --output-dir /home/disk1/MHINet/outputs/diagnostics/quadrant_tiers_smoke`。
+smoke后补充跨图H/逆H分母同号检查，完整单测重跑通过。
+随后后台启动 `bash scripts/generate_three_tiers.sh --generate`；完整生成尚未完成。
+生成摘要保存旧LoMa函数来源hash、驱动与quadrant实现hash；本任务无需模型checkpoint。
+用户明确授权删除GoogleEarth_scale_pairs_geometry_train_val_backup（实目录约66G），
+已执行精确路径rm -r，未触及其他数据；删除进行中，非回收站操作，不保证恢复。
+
 ## 2026-09-15：撤销跨时相监督，恢复单母图合成与无真值视觉测试
 
 不同母图未严格配准，旧temporal4及旧合成test的单位母图变换不成立；旧精度结论暂停使用。

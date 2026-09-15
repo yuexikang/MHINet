@@ -102,6 +102,7 @@ def main(argv=None):
     parser.add_argument('--seed', type=int, default=42)
     parser.add_argument('--generate', action='store_true', help='Without this flag, print plan only (no writes).')
     parser.add_argument('--smoke', action='store_true', help='Only one parent group per split; NOT a training dataset.')
+    parser.add_argument('--three-tiers', action='store_true', help='Quadrants, rotation, radiation and visibility-aware occlusion; seven pairs per parent.')
     args = parser.parse_args(argv)
     legacy = load_generator(args.loma_root)
     training_root = args.dataset_root.resolve() / 'training_data'
@@ -112,20 +113,25 @@ def main(argv=None):
     test_root = args.dataset_root.resolve() / 'evaluation_data'
     test_rows = legacy.load_evaluation_rows(test_root)
     config = legacy.SamplingConfig(enable_photometric_aug=True)
+    per_group = 14 if args.three_tiers else 4
     summary = {
-        'version': 'single_parent_v2', 'status': 'planned',
+        'version': 'quadrant_three_tiers_v1' if args.three_tiers else 'single_parent_v2', 'status': 'planned',
         'smoke_only': args.smoke, 'seed': args.seed,
         'dataset_root': str(args.dataset_root.resolve()), 'training_root': str(training_root),
         'output_dir': str(args.output_dir.resolve()),
         'generator_reference': str(args.loma_root.resolve() / 'generate_pairs.py'),
         'generator_reference_sha256': hashlib.sha256((args.loma_root / 'generate_pairs.py').read_bytes()).hexdigest(),
         'generator_implementation_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-        'sampling_config': {**asdict(config), 'pairs_per_temporal_group': 4, 'pairs_per_image': 2},
+        'quadrant_implementation_sha256': hashlib.sha256(Path(__file__).with_name('quadrant_tiers.py').read_bytes()).hexdigest() if args.three_tiers else None,
+        'sampling_config': ({'tiers': [3,2,2], 'ratios': [.8,.6,.4], 'rotation_degrees': [-30,30],
+            'minimum_geometric_overlap_each': .5, 'minimum_visible_overlap_each_tier3': .3,
+            'occlusion_area_fraction': [.1,.3], 'pairs_per_temporal_group':14, 'pairs_per_image':7}
+            if args.three_tiers else {**asdict(config), 'pairs_per_temporal_group':4, 'pairs_per_image':2}),
         'parent_coordinate_assumption': 'A and B always generated from the identical parent image',
         'csv_affine_fields_used': False,
         'split_policy': 'merge original Train/Val parent pool; whole 0.01-degree cells; nearest attainable val fraction 0.1',
         'source_parent_groups': len(groups),
-        'planned': {k: {'parent_groups': len(v), 'pairs': 4*len(v), 'geo_groups': len({g['geo_group'] for g in v})} for k,v in splits.items()},
+        'planned': {k: {'parent_groups': len(v), 'pairs': per_group*len(v), 'geo_groups': len({g['geo_group'] for g in v})} for k,v in splits.items()},
         'actual_val_fraction': len(splits['val']) / sum(map(len, splits.values())),
         'test_policy': 'original CSV pairs, visualization only, no ground truth or precision metrics',
         'existing_test': str(test_root),
@@ -145,10 +151,14 @@ def main(argv=None):
         count = 0
         previews = legacy.VisualizationReservoir(20, legacy.derive_seed(args.seed, split, 'previews'))
         with (split_out / 'pairs.jsonl').open('w') as stream:
-            for group in tqdm(members, desc=f'Generating {split}', unit='parent group'):
+            for group_index, group in enumerate(tqdm(members, desc=f'Generating {split}', unit='parent group')):
                 images = {domain: legacy.read_image(training_root / group[domain], config.min_input_side)
                           for domain in ('past', 'current')}
-                for kind, a, b, difficulty in recipes(group['group_id'], legacy, args.seed):
+                selected_recipes = recipes(group['group_id'], legacy, args.seed)
+                if args.three_tiers:
+                    selected_recipes = [(f'{domain}_tier{tier}_{j}', domain, domain, j)
+                        for domain in ('past','current') for tier,n in ((1,3),(2,2),(3,2)) for j in range(n)]
+                for kind, a, b, difficulty in selected_recipes:
                     pair_id = f"{kind}__{legacy._safe_identifier(group['group_id'])}"
                     seed = legacy.derive_seed(args.seed, split, group['group_id'], kind)
                     metadata = {
@@ -161,17 +171,24 @@ def main(argv=None):
                         'original_parent_split': group['original_split'],
                     }
                     # Fail loudly: never silently produce incomplete four-pair groups.
-                    row = legacy.generate_and_save_pair(images[a], images[b], split_out,
+                    generator = legacy.generate_and_save_pair
+                    if args.three_tiers:
+                        from mhinet.dataio.quadrant_tiers import generate
+                        generator = generate
+                        tier = int(kind.split('tier')[1].split('_')[0])
+                        ratio_index = difficulty if tier==1 else (group_index+difficulty+(a=='current'))%3
+                        metadata.update(tier=tier, resolution_ratio=(.8,.6,.4)[ratio_index])
+                    row = generator(images[a], images[b], split_out,
                         pair_id, difficulty, seed, config, metadata)
                     stream.write(json.dumps(row, ensure_ascii=False)+'\n')
                     previews.consider(split_out / row['metadata'])
                     count += 1
                 stream.flush()
-        assert count == len(members)*4
+        assert count == len(members)*per_group
         summary['planned'][split]['generated_pairs'] = count
-        for index, path in enumerate(previews.metadata_paths):
+        for index, path in enumerate([] if args.three_tiers else previews.metadata_paths):
             legacy.visualize_pair(path, split_out, index, legacy.derive_seed(args.seed, split, 'preview', index))
-        summary['planned'][split]['visualizations'] = len(previews.metadata_paths)
+        summary['planned'][split]['visualizations'] = 0 if args.three_tiers else len(previews.metadata_paths)
     (out / 'test').mkdir()
     with (out / 'test/pairs.jsonl').open('w') as stream:
         for index, row in enumerate(test_rows):

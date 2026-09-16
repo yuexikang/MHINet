@@ -11,8 +11,22 @@ def grid(h, w, device):
 
 
 def sample(feature, points):
-    return F.grid_sample(feature[None].float(), points[None, None],
-                         align_corners=False)[0, :, 0].T
+    # Equivalent to zero-padded align_corners=False bilinear grid_sample, but
+    # gather has a deterministic CUDA backward. This allows strict deterministic
+    # Flash Attention globally instead of silently accepting nondeterminism.
+    c,h,w = feature.shape
+    xy = (points + 1) * points.new_tensor([w/2,h/2]) - .5
+    low = xy.floor()
+    fraction = xy-low
+    flat = feature.float().reshape(c,-1)
+    result = torch.zeros(len(points),c,device=feature.device,dtype=torch.float32)
+    for dx,dy in ((0,0),(1,0),(0,1),(1,1)):
+        x,y = low[:,0].long()+dx, low[:,1].long()+dy
+        inside = (x>=0)&(x<w)&(y>=0)&(y<h)
+        weight = (fraction[:,0] if dx else 1-fraction[:,0]) * (fraction[:,1] if dy else 1-fraction[:,1])
+        value = flat[:,y.clamp(0,h-1)*w+x.clamp(0,w-1)].T
+        result = result + value * (weight*inside)[:,None]
+    return result
 
 
 def inverse_gt(H):

@@ -1433,3 +1433,25 @@ checkpoint SHA256=`20ee388f5914850287c8237f45e0ad273c73a6e7d7ce539baa5d6a0c72b00
 验证：`bash -n scripts/train_e01.sh scripts/test.sh scripts/test_e00.sh scripts/unit_tests.sh`通过；103项原有单元测试加最新checkpoint选择测试共104项通过。`DRY_RUN=1 bash scripts/train_e01.sh`确认默认路径、GPU1和参数转发；无新增checkpoint、无删除输出。当前工作区中的`artifacts/p4_tiny_s_d1_translation_swa.json`仍为用户无关修改，不纳入提交。
 
 评估总表同步：扫描服务器现有outputs中的10份真实评估summary（含刚完成的E00完整test/1000对），生成 `docs/evaluation_summary.md`、`artifacts/evaluation_registry.json` 和 `.csv`。每条记录绑定源summary SHA、split/对数、模式、H0/最终轨迹、成功率/AUC、失败率、显存、延迟、manifest与checkpoint信息；工程val冒烟和独立test分开标注。评估入口已自动登记新summary，`python -m mhinet.engine.evaluation_registry --scan outputs`可重扫。表不删旧记录，不把tiny/性能探测视为精度评估。
+
+## 2026-09-16：独立共享描述子预训练与DINOv3 LoRA分支
+
+用户批准建立分支实施，最终提供卡1冻结DINO的共享网络、卡2 LoRA对照训练命令；不自动启动正式长训练。由`d312c0a`建立`codex/shared-descriptor-lora`，首个中文提交`377e4a8`已推送origin。既有未提交的旧trainer/random-init/评估表修改保留，不纳入本任务提交。
+
+新增实际代码：`mhinet/pretraining/{model,loss,data,evaluation,train}.py`，两份`configs/shared_descriptor_{frozen,lora}.json`，`scripts/train_shared_descriptor{,_lora}.sh`，三个审计入口`audit_shared_pretraining.py/check_shared_bundle.py/check_shared_resume.py`，测试`tests/test_shared_pretraining.py`。复用现有feature_provider、GHIM四项损失、checkpointing；未修改相邻LoMa源码。只运行GHIM/CGMDP至D2，不构建MHIR、不执行D1。LoRA包装保留原QKV masked-bias，blocks8–17/r8/alpha16；梯度路径绕过旧DINO no_grad，冻结主干本体。
+
+正式参数：同预训练初始化、第一档train51978/val5772、母图/地理交集0；BS1累积4、单epoch12995 optimizer steps、warmup5%+cosine到10%、AdamW wd1e-4/clip1；每5000步及末尾全量val，每1000步保存。MVT/GHIM head lr1e-6，VGG5e-6，累计解码器/LoRA1e-5。损失为现有GHIM四项+三尺度双向InfoNCE（每方向最多1024查询、temperature0.1、全局采样及局部hard negatives、双侧mask）；test未读取用于选参。
+
+资源/环境：Python `/root/miniconda3/envs/loma-repro/bin/python` 3.10.20，torch2.11.0+cu128，RTX4090；LoMa `/home/disk1/LoMa`，数据 `/home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_v1`。实际权重路径完整登记在`configs/runtime_paths.quadrant.server.json`及每次`run.json`：LoRetta位于LoMa outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/snapshots/95bf3670465cc80ffca8b1edf94b5eb651211194/loretta.pth，SHA256 `09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e`；金字塔`/root/.cache/torch/hub/checkpoints/loma_B.pt`，SHA256 `3a38824391e22b33bb3e10377c7736243fd8a2fbf1561446e7e133e497c35758`。train manifest SHA `6587d3be58dfc8b1601244bcf7fa05e3cb5dba1b14b7a49871dcb1fe3ef3276c`，val SHA `c4763636e2ca9914c62aec45f5f6f238e0cfa9269343f27571e6c0acdb3d01ee`。
+
+验证：`bash scripts/unit_tests.sh`127项通过（含新增7项），1.991秒；新脚本bash语法检查通过。真实权重LoRA零初始化H0/D8/D4/D2最大差0；GHIM/CGMDP两条分支对MVT及LoRA均非零有限梯度；第二步A梯度非零。严格模式真实单对20步Ldesc1.167799→0.315688、LGHIM0.040362→0.006571，DINO base参数hash始终`611ab0607761c72dc93bcf7379829109f14da32fd43f9a8ed1e5a07f69d1317f`；报告`artifacts/shared_pretraining_real_tiny20_strict.json`。
+
+初次独立连续/恢复比较未通过，最大state差基线0.030666/LoRA0.022022；定位CUDA非确定性反向，warn_only不足以开启确定性Flash Attention。新增与grid_sample前向/梯度对齐的gather双线性采样，开启strict deterministic、cuDNN deterministic、CUBLAS_WORKSPACE_CONFIG。不放宽误差阈值：重跑两组8对/2步连续与中断恢复，模型/optimizer最大差均0，checkpoint SHA各自完全一致。报告`artifacts/shared_{frozen,lora}_resume_audit.json`；基线checkpoint SHA `02125544071e25e9fe5c310b3dfe42dfcf14949175c373f69bdeb52af97ddc6a`，LoRA `6112cd0c1404a1425522b08b3638ed3486756d4ec2cefb67aa83bf09678e6308`。
+
+真实小跑输出位于`outputs/diagnostics/shared_{frozen,lora}_strict_split`与`*_strict_continuous`。基线第二步2.347秒/峰值9.949GB，LoRA2.617秒/10.104GB（不含保存/val，仅诊断，非正式速度承诺）。每次val实际输出H0叠加图和D8/D4/D2 full-gallery匹配图；32查询/尺度/方向的全目标网格检索误差与采样InfoNCE命中率分开记录。2对val的H0 MACE约201/202px，拟合成功不代表精度成功，这些数字不得作为完整数据集结果。
+
+恢复机制：同目录latest.pt恢复模型/optimizer/scheduler/RNG/数据游标并核对配置、数据、权重、代码hash；无checkpoint将本入口旧记录移入previous_no_checkpoint_*再从头训练，不删除未知文件；目录锁防并发覆盖。导出shared_descriptor.pt含MVT/GHIM/VGG/累计解码器/可选LoRA，不含DINO原权重及任务头；load_shared校验DINO hash，供MHINet和LoMa DINOv3共享分支使用，未宣称原版DINOv2 LoMa可直接load_state_dict。
+
+诊断期间卡1被外部作业占约21GB，初次基线bundle/新短跑因此OOM；没有中断外部作业，基线诊断迁到卡3，LoRA主要用卡2。最终脚本默认卡1/卡2，启动前需确认空闲。工程检查、具体命令、结果表与失败修复详情汇总在`docs/shared_descriptor_results.md`和`docs/shared_descriptor_pretraining.md`。未启动正式训练，未宣称模型验证成功。
+
+最终bundle审计：冻结版806项、LoRA版826项state全部与训练checkpoint一致，H0/D8/D4/D2推理差均0。bundle SHA分别`75a23020cbbeac693f310056a295357448b46883add1588be218db568f4b5ce6`和`bd15a3d8e3dc39ed85b9bcd70f9a70002add0aa40c28435b94588e0b967b5bca`，见`artifacts/shared_{frozen,lora}_bundle_audit.json`。本任务所有短程GPU进程已退出。

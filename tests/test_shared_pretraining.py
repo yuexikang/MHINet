@@ -1,7 +1,8 @@
 import torch
 import unittest
 from mhinet.pretraining.model import LoRALinear
-from mhinet.pretraining.loss import descriptor_loss, inverse_gt
+from mhinet.pretraining.loss import descriptor_loss, inverse_gt, sample
+from mhinet.pretraining.evaluation import retrieval_metrics
 
 
 def test_lora_alignment_and_second_step():
@@ -57,6 +58,28 @@ def test_translation_coordinates():
 def test_singular_label_rejected():
     with unittest.TestCase().assertRaises(ValueError):
         inverse_gt(torch.zeros(1, 3, 3))
+
+
+def test_full_gallery_identity():
+    torch.manual_seed(7)
+    a = torch.randn(1,1,32,12,12)
+    pair = a.repeat(1,2,1,1,1)
+    mask = torch.ones(1,1,24,24)
+    metrics = retrieval_metrics({2:pair},torch.eye(3)[None],[mask,mask],queries=16)
+    assert all(max(v['errors_input_px']) < 1e-4 for v in metrics.values())
+
+
+def test_bilinear_reference_forward_backward():
+    torch.manual_seed(8)
+    x=torch.randn(3,9,11,requires_grad=True)
+    xy=(torch.rand(75,2)*2.4-1.2).requires_grad_()
+    actual=sample(x,xy)
+    expected=torch.nn.functional.grid_sample(x[None],xy[None,None],align_corners=False)[0,:,0].T
+    torch.testing.assert_close(actual,expected,atol=2e-6,rtol=1e-5)
+    gx, gp=torch.autograd.grad(actual.sum(),(x,xy),retain_graph=True)
+    ex, ep=torch.autograd.grad(expected.sum(),(x,xy))
+    torch.testing.assert_close(gx,ex,atol=2e-6,rtol=1e-5)
+    torch.testing.assert_close(gp,ep,atol=1e-5,rtol=1e-5)
 
 
 def test_tiny_descriptor_overfit():

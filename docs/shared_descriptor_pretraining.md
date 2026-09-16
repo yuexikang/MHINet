@@ -28,6 +28,8 @@
 
 验证区分 sampled InfoNCE 命中率与 full-gallery 检索：后者每对/尺度/方向固定32个有效查询，在目标**全部特征网格**中取最大相似度，记录784输入像素坐标误差及 Recall@1/3/5px。它不是每像素穷举，也不是原生不同尺寸影像坐标的精度；D8存在网格量化误差，跨尺度比较需注意。另记录 H0 四角平均误差、拟合失败率。无 MHIR，所以不输出六轮 H 图；每次验证前三对输出 H0 叠加图和 D8/D4/D2 匹配连线图（绿GT、红预测）。
 
+可复现设置：关闭 cuDNN benchmark，开启 cuDNN deterministic 和 PyTorch strict deterministic，设置 `CUBLAS_WORKSPACE_CONFIG=:4096:8`。描述子双线性采样使用与 `grid_sample(align_corners=False)` 前向/梯度对齐的 gather 实现，允许严格确定性的 Attention 反向；不通过放宽恢复误差阈值掩盖漂移。此设置有速度代价，不沿用之前非确定性冒烟的速度作正式耗时承诺。
+
 ## 启动
 
 ```bash
@@ -37,6 +39,8 @@ GPU_ID=2 bash scripts/train_shared_descriptor_lora.sh
 ```
 
 输出分别在 `outputs/shared_descriptor_frozen_seed0` 和 `outputs/shared_descriptor_lora_seed0`。可用 `MHINET_OUTPUT_DIR` 改目录；同目录断点恢复校验配置、数据、权重及实现文件hash，不能把两种实验混在一个目录。`--max-steps`、`--limit-train`、`--limit-val` 仅用于显式诊断，不加这些参数即完整第一档训练/验证。工程冒烟目录绝不能用作正式训练目录。
+
+同目录有 `latest.pt` 则恢复；无 checkpoint 则从头开始，旧的本入口日志/可视化移入 `previous_no_checkpoint_*` 后重新记录，其他文件不动。目录锁阻止两个进程同时写同一实验。启动前用 `nvidia-smi` 确认目标卡可用；短程峰值约10GB，不代表可与其他大显存训练挤占同一张卡。
 
 ## 供两项目复用
 

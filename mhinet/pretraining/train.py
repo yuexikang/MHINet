@@ -1,10 +1,13 @@
 """Standalone shared-descriptor trainer. One epoch; exact mid-epoch resume."""
 import argparse
+import fcntl
 from dataclasses import replace
 import json
 import math
+import os
 from pathlib import Path
 import random
+import shutil
 import time
 import numpy as np
 import torch
@@ -92,7 +95,17 @@ def main():
     p.add_argument('--workers', type=int, default=4)
     args = p.parse_args()
     config = json.loads(Path(args.config).read_text())
+    if (config['accumulation'] < 1 or config['queries'] < 2 or config['save_every'] < 1
+        or args.workers < 0 or any(x is not None and x < 1
+                                 for x in (args.max_steps,args.limit_train,args.limit_val))):
+        raise ValueError('Invalid training/diagnostic limits')
     seed = config['seed']
+    os.environ.setdefault('CUBLAS_WORKSPACE_CONFIG', ':4096:8')
+    torch.backends.cudnn.benchmark = False
+    torch.backends.cudnn.deterministic = True
+    # The shared loss uses deterministic gather-based bilinear sampling, so
+    # strict mode can also request deterministic Flash Attention backward.
+    torch.use_deterministic_algorithms(True)
     random.seed(seed); np.random.seed(seed); torch.manual_seed(seed)
     runtime = replace(RuntimePaths.from_json(config['runtime']), device='cuda:0')
     train = SharedPairDataset(runtime.data_root / 'train/pairs.jsonl', tier=1, max_pairs=args.limit_train)
@@ -104,6 +117,11 @@ def main():
         raise ValueError('Train/val group leakage')
     output = Path(args.output).resolve()
     output.mkdir(parents=True, exist_ok=True)
+    lock_handle = (output / '.training.lock').open('a')
+    try:
+        fcntl.flock(lock_handle, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except BlockingIOError as error:
+        raise RuntimeError(f'Another trainer owns {output}') from error
     accumulation = config['accumulation']
     total_steps = math.ceil(len(train) / accumulation)
     end = min(total_steps, args.max_steps or total_steps)
@@ -131,10 +149,24 @@ def main():
                                 scheduler=scheduler, map_location='cpu', expected_metadata=metadata)
         cursor, completed = state['data_progress']['cursor'], state['optimizer_step']
     else:
-        # User policy: no checkpoint means a fresh run; replace our own records only.
+        # No checkpoint means a fresh run. Archive only files owned by this trainer
+        # so old metrics/visualizations cannot masquerade as the new experiment.
+        owned = [output / name for name in ('train.jsonl','run.json','validation','shared_descriptor.pt')
+                 if (output / name).exists()]
+        if owned:
+            archive = output / f'previous_no_checkpoint_{time.time_ns()}'
+            archive.mkdir()
+            for path in owned:
+                shutil.move(str(path), str(archive / path.name))
         (output / 'train.jsonl').write_text('')
     (output / 'run.json').write_text(json.dumps(dict(**metadata, provenance=provenance,
         torch=str(torch.__version__), output=str(output)), indent=2, default=str))
+    if completed >= end:
+        if not (output / 'validation' / f'step_{completed:06d}' / 'summary.json').exists() or not (output / 'shared_descriptor.pt').exists():
+            summary = validate(model,val,runtime.device,output,completed,args.workers,config['queries'])
+            export_shared(model,output/'shared_descriptor.pt',dict(metadata,step=completed,validation=summary))
+        print(f'Already completed step {completed}; output: {output}',flush=True)
+        return
     order = torch.randperm(len(train), generator=torch.Generator().manual_seed(seed)).tolist()
     loader = iter(DataLoader(Subset(train, order[cursor:]), batch_size=1,
                             num_workers=args.workers, pin_memory=True,

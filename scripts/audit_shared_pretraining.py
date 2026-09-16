@@ -3,6 +3,7 @@ import argparse
 from dataclasses import replace
 import hashlib
 import json
+import os
 from pathlib import Path
 import torch
 from torch.utils.data import DataLoader
@@ -25,7 +26,12 @@ def base_hash(model):
 def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--output',required=True)
+    parser.add_argument('--steps',type=int,default=2)
     args=parser.parse_args()
+    os.environ.setdefault('CUBLAS_WORKSPACE_CONFIG',':4096:8')
+    torch.use_deterministic_algorithms(True)
+    torch.backends.cudnn.deterministic=True
+    torch.backends.cudnn.benchmark=False
     torch.manual_seed(0)
     runtime=replace(RuntimePaths.from_json('configs/runtime_paths.quadrant.server.json'),device='cuda:0')
     dataset=SharedPairDataset(runtime.data_root/'train/pairs.jsonl',tier=1,max_pairs=1)
@@ -49,8 +55,8 @@ def main():
     del after,ref
     model.train()
     optimizer=torch.optim.AdamW(model.optimizer_groups(),weight_decay=1e-4)
-    report={'zero_init_max_abs':errors,'steps':[]}
-    for step in range(2):
+    report={'zero_init_max_abs':errors,'steps':[],'strict_deterministic':True}
+    for step in range(args.steps):
         optimizer.zero_grad(set_to_none=True)
         result=model(batch['images'])
         ghim=ghim_loss(result['stage1'],batch['H_gt_norm'],batch['mask_A_overlap'])['total']
@@ -77,6 +83,9 @@ def main():
     report['frozen_base_sha256_after']=base_hash(model)
     assert initial_hash==report['frozen_base_sha256_after']
     report['passed']=True
+    report['descriptor_final_over_initial']=report['steps'][-1]['descriptor']/report['steps'][0]['descriptor']
+    if args.steps >= 20:
+        assert report['descriptor_final_over_initial'] < .8, 'Real-pair tiny overfit did not improve enough'
     report['peak_memory_gb']=torch.cuda.max_memory_allocated()/1e9
     Path(args.output).write_text(json.dumps(report,indent=2))
     print(json.dumps(report,indent=2))

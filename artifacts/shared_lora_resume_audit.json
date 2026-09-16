@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "progress": {
+    "optimizer_step": 2,
+    "microbatch": null,
+    "data": {
+      "cursor": 8
+    }
+  },
+  "max_parameter_difference": 0.0,
+  "differing_tensors": 0,
+  "max_optimizer_difference": 0.0,
+  "split": "outputs/diagnostics/shared_lora_strict_split",
+  "continuous": "outputs/diagnostics/shared_lora_strict_continuous",
+  "split_checkpoint_sha256": "6112cd0c1404a1425522b08b3638ed3486756d4ec2cefb67aa83bf09678e6308",
+  "continuous_checkpoint_sha256": "6112cd0c1404a1425522b08b3638ed3486756d4ec2cefb67aa83bf09678e6308",
+  "tolerance": 1e-05,
+  "note": "Pinned environment with strict deterministic kernels; cross-platform bitwise identity is not guaranteed."
+}

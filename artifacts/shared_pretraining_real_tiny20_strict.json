@@ -1,0 +1,556 @@
+{
+  "zero_init_max_abs": {
+    "D8": 0.0,
+    "D4": 0.0,
+    "D2": 0.0,
+    "H0": 0.0
+  },
+  "steps": [
+    {
+      "step": 1,
+      "ghim": 0.040362078696489334,
+      "descriptor": 1.1677989959716797,
+      "branch_MVT_LoRA_B_norms": {
+        "GHIM": [
+          0.07184227555990219,
+          0.006295137573033571
+        ],
+        "CGMDP": [
+          0.6281885504722595,
+          0.06540321558713913
+        ]
+      },
+      "lora_gradient_norms": {
+        "lora_A": 0.0,
+        "lora_B": 0.17727789282798767
+      },
+      "calls": {
+        "dino": 1,
+        "mvt": 1,
+        "vgg": 1,
+        "dedode_decode_calls": 1,
+        "dedode_steps": 4,
+        "dedode_scale1": 0
+      }
+    },
+    {
+      "step": 2,
+      "ghim": 0.02588222175836563,
+      "descriptor": 1.0688776969909668,
+      "branch_MVT_LoRA_B_norms": {
+        "GHIM": [
+          0.0535329170525074,
+          0.004266289062798023
+        ],
+        "CGMDP": [
+          0.595478355884552,
+          0.07140351831912994
+        ]
+      },
+      "lora_gradient_norms": {
+        "lora_A": 0.0018117495346814394,
+        "lora_B": 0.16798438131809235
+      },
+      "calls": {
+        "dino": 1,
+        "mvt": 1,
+        "vgg": 1,
+        "dedode_decode_calls": 1,
+        "dedode_steps": 4,
+        "dedode_scale1": 0
+      }
+    },
+    {
+      "step": 3,
+      "ghim": 0.01896785758435726,
+      "descriptor": 0.981898307800293,
+      "branch_MVT_LoRA_B_norms": {
+        "GHIM": [
+          0.03776327893137932,
+          0.0029012265149503946
+        ],
+        "CGMDP": [
+          0.5473176836967468,
+          0.06872627884149551
+        ]
+      },
+      "lora_gradient_norms": {
+        "lora_A": 0.0032541342079639435,
+        "lora_B": 0.15530692040920258
+      },
+      "calls": {
+        "dino": 1,
+        "mvt": 1,
+        "vgg": 1,
+        "dedode_decode_calls": 1,
+        "dedode_steps": 4,
+        "dedode_scale1": 0
+      }
+    },
+    {
+      "step": 4,
+      "ghim": 0.016373690217733383,
+      "descriptor": 0.9122823476791382,
+      "branch_MVT_LoRA_B_norms": {
+        "GHIM": [
+          0.028757648542523384,
+          0.0025737457908689976
+        ],
+        "CGMDP": [
+          0.4908463954925537,
+          0.06040147691965103
+        ]
+      },
+      "lora_gradient_norms": {
+        "lora_A": 0.004142178688198328,
+        "lora_B": 0.13808724284172058
+      },
+      "calls": {
+        "dino": 1,
+        "mvt": 1,
+        "vgg": 1,
+        "dedode_decode_calls": 1,
+        "dedode_steps": 4,
+        "dedode_scale1": 0
+      }
+    },
+    {
+      "step": 5,
+      "ghim": 0.01432234887033701,
+      "descriptor": 0.839801013469696,
+      "branch_MVT_LoRA_B_norms": {
+        "GHIM": [
+          0.02358037419617176,
+          0.0023548814933747053
+        ],
+        "CGMDP": [
+          0.44464078545570374,
+          0.05483389273285866
+        ]
+      },
+      "lora_gradient_norms": {
+        "lora_A": 0.004818257875740528,
+        "lora_B": 0.12308073043823242
+      },
+      "calls": {
+        "dino": 1,
+        "mvt": 1,
+        "vgg": 1,
+        "dedode_decode_calls": 1,
+        "dedode_steps": 4,
+        "dedode_scale1": 0
+      }
+    },
+    {
+      "step": 6,
+      "ghim": 0.01263959240168333,
+      "descriptor": 0.7787191271781921,
+      "branch_MVT_LoRA_B_norms": {
+        "GHIM": [
+          0.019710518419742584,
+          0.0020113543141633272
+        ],
+        "CGMDP": [
+          0.3974202573299408,
+          0.04943287372589111
+        ]
+      },
+      "lora_gradient_norms": {
+        "lora_A": 0.005393680650740862,
+        "lora_B": 0.11196286231279373
+      },
+      "calls": {
+        "dino": 1,
+        "mvt": 1,
+        "vgg": 1,
+        "dedode_decode_calls": 1,
+        "dedode_steps": 4,
+        "dedode_scale1": 0
+      }
+    },
+    {
+      "step": 7,
+      "ghim": 0.011542004533112049,
+      "descriptor": 0.7182482481002808,
+      "branch_MVT_LoRA_B_norms": {
+        "GHIM": [
+          0.016475651413202286,
+          0.0016627893783152103
+        ],
+        "CGMDP": [
+          0.32612723112106323,
+          0.03919811546802521
+        ]
+      },
+      "lora_gradient_norms": {
+        "lora_A": 0.0050867279060184956,
+        "lora_B": 0.08863704651594162
+      },
+      "calls": {
+        "dino": 1,
+        "mvt": 1,
+        "vgg": 1,
+        "dedode_decode_calls": 1,
+        "dedode_steps": 4,
+        "dedode_scale1": 0
+      }
+    },
+    {
+      "step": 8,
+      "ghim": 0.011037622578442097,
+      "descriptor": 0.6651657819747925,
+      "branch_MVT_LoRA_B_norms": {
+        "GHIM": [
+          0.015378028154373169,
+          0.0015468875644728541
+        ],
+        "CGMDP": [
+          0.31173115968704224,
+          0.03963104635477066
+        ]
+      },
+      "lora_gradient_norms": {
+        "lora_A": 0.005976039916276932,
+        "lora_B": 0.09005429595708847
+      },
+      "calls": {
+        "dino": 1,
+        "mvt": 1,
+        "vgg": 1,
+        "dedode_decode_calls": 1,
+        "dedode_steps": 4,
+        "dedode_scale1": 0
+      }
+    },
+    {
+      "step": 9,
+      "ghim": 0.010516262613236904,
+      "descriptor": 0.6181429028511047,
+      "branch_MVT_LoRA_B_norms": {
+        "GHIM": [
+          0.013966772705316544,
+          0.0013917085016146302
+        ],
+        "CGMDP": [
+          0.2659989297389984,
+          0.03227818384766579
+        ]
+      },
+      "lora_gradient_norms": {
+        "lora_A": 0.005448326934129,
+        "lora_B": 0.0728764608502388
+      },
+      "calls": {
+        "dino": 1,
+        "mvt": 1,
+        "vgg": 1,
+        "dedode_decode_calls": 1,
+        "dedode_steps": 4,
+        "dedode_scale1": 0
+      }
+    },
+    {
+      "step": 10,
+      "ghim": 0.00993392150849104,
+      "descriptor": 0.5729140043258667,
+      "branch_MVT_LoRA_B_norms": {
+        "GHIM": [
+          0.01218860037624836,
+          0.001203669118694961
+        ],
+        "CGMDP": [
+          0.23749080300331116,
+          0.026771632954478264
+        ]
+      },
+      "lora_gradient_norms": {
+        "lora_A": 0.0055958665907382965,
+        "lora_B": 0.06598597019910812
+      },
+      "calls": {
+        "dino": 1,
+        "mvt": 1,
+        "vgg": 1,
+        "dedode_decode_calls": 1,
+        "dedode_steps": 4,
+        "dedode_scale1": 0
+      }
+    },
+    {
+      "step": 11,
+      "ghim": 0.0093983830884099,
+      "descriptor": 0.533282995223999,
+      "branch_MVT_LoRA_B_norms": {
+        "GHIM": [
+          0.010732905939221382,
+          0.0011176671832799911
+        ],
+        "CGMDP": [
+          0.18944565951824188,
+          0.01969592645764351
+        ]
+      },
+      "lora_gradient_norms": {
+        "lora_A": 0.00453345337882638,
+        "lora_B": 0.05058807507157326
+      },
+      "calls": {
+        "dino": 1,
+        "mvt": 1,
+        "vgg": 1,
+        "dedode_decode_calls": 1,
+        "dedode_steps": 4,
+        "dedode_scale1": 0
+      }
+    },
+    {
+      "step": 12,
+      "ghim": 0.008992225863039494,
+      "descriptor": 0.4973019063472748,
+      "branch_MVT_LoRA_B_norms": {
+        "GHIM": [
+          0.010271305218338966,
+          0.0011228476651012897
+        ],
+        "CGMDP": [
+          0.15949313342571259,
+          0.015883794054389
+        ]
+      },
+      "lora_gradient_norms": {
+        "lora_A": 0.0040342556312680244,
+        "lora_B": 0.04248129948973656
+      },
+      "calls": {
+        "dino": 1,
+        "mvt": 1,
+        "vgg": 1,
+        "dedode_decode_calls": 1,
+        "dedode_steps": 4,
+        "dedode_scale1": 0
+      }
+    },
+    {
+      "step": 13,
+      "ghim": 0.008534660562872887,
+      "descriptor": 0.46515804529190063,
+      "branch_MVT_LoRA_B_norms": {
+        "GHIM": [
+          0.00913793221116066,
+          0.0009712222381494939
+        ],
+        "CGMDP": [
+          0.13292162120342255,
+          0.012517604045569897
+        ]
+      },
+      "lora_gradient_norms": {
+        "lora_A": 0.003117786720395088,
+        "lora_B": 0.03389995917677879
+      },
+      "calls": {
+        "dino": 1,
+        "mvt": 1,
+        "vgg": 1,
+        "dedode_decode_calls": 1,
+        "dedode_steps": 4,
+        "dedode_scale1": 0
+      }
+    },
+    {
+      "step": 14,
+      "ghim": 0.008109409362077713,
+      "descriptor": 0.43737778067588806,
+      "branch_MVT_LoRA_B_norms": {
+        "GHIM": [
+          0.008575252257287502,
+          0.0008384560351260006
+        ],
+        "CGMDP": [
+          0.12146269530057907,
+          0.012591440230607986
+        ]
+      },
+      "lora_gradient_norms": {
+        "lora_A": 0.0027860673144459724,
+        "lora_B": 0.03419524431228638
+      },
+      "calls": {
+        "dino": 1,
+        "mvt": 1,
+        "vgg": 1,
+        "dedode_decode_calls": 1,
+        "dedode_steps": 4,
+        "dedode_scale1": 0
+      }
+    },
+    {
+      "step": 15,
+      "ghim": 0.007780883461236954,
+      "descriptor": 0.41209015250205994,
+      "branch_MVT_LoRA_B_norms": {
+        "GHIM": [
+          0.008792391046881676,
+          0.0008200223091989756
+        ],
+        "CGMDP": [
+          0.10417601466178894,
+          0.01043063122779131
+        ]
+      },
+      "lora_gradient_norms": {
+        "lora_A": 0.0027868240140378475,
+        "lora_B": 0.027710990980267525
+      },
+      "calls": {
+        "dino": 1,
+        "mvt": 1,
+        "vgg": 1,
+        "dedode_decode_calls": 1,
+        "dedode_steps": 4,
+        "dedode_scale1": 0
+      }
+    },
+    {
+      "step": 16,
+      "ghim": 0.0075553604401648045,
+      "descriptor": 0.38876277208328247,
+      "branch_MVT_LoRA_B_norms": {
+        "GHIM": [
+          0.008797043934464455,
+          0.0008089290931820869
+        ],
+        "CGMDP": [
+          0.09661398828029633,
+          0.009905512444674969
+        ]
+      },
+      "lora_gradient_norms": {
+        "lora_A": 0.002113204449415207,
+        "lora_B": 0.026301292702555656
+      },
+      "calls": {
+        "dino": 1,
+        "mvt": 1,
+        "vgg": 1,
+        "dedode_decode_calls": 1,
+        "dedode_steps": 4,
+        "dedode_scale1": 0
+      }
+    },
+    {
+      "step": 17,
+      "ghim": 0.0072656371630728245,
+      "descriptor": 0.3683881163597107,
+      "branch_MVT_LoRA_B_norms": {
+        "GHIM": [
+          0.007597014773637056,
+          0.0006985034560784698
+        ],
+        "CGMDP": [
+          0.08530447632074356,
+          0.00823765154927969
+        ]
+      },
+      "lora_gradient_norms": {
+        "lora_A": 0.002029980532824993,
+        "lora_B": 0.0229055006057024
+      },
+      "calls": {
+        "dino": 1,
+        "mvt": 1,
+        "vgg": 1,
+        "dedode_decode_calls": 1,
+        "dedode_steps": 4,
+        "dedode_scale1": 0
+      }
+    },
+    {
+      "step": 18,
+      "ghim": 0.007033063564449549,
+      "descriptor": 0.34983882308006287,
+      "branch_MVT_LoRA_B_norms": {
+        "GHIM": [
+          0.006672152783721685,
+          0.0006846892647445202
+        ],
+        "CGMDP": [
+          0.07982029765844345,
+          0.00819383654743433
+        ]
+      },
+      "lora_gradient_norms": {
+        "lora_A": 0.0016043501673266292,
+        "lora_B": 0.022512203082442284
+      },
+      "calls": {
+        "dino": 1,
+        "mvt": 1,
+        "vgg": 1,
+        "dedode_decode_calls": 1,
+        "dedode_steps": 4,
+        "dedode_scale1": 0
+      }
+    },
+    {
+      "step": 19,
+      "ghim": 0.006787776481360197,
+      "descriptor": 0.33151912689208984,
+      "branch_MVT_LoRA_B_norms": {
+        "GHIM": [
+          0.006158376578241587,
+          0.0007128426805138588
+        ],
+        "CGMDP": [
+          0.07092178612947464,
+          0.007082814816385508
+        ]
+      },
+      "lora_gradient_norms": {
+        "lora_A": 0.0012475410476326942,
+        "lora_B": 0.0200180746614933
+      },
+      "calls": {
+        "dino": 1,
+        "mvt": 1,
+        "vgg": 1,
+        "dedode_decode_calls": 1,
+        "dedode_steps": 4,
+        "dedode_scale1": 0
+      }
+    },
+    {
+      "step": 20,
+      "ghim": 0.00657065911218524,
+      "descriptor": 0.31568843126296997,
+      "branch_MVT_LoRA_B_norms": {
+        "GHIM": [
+          0.00557251600548625,
+          0.0006342335254885256
+        ],
+        "CGMDP": [
+          0.06816699355840683,
+          0.0073914909735322
+        ]
+      },
+      "lora_gradient_norms": {
+        "lora_A": 0.0012370405020192266,
+        "lora_B": 0.02045009471476078
+      },
+      "calls": {
+        "dino": 1,
+        "mvt": 1,
+        "vgg": 1,
+        "dedode_decode_calls": 1,
+        "dedode_steps": 4,
+        "dedode_scale1": 0
+      }
+    }
+  ],
+  "strict_deterministic": true,
+  "frozen_base_sha256_before": "611ab0607761c72dc93bcf7379829109f14da32fd43f9a8ed1e5a07f69d1317f",
+  "frozen_base_sha256_after": "611ab0607761c72dc93bcf7379829109f14da32fd43f9a8ed1e5a07f69d1317f",
+  "passed": true,
+  "descriptor_final_over_initial": 0.27032771251896653,
+  "peak_memory_gb": 10.08209664
+}

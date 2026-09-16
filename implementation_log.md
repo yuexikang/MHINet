@@ -16,6 +16,8 @@ state 9bef7194525ecc725b875fcd07f37af511bc95676e3eed2b8141d6b798c1e5d0，
 scheduler 68368fc602eed60bd190dffd4d5e1c8963417c4f76abd62586bef195180f9ca0，
 controller 783099ac1a022ff2ea9b941959f790c61e4ed60895e2cb39bd9fd33beca90e8b。
 新增MHINet adapter以min(P,R,H0-AUC,H6-AUC)评分，坐标784px；详细定义见docs/tier1_uniform_afss.md。
+分别读取A/B配置、seed0重新构建真实模型并逐张量计算完整state_dict哈希，两组均为
+d18d443b8cdd81f317fa5cbf069a1ca065c6e1067f694ca031533c39be2c67c8，确认初始化一致。
 原实现只在全量刷新更新EMA，本次5轮仅第2轮结束一次刷新；不声称长期防遗忘已验证。
 
 120项测试通过；包括初始两轮相同索引、AFSS恢复后的索引序列一致、指纹拒绝、H6退化降低评分。

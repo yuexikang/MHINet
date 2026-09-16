@@ -135,6 +135,7 @@ class HomographyPairDataset(Dataset[dict[str, Any]]):
         exclude_geo_groups: Iterable[str] = (),
         geo_cell_degrees: float = 0.01,
         include_overlap_mask: bool = False,
+        tier: int | None = None,
     ) -> None:
         super().__init__()
         self.manifest = Path(manifest).resolve()
@@ -152,6 +153,8 @@ class HomographyPairDataset(Dataset[dict[str, Any]]):
                 if not line.strip():
                     continue
                 record = json.loads(line)
+                if tier is not None and record.get('tier') != tier:
+                    continue
                 geo = parse_geo_region(record, geo_cell_degrees)
                 if geo in excluded:
                     continue

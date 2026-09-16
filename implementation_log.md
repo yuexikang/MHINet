@@ -1,5 +1,34 @@
 # MHINet implementation log
 
+## 2026-09-16：第一档 Uniform / AFSS-v2 双组训练入口
+
+按用户确认只冻结DINO、同预训练初始化、seed0、BS1×累积4；验证/保存改每5000实际优化步，
+结束补完整val。新增train_tier1_a/b.sh，默认GPU0/1，独立outputs/tier1_a/b_seed0。
+configs/runtime_paths.quadrant.server.json指向实际三档数据；loader tier=1过滤，
+确认train51978/val5772；其他档和test不参与训练/评分/选模型。
+A五轮64975步；B五基准轮，前2轮全量25990步，规划cosine终点43534（按LoMa取整公式）；
+显式warmup1000实际步。学习率/损失/冻结及关闭相关性重计算沿用已确认配置。
+
+复用LoMa config/state/scheduler/controller四文件；LoMa HEAD
+899fdb99a4076e312196bbbf99a3c329739b5d7a；config hash
+7d3c2feb1d94d4b1cdbd8d72a39fc258b0d8984b8f0ba18976672fe23814faae，
+state 9bef7194525ecc725b875fcd07f37af511bc95676e3eed2b8141d6b798c1e5d0，
+scheduler 68368fc602eed60bd190dffd4d5e1c8963417c4f76abd62586bef195180f9ca0，
+controller 783099ac1a022ff2ea9b941959f790c61e4ed60895e2cb39bd9fd33beca90e8b。
+新增MHINet adapter以min(P,R,H0-AUC,H6-AUC)评分，坐标784px；详细定义见docs/tier1_uniform_afss.md。
+原实现只在全量刷新更新EMA，本次5轮仅第2轮结束一次刷新；不声称长期防遗忘已验证。
+
+120项测试通过；包括初始两轮相同索引、AFSS恢复后的索引序列一致、指纹拒绝、H6退化降低评分。
+真实权重8train/2val缩小测试：A前4步、B先5步后同目录续到7步完成，
+B连续7步也完成；第2轮结束评分8对，后续每轮选4对，保存最终7张可视化及best_validation.json。
+命令：`CUDA_VISIBLE_DEVICES=0 OMP_NUM_THREADS=1 /root/miniconda3/envs/loma-repro/bin/python -u -m mhinet.cli train --runtime configs/runtime_paths.quadrant.server.json --config configs/diagnostic_tier1_b.json --output-dir outputs/diagnostics/tier1_afss_resume_v2 --tiny-gate-artifact artifacts/p4_tiny_gate_mcnet_d2.json --no-correlation-checkpoint --stop-after-optimizer-step 5`；续训去掉stop参数。
+暂停/续训日志outputs/tier1_afss_smoke_v2.log；连续运行outputs/tier1_afss_continuous.log。
+恢复后最终checkpoint SHA256 7efd2d788bab56542820c99e206c083cbd8d27431ad6baead11c72923742b4b5；
+连续最终300fc571954e314ac51efc1819bdbed0062898a1d77926784208f16f752307bd。
+短测不代表收敛；跨独立GPU运行首步损失一致，更新后有小幅数值差异，未证明训练逐位可复现。
+采样状态序列恢复测试与神经网络数值逐位一致是不同结论。新运行另记录initial_model_sha256。
+未启动正式长训练；保留现有脏工作树中的用户脚本与自动评估表变更，不合并无关内容。
+
 ## 2026-09-16：原始测试母图各自生成第三档两对
 
 新增scripts/generate_test_tier3.sh与mhinet/dataio/generate_test_tier3.py。

@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 from dataclasses import dataclass
 import json
+import hashlib
 import math
 from pathlib import Path
 import random
@@ -63,6 +64,15 @@ class TrainConfig:
 
     def validate(self) -> None:
         errors: list[str] = []
+        if self.raw.get('sampling_strategy') not in (None,'uniform_rounds','afss_v2'):
+            errors.append('Unknown sampling_strategy')
+        if self.raw.get('sampling_strategy') in ('uniform_rounds','afss_v2'):
+            if self.raw.get('profile')!='frozen_dino' or self.raw.get('data_tier')!=1:
+                errors.append('Round comparison requires frozen_dino and tier1')
+            if int(self.raw.get('baseline_rounds',0))<3 or int(self.raw.get('warmup_steps',0))<1:
+                errors.append('Round comparison needs >=3 rounds and explicit positive warmup_steps')
+            if int(self.raw.get('batch_size',1))!=1 or not self.raw.get('ghim_supervision'):
+                errors.append('Round comparison requires BS1 and GHIM supervision')
         if self.raw.get("training_revision") != "1.2":
             errors.append("training_revision must be 1.2")
         if self.raw.get("loss_profile") != "sequence_corner_l1":
@@ -198,7 +208,8 @@ def _resolve_start(output_dir: Path, resume: Path | None, overwrite: bool):
 
 def _archive_previous_records(output_dir: Path) -> str | None:
     """Replace active run records while retaining a recoverable local backup."""
-    paths = [output_dir / name for name in ('run.json', 'train.jsonl', 'validation', 'visualizations')]
+    paths = [output_dir / name for name in ('run.json', 'train.jsonl', 'validation', 'visualizations',
+                                          'best_validation.json', 'afss_refresh.jsonl')]
     existing = [path for path in paths if path.exists() or path.is_symlink()]
     if not existing:
         return None
@@ -254,6 +265,7 @@ def _safe_train_dataset(
     runtime: RuntimePaths,
     *,
     max_pairs: int | None,
+    tier: int | None = None,
 ) -> tuple[HomographyPairDataset, list[str]]:
     validation_regions = {
         parse_geo_region(record)
@@ -262,6 +274,7 @@ def _safe_train_dataset(
     dataset = HomographyPairDataset(
         runtime.data_root / "train/pairs.jsonl",
         max_pairs=max_pairs,
+        tier=tier,
         exclude_geo_groups=validation_regions,
     )
     return dataset, sorted(validation_regions)
@@ -380,6 +393,8 @@ def _save_training_state(
         metadata=metadata,
     )
     report["sha256"] = sha256_file(path)
+    if hasattr(data_stream,'log_state'):
+        report['data_progress']=data_stream.log_state()
     return report
 
 
@@ -409,6 +424,13 @@ def train(
     for group in build_report["training_parameters"]["groups"].values():
         group.pop("optimizer_parameter_ids", None)
     model.set_training_phase(config.profile)
+    initial_model_sha256=None
+    if config.raw.get('sampling_strategy') and resume is None:
+        digest=hashlib.sha256()
+        for name,value in model.state_dict().items():
+            digest.update(name.encode())
+            digest.update(value.detach().cpu().contiguous().reshape(-1).view(torch.uint8).numpy().tobytes())
+        initial_model_sha256=digest.hexdigest()
     for module in model.modules():
         if isinstance(module, HGuidedLocalCorrelation):
             module.activation_checkpoint_training = correlation_checkpoint
@@ -428,13 +450,13 @@ def train(
     )
     if run_limit <= 0:
         raise ValueError("stop_after_optimizer_step must be positive")
-    warmup_steps = round(total_steps * float(config.raw["warmup_fraction"]))
+    warmup_steps = int(config.raw.get('warmup_steps',round(total_steps * float(config.raw["warmup_fraction"]))))
     minimum_ratio = float(config.raw["minimum_lr_ratio"])
     scheduler = torch.optim.lr_scheduler.LambdaLR(
         optimizer,
         lr_lambda=lambda step: warmup_cosine_factor(
             step,
-            total_steps=total_steps,
+            total_steps=int(config.raw.get('cosine_actual_steps',total_steps)),
             warmup_steps=warmup_steps,
             minimum_ratio=minimum_ratio,
         ),
@@ -443,15 +465,20 @@ def train(
     train_dataset, excluded_regions = _safe_train_dataset(
         runtime,
         max_pairs=None if max_train_pairs is None else int(max_train_pairs),
+        tier=config.raw.get('data_tier'),
     )
     train_dataset.include_overlap_mask = bool(config.raw.get("ghim_supervision", False))
     max_val_pairs = config.raw.get("max_val_pairs")
     validation_dataset = HomographyPairDataset(
         runtime.data_root / "val/pairs.jsonl",
         max_pairs=None if max_val_pairs is None else int(max_val_pairs),
+        tier=config.raw.get('data_tier'),
     )
 
     optimizer_step = 0
+    manifest_metadata=({'train_manifest_sha256':sha256_file(train_dataset.manifest),
+                        'val_manifest_sha256':sha256_file(validation_dataset.manifest)}
+                       if config.raw.get('sampling_strategy') else {})
     resume_report = None
     data_progress: Mapping[str, Any] = {}
     if resume is not None:
@@ -463,6 +490,7 @@ def train(
             map_location=device,
             restore_rng=True,
             expected_metadata={
+                **manifest_metadata,
                 "architecture_sha256": build_report["architecture_sha256"],
                 "mhir_revision": build_report["mhir_revision"],
                 "training_config_sha256": config.sha256,
@@ -475,6 +503,7 @@ def train(
         if metadata.get("profile") != config.profile:
             raise RuntimeError("Resume profile does not match checkpoint")
         optimizer_step = int(resume_report["optimizer_step"])
+        initial_model_sha256=metadata.get('initial_model_sha256')
         data_progress = resume_report.get("data_progress") or {}
     data_stream = DeterministicIndexStream(
         len(train_dataset),
@@ -486,6 +515,21 @@ def train(
         train_dataset
     ):
         raise RuntimeError("Resume dataset length changed")
+
+    round_mode = config.raw.get('sampling_strategy') in ('uniform_rounds','afss_v2')
+    if round_mode:
+        from mhinet.engine.pair_afss.adapter import RoundStream, refresh_scores
+        data_stream=RoundStream([entry.pair_id for entry in train_dataset.index],seed,
+            int(config.raw['effective_batch_size']),int(config.raw['baseline_rounds']),
+            config.raw['sampling_strategy'],sha256_file(train_dataset.manifest),data_progress or None)
+        if resume_report is not None:
+            resume_report['data_progress']=data_stream.log_state()
+        if total_steps!=data_stream.controller.baseline_max_steps:
+            raise ValueError('Round budget does not match selected dataset size')
+        expected_horizon=(data_stream.controller.planned_minimum_actual_steps()
+                          if config.raw['sampling_strategy']=='afss_v2' else total_steps)
+        if int(config.raw['cosine_actual_steps'])!=expected_horizon:
+            raise ValueError('Cosine horizon differs from planned round budget')
 
     active_scales = config.active_scales
     iterations_per_scale = int(config.raw["iterations_per_scale"])
@@ -514,6 +558,11 @@ def train(
         "test_used": False,
         "resume_mode": resume_mode,
         "correlation_activation_checkpoint": correlation_checkpoint,
+        "sampling_strategy": config.raw.get('sampling_strategy','legacy_uniform'),
+        "initial_model_sha256": initial_model_sha256,
+        "data_tier": config.raw.get('data_tier'),
+        "train_manifest_sha256": sha256_file(train_dataset.manifest),
+        "val_manifest_sha256": sha256_file(validation_dataset.manifest),
     }
     run_record = {
         "status": "running",
@@ -545,7 +594,10 @@ def train(
         total=total_steps, initial=optimizer_step, desc=config.experiment_id,
         unit="step", dynamic_ncols=True, mininterval=2.0,
     ) as progress:
-        while optimizer_step < run_limit:
+        while optimizer_step < run_limit and not (round_mode and data_stream.done):
+            if round_mode:
+                data_stream.prepare(lambda stream: refresh_scores(stream,model,train_dataset,device,
+                    output_dir/'afss_refresh.jsonl'))
             model.train()
             optimizer.zero_grad(set_to_none=True)
             losses: list[float] = []
@@ -655,7 +707,7 @@ def train(
                     if device.type == "cuda"
                     else 0
                 ),
-                "data_progress": data_stream.state_dict(),
+                "data_progress": data_stream.log_state() if round_mode else data_stream.state_dict(),
             }
             log_stream.write(json.dumps(log_row, ensure_ascii=False) + "\n")
             log_stream.flush()
@@ -670,7 +722,8 @@ def train(
 
             checkpoint_due = optimizer_step % checkpoint_interval == 0
             validation_due = optimizer_step % validation_interval == 0
-            if checkpoint_due or validation_due or optimizer_step == run_limit:
+            round_done=round_mode and data_stream.done
+            if checkpoint_due or validation_due or optimizer_step == run_limit or round_done:
                 checkpoint_path = output_dir / "checkpoints" / f"step_{optimizer_step:07d}.pt"
                 last_checkpoint = _save_training_state(
                     checkpoint_path,
@@ -683,7 +736,7 @@ def train(
                     shared_call_violations=shared_call_violations,
                     metadata=metadata,
                 )
-            if validation_due or optimizer_step == total_steps:
+            if validation_due or optimizer_step == total_steps or round_done:
                 validation_summary, validation_rows = evaluate_model(
                     model,
                     validation_dataset,
@@ -714,10 +767,16 @@ def train(
                     "summary": validation_summary,
                     "files": validation_files,
                 }
+                candidate=float(validation_summary['H_final_mace_input_px_all_finite_geometry']['mean'])
+                best_path=output_dir/'best_validation.json'
+                best=json.loads(best_path.read_text()) if best_path.exists() else None
+                if math.isfinite(candidate) and (best is None or candidate<float(best['mean_mace_px'])):
+                    _write_json(best_path,{'optimizer_step':optimizer_step,'mean_mace_px':candidate,
+                        'checkpoint':str(checkpoint_path),'selection_split':'val','test_used':False})
 
     completed = {
         **run_record,
-        "status": "completed" if optimizer_step >= total_steps else "paused",
+        "status": "completed" if optimizer_step >= total_steps or (round_mode and data_stream.done) else "paused",
         "optimizer_steps": optimizer_step,
         "invalid_attempts_total": invalid_attempts_total,
         "shared_call_count_violations": shared_call_violations,

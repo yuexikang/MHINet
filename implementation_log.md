@@ -1,5 +1,14 @@
 # MHINet implementation log
 
+## 2026-09-16：按用户要求撤销AFSS实验接入
+
+两组正式训练已按用户要求中断，约434步，未到首次保存点，无正式checkpoint。
+撤销pair_afss模块、A/B实验配置及启动脚本、专用测试和当前实验说明；训练循环恢复普通
+均匀采样、按max_optimizer_steps训练，原有warmup+cosine保留。旧sampling_strategy配置
+明确拒绝，防止拿旧AFSS配置误跑。保留tier筛选和quadrant runtime，数据生成不变。
+历史日志/实验记录不删除；下面AFSS条目仅为历史，不是当前实施方案。
+本次删除的受版本控制源码可由git历史恢复；未覆盖用户已有工作树修改。
+
 ## 2026-09-16：第一档 Uniform / AFSS-v2 双组训练入口
 
 按用户确认只冻结DINO、同预训练初始化、seed0、BS1×累积4；验证/保存改每5000实际优化步，

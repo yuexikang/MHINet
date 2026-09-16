@@ -1,5 +1,18 @@
 # MHINet implementation log
 
+## 2026-09-16：原始测试母图各自生成第三档两对
+
+新增scripts/generate_test_tier3.sh与mhinet/dataio/generate_test_tier3.py。
+读取GoogleEarth/evaluation_data/test_pairs.csv，仅用路径配对信息发现母图；
+Source/Target按相对路径去重，各自单图生成2对tier3，禁止跨母图单位H假设。
+种子20260916；尺寸比.8/.6/.4循环覆盖；复用已测quadrant_tiers生成函数与可见性掩码。
+原始500对视觉测试、既有train/val完全不改。新输出GoogleEarth_test_single_tier3_v1。
+先运行 --generate --smoke --output-dir outputs/diagnostics/test_tier3_smoke，4对生成、
+loader、同母图与几何/可见重叠检查通过。随后后台启动完整生成，PID3765023，
+日志outputs/test_tier3_generation.log；启动不等于完成，摘要completed后才可验收。
+本次不接入精度评估入口，也不训练；新数据仅可评价合成几何/辐射/遮挡鲁棒性，
+不能据此声称真实跨时相精度。AFSS训练预算未修改。
+
 ## 2026-09-15：三档四象限数据生成后台任务
 
 新增quadrant_tiers.py和generate_three_tiers.sh，配方见docs/quadrant_three_tiers.md。

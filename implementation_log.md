@@ -1455,3 +1455,19 @@ checkpoint SHA256=`20ee388f5914850287c8237f45e0ad273c73a6e7d7ce539baa5d6a0c72b00
 诊断期间卡1被外部作业占约21GB，初次基线bundle/新短跑因此OOM；没有中断外部作业，基线诊断迁到卡3，LoRA主要用卡2。最终脚本默认卡1/卡2，启动前需确认空闲。工程检查、具体命令、结果表与失败修复详情汇总在`docs/shared_descriptor_results.md`和`docs/shared_descriptor_pretraining.md`。未启动正式训练，未宣称模型验证成功。
 
 最终bundle审计：冻结版806项、LoRA版826项state全部与训练checkpoint一致，H0/D8/D4/D2推理差均0。bundle SHA分别`75a23020cbbeac693f310056a295357448b46883add1588be218db568f4b5ce6`和`bd15a3d8e3dc39ed85b9bcd70f9a70002add0aa40c28435b94588e0b967b5bca`，见`artifacts/shared_{frozen,lora}_bundle_audit.json`。本任务所有短程GPU进程已退出。
+
+## 2026-09-17：H0有效重叠投影误差与第二档训练
+
+用户明确不继续LoRA，要求补充有效重叠区域H0误差，再实际启动第二档训练并提供tail命令。已补`mhinet/pretraining/overlap_metrics.py`和旧checkpoint评估入口`scripts/evaluate_shared_overlap.py`；新训练验证保留四角MACE，并额外保存H0_overlap。支持集使用GT和A/B有效mask确定，枚举全部源图像素中心，单位为784重采样目标图像像素，方向A→B；预测出界不剔除，非法预测保留在Recall分母。记录pair均值/中位数/P90、像素加权均值、Recall@1/3/5、无支持对数、非法投影和拟合失败，不删极端标签。
+
+第二档配置`configs/shared_descriptor_tier2.json`、脚本`scripts/train_shared_descriptor_tier2.sh`。初始化第一档冻结版最终`/home/disk1/MHINet/outputs/shared_descriptor_frozen_seed0/latest.pt`，SHA256 `df3ec90b9bc53fd983cc1945a3c028ccdf9bf688325a60055101232c509cc25e`，原step12995；严格加载模型、校验DINO provenance，不继承已结束的optimizer/scheduler。无LoRA，DINO冻结，其余共享层训练、VGG BN统计固定；仍不运行MHIR/D1。峰值lr：MVT/head5e-7、VGG2.5e-6、CGMDP5e-6（第一档峰值一半）。BS1×累积4，新AdamW、wd1e-4、clip1，warmup5%后cosine至峰值10%。同新目录支持自动恢复。
+
+实际数据仍为`/home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_v1`，仅第二档几何+辐射处理；train34652/val3848，母图/地理交集均0，一轮8663步；第5000步及最后全量val，每1000步保存。test未用于选择。环境沿用loma-repro Python3.10.20/torch2.11.0+cu128。
+
+检查：131项单元测试通过，耗时2.097s；新增4项覆盖恒等、已知平移、双侧mask、非法投影及fit失败分母。实际8对train/2对val冒烟两步通过，loss0.190485→0.167080、峰值9.96GB；目录`outputs/diagnostics/shared_tier2_overlap_smoke`，新增overlap指标覆盖788167像素，无非法预测，pair均值1.8584px。这里只是小样本工程检查，不是第二档完整训练精度。最终调整中位数使用quantile(0.5)，并补初始化DINO hash校验。
+
+已提交并推送`bbd95d7`（补充H0有效重叠投影评估并配置冻结DINO第二档续训）。启动时GPU0–3均空闲；以独立session后台启动：卡1训练PID3788458，输出`outputs/shared_descriptor_frozen_tier2_seed0`，日志`outputs/shared_descriptor_frozen_tier2_seed0.console.log`；卡0补评估PID3788465，在第一档最终冻结模型上计算tier1/tier2完整val的H0指标，输出`outputs/shared_descriptor_frozen_seed0/h0_overlap_v1`，日志`outputs/shared_descriptor_frozen_h0_overlap.log`。最初shell nohup后台启动未存活，已核对退出且无GPU占用后改用Popen(start_new_session=True)，没有重复训练实例。
+
+后台训练命令等价于`GPU_ID=1 bash scripts/train_shared_descriptor_tier2.sh`；用户查看`tail -n 30 -f /home/disk1/MHINet/outputs/shared_descriptor_frozen_tier2_seed0.console.log`。每50步额外输出TRAIN行。H0补评估单独运行，不等待补评估完成才使用另一张卡训练；新训练自身每次val也计算同指标。设置与指标定义见`docs/shared_descriptor_tier2.md`。训练和完整补评估结果尚未完成，不能提前宣称成功。
+
+启动确认：独立session脱离启动器后两进程仍存活；交付前卡1实际达到22/8663步（最近loss0.1657，显存约10GB），卡0补评估达到第一档647/5772对。未见异常；这只是启动状态，不是最终结果。

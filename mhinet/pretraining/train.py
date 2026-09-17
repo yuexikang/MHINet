@@ -21,6 +21,7 @@ from mhinet.pretraining.data import SharedPairDataset
 from mhinet.pretraining.loss import descriptor_loss
 from mhinet.pretraining.model import build_shared_network, export_shared
 from mhinet.pretraining.evaluation import retrieval_metrics
+from mhinet.pretraining.overlap_metrics import overlap_projection_error, summarize_overlap
 
 
 def losses(model, batch, device, *, queries, seed):
@@ -59,7 +60,11 @@ def validate(model, dataset, device, output, step, workers, queries):
         retrieval = retrieval_metrics(result['pyramid'], batch['H_gt_norm'].to(device),
             [batch['mask_A_overlap'].to(device), batch['mask_B_overlap'].to(device)], seed=i,
             images=batch['images'], folder=folder / batch['pair_id'][0] if i < 3 else None)
-        rows.append(dict(pair_id=batch['pair_id'][0], H0_mace_px=error, retrieval=retrieval, **info))
+        overlap = overlap_projection_error(result['H0_norm'],batch['H_gt_norm'].to(device),
+            batch['mask_A_overlap'].to(device),batch['mask_B_overlap'].to(device),
+            fit_valid=bool(result['stage1_valid'][0]))
+        rows.append(dict(pair_id=batch['pair_id'][0], H0_mace_px=error,
+                         H0_overlap=overlap, retrieval=retrieval, **info))
         if i < 3:
             from mhinet.visualization.visualization import write_iteration_overlays
             write_iteration_overlays(batch['images'][0], batch['H_gt_norm'][0], [], [],
@@ -75,6 +80,7 @@ def validate(model, dataset, device, output, step, workers, queries):
         elapsed_seconds=time.perf_counter()-start,
         note='scales: sampled InfoNCE candidates; retrieval: full feature-grid candidates, 32 valid queries/direction/scale, errors in 784-input pixels.')
     summary['retrieval'] = {}
+    summary['H0_overlap'] = summarize_overlap([row['H0_overlap'] for row in rows])
     for key in rows[0]['retrieval']:
         values = np.asarray([e for row in rows for e in row['retrieval'][key]['errors_input_px']])
         summary['retrieval'][key] = dict(queries=len(values),
@@ -108,8 +114,11 @@ def main():
     torch.use_deterministic_algorithms(True)
     random.seed(seed); np.random.seed(seed); torch.manual_seed(seed)
     runtime = replace(RuntimePaths.from_json(config['runtime']), device='cuda:0')
-    train = SharedPairDataset(runtime.data_root / 'train/pairs.jsonl', tier=1, max_pairs=args.limit_train)
-    val = SharedPairDataset(runtime.data_root / 'val/pairs.jsonl', tier=1, max_pairs=args.limit_val)
+    tier = config.get('tier',1)
+    if tier not in (1,2,3):
+        raise ValueError('Unsupported dataset tier')
+    train = SharedPairDataset(runtime.data_root / 'train/pairs.jsonl', tier=tier, max_pairs=args.limit_train)
+    val = SharedPairDataset(runtime.data_root / 'val/pairs.jsonl', tier=tier, max_pairs=args.limit_val)
     if not len(train) or not len(val):
         raise ValueError('Empty train or val split')
     if ({x.geo_group for x in train.index} & {x.geo_group for x in val.index}
@@ -127,14 +136,35 @@ def main():
     end = min(total_steps, args.max_steps or total_steps)
     metadata = dict(task='shared_descriptor_v1', config=config,
         implementation={name: sha256_file(Path(__file__).parent / name)
-                        for name in ('model.py','loss.py','train.py','evaluation.py','data.py')},
+                        for name in ('model.py','loss.py','train.py','evaluation.py','data.py','overlap_metrics.py')},
         train_sha256=sha256_file(train.manifest), val_sha256=sha256_file(val.manifest),
         dino_sha256=sha256_file(runtime.dino_checkpoint),
         pyramid_sha256=sha256_file(runtime.pyramid_checkpoint),
         ghim_sha256=sha256_file(runtime.selected_stage1_checkpoint),
         train_pairs=len(train), val_pairs=len(val), total_steps=total_steps)
+    initialization = config.get('initialize_checkpoint')
+    if initialization:
+        metadata['initialize_checkpoint_sha256'] = sha256_file(initialization)
     model, provenance = build_shared_network(runtime, lora=config['lora'])
-    optimizer = torch.optim.AdamW(model.optimizer_groups(), weight_decay=1e-4)
+    if initialization and not (output/'latest.pt').exists():
+        initial = torch.load(initialization,map_location='cpu',weights_only=True,mmap=True)
+        if initial.get('metadata',{}).get('task') != 'shared_descriptor_v1':
+            raise ValueError('Initialization must be a shared-descriptor checkpoint')
+        if initial['metadata']['config']['lora'] != config['lora']:
+            raise ValueError('Initialization LoRA topology mismatch')
+        if initial['metadata']['dino_sha256'] != metadata['dino_sha256']:
+            raise ValueError('Initialization DINO provenance mismatch')
+        model.load_state_dict(initial['model'],strict=True)
+        provenance['initialized_from'] = str(initialization)
+        provenance['source_optimizer_step'] = initial['progress']['optimizer_step']
+        del initial
+    groups = model.optimizer_groups()
+    lr_scale = config.get('learning_rate_scale',1.)
+    if not 0 < lr_scale <= 1:
+        raise ValueError('learning_rate_scale must be in (0,1]')
+    for group in groups:
+        group['lr'] *= lr_scale
+    optimizer = torch.optim.AdamW(groups, weight_decay=1e-4)
     warmup = max(1, round(total_steps * .05))
     def factor(step):
         if step < warmup:
@@ -161,6 +191,9 @@ def main():
         (output / 'train.jsonl').write_text('')
     (output / 'run.json').write_text(json.dumps(dict(**metadata, provenance=provenance,
         torch=str(torch.__version__), output=str(output)), indent=2, default=str))
+    print(f'Tier={tier}; train={len(train)}; val={len(val)}; steps={total_steps}; '
+          f'LoRA={config["lora"]}; initialization={initialization}; '
+          f'peak_lrs={[(g["name"],g["lr"]*lr_scale) for g in model.optimizer_groups()]}',flush=True)
     if completed >= end:
         if not (output / 'validation' / f'step_{completed:06d}' / 'summary.json').exists() or not (output / 'shared_descriptor.pt').exists():
             summary = validate(model,val,runtime.device,output,completed,args.workers,config['queries'])
@@ -196,6 +229,9 @@ def main():
         with (output / 'train.jsonl').open('a') as f:
             f.write(json.dumps(record) + '\n')
         bar.set_postfix(loss=f'{record["loss"]:.4f}', GB=f'{record["peak_memory_gb"]:.1f}')
+        if step % 50 == 0 or step == 1 or step == end:
+            print(f'TRAIN step={step}/{total_steps} pairs={cursor}/{len(train)} '
+                  f'loss={record["loss"]:.6f} peak_GB={record["peak_memory_gb"]:.2f}',flush=True)
         if step % config['save_every'] == 0 or step == end:
             save_checkpoint(checkpoint_path, model=model, optimizer=optimizer, scheduler=scheduler,
                 optimizer_step=step, data_progress={'cursor': cursor}, metadata=metadata)

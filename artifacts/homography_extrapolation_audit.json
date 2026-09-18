@@ -450,5 +450,17 @@
       "H0_corner_mace_px": 3296.340087890625,
       "H0_overlap_mean_px": 2.787625789642334
     }
-  ]
+  ],
+  "controlled_sensitivity": {
+    "pair_id": "past_tier2_1__36.035100129.396223",
+    "seed": 0,
+    "trials": 100,
+    "correspondences": 128,
+    "gaussian_noise_sigma_target_px": 0.1,
+    "cv2_version": "4.13.0",
+    "overlap_error_median_px": 0.020539413603425136,
+    "corner_error_median_px": 178721.60274866002,
+    "corner_error_p90_px": 648784.8779945412,
+    "note": "Controlled GT correspondence noise plus unrobust least-squares H fitting; not MHINet output, and not evidence that all network errors are harmless."
+  }
 }

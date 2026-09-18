@@ -36,11 +36,42 @@ def geometry(row):
         visible_overlap_fractions=row['visible_overlap_fractions'])
 
 
+def sensitivity(row):
+    """Controlled correspondence-noise experiment, not a network prediction."""
+    import cv2
+    H=resized_H(row)
+    def project(matrix,p):
+        q=np.c_[p,np.ones(len(p))]@matrix.T
+        return q[:,:2]/q[:,2:]
+    y,x=np.mgrid[0:784:8,0:784:8]
+    src=np.c_[x.ravel(),y.ravel()].astype(float)
+    dst=project(H,src)
+    good=((dst>=0)&(dst<=783)).all(1)
+    src,dst=src[good],dst[good]
+    rng=np.random.default_rng(0)
+    selected=rng.choice(len(src),128,replace=False)
+    corners=np.array([[0.,0],[783,0],[783,783],[0,783]])
+    values=[]
+    for _ in range(100):
+        fit,_=cv2.findHomography(src[selected],dst[selected]+rng.normal(0,.1,(128,2)),method=0)
+        if fit is None:raise ValueError('Controlled fit unexpectedly failed')
+        values.append([np.linalg.norm(project(fit,src)-dst,axis=1).mean(),
+                       np.linalg.norm(project(fit,corners)-project(H,corners),axis=1).mean()])
+    values=np.asarray(values)
+    return dict(pair_id=row['pair_id'],seed=0,trials=100,correspondences=128,
+        gaussian_noise_sigma_target_px=.1,cv2_version=cv2.__version__,
+        overlap_error_median_px=float(np.median(values[:,0])),
+        corner_error_median_px=float(np.median(values[:,1])),
+        corner_error_p90_px=float(np.quantile(values[:,1],.9)),
+        note='Controlled GT correspondence noise plus unrobust least-squares H fitting; not MHINet output, and not evidence that all network errors are harmless.')
+
+
 def main():
     p=argparse.ArgumentParser()
     p.add_argument('--manifest',default='/home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_v1/val/pairs.jsonl')
     p.add_argument('--evaluated-pairs',default='outputs/shared_descriptor_frozen_tier2_seed0/validation/step_008663/pairs.jsonl')
     p.add_argument('--output',required=True)
+    p.add_argument('--sensitivity',action='store_true')
     args=p.parse_args()
     measured={r['pair_id']:r for r in map(json.loads,Path(args.evaluated_pairs).open())}
     rows=[geometry(r) for r in map(json.loads,Path(args.manifest).open())]
@@ -67,6 +98,10 @@ def main():
     report=dict(manifest_sha256=sha256_file(args.manifest),
         evaluated_pairs_sha256=sha256_file(args.evaluated_pairs),tiers=summaries,
         tier2_extent_bins=bins,worst_tier2=sorted(scored,key=lambda r:r['H0_corner_mace_px'],reverse=True)[:12])
+    if args.sensitivity:
+        selected=report['worst_tier2'][0]['pair_id']
+        row=next(r for r in map(json.loads,Path(args.manifest).open()) if r['pair_id']==selected)
+        report['controlled_sensitivity']=sensitivity(row)
     Path(args.output).write_text(json.dumps(report,indent=2,allow_nan=False))
     print(json.dumps(report,indent=2,allow_nan=False))
 

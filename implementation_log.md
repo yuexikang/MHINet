@@ -1471,3 +1471,23 @@ checkpoint SHA256=`20ee388f5914850287c8237f45e0ad273c73a6e7d7ce539baa5d6a0c72b00
 后台训练命令等价于`GPU_ID=1 bash scripts/train_shared_descriptor_tier2.sh`；用户查看`tail -n 30 -f /home/disk1/MHINet/outputs/shared_descriptor_frozen_tier2_seed0.console.log`。每50步额外输出TRAIN行。H0补评估单独运行，不等待补评估完成才使用另一张卡训练；新训练自身每次val也计算同指标。设置与指标定义见`docs/shared_descriptor_tier2.md`。训练和完整补评估结果尚未完成，不能提前宣称成功。
 
 启动确认：独立session脱离启动器后两进程仍存活；交付前卡1实际达到22/8663步（最近loss0.1657，显存约10GB），卡0补评估达到第一档647/5772对。未见异常；这只是启动状态，不是最终结果。
+
+## 2026-09-18：第一档完整回测、第三档训练、极端外推审计
+
+用户要求检查第二档是否损害第一档几何能力、继续第三档并分析外推。新增`scripts/evaluate_shared_full.py`对第二档最终checkpoint运行第一档完整5772对val（GHIM/CGMDP全指标、H0重叠误差），卡0后台PID3792188；输出`outputs/shared_tier2_backtest_tier1`，日志同名`.log`。新增`scripts/compare_shared_backtest.py`在完整report产生后，与第一档最终模型原验证及补算的H0 overlap基线比较，严格校验manifest、对数、pair ID及GT支持像素数。
+
+第三档新配置`configs/shared_descriptor_tier3.json`、脚本`scripts/train_shared_descriptor_tier3.sh`：从第二档最终`outputs/shared_descriptor_frozen_tier2_seed0/latest.pt`初始化，SHA256 `4af7846f8111a64efae182005ba7fa9d1e90fecf9553815d5b88395d80280d7d`。冻结DINO且不开LoRA；其余共享层训练、VGG BN统计冻结；不运行MHIR/D1。峰值LR延续第二档MVT/head5e-7、VGG2.5e-6、CGMDP5e-6，BS1×累积4，warmup5%+cosine至10%，新AdamW状态。一轮34652对train/8663步，3848对完整val，第5000步及最后验证，每1000步保存；不改现有数据、GT或损失。先8对train/2对val两步冒烟，loss0.172034/0.211256、显存9.96GB，反传/验证通过；不同batch的loss不作收敛证据。卡1正式后台PID3792478，输出`outputs/shared_descriptor_frozen_tier3_seed0`，日志`outputs/shared_descriptor_frozen_tier3_seed0.console.log`；已实际进入数百步。第一档回测和第三档独立运行，保留第二档模型，回测完成前不宣称无遗忘。
+
+另在卡2用第二档checkpoint补第三档完整val的训练前H0基线，PID3793109；输出`outputs/shared_descriptor_frozen_tier2_seed0/h0_overlap_tier3_baseline`，日志`outputs/shared_tier2_h0_tier3_baseline.log`，便于第三档结束后同数据比较。
+
+极端外推只读审计：`scripts/analyze_homography_extrapolation.py`，报告`artifacts/homography_extrapolation_audit.json`及`homography_extrapolation_train_audit.json`。val第一/二/三档有78/32/21对GT角点超过10000输入px；train有553/384/249对。所有重新组合T_B@inv(T_A)的H与存储标签一致；角点分母无变号。但现生成器只检查同号/有限，不限制离分母零线距离、投影范围或局部放大率，合法H仍可在非重叠角点极端放大。
+
+第二档最严重样本`past_tier2_1__36.035100129.396223`：GT角点约(-1039396,2348110)px，零线离源角点0.1916px，四角MACE619540.56px、重叠误差1.2503px。单对贡献总四角误差68.1%，32对极端GT贡献94.4%。分组：GT范围<2000的3513对角点/重叠均值6.191/1.518px；2000–10000的303对97.716/2.342px；>=10000的32对26818.398/4.377px。未删除困难样本；仍有真实重叠误差25/59px的坏例，不能把全部模型错误都归因外推。
+
+控制敏感性实验（脚本--sensitivity，OpenCV4.13.0，seed0，128个GT对应点，目标端sigma0.1px噪声，100次无RANSAC拟合）：重叠误差中位数0.02054px、四角误差中位数178721.60px；不是网络预测。CPU float32/float64真值投影检查中最严重样本四角均值差13.5768px，远小于该样本预测619540px，不能单纯归因浮点精度。结论及新数据几何安全约束建议在`docs/homography_extrapolation_analysis.md`，未自动改变生成器。启动MHIR全图四角目标训练前需解决目标外推不稳定，不能只加复杂损失掩盖。
+
+工程验证：133项单元测试通过（1.907秒），新增仿射/近零线但不变号测试；Shell语法通过。初版已中文提交推送`d87b20c`。本节记录启动及审计事实，完整回测比较将在结束后补记；第三档正式训练尚未完成。
+
+完整回测现已完成：5772/5772对第一档val，GT支持2533713851像素保持一致。第二档权重回测相较第一档最终权重，H0 overlap每对均值2.113301→1.686334px、中位数1.178909→1.028497px、P90 2.240741→1.944974px，74.7228%影像对改善；D8/D4/D2双向平均匹配误差3.254289/1.601194/0.829732→3.234129/1.595642/0.824359px，D2 Recall@1px70.1314%→70.6444%，desc loss0.159341→0.145992，无非法投影/拟合失败。H0四角均值74.711518→69.928910px，仍需结合前述外推诊断。该单种子同域val上没有观察到总体能力退化；不泛化为所有域/下游均无遗忘。机器记录`outputs/shared_tier2_backtest_tier1/comparison.json`及`artifacts/shared_tier2_backtest_tier1.json`，完整表`docs/shared_descriptor_tier3.md`。
+
+第三档训练前H0基线也已完成（3848对、1284531292支持像素）：每对均值2.305215px、中位数1.593579px、P90 3.689485px，point Recall@1/3/5为35.2183%/84.4293%/93.8839%，非法投影和拟合失败均0。仅基线评估完成，第三档训练仍在卡1后台运行，不宣称训练完成。卡0/卡2评估任务结束后正常退出。

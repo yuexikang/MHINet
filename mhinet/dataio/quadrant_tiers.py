@@ -75,6 +75,11 @@ def generate(parent_a,parent_b,root,pair_id,pair_index,seed,config,metadata):
             z=np.array([[0,0,1],[ow-1,0,1],[ow-1,oh-1,1],[0,oh-1,1]])@t[2]
             safe &= bool(np.isfinite(t).all() and (np.all(z>1e-8) or np.all(z<-1e-8)))
         if not safe: continue
+        stability = None
+        if metadata.get('stable_geometry', False):
+            from .stable_geometry import check_geometry
+            accepted, stability = check_geometry(H, sizes[0], sizes[1])
+            if not accepted: continue
         va,vb=[np.ones((s[1],s[0]),np.uint8) for s in sizes]
         ma=mask_project(inv,sizes[0],vb); mb=mask_project(H,sizes[1],va)
         if min(ma.mean(),mb.mean())<.5: continue
@@ -101,6 +106,7 @@ def generate(parent_a,parent_b,root,pair_id,pair_index,seed,config,metadata):
          'mother_overlap_fractions':fractions,'geometric_overlap_fractions':[float(ma.mean()),float(mb.mean())],
          'visible_overlap_fractions':[float(visible_a.mean()),float(visible_b.mean())],
          'photometric':photo,'occlusion':occ,'attempts':attempt+1,
+         'geometry_stability':stability,
          'mask_semantics':'overlap masks include own visibility and projected other visibility'}
     files={'image_A':images[0],'image_B':images[1],'mask_A_overlap':visible_a*255,
            'mask_B_overlap':visible_b*255,'mask_A_geometry':ma*255,'mask_B_geometry':mb*255,

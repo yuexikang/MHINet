@@ -1,5 +1,15 @@
 # MHINet implementation log
 
+## 2026-09-18：稳定几何 v2 试生成及全量启动
+
+用户授权执行新版数据生成。新增 `mhinet/dataio/stable_geometry.py`、`scripts/audit_stable_geometry.py`、`scripts/generate_stable_three_tiers.sh`、`tests/test_stable_geometry.py`；原生成器增加显式 --stable-geometry，不改变旧版默认几何。约束与保留率表见 `docs/stable_geometry_v2.md`，统计文件 `artifacts/stable_geometry_v2_retention.json`。归一化双向H：无穷远线距离≥0.1、中心投影范围≤2.5、整域Jacobian保守上界≤10；除法前隔离分母不合法情形。纯几何旧val保留率58.99/60.73/62.86%，重新采样补足数量，未读取预测选择阈值，未使用test精度。阈值偏保守、改变透视难度分布，不宣称只移除极少数异常。
+
+实际命令：`bash scripts/generate_stable_three_tiers.sh --smoke --generate --output-dir /home/disk1/MHINet/outputs/stable_geometry_smoke_v2`，28对生成并逐对复查通过；预览 `outputs/previews/stable_geometry_smoke_v2`，已查看第三档。`/root/miniconda3/envs/loma-repro/bin/python -m unittest discover -s tests -q`：138项通过，2.062秒。环境沿用loma-repro Python3.10.20/OpenCV4.13.0；本任务CPU生成，不加载checkpoint，不改模型权重和训练配置。
+
+现源数据重新划分与旧完整parent_split_manifest内容严格相等：train8663/val962母图组，预计121282/13468对。数据源 `/home/disk1/Data/datasets/GoogleEarth`，复用 `/home/disk1/LoMa/generate_pairs.py` SHA256 `4a4aea0fc2dffa6739d72700da3cf1dbba4d25b8ccb4f0a5086eff754ca2087a`。新输出 `/home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_stable_v2`，保留旧v1；磁盘空余15TB。输出dataset_summary记录实现hash和协议。
+
+后台命令 `bash scripts/generate_stable_three_tiers.sh --generate`，通过Popen(start_new_session=True)启动PID3798971，日志 `/home/disk1/MHINet/outputs/generate_stable_three_tiers_v2.log`。已确认进程存活、进入train生成。未启动训练；全量生成尚未结束，必须完成全量数量/几何/标签/mask/划分检查后才能用于训练，不将冒烟通过标记为数据全量或模型验证成功。
+
 ## 2026-09-16：按用户要求撤销AFSS实验接入
 
 两组正式训练已按用户要求中断，约434步，未到首次保存点，无正式checkpoint。

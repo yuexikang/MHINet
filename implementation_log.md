@@ -1,5 +1,15 @@
 # MHINet implementation log
 
+## 2026-09-20：按批准清理工程权重并验收稳定几何数据
+
+最终验收完成：`artifacts/stable_geometry_v2_verification.json` status=passed，耗时1022.38秒。全量134750对、1078000个PNG头/尺寸通过，train/val各90对解码和双向mask重建通过（共180对，按tier×ratio取前10对，非随机抽样）。全量H组合误差最大0；归一化Jacobian上界train9.9999209/val9.9948778≤10，中心投影范围2.4948557/2.4714207≤2.5，最小无穷远线距离0.2544594/0.2748707≥0.1。母图划分与v1严格相同，train/val的母图、geo、pair ID交集均0，test清单逐字节不变。train manifest SHA256 `c48eb269be7e96a6be8d4eb43b668035d758f0aaf4268d9f6abb8e337e3aad23`；val `9e69f1af29dca1073ca3f12a618d61b52b66a76e67346d2ab39830de17ec5f44`。未做全量PNG像素解码/CRC验证，未评估模型精度，未切换训练配置、未启动训练。
+
+按用户明确批准的第一批清单删除47个工程测试.pt（54076860939字节，50.36GiB）及11个Python缓存目录；删除前验证每个权重精确路径/文件大小、缓存仅含.pyc、无训练/生成/评估进程。删除后47个权重全部不存在，四个正式shared_descriptor输出中的latest.pt和shared_descriptor.pt仍存在。未移动至回收站，无法直接恢复工程checkpoint，测试可重跑；日志/JSON/图像/脚本和正式权重不删。outputs由约152G降至102G。清单和执行状态在artifacts/cleanup_candidates_20260920.json、docs/cleanup_candidates_20260920.md；后续Python运行会正常重建缓存。
+
+新版数据生成摘要completed，非smoke，输出 `/home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_stable_v2`（约313G）。实际train三档51978/34652/34652、val5772/3848/3848。新增scripts/verify_stable_dataset.py：全manifest唯一ID/母图/geo划分、双向H安全界、T_B@inv(T_A)组合、逆矩阵、元数据JSON、全部PNG文件头与尺寸；各split按tier×ratio各取前10对，共90对做完整图像解码和mask重建，明确不是全量像素解码。128线程读取小文件，CPU几何校验OPENBLAS_NUM_THREADS=1；先前串行和24线程只读扫描因IO慢终止，未修改数据，然后从头重跑完整检查。
+
+实际命令：`OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 /root/miniconda3/envs/loma-repro/bin/python -u -m scripts.verify_stable_dataset --root /home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_stable_v2 --old-root /home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_v1 --output artifacts/stable_geometry_v2_verification.json`。139项单测通过（2.047秒），包括缺失PNG和尺寸不符拒绝检查；smoke数据作为完整验收输入时被正确拒绝。完整三档预览位于outputs/previews/stable_geometry_v2_complete，已目检第一、第三档。
+
 ## 2026-09-18：稳定几何 v2 试生成及全量启动
 
 用户授权执行新版数据生成。新增 `mhinet/dataio/stable_geometry.py`、`scripts/audit_stable_geometry.py`、`scripts/generate_stable_three_tiers.sh`、`tests/test_stable_geometry.py`；原生成器增加显式 --stable-geometry，不改变旧版默认几何。约束与保留率表见 `docs/stable_geometry_v2.md`，统计文件 `artifacts/stable_geometry_v2_retention.json`。归一化双向H：无穷远线距离≥0.1、中心投影范围≤2.5、整域Jacobian保守上界≤10；除法前隔离分母不合法情形。纯几何旧val保留率58.99/60.73/62.86%，重新采样补足数量，未读取预测选择阈值，未使用test精度。阈值偏保守、改变透视难度分布，不宣称只移除极少数异常。

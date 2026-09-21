@@ -1,0 +1,248 @@
+{
+  "1": {
+    "checkpoint": "/home/disk1/MHINet/outputs/shared_descriptor_frozen_tier3_seed0/latest.pt",
+    "checkpoint_sha256": "5a9ed14cc32a1a4ff3a843b737410da13d795b79c42a9d33d82a068226e30386",
+    "tier": 1,
+    "split": "val",
+    "manifest": "/home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_stable_v2/val/pairs.jsonl",
+    "manifest_sha256": "9e69f1af29dca1073ca3f12a618d61b52b66a76e67346d2ab39830de17ec5f44",
+    "summary": {
+      "step": 8663,
+      "pairs": 5772,
+      "failed_H0": 0,
+      "H0_failure_rate": 0,
+      "H0_mace_px": 2.7079861281040802,
+      "loss": 0.13181587177627588,
+      "descriptor": 0.12602092139551974,
+      "elapsed_seconds": 915.380087852478,
+      "note": "scales: sampled InfoNCE candidates; retrieval: full feature-grid candidates, 32 valid queries/direction/scale, errors in 784-input pixels.",
+      "retrieval": {
+        "D8_ab": {
+          "queries": 184704,
+          "mean_input_px": 3.1926871764794043,
+          "recall_1px": 0.04905686936936937,
+          "recall_3px": 0.4382254851004851,
+          "recall_5px": 0.9159303534303534
+        },
+        "D8_ba": {
+          "queries": 184704,
+          "mean_input_px": 3.195001990437463,
+          "recall_1px": 0.048060680873180876,
+          "recall_3px": 0.4364226004851005,
+          "recall_5px": 0.9154430873180873
+        },
+        "D4_ab": {
+          "queries": 184704,
+          "mean_input_px": 1.575833913307938,
+          "recall_1px": 0.19660104816354818,
+          "recall_3px": 0.9894154972279973,
+          "recall_5px": 0.9999350311850311
+        },
+        "D4_ba": {
+          "queries": 184704,
+          "mean_input_px": 1.5786233548081574,
+          "recall_1px": 0.1962220634095634,
+          "recall_3px": 0.9885600744975745,
+          "recall_5px": 0.9999458593208593
+        },
+        "D2_ab": {
+          "queries": 184704,
+          "mean_input_px": 0.807364943251718,
+          "recall_1px": 0.7187012733887734,
+          "recall_3px": 0.9998484060984061,
+          "recall_5px": 0.9999729296604296
+        },
+        "D2_ba": {
+          "queries": 184704,
+          "mean_input_px": 0.8084015825407491,
+          "recall_1px": 0.7183980855855856,
+          "recall_3px": 0.9998863045738046,
+          "recall_5px": 0.9999891718641719
+        }
+      },
+      "H0_overlap": {
+        "protocol": "H0_visible_overlap_all_source_pixels_A_to_B_v1",
+        "pairs": 5772,
+        "no_support_pairs": 0,
+        "support_pixels": 2531887893,
+        "invalid_predictions": 0,
+        "invalid_projection_rate": 0,
+        "failed_fit_pairs": 0,
+        "pair_mean_px": 0.9304103314003966,
+        "pair_median_px": 0.8228497505187988,
+        "pair_p90_px": 1.3489359259605411,
+        "pixel_mean_px": 0.9215237175716341,
+        "point_recall": {
+          "1": 0.6740058972271408,
+          "3": 0.9905372484831421,
+          "5": 0.9981042896830977
+        },
+        "note": "Support comes only from GT and both masks; illegal predictions remain in recall denominator. Mean errors are conditional on finite predictions; consult failure counts."
+      }
+    }
+  },
+  "2": {
+    "checkpoint": "/home/disk1/MHINet/outputs/shared_descriptor_frozen_tier3_seed0/latest.pt",
+    "checkpoint_sha256": "5a9ed14cc32a1a4ff3a843b737410da13d795b79c42a9d33d82a068226e30386",
+    "tier": 2,
+    "split": "val",
+    "manifest": "/home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_stable_v2/val/pairs.jsonl",
+    "manifest_sha256": "9e69f1af29dca1073ca3f12a618d61b52b66a76e67346d2ab39830de17ec5f44",
+    "summary": {
+      "step": 8663,
+      "pairs": 3848,
+      "failed_H0": 0,
+      "H0_failure_rate": 0,
+      "H0_mace_px": 2.933929337533249,
+      "loss": 0.13303911939588628,
+      "descriptor": 0.12727485652509574,
+      "elapsed_seconds": 593.718092543073,
+      "note": "scales: sampled InfoNCE candidates; retrieval: full feature-grid candidates, 32 valid queries/direction/scale, errors in 784-input pixels.",
+      "retrieval": {
+        "D8_ab": {
+          "queries": 123136,
+          "mean_input_px": 3.187341538241594,
+          "recall_1px": 0.0485966735966736,
+          "recall_3px": 0.4388237396049896,
+          "recall_5px": 0.9172297297297297
+        },
+        "D8_ba": {
+          "queries": 123136,
+          "mean_input_px": 3.192797813667522,
+          "recall_1px": 0.049189514033264034,
+          "recall_3px": 0.4367447375259875,
+          "recall_5px": 0.9155242983367984
+        },
+        "D4_ab": {
+          "queries": 123136,
+          "mean_input_px": 1.5794474873510957,
+          "recall_1px": 0.19644945426195426,
+          "recall_3px": 0.988443672037422,
+          "recall_5px": 0.9999106678794178
+        },
+        "D4_ba": {
+          "queries": 123136,
+          "mean_input_px": 1.580651382017944,
+          "recall_1px": 0.19592970374220375,
+          "recall_3px": 0.988118827962578,
+          "recall_5px": 0.9998944256756757
+        },
+        "D2_ab": {
+          "queries": 123136,
+          "mean_input_px": 0.8093315466580171,
+          "recall_1px": 0.7182058861746362,
+          "recall_3px": 0.9997238825363826,
+          "recall_5px": 0.9998781834719335
+        },
+        "D2_ba": {
+          "queries": 123136,
+          "mean_input_px": 0.8110013496633091,
+          "recall_1px": 0.715404106029106,
+          "recall_3px": 0.9997969724532224,
+          "recall_5px": 0.9999431522869023
+        }
+      },
+      "H0_overlap": {
+        "protocol": "H0_visible_overlap_all_source_pixels_A_to_B_v1",
+        "pairs": 3848,
+        "no_support_pairs": 0,
+        "support_pixels": 1687209820,
+        "invalid_predictions": 0,
+        "invalid_projection_rate": 0,
+        "failed_fit_pairs": 0,
+        "pair_mean_px": 0.9301942571912448,
+        "pair_median_px": 0.8295983970165253,
+        "pair_p90_px": 1.3549701333045963,
+        "pixel_mean_px": 0.9210083764394759,
+        "point_recall": {
+          "1": 0.6650774809975917,
+          "3": 0.991209699692241,
+          "5": 0.9983849388690732
+        },
+        "note": "Support comes only from GT and both masks; illegal predictions remain in recall denominator. Mean errors are conditional on finite predictions; consult failure counts."
+      }
+    }
+  },
+  "3": {
+    "checkpoint": "/home/disk1/MHINet/outputs/shared_descriptor_frozen_tier3_seed0/latest.pt",
+    "checkpoint_sha256": "5a9ed14cc32a1a4ff3a843b737410da13d795b79c42a9d33d82a068226e30386",
+    "tier": 3,
+    "split": "val",
+    "manifest": "/home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_stable_v2/val/pairs.jsonl",
+    "manifest_sha256": "9e69f1af29dca1073ca3f12a618d61b52b66a76e67346d2ab39830de17ec5f44",
+    "summary": {
+      "step": 8663,
+      "pairs": 3848,
+      "failed_H0": 0,
+      "H0_failure_rate": 0,
+      "H0_mace_px": 4.83265085052118,
+      "loss": 0.14197394226071677,
+      "descriptor": 0.13276435730672922,
+      "elapsed_seconds": 597.6591558614746,
+      "note": "scales: sampled InfoNCE candidates; retrieval: full feature-grid candidates, 32 valid queries/direction/scale, errors in 784-input pixels.",
+      "retrieval": {
+        "D8_ab": {
+          "queries": 123136,
+          "mean_input_px": 3.210224535400825,
+          "recall_1px": 0.04918139293139293,
+          "recall_3px": 0.4369071595634096,
+          "recall_5px": 0.9105379417879418
+        },
+        "D8_ba": {
+          "queries": 123136,
+          "mean_input_px": 3.2131452508206877,
+          "recall_1px": 0.048580431392931396,
+          "recall_3px": 0.4341135005197505,
+          "recall_5px": 0.9115368373180873
+        },
+        "D4_ab": {
+          "queries": 123136,
+          "mean_input_px": 1.5884495160658285,
+          "recall_1px": 0.19591346153846154,
+          "recall_3px": 0.9879076793139293,
+          "recall_5px": 0.9996101871101871
+        },
+        "D4_ba": {
+          "queries": 123136,
+          "mean_input_px": 1.588057823498292,
+          "recall_1px": 0.1979681003118503,
+          "recall_3px": 0.986454002079002,
+          "recall_5px": 0.9996426715176715
+        },
+        "D2_ab": {
+          "queries": 123136,
+          "mean_input_px": 0.8181341138504852,
+          "recall_1px": 0.7115222193347194,
+          "recall_3px": 0.9992934641372141,
+          "recall_5px": 0.9997401247401247
+        },
+        "D2_ba": {
+          "queries": 123136,
+          "mean_input_px": 0.8187839219055846,
+          "recall_1px": 0.7143889682952183,
+          "recall_3px": 0.9993746751559252,
+          "recall_5px": 0.9996913981288982
+        }
+      },
+      "H0_overlap": {
+        "protocol": "H0_visible_overlap_all_source_pixels_A_to_B_v1",
+        "pairs": 3848,
+        "no_support_pairs": 0,
+        "support_pixels": 1276540354,
+        "invalid_predictions": 0,
+        "invalid_projection_rate": 0,
+        "failed_fit_pairs": 0,
+        "pair_mean_px": 1.420393845581463,
+        "pair_median_px": 1.188717544078827,
+        "pair_p90_px": 2.293690824508667,
+        "pixel_mean_px": 1.3532783632039471,
+        "point_recall": {
+          "1": 0.49164428530083115,
+          "3": 0.9330607099632668,
+          "5": 0.9823538410443388
+        },
+        "note": "Support comes only from GT and both masks; illegal predictions remain in recall denominator. Mean errors are conditional on finite predictions; consult failure counts."
+      }
+    }
+  }
+}

@@ -1,5 +1,17 @@
 # MHINet implementation log
 
+## 2026-09-21：第一档稳定数据低学习率适应启动
+
+用户要求在第一档小学习率训练观察损失，并澄清下游应称“H0引导的粗细匹配”。已在docs/shared_stable_v2_adaptation.md明确D8粗→D2细→原生A/B坐标与置信度；P3离散中心、P6连续warped位置，不是已接可训练LoFTR/RRU，未自动拟合最终H。
+
+三档训练前共享完整val基线已完成并归档artifacts/shared_stable_v2_baselines.json：第一档5772对loss0.131815872、desc0.126020921、H0_overlap0.930410331px、corner2.707986128px；第二档3848对0.133039119/0.127274857/0.930194257/2.933929338；第三档3848对0.141973942/0.132764357/1.420393846/4.832650851。按各自数据集登记，不跨档推断训练收益。
+
+新增configs/runtime_paths.stable_v2.server.json、configs/shared_descriptor_stable_v2_tier1_adapt.json、scripts/train_shared_stable_v2_tier1_adapt.sh。初始化outputs/shared_descriptor_frozen_tier3_seed0/latest.pt，SHA256 `5a9ed14cc32a1a4ff3a843b737410da13d795b79c42a9d33d82a068226e30386`。冻结DINO，无LoRA，其他共享层训练、VGG BN统计固定，MHIR/密集下游不执行，D1不算。LR scale0.1即MVT/head1e-7、VGG5e-7、CGMDP1e-6；BS1累积4、新AdamW wd1e-4 clip1，原损失不改。正式限制2000优化步/8000对，seed0，500步存checkpoint；cosine保持一轮12995步horizon与650步warmup，进度条2000/12995停止是预登记预算，不是中断故障。结束时完整第一档val5772，不截取；不自动延长训练。
+
+工程冒烟命令 `GPU_ID=1 MHINET_OUTPUT_DIR=outputs/diagnostics/stable_v2_tier1_adapt_smoke bash scripts/train_shared_stable_v2_tier1_adapt.sh --max-steps 2 --limit-train 8 --limit-val 2`，反传和验证通过，loss0.149783/0.130817、显存9.96GB；不同batch不作为loss下降证据。环境沿用loma-repro，未改训练器实现。
+
+正式后台启动 `GPU_ID=1 bash scripts/train_shared_stable_v2_tier1_adapt.sh`，Popen(start_new_session=True)，PID3829239，输出outputs/shared_stable_v2_tier1_adapt_seed0，日志同名.console.log；未覆盖旧权重。实际train/val路径为stable_v2，manifest SHA同前验收记录。比较同一第一档完整val和训练窗口均值；如有收益再回测二/三档，不把本次训练启动或冒烟标成模型改善成功。
+
 ## 2026-09-21：登记新版共享基线与LoMa H0引导下游迁移第一阶段
 
 用户批准共享网络并列下游方案并强调保留LoMa的H0依赖。实际定位为 `/home/disk1/LoMa/experiments/stage1_dedode_pyramid_hroi_v1`，git899fdb99a4076e312196bbbf99a3c329739b5d7a，源工作区无改动。不是直接移植src/loma关键点网络。登记 `artifacts/loma_downstream_source.json`，逐文件SHA固定6个纯匹配模块，保留MIT许可证；迁入mhinet/downstream/loma_reference。P3预测H0双向支持→D8 dual-softmax粗匹配→H残差D2局部匹配；P6为H-warped sym4对照。RRU、LoFTR fine仅定位，尚未迁入/训练，不混称为已完成的密集训练头。

@@ -1,0 +1,466 @@
+{
+  "manifest_sha256": "c4763636e2ca9914c62aec45f5f6f238e0cfa9269343f27571e6c0acdb3d01ee",
+  "evaluated_pairs_sha256": "5317812c6681649af11b94dadc514dbc1077d778b3df08623034876fde2f3abe",
+  "tiers": {
+    "1": {
+      "pairs": 5772,
+      "gt_extent_gt_10000": 78,
+      "horizon_distance_lt_10": 25,
+      "max_composition_error": 0.0,
+      "denominator_sign_changes": 0
+    },
+    "2": {
+      "pairs": 3848,
+      "gt_extent_gt_10000": 32,
+      "horizon_distance_lt_10": 10,
+      "max_composition_error": 0.0,
+      "denominator_sign_changes": 0
+    },
+    "3": {
+      "pairs": 3848,
+      "gt_extent_gt_10000": 21,
+      "horizon_distance_lt_10": 10,
+      "max_composition_error": 0.0,
+      "denominator_sign_changes": 0
+    }
+  },
+  "tier2_extent_bins": [
+    {
+      "gt_extent_range": [
+        0,
+        2000
+      ],
+      "pairs": 3513,
+      "corner_mace_mean": 6.191063327325093,
+      "overlap_mean": 1.5183551450197152
+    },
+    {
+      "gt_extent_range": [
+        2000,
+        10000
+      ],
+      "pairs": 303,
+      "corner_mace_mean": 97.71565705124695,
+      "overlap_mean": 2.342471961927886
+    },
+    {
+      "gt_extent_range": [
+        10000,
+        null
+      ],
+      "pairs": 32,
+      "corner_mace_mean": 26818.397687792778,
+      "overlap_mean": 4.377494500949979
+    }
+  ],
+  "worst_tier2": [
+    {
+      "pair_id": "past_tier2_1__36.035100129.396223",
+      "tier": 2,
+      "gt_corner_max_abs_px": 2348110.244732779,
+      "gt_corners_xy": [
+        [
+          -828.35803146493,
+          174.49212948079273
+        ],
+        [
+          621.3661493426955,
+          -90.53924902396602
+        ],
+        [
+          753.0507737789139,
+          432.45555317029067
+        ],
+        [
+          -1039395.9524615749,
+          2348110.244732779
+        ]
+      ],
+      "horizon_distance_min_px": 0.19155498980549418,
+      "max_corner_local_magnification": 13408810.709085405,
+      "denominator_sign_change": false,
+      "composition_max_abs_error": 0.0,
+      "visible_overlap_fractions": [
+        0.5957415980795611,
+        0.8763878172153635
+      ],
+      "H0_corner_mace_px": 619540.5625,
+      "H0_overlap_mean_px": 1.2502703666687012
+    },
+    {
+      "pair_id": "current_tier2_1__35.789100129.284223",
+      "tier": 2,
+      "gt_corner_max_abs_px": 278960.7375945543,
+      "gt_corners_xy": [
+        [
+          -193.54986330142475,
+          -0.46339438896953133
+        ],
+        [
+          827.9391607386385,
+          188.5176569357875
+        ],
+        [
+          935.9393940696457,
+          354.68711839474224
+        ],
+        [
+          -278960.7375945543,
+          261654.12161002707
+        ]
+      ],
+      "horizon_distance_min_px": 0.35605615254154027,
+      "max_corner_local_magnification": 1075920.9985317178,
+      "denominator_sign_change": false,
+      "composition_max_abs_error": 0.0,
+      "visible_overlap_fractions": [
+        0.5405932784636488,
+        0.7909974660874867
+      ],
+      "H0_corner_mace_px": 86800.5,
+      "H0_overlap_mean_px": 3.7060725688934326
+    },
+    {
+      "pair_id": "current_tier2_0__35.921100129.445223",
+      "tier": 2,
+      "gt_corner_max_abs_px": 105970.4027399374,
+      "gt_corners_xy": [
+        [
+          148.48271012275066,
+          -79.02656714400635
+        ],
+        [
+          736.8687225702532,
+          53.57525657727037
+        ],
+        [
+          829.1454868453546,
+          167.09189745370858
+        ],
+        [
+          -57521.244588193185,
+          105970.4027399374
+        ]
+      ],
+      "horizon_distance_min_px": 0.5943572848169056,
+      "max_corner_local_magnification": 203465.29310123084,
+      "denominator_sign_change": false,
+      "composition_max_abs_error": 0.0,
+      "visible_overlap_fractions": [
+        0.8471836419753086,
+        0.8401411394032922
+      ],
+      "H0_corner_mace_px": 27572.345703125,
+      "H0_overlap_mean_px": 3.1692912578582764
+    },
+    {
+      "pair_id": "past_tier2_1__36.221100129.361223",
+      "tier": 2,
+      "gt_corner_max_abs_px": 162375.72021663477,
+      "gt_corners_xy": [
+        [
+          -162375.72021663477,
+          -144727.7053533556
+        ],
+        [
+          835.5039444544379,
+          508.06314123692835
+        ],
+        [
+          749.3125692403366,
+          815.1010692316338
+        ],
+        [
+          344.52983401901975,
+          868.8191558706887
+        ]
+      ],
+      "horizon_distance_min_px": 1.017910605937779,
+      "max_corner_local_magnification": 214967.68101143488,
+      "denominator_sign_change": false,
+      "composition_max_abs_error": 0.0,
+      "visible_overlap_fractions": [
+        0.6932373113854595,
+        0.7586403677983539
+      ],
+      "H0_corner_mace_px": 21774.998046875,
+      "H0_overlap_mean_px": 1.5499446392059326
+    },
+    {
+      "pair_id": "current_tier2_0__35.897100129.256223",
+      "tier": 2,
+      "gt_corner_max_abs_px": 73077.1112330531,
+      "gt_corners_xy": [
+        [
+          -60.99270756275334,
+          201.63134447109064
+        ],
+        [
+          73077.1112330531,
+          -47365.61872397379
+        ],
+        [
+          470.05556554540686,
+          1099.5817632845265
+        ],
+        [
+          30.88335016252628,
+          654.8144685834952
+        ]
+      ],
+      "horizon_distance_min_px": 1.8998079005328188,
+      "max_corner_local_magnification": 46086.720310695695,
+      "denominator_sign_change": false,
+      "composition_max_abs_error": 0.0,
+      "visible_overlap_fractions": [
+        0.7296870713305899,
+        0.943513428069273
+      ],
+      "H0_corner_mace_px": 17246.248046875,
+      "H0_overlap_mean_px": 1.9319453239440918
+    },
+    {
+      "pair_id": "current_tier2_1__37.678000126.8065",
+      "tier": 2,
+      "gt_corner_max_abs_px": 80130.48890193414,
+      "gt_corners_xy": [
+        [
+          34.106340611722324,
+          457.48308711446555
+        ],
+        [
+          80130.48890193414,
+          -35808.55914364601
+        ],
+        [
+          860.1442016407098,
+          705.0851480938755
+        ],
+        [
+          105.16548881427642,
+          832.3398365097004
+        ]
+      ],
+      "horizon_distance_min_px": 6.248541487316116,
+      "max_corner_local_magnification": 14141.626988082648,
+      "denominator_sign_change": false,
+      "composition_max_abs_error": 0.0,
+      "visible_overlap_fractions": [
+        0.5727143347050755,
+        0.5688175154320988
+      ],
+      "H0_corner_mace_px": 16749.30859375,
+      "H0_overlap_mean_px": 1.5946317911148071
+    },
+    {
+      "pair_id": "current_tier2_0__35.987100129.354223",
+      "tier": 2,
+      "gt_corner_max_abs_px": 63255.43664696249,
+      "gt_corners_xy": [
+        [
+          -46.190536942547865,
+          395.8453094295447
+        ],
+        [
+          44628.9918101388,
+          -63255.43664696249
+        ],
+        [
+          232.101651132637,
+          792.8908917389386
+        ],
+        [
+          -6.729581732420708,
+          662.5400390278618
+        ]
+      ],
+      "horizon_distance_min_px": 1.8002919870085283,
+      "max_corner_local_magnification": 43363.114360298634,
+      "denominator_sign_change": false,
+      "composition_max_abs_error": 0.0,
+      "visible_overlap_fractions": [
+        0.7956498628257888,
+        0.5703637021795458
+      ],
+      "H0_corner_mace_px": 16021.5498046875,
+      "H0_overlap_mean_px": 2.2325122356414795
+    },
+    {
+      "pair_id": "past_tier2_0__35.495100129.368223",
+      "tier": 2,
+      "gt_corner_max_abs_px": 57991.84300736958,
+      "gt_corners_xy": [
+        [
+          43.840839148703886,
+          -87.071246838591
+        ],
+        [
+          747.4687669173532,
+          17.859905860564787
+        ],
+        [
+          870.2586569394462,
+          665.2178785923059
+        ],
+        [
+          -36186.35322488256,
+          57991.84300736958
+        ]
+      ],
+      "horizon_distance_min_px": 6.44524741354239,
+      "max_corner_local_magnification": 10721.694855315558,
+      "denominator_sign_change": false,
+      "composition_max_abs_error": 0.0,
+      "visible_overlap_fractions": [
+        0.6739866255144032,
+        0.9916338020118884
+      ],
+      "H0_corner_mace_px": 11425.17578125,
+      "H0_overlap_mean_px": 1.8865162134170532
+    },
+    {
+      "pair_id": "past_tier2_1__36.309700127.343181",
+      "tier": 2,
+      "gt_corner_max_abs_px": 44617.03255662855,
+      "gt_corners_xy": [
+        [
+          307.3647947160647,
+          50.45065417597419
+        ],
+        [
+          810.9854394277734,
+          -6.10140840595528
+        ],
+        [
+          662.8629646787706,
+          822.1244652025051
+        ],
+        [
+          -44617.03255662855,
+          26373.745749317233
+        ]
+      ],
+      "horizon_distance_min_px": 9.178886213240608,
+      "max_corner_local_magnification": 5755.1397063246195,
+      "denominator_sign_change": false,
+      "composition_max_abs_error": 0.0,
+      "visible_overlap_fractions": [
+        0.7311325445816187,
+        0.8525913065843621
+      ],
+      "H0_corner_mace_px": 7179.8388671875,
+      "H0_overlap_mean_px": 2.317880868911743
+    },
+    {
+      "pair_id": "current_tier2_0__35.148400126.904922",
+      "tier": 2,
+      "gt_corner_max_abs_px": 16949.328183419282,
+      "gt_corners_xy": [
+        [
+          -12.18249128540043,
+          11.93494189290497
+        ],
+        [
+          569.0584032123488,
+          -24.684721510443946
+        ],
+        [
+          12736.844511537343,
+          16949.328183419282
+        ],
+        [
+          28.053442421870745,
+          416.4192447261627
+        ]
+      ],
+      "horizon_distance_min_px": 16.947258735601,
+      "max_corner_local_magnification": 1265.634770720648,
+      "denominator_sign_change": false,
+      "composition_max_abs_error": 0.0,
+      "visible_overlap_fractions": [
+        0.8383684842249657,
+        0.8471936442615455
+      ],
+      "H0_corner_mace_px": 4259.30908203125,
+      "H0_overlap_mean_px": 25.328359603881836
+    },
+    {
+      "pair_id": "past_tier2_0__36.473100129.417223",
+      "tier": 2,
+      "gt_corner_max_abs_px": 12764.662349886017,
+      "gt_corners_xy": [
+        [
+          6.727439112501744,
+          -45.78801791302539
+        ],
+        [
+          516.4992378054696,
+          -12.091568804367377
+        ],
+        [
+          12764.662349886017,
+          10151.728585700735
+        ],
+        [
+          115.19671428418997,
+          959.6875299979653
+        ]
+      ],
+      "horizon_distance_min_px": 33.2212110871589,
+      "max_corner_local_magnification": 504.0769162868507,
+      "denominator_sign_change": false,
+      "composition_max_abs_error": 0.0,
+      "visible_overlap_fractions": [
+        0.647554012345679,
+        0.8881768213686938
+      ],
+      "H0_corner_mace_px": 3657.69873046875,
+      "H0_overlap_mean_px": 59.51851272583008
+    },
+    {
+      "pair_id": "current_tier2_1__36.109838129.332463",
+      "tier": 2,
+      "gt_corner_max_abs_px": 22164.608113100585,
+      "gt_corners_xy": [
+        [
+          -56.670977376508795,
+          58.22840740029052
+        ],
+        [
+          273.95499198282306,
+          -170.2398031774019
+        ],
+        [
+          9385.086694465297,
+          22164.608113100585
+        ],
+        [
+          -1.485791925053024,
+          532.2150244036035
+        ]
+      ],
+      "horizon_distance_min_px": 13.534465153754507,
+      "max_corner_local_magnification": 1784.791523324093,
+      "denominator_sign_change": false,
+      "composition_max_abs_error": 0.0,
+      "visible_overlap_fractions": [
+        0.585661865569273,
+        0.6220421810699589
+      ],
+      "H0_corner_mace_px": 3296.340087890625,
+      "H0_overlap_mean_px": 2.787625789642334
+    }
+  ],
+  "controlled_sensitivity": {
+    "pair_id": "past_tier2_1__36.035100129.396223",
+    "seed": 0,
+    "trials": 100,
+    "correspondences": 128,
+    "gaussian_noise_sigma_target_px": 0.1,
+    "cv2_version": "4.13.0",
+    "overlap_error_median_px": 0.020539413603425136,
+    "corner_error_median_px": 178721.60274866002,
+    "corner_error_p90_px": 648784.8779945412,
+    "note": "Controlled GT correspondence noise plus unrobust least-squares H fitting; not MHINet output, and not evidence that all network errors are harmless."
+  }
+}

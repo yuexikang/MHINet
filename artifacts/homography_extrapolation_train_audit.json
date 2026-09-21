@@ -1,0 +1,57 @@
+{
+  "manifest_sha256": "6587d3be58dfc8b1601244bcf7fa05e3cb5dba1b14b7a49871dcb1fe3ef3276c",
+  "evaluated_pairs_sha256": "5317812c6681649af11b94dadc514dbc1077d778b3df08623034876fde2f3abe",
+  "tiers": {
+    "1": {
+      "pairs": 51978,
+      "gt_extent_gt_10000": 553,
+      "horizon_distance_lt_10": 202,
+      "max_composition_error": 0.0,
+      "denominator_sign_changes": 0
+    },
+    "2": {
+      "pairs": 34652,
+      "gt_extent_gt_10000": 384,
+      "horizon_distance_lt_10": 110,
+      "max_composition_error": 0.0,
+      "denominator_sign_changes": 0
+    },
+    "3": {
+      "pairs": 34652,
+      "gt_extent_gt_10000": 249,
+      "horizon_distance_lt_10": 107,
+      "max_composition_error": 0.0,
+      "denominator_sign_changes": 0
+    }
+  },
+  "tier2_extent_bins": [
+    {
+      "gt_extent_range": [
+        0,
+        2000
+      ],
+      "pairs": 0,
+      "corner_mace_mean": null,
+      "overlap_mean": null
+    },
+    {
+      "gt_extent_range": [
+        2000,
+        10000
+      ],
+      "pairs": 0,
+      "corner_mace_mean": null,
+      "overlap_mean": null
+    },
+    {
+      "gt_extent_range": [
+        10000,
+        null
+      ],
+      "pairs": 0,
+      "corner_mace_mean": null,
+      "overlap_mean": null
+    }
+  ],
+  "worst_tier2": []
+}

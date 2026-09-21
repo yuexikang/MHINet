@@ -1,0 +1,68 @@
+{
+  "zero_init_max_abs": {
+    "D8": 0.0,
+    "D4": 0.0,
+    "D2": 0.0,
+    "H0": 0.0
+  },
+  "steps": [
+    {
+      "step": 1,
+      "ghim": 0.040362078696489334,
+      "descriptor": 1.1677989959716797,
+      "branch_MVT_LoRA_B_norms": {
+        "GHIM": [
+          0.0718408077955246,
+          0.006299253087490797
+        ],
+        "CGMDP": [
+          0.6288141012191772,
+          0.06559132784605026
+        ]
+      },
+      "lora_gradient_norms": {
+        "lora_A": 0.0,
+        "lora_B": 0.17772530019283295
+      },
+      "calls": {
+        "dino": 1,
+        "mvt": 1,
+        "vgg": 1,
+        "dedode_decode_calls": 1,
+        "dedode_steps": 4,
+        "dedode_scale1": 0
+      }
+    },
+    {
+      "step": 2,
+      "ghim": 0.02575957402586937,
+      "descriptor": 1.072629451751709,
+      "branch_MVT_LoRA_B_norms": {
+        "GHIM": [
+          0.05317404493689537,
+          0.004261181224137545
+        ],
+        "CGMDP": [
+          0.6173403859138489,
+          0.0757632702589035
+        ]
+      },
+      "lora_gradient_norms": {
+        "lora_A": 0.001967931166291237,
+        "lora_B": 0.18248970806598663
+      },
+      "calls": {
+        "dino": 1,
+        "mvt": 1,
+        "vgg": 1,
+        "dedode_decode_calls": 1,
+        "dedode_steps": 4,
+        "dedode_scale1": 0
+      }
+    }
+  ],
+  "frozen_base_sha256_before": "611ab0607761c72dc93bcf7379829109f14da32fd43f9a8ed1e5a07f69d1317f",
+  "frozen_base_sha256_after": "611ab0607761c72dc93bcf7379829109f14da32fd43f9a8ed1e5a07f69d1317f",
+  "passed": true,
+  "peak_memory_gb": 10.198011392
+}

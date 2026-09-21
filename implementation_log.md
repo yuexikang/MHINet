@@ -1,5 +1,65 @@
 # MHINet implementation log
 
+## 2026-09-21：合并共享描述子与可选下游分支至main
+
+按用户要求准备并执行codex/shared-descriptor-lora→main合并，LoRA暂不启用。常规shared_descriptor_frozen、tier2/tier3和stable_v2_tier1_adapt配置均为lora=false；LoRA代码、历史权重及显式独立入口保留，不自动运行。远程main在合并前为d312c0a，源分支为cfb61ea，main为其祖先，无内容冲突。
+
+使用独立干净worktree `/home/disk1/mhinet-main-merge-BoyC8Y/tree`，只合并已提交内容，不包含原工作区6项已修改和9项未跟踪内容；未stash/丢弃原改动。先merge --no-ff --no-commit，再用loma-repro运行 `OMP_NUM_THREADS=4 python -m pytest tests -q`，已提交版本179项通过（3.41秒）。此前原工作区181项包含未跟踪测试，本次179项是干净仓库验证，不混淆。README明确当前LoRA关闭状态。合并不改训练器/config或运行中的训练进程。
+
+## 2026-09-21：第一档稳定数据低学习率适应启动
+
+用户要求在第一档小学习率训练观察损失，并澄清下游应称“H0引导的粗细匹配”。已在docs/shared_stable_v2_adaptation.md明确D8粗→D2细→原生A/B坐标与置信度；P3离散中心、P6连续warped位置，不是已接可训练LoFTR/RRU，未自动拟合最终H。
+
+三档训练前共享完整val基线已完成并归档artifacts/shared_stable_v2_baselines.json：第一档5772对loss0.131815872、desc0.126020921、H0_overlap0.930410331px、corner2.707986128px；第二档3848对0.133039119/0.127274857/0.930194257/2.933929338；第三档3848对0.141973942/0.132764357/1.420393846/4.832650851。按各自数据集登记，不跨档推断训练收益。
+
+新增configs/runtime_paths.stable_v2.server.json、configs/shared_descriptor_stable_v2_tier1_adapt.json、scripts/train_shared_stable_v2_tier1_adapt.sh。初始化outputs/shared_descriptor_frozen_tier3_seed0/latest.pt，SHA256 `5a9ed14cc32a1a4ff3a843b737410da13d795b79c42a9d33d82a068226e30386`。冻结DINO，无LoRA，其他共享层训练、VGG BN统计固定，MHIR/密集下游不执行，D1不算。LR scale0.1即MVT/head1e-7、VGG5e-7、CGMDP1e-6；BS1累积4、新AdamW wd1e-4 clip1，原损失不改。正式限制2000优化步/8000对，seed0，500步存checkpoint；cosine保持一轮12995步horizon与650步warmup，进度条2000/12995停止是预登记预算，不是中断故障。结束时完整第一档val5772，不截取；不自动延长训练。
+
+工程冒烟命令 `GPU_ID=1 MHINET_OUTPUT_DIR=outputs/diagnostics/stable_v2_tier1_adapt_smoke bash scripts/train_shared_stable_v2_tier1_adapt.sh --max-steps 2 --limit-train 8 --limit-val 2`，反传和验证通过，loss0.149783/0.130817、显存9.96GB；不同batch不作为loss下降证据。环境沿用loma-repro，未改训练器实现。
+
+正式后台启动 `GPU_ID=1 bash scripts/train_shared_stable_v2_tier1_adapt.sh`，Popen(start_new_session=True)，PID3829239，输出outputs/shared_stable_v2_tier1_adapt_seed0，日志同名.console.log；未覆盖旧权重。实际train/val路径为stable_v2，manifest SHA同前验收记录。比较同一第一档完整val和训练窗口均值；如有收益再回测二/三档，不把本次训练启动或冒烟标成模型改善成功。
+
+## 2026-09-21：登记新版共享基线与LoMa H0引导下游迁移第一阶段
+
+用户批准共享网络并列下游方案并强调保留LoMa的H0依赖。实际定位为 `/home/disk1/LoMa/experiments/stage1_dedode_pyramid_hroi_v1`，git899fdb99a4076e312196bbbf99a3c329739b5d7a，源工作区无改动。不是直接移植src/loma关键点网络。登记 `artifacts/loma_downstream_source.json`，逐文件SHA固定6个纯匹配模块，保留MIT许可证；迁入mhinet/downstream/loma_reference。P3预测H0双向支持→D8 dual-softmax粗匹配→H残差D2局部匹配；P6为H-warped sym4对照。RRU、LoFTR fine仅定位，尚未迁入/训练，不混称为已完成的密集训练头。
+
+新增HGuidedDenseDownstream无共享模块所有权，接收现有共享输出，非法H在逆/投影前拒绝；GT不进入匹配。此消费者明确为no_grad零样本推理，未复制旧共享网络train(False)包装，未改MHIR/共享训练梯度。DINO/MVT/VGG各1次，累计解码4步至D2，D1调用0。新增CLI evaluate-dense和scripts/validate_dense_loma.sh，默认指定tier完整val、显式--limit才冒烟，不覆盖已有输出。
+
+共同checkpoint `outputs/shared_descriptor_frozen_tier3_seed0/latest.pt` SHA256 `5a9ed14cc32a1a4ff3a843b737410da13d795b79c42a9d33d82a068226e30386`；stable_v2 val SHA `9e69f1af29dca1073ca3f12a618d61b52b66a76e67346d2ab39830de17ec5f44`。共享完整val baseline用scripts/evaluate_shared_full.py新增--data-root，启动前写registration.json，GPU0/1/2分别第一/二/三档，PID3828039/3828040/3828041，输出outputs/shared_tier3_stable_v2_baseline_tier{1,2,3}和同名.log。运行命令 `CUDA_VISIBLE_DEVICES=GPU OMP_NUM_THREADS=4 OPENBLAS_NUM_THREADS=1 /root/miniconda3/envs/loma-repro/bin/python -u -m scripts.evaluate_shared_full --checkpoint outputs/shared_descriptor_frozen_tier3_seed0/latest.pt --tier TIER --data-root /home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_stable_v2 --output outputs/shared_tier3_stable_v2_baseline_tierTIER`。集中登记artifacts/shared_downstream_registration_v1.json，快照running不代表完成。交付时需看report.json，不提前宣称无遗忘或基线精度。
+
+GPU3先P3再P6各2对真实val冒烟，输出outputs/diagnostics/dense_loma_{p3,p6}_smoke，均无失败。P3平均12000点、P6平均5969.5点，峰值allocated约2.335GB；计时含首步，不作稳定速度/精度排名。新增metrics保留LoMa NCM/precision/overlap_precision/SR，旧RMSE明确命名legacy_RMSE_correct5_or_failure10（仅正确匹配且失败常数10），不当作全匹配或估计H误差。单位为原生目标像素。拟合H评价、覆盖率、置信度曲线尚未完成。
+
+实际对齐 `CUDA_VISIBLE_DEVICES=3 OMP_NUM_THREADS=4 OPENBLAS_NUM_THREADS=1 /root/miniconda3/envs/loma-repro/bin/python -m scripts.check_dense_migration --output artifacts/loma_downstream_parity.json`：原_match编排注入相同GHIM/CGMDP输出，与新下游对齐。最初逐顺序严格相等失败，复查匹配集合坐标差均0，P3置信度最大差7.15e-7造成近并列排列变化；采用坐标规范排序及atol1e-7/rtol1e-6后通过，P6置信度差0。P3/P6原评价数字完全一致。仅一对下游隔离对齐，不冒充完整旧权重端到端验证。
+
+测试：迁入4组原pytest测试（仅改import）36项；新引用SHA/非法H/空集与区外点3项；全套pytest共181项通过3.23秒。环境loma-repro新装pytest8.3.5、iniconfig2.3.0、pluggy1.6.0、tomli2.4.1，未升级模型依赖。详情及阶段状态见docs/shared_downstream_integration.md。未启动新训练。
+
+## 2026-09-21：旧数据删除完成与新版极端外推复核
+
+按用户授权删除 `/home/disk1/Data/datasets/GoogleEarth_scale_pairs`（删除前约70G）及 `/home/disk1/Data/datasets/GoogleEarth_temporal4_v1`（约68G）；使用明确路径的rm -r，未跟随temporal4/test软链接遍历额外目标。2026-09-21复核两个目录均不存在、删除进程结束；未进入回收站，无法直接恢复，需重新生成。原始GoogleEarth、quadrant_tiers_v1、stable_v2、test_single_tier3_v1均保留。删除前生成摘要保存在artifacts/deleted_googleearth_legacy_20260920.json；历史配置中旧路径保留作溯源，已不能直接用于运行，未擅自指向新版。
+
+完整外推检查：scripts/audit_stable_extrapolation.py，报告artifacts/stable_geometry_v2_extrapolation.json，说明docs/stable_geometry_v2_extrapolation.md。实际命令 `OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 /root/miniconda3/envs/loma-repro/bin/python -u -m scripts.audit_stable_extrapolation --root /home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_stable_v2 --output artifacts/stable_geometry_v2_extrapolation.json`。train121282/val13468，全部双向，784像素半像素重采样坐标；角坐标绝对值>10000px、无穷远线距离<10px均0，无分母变号。train/val最大角坐标绝对值2342.551/2323.659px，最小无穷远线距离199.450/215.059px，最大角点局部放大率8.944/9.044。仍有正常外推，角坐标绝对值>2000px为690/69对，坐标不是预测误差。
+
+从每个split选双向角投影最远3对，共6对、正反12组，各100次128点GT几何对应的sigma0.1px高斯扰动拟合：重叠误差中位数0.02021–0.02254px、四角误差中位数0.04721–0.20497px、P90 0.07438–0.40258px。仅这些样本该噪声条件下的控制实验，不含遮挡mask/真实误匹配，也不是模型预测。全套142项测试通过（1.993秒），包括新恒等/反向尺度/分母变号拒绝测试。重新校验当前train/val manifest SHA与外推报告一致。本次不加载checkpoint、不启动训练，不把真值几何安全表述为模型精度验证成功。
+
+## 2026-09-20：按批准清理工程权重并验收稳定几何数据
+
+最终验收完成：`artifacts/stable_geometry_v2_verification.json` status=passed，耗时1022.38秒。全量134750对、1078000个PNG头/尺寸通过，train/val各90对解码和双向mask重建通过（共180对，按tier×ratio取前10对，非随机抽样）。全量H组合误差最大0；归一化Jacobian上界train9.9999209/val9.9948778≤10，中心投影范围2.4948557/2.4714207≤2.5，最小无穷远线距离0.2544594/0.2748707≥0.1。母图划分与v1严格相同，train/val的母图、geo、pair ID交集均0，test清单逐字节不变。train manifest SHA256 `c48eb269be7e96a6be8d4eb43b668035d758f0aaf4268d9f6abb8e337e3aad23`；val `9e69f1af29dca1073ca3f12a618d61b52b66a76e67346d2ab39830de17ec5f44`。未做全量PNG像素解码/CRC验证，未评估模型精度，未切换训练配置、未启动训练。
+
+按用户明确批准的第一批清单删除47个工程测试.pt（54076860939字节，50.36GiB）及11个Python缓存目录；删除前验证每个权重精确路径/文件大小、缓存仅含.pyc、无训练/生成/评估进程。删除后47个权重全部不存在，四个正式shared_descriptor输出中的latest.pt和shared_descriptor.pt仍存在。未移动至回收站，无法直接恢复工程checkpoint，测试可重跑；日志/JSON/图像/脚本和正式权重不删。outputs由约152G降至102G。清单和执行状态在artifacts/cleanup_candidates_20260920.json、docs/cleanup_candidates_20260920.md；后续Python运行会正常重建缓存。
+
+新版数据生成摘要completed，非smoke，输出 `/home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_stable_v2`（约313G）。实际train三档51978/34652/34652、val5772/3848/3848。新增scripts/verify_stable_dataset.py：全manifest唯一ID/母图/geo划分、双向H安全界、T_B@inv(T_A)组合、逆矩阵、元数据JSON、全部PNG文件头与尺寸；各split按tier×ratio各取前10对，共90对做完整图像解码和mask重建，明确不是全量像素解码。128线程读取小文件，CPU几何校验OPENBLAS_NUM_THREADS=1；先前串行和24线程只读扫描因IO慢终止，未修改数据，然后从头重跑完整检查。
+
+实际命令：`OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 /root/miniconda3/envs/loma-repro/bin/python -u -m scripts.verify_stable_dataset --root /home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_stable_v2 --old-root /home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_v1 --output artifacts/stable_geometry_v2_verification.json`。139项单测通过（2.047秒），包括缺失PNG和尺寸不符拒绝检查；smoke数据作为完整验收输入时被正确拒绝。完整三档预览位于outputs/previews/stable_geometry_v2_complete，已目检第一、第三档。
+
+## 2026-09-18：稳定几何 v2 试生成及全量启动
+
+用户授权执行新版数据生成。新增 `mhinet/dataio/stable_geometry.py`、`scripts/audit_stable_geometry.py`、`scripts/generate_stable_three_tiers.sh`、`tests/test_stable_geometry.py`；原生成器增加显式 --stable-geometry，不改变旧版默认几何。约束与保留率表见 `docs/stable_geometry_v2.md`，统计文件 `artifacts/stable_geometry_v2_retention.json`。归一化双向H：无穷远线距离≥0.1、中心投影范围≤2.5、整域Jacobian保守上界≤10；除法前隔离分母不合法情形。纯几何旧val保留率58.99/60.73/62.86%，重新采样补足数量，未读取预测选择阈值，未使用test精度。阈值偏保守、改变透视难度分布，不宣称只移除极少数异常。
+
+实际命令：`bash scripts/generate_stable_three_tiers.sh --smoke --generate --output-dir /home/disk1/MHINet/outputs/stable_geometry_smoke_v2`，28对生成并逐对复查通过；预览 `outputs/previews/stable_geometry_smoke_v2`，已查看第三档。`/root/miniconda3/envs/loma-repro/bin/python -m unittest discover -s tests -q`：138项通过，2.062秒。环境沿用loma-repro Python3.10.20/OpenCV4.13.0；本任务CPU生成，不加载checkpoint，不改模型权重和训练配置。
+
+现源数据重新划分与旧完整parent_split_manifest内容严格相等：train8663/val962母图组，预计121282/13468对。数据源 `/home/disk1/Data/datasets/GoogleEarth`，复用 `/home/disk1/LoMa/generate_pairs.py` SHA256 `4a4aea0fc2dffa6739d72700da3cf1dbba4d25b8ccb4f0a5086eff754ca2087a`。新输出 `/home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_stable_v2`，保留旧v1；磁盘空余15TB。输出dataset_summary记录实现hash和协议。
+
+后台命令 `bash scripts/generate_stable_three_tiers.sh --generate`，通过Popen(start_new_session=True)启动PID3798971，日志 `/home/disk1/MHINet/outputs/generate_stable_three_tiers_v2.log`。已确认进程存活、进入train生成。未启动训练；全量生成尚未结束，必须完成全量数量/几何/标签/mask/划分检查后才能用于训练，不将冒烟通过标记为数据全量或模型验证成功。
+
 ## 2026-09-16：按用户要求撤销AFSS实验接入
 
 两组正式训练已按用户要求中断，约434步，未到首次保存点，无正式checkpoint。
@@ -1433,3 +1493,61 @@ checkpoint SHA256=`20ee388f5914850287c8237f45e0ad273c73a6e7d7ce539baa5d6a0c72b00
 验证：`bash -n scripts/train_e01.sh scripts/test.sh scripts/test_e00.sh scripts/unit_tests.sh`通过；103项原有单元测试加最新checkpoint选择测试共104项通过。`DRY_RUN=1 bash scripts/train_e01.sh`确认默认路径、GPU1和参数转发；无新增checkpoint、无删除输出。当前工作区中的`artifacts/p4_tiny_s_d1_translation_swa.json`仍为用户无关修改，不纳入提交。
 
 评估总表同步：扫描服务器现有outputs中的10份真实评估summary（含刚完成的E00完整test/1000对），生成 `docs/evaluation_summary.md`、`artifacts/evaluation_registry.json` 和 `.csv`。每条记录绑定源summary SHA、split/对数、模式、H0/最终轨迹、成功率/AUC、失败率、显存、延迟、manifest与checkpoint信息；工程val冒烟和独立test分开标注。评估入口已自动登记新summary，`python -m mhinet.engine.evaluation_registry --scan outputs`可重扫。表不删旧记录，不把tiny/性能探测视为精度评估。
+
+## 2026-09-16：独立共享描述子预训练与DINOv3 LoRA分支
+
+用户批准建立分支实施，最终提供卡1冻结DINO的共享网络、卡2 LoRA对照训练命令；不自动启动正式长训练。由`d312c0a`建立`codex/shared-descriptor-lora`，首个中文提交`377e4a8`已推送origin。既有未提交的旧trainer/random-init/评估表修改保留，不纳入本任务提交。
+
+新增实际代码：`mhinet/pretraining/{model,loss,data,evaluation,train}.py`，两份`configs/shared_descriptor_{frozen,lora}.json`，`scripts/train_shared_descriptor{,_lora}.sh`，三个审计入口`audit_shared_pretraining.py/check_shared_bundle.py/check_shared_resume.py`，测试`tests/test_shared_pretraining.py`。复用现有feature_provider、GHIM四项损失、checkpointing；未修改相邻LoMa源码。只运行GHIM/CGMDP至D2，不构建MHIR、不执行D1。LoRA包装保留原QKV masked-bias，blocks8–17/r8/alpha16；梯度路径绕过旧DINO no_grad，冻结主干本体。
+
+正式参数：同预训练初始化、第一档train51978/val5772、母图/地理交集0；BS1累积4、单epoch12995 optimizer steps、warmup5%+cosine到10%、AdamW wd1e-4/clip1；每5000步及末尾全量val，每1000步保存。MVT/GHIM head lr1e-6，VGG5e-6，累计解码器/LoRA1e-5。损失为现有GHIM四项+三尺度双向InfoNCE（每方向最多1024查询、temperature0.1、全局采样及局部hard negatives、双侧mask）；test未读取用于选参。
+
+资源/环境：Python `/root/miniconda3/envs/loma-repro/bin/python` 3.10.20，torch2.11.0+cu128，RTX4090；LoMa `/home/disk1/LoMa`，数据 `/home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_v1`。实际权重路径完整登记在`configs/runtime_paths.quadrant.server.json`及每次`run.json`：LoRetta位于LoMa outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/snapshots/95bf3670465cc80ffca8b1edf94b5eb651211194/loretta.pth，SHA256 `09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e`；金字塔`/root/.cache/torch/hub/checkpoints/loma_B.pt`，SHA256 `3a38824391e22b33bb3e10377c7736243fd8a2fbf1561446e7e133e497c35758`。train manifest SHA `6587d3be58dfc8b1601244bcf7fa05e3cb5dba1b14b7a49871dcb1fe3ef3276c`，val SHA `c4763636e2ca9914c62aec45f5f6f238e0cfa9269343f27571e6c0acdb3d01ee`。
+
+验证：`bash scripts/unit_tests.sh`127项通过（含新增7项），1.991秒；新脚本bash语法检查通过。真实权重LoRA零初始化H0/D8/D4/D2最大差0；GHIM/CGMDP两条分支对MVT及LoRA均非零有限梯度；第二步A梯度非零。严格模式真实单对20步Ldesc1.167799→0.315688、LGHIM0.040362→0.006571，DINO base参数hash始终`611ab0607761c72dc93bcf7379829109f14da32fd43f9a8ed1e5a07f69d1317f`；报告`artifacts/shared_pretraining_real_tiny20_strict.json`。
+
+初次独立连续/恢复比较未通过，最大state差基线0.030666/LoRA0.022022；定位CUDA非确定性反向，warn_only不足以开启确定性Flash Attention。新增与grid_sample前向/梯度对齐的gather双线性采样，开启strict deterministic、cuDNN deterministic、CUBLAS_WORKSPACE_CONFIG。不放宽误差阈值：重跑两组8对/2步连续与中断恢复，模型/optimizer最大差均0，checkpoint SHA各自完全一致。报告`artifacts/shared_{frozen,lora}_resume_audit.json`；基线checkpoint SHA `02125544071e25e9fe5c310b3dfe42dfcf14949175c373f69bdeb52af97ddc6a`，LoRA `6112cd0c1404a1425522b08b3638ed3486756d4ec2cefb67aa83bf09678e6308`。
+
+真实小跑输出位于`outputs/diagnostics/shared_{frozen,lora}_strict_split`与`*_strict_continuous`。基线第二步2.347秒/峰值9.949GB，LoRA2.617秒/10.104GB（不含保存/val，仅诊断，非正式速度承诺）。每次val实际输出H0叠加图和D8/D4/D2 full-gallery匹配图；32查询/尺度/方向的全目标网格检索误差与采样InfoNCE命中率分开记录。2对val的H0 MACE约201/202px，拟合成功不代表精度成功，这些数字不得作为完整数据集结果。
+
+恢复机制：同目录latest.pt恢复模型/optimizer/scheduler/RNG/数据游标并核对配置、数据、权重、代码hash；无checkpoint将本入口旧记录移入previous_no_checkpoint_*再从头训练，不删除未知文件；目录锁防并发覆盖。导出shared_descriptor.pt含MVT/GHIM/VGG/累计解码器/可选LoRA，不含DINO原权重及任务头；load_shared校验DINO hash，供MHINet和LoMa DINOv3共享分支使用，未宣称原版DINOv2 LoMa可直接load_state_dict。
+
+诊断期间卡1被外部作业占约21GB，初次基线bundle/新短跑因此OOM；没有中断外部作业，基线诊断迁到卡3，LoRA主要用卡2。最终脚本默认卡1/卡2，启动前需确认空闲。工程检查、具体命令、结果表与失败修复详情汇总在`docs/shared_descriptor_results.md`和`docs/shared_descriptor_pretraining.md`。未启动正式训练，未宣称模型验证成功。
+
+最终bundle审计：冻结版806项、LoRA版826项state全部与训练checkpoint一致，H0/D8/D4/D2推理差均0。bundle SHA分别`75a23020cbbeac693f310056a295357448b46883add1588be218db568f4b5ce6`和`bd15a3d8e3dc39ed85b9bcd70f9a70002add0aa40c28435b94588e0b967b5bca`，见`artifacts/shared_{frozen,lora}_bundle_audit.json`。本任务所有短程GPU进程已退出。
+
+## 2026-09-17：H0有效重叠投影误差与第二档训练
+
+用户明确不继续LoRA，要求补充有效重叠区域H0误差，再实际启动第二档训练并提供tail命令。已补`mhinet/pretraining/overlap_metrics.py`和旧checkpoint评估入口`scripts/evaluate_shared_overlap.py`；新训练验证保留四角MACE，并额外保存H0_overlap。支持集使用GT和A/B有效mask确定，枚举全部源图像素中心，单位为784重采样目标图像像素，方向A→B；预测出界不剔除，非法预测保留在Recall分母。记录pair均值/中位数/P90、像素加权均值、Recall@1/3/5、无支持对数、非法投影和拟合失败，不删极端标签。
+
+第二档配置`configs/shared_descriptor_tier2.json`、脚本`scripts/train_shared_descriptor_tier2.sh`。初始化第一档冻结版最终`/home/disk1/MHINet/outputs/shared_descriptor_frozen_seed0/latest.pt`，SHA256 `df3ec90b9bc53fd983cc1945a3c028ccdf9bf688325a60055101232c509cc25e`，原step12995；严格加载模型、校验DINO provenance，不继承已结束的optimizer/scheduler。无LoRA，DINO冻结，其余共享层训练、VGG BN统计固定；仍不运行MHIR/D1。峰值lr：MVT/head5e-7、VGG2.5e-6、CGMDP5e-6（第一档峰值一半）。BS1×累积4，新AdamW、wd1e-4、clip1，warmup5%后cosine至峰值10%。同新目录支持自动恢复。
+
+实际数据仍为`/home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_v1`，仅第二档几何+辐射处理；train34652/val3848，母图/地理交集均0，一轮8663步；第5000步及最后全量val，每1000步保存。test未用于选择。环境沿用loma-repro Python3.10.20/torch2.11.0+cu128。
+
+检查：131项单元测试通过，耗时2.097s；新增4项覆盖恒等、已知平移、双侧mask、非法投影及fit失败分母。实际8对train/2对val冒烟两步通过，loss0.190485→0.167080、峰值9.96GB；目录`outputs/diagnostics/shared_tier2_overlap_smoke`，新增overlap指标覆盖788167像素，无非法预测，pair均值1.8584px。这里只是小样本工程检查，不是第二档完整训练精度。最终调整中位数使用quantile(0.5)，并补初始化DINO hash校验。
+
+已提交并推送`bbd95d7`（补充H0有效重叠投影评估并配置冻结DINO第二档续训）。启动时GPU0–3均空闲；以独立session后台启动：卡1训练PID3788458，输出`outputs/shared_descriptor_frozen_tier2_seed0`，日志`outputs/shared_descriptor_frozen_tier2_seed0.console.log`；卡0补评估PID3788465，在第一档最终冻结模型上计算tier1/tier2完整val的H0指标，输出`outputs/shared_descriptor_frozen_seed0/h0_overlap_v1`，日志`outputs/shared_descriptor_frozen_h0_overlap.log`。最初shell nohup后台启动未存活，已核对退出且无GPU占用后改用Popen(start_new_session=True)，没有重复训练实例。
+
+后台训练命令等价于`GPU_ID=1 bash scripts/train_shared_descriptor_tier2.sh`；用户查看`tail -n 30 -f /home/disk1/MHINet/outputs/shared_descriptor_frozen_tier2_seed0.console.log`。每50步额外输出TRAIN行。H0补评估单独运行，不等待补评估完成才使用另一张卡训练；新训练自身每次val也计算同指标。设置与指标定义见`docs/shared_descriptor_tier2.md`。训练和完整补评估结果尚未完成，不能提前宣称成功。
+
+启动确认：独立session脱离启动器后两进程仍存活；交付前卡1实际达到22/8663步（最近loss0.1657，显存约10GB），卡0补评估达到第一档647/5772对。未见异常；这只是启动状态，不是最终结果。
+
+## 2026-09-18：第一档完整回测、第三档训练、极端外推审计
+
+用户要求检查第二档是否损害第一档几何能力、继续第三档并分析外推。新增`scripts/evaluate_shared_full.py`对第二档最终checkpoint运行第一档完整5772对val（GHIM/CGMDP全指标、H0重叠误差），卡0后台PID3792188；输出`outputs/shared_tier2_backtest_tier1`，日志同名`.log`。新增`scripts/compare_shared_backtest.py`在完整report产生后，与第一档最终模型原验证及补算的H0 overlap基线比较，严格校验manifest、对数、pair ID及GT支持像素数。
+
+第三档新配置`configs/shared_descriptor_tier3.json`、脚本`scripts/train_shared_descriptor_tier3.sh`：从第二档最终`outputs/shared_descriptor_frozen_tier2_seed0/latest.pt`初始化，SHA256 `4af7846f8111a64efae182005ba7fa9d1e90fecf9553815d5b88395d80280d7d`。冻结DINO且不开LoRA；其余共享层训练、VGG BN统计冻结；不运行MHIR/D1。峰值LR延续第二档MVT/head5e-7、VGG2.5e-6、CGMDP5e-6，BS1×累积4，warmup5%+cosine至10%，新AdamW状态。一轮34652对train/8663步，3848对完整val，第5000步及最后验证，每1000步保存；不改现有数据、GT或损失。先8对train/2对val两步冒烟，loss0.172034/0.211256、显存9.96GB，反传/验证通过；不同batch的loss不作收敛证据。卡1正式后台PID3792478，输出`outputs/shared_descriptor_frozen_tier3_seed0`，日志`outputs/shared_descriptor_frozen_tier3_seed0.console.log`；已实际进入数百步。第一档回测和第三档独立运行，保留第二档模型，回测完成前不宣称无遗忘。
+
+另在卡2用第二档checkpoint补第三档完整val的训练前H0基线，PID3793109；输出`outputs/shared_descriptor_frozen_tier2_seed0/h0_overlap_tier3_baseline`，日志`outputs/shared_tier2_h0_tier3_baseline.log`，便于第三档结束后同数据比较。
+
+极端外推只读审计：`scripts/analyze_homography_extrapolation.py`，报告`artifacts/homography_extrapolation_audit.json`及`homography_extrapolation_train_audit.json`。val第一/二/三档有78/32/21对GT角点超过10000输入px；train有553/384/249对。所有重新组合T_B@inv(T_A)的H与存储标签一致；角点分母无变号。但现生成器只检查同号/有限，不限制离分母零线距离、投影范围或局部放大率，合法H仍可在非重叠角点极端放大。
+
+第二档最严重样本`past_tier2_1__36.035100129.396223`：GT角点约(-1039396,2348110)px，零线离源角点0.1916px，四角MACE619540.56px、重叠误差1.2503px。单对贡献总四角误差68.1%，32对极端GT贡献94.4%。分组：GT范围<2000的3513对角点/重叠均值6.191/1.518px；2000–10000的303对97.716/2.342px；>=10000的32对26818.398/4.377px。未删除困难样本；仍有真实重叠误差25/59px的坏例，不能把全部模型错误都归因外推。
+
+控制敏感性实验（脚本--sensitivity，OpenCV4.13.0，seed0，128个GT对应点，目标端sigma0.1px噪声，100次无RANSAC拟合）：重叠误差中位数0.02054px、四角误差中位数178721.60px；不是网络预测。CPU float32/float64真值投影检查中最严重样本四角均值差13.5768px，远小于该样本预测619540px，不能单纯归因浮点精度。结论及新数据几何安全约束建议在`docs/homography_extrapolation_analysis.md`，未自动改变生成器。启动MHIR全图四角目标训练前需解决目标外推不稳定，不能只加复杂损失掩盖。
+
+工程验证：133项单元测试通过（1.907秒），新增仿射/近零线但不变号测试；Shell语法通过。初版已中文提交推送`d87b20c`。本节记录启动及审计事实，完整回测比较将在结束后补记；第三档正式训练尚未完成。
+
+完整回测现已完成：5772/5772对第一档val，GT支持2533713851像素保持一致。第二档权重回测相较第一档最终权重，H0 overlap每对均值2.113301→1.686334px、中位数1.178909→1.028497px、P90 2.240741→1.944974px，74.7228%影像对改善；D8/D4/D2双向平均匹配误差3.254289/1.601194/0.829732→3.234129/1.595642/0.824359px，D2 Recall@1px70.1314%→70.6444%，desc loss0.159341→0.145992，无非法投影/拟合失败。H0四角均值74.711518→69.928910px，仍需结合前述外推诊断。该单种子同域val上没有观察到总体能力退化；不泛化为所有域/下游均无遗忘。机器记录`outputs/shared_tier2_backtest_tier1/comparison.json`及`artifacts/shared_tier2_backtest_tier1.json`，完整表`docs/shared_descriptor_tier3.md`。
+
+第三档训练前H0基线也已完成（3848对、1284531292支持像素）：每对均值2.305215px、中位数1.593579px、P90 3.689485px，point Recall@1/3/5为35.2183%/84.4293%/93.8839%，非法投影和拟合失败均0。仅基线评估完成，第三档训练仍在卡1后台运行，不宣称训练完成。卡0/卡2评估任务结束后正常退出。

@@ -1,0 +1,138 @@
+{
+  "status": "deletion_completed_absence_verified_20260921",
+  "recovery": "Not moved to trash; regeneration required. Original mothers and retained versions untouched.",
+  "summaries": {
+    "GoogleEarth_scale_pairs": {
+      "mode": "googleearth",
+      "dataset_root": "/home/disk1/Data/datasets/GoogleEarth",
+      "output_dir": "/home/disk1/Data/datasets/GoogleEarth_scale_pairs",
+      "seed": 42,
+      "sampling_config": {
+        "pairs_per_image": 2,
+        "min_size": 500,
+        "max_size": 1000,
+        "min_ratio": 1.2,
+        "max_ratio": 1.8,
+        "min_overlap": 0.5,
+        "max_overlap": 0.9,
+        "min_input_side": 1000,
+        "max_attempts": 100,
+        "enable_photometric_aug": true
+      },
+      "splits": {
+        "train": {
+          "split": "train",
+          "input_images": 18000,
+          "generated_pairs": 36000,
+          "skipped_pairs": 0,
+          "pairs_jsonl": "/home/disk1/Data/datasets/GoogleEarth_scale_pairs/train/pairs.jsonl",
+          "visualizations": 20
+        },
+        "val": {
+          "split": "val",
+          "input_images": 1250,
+          "generated_pairs": 2500,
+          "skipped_pairs": 0,
+          "pairs_jsonl": "/home/disk1/Data/datasets/GoogleEarth_scale_pairs/val/pairs.jsonl",
+          "visualizations": 20
+        },
+        "test": {
+          "split": "test",
+          "input_base_pairs": 500,
+          "generated_pairs": 1000,
+          "skipped_pairs": 0,
+          "pairs_jsonl": "/home/disk1/Data/datasets/GoogleEarth_scale_pairs/test/pairs.jsonl",
+          "visualizations": 20
+        }
+      },
+      "sampling_config_by_split": {
+        "train": {
+          "pairs_per_image": 2,
+          "min_size": 500,
+          "max_size": 1000,
+          "min_ratio": 1.2,
+          "max_ratio": 1.8,
+          "min_overlap": 0.5,
+          "max_overlap": 0.9,
+          "min_input_side": 1000,
+          "max_attempts": 100,
+          "enable_photometric_aug": true
+        },
+        "val": {
+          "pairs_per_image": 2,
+          "min_size": 500,
+          "max_size": 1000,
+          "min_ratio": 1.2,
+          "max_ratio": 1.8,
+          "min_overlap": 0.5,
+          "max_overlap": 0.9,
+          "min_input_side": 1000,
+          "max_attempts": 100,
+          "enable_photometric_aug": true
+        },
+        "test": {
+          "pairs_per_image": 2,
+          "min_size": 500,
+          "max_size": 1000,
+          "min_ratio": 1.2,
+          "max_ratio": 1.8,
+          "min_overlap": 0.5,
+          "max_overlap": 0.9,
+          "min_input_side": 1000,
+          "max_attempts": 100,
+          "enable_photometric_aug": false
+        }
+      },
+      "test_unchanged_during_radiometric_regeneration": true
+    },
+    "GoogleEarth_temporal4_v1": {
+      "version": "temporal_four_pairs_v1",
+      "status": "completed",
+      "smoke_only": false,
+      "seed": 42,
+      "dataset_root": "/home/disk1/Data/datasets/GoogleEarth",
+      "training_root": "/home/disk1/Data/datasets/GoogleEarth/training_data",
+      "output_dir": "/home/disk1/Data/datasets/GoogleEarth_temporal4_v1",
+      "generator_reference": "/home/disk1/LoMa/generate_pairs.py",
+      "generator_reference_sha256": "4a4aea0fc2dffa6739d72700da3cf1dbba4d25b8ccb4f0a5086eff754ca2087a",
+      "generator_implementation_sha256": "6a0f7b6c4e5c3db943f9a86a8e52e7dfb0f3e9879da6cc4c848a697416b97eab",
+      "sampling_config": {
+        "pairs_per_image": null,
+        "min_size": 500,
+        "max_size": 1000,
+        "min_ratio": 1.2,
+        "max_ratio": 1.8,
+        "min_overlap": 0.5,
+        "max_overlap": 0.9,
+        "min_input_side": 1000,
+        "max_attempts": 100,
+        "enable_photometric_aug": true,
+        "pairs_per_temporal_group": 4
+      },
+      "parent_coordinate_assumption": "user-confirmed approximately coregistered; base_H=identity; no exact cross-time GT claim",
+      "csv_affine_fields_used": false,
+      "split_policy": "merge original Train/Val parent pool; whole 0.01-degree cells; nearest attainable val fraction 0.1",
+      "source_parent_groups": 9625,
+      "planned": {
+        "train": {
+          "parent_groups": 8663,
+          "pairs": 34652,
+          "geo_groups": 2564,
+          "generated_pairs": 34652,
+          "visualizations": 20
+        },
+        "val": {
+          "parent_groups": 962,
+          "pairs": 3848,
+          "geo_groups": 286,
+          "generated_pairs": 3848,
+          "visualizations": 20
+        }
+      },
+      "actual_val_fraction": 0.09994805194805195,
+      "test_policy": "unchanged reuse via symlink; generator never writes to test; no test resampling or repartition",
+      "existing_test": "/home/disk1/Data/datasets/GoogleEarth_scale_pairs/test",
+      "test_manifest_sha256": "3db0eca8c64a23cb1000d6905cbcf82dd221f653033e3b8463cd9484601dfb06"
+    }
+  }
+}

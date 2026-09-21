@@ -103,7 +103,10 @@ def main(argv=None):
     parser.add_argument('--generate', action='store_true', help='Without this flag, print plan only (no writes).')
     parser.add_argument('--smoke', action='store_true', help='Only one parent group per split; NOT a training dataset.')
     parser.add_argument('--three-tiers', action='store_true', help='Quadrants, rotation, radiation and visibility-aware occlusion; seven pairs per parent.')
+    parser.add_argument('--stable-geometry', action='store_true', help='Opt-in bidirectional normalized geometry bounds; new dataset only.')
     args = parser.parse_args(argv)
+    if args.stable_geometry and not args.three_tiers:
+        parser.error('--stable-geometry requires --three-tiers')
     legacy = load_generator(args.loma_root)
     training_root = args.dataset_root.resolve() / 'training_data'
     groups = discover_groups(training_root, legacy)
@@ -137,6 +140,11 @@ def main(argv=None):
         'existing_test': str(test_root),
         'test_csv_sha256': hashlib.sha256((test_root / 'test_pairs.csv').read_bytes()).hexdigest(),
     }
+    if args.stable_geometry:
+        from mhinet.dataio.stable_geometry import POLICY
+        summary['version'] = 'quadrant_three_tiers_stable_v2'
+        summary['sampling_config']['stable_geometry'] = POLICY
+        summary['stability_implementation_sha256'] = hashlib.sha256(Path(__file__).with_name('stable_geometry.py').read_bytes()).hexdigest()
     print(json.dumps(summary, ensure_ascii=False, indent=2), flush=True)
     if not args.generate:
         return 0
@@ -177,7 +185,7 @@ def main(argv=None):
                         generator = generate
                         tier = int(kind.split('tier')[1].split('_')[0])
                         ratio_index = difficulty if tier==1 else (group_index+difficulty+(a=='current'))%3
-                        metadata.update(tier=tier, resolution_ratio=(.8,.6,.4)[ratio_index])
+                        metadata.update(tier=tier, resolution_ratio=(.8,.6,.4)[ratio_index], stable_geometry=args.stable_geometry)
                     row = generator(images[a], images[b], split_out,
                         pair_id, difficulty, seed, config, metadata)
                     stream.write(json.dumps(row, ensure_ascii=False)+'\n')

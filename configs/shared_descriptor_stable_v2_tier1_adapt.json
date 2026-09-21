@@ -1,0 +1,11 @@
+{
+  "runtime": "/home/disk1/MHINet/configs/runtime_paths.stable_v2.server.json",
+  "seed": 0,
+  "tier": 1,
+  "lora": false,
+  "accumulation": 4,
+  "queries": 1024,
+  "save_every": 500,
+  "learning_rate_scale": 0.1,
+  "initialize_checkpoint": "/home/disk1/MHINet/outputs/shared_descriptor_frozen_tier3_seed0/latest.pt"
+}

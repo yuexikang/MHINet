@@ -239,3 +239,9 @@ Old D1 long runs and partial checkpoints cannot supply this baseline because
 they used a superseded decoder/architecture and may be incomplete. Preserve
 them for history, never resume them into the D2 mainline, and do not call their
 partial progress a failed or successful current experiment.
+
+## 2026-09-16 新增独立共享预训练主线
+
+当前用户批准先预训练 GHIM+CGMDP，详见 [共享描述子与LoRA计划](shared_descriptor_pretraining.md)。两组相同预训练初始化、第一档单图合成数据、单epoch、BS1×累积4、每5000步及结束验证；基线冻结DINO，对照仅开放DINO QKV LoRA，均训练其余共享组件。此阶段不运行MHIR/D1，不把描述子预训练loss混入旧MHIR实验排名。
+
+验收顺序：采样几何/reference → LoRA零初始化对齐 → 双损失分支/第二步梯度 → 真实tiny-overfit → 训练/恢复/导出重载 → 用户启动两组正式训练 → 全量val比较 → 在MHINet与LoMa的DINOv3共享分支分别做下游迁移。当前工程检查不代表两个下游模型均已验证成功。

@@ -1,0 +1,41 @@
+{
+  "status": "passed",
+  "root": "/home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_stable_v2",
+  "splits": {
+    "train": {
+      "pairs": 121282,
+      "tiers": {
+        "1": 51978,
+        "2": 34652,
+        "3": 34652
+      },
+      "png_headers_checked": 970256,
+      "decoded_pairs": 90,
+      "manifest_sha256": "c48eb269be7e96a6be8d4eb43b668035d758f0aaf4268d9f6abb8e337e3aad23",
+      "max_composition_error": 0.0,
+      "max_jacobian_bound": 9.99992087533414,
+      "max_centered_extent": 2.4948556509618722,
+      "min_horizon_distance": 0.25445940499473935
+    },
+    "val": {
+      "pairs": 13468,
+      "tiers": {
+        "1": 5772,
+        "2": 3848,
+        "3": 3848
+      },
+      "png_headers_checked": 107744,
+      "decoded_pairs": 90,
+      "manifest_sha256": "9e69f1af29dca1073ca3f12a618d61b52b66a76e67346d2ab39830de17ec5f44",
+      "max_composition_error": 0.0,
+      "max_jacobian_bound": 9.994877761179511,
+      "max_centered_extent": 2.471420722449992,
+      "min_horizon_distance": 0.2748706929039622
+    }
+  },
+  "limitations": "All PNG headers checked; full pixel decoding and exact mask reconstruction only on stratified sample. No model accuracy evaluation.",
+  "parent_split_exact_match": true,
+  "train_val_overlap": 0,
+  "test_manifest_unchanged": true,
+  "elapsed_seconds": 1022.3834391953424
+}

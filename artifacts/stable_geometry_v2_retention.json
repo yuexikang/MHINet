@@ -1,0 +1,73 @@
+{
+  "manifest": "/home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_v1/val/pairs.jsonl",
+  "policy": {
+    "min_horizon_distance": 0.1,
+    "max_centered_extent": 2.5,
+    "max_jacobian_bound": 10.0
+  },
+  "tiers": {
+    "1": {
+      "pairs": 5772,
+      "retention_by_jacobian_bound": {
+        "5": 0.3413028413028413,
+        "10": 0.58991683991684,
+        "20": 0.7432432432432432
+      },
+      "absolute_rotation_p50_p90_before": [
+        7.729115301571547,
+        21.32326238564529
+      ],
+      "absolute_rotation_p50_p90_kept": [
+        7.866802551388119,
+        21.305663286651576
+      ],
+      "attempts_p50_p90_max": [
+        38.0,
+        121.0,
+        380.0
+      ]
+    },
+    "2": {
+      "pairs": 3848,
+      "retention_by_jacobian_bound": {
+        "5": 0.3464137214137214,
+        "10": 0.6073284823284824,
+        "20": 0.751039501039501
+      },
+      "absolute_rotation_p50_p90_before": [
+        7.645044922288635,
+        21.276788925911383
+      ],
+      "absolute_rotation_p50_p90_kept": [
+        7.781854168702864,
+        21.567552289810465
+      ],
+      "attempts_p50_p90_max": [
+        36.0,
+        117.30000000000018,
+        487.0
+      ]
+    },
+    "3": {
+      "pairs": 3848,
+      "retention_by_jacobian_bound": {
+        "5": 0.3666839916839917,
+        "10": 0.6286382536382537,
+        "20": 0.7845634095634095
+      },
+      "absolute_rotation_p50_p90_before": [
+        8.070376474329635,
+        21.785164002908413
+      ],
+      "absolute_rotation_p50_p90_kept": [
+        8.144106297099796,
+        22.093622132233072
+      ],
+      "attempts_p50_p90_max": [
+        68.0,
+        231.0,
+        828.0
+      ]
+    }
+  }
+}

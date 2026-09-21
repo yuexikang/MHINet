@@ -1,5 +1,10 @@
 # MHINet
 
+当前主线：共享 GHIM/CGMDP，支持 MHIR 与 H0 引导粗细匹配下游。
+DINOv3 默认冻结，**LoRA 暂不启用**；LoRA 实现及独立实验入口仅保留供后续研究。
+稳定几何数据与当前适应实验见 [实验登记](docs/shared_stable_v2_adaptation.md)，
+下游迁移范围与验证限制见 [下游登记](docs/shared_downstream_integration.md)。
+
 This repository implements MHINet under training protocol v1.2. The current
 mainline is deliberately truncated at `D2`: it has three functional modules
 and six homography updates, not the former four-scale/eight-update path.

@@ -1,5 +1,11 @@
 # MHINet implementation log
 
+## 2026-09-21：第一档适应后最差5对回归诊断
+
+按用户“检查恶化最大的样本”执行只读诊断。新增scripts/diagnose_adaptation_regressions.py（GPU2、H0-only，跳过CGMDP，原GPU0/1工作不动）与scripts/refit_regression_diagnostics.py（CPU，读取已存coarse数组）。前后权重SHA及val SHA登记在artifacts/stable_v2_adaptation_worst5.json，输出outputs/diagnostics/stable_v2_adapt_worst5_v2/01–05，含原图对、前后预测叠加、拟合点空间图、coarse数组。首次绘图因非连续numpy布局失败，修正ascontiguousarray后新目录重跑，旧部分输出未删除；补充探针最初缺LoMa导入路径，增加make_loma_importable后通过。未改模型/数据/训练。
+
+结论：5对重叠误差分别5.284→43.355、1.475→31.619、12.723→39.887、0.890→26.852、1.640→26.665px。旧坐标+新权重重现退化，新坐标+旧权重保留原精度，归因主因是matchability筛选/加权，不是有效区坐标整体退化。只保留旧筛选集合并使用新坐标/权重可回到5.514/1.344/12.989/0.874/1.593px，新增过0.3门限点影响占主导；可见区外入选点31→123、5→90、29→101、12→91、26→82，按训练目标定义的negative误入选也显著增加。覆盖面积/点数增大，正规矩阵条件数约11–18，不是奇异求解或覆盖崩溃。GT-only可见区过滤诊断误差0.888/1.326/0.400/0.552/0.696px，不作可部署结果。已目检第一对原图、拟合点图和after叠加。详细表与损失尺度分析见docs/stable_v2_adaptation_regressions.md；没有自动实施修复，没有用GT修改实际匹配。
+
 ## 2026-09-21：合并共享描述子与可选下游分支至main
 
 按用户要求准备并执行codex/shared-descriptor-lora→main合并，LoRA暂不启用。常规shared_descriptor_frozen、tier2/tier3和stable_v2_tier1_adapt配置均为lora=false；LoRA代码、历史权重及显式独立入口保留，不自动运行。远程main在合并前为d312c0a，源分支为cfb61ea，main为其祖先，无内容冲突。

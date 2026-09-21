@@ -1,0 +1,469 @@
+{
+  "before_checkpoint_sha256": "5a9ed14cc32a1a4ff3a843b737410da13d795b79c42a9d33d82a068226e30386",
+  "after_checkpoint_sha256": "cdd2ceba7f7c603d3132973c2438b5a447dc7d4c128ee632f8dae80f99154895",
+  "val_manifest_sha256": "9e69f1af29dca1073ca3f12a618d61b52b66a76e67346d2ab39830de17ec5f44",
+  "selection": "top5 increase in pair-mean H0 GT-visible-overlap error",
+  "pairs": [
+    {
+      "rank": 1,
+      "pair_id": "current_tier1_0__35.411100129.326223",
+      "archived_before": 5.283651828765869,
+      "archived_after": 43.35498809814453,
+      "states": {
+        "before": {
+          "selected": 1811,
+          "gt_visible_grid": 1861,
+          "selected_gt_visible": 1780,
+          "selected_outside_gt_visible": 31,
+          "selected_gt_error_gt5": 53,
+          "selected_gt_error_gt10": 2,
+          "selected_gt_error_mean": 1.9940102100372314,
+          "mean_matchability": 0.56795334815979,
+          "effective_weighted_points": 1726.179931640625,
+          "good5_weight_fraction": 0.9631518125534058,
+          "source_hull_fraction": 0.8515202043665688,
+          "occupied_4x4_cells": 16,
+          "regularized_normal_condition": 14.120501450040948,
+          "H0_overlap": {
+            "direction": "A_to_B",
+            "units": "resized_target_pixels",
+            "support_pixels": 476512,
+            "finite_predictions": 476512,
+            "invalid_predictions": 0,
+            "fit_valid": true,
+            "mean_px": 5.283652305603027,
+            "median_px": 5.135859489440918,
+            "p90_px": 8.259798049926758,
+            "success_counts": {
+              "1": 6908,
+              "3": 82877,
+              "5": 226022
+            }
+          },
+          "outside_gt_weight_fraction": 0.00975502748042345,
+          "selected_training_target_negative": 31
+        },
+        "after": {
+          "selected": 1941,
+          "gt_visible_grid": 1861,
+          "selected_gt_visible": 1818,
+          "selected_outside_gt_visible": 123,
+          "selected_gt_error_gt5": 54,
+          "selected_gt_error_gt10": 2,
+          "selected_gt_error_mean": 2.0084242820739746,
+          "mean_matchability": 0.6466280221939087,
+          "effective_weighted_points": 1858.1058349609375,
+          "good5_weight_fraction": 0.94203120470047,
+          "source_hull_fraction": 0.8806747225784655,
+          "occupied_4x4_cells": 16,
+          "regularized_normal_condition": 11.430667567580185,
+          "H0_overlap": {
+            "direction": "A_to_B",
+            "units": "resized_target_pixels",
+            "support_pixels": 476512,
+            "finite_predictions": 476512,
+            "invalid_predictions": 0,
+            "fit_valid": true,
+            "mean_px": 43.35498809814453,
+            "median_px": 42.11793518066406,
+            "p90_px": 65.22350311279297,
+            "success_counts": {
+              "1": 117,
+              "3": 1056,
+              "5": 2949
+            }
+          },
+          "outside_gt_weight_fraction": 0.03173651546239853,
+          "selected_training_target_negative": 124
+        }
+      },
+      "crossed_refits": {
+        "before_coords_before_weights": 5.283550262451172,
+        "before_coords_after_weights": 43.373565673828125,
+        "after_coords_before_weights": 5.355648040771484,
+        "after_coords_after_weights": 43.35505676269531,
+        "after_weights_intersect_old_gate": {
+          "error_px": 5.513634204864502,
+          "selected": 1811
+        },
+        "oracle_gt_visible_only": {
+          "error_px": 0.8884577751159668,
+          "selected": 1818
+        },
+        "oracle_gt_visible_and_error5_only": {
+          "error_px": 0.8148452043533325,
+          "selected": 1764
+        }
+      }
+    },
+    {
+      "rank": 2,
+      "pair_id": "current_tier1_1__37.552000126.789000",
+      "archived_before": 1.4752333164215088,
+      "archived_after": 31.6185359954834,
+      "states": {
+        "before": {
+          "selected": 1729,
+          "gt_visible_grid": 1844,
+          "selected_gt_visible": 1724,
+          "selected_outside_gt_visible": 5,
+          "selected_gt_error_gt5": 113,
+          "selected_gt_error_gt10": 12,
+          "selected_gt_error_mean": 2.4970452785491943,
+          "mean_matchability": 0.5727854371070862,
+          "effective_weighted_points": 1652.4921875,
+          "good5_weight_fraction": 0.9442018866539001,
+          "source_hull_fraction": 0.7105372909616303,
+          "occupied_4x4_cells": 14,
+          "regularized_normal_condition": 15.000772438772197,
+          "H0_overlap": {
+            "direction": "A_to_B",
+            "units": "resized_target_pixels",
+            "support_pixels": 470907,
+            "finite_predictions": 470907,
+            "invalid_predictions": 0,
+            "fit_valid": true,
+            "mean_px": 1.4752334356307983,
+            "median_px": 1.523740530014038,
+            "p90_px": 1.971260905265808,
+            "success_counts": {
+              "1": 73198,
+              "3": 470847,
+              "5": 470907
+            }
+          },
+          "outside_gt_weight_fraction": 0.001417841762304306,
+          "selected_training_target_negative": 3
+        },
+        "after": {
+          "selected": 1865,
+          "gt_visible_grid": 1844,
+          "selected_gt_visible": 1775,
+          "selected_outside_gt_visible": 90,
+          "selected_gt_error_gt5": 118,
+          "selected_gt_error_gt10": 17,
+          "selected_gt_error_mean": 2.4044463634490967,
+          "mean_matchability": 0.6409233212471008,
+          "effective_weighted_points": 1781.851318359375,
+          "good5_weight_fraction": 0.9238671660423279,
+          "source_hull_fraction": 0.8467305388762423,
+          "occupied_4x4_cells": 16,
+          "regularized_normal_condition": 12.871488789605461,
+          "H0_overlap": {
+            "direction": "A_to_B",
+            "units": "resized_target_pixels",
+            "support_pixels": 470907,
+            "finite_predictions": 470907,
+            "invalid_predictions": 0,
+            "fit_valid": true,
+            "mean_px": 31.618539810180664,
+            "median_px": 23.715110778808594,
+            "p90_px": 63.18278503417969,
+            "success_counts": {
+              "1": 244,
+              "3": 2593,
+              "5": 8298
+            }
+          },
+          "outside_gt_weight_fraction": 0.021662306040525436,
+          "selected_training_target_negative": 88
+        }
+      },
+      "crossed_refits": {
+        "before_coords_before_weights": 1.4748483896255493,
+        "before_coords_after_weights": 31.743894577026367,
+        "after_coords_before_weights": 1.3459051847457886,
+        "after_coords_after_weights": 31.618417739868164,
+        "after_weights_intersect_old_gate": {
+          "error_px": 1.343611717224121,
+          "selected": 1729
+        },
+        "oracle_gt_visible_only": {
+          "error_px": 1.3264563083648682,
+          "selected": 1775
+        },
+        "oracle_gt_visible_and_error5_only": {
+          "error_px": 1.1931284666061401,
+          "selected": 1657
+        }
+      }
+    },
+    {
+      "rank": 3,
+      "pair_id": "current_tier1_2__37.522000126.908000",
+      "archived_before": 12.722661018371582,
+      "archived_after": 39.8874397277832,
+      "states": {
+        "before": {
+          "selected": 1918,
+          "gt_visible_grid": 1920,
+          "selected_gt_visible": 1889,
+          "selected_outside_gt_visible": 29,
+          "selected_gt_error_gt5": 84,
+          "selected_gt_error_gt10": 11,
+          "selected_gt_error_mean": 1.9634817838668823,
+          "mean_matchability": 0.6070411801338196,
+          "effective_weighted_points": 1832.7816162109375,
+          "good5_weight_fraction": 0.9606448411941528,
+          "source_hull_fraction": 0.8740108413206737,
+          "occupied_4x4_cells": 16,
+          "regularized_normal_condition": 12.822885259484023,
+          "H0_overlap": {
+            "direction": "A_to_B",
+            "units": "resized_target_pixels",
+            "support_pixels": 491011,
+            "finite_predictions": 491011,
+            "invalid_predictions": 0,
+            "fit_valid": true,
+            "mean_px": 12.722661018371582,
+            "median_px": 11.967000961303711,
+            "p90_px": 20.607786178588867,
+            "success_counts": {
+              "1": 1136,
+              "3": 10372,
+              "5": 30829
+            }
+          },
+          "outside_gt_weight_fraction": 0.007071040570735931,
+          "selected_training_target_negative": 28
+        },
+        "after": {
+          "selected": 2014,
+          "gt_visible_grid": 1920,
+          "selected_gt_visible": 1913,
+          "selected_outside_gt_visible": 101,
+          "selected_gt_error_gt5": 87,
+          "selected_gt_error_gt10": 13,
+          "selected_gt_error_mean": 1.968988060951233,
+          "mean_matchability": 0.6806339621543884,
+          "effective_weighted_points": 1935.8460693359375,
+          "good5_weight_fraction": 0.945466935634613,
+          "source_hull_fraction": 0.8942107639986494,
+          "occupied_4x4_cells": 16,
+          "regularized_normal_condition": 11.322033376139258,
+          "H0_overlap": {
+            "direction": "A_to_B",
+            "units": "resized_target_pixels",
+            "support_pixels": 491011,
+            "finite_predictions": 491011,
+            "invalid_predictions": 0,
+            "fit_valid": true,
+            "mean_px": 39.88743591308594,
+            "median_px": 38.63701629638672,
+            "p90_px": 63.49099349975586,
+            "success_counts": {
+              "1": 106,
+              "3": 960,
+              "5": 2766
+            }
+          },
+          "outside_gt_weight_fraction": 0.02249513939023018,
+          "selected_training_target_negative": 100
+        }
+      },
+      "crossed_refits": {
+        "before_coords_before_weights": 12.722845077514648,
+        "before_coords_after_weights": 40.21810531616211,
+        "after_coords_before_weights": 12.738733291625977,
+        "after_coords_after_weights": 39.887596130371094,
+        "after_weights_intersect_old_gate": {
+          "error_px": 12.989215850830078,
+          "selected": 1918
+        },
+        "oracle_gt_visible_only": {
+          "error_px": 0.40010160207748413,
+          "selected": 1913
+        },
+        "oracle_gt_visible_and_error5_only": {
+          "error_px": 0.4722904562950134,
+          "selected": 1826
+        }
+      }
+    },
+    {
+      "rank": 4,
+      "pair_id": "past_tier1_1__35.513100129.396223",
+      "archived_before": 0.890449047088623,
+      "archived_after": 26.852296829223633,
+      "states": {
+        "before": {
+          "selected": 1701,
+          "gt_visible_grid": 1736,
+          "selected_gt_visible": 1689,
+          "selected_outside_gt_visible": 12,
+          "selected_gt_error_gt5": 81,
+          "selected_gt_error_gt10": 6,
+          "selected_gt_error_mean": 2.067018747329712,
+          "mean_matchability": 0.5455935001373291,
+          "effective_weighted_points": 1625.6920166015625,
+          "good5_weight_fraction": 0.9578352570533752,
+          "source_hull_fraction": 0.769679314367278,
+          "occupied_4x4_cells": 15,
+          "regularized_normal_condition": 17.800887033407452,
+          "H0_overlap": {
+            "direction": "A_to_B",
+            "units": "resized_target_pixels",
+            "support_pixels": 443638,
+            "finite_predictions": 443638,
+            "invalid_predictions": 0,
+            "fit_valid": true,
+            "mean_px": 0.8904486894607544,
+            "median_px": 0.7314790487289429,
+            "p90_px": 1.6725401878356934,
+            "success_counts": {
+              "1": 299152,
+              "3": 443638,
+              "5": 443638
+            }
+          },
+          "outside_gt_weight_fraction": 0.0034071747213602066,
+          "selected_training_target_negative": 13
+        },
+        "after": {
+          "selected": 1804,
+          "gt_visible_grid": 1736,
+          "selected_gt_visible": 1713,
+          "selected_outside_gt_visible": 91,
+          "selected_gt_error_gt5": 84,
+          "selected_gt_error_gt10": 11,
+          "selected_gt_error_mean": 2.1923840045928955,
+          "mean_matchability": 0.6215406656265259,
+          "effective_weighted_points": 1733.2000732421875,
+          "good5_weight_fraction": 0.9409851431846619,
+          "source_hull_fraction": 0.8744273355718652,
+          "occupied_4x4_cells": 16,
+          "regularized_normal_condition": 15.811068914609548,
+          "H0_overlap": {
+            "direction": "A_to_B",
+            "units": "resized_target_pixels",
+            "support_pixels": 443638,
+            "finite_predictions": 443638,
+            "invalid_predictions": 0,
+            "fit_valid": true,
+            "mean_px": 26.852298736572266,
+            "median_px": 26.936132431030273,
+            "p90_px": 42.5212516784668,
+            "success_counts": {
+              "1": 341,
+              "3": 3066,
+              "5": 8607
+            }
+          },
+          "outside_gt_weight_fraction": 0.022884372621774673,
+          "selected_training_target_negative": 96
+        }
+      },
+      "crossed_refits": {
+        "before_coords_before_weights": 0.8902084231376648,
+        "before_coords_after_weights": 26.787818908691406,
+        "after_coords_before_weights": 0.8933697938919067,
+        "after_coords_after_weights": 26.8521728515625,
+        "after_weights_intersect_old_gate": {
+          "error_px": 0.8740503191947937,
+          "selected": 1701
+        },
+        "oracle_gt_visible_only": {
+          "error_px": 0.5519006252288818,
+          "selected": 1713
+        },
+        "oracle_gt_visible_and_error5_only": {
+          "error_px": 0.4509292244911194,
+          "selected": 1629
+        }
+      }
+    },
+    {
+      "rank": 5,
+      "pair_id": "past_tier1_1__36.155100129.382223",
+      "archived_before": 1.6396621465682983,
+      "archived_after": 26.665340423583984,
+      "states": {
+        "before": {
+          "selected": 1653,
+          "gt_visible_grid": 1703,
+          "selected_gt_visible": 1627,
+          "selected_outside_gt_visible": 26,
+          "selected_gt_error_gt5": 68,
+          "selected_gt_error_gt10": 3,
+          "selected_gt_error_mean": 1.9817676544189453,
+          "mean_matchability": 0.5345438718795776,
+          "effective_weighted_points": 1578.555908203125,
+          "good5_weight_fraction": 0.9540425539016724,
+          "source_hull_fraction": 0.7498958819871242,
+          "occupied_4x4_cells": 16,
+          "regularized_normal_condition": 15.799554466451003,
+          "H0_overlap": {
+            "direction": "A_to_B",
+            "units": "resized_target_pixels",
+            "support_pixels": 435031,
+            "finite_predictions": 435031,
+            "invalid_predictions": 0,
+            "fit_valid": true,
+            "mean_px": 1.6396621465682983,
+            "median_px": 1.5548908710479736,
+            "p90_px": 3.0522046089172363,
+            "success_counts": {
+              "1": 130356,
+              "3": 388234,
+              "5": 435031
+            }
+          },
+          "outside_gt_weight_fraction": 0.008808044716715813,
+          "selected_training_target_negative": 25
+        },
+        "after": {
+          "selected": 1747,
+          "gt_visible_grid": 1703,
+          "selected_gt_visible": 1665,
+          "selected_outside_gt_visible": 82,
+          "selected_gt_error_gt5": 67,
+          "selected_gt_error_gt10": 5,
+          "selected_gt_error_mean": 1.9424813985824585,
+          "mean_matchability": 0.6090182065963745,
+          "effective_weighted_points": 1678.7891845703125,
+          "good5_weight_fraction": 0.9420739412307739,
+          "source_hull_fraction": 0.7998750598442546,
+          "occupied_4x4_cells": 16,
+          "regularized_normal_condition": 12.744643162144751,
+          "H0_overlap": {
+            "direction": "A_to_B",
+            "units": "resized_target_pixels",
+            "support_pixels": 435031,
+            "finite_predictions": 435031,
+            "invalid_predictions": 0,
+            "fit_valid": true,
+            "mean_px": 26.665340423583984,
+            "median_px": 26.544641494750977,
+            "p90_px": 42.87489700317383,
+            "success_counts": {
+              "1": 325,
+              "3": 2936,
+              "5": 8256
+            }
+          },
+          "outside_gt_weight_fraction": 0.02376561611890793,
+          "selected_training_target_negative": 90
+        }
+      },
+      "crossed_refits": {
+        "before_coords_before_weights": 1.639823317527771,
+        "before_coords_after_weights": 26.786651611328125,
+        "after_coords_before_weights": 1.5733304023742676,
+        "after_coords_after_weights": 26.665407180786133,
+        "after_weights_intersect_old_gate": {
+          "error_px": 1.5932883024215698,
+          "selected": 1653
+        },
+        "oracle_gt_visible_only": {
+          "error_px": 0.6962597966194153,
+          "selected": 1665
+        },
+        "oracle_gt_visible_and_error5_only": {
+          "error_px": 0.5378552079200745,
+          "selected": 1598
+        }
+      }
+    }
+  ],
+  "diagnostic_limitations": "GT filtering is an oracle-only cause probe, not a deployable fix; top5 selected on val, not representative evaluation."
+}

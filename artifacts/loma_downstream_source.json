@@ -1,0 +1,16 @@
+{
+  "source": "/home/disk1/LoMa/experiments/stage1_dedode_pyramid_hroi_v1",
+  "git_commit": "899fdb99a4076e312196bbbf99a3c329739b5d7a",
+  "files_sha256": {
+    "configs.py": "79d1999a7763cd6e845b56c8b318f39d574742f5cf9200e8edddd4521b760571",
+    "matching_utils.py": "c1f66a03715a98aa3e270bc1f7c3d6e2041072047ad74d95c5fadee1403fb0bd",
+    "coarse_matcher.py": "8e8c812363821f5dfda630018ef7ee73704d45b69db7bc69ddcbcde3894ba571",
+    "fine_matcher.py": "284063a29357fefc67666215f0ce6f074851b8c4b0a29c2fee8a09aa1c9187bf",
+    "warped_fine_matcher.py": "0468a190fde43a4b141c734eeb7e3b9eef90c244179ad6f947e929a04c181ba0",
+    "overlap_masks.py": "1807b9b485d1ea09f7d2bf85564df65e03fe69784ade5e4eb55c4616bfdcf7e2"
+  },
+  "phase": "zero_shot_reference_kernels_only",
+  "primary": "C3-P3",
+  "comparison": "C3-P6",
+  "trainable_head_ported": false
+}

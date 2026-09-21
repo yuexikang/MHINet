@@ -1,0 +1,118 @@
+{
+  "revision": 1,
+  "phase": "baseline_and_zero_shot_migration",
+  "frozen_at_registration": true,
+  "registrations": {
+    "1": {
+      "status": "running",
+      "checkpoint": "/home/disk1/MHINet/outputs/shared_descriptor_frozen_tier3_seed0/latest.pt",
+      "checkpoint_sha256": "5a9ed14cc32a1a4ff3a843b737410da13d795b79c42a9d33d82a068226e30386",
+      "tier": 1,
+      "split": "val",
+      "manifest": "/home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_stable_v2/val/pairs.jsonl",
+      "manifest_sha256": "9e69f1af29dca1073ca3f12a618d61b52b66a76e67346d2ab39830de17ec5f44",
+      "checkpoint_training_config": {
+        "runtime": "/home/disk1/MHINet/configs/runtime_paths.quadrant.server.json",
+        "seed": 0,
+        "tier": 3,
+        "lora": false,
+        "accumulation": 4,
+        "queries": 1024,
+        "save_every": 1000,
+        "learning_rate_scale": 0.5,
+        "initialize_checkpoint": "/home/disk1/MHINet/outputs/shared_descriptor_frozen_tier2_seed0/latest.pt"
+      }
+    },
+    "2": {
+      "status": "running",
+      "checkpoint": "/home/disk1/MHINet/outputs/shared_descriptor_frozen_tier3_seed0/latest.pt",
+      "checkpoint_sha256": "5a9ed14cc32a1a4ff3a843b737410da13d795b79c42a9d33d82a068226e30386",
+      "tier": 2,
+      "split": "val",
+      "manifest": "/home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_stable_v2/val/pairs.jsonl",
+      "manifest_sha256": "9e69f1af29dca1073ca3f12a618d61b52b66a76e67346d2ab39830de17ec5f44",
+      "checkpoint_training_config": {
+        "runtime": "/home/disk1/MHINet/configs/runtime_paths.quadrant.server.json",
+        "seed": 0,
+        "tier": 3,
+        "lora": false,
+        "accumulation": 4,
+        "queries": 1024,
+        "save_every": 1000,
+        "learning_rate_scale": 0.5,
+        "initialize_checkpoint": "/home/disk1/MHINet/outputs/shared_descriptor_frozen_tier2_seed0/latest.pt"
+      }
+    },
+    "3": {
+      "status": "running",
+      "checkpoint": "/home/disk1/MHINet/outputs/shared_descriptor_frozen_tier3_seed0/latest.pt",
+      "checkpoint_sha256": "5a9ed14cc32a1a4ff3a843b737410da13d795b79c42a9d33d82a068226e30386",
+      "tier": 3,
+      "split": "val",
+      "manifest": "/home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_stable_v2/val/pairs.jsonl",
+      "manifest_sha256": "9e69f1af29dca1073ca3f12a618d61b52b66a76e67346d2ab39830de17ec5f44",
+      "checkpoint_training_config": {
+        "runtime": "/home/disk1/MHINet/configs/runtime_paths.quadrant.server.json",
+        "seed": 0,
+        "tier": 3,
+        "lora": false,
+        "accumulation": 4,
+        "queries": 1024,
+        "save_every": 1000,
+        "learning_rate_scale": 0.5,
+        "initialize_checkpoint": "/home/disk1/MHINet/outputs/shared_descriptor_frozen_tier2_seed0/latest.pt"
+      }
+    }
+  },
+  "metric_source_sha256": "ea6ac72c3616a66823277719d3c906417a675cd0c223584f10af532bc2064c66",
+  "smoke": {
+    "p3": {
+      "checkpoint": "/home/disk1/MHINet/outputs/shared_descriptor_frozen_tier3_seed0/latest.pt",
+      "checkpoint_sha256": "5a9ed14cc32a1a4ff3a843b737410da13d795b79c42a9d33d82a068226e30386",
+      "manifest": "/home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_stable_v2/val/pairs.jsonl",
+      "manifest_sha256": "9e69f1af29dca1073ca3f12a618d61b52b66a76e67346d2ab39830de17ec5f44",
+      "tier": 1,
+      "result_id": "C3-P3",
+      "limit": 2,
+      "scope": "smoke",
+      "source_registry_sha256": "b69acf680f602f3dcb10277655e877b51745b3c4681e27e843a452a26763f637",
+      "pairs": 2,
+      "failure_rate": 0,
+      "mean_matches": 12000,
+      "mean_precision": {
+        "1.0": 0.9581666666666666,
+        "3.0": 0.9999583333333333,
+        "5.0": 0.9999583333333333,
+        "10.0": 0.9999583333333333
+      },
+      "success_rate_20_correct_at_5px": 1,
+      "mean_runtime_ms": 628.7336349487305,
+      "peak_allocated_bytes": 2335116288,
+      "note": "Native target pixels. No fitted-H metric yet; RMSE in pair rows is legacy correct-match-conditioned, not all-match accuracy. Warmup included."
+    },
+    "p6": {
+      "checkpoint": "/home/disk1/MHINet/outputs/shared_descriptor_frozen_tier3_seed0/latest.pt",
+      "checkpoint_sha256": "5a9ed14cc32a1a4ff3a843b737410da13d795b79c42a9d33d82a068226e30386",
+      "manifest": "/home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_stable_v2/val/pairs.jsonl",
+      "manifest_sha256": "9e69f1af29dca1073ca3f12a618d61b52b66a76e67346d2ab39830de17ec5f44",
+      "tier": 1,
+      "result_id": "C3-P6",
+      "limit": 2,
+      "scope": "smoke",
+      "source_registry_sha256": "b69acf680f602f3dcb10277655e877b51745b3c4681e27e843a452a26763f637",
+      "pairs": 2,
+      "failure_rate": 0,
+      "mean_matches": 5969.5,
+      "mean_precision": {
+        "1.0": 0.6882240276140765,
+        "3.0": 0.99975,
+        "5.0": 0.9999166666666667,
+        "10.0": 1
+      },
+      "success_rate_20_correct_at_5px": 1,
+      "mean_runtime_ms": 227.2531851194799,
+      "peak_allocated_bytes": 2334994944,
+      "note": "Native target pixels. No fitted-H metric yet; RMSE in pair rows is legacy correct-match-conditioned, not all-match accuracy. Warmup included."
+    }
+  }
+}

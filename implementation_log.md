@@ -1,5 +1,19 @@
 # MHINet implementation log
 
+## 2026-09-21：登记新版共享基线与LoMa H0引导下游迁移第一阶段
+
+用户批准共享网络并列下游方案并强调保留LoMa的H0依赖。实际定位为 `/home/disk1/LoMa/experiments/stage1_dedode_pyramid_hroi_v1`，git899fdb99a4076e312196bbbf99a3c329739b5d7a，源工作区无改动。不是直接移植src/loma关键点网络。登记 `artifacts/loma_downstream_source.json`，逐文件SHA固定6个纯匹配模块，保留MIT许可证；迁入mhinet/downstream/loma_reference。P3预测H0双向支持→D8 dual-softmax粗匹配→H残差D2局部匹配；P6为H-warped sym4对照。RRU、LoFTR fine仅定位，尚未迁入/训练，不混称为已完成的密集训练头。
+
+新增HGuidedDenseDownstream无共享模块所有权，接收现有共享输出，非法H在逆/投影前拒绝；GT不进入匹配。此消费者明确为no_grad零样本推理，未复制旧共享网络train(False)包装，未改MHIR/共享训练梯度。DINO/MVT/VGG各1次，累计解码4步至D2，D1调用0。新增CLI evaluate-dense和scripts/validate_dense_loma.sh，默认指定tier完整val、显式--limit才冒烟，不覆盖已有输出。
+
+共同checkpoint `outputs/shared_descriptor_frozen_tier3_seed0/latest.pt` SHA256 `5a9ed14cc32a1a4ff3a843b737410da13d795b79c42a9d33d82a068226e30386`；stable_v2 val SHA `9e69f1af29dca1073ca3f12a618d61b52b66a76e67346d2ab39830de17ec5f44`。共享完整val baseline用scripts/evaluate_shared_full.py新增--data-root，启动前写registration.json，GPU0/1/2分别第一/二/三档，PID3828039/3828040/3828041，输出outputs/shared_tier3_stable_v2_baseline_tier{1,2,3}和同名.log。运行命令 `CUDA_VISIBLE_DEVICES=GPU OMP_NUM_THREADS=4 OPENBLAS_NUM_THREADS=1 /root/miniconda3/envs/loma-repro/bin/python -u -m scripts.evaluate_shared_full --checkpoint outputs/shared_descriptor_frozen_tier3_seed0/latest.pt --tier TIER --data-root /home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_stable_v2 --output outputs/shared_tier3_stable_v2_baseline_tierTIER`。集中登记artifacts/shared_downstream_registration_v1.json，快照running不代表完成。交付时需看report.json，不提前宣称无遗忘或基线精度。
+
+GPU3先P3再P6各2对真实val冒烟，输出outputs/diagnostics/dense_loma_{p3,p6}_smoke，均无失败。P3平均12000点、P6平均5969.5点，峰值allocated约2.335GB；计时含首步，不作稳定速度/精度排名。新增metrics保留LoMa NCM/precision/overlap_precision/SR，旧RMSE明确命名legacy_RMSE_correct5_or_failure10（仅正确匹配且失败常数10），不当作全匹配或估计H误差。单位为原生目标像素。拟合H评价、覆盖率、置信度曲线尚未完成。
+
+实际对齐 `CUDA_VISIBLE_DEVICES=3 OMP_NUM_THREADS=4 OPENBLAS_NUM_THREADS=1 /root/miniconda3/envs/loma-repro/bin/python -m scripts.check_dense_migration --output artifacts/loma_downstream_parity.json`：原_match编排注入相同GHIM/CGMDP输出，与新下游对齐。最初逐顺序严格相等失败，复查匹配集合坐标差均0，P3置信度最大差7.15e-7造成近并列排列变化；采用坐标规范排序及atol1e-7/rtol1e-6后通过，P6置信度差0。P3/P6原评价数字完全一致。仅一对下游隔离对齐，不冒充完整旧权重端到端验证。
+
+测试：迁入4组原pytest测试（仅改import）36项；新引用SHA/非法H/空集与区外点3项；全套pytest共181项通过3.23秒。环境loma-repro新装pytest8.3.5、iniconfig2.3.0、pluggy1.6.0、tomli2.4.1，未升级模型依赖。详情及阶段状态见docs/shared_downstream_integration.md。未启动新训练。
+
 ## 2026-09-21：旧数据删除完成与新版极端外推复核
 
 按用户授权删除 `/home/disk1/Data/datasets/GoogleEarth_scale_pairs`（删除前约70G）及 `/home/disk1/Data/datasets/GoogleEarth_temporal4_v1`（约68G）；使用明确路径的rm -r，未跟随temporal4/test软链接遍历额外目标。2026-09-21复核两个目录均不存在、删除进程结束；未进入回收站，无法直接恢复，需重新生成。原始GoogleEarth、quadrant_tiers_v1、stable_v2、test_single_tier3_v1均保留。删除前生成摘要保存在artifacts/deleted_googleearth_legacy_20260920.json；历史配置中旧路径保留作溯源，已不能直接用于运行，未擅自指向新版。

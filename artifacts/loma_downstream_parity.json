@@ -1,0 +1,36 @@
+{
+  "status": "passed",
+  "scope": "original downstream orchestration vs migrated on identical shared tensors; not upstream legacy-weight parity",
+  "pair_id": "past_tier1_0__34.801100126.376330",
+  "checkpoint_sha256": "5a9ed14cc32a1a4ff3a843b737410da13d795b79c42a9d33d82a068226e30386",
+  "call_counts": {
+    "dino": 1,
+    "mvt": 1,
+    "vgg": 1,
+    "dedode_decode_calls": 1,
+    "dedode_steps": 4,
+    "dedode_scale1": 0
+  },
+  "results": {
+    "C3-P3": {
+      "matches": 12000,
+      "comparison": "canonical coordinate order; atol1e-7 rtol1e-6",
+      "max_abs_differences": {
+        "points_a": 0.0,
+        "points_b": 0.0,
+        "confidence": 7.152557373046875e-07
+      },
+      "legacy_metrics_exact": true
+    },
+    "C3-P6": {
+      "matches": 5939,
+      "comparison": "canonical coordinate order; atol1e-7 rtol1e-6",
+      "max_abs_differences": {
+        "points_a": 0.0,
+        "points_b": 0.0,
+        "confidence": 0.0
+      },
+      "legacy_metrics_exact": true
+    }
+  }
+}

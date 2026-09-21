@@ -1,5 +1,13 @@
 # MHINet implementation log
 
+## 2026-09-21：旧数据删除完成与新版极端外推复核
+
+按用户授权删除 `/home/disk1/Data/datasets/GoogleEarth_scale_pairs`（删除前约70G）及 `/home/disk1/Data/datasets/GoogleEarth_temporal4_v1`（约68G）；使用明确路径的rm -r，未跟随temporal4/test软链接遍历额外目标。2026-09-21复核两个目录均不存在、删除进程结束；未进入回收站，无法直接恢复，需重新生成。原始GoogleEarth、quadrant_tiers_v1、stable_v2、test_single_tier3_v1均保留。删除前生成摘要保存在artifacts/deleted_googleearth_legacy_20260920.json；历史配置中旧路径保留作溯源，已不能直接用于运行，未擅自指向新版。
+
+完整外推检查：scripts/audit_stable_extrapolation.py，报告artifacts/stable_geometry_v2_extrapolation.json，说明docs/stable_geometry_v2_extrapolation.md。实际命令 `OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 /root/miniconda3/envs/loma-repro/bin/python -u -m scripts.audit_stable_extrapolation --root /home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_stable_v2 --output artifacts/stable_geometry_v2_extrapolation.json`。train121282/val13468，全部双向，784像素半像素重采样坐标；角坐标绝对值>10000px、无穷远线距离<10px均0，无分母变号。train/val最大角坐标绝对值2342.551/2323.659px，最小无穷远线距离199.450/215.059px，最大角点局部放大率8.944/9.044。仍有正常外推，角坐标绝对值>2000px为690/69对，坐标不是预测误差。
+
+从每个split选双向角投影最远3对，共6对、正反12组，各100次128点GT几何对应的sigma0.1px高斯扰动拟合：重叠误差中位数0.02021–0.02254px、四角误差中位数0.04721–0.20497px、P90 0.07438–0.40258px。仅这些样本该噪声条件下的控制实验，不含遮挡mask/真实误匹配，也不是模型预测。全套142项测试通过（1.993秒），包括新恒等/反向尺度/分母变号拒绝测试。重新校验当前train/val manifest SHA与外推报告一致。本次不加载checkpoint、不启动训练，不把真值几何安全表述为模型精度验证成功。
+
 ## 2026-09-20：按批准清理工程权重并验收稳定几何数据
 
 最终验收完成：`artifacts/stable_geometry_v2_verification.json` status=passed，耗时1022.38秒。全量134750对、1078000个PNG头/尺寸通过，train/val各90对解码和双向mask重建通过（共180对，按tier×ratio取前10对，非随机抽样）。全量H组合误差最大0；归一化Jacobian上界train9.9999209/val9.9948778≤10，中心投影范围2.4948557/2.4714207≤2.5，最小无穷远线距离0.2544594/0.2748707≥0.1。母图划分与v1严格相同，train/val的母图、geo、pair ID交集均0，test清单逐字节不变。train manifest SHA256 `c48eb269be7e96a6be8d4eb43b668035d758f0aaf4268d9f6abb8e337e3aad23`；val `9e69f1af29dca1073ca3f12a618d61b52b66a76e67346d2ab39830de17ec5f44`。未做全量PNG像素解码/CRC验证，未评估模型精度，未切换训练配置、未启动训练。

@@ -1,0 +1,267 @@
+{
+  "root": "/home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_stable_v2",
+  "coordinate_protocol": "784 input pixels; half-pixel resize; both directions",
+  "scope": "GT geometry, not model predictions. Noise experiment uses GT geometric overlap only, not occlusion masks.",
+  "splits": {
+    "train": {
+      "manifest_sha256": "c48eb269be7e96a6be8d4eb43b668035d758f0aaf4268d9f6abb8e337e3aad23",
+      "tiers": {
+        "1": {
+          "pairs": 51978,
+          "corner_abs_gt_10000": 0,
+          "corner_abs_gt_2000": 339,
+          "horizon_lt_10px": 0,
+          "max_abs_corner_px": 2342.551050078025,
+          "min_horizon_distance_px": 199.44980274573547,
+          "max_corner_magnification": 8.943651352967008,
+          "corner_abs_p50_p90_p99": [
+            1119.5643055050168,
+            1477.09140736471,
+            1926.8276168222278
+          ]
+        },
+        "2": {
+          "pairs": 34652,
+          "corner_abs_gt_10000": 0,
+          "corner_abs_gt_2000": 243,
+          "horizon_lt_10px": 0,
+          "max_abs_corner_px": 2339.3829026943495,
+          "min_horizon_distance_px": 226.63422112655334,
+          "max_corner_magnification": 8.73095228770237,
+          "corner_abs_p50_p90_p99": [
+            1119.6352615116475,
+            1480.5231018059058,
+            1937.9693711878804
+          ]
+        },
+        "3": {
+          "pairs": 34652,
+          "corner_abs_gt_10000": 0,
+          "corner_abs_gt_2000": 108,
+          "horizon_lt_10px": 0,
+          "max_abs_corner_px": 2336.5467775988304,
+          "min_horizon_distance_px": 209.7482089578172,
+          "max_corner_magnification": 8.595708345481025,
+          "corner_abs_p50_p90_p99": [
+            1080.001683083878,
+            1393.9011724991772,
+            1826.8914543605135
+          ]
+        }
+      },
+      "sensitivity_worst_three": [
+        {
+          "max_abs_corner_px": 2342.551050078025,
+          "forward": {
+            "pair_id": "past_tier1_2__35.429100129.284223",
+            "seed": 0,
+            "trials": 100,
+            "correspondences": 128,
+            "gaussian_noise_sigma_target_px": 0.1,
+            "cv2_version": "4.13.0",
+            "overlap_error_median_px": 0.021570096091159383,
+            "corner_error_median_px": 0.050795242936940085,
+            "corner_error_p90_px": 0.07437712256751482,
+            "note": "Controlled GT correspondence noise plus unrobust least-squares H fitting; not MHINet output, and not evidence that all network errors are harmless."
+          },
+          "backward": {
+            "pair_id": "past_tier1_2__35.429100129.284223",
+            "seed": 0,
+            "trials": 100,
+            "correspondences": 128,
+            "gaussian_noise_sigma_target_px": 0.1,
+            "cv2_version": "4.13.0",
+            "overlap_error_median_px": 0.0204065581616069,
+            "corner_error_median_px": 0.10842093681387299,
+            "corner_error_p90_px": 0.2494365299512287,
+            "note": "Controlled GT correspondence noise plus unrobust least-squares H fitting; not MHINet output, and not evidence that all network errors are harmless."
+          }
+        },
+        {
+          "max_abs_corner_px": 2339.3829026943495,
+          "forward": {
+            "pair_id": "current_tier2_1__35.872643128.475189",
+            "seed": 0,
+            "trials": 100,
+            "correspondences": 128,
+            "gaussian_noise_sigma_target_px": 0.1,
+            "cv2_version": "4.13.0",
+            "overlap_error_median_px": 0.021248044598192947,
+            "corner_error_median_px": 0.085202613834154,
+            "corner_error_p90_px": 0.12803122672484005,
+            "note": "Controlled GT correspondence noise plus unrobust least-squares H fitting; not MHINet output, and not evidence that all network errors are harmless."
+          },
+          "backward": {
+            "pair_id": "current_tier2_1__35.872643128.475189",
+            "seed": 0,
+            "trials": 100,
+            "correspondences": 128,
+            "gaussian_noise_sigma_target_px": 0.1,
+            "cv2_version": "4.13.0",
+            "overlap_error_median_px": 0.022540339888768995,
+            "corner_error_median_px": 0.2049665018445052,
+            "corner_error_p90_px": 0.40258159217745354,
+            "note": "Controlled GT correspondence noise plus unrobust least-squares H fitting; not MHINet output, and not evidence that all network errors are harmless."
+          }
+        },
+        {
+          "max_abs_corner_px": 2337.2258171494527,
+          "forward": {
+            "pair_id": "current_tier1_2__36.275100129.326223",
+            "seed": 0,
+            "trials": 100,
+            "correspondences": 128,
+            "gaussian_noise_sigma_target_px": 0.1,
+            "cv2_version": "4.13.0",
+            "overlap_error_median_px": 0.021866577777662852,
+            "corner_error_median_px": 0.18637726933263557,
+            "corner_error_p90_px": 0.3716120557325782,
+            "note": "Controlled GT correspondence noise plus unrobust least-squares H fitting; not MHINet output, and not evidence that all network errors are harmless."
+          },
+          "backward": {
+            "pair_id": "current_tier1_2__36.275100129.326223",
+            "seed": 0,
+            "trials": 100,
+            "correspondences": 128,
+            "gaussian_noise_sigma_target_px": 0.1,
+            "cv2_version": "4.13.0",
+            "overlap_error_median_px": 0.021905408913752648,
+            "corner_error_median_px": 0.060853910920272127,
+            "corner_error_p90_px": 0.11261510372276005,
+            "note": "Controlled GT correspondence noise plus unrobust least-squares H fitting; not MHINet output, and not evidence that all network errors are harmless."
+          }
+        }
+      ]
+    },
+    "val": {
+      "manifest_sha256": "9e69f1af29dca1073ca3f12a618d61b52b66a76e67346d2ab39830de17ec5f44",
+      "tiers": {
+        "1": {
+          "pairs": 5772,
+          "corner_abs_gt_10000": 0,
+          "corner_abs_gt_2000": 37,
+          "horizon_lt_10px": 0,
+          "max_abs_corner_px": 2281.566983075811,
+          "min_horizon_distance_px": 215.0592398453081,
+          "max_corner_magnification": 8.414272348703385,
+          "corner_abs_p50_p90_p99": [
+            1119.3593503195498,
+            1477.2169345787386,
+            1909.9854718439342
+          ]
+        },
+        "2": {
+          "pairs": 3848,
+          "corner_abs_gt_10000": 0,
+          "corner_abs_gt_2000": 25,
+          "horizon_lt_10px": 0,
+          "max_abs_corner_px": 2304.1618238656206,
+          "min_horizon_distance_px": 243.74658417611508,
+          "max_corner_magnification": 9.043690668090031,
+          "corner_abs_p50_p90_p99": [
+            1115.6210167299787,
+            1459.982803874955,
+            1904.6741146215375
+          ]
+        },
+        "3": {
+          "pairs": 3848,
+          "corner_abs_gt_10000": 0,
+          "corner_abs_gt_2000": 7,
+          "horizon_lt_10px": 0,
+          "max_abs_corner_px": 2323.6585600968915,
+          "min_horizon_distance_px": 220.82901379120437,
+          "max_corner_magnification": 7.945633761020879,
+          "corner_abs_p50_p90_p99": [
+            1082.0358999246632,
+            1393.7055631288872,
+            1821.7547858923406
+          ]
+        }
+      },
+      "sensitivity_worst_three": [
+        {
+          "max_abs_corner_px": 2323.6585600968915,
+          "forward": {
+            "pair_id": "past_tier3_0__35.411100129.326223",
+            "seed": 0,
+            "trials": 100,
+            "correspondences": 128,
+            "gaussian_noise_sigma_target_px": 0.1,
+            "cv2_version": "4.13.0",
+            "overlap_error_median_px": 0.02125904836117136,
+            "corner_error_median_px": 0.19636818107638077,
+            "corner_error_p90_px": 0.4025291698957129,
+            "note": "Controlled GT correspondence noise plus unrobust least-squares H fitting; not MHINet output, and not evidence that all network errors are harmless."
+          },
+          "backward": {
+            "pair_id": "past_tier3_0__35.411100129.326223",
+            "seed": 0,
+            "trials": 100,
+            "correspondences": 128,
+            "gaussian_noise_sigma_target_px": 0.1,
+            "cv2_version": "4.13.0",
+            "overlap_error_median_px": 0.020486133516525624,
+            "corner_error_median_px": 0.09034485712743369,
+            "corner_error_p90_px": 0.1691694307391301,
+            "note": "Controlled GT correspondence noise plus unrobust least-squares H fitting; not MHINet output, and not evidence that all network errors are harmless."
+          }
+        },
+        {
+          "max_abs_corner_px": 2304.1618238656206,
+          "forward": {
+            "pair_id": "past_tier2_1__35.819100129.291223",
+            "seed": 0,
+            "trials": 100,
+            "correspondences": 128,
+            "gaussian_noise_sigma_target_px": 0.1,
+            "cv2_version": "4.13.0",
+            "overlap_error_median_px": 0.0207820748846642,
+            "corner_error_median_px": 0.12074521097635986,
+            "corner_error_p90_px": 0.286351312923472,
+            "note": "Controlled GT correspondence noise plus unrobust least-squares H fitting; not MHINet output, and not evidence that all network errors are harmless."
+          },
+          "backward": {
+            "pair_id": "past_tier2_1__35.819100129.291223",
+            "seed": 0,
+            "trials": 100,
+            "correspondences": 128,
+            "gaussian_noise_sigma_target_px": 0.1,
+            "cv2_version": "4.13.0",
+            "overlap_error_median_px": 0.02021270333753221,
+            "corner_error_median_px": 0.04720505313103926,
+            "corner_error_p90_px": 0.08297061974367326,
+            "note": "Controlled GT correspondence noise plus unrobust least-squares H fitting; not MHINet output, and not evidence that all network errors are harmless."
+          }
+        },
+        {
+          "max_abs_corner_px": 2282.5789573436123,
+          "forward": {
+            "pair_id": "current_tier2_0__36.405700127.297681",
+            "seed": 0,
+            "trials": 100,
+            "correspondences": 128,
+            "gaussian_noise_sigma_target_px": 0.1,
+            "cv2_version": "4.13.0",
+            "overlap_error_median_px": 0.020479505283740554,
+            "corner_error_median_px": 0.09048992225916497,
+            "corner_error_p90_px": 0.16355462593364,
+            "note": "Controlled GT correspondence noise plus unrobust least-squares H fitting; not MHINet output, and not evidence that all network errors are harmless."
+          },
+          "backward": {
+            "pair_id": "current_tier2_0__36.405700127.297681",
+            "seed": 0,
+            "trials": 100,
+            "correspondences": 128,
+            "gaussian_noise_sigma_target_px": 0.1,
+            "cv2_version": "4.13.0",
+            "overlap_error_median_px": 0.020623473090351806,
+            "corner_error_median_px": 0.17814854933475033,
+            "corner_error_p90_px": 0.38653652786792897,
+            "note": "Controlled GT correspondence noise plus unrobust least-squares H fitting; not MHINet output, and not evidence that all network errors are harmless."
+          }
+        }
+      ]
+    }
+  }
+}

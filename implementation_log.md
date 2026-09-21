@@ -1,5 +1,11 @@
 # MHINet implementation log
 
+## 2026-09-21：登记稳定数据三档完整一轮实验（未启动）
+
+按用户要求给出三条串接训练命令，不自动启动。新增 configs/shared_stable_v2_full_tier{1,2,3}.json、scripts/train_shared_stable_v2_full_tier{1,2,3}.sh、scripts/run_shared_stable_full.py；具体参数与命令见 docs/shared_stable_v2_full_curriculum.md。使用实际 stable_v2 数据及 loma-repro 环境（Python3.10.20、torch2.11.0+cu128）。三档步数12995/8663/8663，无2000步上限；冻结DINO、不用LoRA，BS1×累积4，LR倍率0.1，每5000步及结束完整val。第一档从旧第三档最终权重重新初始化，现场sha256sum确认 5a9ed14cc32a1a4ff3a843b737410da13d795b79c42a9d33d82a068226e30386，不从退化后的2000步继续；后两档路径预填为本组上一档最终latest.pt（未来产物，当前不存在）。新输出shared_stable_v2_full_tier{1,2,3}_seed0，原实验保留，同目录支持恢复。
+
+验证：三个shell的bash -n、启动器py_compile、第一档--check-only均通过；模拟后两档完成checkpoint的配置/步数/最终全量val检查通过，模拟未完成checkpoint均拒绝。实际第二档--check-only按预期退出1并提示第一档权重尚未生成；没有启动训练或分配GPU。完整训练是否修复matchability筛选退化尚无证据，需完成后比较H0重叠误差及尾部，不能仅看loss下降。用户已有无关脏文件未修改、不纳入本次提交。
+
 ## 2026-09-21：第一档适应后最差5对回归诊断
 
 按用户“检查恶化最大的样本”执行只读诊断。新增scripts/diagnose_adaptation_regressions.py（GPU2、H0-only，跳过CGMDP，原GPU0/1工作不动）与scripts/refit_regression_diagnostics.py（CPU，读取已存coarse数组）。前后权重SHA及val SHA登记在artifacts/stable_v2_adaptation_worst5.json，输出outputs/diagnostics/stable_v2_adapt_worst5_v2/01–05，含原图对、前后预测叠加、拟合点空间图、coarse数组。首次绘图因非连续numpy布局失败，修正ascontiguousarray后新目录重跑，旧部分输出未删除；补充探针最初缺LoMa导入路径，增加make_loma_importable后通过。未改模型/数据/训练。

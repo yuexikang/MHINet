@@ -9,7 +9,7 @@ from .supervision import (coarse_labels,fine_grids,fine_labels,to_uv,to_norm,
     sample_uv,valid_points,legal_h,qrru_targets)
 from .losses import coarse_positive_logp,positive_focal,dual_log_probability,qrru_loss
 from .qrru import QRRU
-from .loma_reference.matching_utils import normalized_cell_centers,centers_to_native
+from .loma_reference.matching_utils import normalized_cell_centers,centers_to_native,flat_indices_to_centers
 from .loma_reference.overlap_masks import predicted_overlap_masks
 from .loma_reference.coarse_matcher import match_d8
 
@@ -187,6 +187,9 @@ class SemidenseMatcher(nn.Module):
             valid=torch.isfinite(out).all(-1)&(out>=-1).all(-1)&(out<=1).all(-1)
             results.append(dict(points_a=centers_to_native(a[valid],size[0]),points_b=centers_to_native(out[valid],size[1]),
                 fine_points_b=centers_to_native(b[valid],size[1]),confidence=score[valid],
+                fine_all_a=centers_to_native(a,size[0]),fine_all_b=centers_to_native(b,size[1]),
+                coarse_a=centers_to_native(flat_indices_to_centers(coarse.source_flat,98,98),size[0]),
+                coarse_b=centers_to_native(flat_indices_to_centers(coarse.target_flat,98,98),size[1]),
                 qrru_outside_samples=out_of_bounds,rejected_qrru=int((~valid).sum()),
                 failure_reason='none' if bool(valid.any()) else 'invalid_qrru_output'))
         return results

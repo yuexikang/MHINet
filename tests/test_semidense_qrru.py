@@ -92,5 +92,56 @@ class SemidenseTests(unittest.TestCase):
         self.assertEqual(records[1]['fine_positive'],0)
         self.assertGreater(records[1]['qrru_queries'],0)
 
+    def test_checkpoint_optimizer_boundary_replay(self):
+        import tempfile
+        from pathlib import Path
+        from mhinet.engine.checkpointing import save_checkpoint,load_checkpoint
+        net=QRRU(channels=8,iterations=2)
+        optimizer=torch.optim.Adam(net.parameters(),lr=.001)
+        a=torch.randn(8,20,20);b=torch.randn_like(a)
+        pa=torch.tensor([[8.,8.]])
+        def step():
+            optimizer.zero_grad()
+            target=pa+torch.randn_like(pa)*.2
+            out=net(a,b,pa,pa)['centers'][-1]
+            (out-target).square().mean().backward();optimizer.step()
+        step()
+        with tempfile.TemporaryDirectory() as d:
+            path=Path(d)/'resume.pt'
+            save_checkpoint(path,model=net,optimizer=optimizer,optimizer_step=1,
+                data_progress={'cursor':1},metadata={'protocol':'qrru-test'})
+            step();expected={k:v.clone() for k,v in net.state_dict().items()}
+            load_checkpoint(path,model=net,optimizer=optimizer,map_location='cpu',expected_metadata={'protocol':'qrru-test'})
+            step()
+            for k,v in net.state_dict().items():torch.testing.assert_close(v,expected[k],rtol=0,atol=0)
+
+    def test_empty_supervision_and_masked_softmax(self):
+        from mhinet.downstream.semidense import SemidenseMatcher,SemidenseConfig
+        net=SemidenseMatcher(SemidenseConfig(coarse_queries=4,fine_windows=2,qrru_queries=2),channels=8)
+        d8=torch.randn(1,2,8,4,4,requires_grad=True);d2=torch.randn(1,2,8,16,16,requires_grad=True)
+        h=torch.eye(3)[None]
+        loss,info=net.training_losses({'pyramid':{8:d8,2:d2},'H0_norm':h,'stage1_valid':torch.tensor([True])},
+            h,torch.zeros(1,1,16,16),torch.zeros(1,1,16,16))
+        loss.backward();self.assertEqual(float(loss.detach()),0.)
+        self.assertTrue(torch.isfinite(d8.grad).all() and torch.isfinite(d2.grad).all())
+        logits=torch.randn(2,4,4,requires_grad=True)
+        lp=dual_log_probability(logits,torch.zeros_like(logits,dtype=torch.bool))
+        lp.sum().backward();self.assertTrue(logits.grad.isfinite().all())
+
+    def test_qrru_small_pair_overfit(self):
+        net=QRRU(channels=8,iterations=2)
+        optimizer=torch.optim.Adam(net.parameters(),lr=.003)
+        a=torch.randn(8,20,20);b=torch.randn_like(a)
+        pa=torch.tensor([[8.,8.],[12.,12.]])
+        pb=pa+torch.tensor([.5,-.25])
+        target,valid,center,cv=qrru_targets(pa,pb,torch.eye(3),torch.ones(1,20,20),torch.ones(1,20,20),(20,20))
+        initial=None
+        for _ in range(35):
+            result=net(a,b,pa,pb)
+            loss,_=qrru_loss(result,target,valid,center,cv)
+            if initial is None:initial=float(loss.detach())
+            optimizer.zero_grad();loss.backward();optimizer.step()
+        self.assertLess(float(loss.detach()),initial*.3)
+
 
 if __name__=='__main__':unittest.main()

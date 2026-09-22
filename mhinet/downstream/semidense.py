@@ -109,6 +109,7 @@ class SemidenseMatcher(nn.Module):
                 pb=to_uv(truth,hf)+noise.clamp(-c.noise_bound,c.noise_bound)
                 target,valid,center,center_valid=qrru_targets(pa,pb,H,ma,mb,hf)
             lq=d2.sum()*0; control_value=lq.detach();center_value=lq.detach()
+            q_epe=[0.]*(c.iterations+1);q_update_max=0.
             if len(pa):
                 projected=self.qrru.project(d2)
                 control_count=int(valid.sum()); center_count=int(center_valid.sum())
@@ -118,6 +119,13 @@ class SemidenseMatcher(nn.Module):
                         result=self.qrru(fa,fb,aa,bb,projected=True)
                         return result['flows'],result['centers']
                     flows,centers=checkpoint(refine,projected[0],projected[1],pa[start:end],pb[start:end],use_reentrant=False)
+                    with torch.no_grad():
+                        cv=center_valid[start:end]
+                        if bool(cv.any()):
+                            trajectory=torch.cat((pb[start:end][None],centers),0)
+                            errors=(trajectory-center[start:end][None]).norm(dim=-1)[:,cv].sum(-1)
+                            for t,value in enumerate(errors):q_epe[t]+=float(value)/max(1,center_count)
+                        q_update_max=max(q_update_max,float(flows.detach().abs().max()))
                     # Separate normalization for controls and centers across window chunks.
                     vs=valid[start:end];cs=center_valid[start:end]
                     weights=[int(vs.sum())/max(1,control_count),int(cs.sum())/max(1,center_count)]
@@ -136,7 +144,7 @@ class SemidenseMatcher(nn.Module):
             records.append(dict(lc=float(lc.detach()),lf=float(lf.detach()),lq=float(lq.detach()),
                 q_control=float(control_value),q_center=float(center_value),coarse_positive=min(len(i),c.coarse_queries),
                 fine_positive=fine_count,fine_tokens=fine_tokens,fine_coverage=fine_count/max(1,fine_tokens),
-                qrru_queries=len(pa),h0_valid=good_h))
+                qrru_queries=len(pa),qrru_epe_d2_by_iteration=q_epe,qrru_max_control_d2=q_update_max,h0_valid=good_h))
         return torch.stack(totals).mean(),records
 
     @torch.no_grad()

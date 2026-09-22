@@ -4,6 +4,7 @@ from dataclasses import asdict,replace
 import fcntl
 import json
 import math
+import os
 import random
 import time
 from pathlib import Path
@@ -59,6 +60,9 @@ def main(argv=None):
         if config[key]<1:raise ValueError(key)
     if any(x is not None and x<1 for x in (args.max_steps,args.limit_train,args.limit_val)):raise ValueError('Invalid diagnostic limit')
     runtime=replace(RuntimePaths.from_json(config['runtime']),device=args.device)
+    os.environ.setdefault('CUBLAS_WORKSPACE_CONFIG', ':4096:8')
+    torch.use_deterministic_algorithms(True)
+    torch.backends.cudnn.deterministic=True
     seed=config.get('seed',0);random.seed(seed);np.random.seed(seed);torch.manual_seed(seed)
     torch.backends.cudnn.benchmark=False
     train=SharedPairDataset(runtime.data_root/'train/pairs.jsonl',tier=config.get('tier',1),max_pairs=args.limit_train)
@@ -100,10 +104,13 @@ def main(argv=None):
             for _ in range(count):
                 loss,info=batch_loss(system,next(loader),runtime.device)
                 (loss/count).backward();records.extend(info);cursor+=1
+            frozen_bad=[name for name,param in system.shared.named_parameters() if not param.requires_grad and param.grad is not None]
+            if frozen_bad:raise RuntimeError(f'Frozen gradients: {frozen_bad[:3]}')
+            group_grads={group['name']:float(torch.stack([p.grad.detach().float().square().sum() for p in group['params'] if p.grad is not None]).sum().sqrt()) for group in optimizer.param_groups}
             grad=torch.nn.utils.clip_grad_norm_([x for x in system.parameters() if x.requires_grad],1.,error_if_nonfinite=True)
             optimizer.step();scheduler.step();completed+=1
             row=dict(step=completed,epoch=epoch,cursor=cursor,gradient_norm=float(grad),
-                seconds=time.perf_counter()-started,records=records,
+                seconds=time.perf_counter()-started,records=records,gradient_groups=group_grads,
                 peak_allocated_bytes=torch.cuda.max_memory_allocated() if args.device.startswith('cuda') else 0)
             with (out/'train.jsonl').open('a') as f:f.write(json.dumps(row)+'\n')
             print(json.dumps(row),flush=True)

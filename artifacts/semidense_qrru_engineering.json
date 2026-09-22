@@ -1,0 +1,68 @@
+{
+  "protocol": "semidense_qrru_v1",
+  "status": "engineering_passed",
+  "formal_training_started": false,
+  "checkpoint_source": "/home/disk1/MHINet/outputs/shared_descriptor_frozen_tier3_seed0/latest.pt",
+  "checkpoint_source_sha256": "5a9ed14cc32a1a4ff3a843b737410da13d795b79c42a9d33d82a068226e30386",
+  "data_train_sha256": "6587d3be58dfc8b1601244bcf7fa05e3cb5dba1b14b7a49871dcb1fe3ef3276c",
+  "data_val_sha256": "c4763636e2ca9914c62aec45f5f6f238e0cfa9269343f27571e6c0acdb3d01ee",
+  "implementation": {
+    "evaluate.py": "7e08974daa1c8a92649b9cef0d9b39bac7a9f3314c3d61f32b1ac8869cf91d70",
+    "semidense.py": "b33ec5b2eb298c2d42ef3c890c0bbf4c50cdd1256b4c0a3c63e41e0c066cf6a0",
+    "dense.py": "9435169de4c21d527ae842896caed1a752dc9e7f8011f433637c01d937777f7d",
+    "losses.py": "ddb47c2c474c5932f08a8549fabb355890ecaa37986ac521f815b43aa9970d2c",
+    "__init__.py": "87f1d8e739b320eda4f0cb6afee29469928286abc98ffc824de8baac9d8da998",
+    "evaluate_semidense.py": "e6c73c2bba032a3f2464c8b8fbdfae0abf32163cc3015db90b9045bf27edf5b3",
+    "metrics.py": "e279a427f7f9da4c30d61b2fb24abdfa166da9ffb8f6c9b2d73c926271001879",
+    "train.py": "4bcffaaad9b2fa697af825683bc024f53751e6a3ffbb38320fd1d01ad562e856",
+    "qrru.py": "abe512acc087ddd3d5a24b0779c657db6d50f7bb4bd6d97b34332345fe369b1f",
+    "supervision.py": "318781b2425caffd9fc0cccd527230f7ff1d802ed0b9490cda07c4bdb44767d9",
+    "training.py": "3ce4ad5f39d76860c2060857be6de6ba188bfd33296cba5dcc6e41cbc209dafb"
+  },
+  "gpu_replay": {
+    "status": "passed",
+    "comparison": "bitwise equal model/optimizer/scheduler/RNG/progress",
+    "full": "outputs/semidense_qrru_replay_v2/full/latest.pt",
+    "resumed": "outputs/semidense_qrru_replay_v2/split/latest.pt"
+  },
+  "training_peak_allocated_bytes": 6821463552,
+  "training_gradient_groups": [
+    {
+      "cgmdp": 4.315011501312256,
+      "semidense_qrru": 1.144598364830017
+    },
+    {
+      "cgmdp": 4.559856414794922,
+      "semidense_qrru": 1.2121927738189697
+    }
+  ],
+  "cascade_smoke": {
+    "checkpoint": "/home/disk1/MHINet/outputs/semidense_qrru_engineering_v1/latest.pt",
+    "checkpoint_sha256": "d18f331064d3de55bb59c662694416540ae8383f2e1946998d6bdb64c31bd7ae",
+    "manifest": "/home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_v1/val/pairs.jsonl",
+    "manifest_sha256": "c4763636e2ca9914c62aec45f5f6f238e0cfa9269343f27571e6c0acdb3d01ee",
+    "tier": 1,
+    "scope": "smoke",
+    "protocol": "semidense_qrru_v1",
+    "pairs": 2,
+    "failure_rate": 0.0,
+    "mean_ms": 3957.0259586907923,
+    "precision": {
+      "1.0": 0.7703333333333333,
+      "3.0": 0.9997916666666666,
+      "5.0": 1.0,
+      "10.0": 1.0
+    },
+    "peak_allocated_bytes": 2057183744,
+    "note": "Native target pixels; first-pair warmup excluded; no fitted-H accuracy claim."
+  },
+  "tests": {
+    "targeted": 18,
+    "full_suite": 154
+  },
+  "limitations": [
+    "Two-step training and two-pair val only; not evidence of accuracy improvement.",
+    "Cascade smoke uses the earlier engineering checkpoint; deterministic replay uses v2.",
+    "Full held-out QRRU benefit and fitted-H evaluation remain future experiments."
+  ]
+}

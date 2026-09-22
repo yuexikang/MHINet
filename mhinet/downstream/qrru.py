@@ -40,7 +40,7 @@ class QRRU(nn.Module):
         wa = sample_uv(feature_a,ga).permute(0,3,1,2)
         h = wa.new_zeros((n,32,4,4))
         flow = wa.new_zeros((n,2,2,2))
-        flows,centers,grids = [],[],[]
+        flows,centers,grids,gates = [],[],[],[]
         for _ in range(self.iterations):
             gb = gb0+interpolate_controls(flow,off)
             wb = sample_uv(feature_b,gb).permute(0,3,1,2)
@@ -50,6 +50,7 @@ class QRRU(nn.Module):
             out = self.head(self.down(h))
             flow = flow+torch.sigmoid(out[:,2:3])*self.radius*torch.tanh(out[:,:2])
             flows.append(flow)
+            gates.append(torch.sigmoid(out[:,2:3]))
             centers.append(points_b_uv+flow.mean((-2,-1)))
             grids.append(gb0+interpolate_controls(flow,off))
-        return dict(flows=torch.stack(flows),centers=torch.stack(centers),grids=torch.stack(grids))
+        return dict(flows=torch.stack(flows),centers=torch.stack(centers),grids=torch.stack(grids),gates=torch.stack(gates))

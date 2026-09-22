@@ -148,7 +148,7 @@ class SemidenseMatcher(nn.Module):
         return torch.stack(totals).mean(),records
 
     @torch.no_grad()
-    def infer(self,shared,sizes=None):
+    def infer(self,shared,sizes=None,*,diagnostics=False):
         """No GT argument. Returns one variable-length match set per image pair."""
         results=[];c=self.config
         for batch in range(len(shared['H0_norm'])):
@@ -165,29 +165,38 @@ class SemidenseMatcher(nn.Module):
                 threshold=c.confidence_threshold,max_coarse=c.max_coarse,policy='mutual',
                 chunk_rows=c.chunk,force_chunked=True)
             mask2=predicted_overlap_masks(H[None],392)
-            matches=[]
+            matches=[];fine_trace=[];qrru_trace=[]
+            probe_parents=set(torch.linspace(0,max(0,len(coarse.source_flat)-1),4).long().tolist())
             for start in range(0,len(coarse.source_flat),c.window_chunk):
                 end=start+c.window_chunk
                 ga,gb=fine_grids(coarse.source_flat[start:end],coarse.target_flat[start:end],H,(98,98),(392,392))
                 va=valid_points(mask2.a,ga);vb=valid_points(mask2.b,gb)
                 lp=self.fine_scores(d2[0],d2[1],ga,gb,va,vb)
+                if diagnostics and len(fine_trace)<4:
+                    for k in range(len(ga)):
+                        if start+k not in probe_parents:continue
+                        fine_trace.append(dict(parent=start+k,a=ga[k].cpu(),b=gb[k].cpu(),
+                            logp=lp[k].cpu(),valid_a=va[k].cpu(),valid_b=vb[k].cpu()))
                 best=lp.argmax(-1);reverse=lp.argmax(-2)
                 ids=torch.arange(16,device=d2.device)[None].expand_as(best)
                 valid=va & vb.gather(1,best) & (reverse.gather(1,best)==ids)
                 m,s=valid.nonzero(as_tuple=True);t=best[m,s]
                 score=(lp[m,s,t].exp()*coarse.confidence[start:end][m]).sqrt()
                 keep=score>=c.confidence_threshold
-                matches.append((ga[m[keep],s[keep]],gb[m[keep],t[keep]],score[keep]))
+                matches.append((ga[m[keep],s[keep]],gb[m[keep],t[keep]],score[keep],torch.stack((m[keep]+start,s[keep],t[keep]),-1)))
             if not matches or sum(len(x[0]) for x in matches)==0:
                 results.append(dict(points_a=empty,points_b=empty,confidence=empty[:,0],failure_reason='no_fine_matches'));continue
-            a,b,score=[torch.cat([x[k] for x in matches]) for k in range(3)]
+            a,b,score,lineage=[torch.cat([x[k] for x in matches]) for k in range(4)]
             order=score.argsort(descending=True,stable=True)[:c.max_matches]
-            a,b,score=a[order],b[order],score[order]
+            a,b,score,lineage=a[order],b[order],score[order],lineage[order]
             projected=self.qrru.project(d2)
             refined=[];out_of_bounds=0
             for start in range(0,len(a),c.window_chunk):
                 end=start+c.window_chunk
                 qr=self.qrru(projected[0],projected[1],to_uv(a[start:end],(392,392)),to_uv(b[start:end],(392,392)),projected=True)
+                if diagnostics and start==0:
+                    qrru_trace.append(dict(a=a[start:end][:8].cpu(),b=b[start:end][:8].cpu(),lineage=lineage[start:end][:8].cpu(),
+                        **{k:v[:,:8].cpu() for k,v in qr.items()}))
                 refined.append(to_norm(qr['centers'][-1],(392,392)))
                 grid=qr['grids'][-1]
                 out_of_bounds+=int(((grid<0)|(grid>391)).any(-1).sum())
@@ -200,4 +209,10 @@ class SemidenseMatcher(nn.Module):
                 coarse_b=centers_to_native(flat_indices_to_centers(coarse.target_flat,98,98),size[1]),
                 qrru_outside_samples=out_of_bounds,rejected_qrru=int((~valid).sum()),
                 failure_reason='none' if bool(valid.any()) else 'invalid_qrru_output'))
+            if diagnostics:
+                results[-1]['diagnostics']=dict(coarse_source=coarse.source_flat.cpu(),coarse_target=coarse.target_flat.cpu(),
+                    coarse_confidence=coarse.confidence.cpu(),coarse_counts=coarse.diagnostics,
+                    mask_a=masks.a.cpu(),mask_b=masks.b.cpu(),fine=fine_trace,qrru=qrru_trace,
+                    fine_before_cap=sum(len(x[0]) for x in matches),fine_after_cap=len(a),lineage=lineage.cpu(),
+                    qrru_valid=valid.cpu())
         return results

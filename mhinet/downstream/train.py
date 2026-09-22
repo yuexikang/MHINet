@@ -82,8 +82,17 @@ def main(argv=None):
         train_pairs=len(train),val_pairs=len(val),total_steps=total_steps,
         dino_sha256=sha256_file(runtime.dino_checkpoint),
         implementation={x.name:sha256_file(x) for x in Path(__file__).parent.glob('*.py')})
+    metadata['freeze_policy']='DINOv3, MVT, GHIM/H0 head frozen; VGG BN running stats fixed; D1 inactive'
     metadata=json.loads(json.dumps(metadata,default=str))
     system=load_first_stage(runtime,args.checkpoint,mc)
+    for name in ('dino','mvt','stage1_head'):
+        if any(p.requires_grad for p in getattr(system.shared,name).parameters()):
+            raise RuntimeError(f'Freeze policy violated: {name}')
+    import hashlib
+    initial_digest=hashlib.sha256()
+    for name,value in sorted(system.matcher.state_dict().items()):
+        initial_digest.update(name.encode());initial_digest.update(value.detach().cpu().numpy().tobytes())
+    metadata['initial_matcher_sha256']=initial_digest.hexdigest()
     optimizer=torch.optim.AdamW(system.optimizer_groups(config.get('shared_lr',1e-5),config.get('head_lr',1e-4)),weight_decay=1e-4)
     scheduler=torch.optim.lr_scheduler.CosineAnnealingLR(optimizer,T_max=total_steps)
     completed=cursor=epoch=0
@@ -93,6 +102,13 @@ def main(argv=None):
         completed=state['optimizer_step'];cursor=state['data_progress']['cursor'];epoch=state['data_progress']['epoch']
     (out/'run.json').write_text(json.dumps(metadata,indent=2))
     system.train()
+    from .visualize import snapshot,update_overview
+    vis=config.get('visualization',{})
+    if vis.get('enabled') and not (out/'visualizations'/f'step_{completed:07d}'/'summary.json').exists():
+        if completed==0:
+            save_checkpoint(out/'latest.pt',model=system,optimizer=optimizer,scheduler=scheduler,
+                optimizer_step=0,data_progress=dict(cursor=cursor,epoch=epoch),metadata=metadata)
+        snapshot(system,val,runtime.device,out,completed,pairs=vis.get('pairs',12),all_channels=True)
     while completed<end:
         if cursor==len(train):epoch+=1;cursor=0
         order=torch.randperm(len(train),generator=torch.Generator().manual_seed(seed+epoch)).tolist()
@@ -111,14 +127,24 @@ def main(argv=None):
             optimizer.step();scheduler.step();completed+=1
             row=dict(step=completed,epoch=epoch,cursor=cursor,gradient_norm=float(grad),
                 seconds=time.perf_counter()-started,records=records,gradient_groups=group_grads,
+                lr_shared=optimizer.param_groups[0]['lr'],lr_head=optimizer.param_groups[1]['lr'],
+                tau_c=float(system.matcher.tau_c.detach()),tau_f=float(system.matcher.tau_f.detach()),
                 peak_allocated_bytes=torch.cuda.max_memory_allocated() if args.device.startswith('cuda') else 0)
             with (out/'train.jsonl').open('a') as f:f.write(json.dumps(row)+'\n')
             print(json.dumps(row),flush=True)
             if completed%config['save_every']==0 or completed==end:
                 save_checkpoint(out/'latest.pt',model=system,optimizer=optimizer,scheduler=scheduler,
                     optimizer_step=completed,data_progress=dict(cursor=cursor,epoch=epoch),metadata=metadata)
+            if vis.get('enabled') and (completed%vis.get('curves_every',100)==0 or completed==end):
+                update_overview(out)
             if completed%config['validate_every']==0 or completed==end:
                 validate(system,val,runtime.device,out,completed)
+            if vis.get('enabled') and (completed%vis.get('every',1000)==0 or completed==end):
+                # Save exact diagnostic state even if intervals do not coincide.
+                save_checkpoint(out/'latest.pt',model=system,optimizer=optimizer,scheduler=scheduler,
+                    optimizer_step=completed,data_progress=dict(cursor=cursor,epoch=epoch),metadata=metadata)
+                snapshot(system,val,runtime.device,out,completed,pairs=vis.get('pairs',12),
+                    all_channels=completed==end or completed==math.ceil(total_steps/2/vis.get('every',1000))*vis.get('every',1000))
     return 0
 
 

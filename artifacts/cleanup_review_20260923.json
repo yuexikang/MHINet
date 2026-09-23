@@ -1,0 +1,2442 @@
+{
+  "created_utc": "2026-09-23T10:07:10.144255+00:00",
+  "mode": "只读审查；未删除或移动文件",
+  "scope": "/home/disk1/MHINet",
+  "active_processes": [
+    "3861460    05:09:24 /root/miniconda3/envs/loma-repro/bin/python -u -m mhinet.downstream.train --config /home/disk1/MHINet/configs/semidense_tier1_lr_c.json --checkpoint /home/disk1/MHINet/outputs/shared_stable_v2_full_tier3_seed0/shared_descriptor.pt --output /home/disk1/MHINet/outputs/semidense_stable_v2_tier1_lr_c_seed0",
+    "3867440       18:37 /root/miniconda3/envs/loma-repro/bin/python -u scripts/train_semidense_next_tier.py --config configs/semidense_tier2_lr_a.json --checkpoint outputs/semidense_stable_v2_tier1_lr_a_seed0/latest.pt --output /home/disk1/MHINet/outputs/semidense_stable_v2_tier2_lr_a_seed0",
+    "3867507       17:56 /root/miniconda3/envs/loma-repro/bin/python scripts/localize_semidense_reports.py --watch"
+  ],
+  "git_status_before_review": " M artifacts/evaluation_registry.csv\n M artifacts/evaluation_registry.json\n M artifacts/p4_tiny_s_d1_translation_swa.json\n M docs/evaluation_summary.md\n M mhinet/engine/train.py\n M scripts/train_e01.sh\n?? artifacts/random_initialization_audit.json\n?? configs/train_tier1_one_epoch_a.json\n?? configs/train_tier1_one_epoch_b.json\n?? mhinet/models/initialization.py\n?? scripts/check_random_initialization.py\n?? scripts/preview_dataset_tiers.py\n?? scripts/train_tier1_one_epoch_a.sh\n?? scripts/train_tier1_one_epoch_b.sh\n?? tests/test_initialization.py\n",
+  "output_directories": [
+    {
+      "path": "outputs/E00_h0_seed0",
+      "logical_bytes": 1832150,
+      "allocated_bytes": 442880,
+      "files": 4,
+      "step": null,
+      "total_steps": null,
+      "status": "无统一运行状态",
+      "action": "保留结果/证据"
+    },
+    {
+      "path": "outputs/E01_heads",
+      "logical_bytes": 18451782258,
+      "allocated_bytes": 18317212160,
+      "files": 242,
+      "step": 10000,
+      "total_steps": null,
+      "status": "completed",
+      "action": "历史正式训练；逐个审查中间权重"
+    },
+    {
+      "path": "outputs/E01_heads_bs_2",
+      "logical_bytes": 34532,
+      "allocated_bytes": 18944,
+      "files": 2,
+      "step": 29,
+      "total_steps": null,
+      "status": "running",
+      "action": "保留结果/证据"
+    },
+    {
+      "path": "outputs/E01_heads_seed0",
+      "logical_bytes": 97189,
+      "allocated_bytes": 31232,
+      "files": 2,
+      "step": 104,
+      "total_steps": null,
+      "status": "running",
+      "action": "保留结果/证据"
+    },
+    {
+      "path": "outputs/E01_heads_test_step10000",
+      "logical_bytes": 13622289,
+      "allocated_bytes": 11393024,
+      "files": 12,
+      "step": null,
+      "total_steps": null,
+      "status": "无统一运行状态",
+      "action": "保留结果/证据"
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0",
+      "logical_bytes": 22128359871,
+      "allocated_bytes": 21913851904,
+      "files": 242,
+      "step": 20000,
+      "total_steps": null,
+      "status": "completed",
+      "action": "历史正式训练；逐个审查中间权重"
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0_test_step20000",
+      "logical_bytes": 13572241,
+      "allocated_bytes": 11338752,
+      "files": 12,
+      "step": null,
+      "total_steps": null,
+      "status": "无统一运行状态",
+      "action": "保留结果/证据"
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0",
+      "logical_bytes": 22116517571,
+      "allocated_bytes": 21910220288,
+      "files": 246,
+      "step": 10000,
+      "total_steps": null,
+      "status": "completed",
+      "action": "历史正式训练；逐个审查中间权重"
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0_test_step10000",
+      "logical_bytes": 13595408,
+      "allocated_bytes": 11357696,
+      "files": 12,
+      "step": null,
+      "total_steps": null,
+      "status": "无统一运行状态",
+      "action": "保留结果/证据"
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_seed0",
+      "logical_bytes": 28182,
+      "allocated_bytes": 24576,
+      "files": 2,
+      "step": 13,
+      "total_steps": null,
+      "status": "running",
+      "action": "保留结果/证据"
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0",
+      "logical_bytes": 36118151737,
+      "allocated_bytes": 35898591744,
+      "files": 242,
+      "step": 20000,
+      "total_steps": null,
+      "status": "completed",
+      "action": "历史正式训练；逐个审查中间权重"
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0_test_step17000",
+      "logical_bytes": 17324143,
+      "allocated_bytes": 15162368,
+      "files": 24,
+      "step": null,
+      "total_steps": null,
+      "status": "无统一运行状态",
+      "action": "保留结果/证据"
+    },
+    {
+      "path": "outputs/diagnostics",
+      "logical_bytes": 2673629326,
+      "allocated_bytes": 2678217728,
+      "files": 728,
+      "step": null,
+      "total_steps": null,
+      "status": "无统一运行状态",
+      "action": "保留结果/证据"
+    },
+    {
+      "path": "outputs/e01_gate_refusal_smoke",
+      "logical_bytes": 0,
+      "allocated_bytes": 0,
+      "files": 0,
+      "step": null,
+      "total_steps": null,
+      "status": "无统一运行状态",
+      "action": "保留结果/证据"
+    },
+    {
+      "path": "outputs/engineering_batch_visualization_smoke",
+      "logical_bytes": 10264,
+      "allocated_bytes": 7168,
+      "files": 2,
+      "step": null,
+      "total_steps": null,
+      "status": "running",
+      "action": "保留结果/证据"
+    },
+    {
+      "path": "outputs/engineering_batch_visualization_smoke_bs1",
+      "logical_bytes": 12348134,
+      "allocated_bytes": 12494336,
+      "files": 22,
+      "step": 2,
+      "total_steps": null,
+      "status": "completed",
+      "action": "保留结果/证据"
+    },
+    {
+      "path": "outputs/engineering_visualization_seven_smoke",
+      "logical_bytes": 7213630,
+      "allocated_bytes": 7292928,
+      "files": 13,
+      "step": 2,
+      "total_steps": null,
+      "status": "completed",
+      "action": "保留结果/证据"
+    },
+    {
+      "path": "outputs/mhinet_minimal_smoke",
+      "logical_bytes": 27190,
+      "allocated_bytes": 38912,
+      "files": 5,
+      "step": 2,
+      "total_steps": null,
+      "status": "completed",
+      "action": "保留结果/证据"
+    },
+    {
+      "path": "outputs/mhinet_resume_smoke",
+      "logical_bytes": 28482,
+      "allocated_bytes": 38912,
+      "files": 5,
+      "step": 2,
+      "total_steps": null,
+      "status": "completed",
+      "action": "保留结果/证据"
+    },
+    {
+      "path": "outputs/mhinet_resume_smoke_mcnet_d2_v2",
+      "logical_bytes": 44680,
+      "allocated_bytes": 38912,
+      "files": 5,
+      "step": 2,
+      "total_steps": null,
+      "status": "completed",
+      "action": "保留结果/证据"
+    },
+    {
+      "path": "outputs/mhinet_uninterrupted_smoke_mcnet_d2_v2",
+      "logical_bytes": 43318,
+      "allocated_bytes": 38912,
+      "files": 5,
+      "step": 2,
+      "total_steps": null,
+      "status": "completed",
+      "action": "保留结果/证据"
+    },
+    {
+      "path": "outputs/previews",
+      "logical_bytes": 4846875,
+      "allocated_bytes": 4988416,
+      "files": 12,
+      "step": null,
+      "total_steps": null,
+      "status": "无统一运行状态",
+      "action": "保留结果/证据"
+    },
+    {
+      "path": "outputs/real_image_accuracy_val16",
+      "logical_bytes": 7244607,
+      "allocated_bytes": 7304192,
+      "files": 12,
+      "step": null,
+      "total_steps": null,
+      "status": "无统一运行状态",
+      "action": "保留结果/证据"
+    },
+    {
+      "path": "outputs/real_image_accuracy_val16_verified",
+      "logical_bytes": 7244812,
+      "allocated_bytes": 7304192,
+      "files": 12,
+      "step": null,
+      "total_steps": null,
+      "status": "无统一运行状态",
+      "action": "保留结果/证据"
+    },
+    {
+      "path": "outputs/semidense_qrru_engineering_v1",
+      "logical_bytes": 1048352999,
+      "allocated_bytes": 1047915520,
+      "files": 10,
+      "step": 2,
+      "total_steps": 2,
+      "status": "日志达到配置步数",
+      "action": "仅权重列为可清理候选；保留日志和报告"
+    },
+    {
+      "path": "outputs/semidense_qrru_replay_v2",
+      "logical_bytes": 2088245647,
+      "allocated_bytes": 2087298560,
+      "files": 15,
+      "step": null,
+      "total_steps": null,
+      "status": "无统一运行状态",
+      "action": "仅权重列为可清理候选；保留日志和报告"
+    },
+    {
+      "path": "outputs/semidense_qrru_resume_v1",
+      "logical_bytes": 1044117256,
+      "allocated_bytes": 1043639296,
+      "files": 6,
+      "step": 2,
+      "total_steps": 2,
+      "status": "日志达到配置步数",
+      "action": "仅权重列为可清理候选；保留日志和报告"
+    },
+    {
+      "path": "outputs/semidense_stable_v2_tier1_lr_a_seed0",
+      "logical_bytes": 3889309555,
+      "allocated_bytes": 3915000832,
+      "files": 6642,
+      "step": 12995,
+      "total_steps": 12995,
+      "status": "日志达到配置步数",
+      "action": "保留主线/对照/初始化链"
+    },
+    {
+      "path": "outputs/semidense_stable_v2_tier1_lr_b_seed0",
+      "logical_bytes": 3910810728,
+      "allocated_bytes": 3936341504,
+      "files": 6642,
+      "step": 12995,
+      "total_steps": 12995,
+      "status": "日志达到配置步数",
+      "action": "保留主线/对照/初始化链"
+    },
+    {
+      "path": "outputs/semidense_stable_v2_tier1_lr_c_seed0",
+      "logical_bytes": 2219983580,
+      "allocated_bytes": 2231054848,
+      "files": 2880,
+      "step": 5940,
+      "total_steps": 12995,
+      "status": "训练中，进程已核对",
+      "action": "保留主线/对照/初始化链"
+    },
+    {
+      "path": "outputs/semidense_stable_v2_tier2_lr_a_seed0",
+      "logical_bytes": 1399484052,
+      "allocated_bytes": 1402335744,
+      "files": 529,
+      "step": 325,
+      "total_steps": 8663,
+      "status": "训练中，进程已核对",
+      "action": "保留主线/对照/初始化链"
+    },
+    {
+      "path": "outputs/semidense_visual_smoke_v1",
+      "logical_bytes": 1108527051,
+      "allocated_bytes": 1080846336,
+      "files": 89,
+      "step": 1,
+      "total_steps": 1,
+      "status": "日志达到配置步数",
+      "action": "仅权重列为可清理候选；保留日志和报告"
+    },
+    {
+      "path": "outputs/semidense_visual_smoke_v2",
+      "logical_bytes": 1109115975,
+      "allocated_bytes": 1081465344,
+      "files": 93,
+      "step": 1,
+      "total_steps": 1,
+      "status": "日志达到配置步数",
+      "action": "仅权重列为可清理候选；保留日志和报告"
+    },
+    {
+      "path": "outputs/shared_descriptor_frozen_seed0",
+      "logical_bytes": 2407372057,
+      "allocated_bytes": 2345573376,
+      "files": 60,
+      "step": 12995,
+      "total_steps": 12995,
+      "status": "日志达到配置步数",
+      "action": "保留主线/对照/初始化链"
+    },
+    {
+      "path": "outputs/shared_descriptor_frozen_tier2_seed0",
+      "logical_bytes": 2320162057,
+      "allocated_bytes": 2285934592,
+      "files": 41,
+      "step": 8663,
+      "total_steps": 8663,
+      "status": "日志达到配置步数",
+      "action": "保留主线/对照/初始化链"
+    },
+    {
+      "path": "outputs/shared_descriptor_frozen_tier3_seed0",
+      "logical_bytes": 2319461808,
+      "allocated_bytes": 2286139904,
+      "files": 39,
+      "step": 8663,
+      "total_steps": 8663,
+      "status": "日志达到配置步数",
+      "action": "保留主线/对照/初始化链"
+    },
+    {
+      "path": "outputs/shared_descriptor_lora_seed0",
+      "logical_bytes": 2409183991,
+      "allocated_bytes": 2349665280,
+      "files": 56,
+      "step": 12995,
+      "total_steps": 12995,
+      "status": "日志达到配置步数",
+      "action": "保留主线/对照/初始化链"
+    },
+    {
+      "path": "outputs/shared_stable_v2_full_tier1_seed0",
+      "logical_bytes": 2412971612,
+      "allocated_bytes": 2351104512,
+      "files": 58,
+      "step": 12995,
+      "total_steps": 12995,
+      "status": "日志达到配置步数",
+      "action": "保留主线/对照/初始化链"
+    },
+    {
+      "path": "outputs/shared_stable_v2_full_tier2_seed0",
+      "logical_bytes": 2320322285,
+      "allocated_bytes": 2286986240,
+      "files": 39,
+      "step": 8663,
+      "total_steps": 8663,
+      "status": "日志达到配置步数",
+      "action": "保留主线/对照/初始化链"
+    },
+    {
+      "path": "outputs/shared_stable_v2_full_tier3_seed0",
+      "logical_bytes": 2324313922,
+      "allocated_bytes": 2290960896,
+      "files": 39,
+      "step": 8663,
+      "total_steps": 8663,
+      "status": "日志达到配置步数",
+      "action": "保留主线/对照/初始化链"
+    },
+    {
+      "path": "outputs/shared_stable_v2_tier1_adapt_seed0",
+      "logical_bytes": 2265975920,
+      "allocated_bytes": 2249273856,
+      "files": 22,
+      "step": 2000,
+      "total_steps": 12995,
+      "status": "按登记2000步完成短程实验；非全轮失败",
+      "action": "保留主线/对照/初始化链"
+    },
+    {
+      "path": "outputs/shared_tier2_backtest_tier1",
+      "logical_bytes": 55790445,
+      "allocated_bytes": 43823104,
+      "files": 19,
+      "step": null,
+      "total_steps": null,
+      "status": "无统一运行状态",
+      "action": "保留主线/对照/初始化链"
+    },
+    {
+      "path": "outputs/shared_tier3_stable_v2_baseline_tier1",
+      "logical_bytes": 56830212,
+      "allocated_bytes": 44854272,
+      "files": 19,
+      "step": null,
+      "total_steps": null,
+      "status": "无统一运行状态",
+      "action": "保留主线/对照/初始化链"
+    },
+    {
+      "path": "outputs/shared_tier3_stable_v2_baseline_tier2",
+      "logical_bytes": 45500588,
+      "allocated_bytes": 37612032,
+      "files": 19,
+      "step": null,
+      "total_steps": null,
+      "status": "无统一运行状态",
+      "action": "保留主线/对照/初始化链"
+    },
+    {
+      "path": "outputs/shared_tier3_stable_v2_baseline_tier3",
+      "logical_bytes": 47465415,
+      "allocated_bytes": 39557120,
+      "files": 19,
+      "step": null,
+      "total_steps": null,
+      "status": "无统一运行状态",
+      "action": "保留主线/对照/初始化链"
+    },
+    {
+      "path": "outputs/stable_geometry_smoke_v2",
+      "logical_bytes": 86908503,
+      "allocated_bytes": 88276480,
+      "files": 257,
+      "step": null,
+      "total_steps": null,
+      "status": "无统一运行状态",
+      "action": "保留结果/证据"
+    },
+    {
+      "path": "outputs/tier1_a_seed0",
+      "logical_bytes": 621777,
+      "allocated_bytes": 191488,
+      "files": 2,
+      "step": 434,
+      "total_steps": null,
+      "status": "running",
+      "action": "保留结果/证据"
+    },
+    {
+      "path": "outputs/tier1_b_seed0",
+      "logical_bytes": 621777,
+      "allocated_bytes": 191488,
+      "files": 2,
+      "step": 434,
+      "total_steps": null,
+      "status": "running",
+      "action": "保留结果/证据"
+    },
+    {
+      "path": "outputs/tiny_overfit",
+      "logical_bytes": 548468511,
+      "allocated_bytes": 496257536,
+      "files": 98,
+      "step": null,
+      "total_steps": null,
+      "status": "无统一运行状态",
+      "action": "保留结果/证据"
+    }
+  ],
+  "checkpoints": [
+    {
+      "path": "outputs/E01_heads/checkpoints/step_0000500.pt",
+      "bytes": 903972281,
+      "mtime_ns": 1789051201341329102,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/E01_heads/validation/step_0000500/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/E01_heads/checkpoints/step_0001000.pt",
+      "bytes": 903972281,
+      "mtime_ns": 1789053703033064487,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/E01_heads/validation/step_0001000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/E01_heads/checkpoints/step_0001500.pt",
+      "bytes": 903972281,
+      "mtime_ns": 1789056173342640108,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/E01_heads/validation/step_0001500/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/E01_heads/checkpoints/step_0002000.pt",
+      "bytes": 903972281,
+      "mtime_ns": 1789058647013232842,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/E01_heads/validation/step_0002000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/E01_heads/checkpoints/step_0002500.pt",
+      "bytes": 903972281,
+      "mtime_ns": 1789061102360732302,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/E01_heads/validation/step_0002500/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/E01_heads/checkpoints/step_0003000.pt",
+      "bytes": 903972281,
+      "mtime_ns": 1789063551027197746,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/E01_heads/validation/step_0003000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/E01_heads/checkpoints/step_0003500.pt",
+      "bytes": 903972281,
+      "mtime_ns": 1789066014275737421,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/E01_heads/validation/step_0003500/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/E01_heads/checkpoints/step_0004000.pt",
+      "bytes": 903972281,
+      "mtime_ns": 1789068467922228212,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/E01_heads/validation/step_0004000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/E01_heads/checkpoints/step_0004500.pt",
+      "bytes": 903972281,
+      "mtime_ns": 1789070925820740652,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/E01_heads/validation/step_0004500/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/E01_heads/checkpoints/step_0005000.pt",
+      "bytes": 903972281,
+      "mtime_ns": 1789073323117944590,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/E01_heads/validation/step_0005000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/E01_heads/checkpoints/step_0005500.pt",
+      "bytes": 903972281,
+      "mtime_ns": 1789075627444675244,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/E01_heads/validation/step_0005500/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/E01_heads/checkpoints/step_0006000.pt",
+      "bytes": 903972281,
+      "mtime_ns": 1789077929053392061,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/E01_heads/validation/step_0006000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/E01_heads/checkpoints/step_0006500.pt",
+      "bytes": 903972281,
+      "mtime_ns": 1789080220292056088,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/E01_heads/validation/step_0006500/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/E01_heads/checkpoints/step_0007000.pt",
+      "bytes": 903972281,
+      "mtime_ns": 1789082481734568436,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/E01_heads/validation/step_0007000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/E01_heads/checkpoints/step_0007500.pt",
+      "bytes": 903972281,
+      "mtime_ns": 1789084755486143438,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/E01_heads/validation/step_0007500/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/E01_heads/checkpoints/step_0008000.pt",
+      "bytes": 903972281,
+      "mtime_ns": 1789087039827772354,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/E01_heads/validation/step_0008000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/E01_heads/checkpoints/step_0008500.pt",
+      "bytes": 903972281,
+      "mtime_ns": 1789089331270437420,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/E01_heads/validation/step_0008500/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/E01_heads/checkpoints/step_0009000.pt",
+      "bytes": 903972217,
+      "mtime_ns": 1789091638903184894,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/E01_heads/validation/step_0009000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/E01_heads/checkpoints/step_0009500.pt",
+      "bytes": 903972281,
+      "mtime_ns": 1789093864124512846,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/E01_heads/validation/step_0009500/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/E01_heads/checkpoints/step_0010000.pt",
+      "bytes": 903972281,
+      "mtime_ns": 1789096084260814911,
+      "category": "保留历史最终权重",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv",
+        "outputs/E01_heads/run.json"
+      ],
+      "validation_summaries": [
+        "outputs/E01_heads/validation/step_0010000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/checkpoints/step_0001000.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789146972742873232,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/validation/step_0001000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/checkpoints/step_0002000.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789150537060018130,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/validation/step_0002000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/checkpoints/step_0003000.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789154126323290029,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/validation/step_0003000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/checkpoints/step_0004000.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789157827514131717,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/validation/step_0004000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/checkpoints/step_0005000.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789161532349991964,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/validation/step_0005000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/checkpoints/step_0006000.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789165227978805333,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/validation/step_0006000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/checkpoints/step_0007000.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789168927082636386,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/validation/step_0007000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/checkpoints/step_0008000.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789172629676485212,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/validation/step_0008000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/checkpoints/step_0009000.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789176331287329029,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/validation/step_0009000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/checkpoints/step_0010000.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789180035279184973,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/validation/step_0010000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/checkpoints/step_0011000.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789183744126065632,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/validation/step_0011000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/checkpoints/step_0012000.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789187416300759597,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/validation/step_0012000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/checkpoints/step_0013000.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789191121560621997,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/validation/step_0013000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/checkpoints/step_0014000.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789195094558847366,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/validation/step_0014000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/checkpoints/step_0015000.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789198866431048865,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/validation/step_0015000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/checkpoints/step_0016000.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789202452463304305,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/validation/step_0016000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/checkpoints/step_0017000.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789206071458727549,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/validation/step_0017000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/checkpoints/step_0018000.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789209687270134584,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/validation/step_0018000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/checkpoints/step_0019000.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789213181734923885,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/validation/step_0019000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/checkpoints/step_0020000.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789216674536704718,
+      "category": "保留历史最终权重",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv",
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/run.json"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs4_20k_seed0/validation/step_0020000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/checkpoints/step_0000500.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789132248071914234,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/validation/step_0000500/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/checkpoints/step_0001000.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789136016572098557,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/validation/step_0001000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/checkpoints/step_0001500.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789139786656290958,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/validation/step_0001500/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/checkpoints/step_0002000.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789143549100444464,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/validation/step_0002000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/checkpoints/step_0002500.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789147317141626464,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/validation/step_0002500/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/checkpoints/step_0003000.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789151086385814590,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/validation/step_0003000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/checkpoints/step_0003500.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789154859957024746,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/validation/step_0003500/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/checkpoints/step_0004000.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789158628036206942,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/validation/step_0004000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/checkpoints/step_0004500.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789162348218145310,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/validation/step_0004500/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/checkpoints/step_0005000.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789165965243558529,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/validation/step_0005000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/checkpoints/step_0005500.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789169591766020096,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/validation/step_0005500/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/checkpoints/step_0006000.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789173220439492613,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/validation/step_0006000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/checkpoints/step_0006500.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789176863594038848,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/validation/step_0006500/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/checkpoints/step_0007000.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789180514446624274,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/validation/step_0007000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/checkpoints/step_0007500.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789184186060315390,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/validation/step_0007500/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/checkpoints/step_0008000.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789187888722164559,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/validation/step_0008000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/checkpoints/step_0008500.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789191632448222775,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/validation/step_0008500/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/checkpoints/step_0009000.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789195452710670611,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/validation/step_0009000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/checkpoints/step_0009500.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789199099101233321,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/validation/step_0009500/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/checkpoints/step_0010000.pt",
+      "bytes": 1078123139,
+      "mtime_ns": 1789202705099590404,
+      "category": "保留历史最终权重",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv",
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/run.json"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_mvt_temporal4_ebs8_seed0/validation/step_0010000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/checkpoints/step_0001000.pt",
+      "bytes": 1777587073,
+      "mtime_ns": 1789305465456712607,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/validation/step_0001000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/checkpoints/step_0002000.pt",
+      "bytes": 1777587073,
+      "mtime_ns": 1789309308036274063,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/validation/step_0002000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/checkpoints/step_0003000.pt",
+      "bytes": 1777587073,
+      "mtime_ns": 1789313161947893195,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/validation/step_0003000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/checkpoints/step_0004000.pt",
+      "bytes": 1777587073,
+      "mtime_ns": 1789317420682573162,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/validation/step_0004000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/checkpoints/step_0005000.pt",
+      "bytes": 1777587073,
+      "mtime_ns": 1789321692413319286,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/validation/step_0005000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/checkpoints/step_0006000.pt",
+      "bytes": 1777587073,
+      "mtime_ns": 1789325974607118681,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/validation/step_0006000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/checkpoints/step_0007000.pt",
+      "bytes": 1777587073,
+      "mtime_ns": 1789330304383160304,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/validation/step_0007000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/checkpoints/step_0008000.pt",
+      "bytes": 1777587073,
+      "mtime_ns": 1789334626927165109,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/validation/step_0008000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/checkpoints/step_0009000.pt",
+      "bytes": 1777587073,
+      "mtime_ns": 1789338754240176056,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/validation/step_0009000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/checkpoints/step_0010000.pt",
+      "bytes": 1777587073,
+      "mtime_ns": 1789342749701515779,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/validation/step_0010000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/checkpoints/step_0011000.pt",
+      "bytes": 1777587073,
+      "mtime_ns": 1789346803197150937,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/validation/step_0011000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/checkpoints/step_0012000.pt",
+      "bytes": 1777587073,
+      "mtime_ns": 1789351202620547115,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/validation/step_0012000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/checkpoints/step_0013000.pt",
+      "bytes": 1777587073,
+      "mtime_ns": 1789355444833142981,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/validation/step_0013000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/checkpoints/step_0014000.pt",
+      "bytes": 1777587073,
+      "mtime_ns": 1789359494814760251,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/validation/step_0014000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/checkpoints/step_0015000.pt",
+      "bytes": 1777587073,
+      "mtime_ns": 1789363488082088801,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/validation/step_0015000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/checkpoints/step_0016000.pt",
+      "bytes": 1777587073,
+      "mtime_ns": 1789367497772500958,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/validation/step_0016000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/checkpoints/step_0017000.pt",
+      "bytes": 1777587073,
+      "mtime_ns": 1789371461282678013,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv",
+        "outputs/diagnostics/original_visual_test_smoke/run.json"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/validation/step_0017000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/checkpoints/step_0018000.pt",
+      "bytes": 1777587073,
+      "mtime_ns": 1789375227183849108,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/validation/step_0018000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/checkpoints/step_0019000.pt",
+      "bytes": 1777587073,
+      "mtime_ns": 1789378928457691205,
+      "category": "历史正式权重待审",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/validation/step_0019000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/checkpoints/step_0020000.pt",
+      "bytes": 1777587073,
+      "mtime_ns": 1789382633800554009,
+      "category": "保留历史最终权重",
+      "explicit_references": [
+        "artifacts/evaluation_registry.json",
+        "artifacts/evaluation_registry.csv",
+        "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/run.json"
+      ],
+      "validation_summaries": [
+        "outputs/GHIM_joint_frozen_dino_temporal4_ebs4_20k_seed0/validation/step_0020000/summary.json"
+      ]
+    },
+    {
+      "path": "outputs/diagnostics/stable_v2_tier1_adapt_smoke/latest.pt",
+      "bytes": 1766050550,
+      "mtime_ns": 1789955581332245994,
+      "category": "工程权重候选",
+      "explicit_references": [],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/diagnostics/stable_v2_tier1_adapt_smoke/shared_descriptor.pt",
+      "bytes": 437033567,
+      "mtime_ns": 1789955590648293416,
+      "category": "工程权重候选",
+      "explicit_references": [],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/semidense_qrru_engineering_v1/latest.pt",
+      "bytes": 1044109510,
+      "mtime_ns": 1790069439043854690,
+      "category": "工程权重候选",
+      "explicit_references": [
+        "artifacts/semidense_qrru_engineering.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/semidense_qrru_replay_v2/full/latest.pt",
+      "bytes": 1044109510,
+      "mtime_ns": 1790069648099918929,
+      "category": "工程权重候选",
+      "explicit_references": [
+        "artifacts/semidense_qrru_engineering.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/semidense_qrru_replay_v2/split/latest.pt",
+      "bytes": 1044109510,
+      "mtime_ns": 1790069693786151504,
+      "category": "工程权重候选",
+      "explicit_references": [
+        "artifacts/semidense_qrru_engineering.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/semidense_qrru_resume_v1/latest.pt",
+      "bytes": 1044109510,
+      "mtime_ns": 1790069564128491456,
+      "category": "工程权重候选",
+      "explicit_references": [],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/semidense_stable_v2_tier1_lr_a_seed0/latest.pt",
+      "bytes": 1044109958,
+      "mtime_ns": 1790121652415656503,
+      "category": "保护：当前主线或LR对照",
+      "explicit_references": [
+        "artifacts/semidense_tier2_lr_a_registration.json",
+        "outputs/semidense_stable_v2_tier2_lr_a_seed0/run.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/semidense_stable_v2_tier1_lr_b_seed0/latest.pt",
+      "bytes": 1044109958,
+      "mtime_ns": 1790121657226680994,
+      "category": "保护：当前主线或LR对照",
+      "explicit_references": [],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/semidense_stable_v2_tier1_lr_c_seed0/latest.pt",
+      "bytes": 1044109958,
+      "mtime_ns": 1790157903186197927,
+      "category": "保护：当前主线或LR对照",
+      "explicit_references": [],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/semidense_stable_v2_tier2_lr_a_seed0/latest.pt",
+      "bytes": 1044110150,
+      "mtime_ns": 1790157965478515038,
+      "category": "保护：当前主线或LR对照",
+      "explicit_references": [],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/semidense_visual_smoke_v1/latest.pt",
+      "bytes": 1044109702,
+      "mtime_ns": 1790076498811793767,
+      "category": "工程权重候选",
+      "explicit_references": [],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/semidense_visual_smoke_v2/latest.pt",
+      "bytes": 1044109894,
+      "mtime_ns": 1790076690122767675,
+      "category": "工程权重候选",
+      "explicit_references": [],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/shared_descriptor_frozen_seed0/latest.pt",
+      "bytes": 1766050166,
+      "mtime_ns": 1789604260187788148,
+      "category": "保留",
+      "explicit_references": [
+        "configs/shared_descriptor_tier2.json",
+        "docs/shared_descriptor_tier2.md",
+        "outputs/diagnostics/shared_tier2_overlap_smoke/run.json",
+        "outputs/shared_descriptor_frozen_tier2_seed0/run.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/shared_descriptor_frozen_seed0/shared_descriptor.pt",
+      "bytes": 437032543,
+      "mtime_ns": 1789605382611502076,
+      "category": "保留",
+      "explicit_references": [],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/shared_descriptor_frozen_tier2_seed0/latest.pt",
+      "bytes": 1766050550,
+      "mtime_ns": 1789682838334805194,
+      "category": "保留",
+      "explicit_references": [
+        "configs/shared_descriptor_tier3.json",
+        "docs/shared_descriptor_tier3.md",
+        "artifacts/shared_downstream_registration_v1.json",
+        "outputs/diagnostics/shared_tier3_smoke/run.json",
+        "outputs/shared_descriptor_frozen_tier3_seed0/run.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/shared_descriptor_frozen_tier2_seed0/shared_descriptor.pt",
+      "bytes": 437033567,
+      "mtime_ns": 1789683575883559840,
+      "category": "保留",
+      "explicit_references": [],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/shared_descriptor_frozen_tier3_seed0/latest.pt",
+      "bytes": 1766050550,
+      "mtime_ns": 1789709395237997485,
+      "category": "保留",
+      "explicit_references": [
+        "configs/shared_descriptor_stable_v2_tier1_adapt.json",
+        "configs/shared_stable_v2_full_tier1.json",
+        "scripts/check_dense_migration.py",
+        "scripts/validate_dense_loma.sh",
+        "scripts/diagnose_adaptation_regressions.py",
+        "docs/shared_stable_v2_adaptation.md",
+        "docs/shared_stable_v2_full_curriculum.md",
+        "docs/shared_downstream_integration.md",
+        "artifacts/shared_downstream_registration_v1.json",
+        "artifacts/shared_stable_v2_baselines.json",
+        "artifacts/semidense_qrru_engineering.json",
+        "outputs/shared_stable_v2_tier1_adapt_seed0/run.json",
+        "outputs/shared_stable_v2_full_tier1_seed0/run.json",
+        "outputs/shared_stable_v2_full_tier1_seed0/previous_no_checkpoint_1789975972595318013/run.json",
+        "outputs/semidense_qrru_resume_v1/run.json",
+        "outputs/diagnostics/stable_v2_tier1_adapt_smoke/run.json",
+        "outputs/semidense_qrru_replay_v2/full/run.json",
+        "outputs/semidense_qrru_replay_v2/split/run.json",
+        "outputs/semidense_qrru_engineering_v1/run.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/shared_descriptor_frozen_tier3_seed0/shared_descriptor.pt",
+      "bytes": 437033567,
+      "mtime_ns": 1789710137392775573,
+      "category": "保留",
+      "explicit_references": [],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/shared_descriptor_lora_seed0/latest.pt",
+      "bytes": 1770007654,
+      "mtime_ns": 1789606592995663787,
+      "category": "保留",
+      "explicit_references": [],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/shared_descriptor_lora_seed0/shared_descriptor.pt",
+      "bytes": 438350135,
+      "mtime_ns": 1789607721163406953,
+      "category": "保留",
+      "explicit_references": [],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/shared_stable_v2_full_tier1_seed0/latest.pt",
+      "bytes": 1766050550,
+      "mtime_ns": 1790001478772894582,
+      "category": "保留",
+      "explicit_references": [
+        "configs/shared_stable_v2_full_tier2.json",
+        "outputs/shared_stable_v2_full_tier2_seed0/run.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/shared_stable_v2_full_tier1_seed0/shared_descriptor.pt",
+      "bytes": 437033567,
+      "mtime_ns": 1790002600813606558,
+      "category": "保留",
+      "explicit_references": [],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/shared_stable_v2_full_tier2_seed0/latest.pt",
+      "bytes": 1766050550,
+      "mtime_ns": 1790054908333883468,
+      "category": "保留",
+      "explicit_references": [
+        "configs/shared_stable_v2_full_tier3.json",
+        "outputs/shared_stable_v2_full_tier3_seed0/run.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/shared_stable_v2_full_tier2_seed0/shared_descriptor.pt",
+      "bytes": 437033567,
+      "mtime_ns": 1790055648764652783,
+      "category": "保留",
+      "explicit_references": [],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/shared_stable_v2_full_tier3_seed0/latest.pt",
+      "bytes": 1766050550,
+      "mtime_ns": 1790074804642169377,
+      "category": "保留",
+      "explicit_references": [],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/shared_stable_v2_full_tier3_seed0/shared_descriptor.pt",
+      "bytes": 437033567,
+      "mtime_ns": 1790075546156944209,
+      "category": "保留",
+      "explicit_references": [
+        "scripts/launch_semidense_lr_compare.py",
+        "docs/semidense_visual_lr_experiment.md",
+        "artifacts/semidense_tier1_lr_compare_registration.json",
+        "artifacts/semidense_tier1_lr_c_registration.json",
+        "outputs/semidense_stable_v2_tier1_lr_a_seed0/run.json",
+        "outputs/semidense_visual_smoke_v1/run.json",
+        "outputs/semidense_stable_v2_tier1_lr_b_seed0/run.json",
+        "outputs/semidense_stable_v2_tier1_lr_c_seed0/run.json",
+        "outputs/semidense_visual_smoke_v2/run.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/shared_stable_v2_tier1_adapt_seed0/latest.pt",
+      "bytes": 1766050550,
+      "mtime_ns": 1789959198098657864,
+      "category": "保留",
+      "explicit_references": [
+        "scripts/diagnose_adaptation_regressions.py"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/shared_stable_v2_tier1_adapt_seed0/shared_descriptor.pt",
+      "bytes": 437033567,
+      "mtime_ns": 1789960307801307027,
+      "category": "保留",
+      "explicit_references": [],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/d1_condition14_vertical_negative_bf16_128_progress.pt",
+      "bytes": 16265169,
+      "mtime_ns": 1788943915892170647,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_s_d1_condition14_vertical_negative_bf16_diagnostic_128.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/d1_condition2_vertical_positive_bf16_128_progress.pt",
+      "bytes": 16265169,
+      "mtime_ns": 1788943921406198717,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_s_d1_condition2_vertical_positive_bf16_diagnostic_128.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/d1_dense5_progress.pt",
+      "bytes": 19389293,
+      "mtime_ns": 1788945501408242045,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_s_d1_translation_swa.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/d1_full_bound_fp32_256_progress.pt",
+      "bytes": 16275921,
+      "mtime_ns": 1788943098640010254,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_s_d1_full_bound_fp32_diagnostic_256.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/d1_single_condition_bf16_128_progress.pt",
+      "bytes": 16261073,
+      "mtime_ns": 1788941327006991386,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_s_d1_single_condition_bf16_diagnostic_128.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/d1_single_condition_fp32_128_progress.pt",
+      "bytes": 16261073,
+      "mtime_ns": 1788941698725883699,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_s_d1_single_condition_fp32_diagnostic_128.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/mcnet_6_full_progress.pt",
+      "bytes": 15217865,
+      "mtime_ns": 1789011457433004577,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_gate_mcnet_d2.json",
+        "artifacts/pretraining_mcnet_d2_summary.json",
+        "artifacts/p4_tiny_6_mcnet.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/mcnet_d2_full_progress.pt",
+      "bytes": 8674553,
+      "mtime_ns": 1789009224575637747,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_gate_mcnet_d2.json",
+        "artifacts/pretraining_mcnet_d2_summary.json",
+        "artifacts/p4_tiny_s_d2_mcnet.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/mcnet_d4_full_progress.pt",
+      "bytes": 8357849,
+      "mtime_ns": 1789007894950869016,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_s_d4_mcnet.json",
+        "artifacts/p4_tiny_gate_mcnet_d2.json",
+        "artifacts/pretraining_mcnet_d2_summary.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/mcnet_d8_full_progress.pt",
+      "bytes": 7911289,
+      "mtime_ns": 1789007049817566693,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_s_d8_mcnet.json",
+        "artifacts/p4_tiny_gate_mcnet_d2.json",
+        "artifacts/pretraining_mcnet_d2_summary.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/mcnet_d8_probe32_progress.pt",
+      "bytes": 6890675,
+      "mtime_ns": 1789005779897101905,
+      "category": "保留",
+      "explicit_references": [
+        "docs/results_mcnet_d2.md",
+        "artifacts/p4_tiny_s_d8_mcnet_probe32.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/p4_resume_cuda_smoke_progress.pt",
+      "bytes": 14488399,
+      "mtime_ns": 1788905724535749994,
+      "category": "保留",
+      "explicit_references": [],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/resume_smoke_1ccedfa_progress.pt",
+      "bytes": 14488399,
+      "mtime_ns": 1788905804371156412,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_resume_cuda_smoke.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/tiny-6_one-pair-residuals_translation_bf16_weight-average-from-1536_arch-92095ffe16a5_bound-0p5_budget-2000_seed0.pt",
+      "bytes": 11524239,
+      "mtime_ns": 1789011457599005422,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_6_mcnet_checkpoint_audit.json",
+        "artifacts/p4_tiny_gate_mcnet_d2.json",
+        "artifacts/pretraining_mcnet_d2_summary.json",
+        "artifacts/p4_tiny_6_mcnet.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/tiny-s-d1_one-pair-residuals_translation_bf16_raw_bound-1_budget-128_seed0.pt",
+      "bytes": 16252625,
+      "mtime_ns": 1788941327142992079,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_s_d1_single_condition_bf16_diagnostic_128.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/tiny-s-d1_one-pair-residuals_translation_bf16_raw_bound-1_budget-128_seed0_condition-offset-14.pt",
+      "bytes": 16252689,
+      "mtime_ns": 1788943916010171247,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_s_d1_condition14_vertical_negative_bf16_diagnostic_128.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/tiny-s-d1_one-pair-residuals_translation_bf16_raw_bound-1_budget-128_seed0_condition-offset-2.pt",
+      "bytes": 16252689,
+      "mtime_ns": 1788943921546199430,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_s_d1_condition2_vertical_positive_bf16_diagnostic_128.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/tiny-s-d1_one-pair-residuals_translation_bf16_raw_seed0.pt",
+      "bytes": 16250961,
+      "mtime_ns": 1788907175086134322,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_s_d1_full_bound_diagnostic_256.json",
+        "artifacts/p4_tiny_s_d1_full_bound_bf16_checkpoint_audit.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/tiny-s-d1_one-pair-residuals_translation_bf16_weight-average-from-1_seed890.pt",
+      "bytes": 16250897,
+      "mtime_ns": 1788866619816036412,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_d1_checkpoint_group_integration_smoke.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/tiny-s-d1_one-pair-residuals_translation_bf16_weight-average-from-1_seed891.pt",
+      "bytes": 16250897,
+      "mtime_ns": 1788868465297220670,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_d1_single_grid_sample_integration_smoke.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/tiny-s-d1_one-pair-residuals_translation_bf16_weight-average-from-1_seed892.pt",
+      "bytes": 16250897,
+      "mtime_ns": 1788868592428007663,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_d1_vectorized_grid_integration_smoke.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/tiny-s-d1_one-pair-residuals_translation_fp32_raw_bound-1_budget-128_seed0.pt",
+      "bytes": 16252625,
+      "mtime_ns": 1788941698899884584,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_s_d1_single_condition_fp32_diagnostic_128.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/tiny-s-d1_one-pair-residuals_translation_fp32_raw_bound-1_budget-256_seed0.pt",
+      "bytes": 16252945,
+      "mtime_ns": 1788943098775010942,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_s_d1_full_bound_fp32_diagnostic_256.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/tiny-s-d2_one-pair-residuals_translation_bf16_weight-average-from-1536_arch-92095ffe16a5_bound-0p5_budget-2000_seed0.pt",
+      "bytes": 7270147,
+      "mtime_ns": 1789009224719638480,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_s_d2_mcnet_checkpoint_audit.json",
+        "artifacts/p4_tiny_gate_mcnet_d2.json",
+        "artifacts/pretraining_mcnet_d2_summary.json",
+        "artifacts/p4_tiny_s_d2_mcnet.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/tiny-s-d2_one-pair-residuals_translation_bf16_weight-average-from-1536_seed0.pt",
+      "bytes": 15644987,
+      "mtime_ns": 1788853378486948280,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_s_d2_translation_swa.json",
+        "artifacts/p4_tiny_gate_partial_d8_d4_d2.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/tiny-s-d2_one-pair-residuals_translation_bf16_weight-average-from-1_seed889.pt",
+      "bytes": 15645115,
+      "mtime_ns": 1788851544875118886,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_d2_checkpoint_group_integration_smoke.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/tiny-s-d4_one-pair-residuals_translation_bf16_weight-average-from-1536_arch-92095ffe16a5_bound-0p5_budget-2000_seed0.pt",
+      "bytes": 7052635,
+      "mtime_ns": 1789007895057869561,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_s_d4_mcnet.json",
+        "artifacts/p4_tiny_s_d4_mcnet_checkpoint_audit.json",
+        "artifacts/p4_tiny_gate_mcnet_d2.json",
+        "artifacts/pretraining_mcnet_d2_summary.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/tiny-s-d4_one-pair-residuals_translation_bf16_weight-average-from-1536_seed0.pt",
+      "bytes": 15112741,
+      "mtime_ns": 1788850953553675177,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_s_d4_translation_swa.json",
+        "artifacts/p4_tiny_gate_partial_d8_d4_d2.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/tiny-s-d4_one-pair-residuals_translation_bf16_weight-average-from-1_seed888.pt",
+      "bytes": 15112677,
+      "mtime_ns": 1788851017964094686,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_preload_weight_average_integration_smoke.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/tiny-s-d8_one-pair-residuals_seed0.pt",
+      "bytes": 14481999,
+      "mtime_ns": 1788833281058604234,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_s_d8_one_pair.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/tiny-s-d8_one-pair-residuals_translation_bf16_raw_arch-92095ffe16a5_bound-0p5_budget-32_seed0.pt",
+      "bytes": 6752499,
+      "mtime_ns": 1789005779987102364,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_s_d8_mcnet_probe32.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/tiny-s-d8_one-pair-residuals_translation_bf16_raw_bound-0p5_budget-1_seed0.pt",
+      "bytes": 14484239,
+      "mtime_ns": 1788905837258323831,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_resume_cuda_smoke.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/tiny-s-d8_one-pair-residuals_translation_bf16_seed0.pt",
+      "bytes": 14481935,
+      "mtime_ns": 1788847968642334769,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_d8_single_residual_diagnostic.json",
+        "artifacts/p4_tiny_d8_single_residual_stepwise.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/tiny-s-d8_one-pair-residuals_translation_bf16_weight-average-from-1536_arch-92095ffe16a5_bound-0p5_budget-2000_seed0.pt",
+      "bytes": 6752819,
+      "mtime_ns": 1789007049891567070,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_s_d8_mcnet.json",
+        "artifacts/p4_tiny_s_d8_mcnet_checkpoint_audit.json",
+        "artifacts/p4_tiny_gate_mcnet_d2.json",
+        "artifacts/pretraining_mcnet_d2_summary.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/tiny-s-d8_one-pair-residuals_translation_bf16_weight-average-from-1536_seed0.pt",
+      "bytes": 14482191,
+      "mtime_ns": 1788849160864347201,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_gate_partial.json",
+        "artifacts/p4_tiny_s_d8_translation_swa.json",
+        "artifacts/p4_tiny_gate_partial_d8_d4_d2.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/tiny-s-d8_one-pair-residuals_translation_bf16_weight-average-from-1_seed777.pt",
+      "bytes": 14482063,
+      "mtime_ns": 1788848448244405140,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_weight_average_smoke.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/tiny-s-d8_one-pair-residuals_translation_seed0.pt",
+      "bytes": 14482063,
+      "mtime_ns": 1788835565813279251,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_s_d8_translation.json",
+        "artifacts/p4_tiny_d8_failure_analysis.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/tiny-s-d8_seed0.pt",
+      "bytes": 14483151,
+      "mtime_ns": 1788832634910510553,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_s_d8.json"
+      ],
+      "validation_summaries": []
+    },
+    {
+      "path": "outputs/tiny_overfit/tiny-s-d8_seed999.pt",
+      "bytes": 14481871,
+      "mtime_ns": 1788831491680370690,
+      "category": "保留",
+      "explicit_references": [
+        "artifacts/p4_tiny_integration_smoke.json"
+      ],
+      "validation_summaries": []
+    }
+  ],
+  "error_log_evidence": [
+    {
+      "path": "outputs/batch_precision_diagnosis.log",
+      "hits": [
+        {
+          "line": 1,
+          "text": "Traceback (most recent call last):"
+        },
+        {
+          "line": 26,
+          "text": "RuntimeError: expected scalar type Float but found BFloat16"
+        }
+      ],
+      "tail": [
+        "    return self.torch.einsum(pattern, *x)",
+        "  File \"/root/miniconda3/envs/loma-repro/lib/python3.10/site-packages/torch/functional.py\", line 373, in einsum",
+        "    return _VF.einsum(equation, operands)  # type: ignore[attr-defined]",
+        "RuntimeError: expected scalar type Float but found BFloat16"
+      ]
+    },
+    {
+      "path": "outputs/engineering_batch_visualization_smoke_start.log",
+      "hits": [
+        {
+          "line": 4,
+          "text": "Traceback (most recent call last):"
+        },
+        {
+          "line": 23,
+          "text": "torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 116.00 MiB. GPU 0 has a total capacity of 23.54 GiB of which 58.06 MiB is free. Including non-PyTorch memory, this process has 0 bytes memory in use. Of the allocated memory 6.47 GiB is allocated by PyTorch, and 610.13 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_"
+        }
+      ],
+      "tail": [
+        "    _engine_run_backward(",
+        "  File \"/root/miniconda3/envs/loma-repro/lib/python3.10/site-packages/torch/autograd/graph.py\", line 869, in _engine_run_backward",
+        "    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass",
+        "torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 116.00 MiB. GPU 0 has a total capacity of 23.54 GiB of which 58.06 MiB is free. Including non-PyTorch memory, this process has 0 bytes memory in use. Of the allocated memory 6.47 GiB is allocated by PyTorch, and 610.13 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)"
+      ]
+    },
+    {
+      "path": "outputs/tier1_a_console.log",
+      "hits": [
+        {
+          "line": 2609,
+          "text": "Traceback (most recent call last):"
+        },
+        {
+          "line": 2628,
+          "text": "KeyboardInterrupt"
+        }
+      ],
+      "tail": [
+        "    _engine_run_backward(",
+        "  File \"/root/miniconda3/envs/loma-repro/lib/python3.10/site-packages/torch/autograd/graph.py\", line 869, in _engine_run_backward",
+        "    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass",
+        "KeyboardInterrupt"
+      ]
+    },
+    {
+      "path": "outputs/tier1_b_console.log",
+      "hits": [
+        {
+          "line": 2609,
+          "text": "Traceback (most recent call last):"
+        },
+        {
+          "line": 2628,
+          "text": "KeyboardInterrupt"
+        }
+      ],
+      "tail": [
+        "    _engine_run_backward(",
+        "  File \"/root/miniconda3/envs/loma-repro/lib/python3.10/site-packages/torch/autograd/graph.py\", line 869, in _engine_run_backward",
+        "    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass",
+        "KeyboardInterrupt"
+      ]
+    },
+    {
+      "path": "outputs/tiny_overfit/mcnet_d4_full.log",
+      "hits": [
+        {
+          "line": 9,
+          "text": "Traceback (most recent call last):"
+        },
+        {
+          "line": 30,
+          "text": "KeyboardInterrupt"
+        }
+      ],
+      "tail": [
+        "      \"scope_note\": \"This is a training-set learnability diagnostic with controlled H0; it is not validation accuracy and must not select a formal configuration.\"",
+        "    }",
+        "  ]",
+        "}"
+      ]
+    },
+    {
+      "path": "outputs/tiny_overfit/mcnet_d8_full.log",
+      "hits": [
+        {
+          "line": 18,
+          "text": "Traceback (most recent call last):"
+        },
+        {
+          "line": 39,
+          "text": "KeyboardInterrupt"
+        }
+      ],
+      "tail": [
+        "      \"scope_note\": \"This is a training-set learnability diagnostic with controlled H0; it is not validation accuracy and must not select a formal configuration.\"",
+        "    }",
+        "  ]",
+        "}"
+      ]
+    }
+  ],
+  "regenerable_caches": [
+    {
+      "path": ".pytest_cache",
+      "bytes": 19063,
+      "files": 5
+    },
+    {
+      "path": "tests/__pycache__",
+      "bytes": 331936,
+      "files": 65
+    },
+    {
+      "path": "tests/loma_reference/__pycache__",
+      "bytes": 35464,
+      "files": 4
+    },
+    {
+      "path": "scripts/__pycache__",
+      "bytes": 51420,
+      "files": 9
+    },
+    {
+      "path": "mhinet/__pycache__",
+      "bytes": 15366,
+      "files": 3
+    },
+    {
+      "path": "mhinet/diagnostics/__pycache__",
+      "bytes": 142953,
+      "files": 12
+    },
+    {
+      "path": "mhinet/models/__pycache__",
+      "bytes": 49790,
+      "files": 6
+    },
+    {
+      "path": "mhinet/visualization/__pycache__",
+      "bytes": 5023,
+      "files": 2
+    },
+    {
+      "path": "mhinet/pretraining/__pycache__",
+      "bytes": 31730,
+      "files": 7
+    },
+    {
+      "path": "mhinet/downstream/__pycache__",
+      "bytes": 76895,
+      "files": 12
+    },
+    {
+      "path": "mhinet/downstream/loma_reference/__pycache__",
+      "bytes": 40910,
+      "files": 7
+    },
+    {
+      "path": "mhinet/engine/__pycache__",
+      "bytes": 68519,
+      "files": 7
+    },
+    {
+      "path": "mhinet/dataio/__pycache__",
+      "bytes": 31225,
+      "files": 6
+    },
+    {
+      "path": "mhinet/ops/__pycache__",
+      "bytes": 29712,
+      "files": 3
+    }
+  ],
+  "limitations": [
+    "显式路径搜索不等于完整动态依赖分析；未做大权重内容去重。",
+    "日志出现异常不代表最终运行失败；失败证据需结合日志尾部和后续报告。",
+    "文件正在写入，占用和训练步数仅为盘点瞬间快照。",
+    "allocated_bytes 是 stat.st_blocks 汇总；实际释放量受文件系统压缩/快照影响。"
+  ]
+}

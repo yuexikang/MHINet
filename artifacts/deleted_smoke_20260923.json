@@ -1,0 +1,673 @@
+{
+  "created_utc": "2026-09-23T10:19:12.837958+00:00",
+  "authorization": "用户要求：把项目里的冒烟记录都删了",
+  "status": "completed",
+  "targets": [
+    {
+      "path": "artifacts/batch_visualization_summary.json",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 36899,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "artifacts/frozen_dino_mvt_two_step.json",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 4210,
+      "allocated_bytes": 6656
+    },
+    {
+      "path": "artifacts/frozen_dino_two_step.json",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 3624,
+      "allocated_bytes": 6656
+    },
+    {
+      "path": "artifacts/p3_zero_init_smoke.json",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 9141,
+      "allocated_bytes": 6656
+    },
+    {
+      "path": "artifacts/p3_zero_init_smoke_mcnet_d2.json",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 4486,
+      "allocated_bytes": 6656
+    },
+    {
+      "path": "artifacts/p4_resume_smoke.json",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 2148,
+      "allocated_bytes": 6656
+    },
+    {
+      "path": "artifacts/p4_tiny_d1_checkpoint_group_integration_smoke.json",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 20511,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "artifacts/p4_tiny_d1_single_grid_sample_integration_smoke.json",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 20485,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "artifacts/p4_tiny_d1_vectorized_grid_integration_smoke.json",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 20488,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "artifacts/p4_tiny_d2_checkpoint_group_integration_smoke.json",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 81587,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "artifacts/p4_tiny_integration_smoke.json",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 23528,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "artifacts/p4_tiny_preload_weight_average_integration_smoke.json",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 20351,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "artifacts/p4_tiny_resume_cuda_smoke.json",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 4845,
+      "allocated_bytes": 6656
+    },
+    {
+      "path": "artifacts/p4_tiny_weight_average_smoke.json",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 27090,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "artifacts/semidense_qrru_engineering.json",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 3127,
+      "allocated_bytes": 6656
+    },
+    {
+      "path": "artifacts/semidense_visual_startup_audit.json",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 6866,
+      "allocated_bytes": 6656
+    },
+    {
+      "path": "artifacts/shared_frozen_resume_audit.json",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 695,
+      "allocated_bytes": 6656
+    },
+    {
+      "path": "artifacts/shared_lora_resume_audit.json",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 691,
+      "allocated_bytes": 6656
+    },
+    {
+      "path": "outputs/diagnostics/dense_loma_p3_smoke",
+      "kind": "directory",
+      "files": 3,
+      "logical_bytes": 3158,
+      "allocated_bytes": 19968
+    },
+    {
+      "path": "outputs/diagnostics/dense_loma_p6_smoke",
+      "kind": "directory",
+      "files": 3,
+      "logical_bytes": 3091,
+      "allocated_bytes": 19968
+    },
+    {
+      "path": "outputs/diagnostics/frozen_dino_mvt_trainer_smoke",
+      "kind": "directory",
+      "files": 2,
+      "logical_bytes": 14802,
+      "allocated_bytes": 18944
+    },
+    {
+      "path": "outputs/diagnostics/frozen_dino_mvt_trainer_smoke_v2",
+      "kind": "directory",
+      "files": 2,
+      "logical_bytes": 17743,
+      "allocated_bytes": 18944
+    },
+    {
+      "path": "outputs/diagnostics/frozen_dino_trainer_smoke",
+      "kind": "directory",
+      "files": 2,
+      "logical_bytes": 17593,
+      "allocated_bytes": 18944
+    },
+    {
+      "path": "outputs/diagnostics/original_visual_test_smoke",
+      "kind": "directory",
+      "files": 10,
+      "logical_bytes": 7880209,
+      "allocated_bytes": 7987200
+    },
+    {
+      "path": "outputs/diagnostics/quadrant_tiers_smoke",
+      "kind": "directory",
+      "files": 257,
+      "logical_bytes": 84296764,
+      "allocated_bytes": 85721088
+    },
+    {
+      "path": "outputs/diagnostics/shared_frozen_deterministic_continuous",
+      "kind": "directory",
+      "files": 15,
+      "logical_bytes": 14755598,
+      "allocated_bytes": 14900736
+    },
+    {
+      "path": "outputs/diagnostics/shared_frozen_deterministic_split",
+      "kind": "directory",
+      "files": 15,
+      "logical_bytes": 14751429,
+      "allocated_bytes": 14894080
+    },
+    {
+      "path": "outputs/diagnostics/shared_frozen_final_continuous",
+      "kind": "directory",
+      "files": 15,
+      "logical_bytes": 14756450,
+      "allocated_bytes": 14894592
+    },
+    {
+      "path": "outputs/diagnostics/shared_frozen_final_split",
+      "kind": "directory",
+      "files": 29,
+      "logical_bytes": 29500362,
+      "allocated_bytes": 29782016
+    },
+    {
+      "path": "outputs/diagnostics/shared_frozen_smoke",
+      "kind": "directory",
+      "files": 8,
+      "logical_bytes": 2073763,
+      "allocated_bytes": 2129920
+    },
+    {
+      "path": "outputs/diagnostics/shared_frozen_strict_continuous",
+      "kind": "directory",
+      "files": 15,
+      "logical_bytes": 14748745,
+      "allocated_bytes": 14888448
+    },
+    {
+      "path": "outputs/diagnostics/shared_frozen_strict_split",
+      "kind": "directory",
+      "files": 27,
+      "logical_bytes": 29503795,
+      "allocated_bytes": 29780992
+    },
+    {
+      "path": "outputs/diagnostics/shared_frozen_v1",
+      "kind": "directory",
+      "files": 26,
+      "logical_bytes": 29513643,
+      "allocated_bytes": 29798400
+    },
+    {
+      "path": "outputs/diagnostics/shared_lora_final_continuous",
+      "kind": "directory",
+      "files": 15,
+      "logical_bytes": 14743573,
+      "allocated_bytes": 14882304
+    },
+    {
+      "path": "outputs/diagnostics/shared_lora_final_split",
+      "kind": "directory",
+      "files": 27,
+      "logical_bytes": 29498822,
+      "allocated_bytes": 29768704
+    },
+    {
+      "path": "outputs/diagnostics/shared_lora_smoke",
+      "kind": "directory",
+      "files": 8,
+      "logical_bytes": 2084495,
+      "allocated_bytes": 2142208
+    },
+    {
+      "path": "outputs/diagnostics/shared_lora_strict_continuous",
+      "kind": "directory",
+      "files": 15,
+      "logical_bytes": 14744782,
+      "allocated_bytes": 14882304
+    },
+    {
+      "path": "outputs/diagnostics/shared_lora_strict_split",
+      "kind": "directory",
+      "files": 27,
+      "logical_bytes": 29494822,
+      "allocated_bytes": 29774848
+    },
+    {
+      "path": "outputs/diagnostics/shared_lora_v1",
+      "kind": "directory",
+      "files": 14,
+      "logical_bytes": 14763709,
+      "allocated_bytes": 14905856
+    },
+    {
+      "path": "outputs/diagnostics/shared_tier2_overlap_smoke",
+      "kind": "directory",
+      "files": 15,
+      "logical_bytes": 14999687,
+      "allocated_bytes": 15157760
+    },
+    {
+      "path": "outputs/diagnostics/shared_tier3_smoke",
+      "kind": "directory",
+      "files": 15,
+      "logical_bytes": 16401387,
+      "allocated_bytes": 16525824
+    },
+    {
+      "path": "outputs/diagnostics/stable_v2_tier1_adapt_smoke",
+      "kind": "directory",
+      "files": 17,
+      "logical_bytes": 2218762726,
+      "allocated_bytes": 2218004992
+    },
+    {
+      "path": "outputs/diagnostics/test_tier3_smoke",
+      "kind": "directory",
+      "files": 38,
+      "logical_bytes": 11234293,
+      "allocated_bytes": 11427840
+    },
+    {
+      "path": "outputs/diagnostics/tier1_afss_continuous",
+      "kind": "directory",
+      "files": 15,
+      "logical_bytes": 9390888,
+      "allocated_bytes": 9483264
+    },
+    {
+      "path": "outputs/diagnostics/tier1_afss_resume",
+      "kind": "directory",
+      "files": 3,
+      "logical_bytes": 22829,
+      "allocated_bytes": 25600
+    },
+    {
+      "path": "outputs/diagnostics/tier1_afss_resume_v2",
+      "kind": "directory",
+      "files": 15,
+      "logical_bytes": 9402928,
+      "allocated_bytes": 9483264
+    },
+    {
+      "path": "outputs/diagnostics/tier1_random_init_smoke",
+      "kind": "directory",
+      "files": 2,
+      "logical_bytes": 20140,
+      "allocated_bytes": 18944
+    },
+    {
+      "path": "outputs/diagnostics/tier1_uniform_smoke",
+      "kind": "directory",
+      "files": 2,
+      "logical_bytes": 21141,
+      "allocated_bytes": 18944
+    },
+    {
+      "path": "outputs/e01_gate_refusal_smoke",
+      "kind": "directory",
+      "files": 0,
+      "logical_bytes": 0,
+      "allocated_bytes": 0
+    },
+    {
+      "path": "outputs/engineering_batch_visualization_smoke",
+      "kind": "directory",
+      "files": 2,
+      "logical_bytes": 10264,
+      "allocated_bytes": 7168
+    },
+    {
+      "path": "outputs/engineering_batch_visualization_smoke_bs1",
+      "kind": "directory",
+      "files": 22,
+      "logical_bytes": 12348134,
+      "allocated_bytes": 12494336
+    },
+    {
+      "path": "outputs/engineering_batch_visualization_smoke_bs1_resume.log",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 37257,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "outputs/engineering_batch_visualization_smoke_bs1_start.log",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 35485,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "outputs/engineering_batch_visualization_smoke_start.log",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 1977,
+      "allocated_bytes": 6656
+    },
+    {
+      "path": "outputs/engineering_visualization_seven_smoke",
+      "kind": "directory",
+      "files": 13,
+      "logical_bytes": 7213630,
+      "allocated_bytes": 7292928
+    },
+    {
+      "path": "outputs/engineering_visualization_seven_smoke.log",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 37220,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "outputs/mhinet_minimal_smoke",
+      "kind": "directory",
+      "files": 5,
+      "logical_bytes": 27190,
+      "allocated_bytes": 38912
+    },
+    {
+      "path": "outputs/mhinet_resume_smoke",
+      "kind": "directory",
+      "files": 5,
+      "logical_bytes": 28482,
+      "allocated_bytes": 38912
+    },
+    {
+      "path": "outputs/mhinet_resume_smoke_mcnet_d2_v2",
+      "kind": "directory",
+      "files": 5,
+      "logical_bytes": 44680,
+      "allocated_bytes": 38912
+    },
+    {
+      "path": "outputs/mhinet_uninterrupted_smoke_mcnet_d2_v2",
+      "kind": "directory",
+      "files": 5,
+      "logical_bytes": 43318,
+      "allocated_bytes": 38912
+    },
+    {
+      "path": "outputs/previews/stable_geometry_smoke_v2",
+      "kind": "directory",
+      "files": 4,
+      "logical_bytes": 2068141,
+      "allocated_bytes": 2127360
+    },
+    {
+      "path": "outputs/semidense_qrru_engineering_v1",
+      "kind": "directory",
+      "files": 10,
+      "logical_bytes": 1048352999,
+      "allocated_bytes": 1047915520
+    },
+    {
+      "path": "outputs/semidense_qrru_replay_v2",
+      "kind": "directory",
+      "files": 15,
+      "logical_bytes": 2088245647,
+      "allocated_bytes": 2087298560
+    },
+    {
+      "path": "outputs/semidense_qrru_resume_v1",
+      "kind": "directory",
+      "files": 6,
+      "logical_bytes": 1044117256,
+      "allocated_bytes": 1043639296
+    },
+    {
+      "path": "outputs/semidense_visual_smoke_v1",
+      "kind": "directory",
+      "files": 89,
+      "logical_bytes": 1108527051,
+      "allocated_bytes": 1080846336
+    },
+    {
+      "path": "outputs/semidense_visual_smoke_v2",
+      "kind": "directory",
+      "files": 93,
+      "logical_bytes": 1109115975,
+      "allocated_bytes": 1081465344
+    },
+    {
+      "path": "outputs/stable_geometry_smoke_v2",
+      "kind": "directory",
+      "files": 257,
+      "logical_bytes": 86908503,
+      "allocated_bytes": 88276480
+    },
+    {
+      "path": "outputs/tier1_afss_continuous.log",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 45511,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "outputs/tier1_afss_smoke.log",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 19115,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "outputs/tier1_afss_smoke_v2.log",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 63756,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "outputs/tier1_random_init_smoke.log",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 19027,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "outputs/tier1_uniform_smoke.log",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 17760,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "outputs/tiny_overfit/d1_checkpoint_group_smoke.stderr",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 1669,
+      "allocated_bytes": 6656
+    },
+    {
+      "path": "outputs/tiny_overfit/d1_checkpoint_group_smoke.stdout",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 20511,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "outputs/tiny_overfit/d1_single_grid_sample_smoke.stderr",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 1671,
+      "allocated_bytes": 6656
+    },
+    {
+      "path": "outputs/tiny_overfit/d1_single_grid_sample_smoke.stdout",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 20485,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "outputs/tiny_overfit/d1_vectorized_grid_smoke.stderr",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 1668,
+      "allocated_bytes": 6656
+    },
+    {
+      "path": "outputs/tiny_overfit/d1_vectorized_grid_smoke.stdout",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 20488,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "outputs/tiny_overfit/d2_checkpoint_group_smoke.stderr",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 1670,
+      "allocated_bytes": 6656
+    },
+    {
+      "path": "outputs/tiny_overfit/d2_checkpoint_group_smoke.stdout",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 81587,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "outputs/tiny_overfit/p4_resume_cuda_smoke_progress.pt",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 14488399,
+      "allocated_bytes": 10339328
+    },
+    {
+      "path": "outputs/tiny_overfit/resume_smoke_1ccedfa_fresh.json",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 23063,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "outputs/tiny_overfit/resume_smoke_1ccedfa_fresh.stderr",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 1213,
+      "allocated_bytes": 6656
+    },
+    {
+      "path": "outputs/tiny_overfit/resume_smoke_1ccedfa_fresh.stdout",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 23063,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "outputs/tiny_overfit/resume_smoke_1ccedfa_progress.pt",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 14488399,
+      "allocated_bytes": 10339328
+    },
+    {
+      "path": "outputs/tiny_overfit/resume_smoke_1ccedfa_resumed.json",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 26507,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "outputs/tiny_overfit/resume_smoke_1ccedfa_resumed.stderr",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 34,
+      "allocated_bytes": 512
+    },
+    {
+      "path": "outputs/tiny_overfit/resume_smoke_1ccedfa_resumed.stdout",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 26507,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "artifacts/shared_frozen_bundle_audit.json",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 411,
+      "allocated_bytes": 6656
+    },
+    {
+      "path": "artifacts/shared_lora_bundle_audit.json",
+      "kind": "file",
+      "files": 1,
+      "logical_bytes": 408,
+      "allocated_bytes": 6656
+    }
+  ],
+  "protected": [
+    "outputs/semidense_stable_v2_tier2_lr_a_seed0",
+    "outputs/shared_stable_v2_full_tier1_seed0",
+    "outputs/shared_descriptor_frozen_seed0",
+    "outputs/semidense_stable_v2_tier1_lr_b_seed0.console.log",
+    "outputs/shared_stable_v2_full_tier2_seed0",
+    "outputs/shared_stable_v2_full_tier3_seed0",
+    "outputs/semidense_stable_v2_tier1_lr_c_seed0.console.log",
+    "outputs/shared_descriptor_frozen_tier3_seed0.console.log",
+    "outputs/shared_descriptor_frozen_tier2_seed0",
+    "outputs/shared_descriptor_frozen_h0_overlap.log",
+    "outputs/semidense_stable_v2_tier2_lr_a_seed0.console.log",
+    "outputs/semidense_stable_v2_tier1_lr_a_seed0",
+    "outputs/shared_descriptor_frozen_tier3_seed0",
+    "outputs/semidense_stable_v2_tier1_lr_b_seed0",
+    "outputs/shared_descriptor_frozen_tier2_seed0.console.log",
+    "outputs/semidense_stable_v2_tier1_lr_c_seed0",
+    "outputs/semidense_stable_v2_tier1_lr_a_seed0.console.log",
+    "outputs/shared_descriptor_lora_seed0"
+  ],
+  "note": "仅删除生成记录及权重；保留源码、测试配置、设计/历史文档和清理审计。符号链接只删链接，不遍历外部数据。",
+  "removed_registry_ids": [
+    "ea4902ea3eed7a41",
+    "69a49b547a666116",
+    "3204e56bb20ded80",
+    "7bc01f3e8b53ca9a",
+    "d4c0375fa4f473b8",
+    "c509a69f05a932de",
+    "350c1924d3323cd0",
+    "999f275858b9a0ac",
+    "7bf13a220d3a9c76"
+  ],
+  "deleted_files": 1233,
+  "logical_bytes": 9164270270,
+  "allocated_bytes": 9103989760,
+  "retained_historical_evaluations_note": "real_image_accuracy_val16 及其登记保留：属于独立真实影像评估，虽引用已删除工程权重，不是冒烟运行；删除权重后不可直接原样复算。"
+}

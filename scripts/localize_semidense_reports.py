@@ -124,12 +124,12 @@ def localize_run(run):
 
 def dashboard():
     cards=[]
-    for name,gpu in [('a',1),('b',2),('c',1)]:
-        run=f'semidense_stable_v2_tier1_lr_{name}_seed0'
-        config=read_json(ROOT/f'configs/semidense_tier1_lr_{name}.json')
+    for name,gpu,tier in [('a',1,1),('b',2,1),('c',1,1),('a',2,2)]:
+        run=f'semidense_stable_v2_tier{tier}_lr_{name}_seed0'
+        config=read_json(ROOT/f'configs/semidense_tier{tier}_lr_{name}.json')
         report=f'{run}/visualizations/zh/index.html'
-        cards.append(f'<section><h2>{name.upper()} 组 · GPU {gpu}</h2><p>CGMDP 学习率:{config["shared_lr"]:g}<br>下游学习率:{config["head_lr"]:g}</p><a href="{report}">打开详细可视化</a> · <a href="{run}.console.log">查看训练日志</a><iframe title="{name.upper()}组训练报告" src="{report}"></iframe></section>')
-    body='<p>第三档预训练权重 → 第一档半密集下游训练。各组使用相同初始化、随机种子、数据顺序和验证样本；冻结 DINO、MVT 与 H0 预测分支，每组训练12995步。</p>'
+        cards.append(f'<section><h2>{name.upper()} 组 · 第 {tier} 档 · GPU {gpu}</h2><p>CGMDP 学习率:{config["shared_lr"]:g}<br>下游学习率:{config["head_lr"]:g}</p><a href="{report}">打开详细可视化</a> · <a href="{run}.console.log">查看训练日志</a><iframe title="{name.upper()}组训练报告" src="{report}"></iframe></section>')
+    body='<p>第三档预训练权重 → 第一档半密集下游训练。各组使用相同初始化、随机种子、数据顺序和验证样本；冻结 DINO、MVT 与 H0 预测分支，第一档每组训练12995步。A 组第二档继承第一档完整权重，以相同初始学习率开启新一轮余弦调度。</p>'
     body+='<style>main{display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:20px}iframe{width:100%;height:850px;border:0}</style><main>'+''.join(cards)+'</main>'
     write(ROOT/'outputs/semidense_lr_comparison.html',document('半密集下游学习率对照',body,True))
 
@@ -143,20 +143,20 @@ def main():
     plt.rcParams['axes.unicode_minus']=False
     cache={}
     while True:
-        for name in 'abc':
-            run=ROOT/f'outputs/semidense_stable_v2_tier1_lr_{name}_seed0'
+        for name,tier in [('a',1),('b',1),('c',1),('a',2)]:
+            run=ROOT/f'outputs/semidense_stable_v2_tier{tier}_lr_{name}_seed0'
             if not (run/'run.json').exists():continue
             watched=[run/'train.jsonl']+list((run/'visualizations').glob('step_*/pairs.json'))+list((run/'visualizations').glob('step_*/summary.json'))
             signature=tuple((str(p),p.stat().st_mtime_ns) for p in watched if p.exists())
-            if cache.get(name)!=signature:
-                try:print(json.dumps(localize_run(run),ensure_ascii=False),flush=True);cache[name]=signature
+            if cache.get((name,tier))!=signature:
+                try:print(json.dumps(localize_run(run),ensure_ascii=False),flush=True);cache[(name,tier)]=signature
                 except (json.JSONDecodeError,FileNotFoundError):
                     if not args.watch:raise
         dashboard()
         if not args.watch:break
         complete=True
-        for name in 'abc':
-            run=ROOT/f'outputs/semidense_stable_v2_tier1_lr_{name}_seed0'
+        for name,tier in [('a',1),('b',1),('c',1),('a',2)]:
+            run=ROOT/f'outputs/semidense_stable_v2_tier{tier}_lr_{name}_seed0'
             if not (run/'run.json').exists():complete=False;continue
             total=read_json(run/'run.json')['total_steps']
             if not (run/'visualizations'/f'step_{total:07d}'/'summary.json').exists():complete=False

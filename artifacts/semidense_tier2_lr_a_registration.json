@@ -1,0 +1,22 @@
+{
+  "pid": 3867440,
+  "gpu": 2,
+  "command": [
+    "/root/miniconda3/envs/loma-repro/bin/python",
+    "-u",
+    "scripts/train_semidense_next_tier.py",
+    "--config",
+    "configs/semidense_tier2_lr_a.json",
+    "--checkpoint",
+    "outputs/semidense_stable_v2_tier1_lr_a_seed0/latest.pt",
+    "--output",
+    "/home/disk1/MHINet/outputs/semidense_stable_v2_tier2_lr_a_seed0"
+  ],
+  "created_unix": 1790156913.4285703,
+  "log": "/home/disk1/MHINet/outputs/semidense_stable_v2_tier2_lr_a_seed0.console.log",
+  "initialization": "Run A tier1 complete model",
+  "shared_lr": 1e-05,
+  "head_lr": 0.0001,
+  "optimizer": "fresh AdamW",
+  "schedule": "fresh cosine, one tier2 epoch"
+}

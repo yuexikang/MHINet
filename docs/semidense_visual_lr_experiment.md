@@ -25,3 +25,9 @@
 val样本按manifest等距索引固定选择，跨A/B共享选择规则；不是根据误差挑选成功例子。诊断是固定子集，不等于全量验证。QRRU前后同时报告同一保留点集合的误差，以及出界/剔除数量；fine完整结果不被QRRU剔除子集替代。
 
 启动器：`scripts/launch_semidense_lr_compare.py`；机器可读登记：`artifacts/semidense_tier1_lr_compare_registration.json`。重复启动拒绝已有目录/登记。运行状态以进程、日志和checkpoint为准，登记的launched不是完成证据。
+
+## C组：更大学习率追加对照（2026-09-23）
+
+用户授权新增一组更大学习率。C使用GPU1，CGMDP学习率2e-5、温度/QRRU学习率2e-4，均为A的2倍。重新从同一第三档共享预训练导出开始，完整训练stable_v2第一档一轮，12995步；不从A训练后的权重续训。其余配置、seed、冻结策略、可视化和验证频率保持一致。
+
+配置：`configs/semidense_tier1_lr_c.json`。登记含来源SHA、命令、进程及输出：`artifacts/semidense_tier1_lr_c_registration.json`。输出：`outputs/semidense_stable_v2_tier1_lr_c_seed0`。启动状态不代表完成或更优；结束后按同样的完整val监督损失与独立级联诊断比较。

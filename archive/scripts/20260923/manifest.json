@@ -1,0 +1,43 @@
+{
+  "date": "2026-09-23",
+  "deleted_p1": [
+    "scripts/summarize_batch_visualization.py",
+    "scripts/check_frozen_dino.py",
+    "scripts/check_frozen_dino_mvt.py",
+    "scripts/check_correlation_recompute.py",
+    "scripts/probe_temporal_batch.py",
+    "scripts/diagnose_batch_precision.py"
+  ],
+  "archived_p2": [
+    {
+      "original": "scripts/launch_semidense_lr_compare.py",
+      "archived": "archive/scripts/20260923/launch_semidense_lr_compare.py",
+      "sha256": "f8aa56f915ff852cff37736b53755efeb9020055db986434d16489c04f17b940"
+    },
+    {
+      "original": "scripts/train_shared_stable_v2_tier1_adapt.sh",
+      "archived": "archive/scripts/20260923/train_shared_stable_v2_tier1_adapt.sh",
+      "sha256": "1b162f553594a383b71be421331e9a879b622d8951c1f927cb80c9aad0e30dae"
+    },
+    {
+      "original": "scripts/generate_three_tiers.sh",
+      "archived": "archive/scripts/20260923/generate_three_tiers.sh",
+      "sha256": "406e2292eac964e62aea0c860579bd0117db3eeab94093769434586efe2af24d"
+    },
+    {
+      "original": "scripts/generate_temporal_dataset.sh",
+      "archived": "archive/scripts/20260923/generate_temporal_dataset.sh",
+      "sha256": "28d051b32048fa769679ffb3873b5c14de301d3c20616629db6e6c3e8e12990f"
+    },
+    {
+      "original": "scripts/analyze_tiny_conditions.py",
+      "archived": "archive/scripts/20260923/analyze_tiny_conditions.py",
+      "sha256": "3ea9ac4ab90a2727d10671ece1f013bef9496f1090df0af0f9a411d76124d970"
+    },
+    {
+      "original": "scripts/summarize_pretraining.py",
+      "archived": "archive/scripts/20260923/summarize_pretraining.py",
+      "sha256": "719223df294a5ec39f04af291a1cd053f9ef3a5dd9e404b6c1c110fad0b45530"
+    }
+  ]
+}

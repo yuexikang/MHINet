@@ -1,0 +1,420 @@
+{
+  "a": {
+    "train_last_1": {
+      "lc": 0.1147613450884819,
+      "lf": 0.14471933618187904,
+      "lq": 0.42994524538517
+    },
+    "train_last_100": {
+      "lc": 0.1327889446524819,
+      "lf": 0.22099168012714265,
+      "lq": 0.5352742465297181
+    },
+    "train_last_1000": {
+      "lc": 0.1333812453121081,
+      "lf": 0.2158820036893758,
+      "lq": 0.5302374421685502
+    },
+    "val_5000": {
+      "step": 5000,
+      "pairs": 5772,
+      "loss": 0.9811785286363428,
+      "metrics": {
+        "lc": 0.15102212626179803,
+        "lf": 0.24527600446002132,
+        "lq": 0.5848803980455411,
+        "fine_coverage": 0.5497162013275294,
+        "q_control": 0.3319524798751373,
+        "q_center": 0.25292791760244554
+      },
+      "scope": "GT-decoupled validation losses; use evaluate-semidense for cascaded matching accuracy",
+      "qrru_epe_d2": [
+        1.0015185578408046,
+        0.31158779482844484,
+        0.1278440385546383,
+        0.09253204583347861,
+        0.08633222185141115
+      ]
+    },
+    "val_10000": {
+      "step": 10000,
+      "pairs": 5772,
+      "loss": 0.8929927535587437,
+      "metrics": {
+        "lc": 0.1362819960850729,
+        "lf": 0.2200006359648566,
+        "lq": 0.5367101216979185,
+        "fine_coverage": 0.5497162013275294,
+        "q_control": 0.3039389786982363,
+        "q_center": 0.23277114379224229
+      },
+      "scope": "GT-decoupled validation losses; use evaluate-semidense for cascaded matching accuracy",
+      "qrru_epe_d2": [
+        1.0015185578408046,
+        0.29608278632246615,
+        0.11538084278742208,
+        0.08336482463421963,
+        0.07792518165108392
+      ]
+    },
+    "val_12995": {
+      "step": 12995,
+      "pairs": 5772,
+      "loss": 0.8852080796856229,
+      "metrics": {
+        "lc": 0.1350003436584689,
+        "lf": 0.21873831126079923,
+        "lq": 0.5314694249064081,
+        "fine_coverage": 0.5497162013275294,
+        "q_control": 0.30090679852801816,
+        "q_center": 0.23056262629061464
+      },
+      "scope": "GT-decoupled validation losses; use evaluate-semidense for cascaded matching accuracy",
+      "qrru_epe_d2": [
+        1.0015185578408046,
+        0.29499105823936866,
+        0.11409807323099953,
+        0.0821422906161679,
+        0.0768825805094803
+      ]
+    },
+    "cascade12": {
+      "step": 12995,
+      "pairs": 12,
+      "stages": {
+        "coarse": {
+          "precision_1px": 0.13524224526850184,
+          "epe": 2.2647213746835386,
+          "matches": 5362.583333333333
+        },
+        "fine": {
+          "precision_1px": 0.9495625,
+          "epe": 0.4775621665083385,
+          "matches": 12000.0
+        },
+        "final": {
+          "precision_1px": 0.9996041631941551,
+          "epe": 0.11168301284170777,
+          "matches": 11999.916666666666
+        }
+      },
+      "seconds": 313.66701341141015,
+      "checkpoint_sha256": "b7cabb686174d090a6a64dbac4e047fa4ee1c930f37f9ea05651c8084925204d",
+      "source": "current model at optimizer boundary; labels excluded from cascade",
+      "all_channels": true,
+      "scope": "fixed diagnostic subset, not full-val score"
+    },
+    "cascade_extra": {
+      "coarse": {
+        "1.0": 0.13524224526850184,
+        "3.0": 0.7500237567281108,
+        "5.0": 0.9727209386159049
+      },
+      "fine": {
+        "1.0": 0.9495625,
+        "3.0": 0.9997847222222225,
+        "5.0": 0.9998194444444447
+      },
+      "final": {
+        "1.0": 0.9996041631941551,
+        "3.0": 0.999805552661796,
+        "5.0": 0.9998194421294367
+      }
+    },
+    "q_improved": [
+      {
+        "count": 12000,
+        "improved_fraction": 0.963,
+        "worsened_fraction": 0.037,
+        "before_epe": 0.5571057633287397,
+        "after_epe": 0.11836872284457256
+      },
+      {
+        "count": 11999,
+        "improved_fraction": 0.9503291940995083,
+        "worsened_fraction": 0.04967080590049171,
+        "before_epe": 0.4278308944131314,
+        "after_epe": 0.10156594034569913
+      },
+      {
+        "count": 12000,
+        "improved_fraction": 0.9480833333333333,
+        "worsened_fraction": 0.051916666666666667,
+        "before_epe": 0.38040362843666115,
+        "after_epe": 0.0918656660680768
+      },
+      {
+        "count": 12000,
+        "improved_fraction": 0.9455,
+        "worsened_fraction": 0.0545,
+        "before_epe": 0.5233714676572744,
+        "after_epe": 0.1451782381533725
+      },
+      {
+        "count": 12000,
+        "improved_fraction": 0.9586666666666667,
+        "worsened_fraction": 0.04133333333333333,
+        "before_epe": 0.4942090857036115,
+        "after_epe": 0.10086979362471148
+      },
+      {
+        "count": 12000,
+        "improved_fraction": 0.92375,
+        "worsened_fraction": 0.07625,
+        "before_epe": 0.38494136022418174,
+        "after_epe": 0.1247226247480379
+      },
+      {
+        "count": 12000,
+        "improved_fraction": 0.97275,
+        "worsened_fraction": 0.02725,
+        "before_epe": 0.6305039562803981,
+        "after_epe": 0.12008286044859655
+      },
+      {
+        "count": 12000,
+        "improved_fraction": 0.96375,
+        "worsened_fraction": 0.03625,
+        "before_epe": 0.7455091397687316,
+        "after_epe": 0.1568916001757221
+      },
+      {
+        "count": 12000,
+        "improved_fraction": 0.9733333333333334,
+        "worsened_fraction": 0.02666666666666667,
+        "before_epe": 0.5967528747730353,
+        "after_epe": 0.1251710337256466
+      },
+      {
+        "count": 12000,
+        "improved_fraction": 0.9159166666666667,
+        "worsened_fraction": 0.08408333333333333,
+        "before_epe": 0.30078057736872316,
+        "after_epe": 0.10355854695036887
+      },
+      {
+        "count": 12000,
+        "improved_fraction": 0.9655,
+        "worsened_fraction": 0.0345,
+        "before_epe": 0.36478321106938355,
+        "after_epe": 0.07636982077336196
+      },
+      {
+        "count": 12000,
+        "improved_fraction": 0.9535833333333333,
+        "worsened_fraction": 0.04641666666666667,
+        "before_epe": 0.3245869065055961,
+        "after_epe": 0.07570800438765156
+      }
+    ]
+  },
+  "b": {
+    "train_last_1": {
+      "lc": 0.13462138175964355,
+      "lf": 0.1803119033575058,
+      "lq": 0.4845927953720093
+    },
+    "train_last_100": {
+      "lc": 0.15438158860682843,
+      "lf": 0.2552173291730821,
+      "lq": 0.6033506843462662
+    },
+    "train_last_1000": {
+      "lc": 0.15512785732395773,
+      "lf": 0.24993169833144258,
+      "lq": 0.5981444223500181
+    },
+    "val_5000": {
+      "step": 5000,
+      "pairs": 5772,
+      "loss": 1.1107456992668818,
+      "metrics": {
+        "lc": 0.1718199680174029,
+        "lf": 0.2772141159308799,
+        "lq": 0.6617116157019708,
+        "fine_coverage": 0.5497162013275294,
+        "q_control": 0.37848137971981893,
+        "q_center": 0.2832302360544375
+      },
+      "scope": "GT-decoupled validation losses; use evaluate-semidense for cascaded matching accuracy",
+      "qrru_epe_d2": [
+        1.0015185578408046,
+        0.3386047495540673,
+        0.1477530618486713,
+        0.10556732839485211,
+        0.09687251138984279
+      ]
+    },
+    "val_10000": {
+      "step": 10000,
+      "pairs": 5772,
+      "loss": 1.0098759342379977,
+      "metrics": {
+        "lc": 0.15697405260373798,
+        "lf": 0.2525324161427143,
+        "lq": 0.600369466405442,
+        "fine_coverage": 0.5497162013275294,
+        "q_control": 0.3418619468916603,
+        "q_center": 0.25850751938728184
+      },
+      "scope": "GT-decoupled validation losses; use evaluate-semidense for cascaded matching accuracy",
+      "qrru_epe_d2": [
+        1.0015185578408046,
+        0.3199131632345062,
+        0.13223505079115683,
+        0.09408535475214028,
+        0.08675523351781762
+      ]
+    },
+    "val_12995": {
+      "step": 12995,
+      "pairs": 5772,
+      "loss": 1.0046954368830388,
+      "metrics": {
+        "lc": 0.15600986241370088,
+        "lf": 0.2517800692311402,
+        "lq": 0.596905505319519,
+        "fine_coverage": 0.5497162013275294,
+        "q_control": 0.33967383586164573,
+        "q_center": 0.25723166981155643
+      },
+      "scope": "GT-decoupled validation losses; use evaluate-semidense for cascaded matching accuracy",
+      "qrru_epe_d2": [
+        1.0015185578408046,
+        0.3190581652446187,
+        0.13131605636919652,
+        0.09344721755915794,
+        0.08633801441933968
+      ]
+    },
+    "cascade12": {
+      "step": 12995,
+      "pairs": 12,
+      "stages": {
+        "coarse": {
+          "precision_1px": 0.1353798669906502,
+          "epe": 2.270966322114095,
+          "matches": 5356.666666666667
+        },
+        "fine": {
+          "precision_1px": 0.9469444444444445,
+          "epe": 0.48311830540674716,
+          "matches": 12000.0
+        },
+        "final": {
+          "precision_1px": 0.9993402777777778,
+          "epe": 0.1247409017666294,
+          "matches": 12000.0
+        }
+      },
+      "seconds": 312.3718660399318,
+      "checkpoint_sha256": "4e40242ed86f339ee9ec0e81ec391c8d97e7bdfc623f7937e0e12e4e128cad3a",
+      "source": "current model at optimizer boundary; labels excluded from cascade",
+      "all_channels": true,
+      "scope": "fixed diagnostic subset, not full-val score"
+    },
+    "cascade_extra": {
+      "coarse": {
+        "1.0": 0.1353798669906502,
+        "3.0": 0.7481923993618088,
+        "5.0": 0.9714577732359694
+      },
+      "fine": {
+        "1.0": 0.9469444444444445,
+        "3.0": 0.9997569444444444,
+        "5.0": 0.9998194444444447
+      },
+      "final": {
+        "1.0": 0.9993402777777778,
+        "3.0": 0.9997847222222224,
+        "5.0": 0.9998055555555556
+      }
+    },
+    "q_improved": [
+      {
+        "count": 12000,
+        "improved_fraction": 0.9533333333333334,
+        "worsened_fraction": 0.04666666666666667,
+        "before_epe": 0.5655929551775473,
+        "after_epe": 0.13453629266016193
+      },
+      {
+        "count": 12000,
+        "improved_fraction": 0.9408333333333333,
+        "worsened_fraction": 0.059166666666666666,
+        "before_epe": 0.4292771903432443,
+        "after_epe": 0.11210853597381679
+      },
+      {
+        "count": 12000,
+        "improved_fraction": 0.93675,
+        "worsened_fraction": 0.06325,
+        "before_epe": 0.38239727342260754,
+        "after_epe": 0.10011674512309165
+      },
+      {
+        "count": 12000,
+        "improved_fraction": 0.9303333333333333,
+        "worsened_fraction": 0.06966666666666667,
+        "before_epe": 0.5273712783115437,
+        "after_epe": 0.16032375210449296
+      },
+      {
+        "count": 12000,
+        "improved_fraction": 0.9504166666666667,
+        "worsened_fraction": 0.04958333333333333,
+        "before_epe": 0.5012979323999808,
+        "after_epe": 0.11280196246768405
+      },
+      {
+        "count": 12000,
+        "improved_fraction": 0.9081666666666667,
+        "worsened_fraction": 0.09183333333333334,
+        "before_epe": 0.3946367687150418,
+        "after_epe": 0.13662664545933004
+      },
+      {
+        "count": 12000,
+        "improved_fraction": 0.96775,
+        "worsened_fraction": 0.03225,
+        "before_epe": 0.635898115117727,
+        "after_epe": 0.134871971284239
+      },
+      {
+        "count": 12000,
+        "improved_fraction": 0.9528333333333333,
+        "worsened_fraction": 0.04716666666666667,
+        "before_epe": 0.7513367873911757,
+        "after_epe": 0.18005862843243814
+      },
+      {
+        "count": 12000,
+        "improved_fraction": 0.969,
+        "worsened_fraction": 0.031,
+        "before_epe": 0.6028991622058313,
+        "after_epe": 0.13743029889231448
+      },
+      {
+        "count": 12000,
+        "improved_fraction": 0.9009166666666667,
+        "worsened_fraction": 0.09908333333333333,
+        "before_epe": 0.30765062533264786,
+        "after_epe": 0.11625989338260229
+      },
+      {
+        "count": 12000,
+        "improved_fraction": 0.95475,
+        "worsened_fraction": 0.04525,
+        "before_epe": 0.3696420507277124,
+        "after_epe": 0.08661895997064903
+      },
+      {
+        "count": 12000,
+        "improved_fraction": 0.9423333333333334,
+        "worsened_fraction": 0.057666666666666665,
+        "before_epe": 0.3300575435734272,
+        "after_epe": 0.08579474301841972
+      }
+    ]
+  }
+}

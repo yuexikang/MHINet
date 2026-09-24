@@ -1,0 +1,77 @@
+{
+  "created_unix": 1790233131.7639515,
+  "source": "/home/disk1/MHINet/outputs/semidense_stable_v2_tier1_lr_c_seed0/latest.pt",
+  "source_sha256": "aa63bcb3a081cbf45b3fd3708c1d808bd1ac497f45d8624b55612ab220d66926",
+  "source_step": 12995,
+  "tier": 3,
+  "epochs": 1,
+  "seed": 0,
+  "effective_batch": 4,
+  "expected_steps": 8663,
+  "expected_train_pairs": 34652,
+  "expected_val_pairs": 3848,
+  "train_sha256": "c48eb269be7e96a6be8d4eb43b668035d758f0aaf4268d9f6abb8e337e3aad23",
+  "val_sha256": "9e69f1af29dca1073ca3f12a618d61b52b66a76e67346d2ab39830de17ec5f44",
+  "freeze": [
+    "DINO",
+    "MVT",
+    "GHIM/H0 head"
+  ],
+  "train": [
+    "VGG",
+    "CGMDP",
+    "temperatures",
+    "QRRU"
+  ],
+  "loss": "Lc+Lf+Lq",
+  "optimizer": "fresh AdamW",
+  "schedule": "fresh cosine; same initial LRs as C and twice C",
+  "jobs": [
+    {
+      "name": "c",
+      "gpu": 0,
+      "output": "/home/disk1/MHINet/outputs/semidense_stable_v2_tier3_lr_c_seed0",
+      "log": "/home/disk1/MHINet/outputs/semidense_stable_v2_tier3_lr_c_seed0.console.log",
+      "config": "/home/disk1/MHINet/configs/semidense_tier3_lr_c.json",
+      "config_sha256": "2c4a74014f01b1d4368efd21960ec96b38ebfe2a404a79072a9fcc955a0285b1",
+      "shared_lr": 2e-05,
+      "head_lr": 0.0002,
+      "command": [
+        "/root/miniconda3/envs/loma-repro/bin/python",
+        "-u",
+        "scripts/train_semidense_next_tier.py",
+        "--config",
+        "/home/disk1/MHINet/configs/semidense_tier3_lr_c.json",
+        "--checkpoint",
+        "/home/disk1/MHINet/outputs/semidense_stable_v2_tier1_lr_c_seed0/latest.pt",
+        "--output",
+        "/home/disk1/MHINet/outputs/semidense_stable_v2_tier3_lr_c_seed0"
+      ],
+      "pid": 3884001,
+      "state": "launched"
+    },
+    {
+      "name": "d",
+      "gpu": 1,
+      "output": "/home/disk1/MHINet/outputs/semidense_stable_v2_tier3_lr_d_seed0",
+      "log": "/home/disk1/MHINet/outputs/semidense_stable_v2_tier3_lr_d_seed0.console.log",
+      "config": "/home/disk1/MHINet/configs/semidense_tier3_lr_d.json",
+      "config_sha256": "4f6fed9dce77383cb63833a0bad63dc9b5dfb5f96b87319b8b4ed27684f6bbd2",
+      "shared_lr": 4e-05,
+      "head_lr": 0.0004,
+      "command": [
+        "/root/miniconda3/envs/loma-repro/bin/python",
+        "-u",
+        "scripts/train_semidense_next_tier.py",
+        "--config",
+        "/home/disk1/MHINet/configs/semidense_tier3_lr_d.json",
+        "--checkpoint",
+        "/home/disk1/MHINet/outputs/semidense_stable_v2_tier1_lr_c_seed0/latest.pt",
+        "--output",
+        "/home/disk1/MHINet/outputs/semidense_stable_v2_tier3_lr_d_seed0"
+      ],
+      "pid": 3884002,
+      "state": "launched"
+    }
+  ]
+}

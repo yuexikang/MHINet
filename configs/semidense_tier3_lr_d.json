@@ -1,0 +1,32 @@
+{
+  "runtime": "/home/disk1/MHINet/configs/runtime_paths.stable_v2.server.json",
+  "seed": 0,
+  "tier": 3,
+  "epochs": 1,
+  "accumulation": 4,
+  "shared_lr": 4e-05,
+  "head_lr": 0.0004,
+  "save_every": 100,
+  "validate_every": 5000,
+  "matcher": {
+    "coarse_queries": 1024,
+    "fine_windows": 64,
+    "qrru_queries": 128,
+    "window_chunk": 32,
+    "iterations": 4,
+    "radius": 1.5,
+    "gamma": 0.8,
+    "lambda_c": 1.0,
+    "lambda_f": 1.0,
+    "lambda_q": 1.0
+  },
+  "visualization": {
+    "enabled": true,
+    "pairs": 12,
+    "every": 1000,
+    "curves_every": 100
+  },
+  "experiment_id": "semidense_tier3_lr_d",
+  "initialization": "Full Run C tier1 model; fresh AdamW and cosine schedule",
+  "continuation_entry_sha256": "60c965a70ac52421ec656f486dd0bad7a50de5035533b02d0146c6b3b4195dbf"
+}

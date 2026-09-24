@@ -73,5 +73,31 @@
       "pid": 3884002,
       "state": "launched"
     }
+  ],
+  "startup_verification": [
+    {
+      "group": "c",
+      "source_model_tensors_equal": 826,
+      "initial_lrs": [
+        2e-05,
+        0.0002
+      ],
+      "optimizer_fresh": true,
+      "train_pairs": 34652,
+      "val_pairs": 3848,
+      "steps": 8663
+    },
+    {
+      "group": "d",
+      "source_model_tensors_equal": 826,
+      "initial_lrs": [
+        4e-05,
+        0.0004
+      ],
+      "optimizer_fresh": true,
+      "train_pairs": 34652,
+      "val_pairs": 3848,
+      "steps": 8663
+    }
   ]
 }

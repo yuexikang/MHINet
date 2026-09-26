@@ -1,0 +1,104 @@
+{
+  "created_unix": 1790412496.9032862,
+  "test_manifest": "/home/disk1/Data/datasets/GoogleEarth_test_single_tier3_v1/test/pairs.jsonl",
+  "test_manifest_sha256": "8dd705d520d7753cd9e83442a99b10c8a7f984db220be628d2db49c3dad78fcd",
+  "test_pairs": 2000,
+  "test_scope": "Independent same-parent synthetic tier3; not real cross-temporal GT",
+  "training": {
+    "tier": 3,
+    "shared_lr": 8e-05,
+    "head_lr": 0.0008,
+    "epochs": 1,
+    "steps": 8663,
+    "initialization": "tier1 C complete model",
+    "optimizer": "fresh AdamW and cosine",
+    "freeze": [
+      "DINO",
+      "MVT",
+      "GHIM/H0 head"
+    ]
+  },
+  "jobs": [
+    {
+      "label": "e",
+      "kind": "train",
+      "gpu": 0,
+      "source": "/home/disk1/MHINet/outputs/semidense_stable_v2_tier1_lr_c_seed0/latest.pt",
+      "source_sha256": "aa63bcb3a081cbf45b3fd3708c1d808bd1ac497f45d8624b55612ab220d66926",
+      "output": "/home/disk1/MHINet/outputs/semidense_stable_v2_tier3_lr_e_seed0",
+      "log": "/home/disk1/MHINet/outputs/semidense_stable_v2_tier3_lr_e_seed0.console.log",
+      "command": [
+        "/root/miniconda3/envs/loma-repro/bin/python",
+        "-u",
+        "scripts/train_semidense_next_tier.py",
+        "--config",
+        "/home/disk1/MHINet/configs/semidense_tier3_lr_e.json",
+        "--checkpoint",
+        "/home/disk1/MHINet/outputs/semidense_stable_v2_tier1_lr_c_seed0/latest.pt",
+        "--output",
+        "/home/disk1/MHINet/outputs/semidense_stable_v2_tier3_lr_e_seed0"
+      ],
+      "pid": 3915896,
+      "state": "launched"
+    },
+    {
+      "label": "c",
+      "kind": "test",
+      "gpu": 1,
+      "source": "/home/disk1/MHINet/outputs/semidense_stable_v2_tier3_lr_c_seed0/latest.pt",
+      "source_sha256": "f8c7c72509c681ae8f8a35c27743e69475e1bfcff0f7d81b568db0ae0af15199",
+      "output": "/home/disk1/MHINet/outputs/semidense_tier3_lr_c_test2000",
+      "log": "/home/disk1/MHINet/outputs/semidense_tier3_lr_c_test2000.console.log",
+      "command": [
+        "/root/miniconda3/envs/loma-repro/bin/python",
+        "-u",
+        "-m",
+        "mhinet.downstream.evaluate_semidense",
+        "--manifest",
+        "/home/disk1/Data/datasets/GoogleEarth_test_single_tier3_v1/test/pairs.jsonl",
+        "--tier",
+        "3",
+        "--checkpoint",
+        "/home/disk1/MHINet/outputs/semidense_stable_v2_tier3_lr_c_seed0/latest.pt",
+        "--output",
+        "/home/disk1/MHINet/outputs/semidense_tier3_lr_c_test2000"
+      ],
+      "pid": 3915897,
+      "state": "launched"
+    },
+    {
+      "label": "d",
+      "kind": "test",
+      "gpu": 3,
+      "source": "/home/disk1/MHINet/outputs/semidense_stable_v2_tier3_lr_d_seed0/latest.pt",
+      "source_sha256": "75dc50cadb81aa3f45ea72680275453bbef614013acc18bd26ba6396dda0774f",
+      "output": "/home/disk1/MHINet/outputs/semidense_tier3_lr_d_test2000",
+      "log": "/home/disk1/MHINet/outputs/semidense_tier3_lr_d_test2000.console.log",
+      "command": [
+        "/root/miniconda3/envs/loma-repro/bin/python",
+        "-u",
+        "-m",
+        "mhinet.downstream.evaluate_semidense",
+        "--manifest",
+        "/home/disk1/Data/datasets/GoogleEarth_test_single_tier3_v1/test/pairs.jsonl",
+        "--tier",
+        "3",
+        "--checkpoint",
+        "/home/disk1/MHINet/outputs/semidense_stable_v2_tier3_lr_d_seed0/latest.pt",
+        "--output",
+        "/home/disk1/MHINet/outputs/semidense_tier3_lr_d_test2000"
+      ],
+      "pid": 3915898,
+      "state": "launched"
+    }
+  ],
+  "E_startup_verification": {
+    "full_model_tensors_equal": 826,
+    "initial_lrs": [
+      8e-05,
+      0.0008
+    ],
+    "fresh_optimizer": true,
+    "step": 0
+  }
+}

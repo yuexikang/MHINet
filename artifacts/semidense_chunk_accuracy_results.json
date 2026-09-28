@@ -1,0 +1,334 @@
+{
+  "complete": false,
+  "pairs": 0,
+  "expected_pairs": 3848,
+  "scope": "paired full tier3 validation; C checkpoint; only inference window_chunk differs",
+  "registrations": [],
+  "groups": {
+    "32": {
+      "stages": {
+        "coarse": {
+          "reported_pairs": 0,
+          "epe_pairs": 0,
+          "epe": null,
+          "matches": null,
+          "precision": {
+            "1.0": null,
+            "3.0": null,
+            "5.0": null,
+            "10.0": null
+          },
+          "success_at5px": null
+        },
+        "fine": {
+          "reported_pairs": 0,
+          "epe_pairs": 0,
+          "epe": null,
+          "matches": null,
+          "precision": {
+            "1.0": null,
+            "3.0": null,
+            "5.0": null,
+            "10.0": null
+          },
+          "success_at5px": null
+        },
+        "final": {
+          "reported_pairs": 0,
+          "epe_pairs": 0,
+          "epe": null,
+          "matches": null,
+          "precision": {
+            "1.0": null,
+            "3.0": null,
+            "5.0": null,
+            "10.0": null
+          },
+          "success_at5px": null
+        }
+      },
+      "failure_rate": null,
+      "source_set_changed_pairs": 0,
+      "source_order_changed_pairs": 0,
+      "added_sources": 0,
+      "dropped_sources": 0,
+      "ambiguous_duplicate_pairs": 0,
+      "compared_targets": 0,
+      "common_target_mean_delta_px": null,
+      "common_target_max_delta_px": null,
+      "paired_epe": {
+        "pairs": 0,
+        "mean_delta": null,
+        "max_abs_delta": null
+      },
+      "paired_precision1": {
+        "mean_delta": null,
+        "improved_pairs": 0,
+        "worse_pairs": 0
+      },
+      "wall_mean_ms": null,
+      "wall_p95_ms": null,
+      "peak_allocated_bytes": 0
+    },
+    "128": {
+      "stages": {
+        "coarse": {
+          "reported_pairs": 0,
+          "epe_pairs": 0,
+          "epe": null,
+          "matches": null,
+          "precision": {
+            "1.0": null,
+            "3.0": null,
+            "5.0": null,
+            "10.0": null
+          },
+          "success_at5px": null
+        },
+        "fine": {
+          "reported_pairs": 0,
+          "epe_pairs": 0,
+          "epe": null,
+          "matches": null,
+          "precision": {
+            "1.0": null,
+            "3.0": null,
+            "5.0": null,
+            "10.0": null
+          },
+          "success_at5px": null
+        },
+        "final": {
+          "reported_pairs": 0,
+          "epe_pairs": 0,
+          "epe": null,
+          "matches": null,
+          "precision": {
+            "1.0": null,
+            "3.0": null,
+            "5.0": null,
+            "10.0": null
+          },
+          "success_at5px": null
+        }
+      },
+      "failure_rate": null,
+      "source_set_changed_pairs": 0,
+      "source_order_changed_pairs": 0,
+      "added_sources": 0,
+      "dropped_sources": 0,
+      "ambiguous_duplicate_pairs": 0,
+      "compared_targets": 0,
+      "common_target_mean_delta_px": null,
+      "common_target_max_delta_px": null,
+      "paired_epe": {
+        "pairs": 0,
+        "mean_delta": null,
+        "max_abs_delta": null
+      },
+      "paired_precision1": {
+        "mean_delta": null,
+        "improved_pairs": 0,
+        "worse_pairs": 0
+      },
+      "wall_mean_ms": null,
+      "wall_p95_ms": null,
+      "peak_allocated_bytes": 0
+    },
+    "256": {
+      "stages": {
+        "coarse": {
+          "reported_pairs": 0,
+          "epe_pairs": 0,
+          "epe": null,
+          "matches": null,
+          "precision": {
+            "1.0": null,
+            "3.0": null,
+            "5.0": null,
+            "10.0": null
+          },
+          "success_at5px": null
+        },
+        "fine": {
+          "reported_pairs": 0,
+          "epe_pairs": 0,
+          "epe": null,
+          "matches": null,
+          "precision": {
+            "1.0": null,
+            "3.0": null,
+            "5.0": null,
+            "10.0": null
+          },
+          "success_at5px": null
+        },
+        "final": {
+          "reported_pairs": 0,
+          "epe_pairs": 0,
+          "epe": null,
+          "matches": null,
+          "precision": {
+            "1.0": null,
+            "3.0": null,
+            "5.0": null,
+            "10.0": null
+          },
+          "success_at5px": null
+        }
+      },
+      "failure_rate": null,
+      "source_set_changed_pairs": 0,
+      "source_order_changed_pairs": 0,
+      "added_sources": 0,
+      "dropped_sources": 0,
+      "ambiguous_duplicate_pairs": 0,
+      "compared_targets": 0,
+      "common_target_mean_delta_px": null,
+      "common_target_max_delta_px": null,
+      "paired_epe": {
+        "pairs": 0,
+        "mean_delta": null,
+        "max_abs_delta": null
+      },
+      "paired_precision1": {
+        "mean_delta": null,
+        "improved_pairs": 0,
+        "worse_pairs": 0
+      },
+      "wall_mean_ms": null,
+      "wall_p95_ms": null,
+      "peak_allocated_bytes": 0
+    },
+    "512": {
+      "stages": {
+        "coarse": {
+          "reported_pairs": 0,
+          "epe_pairs": 0,
+          "epe": null,
+          "matches": null,
+          "precision": {
+            "1.0": null,
+            "3.0": null,
+            "5.0": null,
+            "10.0": null
+          },
+          "success_at5px": null
+        },
+        "fine": {
+          "reported_pairs": 0,
+          "epe_pairs": 0,
+          "epe": null,
+          "matches": null,
+          "precision": {
+            "1.0": null,
+            "3.0": null,
+            "5.0": null,
+            "10.0": null
+          },
+          "success_at5px": null
+        },
+        "final": {
+          "reported_pairs": 0,
+          "epe_pairs": 0,
+          "epe": null,
+          "matches": null,
+          "precision": {
+            "1.0": null,
+            "3.0": null,
+            "5.0": null,
+            "10.0": null
+          },
+          "success_at5px": null
+        }
+      },
+      "failure_rate": null,
+      "source_set_changed_pairs": 0,
+      "source_order_changed_pairs": 0,
+      "added_sources": 0,
+      "dropped_sources": 0,
+      "ambiguous_duplicate_pairs": 0,
+      "compared_targets": 0,
+      "common_target_mean_delta_px": null,
+      "common_target_max_delta_px": null,
+      "paired_epe": {
+        "pairs": 0,
+        "mean_delta": null,
+        "max_abs_delta": null
+      },
+      "paired_precision1": {
+        "mean_delta": null,
+        "improved_pairs": 0,
+        "worse_pairs": 0
+      },
+      "wall_mean_ms": null,
+      "wall_p95_ms": null,
+      "peak_allocated_bytes": 0
+    },
+    "1024": {
+      "stages": {
+        "coarse": {
+          "reported_pairs": 0,
+          "epe_pairs": 0,
+          "epe": null,
+          "matches": null,
+          "precision": {
+            "1.0": null,
+            "3.0": null,
+            "5.0": null,
+            "10.0": null
+          },
+          "success_at5px": null
+        },
+        "fine": {
+          "reported_pairs": 0,
+          "epe_pairs": 0,
+          "epe": null,
+          "matches": null,
+          "precision": {
+            "1.0": null,
+            "3.0": null,
+            "5.0": null,
+            "10.0": null
+          },
+          "success_at5px": null
+        },
+        "final": {
+          "reported_pairs": 0,
+          "epe_pairs": 0,
+          "epe": null,
+          "matches": null,
+          "precision": {
+            "1.0": null,
+            "3.0": null,
+            "5.0": null,
+            "10.0": null
+          },
+          "success_at5px": null
+        }
+      },
+      "failure_rate": null,
+      "source_set_changed_pairs": 0,
+      "source_order_changed_pairs": 0,
+      "added_sources": 0,
+      "dropped_sources": 0,
+      "ambiguous_duplicate_pairs": 0,
+      "compared_targets": 0,
+      "common_target_mean_delta_px": null,
+      "common_target_max_delta_px": null,
+      "paired_epe": {
+        "pairs": 0,
+        "mean_delta": null,
+        "max_abs_delta": null
+      },
+      "paired_precision1": {
+        "mean_delta": null,
+        "improved_pairs": 0,
+        "worse_pairs": 0
+      },
+      "wall_mean_ms": null,
+      "wall_p95_ms": null,
+      "peak_allocated_bytes": 0
+    }
+  }
+}

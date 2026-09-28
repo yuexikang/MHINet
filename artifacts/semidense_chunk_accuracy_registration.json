@@ -1,0 +1,58 @@
+{
+  "created_unix": 1790561101.1158776,
+  "baseline_commit": "be9025c",
+  "baseline_tag": "baseline/pre-chunk-accuracy-20260928",
+  "chunks": [
+    32,
+    128,
+    256,
+    512,
+    1024
+  ],
+  "total_pairs": 3848,
+  "status": "running",
+  "jobs": [
+    {
+      "shard": 0,
+      "gpu": 0,
+      "command": [
+        "/root/miniconda3/envs/loma-repro/bin/python",
+        "-u",
+        "scripts/evaluate_semidense_chunk_accuracy.py",
+        "--checkpoint",
+        "/home/disk1/MHINet/outputs/semidense_stable_v2_tier3_lr_c_seed0/latest.pt",
+        "--manifest",
+        "/home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_stable_v2/val/pairs.jsonl",
+        "--output",
+        "/home/disk1/MHINet/outputs/semidense_chunk_accuracy_val3848/shard_0",
+        "--shard",
+        "0"
+      ],
+      "log": "/home/disk1/MHINet/outputs/semidense_chunk_accuracy_shard0.console.log",
+      "state": "running",
+      "pid": 3940586,
+      "started_unix": 1790561101.1579676
+    },
+    {
+      "shard": 1,
+      "gpu": 1,
+      "command": [
+        "/root/miniconda3/envs/loma-repro/bin/python",
+        "-u",
+        "scripts/evaluate_semidense_chunk_accuracy.py",
+        "--checkpoint",
+        "/home/disk1/MHINet/outputs/semidense_stable_v2_tier3_lr_c_seed0/latest.pt",
+        "--manifest",
+        "/home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_stable_v2/val/pairs.jsonl",
+        "--output",
+        "/home/disk1/MHINet/outputs/semidense_chunk_accuracy_val3848/shard_1",
+        "--shard",
+        "1"
+      ],
+      "log": "/home/disk1/MHINet/outputs/semidense_chunk_accuracy_shard1.console.log",
+      "state": "waiting_for_free_gpu"
+    }
+  ],
+  "comparison": "same C tier3 weights, full tier3 val, changes only inference window_chunk",
+  "summary_pid": 3940582
+}

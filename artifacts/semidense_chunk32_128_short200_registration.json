@@ -1,0 +1,36 @@
+{
+  "status": "running",
+  "started_unix": 1790595704.457487,
+  "branch": "codex/semidense-train-chunk32-128",
+  "code_commit": "00bdf8ab695d2828b398bfa780dc0bce732325aa",
+  "source": "/home/disk1/MHINet/outputs/semidense_stable_v2_tier1_lr_c_seed0/latest.pt",
+  "source_sha256": "aa63bcb3a081cbf45b3fd3708c1d808bd1ac497f45d8624b55612ab220d66926",
+  "val_manifest_sha256": "9e69f1af29dca1073ca3f12a618d61b52b66a76e67346d2ab39830de17ec5f44",
+  "steps": 200,
+  "accumulation": 4,
+  "seed": 0,
+  "shared_lr": 8e-05,
+  "head_lr": 0.0008,
+  "schedule": "Original full tier3 cosine horizon; diagnostic stop at 200; fresh AdamW",
+  "scope": "Single-seed short training; first128 tier3 validation pairs; not full-set convergence evidence",
+  "inference_window_chunk": 1024,
+  "runner_sha256": "e0283e20c65bc5a836277c3d4708207e8a61aa425e4cd5ecfb4a3c8c3245bf3d",
+  "jobs": [
+    {
+      "chunk": 32,
+      "gpu": 0,
+      "pid": 3949611,
+      "state": "running",
+      "log": "/home/disk1/MHINet/outputs/semidense_chunk32_128_short200_20260928/chunk32.console.log",
+      "config_sha256": "618b5d8bab5ae78a7867fc102e7dd36591d3ccbb3a890731947506293816eb80"
+    },
+    {
+      "chunk": 128,
+      "gpu": 1,
+      "pid": 3949612,
+      "state": "running",
+      "log": "/home/disk1/MHINet/outputs/semidense_chunk32_128_short200_20260928/chunk128.console.log",
+      "config_sha256": "6ef3bec058fbba789ebd90185686b38585c7ebb00c99d95fa57995be7cd799e0"
+    }
+  ]
+}

@@ -26,4 +26,6 @@ OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 /root/miniconda3/envs/loma-repro/bin/py
 
 启动器拒绝重复输出目录，检查GPU0/1空闲，并核验两份配置除window_chunk外完全相同。训练和评估后台子进程有独立日志，失败不会伪报完成。评估器的历史`scope=smoke`标签由`--limit`自动产生；此次实验用途明确为预注册128对短程比较，不可将该标签或结果误作完整val。
 
+对照报告生成：`python scripts/summarize_semidense_chunk_training.py`；页面：`outputs/semidense_chunk32_128_short200_20260928/index.html`，JSON：同目录`comparison.json`。汇总器逐步核验实际训练pair_id、学习率、初始权重身份和评估pair_id；未完成时明确标记部分结果。
+
 此实验只能筛查明显收敛回退，不足以确定完整训练等价。正式训练默认是否升级，需结合最终验证和后续更长对照。

@@ -9,6 +9,8 @@ import torch
 from mhinet.config import sha256_file
 from mhinet.downstream import train
 from mhinet.downstream.training import load_first_stage
+from mhinet.downstream.semidense import SemidenseConfig
+from dataclasses import replace
 
 
 def load_completed_semidense(runtime, path, config):
@@ -18,7 +20,9 @@ def load_completed_semidense(runtime, path, config):
         raise ValueError('Expected a semidense training checkpoint')
     if payload['progress']['optimizer_step'] != metadata['total_steps']:
         raise ValueError('Source training has not completed')
-    if metadata['matcher'] != config.__dict__:
+    # Normalize legacy metadata; inference batching is not a training parameter.
+    source_config = SemidenseConfig(**metadata['matcher'])
+    if replace(source_config, inference_window_chunk=config.inference_window_chunk) != config:
         raise ValueError('Matcher configuration differs from source')
     if metadata['dino_sha256'] != sha256_file(runtime.dino_checkpoint):
         raise ValueError('DINO identity differs from source')

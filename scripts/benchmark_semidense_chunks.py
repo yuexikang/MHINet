@@ -34,7 +34,7 @@ def main():
             row=rows[idx];images=torch.stack([load_rgb_bicubic(manifest.parent/row['image_'+s]) for s in 'AB'])[None].cuda();sizes=[(tuple(row['size_A']),tuple(row['size_B']))]
             baseline=None
             for chunk in [32,128,256,512,1024]:
-                model.matcher.config=replace(model.matcher.config,window_chunk=chunk)
+                model.matcher.config=replace(model.matcher.config,inference_window_chunk=chunk)
                 model.matcher.infer(model(images),sizes);torch.cuda.synchronize()
                 for repeat in range(report['repeats']):
                     torch.cuda.reset_peak_memory_stats()

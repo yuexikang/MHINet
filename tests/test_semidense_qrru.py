@@ -12,12 +12,60 @@ class SemidenseTests(unittest.TestCase):
         torch.set_num_threads(2)
         torch.manual_seed(3)
 
+    def test_legacy_config_and_inference_chunk_leave_training_unchanged(self):
+        from dataclasses import replace,asdict
+        from mhinet.downstream.semidense import SemidenseMatcher,SemidenseConfig
+        legacy=dict(coarse_queries=8,fine_windows=3,qrru_queries=4,window_chunk=2,iterations=2)
+        config=SemidenseConfig(**legacy)
+        self.assertEqual(config.inference_window_chunk,1024)
+        with self.assertRaises(ValueError):replace(config,inference_window_chunk=0)
+        matcher=SemidenseMatcher(config,channels=8)
+        d8=torch.randn(1,2,8,8,8,requires_grad=True)
+        d2=torch.randn(1,2,8,32,32,requires_grad=True)
+        h=torch.eye(3)[None];mask=torch.ones(1,1,32,32)
+        shared={'pyramid':{8:d8,2:d2},'H0_norm':h,'stage1_valid':torch.tensor([True])}
+        params=(d8,d2,*matcher.parameters());reference=None
+        for chunk in (32,1024):
+            matcher.config=replace(config,inference_window_chunk=chunk)
+            torch.manual_seed(17)
+            loss,records=matcher.training_losses(shared,h,mask,mask)
+            grads=torch.autograd.grad(loss,params)
+            if reference is None:reference=(loss.detach(),records,grads)
+            else:
+                torch.testing.assert_close(loss,reference[0],rtol=0,atol=0)
+                self.assertEqual(records,reference[1])
+                for actual,expected in zip(grads,reference[2]):
+                    torch.testing.assert_close(actual,expected,rtol=0,atol=0)
+        # Execution settings do not alter checkpoint tensor names or shapes.
+        restored=SemidenseMatcher(SemidenseConfig(**asdict(config)),channels=8)
+        restored.load_state_dict(matcher.state_dict(),strict=True)
+
     def test_coordinate_roundtrip(self):
         uv=torch.tensor([[0.,0.],[12.3,8.7]])
         for hw in ((392,392),(80,140)):
             torch.testing.assert_close(to_uv(to_norm(uv,hw),hw),uv,atol=1e-5,rtol=1e-5)
         native=to_uv(to_norm(uv,(392,392)),(784,784))
         torch.testing.assert_close(native,2*uv+.5,atol=2e-5,rtol=1e-5)
+
+    def test_next_tier_accepts_legacy_inference_config_but_checks_training(self):
+        from dataclasses import asdict,replace
+        from types import SimpleNamespace
+        from unittest.mock import Mock,patch
+        from mhinet.downstream.semidense import SemidenseConfig
+        from scripts.train_semidense_next_tier import load_completed_semidense
+        config=SemidenseConfig();legacy=asdict(config);legacy.pop('inference_window_chunk')
+        payload=dict(format='mhinet.training',progress={'optimizer_step':1},model={},
+            metadata=dict(task='semidense_qrru_v1',total_steps=1,matcher=legacy,
+                dino_sha256='hash',source_checkpoint='/unused/shared.pt',source_sha256='hash'))
+        system=Mock();runtime=SimpleNamespace(dino_checkpoint='/unused/dino.pt')
+        with patch('scripts.train_semidense_next_tier.torch.load',return_value=payload), \
+             patch('scripts.train_semidense_next_tier.sha256_file',return_value='hash'), \
+             patch('scripts.train_semidense_next_tier.load_first_stage',return_value=system):
+            self.assertIs(load_completed_semidense(runtime,'unused.pt',config),system)
+            system.load_state_dict.assert_called_once_with({},strict=True)
+            self.assertIs(load_completed_semidense(runtime,'unused.pt',replace(config,inference_window_chunk=128)),system)
+            with self.assertRaisesRegex(ValueError,'Matcher configuration differs'):
+                load_completed_semidense(runtime,'unused.pt',replace(config,iterations=2))
 
     def test_affine_control_field(self):
         control=offsets('cpu',True)

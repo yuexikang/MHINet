@@ -1,6 +1,6 @@
 # 当前模型、分块选择与训练路线（完整结果）
 
-选择：当前模型优先第三档E最终权重；推理分块推荐1024。注意：1024的完整分块验证用的是C权重，E+1024组合尚未完整验证，不把两个独立实验冒充同一组合已通过。未修改生产推理默认值，也未重新启动训练。
+选择：当前模型优先第三档E最终权重；正式推理分块已设为1024（inference_window_chunk），训练window_chunk仍为32。1024的完整分块验证用的是C权重；E+1024另完成3对影像的兼容性对比，尚未完整验证。未重新启动训练。执行配置及训练加速实测见 [正式分块与训练加速](semidense_production_chunk_and_training_speed.md)。
 
 ## 分块：C权重，第三档完整val 3848对
 
@@ -35,6 +35,6 @@ E的完整验证损失及测试最终精度/EPE均最佳，作为当前候选；
 
 两个半密集阶段都冻结DINO、MVT、GHIM/H0预测分支，VGG BN统计固定；训练VGG、CGMDP、温度和QRRU。BS1×累积4，seed0，Lc+Lf+Lq（各权重1），AdamW+cosine，每阶段重置优化器与调度。训练window_chunk维持32，QRRU保持4轮，H0残差先验只在粗/细匹配路径使用，不进入QRRU。
 
-推理分块是执行配置，不是训练超参数或新权重版本；不能将推理1024反过来当成E的训练分块。下一步使用E+1024前，先在同一完整val核对与E+32的精度/点集差异；如后续面向真实数据，再做目标数据验证和低学习率适应，不依据合成测试继续无上限加LR。
+推理分块是执行配置，不是训练超参数或新权重版本；不能将推理1024反过来当成E的训练分块。后续仍应补齐同一完整val上E+1024与E+32的精度/点集差异核对；如后续面向真实数据，再做目标数据验证和低学习率适应，不依据合成测试继续无上限加LR。
 
 最终权重：outputs/semidense_stable_v2_tier3_lr_e_seed0/latest.pt。基础保留C/D作为对照，baseline/pre-chunk-accuracy-20260928为分块实验前完整代码快照。原始证据见 artifacts/semidense_chunk_accuracy_results.json 和 artifacts/semidense_cde_timed_test_results.json。

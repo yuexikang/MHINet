@@ -1,0 +1,479 @@
+{
+  "complete": true,
+  "scope": "E legacy checkpoint strict loading and paired inference compatibility on 3 test pairs; not full-set accuracy",
+  "checkpoint_sha256": "b5995d184240be0be70d24a44dfbdc6e6f79050c735b0f8e7547542b40d97f50",
+  "manifest_sha256": "8dd705d520d7753cd9e83442a99b10c8a7f984db220be628d2db49c3dad78fcd",
+  "matcher": {
+    "coarse_queries": 1024,
+    "fine_windows": 64,
+    "qrru_queries": 128,
+    "chunk": 128,
+    "window_chunk": 32,
+    "inference_window_chunk": 1024,
+    "iterations": 4,
+    "radius": 1.5,
+    "gamma": 0.8,
+    "noise_std": 0.8,
+    "noise_bound": 2.4,
+    "temperature": 0.05,
+    "fine_gt_tolerance": 1.5,
+    "max_coarse": 6000,
+    "max_matches": 12000,
+    "confidence_threshold": 0.0,
+    "lambda_c": 1.0,
+    "lambda_f": 1.0,
+    "lambda_q": 1.0
+  },
+  "records": [
+    {
+      "index": 0,
+      "pair_id": "source_source_000_tier3_0",
+      "variants": {
+        "32": {
+          "timing": {
+            "module_ms": {
+              "dino": 33.638431549072266,
+              "mvt": 14.170207977294922,
+              "h0": 2.486272096633911,
+              "vgg": 13.536416053771973,
+              "cgmdp": 13.569024085998535,
+              "shared_other": 0.08384013175964355,
+              "matcher_setup": 1.0026559829711914,
+              "coarse": 20.99388885498047,
+              "fine": 698.524658203125,
+              "qrru": 2995.892333984375,
+              "pipeline_other": 0.032202720642089844
+            },
+            "stream_total_ms": 3793.929931640625,
+            "wall_total_ms": 3794.0474348142743,
+            "method": "cuda_events_single_final_sync",
+            "accounting_error_ms": 0.0
+          },
+          "metrics": {
+            "matches": 12000,
+            "overlap_matches": 11985,
+            "invalid_matches": 0,
+            "coordinate_unit": "native_target_pixels",
+            "thresholds": {
+              "1.0": {
+                "NCM": 11978,
+                "precision": 0.9981666666666666,
+                "overlap_precision": 0.9994159365874009
+              },
+              "3.0": {
+                "NCM": 11985,
+                "precision": 0.99875,
+                "overlap_precision": 1.0
+              },
+              "5.0": {
+                "NCM": 11985,
+                "precision": 0.99875,
+                "overlap_precision": 1.0
+              },
+              "10.0": {
+                "NCM": 11985,
+                "precision": 0.99875,
+                "overlap_precision": 1.0
+              }
+            },
+            "success_20_correct_at_5px": true,
+            "legacy_RMSE_correct5_or_failure10": 0.140368940392008,
+            "overlap_finite_EPE": 0.11103903618074233
+          },
+          "comparison": {
+            "source_order_equal": true,
+            "source_sets_equal": true,
+            "targets_order_equal": true,
+            "baseline_points": 12000,
+            "candidate_points": 12000,
+            "added_sources": 0,
+            "dropped_sources": 0,
+            "common_sources": 12000,
+            "duplicate_sources": false,
+            "compared_targets": 12000,
+            "common_target_mean_delta_px": 0.0,
+            "common_target_max_delta_px": 0.0
+          },
+          "qrru_batch_summary": {
+            "calls": 375,
+            "max_queries": 32,
+            "last_queries": 32,
+            "total_queries": 12000
+          }
+        },
+        "1024": {
+          "timing": {
+            "module_ms": {
+              "dino": 31.89686393737793,
+              "mvt": 13.319168090820312,
+              "h0": 2.7189440727233887,
+              "vgg": 13.002752304077148,
+              "cgmdp": 12.915712356567383,
+              "shared_other": 0.09689188003540039,
+              "matcher_setup": 1.0679999589920044,
+              "coarse": 20.876319885253906,
+              "fine": 27.3121280670166,
+              "qrru": 98.32649230957031,
+              "pipeline_other": 0.030890345573425293
+            },
+            "stream_total_ms": 221.5641632080078,
+            "wall_total_ms": 221.6144260019064,
+            "method": "cuda_events_single_final_sync",
+            "accounting_error_ms": 0.0
+          },
+          "metrics": {
+            "matches": 12000,
+            "overlap_matches": 11985,
+            "invalid_matches": 0,
+            "coordinate_unit": "native_target_pixels",
+            "thresholds": {
+              "1.0": {
+                "NCM": 11978,
+                "precision": 0.9981666666666666,
+                "overlap_precision": 0.9994159365874009
+              },
+              "3.0": {
+                "NCM": 11985,
+                "precision": 0.99875,
+                "overlap_precision": 1.0
+              },
+              "5.0": {
+                "NCM": 11985,
+                "precision": 0.99875,
+                "overlap_precision": 1.0
+              },
+              "10.0": {
+                "NCM": 11985,
+                "precision": 0.99875,
+                "overlap_precision": 1.0
+              }
+            },
+            "success_20_correct_at_5px": true,
+            "legacy_RMSE_correct5_or_failure10": 0.1403723834426075,
+            "overlap_finite_EPE": 0.11104053599983067
+          },
+          "comparison": {
+            "source_order_equal": true,
+            "source_sets_equal": true,
+            "targets_order_equal": false,
+            "baseline_points": 12000,
+            "candidate_points": 12000,
+            "added_sources": 0,
+            "dropped_sources": 0,
+            "common_sources": 12000,
+            "duplicate_sources": false,
+            "compared_targets": 12000,
+            "common_target_mean_delta_px": 0.00016070701531134546,
+            "common_target_max_delta_px": 0.0006224389071576297
+          },
+          "qrru_batch_summary": {
+            "calls": 12,
+            "max_queries": 1024,
+            "last_queries": 736,
+            "total_queries": 12000
+          }
+        }
+      }
+    },
+    {
+      "index": 666,
+      "pair_id": "source_source_333_tier3_0",
+      "variants": {
+        "32": {
+          "timing": {
+            "module_ms": {
+              "dino": 33.70915222167969,
+              "mvt": 14.159872055053711,
+              "h0": 2.4791040420532227,
+              "vgg": 13.535136222839355,
+              "cgmdp": 13.567168235778809,
+              "shared_other": 0.0842580795288086,
+              "matcher_setup": 1.0317120552062988,
+              "coarse": 23.193056106567383,
+              "fine": 871.085205078125,
+              "qrru": 3008.16015625,
+              "pipeline_other": 0.02789449691772461
+            },
+            "stream_total_ms": 3981.03271484375,
+            "wall_total_ms": 3981.1445269733667,
+            "method": "cuda_events_single_final_sync",
+            "accounting_error_ms": 0.0
+          },
+          "metrics": {
+            "matches": 12000,
+            "overlap_matches": 12000,
+            "invalid_matches": 0,
+            "coordinate_unit": "native_target_pixels",
+            "thresholds": {
+              "1.0": {
+                "NCM": 11997,
+                "precision": 0.99975,
+                "overlap_precision": 0.99975
+              },
+              "3.0": {
+                "NCM": 12000,
+                "precision": 1.0,
+                "overlap_precision": 1.0
+              },
+              "5.0": {
+                "NCM": 12000,
+                "precision": 1.0,
+                "overlap_precision": 1.0
+              },
+              "10.0": {
+                "NCM": 12000,
+                "precision": 1.0,
+                "overlap_precision": 1.0
+              }
+            },
+            "success_20_correct_at_5px": true,
+            "legacy_RMSE_correct5_or_failure10": 0.16626970820653014,
+            "overlap_finite_EPE": 0.1359937691524931
+          },
+          "comparison": {
+            "source_order_equal": true,
+            "source_sets_equal": true,
+            "targets_order_equal": true,
+            "baseline_points": 12000,
+            "candidate_points": 12000,
+            "added_sources": 0,
+            "dropped_sources": 0,
+            "common_sources": 12000,
+            "duplicate_sources": false,
+            "compared_targets": 12000,
+            "common_target_mean_delta_px": 0.0,
+            "common_target_max_delta_px": 0.0
+          },
+          "qrru_batch_summary": {
+            "calls": 375,
+            "max_queries": 32,
+            "last_queries": 32,
+            "total_queries": 12000
+          }
+        },
+        "1024": {
+          "timing": {
+            "module_ms": {
+              "dino": 31.944480895996094,
+              "mvt": 13.323264122009277,
+              "h0": 2.2950079441070557,
+              "vgg": 12.907520294189453,
+              "cgmdp": 12.916735649108887,
+              "shared_other": 0.07462286949157715,
+              "matcher_setup": 0.9527680277824402,
+              "coarse": 22.984575271606445,
+              "fine": 33.07795333862305,
+              "qrru": 97.78860473632812,
+              "pipeline_other": 0.027008354663848877
+            },
+            "stream_total_ms": 228.29254150390625,
+            "wall_total_ms": 228.342579677701,
+            "method": "cuda_events_single_final_sync",
+            "accounting_error_ms": 0.0
+          },
+          "metrics": {
+            "matches": 12000,
+            "overlap_matches": 12000,
+            "invalid_matches": 0,
+            "coordinate_unit": "native_target_pixels",
+            "thresholds": {
+              "1.0": {
+                "NCM": 11997,
+                "precision": 0.99975,
+                "overlap_precision": 0.99975
+              },
+              "3.0": {
+                "NCM": 12000,
+                "precision": 1.0,
+                "overlap_precision": 1.0
+              },
+              "5.0": {
+                "NCM": 12000,
+                "precision": 1.0,
+                "overlap_precision": 1.0
+              },
+              "10.0": {
+                "NCM": 12000,
+                "precision": 1.0,
+                "overlap_precision": 1.0
+              }
+            },
+            "success_20_correct_at_5px": true,
+            "legacy_RMSE_correct5_or_failure10": 0.1662664911950835,
+            "overlap_finite_EPE": 0.13599129050105146
+          },
+          "comparison": {
+            "source_order_equal": false,
+            "source_sets_equal": true,
+            "targets_order_equal": false,
+            "baseline_points": 12000,
+            "candidate_points": 12000,
+            "added_sources": 0,
+            "dropped_sources": 0,
+            "common_sources": 12000,
+            "duplicate_sources": false,
+            "compared_targets": 12000,
+            "common_target_mean_delta_px": 0.00017002240929286927,
+            "common_target_max_delta_px": 0.0008217109134420753
+          },
+          "qrru_batch_summary": {
+            "calls": 12,
+            "max_queries": 1024,
+            "last_queries": 736,
+            "total_queries": 12000
+          }
+        }
+      }
+    },
+    {
+      "index": 1333,
+      "pair_id": "target_target_166_tier3_1",
+      "variants": {
+        "32": {
+          "timing": {
+            "module_ms": {
+              "dino": 33.78384017944336,
+              "mvt": 14.165120124816895,
+              "h0": 2.450432062149048,
+              "vgg": 13.542240142822266,
+              "cgmdp": 13.573216438293457,
+              "shared_other": 0.10502409934997559,
+              "matcher_setup": 1.0027199983596802,
+              "coarse": 22.037376403808594,
+              "fine": 828.2459106445312,
+              "qrru": 2978.90478515625,
+              "pipeline_other": 0.028690218925476074
+            },
+            "stream_total_ms": 3907.83935546875,
+            "wall_total_ms": 3907.9541321843863,
+            "method": "cuda_events_single_final_sync",
+            "accounting_error_ms": 0.0
+          },
+          "metrics": {
+            "matches": 12000,
+            "overlap_matches": 11997,
+            "invalid_matches": 0,
+            "coordinate_unit": "native_target_pixels",
+            "thresholds": {
+              "1.0": {
+                "NCM": 11997,
+                "precision": 0.99975,
+                "overlap_precision": 1.0
+              },
+              "3.0": {
+                "NCM": 11997,
+                "precision": 0.99975,
+                "overlap_precision": 1.0
+              },
+              "5.0": {
+                "NCM": 11997,
+                "precision": 0.99975,
+                "overlap_precision": 1.0
+              },
+              "10.0": {
+                "NCM": 11997,
+                "precision": 0.99975,
+                "overlap_precision": 1.0
+              }
+            },
+            "success_20_correct_at_5px": true,
+            "legacy_RMSE_correct5_or_failure10": 0.08783973586959293,
+            "overlap_finite_EPE": 0.07303795027300332
+          },
+          "comparison": {
+            "source_order_equal": true,
+            "source_sets_equal": true,
+            "targets_order_equal": true,
+            "baseline_points": 12000,
+            "candidate_points": 12000,
+            "added_sources": 0,
+            "dropped_sources": 0,
+            "common_sources": 12000,
+            "duplicate_sources": false,
+            "compared_targets": 12000,
+            "common_target_mean_delta_px": 0.0,
+            "common_target_max_delta_px": 0.0
+          },
+          "qrru_batch_summary": {
+            "calls": 375,
+            "max_queries": 32,
+            "last_queries": 32,
+            "total_queries": 12000
+          }
+        },
+        "1024": {
+          "timing": {
+            "module_ms": {
+              "dino": 31.906496047973633,
+              "mvt": 13.37548828125,
+              "h0": 2.2458879947662354,
+              "vgg": 12.926655769348145,
+              "cgmdp": 12.937472343444824,
+              "shared_other": 0.07318663597106934,
+              "matcher_setup": 0.9398400187492371,
+              "coarse": 21.032127380371094,
+              "fine": 27.409408569335938,
+              "qrru": 96.31062316894531,
+              "pipeline_other": 0.02524787187576294
+            },
+            "stream_total_ms": 219.18243408203125,
+            "wall_total_ms": 219.22772843390703,
+            "method": "cuda_events_single_final_sync",
+            "accounting_error_ms": 0.0
+          },
+          "metrics": {
+            "matches": 12000,
+            "overlap_matches": 11997,
+            "invalid_matches": 0,
+            "coordinate_unit": "native_target_pixels",
+            "thresholds": {
+              "1.0": {
+                "NCM": 11997,
+                "precision": 0.99975,
+                "overlap_precision": 1.0
+              },
+              "3.0": {
+                "NCM": 11997,
+                "precision": 0.99975,
+                "overlap_precision": 1.0
+              },
+              "5.0": {
+                "NCM": 11997,
+                "precision": 0.99975,
+                "overlap_precision": 1.0
+              },
+              "10.0": {
+                "NCM": 11997,
+                "precision": 0.99975,
+                "overlap_precision": 1.0
+              }
+            },
+            "success_20_correct_at_5px": true,
+            "legacy_RMSE_correct5_or_failure10": 0.08784005169589527,
+            "overlap_finite_EPE": 0.07303809543345115
+          },
+          "comparison": {
+            "source_order_equal": true,
+            "source_sets_equal": true,
+            "targets_order_equal": false,
+            "baseline_points": 12000,
+            "candidate_points": 12000,
+            "added_sources": 0,
+            "dropped_sources": 0,
+            "common_sources": 12000,
+            "duplicate_sources": false,
+            "compared_targets": 12000,
+            "common_target_mean_delta_px": 0.00011104899749625474,
+            "common_target_max_delta_px": 0.0004369452362880111
+          },
+          "qrru_batch_summary": {
+            "calls": 12,
+            "max_queries": 1024,
+            "last_queries": 736,
+            "total_queries": 12000
+          }
+        }
+      }
+    }
+  ]
+}

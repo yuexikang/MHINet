@@ -1,6 +1,6 @@
 """Cascaded evaluation; GT is used only after prediction for reporting."""
 import argparse
-from dataclasses import replace
+from dataclasses import asdict,replace
 import json
 from pathlib import Path
 import time
@@ -38,6 +38,7 @@ def main(argv=None):
     p.add_argument('--checkpoint',required=True,type=Path);p.add_argument('--manifest',required=True,type=Path)
     p.add_argument('--output',required=True,type=Path);p.add_argument('--tier',type=int,default=1,choices=(1,2,3))
     p.add_argument('--device',default='cuda:0');p.add_argument('--limit',type=int,default=0)
+    p.add_argument('--inference-window-chunk',type=int,help='Override inference chunk (default: checkpoint value or 1024 for legacy weights)')
     args=p.parse_args(argv)
     if args.limit<0:raise ValueError('Negative limit')
     if args.output.exists():raise FileExistsError(args.output)
@@ -47,14 +48,17 @@ def main(argv=None):
     runtime=replace(RuntimePaths.from_json(meta['config']['runtime']),device=args.device)
     if sha256_file(runtime.dino_checkpoint)!=meta['dino_sha256']:raise ValueError('DINO identity mismatch')
     shared,_=build_shared_network(runtime,lora=False)
-    system=SemidenseSystem(shared,SemidenseMatcher(SemidenseConfig(**meta['matcher']))).to(args.device)
+    matcher_config=SemidenseConfig(**meta['matcher'])
+    if args.inference_window_chunk is not None:
+        matcher_config=replace(matcher_config,inference_window_chunk=args.inference_window_chunk)
+    system=SemidenseSystem(shared,SemidenseMatcher(matcher_config)).to(args.device)
     system.load_state_dict(state['model'],strict=True);system.eval()
     rows=[json.loads(x) for x in args.manifest.read_text().splitlines() if x.strip()]
     rows=[x for x in rows if x['tier']==args.tier]
     if args.limit:rows=rows[:args.limit]
     if not rows:raise ValueError('Empty evaluation')
     args.output.mkdir(parents=True)
-    registration=dict(checkpoint=str(args.checkpoint.resolve()),checkpoint_sha256=sha256_file(args.checkpoint),
+    registration=dict(matcher=asdict(matcher_config),checkpoint=str(args.checkpoint.resolve()),checkpoint_sha256=sha256_file(args.checkpoint),
         manifest=str(args.manifest.resolve()),manifest_sha256=sha256_file(args.manifest),tier=args.tier,
         scope='smoke' if args.limit else 'full_tier',protocol='semidense_qrru_v1')
     (args.output/'registration.json').write_text(json.dumps(registration,indent=2))

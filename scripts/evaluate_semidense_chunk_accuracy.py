@@ -60,14 +60,14 @@ def main():
             sizes=[(tuple(row['size_A']),tuple(row['size_B']))]
             if position==0:
                 for chunk in CHUNKS:
-                    model.matcher.config=replace(model.matcher.config,window_chunk=chunk)
+                    model.matcher.config=replace(model.matcher.config,inference_window_chunk=chunk)
                     model.matcher.infer(model(images),sizes)
                 torch.cuda.synchronize()
             # Baseline first; rotate the other chunk sizes to reduce fixed order bias.
             alternatives=list(CHUNKS[1:]);shift=index%len(alternatives);order=[32]+alternatives[shift:]+alternatives[:shift]
             variants={};base_a=base_b=None
             for chunk in order:
-                model.matcher.config=replace(model.matcher.config,window_chunk=chunk)
+                model.matcher.config=replace(model.matcher.config,inference_window_chunk=chunk)
                 torch.cuda.reset_peak_memory_stats()
                 results,timing=timed_inference(model,images,sizes);result=results[0]
                 a=result['points_a'].cpu().numpy();b=result['points_b'].cpu().numpy()

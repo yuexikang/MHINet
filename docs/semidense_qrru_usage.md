@@ -33,6 +33,8 @@ CUDA_VISIBLE_DEVICES=3 /root/miniconda3/envs/loma-repro/bin/python \
 
 ## 评估
 
+正式推理使用 `inference_window_chunk=1024`；训练仍使用独立的 `window_chunk=32`。旧权重缺少新字段时自动采用1024，模型参数和H0/QRRU路径不变。评估入口（含timed脚本）可用 `--inference-window-chunk 32` 重现原分块；registration/report记录实际matcher配置。旧训练的精确resume仍要求原配置与源码身份；从完成权重开始下一档训练支持旧metadata，不等同于跨版本恢复优化器。
+
 ```bash
 CUDA_VISIBLE_DEVICES=3 /root/miniconda3/envs/loma-repro/bin/python \
   -m mhinet.downstream.evaluate_semidense \

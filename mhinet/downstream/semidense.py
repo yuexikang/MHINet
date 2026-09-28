@@ -21,6 +21,8 @@ class SemidenseConfig:
     qrru_queries: int = 128
     chunk: int = 128
     window_chunk: int = 32
+    # Execution-only inference batch size; old checkpoint metadata uses this default.
+    inference_window_chunk: int = 1024
     iterations: int = 4
     radius: float = 1.5
     gamma: float = .8
@@ -36,7 +38,7 @@ class SemidenseConfig:
     lambda_q: float = 1.
 
     def __post_init__(self):
-        for key in ('coarse_queries','fine_windows','qrru_queries','chunk','window_chunk','iterations','max_coarse','max_matches'):
+        for key in ('coarse_queries','fine_windows','qrru_queries','chunk','window_chunk','inference_window_chunk','iterations','max_coarse','max_matches'):
             if getattr(self,key)<1:raise ValueError(f'{key} must be positive')
         for key in ('radius','temperature','fine_gt_tolerance','gamma'):
             if not math.isfinite(getattr(self,key)) or getattr(self,key)<=0:raise ValueError(key)
@@ -167,8 +169,8 @@ class SemidenseMatcher(nn.Module):
             mask2=predicted_overlap_masks(H[None],392)
             matches=[];fine_trace=[];qrru_trace=[]
             probe_parents=set(torch.linspace(0,max(0,len(coarse.source_flat)-1),4).long().tolist())
-            for start in range(0,len(coarse.source_flat),c.window_chunk):
-                end=start+c.window_chunk
+            for start in range(0,len(coarse.source_flat),c.inference_window_chunk):
+                end=start+c.inference_window_chunk
                 ga,gb=fine_grids(coarse.source_flat[start:end],coarse.target_flat[start:end],H,(98,98),(392,392))
                 va=valid_points(mask2.a,ga);vb=valid_points(mask2.b,gb)
                 lp=self.fine_scores(d2[0],d2[1],ga,gb,va,vb)
@@ -191,8 +193,8 @@ class SemidenseMatcher(nn.Module):
             a,b,score,lineage=a[order],b[order],score[order],lineage[order]
             projected=self.qrru.project(d2)
             refined=[];out_of_bounds=0
-            for start in range(0,len(a),c.window_chunk):
-                end=start+c.window_chunk
+            for start in range(0,len(a),c.inference_window_chunk):
+                end=start+c.inference_window_chunk
                 qr=self.qrru(projected[0],projected[1],to_uv(a[start:end],(392,392)),to_uv(b[start:end],(392,392)),projected=True)
                 if diagnostics and start==0:
                     qrru_trace.append(dict(a=a[start:end][:8].cpu(),b=b[start:end][:8].cpu(),lineage=lineage[start:end][:8].cpu(),

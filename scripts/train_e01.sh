@@ -19,8 +19,8 @@ export CUDA_VISIBLE_DEVICES="$GPU_ID"
 export OMP_NUM_THREADS="${OMP_NUM_THREADS:-1}"
 export MKL_NUM_THREADS="${MKL_NUM_THREADS:-1}"
 
-MHINET_CONFIG="${MHINET_CONFIG:-$MHINET_ROOT/configs/e01_heads_v1.2 bs_2.json}"
-MHINET_OUTPUT_DIR="${MHINET_OUTPUT_DIR:-$MHINET_ROOT/outputs/E01_heads_bs_2}"
+MHINET_CONFIG="${MHINET_CONFIG:-$MHINET_ROOT/configs/e01_heads_v1.2.json}"
+MHINET_OUTPUT_DIR="${MHINET_OUTPUT_DIR:-$MHINET_ROOT/outputs/E01_heads}"
 [[ -f "$MHINET_CONFIG" ]] || { echo "训练配置不存在：$MHINET_CONFIG" >&2; exit 2; }
 command=("$MHINET_PYTHON" -u -m mhinet.cli train
     --runtime "$MHINET_ROOT/configs/runtime_paths.server.json"

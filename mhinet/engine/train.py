@@ -413,6 +413,10 @@ def train(
     for group in build_report["training_parameters"]["groups"].values():
         group.pop("optimizer_parameter_ids", None)
     model.set_training_phase(config.profile)
+    initialization_report=None
+    if config.raw.get('initialization') and resume is None:
+        from mhinet.models.initialization import initialize_ablation
+        initialization_report=initialize_ablation(model,config.raw['initialization'],seed)
     for module in model.modules():
         if isinstance(module, HGuidedLocalCorrelation):
             module.activation_checkpoint_training = correlation_checkpoint
@@ -476,6 +480,7 @@ def train(
             },
         )
         metadata = resume_report.get("metadata", {})
+        initialization_report=metadata.get('initialization')
         if metadata.get("training_config_sha256") != config.sha256:
             raise RuntimeError("Resume training config hash does not match checkpoint")
         if metadata.get("profile") != config.profile:
@@ -520,6 +525,8 @@ def train(
         "test_used": False,
         "resume_mode": resume_mode,
         "correlation_activation_checkpoint": correlation_checkpoint,
+        "initialization": initialization_report,
+        "data_tier": config.raw.get('data_tier'),
     }
     run_record = {
         "status": "running",

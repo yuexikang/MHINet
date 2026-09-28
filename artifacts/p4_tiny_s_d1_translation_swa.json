@@ -9,7 +9,10 @@
     "planar_head": false,
     "precision": "BF16 adapter/CNN autocast, FP32 correlation/geometry",
     "deterministic_algorithms": "enabled_warn_only",
-    "tiny_weight_average_start_step": 1536
+    "tiny_weight_average_start_step": 1536,
+    "tiny_progress_checkpoint_interval": 8,
+    "tiny_progress_checkpoint_role": "raw optimizer boundary",
+    "condition_index_offset": 0
   },
   "runtime_config": "/home/disk1/MHINet/configs/runtime_paths.server.json",
   "device": "cuda:0",
@@ -139,14 +142,45 @@
       "dedode_full_pyramid": 1
     },
     "shared_once_per_pair": true,
-    "elapsed_seconds": 0.4970282353460789,
-    "pairs_per_second": 2.011958132124433,
+    "elapsed_seconds": 0.706762533634901,
+    "pairs_per_second": 1.4149023928263003,
     "peak_allocated_bytes": 10794867712,
     "peak_reserved_bytes": 13220446208,
     "sample_protocol": "one_pair_residuals",
     "unique_image_pair_count": 1,
     "diagnostic_sample_count": 32,
-    "diagnostic_sample_definition": "one exact image pair with 32 deterministic locally observable H0 residuals"
+    "diagnostic_sample_definition": "one exact image pair with 32 deterministic locally observable H0 residuals",
+    "condition_index_offset": 0
   },
-  "experiments": []
+  "experiments": [],
+  "current_experiment": {
+    "event": "heartbeat",
+    "name": "TINY-S-D1",
+    "status": "running",
+    "active_scales": [
+      1
+    ],
+    "optimizer_step": 184,
+    "maximum_steps": 2000,
+    "data_progress": {
+      "epoch": 22,
+      "position": 32,
+      "length": 32
+    },
+    "last_evaluated_step": 160,
+    "last_primary_mean_mace_px": 0.9257028698921204,
+    "last_loss": 0.21847009658813477,
+    "maximum_preclip_gradient_norm": 29.19962501525879,
+    "weight_average_count": 0,
+    "training_elapsed_seconds": 2328.981723717414,
+    "progress_checkpoint": {
+      "path": "/home/disk1/MHINet/outputs/tiny_overfit/d1_dense5_progress.pt",
+      "format": "mhinet.training",
+      "version": 1,
+      "bytes": 19389293,
+      "optimizer_step": 184,
+      "sha256": "b046f763ea844087ec3803ecce24a347e11de1056cdcc27648b65b179f17f38e"
+    },
+    "resumed_from": null
+  }
 }

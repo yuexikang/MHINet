@@ -1,0 +1,1725 @@
+{
+  "checkpoint_sha256": "f8c7c72509c681ae8f8a35c27743e69475e1bfcff0f7d81b568db0ae0af15199",
+  "manifest_sha256": "8dd705d520d7753cd9e83442a99b10c8a7f984db220be628d2db49c3dad78fcd",
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "pair_indices": [
+    0,
+    666,
+    1333
+  ],
+  "repeats": 2,
+  "records": [
+    {
+      "pair_id": "source_source_000_tier3_0",
+      "chunk": 32,
+      "repeat": 0,
+      "wall_ms": 3672.076491639018,
+      "module_ms": {
+        "dino": 33.795711517333984,
+        "mvt": 14.188544273376465,
+        "h0": 2.372607946395874,
+        "vgg": 13.548576354980469,
+        "cgmdp": 13.57414436340332,
+        "shared_other": 0.0858910083770752,
+        "matcher_setup": 0.9704639911651611,
+        "coarse": 20.90540885925293,
+        "fine": 673.8583984375,
+        "qrru": 2898.566162109375,
+        "pipeline_other": 0.07720637321472168
+      },
+      "peak_allocated_bytes": 2056579584,
+      "matches": 12000,
+      "coarse_matches": 4224,
+      "source_coordinates_bitwise_equal": true,
+      "target_coordinates_bitwise_equal": true,
+      "max_target_delta_px": 0.0,
+      "confidence_bitwise_equal": true,
+      "metrics": {
+        "matches": 12000,
+        "overlap_matches": 11970,
+        "invalid_matches": 0,
+        "coordinate_unit": "native_target_pixels",
+        "thresholds": {
+          "1.0": {
+            "NCM": 11958,
+            "precision": 0.9965,
+            "overlap_precision": 0.9989974937343359
+          },
+          "3.0": {
+            "NCM": 11970,
+            "precision": 0.9975,
+            "overlap_precision": 1.0
+          },
+          "5.0": {
+            "NCM": 11970,
+            "precision": 0.9975,
+            "overlap_precision": 1.0
+          },
+          "10.0": {
+            "NCM": 11970,
+            "precision": 0.9975,
+            "overlap_precision": 1.0
+          }
+        },
+        "success_20_correct_at_5px": true,
+        "legacy_RMSE_correct5_or_failure10": 0.16934076948844565,
+        "overlap_finite_EPE": 0.13418176613853994
+      }
+    },
+    {
+      "pair_id": "source_source_000_tier3_0",
+      "chunk": 32,
+      "repeat": 1,
+      "wall_ms": 3698.4382681548595,
+      "module_ms": {
+        "dino": 33.69795227050781,
+        "mvt": 14.159872055053711,
+        "h0": 2.391040086746216,
+        "vgg": 13.500351905822754,
+        "cgmdp": 13.560832023620605,
+        "shared_other": 0.08227038383483887,
+        "matcher_setup": 0.9563519954681396,
+        "coarse": 19.860544204711914,
+        "fine": 689.3844604492188,
+        "qrru": 2910.708740234375,
+        "pipeline_other": 0.02912735939025879
+      },
+      "peak_allocated_bytes": 2057176576,
+      "matches": 12000,
+      "coarse_matches": 4224,
+      "source_coordinates_bitwise_equal": true,
+      "target_coordinates_bitwise_equal": true,
+      "max_target_delta_px": 0.0,
+      "confidence_bitwise_equal": true,
+      "metrics": {
+        "matches": 12000,
+        "overlap_matches": 11970,
+        "invalid_matches": 0,
+        "coordinate_unit": "native_target_pixels",
+        "thresholds": {
+          "1.0": {
+            "NCM": 11958,
+            "precision": 0.9965,
+            "overlap_precision": 0.9989974937343359
+          },
+          "3.0": {
+            "NCM": 11970,
+            "precision": 0.9975,
+            "overlap_precision": 1.0
+          },
+          "5.0": {
+            "NCM": 11970,
+            "precision": 0.9975,
+            "overlap_precision": 1.0
+          },
+          "10.0": {
+            "NCM": 11970,
+            "precision": 0.9975,
+            "overlap_precision": 1.0
+          }
+        },
+        "success_20_correct_at_5px": true,
+        "legacy_RMSE_correct5_or_failure10": 0.16934076948844565,
+        "overlap_finite_EPE": 0.13418176613853994
+      }
+    },
+    {
+      "pair_id": "source_source_000_tier3_0",
+      "chunk": 128,
+      "repeat": 0,
+      "wall_ms": 1005.7283593341708,
+      "module_ms": {
+        "dino": 31.79324722290039,
+        "mvt": 13.259903907775879,
+        "h0": 2.3408639430999756,
+        "vgg": 12.897279739379883,
+        "cgmdp": 12.923904418945312,
+        "shared_other": 0.07808232307434082,
+        "matcher_setup": 1.2019840478897095,
+        "coarse": 19.596607208251953,
+        "fine": 170.32794189453125,
+        "qrru": 741.2169189453125,
+        "pipeline_other": 0.027145743370056152
+      },
+      "peak_allocated_bytes": 2057176576,
+      "matches": 12000,
+      "coarse_matches": 4224,
+      "source_coordinates_bitwise_equal": true,
+      "target_coordinates_bitwise_equal": true,
+      "max_target_delta_px": 0.0,
+      "confidence_bitwise_equal": true,
+      "metrics": {
+        "matches": 12000,
+        "overlap_matches": 11970,
+        "invalid_matches": 0,
+        "coordinate_unit": "native_target_pixels",
+        "thresholds": {
+          "1.0": {
+            "NCM": 11958,
+            "precision": 0.9965,
+            "overlap_precision": 0.9989974937343359
+          },
+          "3.0": {
+            "NCM": 11970,
+            "precision": 0.9975,
+            "overlap_precision": 1.0
+          },
+          "5.0": {
+            "NCM": 11970,
+            "precision": 0.9975,
+            "overlap_precision": 1.0
+          },
+          "10.0": {
+            "NCM": 11970,
+            "precision": 0.9975,
+            "overlap_precision": 1.0
+          }
+        },
+        "success_20_correct_at_5px": true,
+        "legacy_RMSE_correct5_or_failure10": 0.16934076948844565,
+        "overlap_finite_EPE": 0.13418176613853994
+      }
+    },
+    {
+      "pair_id": "source_source_000_tier3_0",
+      "chunk": 128,
+      "repeat": 1,
+      "wall_ms": 1093.604862689972,
+      "module_ms": {
+        "dino": 31.79759979248047,
+        "mvt": 13.289504051208496,
+        "h0": 2.412544012069702,
+        "vgg": 12.896256446838379,
+        "cgmdp": 12.893183708190918,
+        "shared_other": 0.07468914985656738,
+        "matcher_setup": 0.9530240297317505,
+        "coarse": 20.901344299316406,
+        "fine": 184.70077514648438,
+        "qrru": 813.606201171875,
+        "pipeline_other": 0.02895534038543701
+      },
+      "peak_allocated_bytes": 2057176576,
+      "matches": 12000,
+      "coarse_matches": 4224,
+      "source_coordinates_bitwise_equal": true,
+      "target_coordinates_bitwise_equal": true,
+      "max_target_delta_px": 0.0,
+      "confidence_bitwise_equal": true,
+      "metrics": {
+        "matches": 12000,
+        "overlap_matches": 11970,
+        "invalid_matches": 0,
+        "coordinate_unit": "native_target_pixels",
+        "thresholds": {
+          "1.0": {
+            "NCM": 11958,
+            "precision": 0.9965,
+            "overlap_precision": 0.9989974937343359
+          },
+          "3.0": {
+            "NCM": 11970,
+            "precision": 0.9975,
+            "overlap_precision": 1.0
+          },
+          "5.0": {
+            "NCM": 11970,
+            "precision": 0.9975,
+            "overlap_precision": 1.0
+          },
+          "10.0": {
+            "NCM": 11970,
+            "precision": 0.9975,
+            "overlap_precision": 1.0
+          }
+        },
+        "success_20_correct_at_5px": true,
+        "legacy_RMSE_correct5_or_failure10": 0.16934076948844565,
+        "overlap_finite_EPE": 0.13418176613853994
+      }
+    },
+    {
+      "pair_id": "source_source_000_tier3_0",
+      "chunk": 256,
+      "repeat": 0,
+      "wall_ms": 546.2203323841095,
+      "module_ms": {
+        "dino": 31.858015060424805,
+        "mvt": 13.285375595092773,
+        "h0": 2.284832000732422,
+        "vgg": 12.891136169433594,
+        "cgmdp": 12.925087928771973,
+        "shared_other": 0.07552242279052734,
+        "matcher_setup": 0.9333760142326355,
+        "coarse": 19.205631256103516,
+        "fine": 89.90217590332031,
+        "qrru": 362.77337646484375,
+        "pipeline_other": 0.025505363941192627
+      },
+      "peak_allocated_bytes": 2057176576,
+      "matches": 12000,
+      "coarse_matches": 4224,
+      "source_coordinates_bitwise_equal": false,
+      "target_coordinates_bitwise_equal": false,
+      "max_target_delta_px": null,
+      "confidence_bitwise_equal": false,
+      "metrics": {
+        "matches": 12000,
+        "overlap_matches": 11970,
+        "invalid_matches": 0,
+        "coordinate_unit": "native_target_pixels",
+        "thresholds": {
+          "1.0": {
+            "NCM": 11958,
+            "precision": 0.9965,
+            "overlap_precision": 0.9989974937343359
+          },
+          "3.0": {
+            "NCM": 11970,
+            "precision": 0.9975,
+            "overlap_precision": 1.0
+          },
+          "5.0": {
+            "NCM": 11970,
+            "precision": 0.9975,
+            "overlap_precision": 1.0
+          },
+          "10.0": {
+            "NCM": 11970,
+            "precision": 0.9975,
+            "overlap_precision": 1.0
+          }
+        },
+        "success_20_correct_at_5px": true,
+        "legacy_RMSE_correct5_or_failure10": 0.16933895286867523,
+        "overlap_finite_EPE": 0.13418131902045763
+      }
+    },
+    {
+      "pair_id": "source_source_000_tier3_0",
+      "chunk": 256,
+      "repeat": 1,
+      "wall_ms": 586.0275849699974,
+      "module_ms": {
+        "dino": 31.849760055541992,
+        "mvt": 13.290495872497559,
+        "h0": 2.314239978790283,
+        "vgg": 12.890848159790039,
+        "cgmdp": 12.914688110351562,
+        "shared_other": 0.06665849685668945,
+        "matcher_setup": 0.9364479780197144,
+        "coarse": 19.189247131347656,
+        "fine": 96.88371276855469,
+        "qrru": 395.6269226074219,
+        "pipeline_other": 0.025565266609191895
+      },
+      "peak_allocated_bytes": 2057176576,
+      "matches": 12000,
+      "coarse_matches": 4224,
+      "source_coordinates_bitwise_equal": false,
+      "target_coordinates_bitwise_equal": false,
+      "max_target_delta_px": null,
+      "confidence_bitwise_equal": false,
+      "metrics": {
+        "matches": 12000,
+        "overlap_matches": 11970,
+        "invalid_matches": 0,
+        "coordinate_unit": "native_target_pixels",
+        "thresholds": {
+          "1.0": {
+            "NCM": 11958,
+            "precision": 0.9965,
+            "overlap_precision": 0.9989974937343359
+          },
+          "3.0": {
+            "NCM": 11970,
+            "precision": 0.9975,
+            "overlap_precision": 1.0
+          },
+          "5.0": {
+            "NCM": 11970,
+            "precision": 0.9975,
+            "overlap_precision": 1.0
+          },
+          "10.0": {
+            "NCM": 11970,
+            "precision": 0.9975,
+            "overlap_precision": 1.0
+          }
+        },
+        "success_20_correct_at_5px": true,
+        "legacy_RMSE_correct5_or_failure10": 0.16933895286867523,
+        "overlap_finite_EPE": 0.13418131902045763
+      }
+    },
+    {
+      "pair_id": "source_source_000_tier3_0",
+      "chunk": 512,
+      "repeat": 0,
+      "wall_ms": 325.7308220490813,
+      "module_ms": {
+        "dino": 31.88915252685547,
+        "mvt": 13.295616149902344,
+        "h0": 2.3337600231170654,
+        "vgg": 12.912639617919922,
+        "cgmdp": 12.931072235107422,
+        "shared_other": 0.07567906379699707,
+        "matcher_setup": 0.9313279986381531,
+        "coarse": 19.51817512512207,
+        "fine": 46.47401428222656,
+        "qrru": 185.2959747314453,
+        "pipeline_other": 0.02645665407180786
+      },
+      "peak_allocated_bytes": 2057176576,
+      "matches": 12000,
+      "coarse_matches": 4224,
+      "source_coordinates_bitwise_equal": true,
+      "target_coordinates_bitwise_equal": false,
+      "max_target_delta_px": 0.0012359619140625,
+      "confidence_bitwise_equal": true,
+      "metrics": {
+        "matches": 12000,
+        "overlap_matches": 11970,
+        "invalid_matches": 0,
+        "coordinate_unit": "native_target_pixels",
+        "thresholds": {
+          "1.0": {
+            "NCM": 11958,
+            "precision": 0.9965,
+            "overlap_precision": 0.9989974937343359
+          },
+          "3.0": {
+            "NCM": 11970,
+            "precision": 0.9975,
+            "overlap_precision": 1.0
+          },
+          "5.0": {
+            "NCM": 11970,
+            "precision": 0.9975,
+            "overlap_precision": 1.0
+          },
+          "10.0": {
+            "NCM": 11970,
+            "precision": 0.9975,
+            "overlap_precision": 1.0
+          }
+        },
+        "success_20_correct_at_5px": true,
+        "legacy_RMSE_correct5_or_failure10": 0.16933838203388743,
+        "overlap_finite_EPE": 0.13418099856310342
+      }
+    },
+    {
+      "pair_id": "source_source_000_tier3_0",
+      "chunk": 512,
+      "repeat": 1,
+      "wall_ms": 329.2362941429019,
+      "module_ms": {
+        "dino": 31.901504516601562,
+        "mvt": 13.314047813415527,
+        "h0": 2.241760015487671,
+        "vgg": 12.902144432067871,
+        "cgmdp": 12.930047988891602,
+        "shared_other": 0.0694429874420166,
+        "matcher_setup": 0.9475200176239014,
+        "coarse": 19.7425594329834,
+        "fine": 46.42720031738281,
+        "qrru": 188.69815063476562,
+        "pipeline_other": 0.025817155838012695
+      },
+      "peak_allocated_bytes": 2057176576,
+      "matches": 12000,
+      "coarse_matches": 4224,
+      "source_coordinates_bitwise_equal": true,
+      "target_coordinates_bitwise_equal": false,
+      "max_target_delta_px": 0.0012359619140625,
+      "confidence_bitwise_equal": true,
+      "metrics": {
+        "matches": 12000,
+        "overlap_matches": 11970,
+        "invalid_matches": 0,
+        "coordinate_unit": "native_target_pixels",
+        "thresholds": {
+          "1.0": {
+            "NCM": 11958,
+            "precision": 0.9965,
+            "overlap_precision": 0.9989974937343359
+          },
+          "3.0": {
+            "NCM": 11970,
+            "precision": 0.9975,
+            "overlap_precision": 1.0
+          },
+          "5.0": {
+            "NCM": 11970,
+            "precision": 0.9975,
+            "overlap_precision": 1.0
+          },
+          "10.0": {
+            "NCM": 11970,
+            "precision": 0.9975,
+            "overlap_precision": 1.0
+          }
+        },
+        "success_20_correct_at_5px": true,
+        "legacy_RMSE_correct5_or_failure10": 0.16933838203388743,
+        "overlap_finite_EPE": 0.13418099856310342
+      }
+    },
+    {
+      "pair_id": "source_source_000_tier3_0",
+      "chunk": 1024,
+      "repeat": 0,
+      "wall_ms": 212.38876599818468,
+      "module_ms": {
+        "dino": 31.891071319580078,
+        "mvt": 13.297663688659668,
+        "h0": 2.268480062484741,
+        "vgg": 12.911680221557617,
+        "cgmdp": 12.93619155883789,
+        "shared_other": 0.07500958442687988,
+        "matcher_setup": 0.9384959936141968,
+        "coarse": 19.490463256835938,
+        "fine": 26.358623504638672,
+        "qrru": 92.14838409423828,
+        "pipeline_other": 0.027396798133850098
+      },
+      "peak_allocated_bytes": 2057176576,
+      "matches": 12000,
+      "coarse_matches": 4224,
+      "source_coordinates_bitwise_equal": true,
+      "target_coordinates_bitwise_equal": false,
+      "max_target_delta_px": 0.0012359619140625,
+      "confidence_bitwise_equal": true,
+      "metrics": {
+        "matches": 12000,
+        "overlap_matches": 11970,
+        "invalid_matches": 0,
+        "coordinate_unit": "native_target_pixels",
+        "thresholds": {
+          "1.0": {
+            "NCM": 11958,
+            "precision": 0.9965,
+            "overlap_precision": 0.9989974937343359
+          },
+          "3.0": {
+            "NCM": 11970,
+            "precision": 0.9975,
+            "overlap_precision": 1.0
+          },
+          "5.0": {
+            "NCM": 11970,
+            "precision": 0.9975,
+            "overlap_precision": 1.0
+          },
+          "10.0": {
+            "NCM": 11970,
+            "precision": 0.9975,
+            "overlap_precision": 1.0
+          }
+        },
+        "success_20_correct_at_5px": true,
+        "legacy_RMSE_correct5_or_failure10": 0.1693385768301288,
+        "overlap_finite_EPE": 0.13418116282223452
+      }
+    },
+    {
+      "pair_id": "source_source_000_tier3_0",
+      "chunk": 1024,
+      "repeat": 1,
+      "wall_ms": 216.5323793888092,
+      "module_ms": {
+        "dino": 31.89664077758789,
+        "mvt": 13.333503723144531,
+        "h0": 2.225152015686035,
+        "vgg": 12.918656349182129,
+        "cgmdp": 12.930047988891602,
+        "shared_other": 0.06972503662109375,
+        "matcher_setup": 0.9504960179328918,
+        "coarse": 20.466655731201172,
+        "fine": 29.2923526763916,
+        "qrru": 92.39043426513672,
+        "pipeline_other": 0.024870574474334717
+      },
+      "peak_allocated_bytes": 2057176576,
+      "matches": 12000,
+      "coarse_matches": 4224,
+      "source_coordinates_bitwise_equal": true,
+      "target_coordinates_bitwise_equal": false,
+      "max_target_delta_px": 0.0012359619140625,
+      "confidence_bitwise_equal": true,
+      "metrics": {
+        "matches": 12000,
+        "overlap_matches": 11970,
+        "invalid_matches": 0,
+        "coordinate_unit": "native_target_pixels",
+        "thresholds": {
+          "1.0": {
+            "NCM": 11958,
+            "precision": 0.9965,
+            "overlap_precision": 0.9989974937343359
+          },
+          "3.0": {
+            "NCM": 11970,
+            "precision": 0.9975,
+            "overlap_precision": 1.0
+          },
+          "5.0": {
+            "NCM": 11970,
+            "precision": 0.9975,
+            "overlap_precision": 1.0
+          },
+          "10.0": {
+            "NCM": 11970,
+            "precision": 0.9975,
+            "overlap_precision": 1.0
+          }
+        },
+        "success_20_correct_at_5px": true,
+        "legacy_RMSE_correct5_or_failure10": 0.1693385768301288,
+        "overlap_finite_EPE": 0.13418116282223452
+      }
+    },
+    {
+      "pair_id": "source_source_333_tier3_0",
+      "chunk": 32,
+      "repeat": 0,
+      "wall_ms": 3836.4509204402566,
+      "module_ms": {
+        "dino": 33.74979019165039,
+        "mvt": 14.153792381286621,
+        "h0": 2.3193600177764893,
+        "vgg": 13.496319770812988,
+        "cgmdp": 13.578240394592285,
+        "shared_other": 0.08969664573669434,
+        "matcher_setup": 0.9450240135192871,
+        "coarse": 22.573183059692383,
+        "fine": 842.0671997070312,
+        "qrru": 2893.310302734375,
+        "pipeline_other": 0.028858661651611328
+      },
+      "peak_allocated_bytes": 2057176576,
+      "matches": 12000,
+      "coarse_matches": 5365,
+      "source_coordinates_bitwise_equal": true,
+      "target_coordinates_bitwise_equal": true,
+      "max_target_delta_px": 0.0,
+      "confidence_bitwise_equal": true,
+      "metrics": {
+        "matches": 12000,
+        "overlap_matches": 11997,
+        "invalid_matches": 0,
+        "coordinate_unit": "native_target_pixels",
+        "thresholds": {
+          "1.0": {
+            "NCM": 11982,
+            "precision": 0.9985,
+            "overlap_precision": 0.9987496874218554
+          },
+          "3.0": {
+            "NCM": 11997,
+            "precision": 0.99975,
+            "overlap_precision": 1.0
+          },
+          "5.0": {
+            "NCM": 11997,
+            "precision": 0.99975,
+            "overlap_precision": 1.0
+          },
+          "10.0": {
+            "NCM": 11997,
+            "precision": 0.99975,
+            "overlap_precision": 1.0
+          }
+        },
+        "success_20_correct_at_5px": true,
+        "legacy_RMSE_correct5_or_failure10": 0.19745585320323356,
+        "overlap_finite_EPE": 0.15972046355395675
+      }
+    },
+    {
+      "pair_id": "source_source_333_tier3_0",
+      "chunk": 32,
+      "repeat": 1,
+      "wall_ms": 3950.213926844299,
+      "module_ms": {
+        "dino": 33.66806411743164,
+        "mvt": 14.163968086242676,
+        "h0": 2.4414401054382324,
+        "vgg": 13.531200408935547,
+        "cgmdp": 13.566047668457031,
+        "shared_other": 0.0807337760925293,
+        "matcher_setup": 0.9995520114898682,
+        "coarse": 23.162752151489258,
+        "fine": 855.804931640625,
+        "qrru": 2992.683837890625,
+        "pipeline_other": 0.025401830673217773
+      },
+      "peak_allocated_bytes": 2057195008,
+      "matches": 12000,
+      "coarse_matches": 5365,
+      "source_coordinates_bitwise_equal": true,
+      "target_coordinates_bitwise_equal": true,
+      "max_target_delta_px": 0.0,
+      "confidence_bitwise_equal": true,
+      "metrics": {
+        "matches": 12000,
+        "overlap_matches": 11997,
+        "invalid_matches": 0,
+        "coordinate_unit": "native_target_pixels",
+        "thresholds": {
+          "1.0": {
+            "NCM": 11982,
+            "precision": 0.9985,
+            "overlap_precision": 0.9987496874218554
+          },
+          "3.0": {
+            "NCM": 11997,
+            "precision": 0.99975,
+            "overlap_precision": 1.0
+          },
+          "5.0": {
+            "NCM": 11997,
+            "precision": 0.99975,
+            "overlap_precision": 1.0
+          },
+          "10.0": {
+            "NCM": 11997,
+            "precision": 0.99975,
+            "overlap_precision": 1.0
+          }
+        },
+        "success_20_correct_at_5px": true,
+        "legacy_RMSE_correct5_or_failure10": 0.19745585320323356,
+        "overlap_finite_EPE": 0.15972046355395675
+      }
+    },
+    {
+      "pair_id": "source_source_333_tier3_0",
+      "chunk": 128,
+      "repeat": 0,
+      "wall_ms": 1042.8289221599698,
+      "module_ms": {
+        "dino": 33.303585052490234,
+        "mvt": 13.988863945007324,
+        "h0": 2.3070719242095947,
+        "vgg": 13.389823913574219,
+        "cgmdp": 13.462528228759766,
+        "shared_other": 0.0794837474822998,
+        "matcher_setup": 0.9571200013160706,
+        "coarse": 22.91539192199707,
+        "fine": 211.15817260742188,
+        "qrru": 731.1800537109375,
+        "pipeline_other": 0.02658170461654663
+      },
+      "peak_allocated_bytes": 2057195008,
+      "matches": 12000,
+      "coarse_matches": 5365,
+      "source_coordinates_bitwise_equal": true,
+      "target_coordinates_bitwise_equal": true,
+      "max_target_delta_px": 0.0,
+      "confidence_bitwise_equal": true,
+      "metrics": {
+        "matches": 12000,
+        "overlap_matches": 11997,
+        "invalid_matches": 0,
+        "coordinate_unit": "native_target_pixels",
+        "thresholds": {
+          "1.0": {
+            "NCM": 11982,
+            "precision": 0.9985,
+            "overlap_precision": 0.9987496874218554
+          },
+          "3.0": {
+            "NCM": 11997,
+            "precision": 0.99975,
+            "overlap_precision": 1.0
+          },
+          "5.0": {
+            "NCM": 11997,
+            "precision": 0.99975,
+            "overlap_precision": 1.0
+          },
+          "10.0": {
+            "NCM": 11997,
+            "precision": 0.99975,
+            "overlap_precision": 1.0
+          }
+        },
+        "success_20_correct_at_5px": true,
+        "legacy_RMSE_correct5_or_failure10": 0.19745585320323356,
+        "overlap_finite_EPE": 0.15972046355395675
+      }
+    },
+    {
+      "pair_id": "source_source_333_tier3_0",
+      "chunk": 128,
+      "repeat": 1,
+      "wall_ms": 1028.2468479126692,
+      "module_ms": {
+        "dino": 31.92665672302246,
+        "mvt": 13.296640396118164,
+        "h0": 2.2776639461517334,
+        "vgg": 12.911616325378418,
+        "cgmdp": 12.914688110351562,
+        "shared_other": 0.07654309272766113,
+        "matcher_setup": 0.9370560050010681,
+        "coarse": 21.503904342651367,
+        "fine": 210.7507781982422,
+        "qrru": 721.5657348632812,
+        "pipeline_other": 0.029635965824127197
+      },
+      "peak_allocated_bytes": 2057195008,
+      "matches": 12000,
+      "coarse_matches": 5365,
+      "source_coordinates_bitwise_equal": true,
+      "target_coordinates_bitwise_equal": true,
+      "max_target_delta_px": 0.0,
+      "confidence_bitwise_equal": true,
+      "metrics": {
+        "matches": 12000,
+        "overlap_matches": 11997,
+        "invalid_matches": 0,
+        "coordinate_unit": "native_target_pixels",
+        "thresholds": {
+          "1.0": {
+            "NCM": 11982,
+            "precision": 0.9985,
+            "overlap_precision": 0.9987496874218554
+          },
+          "3.0": {
+            "NCM": 11997,
+            "precision": 0.99975,
+            "overlap_precision": 1.0
+          },
+          "5.0": {
+            "NCM": 11997,
+            "precision": 0.99975,
+            "overlap_precision": 1.0
+          },
+          "10.0": {
+            "NCM": 11997,
+            "precision": 0.99975,
+            "overlap_precision": 1.0
+          }
+        },
+        "success_20_correct_at_5px": true,
+        "legacy_RMSE_correct5_or_failure10": 0.19745585320323356,
+        "overlap_finite_EPE": 0.15972046355395675
+      }
+    },
+    {
+      "pair_id": "source_source_333_tier3_0",
+      "chunk": 256,
+      "repeat": 0,
+      "wall_ms": 563.8183187693357,
+      "module_ms": {
+        "dino": 31.879199981689453,
+        "mvt": 13.316320419311523,
+        "h0": 2.2814719676971436,
+        "vgg": 12.919808387756348,
+        "cgmdp": 12.96076774597168,
+        "shared_other": 0.08070206642150879,
+        "matcher_setup": 0.9521920084953308,
+        "coarse": 21.83180809020996,
+        "fine": 106.91289520263672,
+        "qrru": 360.5999450683594,
+        "pipeline_other": 0.027157127857208252
+      },
+      "peak_allocated_bytes": 2057195008,
+      "matches": 12000,
+      "coarse_matches": 5365,
+      "source_coordinates_bitwise_equal": false,
+      "target_coordinates_bitwise_equal": false,
+      "max_target_delta_px": null,
+      "confidence_bitwise_equal": false,
+      "metrics": {
+        "matches": 12000,
+        "overlap_matches": 11997,
+        "invalid_matches": 0,
+        "coordinate_unit": "native_target_pixels",
+        "thresholds": {
+          "1.0": {
+            "NCM": 11982,
+            "precision": 0.9985,
+            "overlap_precision": 0.9987496874218554
+          },
+          "3.0": {
+            "NCM": 11997,
+            "precision": 0.99975,
+            "overlap_precision": 1.0
+          },
+          "5.0": {
+            "NCM": 11997,
+            "precision": 0.99975,
+            "overlap_precision": 1.0
+          },
+          "10.0": {
+            "NCM": 11997,
+            "precision": 0.99975,
+            "overlap_precision": 1.0
+          }
+        },
+        "success_20_correct_at_5px": true,
+        "legacy_RMSE_correct5_or_failure10": 0.19745429780310259,
+        "overlap_finite_EPE": 0.1597194453120504
+      }
+    },
+    {
+      "pair_id": "source_source_333_tier3_0",
+      "chunk": 256,
+      "repeat": 1,
+      "wall_ms": 561.7491658776999,
+      "module_ms": {
+        "dino": 31.887807846069336,
+        "mvt": 13.313023567199707,
+        "h0": 2.2540159225463867,
+        "vgg": 12.907391548156738,
+        "cgmdp": 12.924927711486816,
+        "shared_other": 0.06988906860351562,
+        "matcher_setup": 0.9302080273628235,
+        "coarse": 21.482080459594727,
+        "fine": 106.59772491455078,
+        "qrru": 359.3169860839844,
+        "pipeline_other": 0.0249292254447937
+      },
+      "peak_allocated_bytes": 2057195008,
+      "matches": 12000,
+      "coarse_matches": 5365,
+      "source_coordinates_bitwise_equal": false,
+      "target_coordinates_bitwise_equal": false,
+      "max_target_delta_px": null,
+      "confidence_bitwise_equal": false,
+      "metrics": {
+        "matches": 12000,
+        "overlap_matches": 11997,
+        "invalid_matches": 0,
+        "coordinate_unit": "native_target_pixels",
+        "thresholds": {
+          "1.0": {
+            "NCM": 11982,
+            "precision": 0.9985,
+            "overlap_precision": 0.9987496874218554
+          },
+          "3.0": {
+            "NCM": 11997,
+            "precision": 0.99975,
+            "overlap_precision": 1.0
+          },
+          "5.0": {
+            "NCM": 11997,
+            "precision": 0.99975,
+            "overlap_precision": 1.0
+          },
+          "10.0": {
+            "NCM": 11997,
+            "precision": 0.99975,
+            "overlap_precision": 1.0
+          }
+        },
+        "success_20_correct_at_5px": true,
+        "legacy_RMSE_correct5_or_failure10": 0.19745429780310259,
+        "overlap_finite_EPE": 0.1597194453120504
+      }
+    },
+    {
+      "pair_id": "source_source_333_tier3_0",
+      "chunk": 512,
+      "repeat": 0,
+      "wall_ms": 340.64256586134434,
+      "module_ms": {
+        "dino": 31.88230323791504,
+        "mvt": 13.315072059631348,
+        "h0": 2.1937599182128906,
+        "vgg": 12.90339183807373,
+        "cgmdp": 12.932095527648926,
+        "shared_other": 0.0685739517211914,
+        "matcher_setup": 0.9273920059204102,
+        "coarse": 21.730976104736328,
+        "fine": 57.02143859863281,
+        "qrru": 187.5979766845703,
+        "pipeline_other": 0.02644634246826172
+      },
+      "peak_allocated_bytes": 2057195008,
+      "matches": 12000,
+      "coarse_matches": 5365,
+      "source_coordinates_bitwise_equal": false,
+      "target_coordinates_bitwise_equal": false,
+      "max_target_delta_px": null,
+      "confidence_bitwise_equal": false,
+      "metrics": {
+        "matches": 12000,
+        "overlap_matches": 11997,
+        "invalid_matches": 0,
+        "coordinate_unit": "native_target_pixels",
+        "thresholds": {
+          "1.0": {
+            "NCM": 11982,
+            "precision": 0.9985,
+            "overlap_precision": 0.9987496874218554
+          },
+          "3.0": {
+            "NCM": 11997,
+            "precision": 0.99975,
+            "overlap_precision": 1.0
+          },
+          "5.0": {
+            "NCM": 11997,
+            "precision": 0.99975,
+            "overlap_precision": 1.0
+          },
+          "10.0": {
+            "NCM": 11997,
+            "precision": 0.99975,
+            "overlap_precision": 1.0
+          }
+        },
+        "success_20_correct_at_5px": true,
+        "legacy_RMSE_correct5_or_failure10": 0.1974546099660474,
+        "overlap_finite_EPE": 0.1597205833856808
+      }
+    },
+    {
+      "pair_id": "source_source_333_tier3_0",
+      "chunk": 512,
+      "repeat": 1,
+      "wall_ms": 335.826737806201,
+      "module_ms": {
+        "dino": 31.90732765197754,
+        "mvt": 13.335552215576172,
+        "h0": 2.368511915206909,
+        "vgg": 12.920639991760254,
+        "cgmdp": 12.930047988891602,
+        "shared_other": 0.07270264625549316,
+        "matcher_setup": 0.9496639966964722,
+        "coarse": 21.76367950439453,
+        "fine": 56.48384094238281,
+        "qrru": 183.0341796875,
+        "pipeline_other": 0.024380803108215332
+      },
+      "peak_allocated_bytes": 2057195008,
+      "matches": 12000,
+      "coarse_matches": 5365,
+      "source_coordinates_bitwise_equal": false,
+      "target_coordinates_bitwise_equal": false,
+      "max_target_delta_px": null,
+      "confidence_bitwise_equal": false,
+      "metrics": {
+        "matches": 12000,
+        "overlap_matches": 11997,
+        "invalid_matches": 0,
+        "coordinate_unit": "native_target_pixels",
+        "thresholds": {
+          "1.0": {
+            "NCM": 11982,
+            "precision": 0.9985,
+            "overlap_precision": 0.9987496874218554
+          },
+          "3.0": {
+            "NCM": 11997,
+            "precision": 0.99975,
+            "overlap_precision": 1.0
+          },
+          "5.0": {
+            "NCM": 11997,
+            "precision": 0.99975,
+            "overlap_precision": 1.0
+          },
+          "10.0": {
+            "NCM": 11997,
+            "precision": 0.99975,
+            "overlap_precision": 1.0
+          }
+        },
+        "success_20_correct_at_5px": true,
+        "legacy_RMSE_correct5_or_failure10": 0.1974546099660474,
+        "overlap_finite_EPE": 0.1597205833856808
+      }
+    },
+    {
+      "pair_id": "source_source_333_tier3_0",
+      "chunk": 1024,
+      "repeat": 0,
+      "wall_ms": 219.3270642310381,
+      "module_ms": {
+        "dino": 31.94918441772461,
+        "mvt": 13.347840309143066,
+        "h0": 2.1875839233398438,
+        "vgg": 12.934080123901367,
+        "cgmdp": 12.951552391052246,
+        "shared_other": 0.07145500183105469,
+        "matcher_setup": 0.9185280203819275,
+        "coarse": 21.45894432067871,
+        "fine": 31.296512603759766,
+        "qrru": 92.14611053466797,
+        "pipeline_other": 0.026080667972564697
+      },
+      "peak_allocated_bytes": 2057195008,
+      "matches": 12000,
+      "coarse_matches": 5365,
+      "source_coordinates_bitwise_equal": false,
+      "target_coordinates_bitwise_equal": false,
+      "max_target_delta_px": null,
+      "confidence_bitwise_equal": false,
+      "metrics": {
+        "matches": 12000,
+        "overlap_matches": 11997,
+        "invalid_matches": 0,
+        "coordinate_unit": "native_target_pixels",
+        "thresholds": {
+          "1.0": {
+            "NCM": 11982,
+            "precision": 0.9985,
+            "overlap_precision": 0.9987496874218554
+          },
+          "3.0": {
+            "NCM": 11997,
+            "precision": 0.99975,
+            "overlap_precision": 1.0
+          },
+          "5.0": {
+            "NCM": 11997,
+            "precision": 0.99975,
+            "overlap_precision": 1.0
+          },
+          "10.0": {
+            "NCM": 11997,
+            "precision": 0.99975,
+            "overlap_precision": 1.0
+          }
+        },
+        "success_20_correct_at_5px": true,
+        "legacy_RMSE_correct5_or_failure10": 0.1974545285780262,
+        "overlap_finite_EPE": 0.15972070722390067
+      }
+    },
+    {
+      "pair_id": "source_source_333_tier3_0",
+      "chunk": 1024,
+      "repeat": 1,
+      "wall_ms": 219.55966111272573,
+      "module_ms": {
+        "dino": 31.984031677246094,
+        "mvt": 13.356032371520996,
+        "h0": 2.264064073562622,
+        "vgg": 12.925951957702637,
+        "cgmdp": 12.949824333190918,
+        "shared_other": 0.0671994686126709,
+        "matcher_setup": 0.9357119798660278,
+        "coarse": 21.371103286743164,
+        "fine": 31.369216918945312,
+        "qrru": 92.2774429321289,
+        "pipeline_other": 0.025666117668151855
+      },
+      "peak_allocated_bytes": 2057195008,
+      "matches": 12000,
+      "coarse_matches": 5365,
+      "source_coordinates_bitwise_equal": false,
+      "target_coordinates_bitwise_equal": false,
+      "max_target_delta_px": null,
+      "confidence_bitwise_equal": false,
+      "metrics": {
+        "matches": 12000,
+        "overlap_matches": 11997,
+        "invalid_matches": 0,
+        "coordinate_unit": "native_target_pixels",
+        "thresholds": {
+          "1.0": {
+            "NCM": 11982,
+            "precision": 0.9985,
+            "overlap_precision": 0.9987496874218554
+          },
+          "3.0": {
+            "NCM": 11997,
+            "precision": 0.99975,
+            "overlap_precision": 1.0
+          },
+          "5.0": {
+            "NCM": 11997,
+            "precision": 0.99975,
+            "overlap_precision": 1.0
+          },
+          "10.0": {
+            "NCM": 11997,
+            "precision": 0.99975,
+            "overlap_precision": 1.0
+          }
+        },
+        "success_20_correct_at_5px": true,
+        "legacy_RMSE_correct5_or_failure10": 0.1974545285780262,
+        "overlap_finite_EPE": 0.15972070722390067
+      }
+    },
+    {
+      "pair_id": "target_target_166_tier3_1",
+      "chunk": 32,
+      "repeat": 0,
+      "wall_ms": 3769.8682928457856,
+      "module_ms": {
+        "dino": 33.76569747924805,
+        "mvt": 14.151679992675781,
+        "h0": 2.353343963623047,
+        "vgg": 13.507295608520508,
+        "cgmdp": 13.56595230102539,
+        "shared_other": 0.09167671203613281,
+        "matcher_setup": 0.959168016910553,
+        "coarse": 20.758943557739258,
+        "fine": 785.4603881835938,
+        "qrru": 2885.1171875,
+        "pipeline_other": 0.02843230962753296
+      },
+      "peak_allocated_bytes": 2057195008,
+      "matches": 12000,
+      "coarse_matches": 4946,
+      "source_coordinates_bitwise_equal": true,
+      "target_coordinates_bitwise_equal": true,
+      "max_target_delta_px": 0.0,
+      "confidence_bitwise_equal": true,
+      "metrics": {
+        "matches": 12000,
+        "overlap_matches": 11991,
+        "invalid_matches": 0,
+        "coordinate_unit": "native_target_pixels",
+        "thresholds": {
+          "1.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          },
+          "3.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          },
+          "5.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          },
+          "10.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          }
+        },
+        "success_20_correct_at_5px": true,
+        "legacy_RMSE_correct5_or_failure10": 0.10109188632605576,
+        "overlap_finite_EPE": 0.0845927748882302
+      }
+    },
+    {
+      "pair_id": "target_target_166_tier3_1",
+      "chunk": 32,
+      "repeat": 1,
+      "wall_ms": 3752.1397210657597,
+      "module_ms": {
+        "dino": 33.65398406982422,
+        "mvt": 14.17420768737793,
+        "h0": 2.3613440990448,
+        "vgg": 13.523967742919922,
+        "cgmdp": 13.577216148376465,
+        "shared_other": 0.07597184181213379,
+        "matcher_setup": 0.9647679924964905,
+        "coarse": 20.21891212463379,
+        "fine": 780.7653198242188,
+        "qrru": 2872.685546875,
+        "pipeline_other": 0.02610534429550171
+      },
+      "peak_allocated_bytes": 2057188864,
+      "matches": 12000,
+      "coarse_matches": 4946,
+      "source_coordinates_bitwise_equal": true,
+      "target_coordinates_bitwise_equal": true,
+      "max_target_delta_px": 0.0,
+      "confidence_bitwise_equal": true,
+      "metrics": {
+        "matches": 12000,
+        "overlap_matches": 11991,
+        "invalid_matches": 0,
+        "coordinate_unit": "native_target_pixels",
+        "thresholds": {
+          "1.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          },
+          "3.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          },
+          "5.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          },
+          "10.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          }
+        },
+        "success_20_correct_at_5px": true,
+        "legacy_RMSE_correct5_or_failure10": 0.10109188632605576,
+        "overlap_finite_EPE": 0.0845927748882302
+      }
+    },
+    {
+      "pair_id": "target_target_166_tier3_1",
+      "chunk": 128,
+      "repeat": 0,
+      "wall_ms": 1053.0449748039246,
+      "module_ms": {
+        "dino": 31.88502311706543,
+        "mvt": 13.281279563903809,
+        "h0": 2.2476799488067627,
+        "vgg": 12.889087677001953,
+        "cgmdp": 12.901375770568848,
+        "shared_other": 0.07180666923522949,
+        "matcher_setup": 0.9439039826393127,
+        "coarse": 21.244447708129883,
+        "fine": 225.16908264160156,
+        "qrru": 732.312744140625,
+        "pipeline_other": 0.03293889760971069
+      },
+      "peak_allocated_bytes": 2057188864,
+      "matches": 12000,
+      "coarse_matches": 4946,
+      "source_coordinates_bitwise_equal": true,
+      "target_coordinates_bitwise_equal": true,
+      "max_target_delta_px": 0.0,
+      "confidence_bitwise_equal": true,
+      "metrics": {
+        "matches": 12000,
+        "overlap_matches": 11991,
+        "invalid_matches": 0,
+        "coordinate_unit": "native_target_pixels",
+        "thresholds": {
+          "1.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          },
+          "3.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          },
+          "5.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          },
+          "10.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          }
+        },
+        "success_20_correct_at_5px": true,
+        "legacy_RMSE_correct5_or_failure10": 0.10109188632605576,
+        "overlap_finite_EPE": 0.0845927748882302
+      }
+    },
+    {
+      "pair_id": "target_target_166_tier3_1",
+      "chunk": 128,
+      "repeat": 1,
+      "wall_ms": 1022.7980613708496,
+      "module_ms": {
+        "dino": 31.98931121826172,
+        "mvt": 13.303808212280273,
+        "h0": 2.415616035461426,
+        "vgg": 12.922847747802734,
+        "cgmdp": 12.929183959960938,
+        "shared_other": 0.0876169204711914,
+        "matcher_setup": 0.978272020816803,
+        "coarse": 21.167776107788086,
+        "fine": 203.4134979248047,
+        "qrru": 723.5027465820312,
+        "pipeline_other": 0.027238309383392334
+      },
+      "peak_allocated_bytes": 2057188864,
+      "matches": 12000,
+      "coarse_matches": 4946,
+      "source_coordinates_bitwise_equal": true,
+      "target_coordinates_bitwise_equal": true,
+      "max_target_delta_px": 0.0,
+      "confidence_bitwise_equal": true,
+      "metrics": {
+        "matches": 12000,
+        "overlap_matches": 11991,
+        "invalid_matches": 0,
+        "coordinate_unit": "native_target_pixels",
+        "thresholds": {
+          "1.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          },
+          "3.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          },
+          "5.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          },
+          "10.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          }
+        },
+        "success_20_correct_at_5px": true,
+        "legacy_RMSE_correct5_or_failure10": 0.10109188632605576,
+        "overlap_finite_EPE": 0.0845927748882302
+      }
+    },
+    {
+      "pair_id": "target_target_166_tier3_1",
+      "chunk": 256,
+      "repeat": 0,
+      "wall_ms": 556.7812835797668,
+      "module_ms": {
+        "dino": 31.927488327026367,
+        "mvt": 13.314047813415527,
+        "h0": 2.250880002975464,
+        "vgg": 12.900351524353027,
+        "cgmdp": 12.928000450134277,
+        "shared_other": 0.07126069068908691,
+        "matcher_setup": 0.9568960070610046,
+        "coarse": 20.235872268676758,
+        "fine": 104.08665466308594,
+        "qrru": 358.02984619140625,
+        "pipeline_other": 0.02813321352005005
+      },
+      "peak_allocated_bytes": 2057188864,
+      "matches": 12000,
+      "coarse_matches": 4946,
+      "source_coordinates_bitwise_equal": false,
+      "target_coordinates_bitwise_equal": false,
+      "max_target_delta_px": null,
+      "confidence_bitwise_equal": false,
+      "metrics": {
+        "matches": 12000,
+        "overlap_matches": 11991,
+        "invalid_matches": 0,
+        "coordinate_unit": "native_target_pixels",
+        "thresholds": {
+          "1.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          },
+          "3.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          },
+          "5.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          },
+          "10.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          }
+        },
+        "success_20_correct_at_5px": true,
+        "legacy_RMSE_correct5_or_failure10": 0.10109122759357593,
+        "overlap_finite_EPE": 0.08459048317082186
+      }
+    },
+    {
+      "pair_id": "target_target_166_tier3_1",
+      "chunk": 256,
+      "repeat": 1,
+      "wall_ms": 558.6466509848833,
+      "module_ms": {
+        "dino": 31.887104034423828,
+        "mvt": 13.310976028442383,
+        "h0": 2.3603200912475586,
+        "vgg": 12.923808097839355,
+        "cgmdp": 12.926976203918457,
+        "shared_other": 0.07171154022216797,
+        "matcher_setup": 0.9518399834632874,
+        "coarse": 20.074975967407227,
+        "fine": 104.7890853881836,
+        "qrru": 359.2835693359375,
+        "pipeline_other": 0.025834500789642334
+      },
+      "peak_allocated_bytes": 2057188864,
+      "matches": 12000,
+      "coarse_matches": 4946,
+      "source_coordinates_bitwise_equal": false,
+      "target_coordinates_bitwise_equal": false,
+      "max_target_delta_px": null,
+      "confidence_bitwise_equal": false,
+      "metrics": {
+        "matches": 12000,
+        "overlap_matches": 11991,
+        "invalid_matches": 0,
+        "coordinate_unit": "native_target_pixels",
+        "thresholds": {
+          "1.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          },
+          "3.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          },
+          "5.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          },
+          "10.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          }
+        },
+        "success_20_correct_at_5px": true,
+        "legacy_RMSE_correct5_or_failure10": 0.10109122759357593,
+        "overlap_finite_EPE": 0.08459048317082186
+      }
+    },
+    {
+      "pair_id": "target_target_166_tier3_1",
+      "chunk": 512,
+      "repeat": 0,
+      "wall_ms": 331.48355036973953,
+      "module_ms": {
+        "dino": 31.886751174926758,
+        "mvt": 13.34067153930664,
+        "h0": 2.176095962524414,
+        "vgg": 12.916735649108887,
+        "cgmdp": 12.949503898620605,
+        "shared_other": 0.06422615051269531,
+        "matcher_setup": 0.9249600172042847,
+        "coarse": 19.895328521728516,
+        "fine": 51.129024505615234,
+        "qrru": 186.12527465820312,
+        "pipeline_other": 0.03344452381134033
+      },
+      "peak_allocated_bytes": 2057188864,
+      "matches": 12000,
+      "coarse_matches": 4946,
+      "source_coordinates_bitwise_equal": false,
+      "target_coordinates_bitwise_equal": false,
+      "max_target_delta_px": null,
+      "confidence_bitwise_equal": false,
+      "metrics": {
+        "matches": 12000,
+        "overlap_matches": 11991,
+        "invalid_matches": 0,
+        "coordinate_unit": "native_target_pixels",
+        "thresholds": {
+          "1.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          },
+          "3.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          },
+          "5.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          },
+          "10.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          }
+        },
+        "success_20_correct_at_5px": true,
+        "legacy_RMSE_correct5_or_failure10": 0.10109147031131509,
+        "overlap_finite_EPE": 0.08459073318566693
+      }
+    },
+    {
+      "pair_id": "target_target_166_tier3_1",
+      "chunk": 512,
+      "repeat": 1,
+      "wall_ms": 330.7681046426296,
+      "module_ms": {
+        "dino": 31.91926383972168,
+        "mvt": 13.335552215576172,
+        "h0": 2.297919988632202,
+        "vgg": 12.908543586730957,
+        "cgmdp": 12.943360328674316,
+        "shared_other": 0.07231926918029785,
+        "matcher_setup": 0.9291520118713379,
+        "coarse": 19.777151107788086,
+        "fine": 52.66262435913086,
+        "qrru": 183.8592987060547,
+        "pipeline_other": 0.025313854217529297
+      },
+      "peak_allocated_bytes": 2057188864,
+      "matches": 12000,
+      "coarse_matches": 4946,
+      "source_coordinates_bitwise_equal": false,
+      "target_coordinates_bitwise_equal": false,
+      "max_target_delta_px": null,
+      "confidence_bitwise_equal": false,
+      "metrics": {
+        "matches": 12000,
+        "overlap_matches": 11991,
+        "invalid_matches": 0,
+        "coordinate_unit": "native_target_pixels",
+        "thresholds": {
+          "1.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          },
+          "3.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          },
+          "5.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          },
+          "10.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          }
+        },
+        "success_20_correct_at_5px": true,
+        "legacy_RMSE_correct5_or_failure10": 0.10109147031131509,
+        "overlap_finite_EPE": 0.08459073318566693
+      }
+    },
+    {
+      "pair_id": "target_target_166_tier3_1",
+      "chunk": 1024,
+      "repeat": 0,
+      "wall_ms": 213.0163861438632,
+      "module_ms": {
+        "dino": 31.911359786987305,
+        "mvt": 13.34886360168457,
+        "h0": 2.173952102661133,
+        "vgg": 12.909567832946777,
+        "cgmdp": 12.946432113647461,
+        "shared_other": 0.06569766998291016,
+        "matcher_setup": 0.9063040018081665,
+        "coarse": 19.89971160888672,
+        "fine": 26.036863327026367,
+        "qrru": 92.7562255859375,
+        "pipeline_other": 0.02393472194671631
+      },
+      "peak_allocated_bytes": 2057188864,
+      "matches": 12000,
+      "coarse_matches": 4946,
+      "source_coordinates_bitwise_equal": true,
+      "target_coordinates_bitwise_equal": false,
+      "max_target_delta_px": 0.0010833740234375,
+      "confidence_bitwise_equal": true,
+      "metrics": {
+        "matches": 12000,
+        "overlap_matches": 11991,
+        "invalid_matches": 0,
+        "coordinate_unit": "native_target_pixels",
+        "thresholds": {
+          "1.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          },
+          "3.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          },
+          "5.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          },
+          "10.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          }
+        },
+        "success_20_correct_at_5px": true,
+        "legacy_RMSE_correct5_or_failure10": 0.10109142608802268,
+        "overlap_finite_EPE": 0.08459071980689979
+      }
+    },
+    {
+      "pair_id": "target_target_166_tier3_1",
+      "chunk": 1024,
+      "repeat": 1,
+      "wall_ms": 216.08274336904287,
+      "module_ms": {
+        "dino": 31.956640243530273,
+        "mvt": 13.36729621887207,
+        "h0": 2.2019200325012207,
+        "vgg": 12.932064056396484,
+        "cgmdp": 12.949503898620605,
+        "shared_other": 0.06604814529418945,
+        "matcher_setup": 0.9459519982337952,
+        "coarse": 19.810752868652344,
+        "fine": 27.591455459594727,
+        "qrru": 94.20304107666016,
+        "pipeline_other": 0.02300971746444702
+      },
+      "peak_allocated_bytes": 2057188864,
+      "matches": 12000,
+      "coarse_matches": 4946,
+      "source_coordinates_bitwise_equal": true,
+      "target_coordinates_bitwise_equal": false,
+      "max_target_delta_px": 0.0010833740234375,
+      "confidence_bitwise_equal": true,
+      "metrics": {
+        "matches": 12000,
+        "overlap_matches": 11991,
+        "invalid_matches": 0,
+        "coordinate_unit": "native_target_pixels",
+        "thresholds": {
+          "1.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          },
+          "3.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          },
+          "5.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          },
+          "10.0": {
+            "NCM": 11991,
+            "precision": 0.99925,
+            "overlap_precision": 1.0
+          }
+        },
+        "success_20_correct_at_5px": true,
+        "legacy_RMSE_correct5_or_failure10": 0.10109142608802268,
+        "overlap_finite_EPE": 0.08459071980689979
+      }
+    }
+  ],
+  "scope": "Three-pair chunk-only performance diagnostic; not full validation or a changed production configuration",
+  "completed": true
+}

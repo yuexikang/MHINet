@@ -130,7 +130,7 @@ def dashboard():
         report=f'{run}/visualizations/zh/index.html'
         cards.append(f'<section><h2>{name.upper()} 组 · 第 {tier} 档 · GPU {gpu}</h2><p>CGMDP 学习率:{config["shared_lr"]:g}<br>下游学习率:{config["head_lr"]:g}</p><a href="{report}">打开详细可视化</a> · <a href="{run}.console.log">查看训练日志</a><iframe title="{name.upper()}组训练报告" src="{report}"></iframe></section>')
     body='<p>第三档预训练权重 → 第一档半密集下游训练。同档学习率对照使用相同初始化、随机种子、数据顺序和验证样本；冻结 DINO、MVT 与 H0 预测分支，第一档每组训练12995步。A 组第二档继承第一档完整权重，以相同初始学习率开启新一轮余弦调度。第三档 C/D/E 均直接继承第一档 C 权重，D 学习率为 C 的两倍，E 为 D 的两倍，各训练8663步。</p>'
-    body+='<p><a href="semidense_tier3_cd_test_comparison/index.html">C/D 第三档独立测试结果</a></p>'
+    body+='<p><a href="semidense_tier3_cde_test_comparison/index.html">C/D/E 第三档独立测试结果</a></p>'
     body+='<style>main{display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:20px}iframe{width:100%;height:850px;border:0}</style><main>'+''.join(cards)+'</main>'
     write(ROOT/'outputs/semidense_lr_comparison.html',document('半密集下游学习率对照',body,True))
 

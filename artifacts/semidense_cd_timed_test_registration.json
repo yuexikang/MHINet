@@ -42,7 +42,7 @@
     },
     {
       "name": "d",
-      "gpu": 3,
+      "gpu": 1,
       "output": "/home/disk1/MHINet/outputs/semidense_tier3_lr_d_test2000",
       "log": "/home/disk1/MHINet/outputs/semidense_tier3_lr_d_test2000.console.log",
       "checkpoint": "/home/disk1/MHINet/outputs/semidense_stable_v2_tier3_lr_d_seed0/latest.pt",
@@ -61,15 +61,30 @@
         "3",
         "--verify-first-pair"
       ],
-      "pid": 3919106,
-      "state": "completed",
-      "pairs": 2000,
-      "report_sha256": "22cf22977dba3246b919467623d64e54ebd2a9931182abbd036f55457d3b75cc"
+      "pid": 3937505,
+      "state": "running"
     }
   ],
   "validation": "One real pair: timed/untimed prediction bitwise equal; duration accounting error zero",
   "training_implementation_unchanged": true,
   "summary_pid": 3919107,
-  "status": "completed",
-  "timing_warning": "\u672c\u8f6e C/D \u8017\u65f6\u5dee\u5f02\u8f83\u5927\uff1b\u672a\u8bb0\u5f55\u6d4b\u8bd5\u671f\u95f4 GPU \u8d1f\u8f7d\uff0c\u4e0d\u80fd\u5c06\u5dee\u5f02\u5f52\u56e0\u4e8e\u6a21\u578b\u6743\u91cd\u6216\u636e\u6b64\u6bd4\u8f83\u901f\u5ea6\u3002"
+  "status": "D_rerun_running",
+  "timing_warning": null,
+  "d_rerun": {
+    "created_unix": 1790558506.5704873,
+    "gpu": 1,
+    "reason": "User requested D-only overwrite after abnormal previous latency",
+    "old_report_sha256": "22cf22977dba3246b919467623d64e54ebd2a9931182abbd036f55457d3b75cc",
+    "C_files_sha256": {
+      "/home/disk1/MHINet/outputs/semidense_tier3_lr_c_test2000/pair_0001.png": "11a3246ea79e5a347393fba5607bd42d1292462dbb6b3b4767ad709ce67af555",
+      "/home/disk1/MHINet/outputs/semidense_tier3_lr_c_test2000/registration.json": "c5df92eac203a98dc3d0e9839e301740c33853a31e09f453c40f197998aef1fd",
+      "/home/disk1/MHINet/outputs/semidense_tier3_lr_c_test2000/pairs.jsonl": "af48ab2b6b57dda5e4eb60ab9b285fd061db737dc005f1973de9c657a3150efc",
+      "/home/disk1/MHINet/outputs/semidense_tier3_lr_c_test2000/pair_0000.png": "01dd0eb068318435e82d668badd88bf7f36bd00a0d59635531d32d215020b81f",
+      "/home/disk1/MHINet/outputs/semidense_tier3_lr_c_test2000/report.json": "92a7b43ff78ef6c848688d9dc94b2d545c7216a15234ba0261a417707eaab7cf",
+      "/home/disk1/MHINet/outputs/semidense_tier3_lr_c_test2000/pair_0002.png": "c0b8d9acd338a964bd1096c5278163ec8418dda0e4a3e7636f923529750968d6"
+    },
+    "telemetry": "/home/disk1/MHINet/outputs/semidense_tier3_lr_d_test2000.gpu.jsonl",
+    "evaluator_sha256": "a47e01913dc256cf9a415395c81bacb846bb9702bbe4c55d34f5a7a3c42196de",
+    "profiler_sha256": "aef0acfa0947b6979696846cf67193ad2411b5c0fb1a31f8d12bfad39af72c82"
+  }
 }

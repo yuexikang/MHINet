@@ -1,0 +1,29 @@
+{
+  "created_unix": 1790558620.1968915,
+  "state": "running",
+  "gpu": 3,
+  "expected_pairs": 2000,
+  "checkpoint": "/home/disk1/MHINet/outputs/semidense_stable_v2_tier3_lr_e_seed0/latest.pt",
+  "checkpoint_sha256": "b5995d184240be0be70d24a44dfbdc6e6f79050c735b0f8e7547542b40d97f50",
+  "manifest": "/home/disk1/Data/datasets/GoogleEarth_test_single_tier3_v1/test/pairs.jsonl",
+  "manifest_sha256": "8dd705d520d7753cd9e83442a99b10c8a7f984db220be628d2db49c3dad78fcd",
+  "output": "/home/disk1/MHINet/outputs/semidense_tier3_lr_e_test2000",
+  "log": "/home/disk1/MHINet/outputs/semidense_tier3_lr_e_test2000.console.log",
+  "telemetry": "/home/disk1/MHINet/outputs/semidense_tier3_lr_e_test2000.gpu.jsonl",
+  "command": [
+    "/root/miniconda3/envs/loma-repro/bin/python",
+    "-u",
+    "scripts/evaluate_semidense_timed.py",
+    "--checkpoint",
+    "/home/disk1/MHINet/outputs/semidense_stable_v2_tier3_lr_e_seed0/latest.pt",
+    "--manifest",
+    "/home/disk1/Data/datasets/GoogleEarth_test_single_tier3_v1/test/pairs.jsonl",
+    "--output",
+    "/home/disk1/MHINet/outputs/semidense_tier3_lr_e_test2000",
+    "--tier",
+    "3",
+    "--verify-first-pair"
+  ],
+  "pid": 3937578,
+  "started_unix": 1790558621.5931666
+}

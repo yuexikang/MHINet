@@ -29,3 +29,35 @@ OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 /root/miniconda3/envs/loma-repro/bin/py
 对照报告生成：`python scripts/summarize_semidense_chunk_training.py`；页面：`outputs/semidense_chunk32_128_short200_20260928/index.html`，JSON：同目录`comparison.json`。汇总器逐步核验实际训练pair_id、学习率、初始权重身份和评估pair_id；未完成时明确标记部分结果。
 
 此实验只能筛查明显收敛回退，不足以确定完整训练等价。正式训练默认是否升级，需结合最终验证和后续更长对照。
+
+
+## 已完成结果（200步，128对固定val）
+
+两组均正常完成200个优化器步、800对训练样本，以及128对级联评估。逐步实际pair_id、cursor、学习率一致；源权重SHA、初始matcher SHA和8663步调度长度一致。监督点数与H0有效性一致，QRRU初始扰动EPE的最大差为1.64e-7 D2像素（归约浮点差异范围）。
+
+| 指标 | window_chunk=32 | window_chunk=128 |
+|---|---:|---:|
+| 稳态训练步耗时（排除前10步） | 2.116884 s | 1.871589 s |
+| 启动至训练+验证完成墙钟 | 540.06 s | 475.08 s |
+| 第0步验证总损失 | 0.928418 | 0.928418 |
+| 第100步验证总损失 | 1.044848 | 1.120670 |
+| 第200步验证总损失 | 1.103657 | 1.050833 |
+| 第200步验证Lc | 0.162606 | 0.159679 |
+| 第200步验证Lf | 0.246576 | 0.231894 |
+| 第200步验证Lq | 0.694475 | 0.659260 |
+| 最后50步训练总损失均值 | 1.127551 | 1.112533 |
+| coarse EPE（原图px） | 2.345412 | 2.344334 |
+| fine EPE（原图px） | 0.550252 | 0.548163 |
+| final EPE（原图px） | 0.180792 | 0.165738 |
+| coarse precision@1px | 10.014637% | 9.980923% |
+| fine precision@1px | 89.940039% | 90.101563% |
+| final precision@1px | 99.558332% | 99.598632% |
+| 推理失败率 | 0 | 0 |
+
+128的训练步耗时减少11.59%（吞吐约1.131倍），最终验证总损失低4.79%，最终EPE低8.33%，precision@1px高0.04030个百分点。本次没有最终精度回退，但并非所有阶段所有指标都改善；coarse precision略低。每步时间包含数据读取/传输、梯度裁剪和optimizer更新，排除定期保存/验证，且来自不同物理GPU；因此不能直接套用之前同GPU纯前反向benchmark的25.70%节时。
+
+第100步128的验证损失更高，第200步排名反转；两组终点损失都高于共同起点。此时cosine学习率仍接近初始峰值，实验没有跑到原8663步日程后段。结论仅为：128有实用提速，本次短程终点的细/最终精度更好，值得做更长对照；不能声称已证明训练等价或稳定改善。正式训练默认仍为32，分支不合并。
+
+最终权重保存在输出根目录的`chunk32/latest.pt`与`chunk128/latest.pt`；各自第0/100/200步验证明细在`validation/`，级联逐对结果在`cascaded_val128/`。权重未推送Git；配置、执行脚本、注册记录和完整逐步曲线/汇总JSON已纳入版本控制。最终权重SHA和评估实际matcher配置收录在结果JSON的evaluation_registration中。
+
+结果记录：`artifacts/semidense_chunk32_128_short200_results.json`；曲线页面：`outputs/semidense_chunk32_128_short200_20260928/index.html`。

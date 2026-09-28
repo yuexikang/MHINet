@@ -47,6 +47,9 @@ def collect(chunk):
         item['loss']=sum(item[k] for k in ('lc','lf','lq'));curves.append(item)
     complete=(folder/'completed.json').exists()
     if complete and (len(rows)!=200 or len(evaluated)!=128):raise ValueError('Completed experiment has incomplete records')
+    evaluation_registration=json.loads((folder/'cascaded_val128/registration.json').read_text()) if (folder/'cascaded_val128/registration.json').exists() else None
+    if evaluation_registration and evaluation_registration['matcher']['inference_window_chunk']!=1024:
+        raise ValueError('Evaluation inference configuration differs')
     pair_ids=[r['pair_id'] for row in rows for r in row['records']]
     steady=[x for x in curves if x['step']>10]
     return dict(chunk=chunk,complete=complete,steps=len(rows),training_pairs=len(pair_ids),
@@ -58,6 +61,8 @@ def collect(chunk):
         last50_train={k:mean([x[k] for x in curves[-50:]]) for k in ('loss','lc','lf','lq','gradient_norm')},
         peak_allocated_bytes=max((x['peak_allocated_bytes'] for x in rows),default=0),
         validation=validations,cascaded_pairs=len(evaluated),stages=stages,
+        evaluation_registration=evaluation_registration,
+        completion=json.loads((folder/'completed.json').read_text()) if complete else None,
         failure_rate=mean([float(x['failure_reason']!='none') for x in evaluated]),curves=curves),rows,evaluated
 
 
@@ -79,9 +84,15 @@ def main():
     groups={};training={};evaluation={}
     for chunk in (32,128):groups[str(chunk)],training[chunk],evaluation[chunk]=collect(chunk)
     n=min(len(training[32]),len(training[128]))
+    noise_epe_delta=0.
     for a,b in zip(training[32][:n],training[128][:n]):
         if any(a[k]!=b[k] for k in ('step','cursor','lr_shared','lr_head')):raise ValueError('Step or schedule mismatch')
         if [r['pair_id'] for r in a['records']]!=[r['pair_id'] for r in b['records']]:raise ValueError('Training data order mismatch')
+        for x,y in zip(a['records'],b['records']):
+            if any(x[k]!=y[k] for k in ('coarse_positive','fine_positive','qrru_queries','h0_valid')):
+                raise ValueError('Supervision counts or H0 validity differ')
+            noise_epe_delta=max(noise_epe_delta,abs(x['qrru_epe_d2_by_iteration'][0]-y['qrru_epe_d2_by_iteration'][0]))
+    if noise_epe_delta>1e-5:raise ValueError('Initial QRRU noise diagnostic differs beyond reduction tolerance')
     for key in ('source_sha256','initial_matcher_sha256','schedule_steps'):
         a,b=[groups[c][key] for c in ('32','128')]
         if a is not None and b is not None and a!=b:raise ValueError(f'Metadata mismatch: {key}')
@@ -89,7 +100,7 @@ def main():
     if [r['pair_id'] for r in evaluation[32][:count]]!=[r['pair_id'] for r in evaluation[128][:count]]:
         raise ValueError('Evaluation cohort mismatch')
     complete=all(g['complete'] for g in groups.values())
-    report=dict(complete=complete,matched_training_steps=n,matched_evaluation_pairs=count,groups=groups,
+    report=dict(complete=complete,matched_training_steps=n,matched_evaluation_pairs=count,initial_noise_epe_max_delta=noise_epe_delta,groups=groups,
         note='Single seed, 200 updates, fixed first128 tier3 val pairs. Partial results are not a ranking; full-training equivalence unproven. Step timing excludes periodic validation/saving; different GPUs.')
     atomic(OUT/'comparison.json',json.dumps(report,ensure_ascii=False,indent=2)+'\n')
     atomic(ROOT/'artifacts/semidense_chunk32_128_short200_results.json',json.dumps(report,ensure_ascii=False,indent=2)+'\n')

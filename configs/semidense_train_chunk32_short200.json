@@ -1,0 +1,30 @@
+{
+  "runtime": "/home/disk1/MHINet/configs/runtime_paths.stable_v2.server.json",
+  "seed": 0,
+  "tier": 3,
+  "epochs": 1,
+  "accumulation": 4,
+  "shared_lr": 8e-05,
+  "head_lr": 0.0008,
+  "save_every": 100,
+  "validate_every": 100,
+  "matcher": {
+    "coarse_queries": 1024,
+    "fine_windows": 64,
+    "qrru_queries": 128,
+    "window_chunk": 32,
+    "iterations": 4,
+    "radius": 1.5,
+    "gamma": 0.8,
+    "lambda_c": 1.0,
+    "lambda_f": 1.0,
+    "lambda_q": 1.0,
+    "inference_window_chunk": 1024
+  },
+  "visualization": {
+    "enabled": false
+  },
+  "experiment_id": "semidense_train_chunk32_128_short200",
+  "initialization": "Full Run C tier1 model; fresh AdamW and cosine schedule",
+  "experiment_entry_sha256": "417151b4a19eea392c6b42e147ca65d110a3af86018afef20c67adab8be0562e"
+}

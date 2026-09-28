@@ -1,0 +1,75 @@
+{
+  "created_unix": 1790431003.529677,
+  "authorization": "User requested module timing, removal of both old tests, and full rerun replacing current records",
+  "manifest": "/home/disk1/Data/datasets/GoogleEarth_test_single_tier3_v1/test/pairs.jsonl",
+  "manifest_sha256": "8dd705d520d7753cd9e83442a99b10c8a7f984db220be628d2db49c3dad78fcd",
+  "pairs": 2000,
+  "protocol": "semidense_qrru_timed_v1",
+  "removed": [
+    "/home/disk1/MHINet/outputs/semidense_tier3_cd_test_comparison",
+    "/home/disk1/MHINet/outputs/semidense_cd_test_summary.console.log",
+    "/home/disk1/MHINet/outputs/semidense_tier3_lr_c_test2000",
+    "/home/disk1/MHINet/outputs/semidense_tier3_lr_c_test2000.console.log",
+    "/home/disk1/MHINet/outputs/semidense_tier3_lr_d_test2000",
+    "/home/disk1/MHINet/outputs/semidense_tier3_lr_d_test2000.console.log"
+  ],
+  "jobs": [
+    {
+      "name": "c",
+      "gpu": 1,
+      "output": "/home/disk1/MHINet/outputs/semidense_tier3_lr_c_test2000",
+      "log": "/home/disk1/MHINet/outputs/semidense_tier3_lr_c_test2000.console.log",
+      "checkpoint": "/home/disk1/MHINet/outputs/semidense_stable_v2_tier3_lr_c_seed0/latest.pt",
+      "checkpoint_sha256": "f8c7c72509c681ae8f8a35c27743e69475e1bfcff0f7d81b568db0ae0af15199",
+      "command": [
+        "/root/miniconda3/envs/loma-repro/bin/python",
+        "-u",
+        "scripts/evaluate_semidense_timed.py",
+        "--checkpoint",
+        "/home/disk1/MHINet/outputs/semidense_stable_v2_tier3_lr_c_seed0/latest.pt",
+        "--manifest",
+        "/home/disk1/Data/datasets/GoogleEarth_test_single_tier3_v1/test/pairs.jsonl",
+        "--output",
+        "/home/disk1/MHINet/outputs/semidense_tier3_lr_c_test2000",
+        "--tier",
+        "3",
+        "--verify-first-pair"
+      ],
+      "pid": 3919105,
+      "state": "completed",
+      "pairs": 2000,
+      "report_sha256": "92a7b43ff78ef6c848688d9dc94b2d545c7216a15234ba0261a417707eaab7cf"
+    },
+    {
+      "name": "d",
+      "gpu": 3,
+      "output": "/home/disk1/MHINet/outputs/semidense_tier3_lr_d_test2000",
+      "log": "/home/disk1/MHINet/outputs/semidense_tier3_lr_d_test2000.console.log",
+      "checkpoint": "/home/disk1/MHINet/outputs/semidense_stable_v2_tier3_lr_d_seed0/latest.pt",
+      "checkpoint_sha256": "75dc50cadb81aa3f45ea72680275453bbef614013acc18bd26ba6396dda0774f",
+      "command": [
+        "/root/miniconda3/envs/loma-repro/bin/python",
+        "-u",
+        "scripts/evaluate_semidense_timed.py",
+        "--checkpoint",
+        "/home/disk1/MHINet/outputs/semidense_stable_v2_tier3_lr_d_seed0/latest.pt",
+        "--manifest",
+        "/home/disk1/Data/datasets/GoogleEarth_test_single_tier3_v1/test/pairs.jsonl",
+        "--output",
+        "/home/disk1/MHINet/outputs/semidense_tier3_lr_d_test2000",
+        "--tier",
+        "3",
+        "--verify-first-pair"
+      ],
+      "pid": 3919106,
+      "state": "completed",
+      "pairs": 2000,
+      "report_sha256": "22cf22977dba3246b919467623d64e54ebd2a9931182abbd036f55457d3b75cc"
+    }
+  ],
+  "validation": "One real pair: timed/untimed prediction bitwise equal; duration accounting error zero",
+  "training_implementation_unchanged": true,
+  "summary_pid": 3919107,
+  "status": "completed",
+  "timing_warning": "\u672c\u8f6e C/D \u8017\u65f6\u5dee\u5f02\u8f83\u5927\uff1b\u672a\u8bb0\u5f55\u6d4b\u8bd5\u671f\u95f4 GPU \u8d1f\u8f7d\uff0c\u4e0d\u80fd\u5c06\u5dee\u5f02\u5f52\u56e0\u4e8e\u6a21\u578b\u6743\u91cd\u6216\u636e\u6b64\u6bd4\u8f83\u901f\u5ea6\u3002"
+}

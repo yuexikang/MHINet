@@ -1,6 +1,6 @@
 {
   "created_unix": 1790558620.1968915,
-  "state": "running",
+  "state": "completed",
   "gpu": 3,
   "expected_pairs": 2000,
   "checkpoint": "/home/disk1/MHINet/outputs/semidense_stable_v2_tier3_lr_e_seed0/latest.pt",
@@ -25,5 +25,8 @@
     "--verify-first-pair"
   ],
   "pid": 3937578,
-  "started_unix": 1790558621.5931666
+  "started_unix": 1790558621.5931666,
+  "exit_code": 0,
+  "finished_unix": 1790566261.4403372,
+  "pairs": 2000
 }

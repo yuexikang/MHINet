@@ -62,14 +62,16 @@
         "--verify-first-pair"
       ],
       "pid": 3937505,
-      "state": "running"
+      "state": "completed",
+      "pairs": 2000,
+      "report_sha256": "2c054ab1a883b41dc8b20602fa6d687e1f2d92a7e7f27886fded7239347a3e6d"
     }
   ],
   "validation": "One real pair: timed/untimed prediction bitwise equal; duration accounting error zero",
   "training_implementation_unchanged": true,
   "summary_pid": 3919107,
-  "status": "D_rerun_running",
-  "timing_warning": null,
+  "status": "completed",
+  "timing_warning": "本轮 C/D 耗时差异较大；未记录测试期间 GPU 负载，不能将差异归因于模型权重或据此比较速度。",
   "d_rerun": {
     "created_unix": 1790558506.5704873,
     "gpu": 1,
@@ -85,6 +87,9 @@
     },
     "telemetry": "/home/disk1/MHINet/outputs/semidense_tier3_lr_d_test2000.gpu.jsonl",
     "evaluator_sha256": "a47e01913dc256cf9a415395c81bacb846bb9702bbe4c55d34f5a7a3c42196de",
-    "profiler_sha256": "aef0acfa0947b6979696846cf67193ad2411b5c0fb1a31f8d12bfad39af72c82"
+    "profiler_sha256": "aef0acfa0947b6979696846cf67193ad2411b5c0fb1a31f8d12bfad39af72c82",
+    "exit_code": 0,
+    "finished_unix": 1790571348.2260733,
+    "C_unchanged": true
   }
 }

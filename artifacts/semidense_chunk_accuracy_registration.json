@@ -10,7 +10,7 @@
     1024
   ],
   "total_pairs": 3848,
-  "status": "running",
+  "status": "completed",
   "jobs": [
     {
       "shard": 0,
@@ -29,9 +29,11 @@
         "0"
       ],
       "log": "/home/disk1/MHINet/outputs/semidense_chunk_accuracy_shard0.console.log",
-      "state": "running",
+      "state": "completed",
       "pid": 3940586,
-      "started_unix": 1790561101.1579676
+      "started_unix": 1790561101.1579676,
+      "exit_code": 0,
+      "finished_unix": 1790573518.5880919
     },
     {
       "shard": 1,
@@ -50,7 +52,11 @@
         "1"
       ],
       "log": "/home/disk1/MHINet/outputs/semidense_chunk_accuracy_shard1.console.log",
-      "state": "waiting_for_free_gpu"
+      "state": "completed",
+      "pid": 3944458,
+      "started_unix": 1790571353.8909826,
+      "exit_code": 0,
+      "finished_unix": 1790583591.3683352
     }
   ],
   "comparison": "same C tier3 weights, full tier3 val, changes only inference window_chunk",

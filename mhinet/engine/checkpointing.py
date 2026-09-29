@@ -274,6 +274,12 @@ def load_checkpoint(
         raise ValueError("Checkpoint metadata must be a mapping")
     for key, expected in dict(expected_metadata or {}).items():
         actual = metadata.get(key)
+        # CUDA ordinals are local to a process and can differ across DDP ranks
+        # or when resuming on a different set of physical GPUs.  They do not
+        # change the training task, so compare the rest of the runtime record.
+        if key == "runtime" and isinstance(actual, Mapping) and isinstance(expected, Mapping):
+            actual = {name: value for name, value in actual.items() if name != "device"}
+            expected = {name: value for name, value in expected.items() if name != "device"}
         if actual != expected:
             raise RuntimeError(
                 f"Checkpoint metadata mismatch for {key}: "

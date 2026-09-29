@@ -222,6 +222,38 @@ class CheckpointRoundTripTests(unittest.TestCase):
             for key, value in replacement.state_dict().items():
                 torch.testing.assert_close(value, before[key])
 
+    def test_runtime_cuda_ordinal_can_change_while_resuming(self) -> None:
+        model = nn.Linear(2, 1)
+        optimizer = torch.optim.SGD(model.parameters(), lr=0.1)
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            path = Path(temporary_directory) / "portable-runtime.pt"
+            save_checkpoint(
+                path,
+                model=model,
+                optimizer=optimizer,
+                optimizer_step=0,
+                metadata={"runtime": {"device": "cuda:0", "data_root": "/data"}},
+            )
+            load_checkpoint(
+                path,
+                model=nn.Linear(2, 1),
+                map_location="cpu",
+                restore_rng=False,
+                expected_metadata={
+                    "runtime": {"device": "cuda:1", "data_root": "/data"}
+                },
+            )
+            with self.assertRaisesRegex(RuntimeError, "runtime"):
+                load_checkpoint(
+                    path,
+                    model=nn.Linear(2, 1),
+                    map_location="cpu",
+                    restore_rng=False,
+                    expected_metadata={
+                        "runtime": {"device": "cuda:1", "data_root": "/other"}
+                    },
+                )
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,0 +1,766 @@
+{
+  "complete": true,
+  "registration": {
+    "checkpoint": "/home/disk1/MHINet/outputs/semidense_stable_v2_tier3_lr_e_seed0/latest.pt",
+    "checkpoint_sha256": "b5995d184240be0be70d24a44dfbdc6e6f79050c735b0f8e7547542b40d97f50",
+    "manifest": "/home/disk1/MHINet/artifacts/mrsi_expanded_e_manifest.jsonl",
+    "manifest_sha256": "c44d4d368158d9a09dfda57f8a73f32dbf3c9f0672374f4bef4b479bceda756a",
+    "matcher": {
+      "coarse_queries": 1024,
+      "fine_windows": 64,
+      "qrru_queries": 128,
+      "chunk": 128,
+      "window_chunk": 32,
+      "inference_window_chunk": 1024,
+      "iterations": 4,
+      "radius": 1.5,
+      "gamma": 0.8,
+      "noise_std": 0.8,
+      "noise_bound": 2.4,
+      "temperature": 0.05,
+      "fine_gt_tolerance": 1.5,
+      "max_coarse": 6000,
+      "max_matches": 12000,
+      "confidence_threshold": 0.0,
+      "lambda_c": 1.0,
+      "lambda_f": 1.0,
+      "lambda_q": 1.0
+    },
+    "implementation_commit": "7cddb2a89ef5773b4cbe0b056ff22e3335b1db9f",
+    "evaluator_sha256": "a9c37f25ca22f0160de891a9cbf533cbf7ded8a4a44e0fd448b101289522248c",
+    "metrics_sha256": "e3a6ea43bb21633dbc8142d40129ccf50cd2494ff6f0efe74681a8d8e8c9b624",
+    "gt_basis": "Native image0-to-image1 homography from each target .npy in the requested expanded MRSI dataset; source is 00.PNG, targets 01..10.PNG; 00_.PNG is auxiliary only. All 600 pairs, no MRSI fine-tuning.",
+    "precision": "Correct matches within common source support at <=1/3/5 native target pixels divided by all output matches; empty output=0; pair-macro headline, micro additionally provided.",
+    "matching_rmse": "sqrt(mean(||H_GT(a)-b||^2)) over ALL finite, GT-projectable returned matches, not just RANSAC inliers or correct subset; pair macro. Missing pairs excluded with counts.",
+    "sr": "Fit H only from predicted matches with OpenCV RANSAC(3px,10000 iterations,confidence .999,seed0); evaluate against GT on a 20x20 source grid restricted to GT-visible overlap; SR@t = fraction of ALL pairs with grid RMSE<=t. Fit failures count as failure.",
+    "aggregation": "Overall weighted by image pairs, not equal modality weights; modality rows pair-macro.",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "torch_version": "2.11.0+cu128"
+  },
+  "overall": {
+    "pairs": 600,
+    "precision": {
+      "1": 0.18769651480653876,
+      "3": 0.44670827048950307,
+      "5": 0.5779845150527276
+    },
+    "precision_micro": {
+      "1": 0.19977452509181085,
+      "3": 0.47525499398970206,
+      "5": 0.6147409360447507
+    },
+    "matching_rmse": 16.53073348055561,
+    "matching_rmse_pairs": 569,
+    "matching_epe": 11.133324684120876,
+    "registration_rmse": 78.03411722786403,
+    "registration_rmse_pairs": 569,
+    "sr": {
+      "1": 0.22,
+      "3": 0.6,
+      "5": 0.7366666666666667
+    },
+    "match_success20_at5": 0.935,
+    "mean_ncm": {
+      "1": 2251.3683333333333,
+      "3": 5355.908333333334,
+      "5": 6927.8516666666665
+    },
+    "mean_matches": 11269.546666666667,
+    "inference_failure_rate": 0.051666666666666666,
+    "registration_failure_rate": 0.051666666666666666,
+    "inference_ms_mean": 207.7696041824917,
+    "inference_ms_p95": 226.22708007693288
+  },
+  "by_modality": {
+    "1 optical-optical": {
+      "pairs": 100,
+      "precision": {
+        "1": 0.37940985835538904,
+        "3": 0.6513037267565717,
+        "5": 0.7532329480271769
+      },
+      "precision_micro": {
+        "1": 0.3794271655889317,
+        "3": 0.6513214094923464,
+        "5": 0.753247164538838
+      },
+      "matching_rmse": 6.559012293568251,
+      "matching_rmse_pairs": 100,
+      "matching_epe": 4.1046010171841205,
+      "registration_rmse": 1.8076182803087095,
+      "registration_rmse_pairs": 100,
+      "sr": {
+        "1": 0.56,
+        "3": 0.83,
+        "5": 0.92
+      },
+      "match_success20_at5": 1.0,
+      "mean_ncm": {
+        "1": 4552.72,
+        "3": 7815.16,
+        "5": 9038.16
+      },
+      "mean_matches": 11998.93,
+      "inference_failure_rate": 0.0,
+      "registration_failure_rate": 0.0,
+      "inference_ms_mean": 212.59872570633888,
+      "inference_ms_p95": 224.08071467652917
+    },
+    "2 optical-infrared": {
+      "pairs": 100,
+      "precision": {
+        "1": 0.16026869780508052,
+        "3": 0.3526225515013316,
+        "5": 0.4599138396743785
+      },
+      "precision_micro": {
+        "1": 0.1602815161665926,
+        "3": 0.3526453401389744,
+        "5": 0.45993920597705096
+      },
+      "matching_rmse": 17.629836885251425,
+      "matching_rmse_pairs": 100,
+      "matching_epe": 10.276690840043848,
+      "registration_rmse": 6.856000543814353,
+      "registration_rmse_pairs": 100,
+      "sr": {
+        "1": 0.25,
+        "3": 0.46,
+        "5": 0.62
+      },
+      "match_success20_at5": 1.0,
+      "mean_ncm": {
+        "1": 1923.04,
+        "3": 4231.0,
+        "5": 5518.3
+      },
+      "mean_matches": 11997.89,
+      "inference_failure_rate": 0.0,
+      "registration_failure_rate": 0.0,
+      "inference_ms_mean": 208.7333272304386,
+      "inference_ms_p95": 219.412691751495
+    },
+    "3 optical-sar": {
+      "pairs": 100,
+      "precision": {
+        "1": 0.07499747636438743,
+        "3": 0.25041400896370436,
+        "5": 0.3952643740069474
+      },
+      "precision_micro": {
+        "1": 0.08376461067566421,
+        "3": 0.27941923700504107,
+        "5": 0.44085012991928874
+      },
+      "matching_rmse": 22.823286724731,
+      "matching_rmse_pairs": 91,
+      "matching_epe": 15.967344955194756,
+      "registration_rmse": 9.802428560104694,
+      "registration_rmse_pairs": 91,
+      "sr": {
+        "1": 0.1,
+        "3": 0.33,
+        "5": 0.48
+      },
+      "match_success20_at5": 0.91,
+      "mean_ncm": {
+        "1": 898.45,
+        "3": 2997.02,
+        "5": 4728.51
+      },
+      "mean_matches": 10725.89,
+      "inference_failure_rate": 0.09,
+      "registration_failure_rate": 0.09,
+      "inference_ms_mean": 204.14290103130043,
+      "inference_ms_p95": 225.11637727729948
+    },
+    "4 optical-depth": {
+      "pairs": 100,
+      "precision": {
+        "1": 0.09461714563281465,
+        "3": 0.35571452572518497,
+        "5": 0.5733270565654841
+      },
+      "precision_micro": {
+        "1": 0.09754722785021129,
+        "3": 0.36672492279773783,
+        "5": 0.5910694553996904
+      },
+      "matching_rmse": 8.022437956896058,
+      "matching_rmse_pairs": 97,
+      "matching_epe": 5.401767541883402,
+      "registration_rmse": 2.7747004622096547,
+      "registration_rmse_pairs": 97,
+      "sr": {
+        "1": 0.08,
+        "3": 0.66,
+        "5": 0.86
+      },
+      "match_success20_at5": 0.97,
+      "mean_ncm": {
+        "1": 1135.28,
+        "3": 4268.04,
+        "5": 6879.02
+      },
+      "mean_matches": 11638.26,
+      "inference_failure_rate": 0.03,
+      "registration_failure_rate": 0.03,
+      "inference_ms_mean": 208.71701051481068,
+      "inference_ms_p95": 224.81570579111573
+    },
+    "5 optical-map": {
+      "pairs": 100,
+      "precision": {
+        "1": 0.162227705986847,
+        "3": 0.5157689819715332,
+        "5": 0.6592251601443911
+      },
+      "precision_micro": {
+        "1": 0.16953037506373075,
+        "3": 0.5386162688850057,
+        "5": 0.6877815592576292
+      },
+      "matching_rmse": 22.223491687559285,
+      "matching_rmse_pairs": 98,
+      "matching_epe": 17.193094185439232,
+      "registration_rmse": 11.951665351073643,
+      "registration_rmse_pairs": 98,
+      "sr": {
+        "1": 0.12,
+        "3": 0.69,
+        "5": 0.82
+      },
+      "match_success20_at5": 0.91,
+      "mean_ncm": {
+        "1": 1945.2,
+        "3": 6180.11,
+        "5": 7891.64
+      },
+      "mean_matches": 11474.05,
+      "inference_failure_rate": 0.02,
+      "registration_failure_rate": 0.02,
+      "inference_ms_mean": 220.21393810398877,
+      "inference_ms_p95": 336.7057368159294
+    },
+    "6 day-night": {
+      "pairs": 100,
+      "precision": {
+        "1": 0.254658204694714,
+        "3": 0.5544258280186924,
+        "5": 0.6269437118979885
+      },
+      "precision_micro": {
+        "1": 0.31214872636793545,
+        "3": 0.679200920850601,
+        "5": 0.7678675479899328
+      },
+      "matching_rmse": 23.54342980004732,
+      "matching_rmse_pairs": 83,
+      "matching_epe": 14.877222733536442,
+      "registration_rmse": 496.41711653052107,
+      "registration_rmse_pairs": 83,
+      "sr": {
+        "1": 0.21,
+        "3": 0.63,
+        "5": 0.72
+      },
+      "match_success20_at5": 0.82,
+      "mean_ncm": {
+        "1": 3053.52,
+        "3": 6644.12,
+        "5": 7511.48
+      },
+      "mean_matches": 9782.26,
+      "inference_failure_rate": 0.17,
+      "registration_failure_rate": 0.17,
+      "inference_ms_mean": 192.21172250807285,
+      "inference_ms_p95": 226.3098853174597
+    }
+  },
+  "stages": {
+    "coarse": {
+      "overall": {
+        "pairs": 600,
+        "precision": {
+          "1": 0.04640351680594312,
+          "3": 0.3161547134583165,
+          "5": 0.5415894146946877
+        },
+        "precision_micro": {
+          "1": 0.054044973754247376,
+          "3": 0.3655515517863751,
+          "5": 0.6167960996438434
+        },
+        "matching_rmse": 19.28812381723346,
+        "matching_rmse_pairs": 569,
+        "matching_epe": 12.901944476389126,
+        "registration_rmse": 13.625610862043244,
+        "registration_rmse_pairs": 569,
+        "sr": {
+          "1": 0.01,
+          "3": 0.49166666666666664,
+          "5": 0.735
+        },
+        "match_success20_at5": 0.93,
+        "mean_ncm": {
+          "1": 198.12833333333333,
+          "3": 1340.1083333333333,
+          "5": 2261.1683333333335
+        },
+        "mean_matches": 3665.99,
+        "inference_failure_rate": 0.051666666666666666,
+        "registration_failure_rate": 0.051666666666666666,
+        "inference_ms_mean": 207.7696041824917,
+        "inference_ms_p95": 226.22708007693288
+      },
+      "by_modality": {
+        "1 optical-optical": {
+          "pairs": 100,
+          "precision": {
+            "1": 0.06481432474197381,
+            "3": 0.43096811826712766,
+            "5": 0.6915422423274318
+          },
+          "precision_micro": {
+            "1": 0.0693128176375902,
+            "3": 0.45732578539002733,
+            "5": 0.7217472102150441
+          },
+          "matching_rmse": 8.33054666457552,
+          "matching_rmse_pairs": 100,
+          "matching_epe": 5.668541210814648,
+          "registration_rmse": 3.3533339293670177,
+          "registration_rmse_pairs": 100,
+          "sr": {
+            "1": 0.03,
+            "3": 0.75,
+            "5": 0.89
+          },
+          "match_success20_at5": 1.0,
+          "mean_ncm": {
+            "1": 306.59,
+            "3": 2022.88,
+            "5": 3192.49
+          },
+          "mean_matches": 4423.28,
+          "inference_failure_rate": 0.0,
+          "registration_failure_rate": 0.0,
+          "inference_ms_mean": 212.59872570633888,
+          "inference_ms_p95": 224.08071467652917
+        },
+        "2 optical-infrared": {
+          "pairs": 100,
+          "precision": {
+            "1": 0.03408039692151455,
+            "3": 0.23489944324145548,
+            "5": 0.4204889640485396
+          },
+          "precision_micro": {
+            "1": 0.03759290175506987,
+            "3": 0.25717861148069365,
+            "5": 0.4545808933822595
+          },
+          "matching_rmse": 20.470309256561965,
+          "matching_rmse_pairs": 100,
+          "matching_epe": 11.999982063576443,
+          "registration_rmse": 6.6827523338593595,
+          "registration_rmse_pairs": 100,
+          "sr": {
+            "1": 0.01,
+            "3": 0.33,
+            "5": 0.57
+          },
+          "match_success20_at5": 1.0,
+          "mean_ncm": {
+            "1": 133.08,
+            "3": 910.42,
+            "5": 1609.23
+          },
+          "mean_matches": 3540.03,
+          "inference_failure_rate": 0.0,
+          "registration_failure_rate": 0.0,
+          "inference_ms_mean": 208.7333272304386,
+          "inference_ms_p95": 219.412691751495
+        },
+        "3 optical-sar": {
+          "pairs": 100,
+          "precision": {
+            "1": 0.024553755721736573,
+            "3": 0.1841053531325854,
+            "5": 0.3758865324156677
+          },
+          "precision_micro": {
+            "1": 0.030054735746466686,
+            "3": 0.2236934072018808,
+            "5": 0.45191938202162196
+          },
+          "matching_rmse": 26.070110367295545,
+          "matching_rmse_pairs": 91,
+          "matching_epe": 18.02365632537957,
+          "registration_rmse": 10.352780438417085,
+          "registration_rmse_pairs": 91,
+          "sr": {
+            "1": 0.0,
+            "3": 0.26,
+            "5": 0.55
+          },
+          "match_success20_at5": 0.9,
+          "mean_ncm": {
+            "1": 99.33,
+            "3": 739.3,
+            "5": 1493.58
+          },
+          "mean_matches": 3304.97,
+          "inference_failure_rate": 0.09,
+          "registration_failure_rate": 0.09,
+          "inference_ms_mean": 204.14290103130043,
+          "inference_ms_p95": 225.11637727729948
+        },
+        "4 optical-depth": {
+          "pairs": 100,
+          "precision": {
+            "1": 0.048625576576867974,
+            "3": 0.3378190286562659,
+            "5": 0.6062600002749129
+          },
+          "precision_micro": {
+            "1": 0.05146326387789192,
+            "3": 0.35681519812424334,
+            "5": 0.6381531561444823
+          },
+          "matching_rmse": 8.201104612649138,
+          "matching_rmse_pairs": 97,
+          "matching_epe": 5.4047543971195315,
+          "registration_rmse": 2.793411186306127,
+          "registration_rmse_pairs": 97,
+          "sr": {
+            "1": 0.0,
+            "3": 0.63,
+            "5": 0.93
+          },
+          "match_success20_at5": 0.97,
+          "mean_ncm": {
+            "1": 201.49,
+            "3": 1397.01,
+            "5": 2498.51
+          },
+          "mean_matches": 3915.22,
+          "inference_failure_rate": 0.03,
+          "registration_failure_rate": 0.03,
+          "inference_ms_mean": 208.71701051481068,
+          "inference_ms_p95": 224.81570579111573
+        },
+        "5 optical-map": {
+          "pairs": 100,
+          "precision": {
+            "1": 0.05352296581297049,
+            "3": 0.3636389704388172,
+            "5": 0.617540710244269
+          },
+          "precision_micro": {
+            "1": 0.061447470143968515,
+            "3": 0.41475420471317126,
+            "5": 0.6950008379691952
+          },
+          "matching_rmse": 23.928593074169477,
+          "matching_rmse_pairs": 98,
+          "matching_epe": 18.562022123275153,
+          "registration_rmse": 48.59096764989535,
+          "registration_rmse_pairs": 98,
+          "sr": {
+            "1": 0.0,
+            "3": 0.52,
+            "5": 0.76
+          },
+          "match_success20_at5": 0.89,
+          "mean_ncm": {
+            "1": 227.32,
+            "3": 1534.35,
+            "5": 2571.1
+          },
+          "mean_matches": 3699.42,
+          "inference_failure_rate": 0.02,
+          "registration_failure_rate": 0.02,
+          "inference_ms_mean": 220.21393810398877,
+          "inference_ms_p95": 336.7057368159294
+        },
+        "6 day-night": {
+          "pairs": 100,
+          "precision": {
+            "1": 0.052824081060595336,
+            "3": 0.3454973670136473,
+            "5": 0.5378180388573047
+          },
+          "precision_micro": {
+            "1": 0.07097930626851097,
+            "3": 0.46151004490815994,
+            "5": 0.7073838266377986
+          },
+          "matching_rmse": 31.108042744248433,
+          "matching_rmse_pairs": 83,
+          "matching_epe": 19.167012161628957,
+          "registration_rmse": 9.329942403886461,
+          "registration_rmse_pairs": 83,
+          "sr": {
+            "1": 0.02,
+            "3": 0.46,
+            "5": 0.71
+          },
+          "match_success20_at5": 0.82,
+          "mean_ncm": {
+            "1": 220.96,
+            "3": 1436.69,
+            "5": 2202.1
+          },
+          "mean_matches": 3113.02,
+          "inference_failure_rate": 0.17,
+          "registration_failure_rate": 0.17,
+          "inference_ms_mean": 192.21172250807285,
+          "inference_ms_p95": 226.3098853174597
+        }
+      }
+    },
+    "fine": {
+      "overall": {
+        "pairs": 600,
+        "precision": {
+          "1": 0.17826398927400855,
+          "3": 0.4570231844107582,
+          "5": 0.5915376599542707
+        },
+        "precision_micro": {
+          "1": 0.18971601893581702,
+          "3": 0.48617920177256374,
+          "5": 0.6291096043346424
+        },
+        "matching_rmse": 16.388142295267738,
+        "matching_rmse_pairs": 569,
+        "matching_epe": 11.01955965415812,
+        "registration_rmse": 13.410884025973296,
+        "registration_rmse_pairs": 569,
+        "sr": {
+          "1": 0.22,
+          "3": 0.595,
+          "5": 0.745
+        },
+        "match_success20_at5": 0.9366666666666666,
+        "mean_ncm": {
+          "1": 2138.3,
+          "3": 5479.753333333333,
+          "5": 7090.73
+        },
+        "mean_matches": 11271.056666666667,
+        "inference_failure_rate": 0.051666666666666666,
+        "registration_failure_rate": 0.051666666666666666,
+        "inference_ms_mean": 207.7696041824917,
+        "inference_ms_p95": 226.22708007693288
+      },
+      "by_modality": {
+        "1 optical-optical": {
+          "pairs": 100,
+          "precision": {
+            "1": 0.35321,
+            "3": 0.6576533333333333,
+            "5": 0.7619316666666667
+          },
+          "precision_micro": {
+            "1": 0.35321,
+            "3": 0.6576533333333333,
+            "5": 0.7619316666666667
+          },
+          "matching_rmse": 6.436167586302466,
+          "matching_rmse_pairs": 100,
+          "matching_epe": 4.053372269441797,
+          "registration_rmse": 1.7273981432277261,
+          "registration_rmse_pairs": 100,
+          "sr": {
+            "1": 0.54,
+            "3": 0.81,
+            "5": 0.93
+          },
+          "match_success20_at5": 1.0,
+          "mean_ncm": {
+            "1": 4238.52,
+            "3": 7891.84,
+            "5": 9143.18
+          },
+          "mean_matches": 12000.0,
+          "inference_failure_rate": 0.0,
+          "registration_failure_rate": 0.0,
+          "inference_ms_mean": 212.59872570633888,
+          "inference_ms_p95": 224.08071467652917
+        },
+        "2 optical-infrared": {
+          "pairs": 100,
+          "precision": {
+            "1": 0.14994666666666667,
+            "3": 0.3606066666666667,
+            "5": 0.47264999999999996
+          },
+          "precision_micro": {
+            "1": 0.14994666666666667,
+            "3": 0.3606066666666667,
+            "5": 0.47265
+          },
+          "matching_rmse": 17.50020429286496,
+          "matching_rmse_pairs": 100,
+          "matching_epe": 10.161040406515847,
+          "registration_rmse": 6.147616419417406,
+          "registration_rmse_pairs": 100,
+          "sr": {
+            "1": 0.24,
+            "3": 0.42,
+            "5": 0.6
+          },
+          "match_success20_at5": 1.0,
+          "mean_ncm": {
+            "1": 1799.36,
+            "3": 4327.28,
+            "5": 5671.8
+          },
+          "mean_matches": 12000.0,
+          "inference_failure_rate": 0.0,
+          "registration_failure_rate": 0.0,
+          "inference_ms_mean": 208.7333272304386,
+          "inference_ms_p95": 219.412691751495
+        },
+        "3 optical-sar": {
+          "pairs": 100,
+          "precision": {
+            "1": 0.07137552090002208,
+            "3": 0.2559410766303556,
+            "5": 0.4058810238917356
+          },
+          "precision_micro": {
+            "1": 0.07970210639749724,
+            "3": 0.285527979029245,
+            "5": 0.4526526662763859
+          },
+          "matching_rmse": 22.692345150057722,
+          "matching_rmse_pairs": 91,
+          "matching_epe": 15.843973117542049,
+          "registration_rmse": 8.110017346706448,
+          "registration_rmse_pairs": 91,
+          "sr": {
+            "1": 0.08,
+            "3": 0.35,
+            "5": 0.53
+          },
+          "match_success20_at5": 0.91,
+          "mean_ncm": {
+            "1": 854.99,
+            "3": 3062.95,
+            "5": 4855.75
+          },
+          "mean_matches": 10727.32,
+          "inference_failure_rate": 0.09,
+          "registration_failure_rate": 0.09,
+          "inference_ms_mean": 204.14290103130043,
+          "inference_ms_p95": 225.11637727729948
+        },
+        "4 optical-depth": {
+          "pairs": 100,
+          "precision": {
+            "1": 0.09907666666666667,
+            "3": 0.3801775,
+            "5": 0.6012333333333333
+          },
+          "precision_micro": {
+            "1": 0.10214089347079038,
+            "3": 0.3919355670103093,
+            "5": 0.6198281786941581
+          },
+          "matching_rmse": 7.793035284757053,
+          "matching_rmse_pairs": 97,
+          "matching_epe": 5.181980940257625,
+          "registration_rmse": 2.750900807229452,
+          "registration_rmse_pairs": 97,
+          "sr": {
+            "1": 0.1,
+            "3": 0.62,
+            "5": 0.89
+          },
+          "match_success20_at5": 0.97,
+          "mean_ncm": {
+            "1": 1188.92,
+            "3": 4562.13,
+            "5": 7214.8
+          },
+          "mean_matches": 11640.0,
+          "inference_failure_rate": 0.03,
+          "registration_failure_rate": 0.03,
+          "inference_ms_mean": 208.71701051481068,
+          "inference_ms_p95": 224.81570579111573
+        },
+        "5 optical-map": {
+          "pairs": 100,
+          "precision": {
+            "1": 0.16038163623617618,
+            "3": 0.5313175289440882,
+            "5": 0.6755563135369057
+          },
+          "precision_micro": {
+            "1": 0.1675701629256025,
+            "3": 0.55475135045169,
+            "5": 0.7046808977856862
+          },
+          "matching_rmse": 22.04875522225408,
+          "matching_rmse_pairs": 98,
+          "matching_epe": 17.058180657950928,
+          "registration_rmse": 11.004509535234643,
+          "registration_rmse_pairs": 98,
+          "sr": {
+            "1": 0.16,
+            "3": 0.72,
+            "5": 0.8
+          },
+          "match_success20_at5": 0.91,
+          "mean_ncm": {
+            "1": 1923.0,
+            "3": 6366.21,
+            "5": 8086.77
+          },
+          "mean_matches": 11475.79,
+          "inference_failure_rate": 0.02,
+          "registration_failure_rate": 0.02,
+          "inference_ms_mean": 220.21393810398877,
+          "inference_ms_p95": 336.7057368159294
+        },
+        "6 day-night": {
+          "pairs": 100,
+          "precision": {
+            "1": 0.2355934451745198,
+            "3": 0.5564430008901051,
+            "5": 0.6319736222969827
+          },
+          "precision_micro": {
+            "1": 0.2887604605023085,
+            "3": 0.6815857339549413,
+            "5": 0.7739856877534311
+          },
+          "matching_rmse": 23.488071506421868,
+          "matching_rmse_pairs": 83,
+          "matching_epe": 14.849792364333725,
+          "registration_rmse": 57.349405580840404,
+          "registration_rmse_pairs": 83,
+          "sr": {
+            "1": 0.2,
+            "3": 0.65,
+            "5": 0.72
+          },
+          "match_success20_at5": 0.83,
+          "mean_ncm": {
+            "1": 2825.01,
+            "3": 6668.11,
+            "5": 7572.08
+          },
+          "mean_matches": 9783.23,
+          "inference_failure_rate": 0.17,
+          "registration_failure_rate": 0.17,
+          "inference_ms_mean": 192.21172250807285,
+          "inference_ms_p95": 226.3098853174597
+        }
+      }
+    }
+  }
+}

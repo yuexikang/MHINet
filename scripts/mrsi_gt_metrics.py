@@ -11,6 +11,26 @@ def project(points,H):
     return result,valid
 
 
+def conditional_rmse(a,b,size_a,size_b,H_gt,*,success_override=None):
+    """Correct matches: <=5px with GT-visible support; default success: NCM>=20.
+
+    GT transforms source coordinates. Failed pairs contribute 10 to the mean.
+    success_override permits an explicitly registered alternative success rule.
+    """
+    a=np.asarray(a,dtype=np.float64).reshape(-1,2)
+    b=np.asarray(b,dtype=np.float64).reshape(-1,2)
+    if a.shape!=b.shape:raise ValueError('Unequal point arrays')
+    truth,valid=project(a,H_gt)
+    valid=valid&np.isfinite(a).all(1)&np.isfinite(b).all(1)
+    valid=valid&(a>=0).all(1)&(a<=np.asarray(size_a)-1).all(1)&(truth>=0).all(1)&(truth<=np.asarray(size_b)-1).all(1)&(b>=0).all(1)&(b<=np.asarray(size_b)-1).all(1)
+    error=np.linalg.norm(truth-b,axis=1)
+    correct=valid&(error<=5.);ncm=int(correct.sum())
+    success=ncm>=20 if success_override is None else bool(success_override)
+    if success and ncm==0:raise ValueError('Successful pair has no correct matches')
+    return dict(rmse_correct5_or_failure10=float(np.sqrt(np.mean(error[correct]**2))) if success else 10.,
+        rmse_protocol_success=success,rmse_ncm=ncm)
+
+
 def score_matches(a,b,size_a,size_b,H_gt):
     a=np.asarray(a,dtype=np.float64).reshape(-1,2)
     b=np.asarray(b,dtype=np.float64).reshape(-1,2)

@@ -1,5 +1,36 @@
 # E组 expanded MRSI 全量真值评估
 
+## 当前RMSE口径（按用户修订）
+
+成功条件沿用配准SR@3px（预测H在GT可见网格上的配准RMSE≤3px）；正确匹配为GT重投影误差≤5px且支持区有效。成功对计算 sqrt(sum(e_i²)/NCM)，只用正确匹配；失败对RMSE=10。变换源点使用H_GT。最后对全体600对逐对取平均，包含失败对。
+
+该成功条件和正确点阈值由用户明确选定；引用公式片段本身未给出这两个阈值，不声称已核验原论文的完整协议。P/NCM/配准SR保持原值。
+
+| 模态 | 新RMSE(px) | SR@3px | 成功/失败对数 |
+|---|---:|---:|---:|
+| 总体 | 5.2899 | 60.00% | 360/240 |
+| 光学–光学 | 3.1525 | 83.00% | 83/17 |
+| 光学–红外 | 6.3776 | 46.00% | 46/54 |
+| 光学–SAR | 7.5355 | 33.00% | 33/67 |
+| 光学–深度 | 5.2294 | 66.00% | 66/34 |
+| 光学–地图 | 4.6487 | 69.00% | 69/31 |
+| 昼–夜 | 4.7953 | 63.00% | 63/37 |
+
+总体新RMSE=5.2898504px；360对成功、240对失败。失败项单独贡献240×10/600=4px。新RMSE不能解释为所有输出匹配点的平均定位误差；之前的16.5307px全匹配RMSE和78.0341px配准网格RMSE仍留作诊断，不与新口径混用。
+
+修订页面：`outputs/mrsi_expanded_e_correct_rmse_20260929/index.html`；修订逐对结果：同目录pairs.jsonl。当前汇总：`artifacts/mrsi_expanded_e_gt_results.json`；历史全匹配汇总：`artifacts/mrsi_expanded_e_all_match_rmse_v1.json`。旧输出目录及其预测NPZ保持原样，未重跑神经网络。
+
+复现重评分：
+
+```bash
+/root/miniconda3/envs/loma-repro/bin/python scripts/rescore_mrsi_correct_match_rmse.py \
+  --source outputs/mrsi_expanded_e_gt_20260929 \
+  --output outputs/mrsi_expanded_e_correct_rmse_new \
+  --success-rule registration3
+```
+
+以下章节记录原始评测执行和旧RMSE诊断；当前主RMSE以上述修订为准。
+
 原始MRSIDatasets的46对恒等映射评估按用户要求放弃。其输出保留ABANDONED.json标记及代码快照，不作为本报告结果。
 
 ## 固定输入与执行

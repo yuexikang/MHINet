@@ -69,11 +69,7 @@
     "inference_failure_rate": 0.051666666666666666,
     "registration_failure_rate": 0.051666666666666666,
     "inference_ms_mean": 207.7696041824917,
-    "inference_ms_p95": 226.22708007693288,
-    "rmse_correct5_or_failure10": 5.2898503980440745,
-    "rmse_success_pairs": 360,
-    "rmse_failure_pairs": 240,
-    "rmse_protocol_sr": 0.6
+    "inference_ms_p95": 226.22708007693288
   },
   "by_modality": {
     "1 optical-optical": {
@@ -108,11 +104,7 @@
       "inference_failure_rate": 0.0,
       "registration_failure_rate": 0.0,
       "inference_ms_mean": 212.59872570633888,
-      "inference_ms_p95": 224.08071467652917,
-      "rmse_correct5_or_failure10": 3.152538736229404,
-      "rmse_success_pairs": 83,
-      "rmse_failure_pairs": 17,
-      "rmse_protocol_sr": 0.83
+      "inference_ms_p95": 224.08071467652917
     },
     "2 optical-infrared": {
       "pairs": 100,
@@ -146,11 +138,7 @@
       "inference_failure_rate": 0.0,
       "registration_failure_rate": 0.0,
       "inference_ms_mean": 208.7333272304386,
-      "inference_ms_p95": 219.412691751495,
-      "rmse_correct5_or_failure10": 6.377627645313472,
-      "rmse_success_pairs": 46,
-      "rmse_failure_pairs": 54,
-      "rmse_protocol_sr": 0.46
+      "inference_ms_p95": 219.412691751495
     },
     "3 optical-sar": {
       "pairs": 100,
@@ -184,11 +172,7 @@
       "inference_failure_rate": 0.09,
       "registration_failure_rate": 0.09,
       "inference_ms_mean": 204.14290103130043,
-      "inference_ms_p95": 225.11637727729948,
-      "rmse_correct5_or_failure10": 7.5354934610610975,
-      "rmse_success_pairs": 33,
-      "rmse_failure_pairs": 67,
-      "rmse_protocol_sr": 0.33
+      "inference_ms_p95": 225.11637727729948
     },
     "4 optical-depth": {
       "pairs": 100,
@@ -222,11 +206,7 @@
       "inference_failure_rate": 0.03,
       "registration_failure_rate": 0.03,
       "inference_ms_mean": 208.71701051481068,
-      "inference_ms_p95": 224.81570579111573,
-      "rmse_correct5_or_failure10": 5.229428236706782,
-      "rmse_success_pairs": 66,
-      "rmse_failure_pairs": 34,
-      "rmse_protocol_sr": 0.66
+      "inference_ms_p95": 224.81570579111573
     },
     "5 optical-map": {
       "pairs": 100,
@@ -260,11 +240,7 @@
       "inference_failure_rate": 0.02,
       "registration_failure_rate": 0.02,
       "inference_ms_mean": 220.21393810398877,
-      "inference_ms_p95": 336.7057368159294,
-      "rmse_correct5_or_failure10": 4.648734828520377,
-      "rmse_success_pairs": 69,
-      "rmse_failure_pairs": 31,
-      "rmse_protocol_sr": 0.69
+      "inference_ms_p95": 336.7057368159294
     },
     "6 day-night": {
       "pairs": 100,
@@ -298,11 +274,7 @@
       "inference_failure_rate": 0.17,
       "registration_failure_rate": 0.17,
       "inference_ms_mean": 192.21172250807285,
-      "inference_ms_p95": 226.3098853174597,
-      "rmse_correct5_or_failure10": 4.79527948043332,
-      "rmse_success_pairs": 63,
-      "rmse_failure_pairs": 37,
-      "rmse_protocol_sr": 0.63
+      "inference_ms_p95": 226.3098853174597
     }
   },
   "stages": {
@@ -790,19 +762,5 @@
         }
       }
     }
-  },
-  "rmse_revision": {
-    "source_report_sha256": "685d2ca5f7a9de3ef7c5e7e8d2dc8ac917d6f79c4043a04573c3b8c779ba3039",
-    "source_pairs_sha256": "e252026e8ac716803d5e15cedd0c8ca5c60c6df989df81856c1626976f7e15fb",
-    "script_sha256": "ecb19701477811e7d84e4f97e4fb9b55400d7d8ee10da08b56fb9fe27359e5b8",
-    "metrics_sha256": "cfd3783301b194f3bc0fc26eecc0f7efddb7bfe538a20660d8624f17347c130b",
-    "scope": "Final-stage RMSE re-scored from unchanged prediction NPZs; inference, precision, NCM, registration SR, old RMSE diagnostics, coarse/fine reports unchanged.",
-    "correct_matches": "GT reprojection error <=5 native target pixels with valid GT-visible support",
-    "source_transform": "H_GT, not the model-fitted homography",
-    "success_rule": "registration3",
-    "success_definition": "Original registration grid RMSE<=3px",
-    "failure_rmse": 10,
-    "aggregation": "Mean of per-pair RMSE over ALL pairs, including failures; not pooled by NCM",
-    "note": "The supplied excerpt does not specify a correct-match threshold or success criterion; these are explicit implementation choices, not claimed as verified paper definitions."
   }
 }

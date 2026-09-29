@@ -1,6 +1,6 @@
 import unittest
 import numpy as np
-from scripts.mrsi_gt_metrics import score_matches,aggregate,project
+from scripts.mrsi_gt_metrics import score_matches,aggregate,project,conditional_rmse
 
 class GTMetricsTests(unittest.TestCase):
     def setUp(self):
@@ -34,5 +34,20 @@ class GTMetricsTests(unittest.TestCase):
         a=np.array([[1.,1.],[10.,10.],[20.,20.],[90.,90.]])
         r=score_matches(a,a,(100,100),(80,80),np.eye(3))
         self.assertEqual(r['precision']['1'],.75)
+
+    def test_conditional_rmse_success_discards_incorrect_matches(self):
+        b=self.b+[2.,0];b[0]=self.b[0]+[30.,0]
+        r=conditional_rmse(self.a,b,(100,100),(100,100),self.H,success_override=True)
+        self.assertAlmostEqual(r['rmse_correct5_or_failure10'],2.)
+        self.assertEqual(r['rmse_ncm'],len(b)-1)
+
+    def test_registration_failure_gets_ten_even_with_many_correct_matches(self):
+        r=conditional_rmse(self.a,self.b,(100,100),(100,100),self.H,success_override=False)
+        self.assertGreater(r['rmse_ncm'],20)
+        self.assertEqual(r['rmse_correct5_or_failure10'],10.)
+        empty=conditional_rmse([],[],(100,100),(100,100),self.H,success_override=False)
+        self.assertEqual(empty['rmse_correct5_or_failure10'],10.)
+        with self.assertRaises(ValueError):
+            conditional_rmse([],[],(100,100),(100,100),self.H,success_override=True)
 
 if __name__=='__main__':unittest.main()

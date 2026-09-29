@@ -7,10 +7,11 @@ from mrsi_gt_metrics import score_matches,aggregate,project
 
 def main():
     p=argparse.ArgumentParser(description=__doc__)
-    p.add_argument('--implementation-root',type=Path,required=True)
+    p.add_argument('--implementation-root',type=Path,default=Path(__file__).resolve().parents[1])
     p.add_argument('--checkpoint',type=Path,required=True)
     p.add_argument('--manifest',type=Path,required=True)
     p.add_argument('--output',type=Path,required=True)
+    p.add_argument('--input-size',type=int,choices=(512,784),default=784)
     args=p.parse_args()
     if args.output.exists():raise FileExistsError(args.output)
     sys.path.insert(0,str(args.implementation_root.resolve()))
@@ -30,7 +31,7 @@ def main():
     if meta['task']!='semidense_qrru_v1' or state['progress']['optimizer_step']!=meta['total_steps']:raise ValueError('Expected completed semidense model')
     runtime=replace(RuntimePaths.from_json(meta['config']['runtime']),device='cuda:0')
     if sha256_file(runtime.dino_checkpoint)!=meta['dino_sha256']:raise ValueError('DINO identity mismatch')
-    config=replace(SemidenseConfig(**meta['matcher']),inference_window_chunk=1024)
+    config=replace(SemidenseConfig(**meta['matcher']),inference_window_chunk=1024,input_size=args.input_size)
     shared,_=build_shared_network(runtime,lora=False)
     model=SemidenseSystem(shared,SemidenseMatcher(config)).cuda();model.load_state_dict(state['model'],strict=True);model.eval();del state
     args.output.mkdir(parents=True);(args.output/'matches').mkdir();(args.output/'visuals').mkdir()
@@ -50,7 +51,7 @@ def main():
         for index,row in enumerate(rows):
             source=[Image.open(row['image'+str(i)]).convert('RGB') for i in (0,1)]
             sizes=[im.size for im in source]
-            images=torch.stack([load_rgb_bicubic(row['image'+str(i)]) for i in (0,1)])[None].cuda()
+            images=torch.stack([load_rgb_bicubic(row['image'+str(i)],size=config.input_size) for i in (0,1)])[None].cuda()
             if index==0:model.matcher.infer(model(images),[sizes]);torch.cuda.synchronize()
             results,timing=timed_inference(model,images,[sizes]);result=results[0]
             a,b=[result[k].cpu().numpy() for k in ('points_a','points_b')]

@@ -1,0 +1,391 @@
+{
+  "complete": true,
+  "checkpoint_sha256": "b5995d184240be0be70d24a44dfbdc6e6f79050c735b0f8e7547542b40d97f50",
+  "script_sha256": "284e663f3ba06553458f648d2e5439ff4d1134e3ddb4b6e91a49608ddbffce1d",
+  "scope": "Three fixed pairs at both sizes; 784 bitwise regression versus stored original E predictions; one 512 visualization and full backward without optimizer update. Not a full accuracy or speed benchmark.",
+  "inference": [
+    {
+      "index": 0,
+      "pair_id": "1 optical-optical/000/01",
+      "input_size": 784,
+      "shapes": {
+        "8": [
+          1,
+          2,
+          256,
+          98,
+          98
+        ],
+        "4": [
+          1,
+          2,
+          256,
+          196,
+          196
+        ],
+        "2": [
+          1,
+          2,
+          256,
+          392,
+          392
+        ]
+      },
+      "matches": 11999,
+      "failure_reason": "none",
+      "token_size": [
+        49,
+        49
+      ],
+      "historical_784_bitwise_equal": {
+        "points_a": true,
+        "points_b": true,
+        "confidence": true
+      },
+      "timing": {
+        "module_ms": {
+          "dino": 33.907840728759766,
+          "mvt": 14.331904411315918,
+          "h0": 2.372607946395874,
+          "vgg": 13.543423652648926,
+          "cgmdp": 13.569024085998535,
+          "shared_other": 0.0767052173614502,
+          "matcher_setup": 1.016160011291504,
+          "coarse": 19.901248931884766,
+          "fine": 28.484447479248047,
+          "qrru": 101.04723358154297,
+          "pipeline_other": 0.027831077575683594
+        },
+        "stream_total_ms": 228.27842712402344,
+        "wall_total_ms": 228.339534252882,
+        "method": "cuda_events_single_final_sync",
+        "accounting_error_ms": 0.0
+      }
+    },
+    {
+      "index": 0,
+      "pair_id": "1 optical-optical/000/01",
+      "input_size": 512,
+      "shapes": {
+        "8": [
+          1,
+          2,
+          256,
+          64,
+          64
+        ],
+        "4": [
+          1,
+          2,
+          256,
+          128,
+          128
+        ],
+        "2": [
+          1,
+          2,
+          256,
+          256,
+          256
+        ]
+      },
+      "matches": 11963,
+      "failure_reason": "none",
+      "token_size": [
+        32,
+        32
+      ],
+      "historical_784_bitwise_equal": null,
+      "timing": {
+        "module_ms": {
+          "dino": 19.946271896362305,
+          "mvt": 9.472319602966309,
+          "h0": 2.3347198963165283,
+          "vgg": 4.56982421875,
+          "cgmdp": 5.173247814178467,
+          "shared_other": 0.10915398597717285,
+          "matcher_setup": 0.6525120139122009,
+          "coarse": 9.25487995147705,
+          "fine": 11.870016098022461,
+          "qrru": 99.78050994873047,
+          "pipeline_other": 0.026531755924224854
+        },
+        "stream_total_ms": 163.1899871826172,
+        "wall_total_ms": 163.23654912412167,
+        "method": "cuda_events_single_final_sync",
+        "accounting_error_ms": 0.0
+      }
+    },
+    {
+      "index": 100,
+      "pair_id": "2 optical-infrared/000/01",
+      "input_size": 784,
+      "shapes": {
+        "8": [
+          1,
+          2,
+          256,
+          98,
+          98
+        ],
+        "4": [
+          1,
+          2,
+          256,
+          196,
+          196
+        ],
+        "2": [
+          1,
+          2,
+          256,
+          392,
+          392
+        ]
+      },
+      "matches": 12000,
+      "failure_reason": "none",
+      "token_size": [
+        49,
+        49
+      ],
+      "historical_784_bitwise_equal": {
+        "points_a": true,
+        "points_b": true,
+        "confidence": true
+      },
+      "timing": {
+        "module_ms": {
+          "dino": 32.51356887817383,
+          "mvt": 13.504511833190918,
+          "h0": 2.2251839637756348,
+          "vgg": 13.066399574279785,
+          "cgmdp": 13.119487762451172,
+          "shared_other": 0.06688070297241211,
+          "matcher_setup": 0.9462720155715942,
+          "coarse": 26.025184631347656,
+          "fine": 21.80575942993164,
+          "qrru": 95.67353820800781,
+          "pipeline_other": 0.027364611625671387
+        },
+        "stream_total_ms": 218.97415161132812,
+        "wall_total_ms": 219.01752147823572,
+        "method": "cuda_events_single_final_sync",
+        "accounting_error_ms": 0.0
+      }
+    },
+    {
+      "index": 100,
+      "pair_id": "2 optical-infrared/000/01",
+      "input_size": 512,
+      "shapes": {
+        "8": [
+          1,
+          2,
+          256,
+          64,
+          64
+        ],
+        "4": [
+          1,
+          2,
+          256,
+          128,
+          128
+        ],
+        "2": [
+          1,
+          2,
+          256,
+          256,
+          256
+        ]
+      },
+      "matches": 11999,
+      "failure_reason": "none",
+      "token_size": [
+        32,
+        32
+      ],
+      "historical_784_bitwise_equal": null,
+      "timing": {
+        "module_ms": {
+          "dino": 18.749216079711914,
+          "mvt": 8.8340482711792,
+          "h0": 2.1287999153137207,
+          "vgg": 4.571135997772217,
+          "cgmdp": 5.185535907745361,
+          "shared_other": 0.09801721572875977,
+          "matcher_setup": 0.6289600133895874,
+          "coarse": 12.187423706054688,
+          "fine": 11.74345588684082,
+          "qrru": 96.99766540527344,
+          "pipeline_other": 0.02480471134185791
+        },
+        "stream_total_ms": 161.14906311035156,
+        "wall_total_ms": 161.18995007127523,
+        "method": "cuda_events_single_final_sync",
+        "accounting_error_ms": 0.0
+      }
+    },
+    {
+      "index": 200,
+      "pair_id": "3 optical-sar/000/01",
+      "input_size": 784,
+      "shapes": {
+        "8": [
+          1,
+          2,
+          256,
+          98,
+          98
+        ],
+        "4": [
+          1,
+          2,
+          256,
+          196,
+          196
+        ],
+        "2": [
+          1,
+          2,
+          256,
+          392,
+          392
+        ]
+      },
+      "matches": 11999,
+      "failure_reason": "none",
+      "token_size": [
+        49,
+        49
+      ],
+      "historical_784_bitwise_equal": {
+        "points_a": true,
+        "points_b": true,
+        "confidence": true
+      },
+      "timing": {
+        "module_ms": {
+          "dino": 32.04447937011719,
+          "mvt": 13.285375595092773,
+          "h0": 2.218143939971924,
+          "vgg": 12.88806438446045,
+          "cgmdp": 12.916735649108887,
+          "shared_other": 0.0664973258972168,
+          "matcher_setup": 0.9461439847946167,
+          "coarse": 21.03708839416504,
+          "fine": 16.443391799926758,
+          "qrru": 95.46713256835938,
+          "pipeline_other": 0.026241421699523926
+        },
+        "stream_total_ms": 207.33929443359375,
+        "wall_total_ms": 207.3806468397379,
+        "method": "cuda_events_single_final_sync",
+        "accounting_error_ms": 0.0
+      }
+    },
+    {
+      "index": 200,
+      "pair_id": "3 optical-sar/000/01",
+      "input_size": 512,
+      "shapes": {
+        "8": [
+          1,
+          2,
+          256,
+          64,
+          64
+        ],
+        "4": [
+          1,
+          2,
+          256,
+          128,
+          128
+        ],
+        "2": [
+          1,
+          2,
+          256,
+          256,
+          256
+        ]
+      },
+      "matches": 11994,
+      "failure_reason": "none",
+      "token_size": [
+        32,
+        32
+      ],
+      "historical_784_bitwise_equal": null,
+      "timing": {
+        "module_ms": {
+          "dino": 21.099552154541016,
+          "mvt": 9.8406400680542,
+          "h0": 2.5958399772644043,
+          "vgg": 4.581376075744629,
+          "cgmdp": 5.187583923339844,
+          "shared_other": 0.11667299270629883,
+          "matcher_setup": 0.7060800194740295,
+          "coarse": 10.337759971618652,
+          "fine": 12.338175773620605,
+          "qrru": 105.8117446899414,
+          "pipeline_other": 0.03040260076522827
+        },
+        "stream_total_ms": 172.6458282470703,
+        "wall_total_ms": 172.69581742584705,
+        "method": "cuda_events_single_final_sync",
+        "accounting_error_ms": 0.0
+      }
+    }
+  ],
+  "backward512": {
+    "loss": 1.975331425666809,
+    "metrics": [
+      {
+        "lc": 0.5742480754852295,
+        "lf": 0.46653345227241516,
+        "lq": 0.9345499277114868,
+        "q_control": 0.5129281282424927,
+        "q_center": 0.42162179946899414,
+        "coarse_positive": 929,
+        "fine_positive": 507,
+        "fine_tokens": 1024,
+        "fine_coverage": 0.4951171875,
+        "qrru_queries": 128,
+        "qrru_epe_d2_by_iteration": [
+          0.9844667464494705,
+          0.3881240412592888,
+          0.21309184283018112,
+          0.1809581182897091,
+          0.17404326796531677
+        ],
+        "qrru_max_control_d2": 3.977396011352539,
+        "h0_valid": true
+      }
+    ],
+    "gradient_norms": {
+      "cgmdp": 14.800041198730469,
+      "semidense_qrru": 2.5584042072296143
+    },
+    "frozen_with_grad": []
+  },
+  "implementation": {
+    "mhinet/models/feature_provider.py": "a32d80bf0c16f3cac4f9dd49439e3fed6153d1ba9c157a9385986072930c49f3",
+    "mhinet/downstream/evaluate.py": "7e08974daa1c8a92649b9cef0d9b39bac7a9f3314c3d61f32b1ac8869cf91d70",
+    "mhinet/downstream/semidense.py": "ff87ed824ba05084342bcec7122b451912871d38d8951d12759caa60df637e52",
+    "mhinet/downstream/dense.py": "9435169de4c21d527ae842896caed1a752dc9e7f8011f433637c01d937777f7d",
+    "mhinet/downstream/losses.py": "ddb47c2c474c5932f08a8549fabb355890ecaa37986ac521f815b43aa9970d2c",
+    "mhinet/downstream/__init__.py": "87f1d8e739b320eda4f0cb6afee29469928286abc98ffc824de8baac9d8da998",
+    "mhinet/downstream/evaluate_semidense.py": "b0945deae0c8d847d7a6d8511db8f7fef87c61ef9f4f7d3f624daba991ccd758",
+    "mhinet/downstream/visualize.py": "bf748a424c6edfa71be63bc8c02c8405a15190f34e06c30260f2a894ce704a45",
+    "mhinet/downstream/metrics.py": "e279a427f7f9da4c30d61b2fb24abdfa166da9ffb8f6c9b2d73c926271001879",
+    "mhinet/downstream/train.py": "ac7682411118cdf386ee307cd71475881f6a940999336fa49f33b9efaf72e020",
+    "mhinet/downstream/qrru.py": "6508838da7f3f35661d1aa0ec38a5d3f34ce4bc837223d10e7383fe26ff74b40",
+    "mhinet/downstream/supervision.py": "318781b2425caffd9fc0cccd527230f7ff1d802ed0b9490cda07c4bdb44767d9",
+    "mhinet/downstream/training.py": "3676fcba8425a84db11320945256c91a93fd596e3d297da2c2cf932d38c4739c",
+    "mhinet/downstream/loma_reference/coarse_matcher.py": "2e65565f71c1425ced5d98593def52de5ab1cdcc8517da7e8f87eb92c7df4fa9"
+  }
+}

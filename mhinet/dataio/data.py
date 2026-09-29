@@ -38,6 +38,13 @@ def parse_geo_region(record: dict[str, Any], degrees: float = 0.01) -> str:
         row = record.get("input_pair_row_index")
         if row is not None:
             return f"external_test:{int(row)}"
+        # Synthetic RGB manifests are source-stratified but do not carry
+        # geographic coordinates. Keep each original source in its own stable
+        # namespace so the existing train/validation leakage audit still works.
+        dataset = record.get("source_dataset")
+        source_path = record.get("source_path", record.get("source_relative_path"))
+        if dataset and source_path:
+            return f"source:{dataset}:{Path(str(source_path)).as_posix()}"
         raise ValueError(f"Cannot derive geographic group from {source!r}")
     latitude = float(match.group("lat"))
     longitude = float(match.group("lon"))
@@ -51,6 +58,11 @@ def parent_group(record: dict[str, Any]) -> str:
         return f"test_pair:{int(record['input_pair_row_index'])}"
     left = str(record.get("parent_image_A", ""))
     right = str(record.get("parent_image_B", left))
+    if not left and not right:
+        dataset = record.get("source_dataset")
+        source_path = record.get("source_path", record.get("source_relative_path"))
+        if dataset and source_path:
+            return f"source:{dataset}:{Path(str(source_path)).as_posix()}"
     return "parent:" + "|".join(sorted({left, right}))
 
 

@@ -14,11 +14,16 @@ class SemidenseSystem(nn.Module):
         self.matcher=matcher
         shared.set_training_groups(mvt=False,vgg=True,dedode=True,ghim_head=False)
 
-    def forward(self,images):
+    def forward(self,images,H_gt=None,mask_A_overlap=None,mask_B_overlap=None):
         size=self.matcher.config.input_size
         if images.ndim!=5 or images.shape[1:]!=(2,3,size,size):
             raise ValueError(f'Configured input_size={size}, got {tuple(images.shape)}')
-        return self.shared(images)
+        shared=self.shared(images)
+        if H_gt is None:
+            return shared
+        if mask_A_overlap is None or mask_B_overlap is None:
+            raise ValueError('Training forward requires both overlap masks')
+        return self.matcher.training_losses(shared,H_gt,mask_A_overlap,mask_B_overlap)
 
     def optimizer_groups(self,shared_lr=1e-5,head_lr=1e-4):
         return [dict(name='cgmdp',params=[p for p in self.shared.parameters() if p.requires_grad],lr=shared_lr),

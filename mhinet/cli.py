@@ -8,6 +8,8 @@ from typing import Callable
 
 
 COMMAND_MODULES = {
+    "train-semidense": "mhinet.downstream.train",
+    "evaluate-semidense": "mhinet.downstream.evaluate_semidense",
     "evaluate-dense": "mhinet.downstream.evaluate",
     "preflight": "mhinet.diagnostics.preflight",
     "alignment": "mhinet.diagnostics.alignment",

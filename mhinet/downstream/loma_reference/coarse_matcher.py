@@ -232,8 +232,8 @@ def match_d8(
     if descriptor_a.shape != descriptor_b.shape or descriptor_a.ndim != 3:
         raise ValueError("Expected matching CxHxW D8 tensors")
     channels, height, width = descriptor_a.shape
-    if channels != 256 or (height, width) != (98, 98):
-        raise ValueError(f"D8 contract is 256x98x98, got {tuple(descriptor_a.shape)}")
+    if channels != 256 or (height, width) not in ((98,98),(64,64)):
+        raise ValueError(f"D8 contract is 256x98x98 (784) or 256x64x64 (512), got {tuple(descriptor_a.shape)}")
     if mask_a.shape != (height, width) or mask_b.shape != (height, width):
         raise ValueError("D8 mask shape mismatch")
     flat_a = descriptor_a.permute(1, 2, 0).reshape(-1, channels)

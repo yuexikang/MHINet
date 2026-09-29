@@ -355,9 +355,9 @@ class SharedFeatureProvider(nn.Module):
         pyramid_scales: tuple[int, ...] = (8, 4, 2),
         compute_stage1: bool = True,
     ) -> dict[str, Any]:
-        if images.ndim != 5 or images.shape[0] < 1 or images.shape[1:] != (2, 3, 784, 784):
+        if images.ndim != 5 or images.shape[0] < 1 or (images.shape[1:3] != (2, 3) or images.shape[-2:] not in ((784,784),(512,512))):
             raise ValueError(
-                "MHINet provider requires shape Bx2x3x784x784, got "
+                "MHINet provider requires shape Bx2x3xSxS with S=784 or 512, got "
                 f"{tuple(images.shape)}"
             )
         batch = images.shape[0]
@@ -404,12 +404,8 @@ class SharedFeatureProvider(nn.Module):
                 pyramid = self._decode_pyramid(
                     vgg_features, vgg_sizes, contextualized, pyramid_scales
                 )
-        expected_shapes = {
-            8: (batch, 2, 256, 98, 98),
-            4: (batch, 2, 256, 196, 196),
-            2: (batch, 2, 256, 392, 392),
-            1: (batch, 2, 256, 784, 784),
-        }
+        height,width = images.shape[-2:]
+        expected_shapes = {scale: (batch,2,256,height//scale,width//scale) for scale in (8,4,2,1)}
         for scale in pyramid_scales:
             expected = expected_shapes[scale]
             if tuple(pyramid[scale].shape) != expected:

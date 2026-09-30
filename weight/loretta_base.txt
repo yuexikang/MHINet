@@ -1,0 +1,9 @@
+权重：loretta_base.pth
+来源：/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/snapshots/95bf3670465cc80ffca8b1edf94b5eb651211194/loretta.pth
+来源真实路径：/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e
+SHA256：09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e
+整理时间 UTC：2026-09-30T11:42:24.941989+00:00
+本文件为独立副本，不是软链接。原训练输出未移动；活动任务后续保存不会自动更新本副本，重新运行整理脚本可更新。
+
+官方 LoRetta 基础权重，提供项目使用的 DINO、MVT 和 GHIM 初始化。
+属于上游预训练权重。本地没有完整上游训练数据和超参数记录，不推测或补写；不属于本项目训练结果。

@@ -1,0 +1,789 @@
+权重：semidense_stable_v2_tier2_lr_a_seed0.pt
+来源：/home/disk1/MHINet/outputs/semidense_stable_v2_tier2_lr_a_seed0/latest.pt
+来源真实路径：/home/disk1/MHINet/outputs/semidense_stable_v2_tier2_lr_a_seed0/latest.pt
+SHA256：9df3fd39c0b77ba6b8911a0d416044d304be9c1414a4abef5c73809991e8232d
+整理时间 UTC：2026-09-30T11:42:51.892483+00:00
+本文件为独立副本，不是软链接。原训练输出未移动；活动任务后续保存不会自动更新本副本，重新运行整理脚本可更新。
+
+用途：半密集匹配：D8 粗匹配 + D2 细匹配 + QRRU 细化。
+
+训练进度：8663/8663 优化步；已完成该阶段。
+
+输入尺寸：784 × 784
+
+数据根目录：/home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_stable_v2
+
+训练/验证清单：/home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_stable_v2/train/pairs.jsonl；/home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_stable_v2/val/pairs.jsonl
+
+档位过滤：2（null/None 表示不按档位过滤）
+
+样本量：训练 34652 对，验证 3848 对。
+
+随机种子：0；world_size=1；每卡 microbatch=1 对；梯度累计=4；有效批量=4 对。
+
+初始化：/home/disk1/MHINet/outputs/semidense_stable_v2_tier1_lr_a_seed0/latest.pt
+
+阶段间只迁移模型参数，重新建立优化器和调度器；同一任务 resume 则恢复优化器、调度器与进度。
+
+优化器：AdamW；weight_decay=1e-4；梯度范数裁剪=1.0。
+
+训练轮数：1；初始 shared_lr=1e-05，head_lr=0.0001。
+
+调度：CosineAnnealingLR，T_max=8663，eta_min=0。
+
+损失：lambda_c*Lc + lambda_f*Lf + lambda_q*Lq。Lc 为 GT 粗对应的正样本 focal；Lf 为 GT 监督的局部细匹配；Lq 为多轮 2×2 控制流场及中心位移监督。
+
+H0 保留为细匹配窗口的几何先验并 detach；QRRU 使用独立 GT 中心与扰动监督，不输入 H0。
+
+冻结策略：DINOv3, MVT, GHIM/H0 head frozen; VGG BN running stats fixed; D1 inactive
+
+注意：H0 头即使 requires_grad=True，当前 Lc/Lf/Lq 也不直接更新该头；共享 MVT 解冻时可通过描述子路径更新。
+
+匹配器完整参数（旧权重未记录 input_size 时为 784；旧 inference_window_chunk 未记录时请在评测配置显式确认）：
+{
+  "coarse_queries": 1024,
+  "fine_windows": 64,
+  "qrru_queries": 128,
+  "chunk": 128,
+  "window_chunk": 32,
+  "iterations": 4,
+  "radius": 1.5,
+  "gamma": 0.8,
+  "noise_std": 0.8,
+  "noise_bound": 2.4,
+  "temperature": 0.05,
+  "fine_gt_tolerance": 1.5,
+  "max_coarse": 6000,
+  "max_matches": 12000,
+  "confidence_threshold": 0.0,
+  "lambda_c": 1.0,
+  "lambda_f": 1.0,
+  "lambda_q": 1.0
+}
+
+检查点时优化器参数组（lr 是保存时值，不是初始值）：
+[
+  {
+    "name": "cgmdp",
+    "lr": 0.0,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "weight_decay": 0.0001,
+    "amsgrad": false,
+    "maximize": false,
+    "foreach": null,
+    "capturable": false,
+    "differentiable": false,
+    "fused": null,
+    "decoupled_weight_decay": true,
+    "initial_lr": 1e-05
+  },
+  {
+    "name": "semidense_qrru",
+    "lr": 0.0,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "weight_decay": 0.0001,
+    "amsgrad": false,
+    "maximize": false,
+    "foreach": null,
+    "capturable": false,
+    "differentiable": false,
+    "fused": null,
+    "decoupled_weight_decay": true,
+    "initial_lr": 0.0001
+  }
+]
+
+执行设置：
+{}
+
+数据生成与来源说明（直接复制数据集记录）：
+{
+  "version": "quadrant_three_tiers_stable_v2",
+  "status": "completed",
+  "smoke_only": false,
+  "seed": 42,
+  "dataset_root": "/home/disk1/Data/datasets/GoogleEarth",
+  "training_root": "/home/disk1/Data/datasets/GoogleEarth/training_data",
+  "output_dir": "/home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_stable_v2",
+  "generator_reference": "/home/disk1/LoMa/generate_pairs.py",
+  "generator_reference_sha256": "4a4aea0fc2dffa6739d72700da3cf1dbba4d25b8ccb4f0a5086eff754ca2087a",
+  "generator_implementation_sha256": "6fc6f42f287a9fc7f63a29ed3d053cbd30a942d9fd57e0931420077e825640d7",
+  "quadrant_implementation_sha256": "8ae62a1bfd19c1eefdfdf34ce2eaa5a65073339e92a5071639abec85e30a47fb",
+  "sampling_config": {
+    "tiers": [
+      3,
+      2,
+      2
+    ],
+    "ratios": [
+      0.8,
+      0.6,
+      0.4
+    ],
+    "rotation_degrees": [
+      -30,
+      30
+    ],
+    "minimum_geometric_overlap_each": 0.5,
+    "minimum_visible_overlap_each_tier3": 0.3,
+    "occlusion_area_fraction": [
+      0.1,
+      0.3
+    ],
+    "pairs_per_temporal_group": 14,
+    "pairs_per_image": 7,
+    "stable_geometry": {
+      "min_horizon_distance": 0.1,
+      "max_centered_extent": 2.5,
+      "max_jacobian_bound": 10.0
+    }
+  },
+  "parent_coordinate_assumption": "A and B always generated from the identical parent image",
+  "csv_affine_fields_used": false,
+  "split_policy": "merge original Train/Val parent pool; whole 0.01-degree cells; nearest attainable val fraction 0.1",
+  "source_parent_groups": 9625,
+  "planned": {
+    "train": {
+      "parent_groups": 8663,
+      "pairs": 121282,
+      "geo_groups": 2564,
+      "generated_pairs": 121282,
+      "visualizations": 0
+    },
+    "val": {
+      "parent_groups": 962,
+      "pairs": 13468,
+      "geo_groups": 286,
+      "generated_pairs": 13468,
+      "visualizations": 0
+    }
+  },
+  "actual_val_fraction": 0.09994805194805195,
+  "test_policy": "original CSV pairs, visualization only, no ground truth or precision metrics",
+  "existing_test": "/home/disk1/Data/datasets/GoogleEarth/evaluation_data",
+  "test_csv_sha256": "f7214f38a37347bc1ba3d44b62e39b0f2b0e9cb95ad37d15b0197e4d631b1b72",
+  "stability_implementation_sha256": "0a1290597f27beff1374956c6e1d47623faec4cfaeae6502dfe54a3366663244"
+}
+
+
+初始化训练链（祖先 run.json 原始记录）：
+[
+  {
+    "checkpoint": "/home/disk1/MHINet/outputs/semidense_stable_v2_tier1_lr_a_seed0/latest.pt",
+    "record": {
+      "task": "semidense_qrru_v1",
+      "config": {
+        "runtime": "/home/disk1/MHINet/configs/runtime_paths.stable_v2.server.json",
+        "seed": 0,
+        "tier": 1,
+        "epochs": 1,
+        "accumulation": 4,
+        "shared_lr": 1e-05,
+        "head_lr": 0.0001,
+        "save_every": 100,
+        "validate_every": 5000,
+        "matcher": {
+          "coarse_queries": 1024,
+          "fine_windows": 64,
+          "qrru_queries": 128,
+          "window_chunk": 32,
+          "iterations": 4,
+          "radius": 1.5,
+          "gamma": 0.8,
+          "lambda_c": 1.0,
+          "lambda_f": 1.0,
+          "lambda_q": 1.0
+        },
+        "visualization": {
+          "enabled": true,
+          "pairs": 12,
+          "every": 1000,
+          "curves_every": 100
+        },
+        "experiment_id": "semidense_tier1_lr_a"
+      },
+      "matcher": {
+        "coarse_queries": 1024,
+        "fine_windows": 64,
+        "qrru_queries": 128,
+        "chunk": 128,
+        "window_chunk": 32,
+        "iterations": 4,
+        "radius": 1.5,
+        "gamma": 0.8,
+        "noise_std": 0.8,
+        "noise_bound": 2.4,
+        "temperature": 0.05,
+        "fine_gt_tolerance": 1.5,
+        "max_coarse": 6000,
+        "max_matches": 12000,
+        "confidence_threshold": 0.0,
+        "lambda_c": 1.0,
+        "lambda_f": 1.0,
+        "lambda_q": 1.0
+      },
+      "source_checkpoint": "/home/disk1/MHINet/outputs/shared_stable_v2_full_tier3_seed0/shared_descriptor.pt",
+      "source_sha256": "b8dd5132120dd3e3a1a69f10d3159f24860df8c860ab90c5a8caece40383a32e",
+      "runtime": {
+        "repo_root": "/home/disk1/MHINet",
+        "loma_root": "/home/disk1/LoMa",
+        "loretta_source_root": "/home/disk1/LoMa/third_party/LoRetta",
+        "dino_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+        "selected_stage1_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+        "pyramid_checkpoint": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+        "data_root": "/home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_stable_v2",
+        "split_manifest": "/home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_stable_v2/train/pairs.jsonl",
+        "output_root": "/home/disk1/MHINet/outputs",
+        "device": "cuda:0",
+        "source_path": "/home/disk1/MHINet/configs/runtime_paths.stable_v2.server.json"
+      },
+      "train_sha256": "c48eb269be7e96a6be8d4eb43b668035d758f0aaf4268d9f6abb8e337e3aad23",
+      "val_sha256": "9e69f1af29dca1073ca3f12a618d61b52b66a76e67346d2ab39830de17ec5f44",
+      "train_pairs": 51978,
+      "val_pairs": 5772,
+      "total_steps": 12995,
+      "dino_sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "implementation": {
+        "evaluate.py": "7e08974daa1c8a92649b9cef0d9b39bac7a9f3314c3d61f32b1ac8869cf91d70",
+        "semidense.py": "c6f605ecb1e7d23dc99767f70841c5f65cd5939520c00d45874414595809d4f5",
+        "dense.py": "9435169de4c21d527ae842896caed1a752dc9e7f8011f433637c01d937777f7d",
+        "losses.py": "ddb47c2c474c5932f08a8549fabb355890ecaa37986ac521f815b43aa9970d2c",
+        "__init__.py": "87f1d8e739b320eda4f0cb6afee29469928286abc98ffc824de8baac9d8da998",
+        "evaluate_semidense.py": "e6c73c2bba032a3f2464c8b8fbdfae0abf32163cc3015db90b9045bf27edf5b3",
+        "visualize.py": "bd0db8f0e5b3889397787e99acf338886c305c7922083f9f83b9f639710cca62",
+        "metrics.py": "e279a427f7f9da4c30d61b2fb24abdfa166da9ffb8f6c9b2d73c926271001879",
+        "train.py": "2331c3157cf9dc75e3676fce7e75da68fa55202b847a80af99d01227714bd5ae",
+        "qrru.py": "6508838da7f3f35661d1aa0ec38a5d3f34ce4bc837223d10e7383fe26ff74b40",
+        "supervision.py": "318781b2425caffd9fc0cccd527230f7ff1d802ed0b9490cda07c4bdb44767d9",
+        "training.py": "3ce4ad5f39d76860c2060857be6de6ba188bfd33296cba5dcc6e41cbc209dafb"
+      },
+      "freeze_policy": "DINOv3, MVT, GHIM/H0 head frozen; VGG BN running stats fixed; D1 inactive",
+      "initial_matcher_sha256": "75cf75336c92081e954fcaa57b7980f59da639074eee85d5e81ca9724c29f1d9"
+    }
+  },
+  {
+    "checkpoint": "/home/disk1/MHINet/outputs/shared_stable_v2_full_tier3_seed0/shared_descriptor.pt",
+    "record": {
+      "task": "shared_descriptor_v1",
+      "config": {
+        "runtime": "/home/disk1/MHINet/configs/runtime_paths.stable_v2.server.json",
+        "seed": 0,
+        "tier": 3,
+        "lora": false,
+        "accumulation": 4,
+        "queries": 1024,
+        "save_every": 500,
+        "learning_rate_scale": 0.1,
+        "initialize_checkpoint": "/home/disk1/MHINet/outputs/shared_stable_v2_full_tier2_seed0/latest.pt"
+      },
+      "implementation": {
+        "model.py": "05c57f11629e9375d218df8346b7096474cdf7d2ac68fe342d5cfdaa44a7e8e6",
+        "loss.py": "be3fb841e19e0a9743eebe98b42a77ad2a160f09dec794699ad242e4014d8c6b",
+        "train.py": "16094bc0d0d53a65da618446779812bc9f4496aabfe57ab5fa3b89ed38cbf774",
+        "evaluation.py": "041a13c253dfb191136d6cb33df0c4aee309e009a3a39fd84cec5b88445e5c31",
+        "data.py": "7404b055c4de4b1e25d8999c6b2d37c512131b165adacaf4f67574b77a05b611",
+        "overlap_metrics.py": "5e08a207a1ac29123805a37bcac4ac74e6cac96bfad0d61c8d4e1e223f14814d"
+      },
+      "train_sha256": "c48eb269be7e96a6be8d4eb43b668035d758f0aaf4268d9f6abb8e337e3aad23",
+      "val_sha256": "9e69f1af29dca1073ca3f12a618d61b52b66a76e67346d2ab39830de17ec5f44",
+      "dino_sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "pyramid_sha256": "3a38824391e22b33bb3e10377c7736243fd8a2fbf1561446e7e133e497c35758",
+      "ghim_sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "train_pairs": 34652,
+      "val_pairs": 3848,
+      "total_steps": 8663,
+      "initialize_checkpoint_sha256": "23be39a827eeb8ab979cceee891c60f205470f8ad455d9654720d11777487d8f",
+      "provenance": {
+        "loma_root": "/home/disk1/LoMa",
+        "loma_checkpoint": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+        "dino_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+        "selected_stage1_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+        "loretta_loaded_keys": 807,
+        "locator": {
+          "source": "official_loretta_checkpoint",
+          "overridden": false
+        },
+        "descriptor_initialization": {
+          "migrated_tensors": 364,
+          "vgg_tensors": 84,
+          "decoder_tensors": 280,
+          "top_refiner_mapping": "LoMa-B scale 14 -> DINOv3 scale 16"
+        },
+        "ownership": {
+          "dino_wrapper_instances": 1,
+          "mvt_object_references": 1,
+          "stage1_head_contains_dino": 0,
+          "stage1_head_contains_mvt": 0,
+          "decoder_scales": [
+            "16",
+            "8",
+            "4",
+            "2",
+            "1"
+          ]
+        },
+        "legacy_training_wrappers_reused": false,
+        "safe_stage1_fitter": true,
+        "initialized_from": "/home/disk1/MHINet/outputs/shared_stable_v2_full_tier2_seed0/latest.pt",
+        "source_optimizer_step": 8663
+      },
+      "torch": "2.11.0+cu128",
+      "output": "/home/disk1/MHINet/outputs/shared_stable_v2_full_tier3_seed0"
+    }
+  },
+  {
+    "checkpoint": "/home/disk1/MHINet/outputs/shared_stable_v2_full_tier2_seed0/latest.pt",
+    "record": {
+      "task": "shared_descriptor_v1",
+      "config": {
+        "runtime": "/home/disk1/MHINet/configs/runtime_paths.stable_v2.server.json",
+        "seed": 0,
+        "tier": 2,
+        "lora": false,
+        "accumulation": 4,
+        "queries": 1024,
+        "save_every": 500,
+        "learning_rate_scale": 0.1,
+        "initialize_checkpoint": "/home/disk1/MHINet/outputs/shared_stable_v2_full_tier1_seed0/latest.pt"
+      },
+      "implementation": {
+        "model.py": "05c57f11629e9375d218df8346b7096474cdf7d2ac68fe342d5cfdaa44a7e8e6",
+        "loss.py": "be3fb841e19e0a9743eebe98b42a77ad2a160f09dec794699ad242e4014d8c6b",
+        "train.py": "16094bc0d0d53a65da618446779812bc9f4496aabfe57ab5fa3b89ed38cbf774",
+        "evaluation.py": "041a13c253dfb191136d6cb33df0c4aee309e009a3a39fd84cec5b88445e5c31",
+        "data.py": "7404b055c4de4b1e25d8999c6b2d37c512131b165adacaf4f67574b77a05b611",
+        "overlap_metrics.py": "5e08a207a1ac29123805a37bcac4ac74e6cac96bfad0d61c8d4e1e223f14814d"
+      },
+      "train_sha256": "c48eb269be7e96a6be8d4eb43b668035d758f0aaf4268d9f6abb8e337e3aad23",
+      "val_sha256": "9e69f1af29dca1073ca3f12a618d61b52b66a76e67346d2ab39830de17ec5f44",
+      "dino_sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "pyramid_sha256": "3a38824391e22b33bb3e10377c7736243fd8a2fbf1561446e7e133e497c35758",
+      "ghim_sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "train_pairs": 34652,
+      "val_pairs": 3848,
+      "total_steps": 8663,
+      "initialize_checkpoint_sha256": "895e4091cd7ba647cbd3bca7c72d7192ad496d43e247385a1b98e66838774844",
+      "provenance": {
+        "loma_root": "/home/disk1/LoMa",
+        "loma_checkpoint": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+        "dino_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+        "selected_stage1_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+        "loretta_loaded_keys": 807,
+        "locator": {
+          "source": "official_loretta_checkpoint",
+          "overridden": false
+        },
+        "descriptor_initialization": {
+          "migrated_tensors": 364,
+          "vgg_tensors": 84,
+          "decoder_tensors": 280,
+          "top_refiner_mapping": "LoMa-B scale 14 -> DINOv3 scale 16"
+        },
+        "ownership": {
+          "dino_wrapper_instances": 1,
+          "mvt_object_references": 1,
+          "stage1_head_contains_dino": 0,
+          "stage1_head_contains_mvt": 0,
+          "decoder_scales": [
+            "16",
+            "8",
+            "4",
+            "2",
+            "1"
+          ]
+        },
+        "legacy_training_wrappers_reused": false,
+        "safe_stage1_fitter": true,
+        "initialized_from": "/home/disk1/MHINet/outputs/shared_stable_v2_full_tier1_seed0/latest.pt",
+        "source_optimizer_step": 12995
+      },
+      "torch": "2.11.0+cu128",
+      "output": "/home/disk1/MHINet/outputs/shared_stable_v2_full_tier2_seed0"
+    }
+  },
+  {
+    "checkpoint": "/home/disk1/MHINet/outputs/shared_stable_v2_full_tier1_seed0/latest.pt",
+    "record": {
+      "task": "shared_descriptor_v1",
+      "config": {
+        "runtime": "/home/disk1/MHINet/configs/runtime_paths.stable_v2.server.json",
+        "seed": 0,
+        "tier": 1,
+        "lora": false,
+        "accumulation": 4,
+        "queries": 1024,
+        "save_every": 500,
+        "learning_rate_scale": 0.1,
+        "initialize_checkpoint": "/home/disk1/MHINet/outputs/shared_descriptor_frozen_tier3_seed0/latest.pt"
+      },
+      "implementation": {
+        "model.py": "05c57f11629e9375d218df8346b7096474cdf7d2ac68fe342d5cfdaa44a7e8e6",
+        "loss.py": "be3fb841e19e0a9743eebe98b42a77ad2a160f09dec794699ad242e4014d8c6b",
+        "train.py": "16094bc0d0d53a65da618446779812bc9f4496aabfe57ab5fa3b89ed38cbf774",
+        "evaluation.py": "041a13c253dfb191136d6cb33df0c4aee309e009a3a39fd84cec5b88445e5c31",
+        "data.py": "7404b055c4de4b1e25d8999c6b2d37c512131b165adacaf4f67574b77a05b611",
+        "overlap_metrics.py": "5e08a207a1ac29123805a37bcac4ac74e6cac96bfad0d61c8d4e1e223f14814d"
+      },
+      "train_sha256": "c48eb269be7e96a6be8d4eb43b668035d758f0aaf4268d9f6abb8e337e3aad23",
+      "val_sha256": "9e69f1af29dca1073ca3f12a618d61b52b66a76e67346d2ab39830de17ec5f44",
+      "dino_sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "pyramid_sha256": "3a38824391e22b33bb3e10377c7736243fd8a2fbf1561446e7e133e497c35758",
+      "ghim_sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "train_pairs": 51978,
+      "val_pairs": 5772,
+      "total_steps": 12995,
+      "initialize_checkpoint_sha256": "5a9ed14cc32a1a4ff3a843b737410da13d795b79c42a9d33d82a068226e30386",
+      "provenance": {
+        "loma_root": "/home/disk1/LoMa",
+        "loma_checkpoint": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+        "dino_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+        "selected_stage1_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+        "loretta_loaded_keys": 807,
+        "locator": {
+          "source": "official_loretta_checkpoint",
+          "overridden": false
+        },
+        "descriptor_initialization": {
+          "migrated_tensors": 364,
+          "vgg_tensors": 84,
+          "decoder_tensors": 280,
+          "top_refiner_mapping": "LoMa-B scale 14 -> DINOv3 scale 16"
+        },
+        "ownership": {
+          "dino_wrapper_instances": 1,
+          "mvt_object_references": 1,
+          "stage1_head_contains_dino": 0,
+          "stage1_head_contains_mvt": 0,
+          "decoder_scales": [
+            "16",
+            "8",
+            "4",
+            "2",
+            "1"
+          ]
+        },
+        "legacy_training_wrappers_reused": false,
+        "safe_stage1_fitter": true,
+        "initialized_from": "/home/disk1/MHINet/outputs/shared_descriptor_frozen_tier3_seed0/latest.pt",
+        "source_optimizer_step": 8663
+      },
+      "torch": "2.11.0+cu128",
+      "output": "/home/disk1/MHINet/outputs/shared_stable_v2_full_tier1_seed0"
+    }
+  },
+  {
+    "checkpoint": "/home/disk1/MHINet/outputs/shared_descriptor_frozen_tier3_seed0/latest.pt",
+    "record": {
+      "task": "shared_descriptor_v1",
+      "config": {
+        "runtime": "/home/disk1/MHINet/configs/runtime_paths.quadrant.server.json",
+        "seed": 0,
+        "tier": 3,
+        "lora": false,
+        "accumulation": 4,
+        "queries": 1024,
+        "save_every": 1000,
+        "learning_rate_scale": 0.5,
+        "initialize_checkpoint": "/home/disk1/MHINet/outputs/shared_descriptor_frozen_tier2_seed0/latest.pt"
+      },
+      "implementation": {
+        "model.py": "05c57f11629e9375d218df8346b7096474cdf7d2ac68fe342d5cfdaa44a7e8e6",
+        "loss.py": "be3fb841e19e0a9743eebe98b42a77ad2a160f09dec794699ad242e4014d8c6b",
+        "train.py": "16094bc0d0d53a65da618446779812bc9f4496aabfe57ab5fa3b89ed38cbf774",
+        "evaluation.py": "041a13c253dfb191136d6cb33df0c4aee309e009a3a39fd84cec5b88445e5c31",
+        "data.py": "7404b055c4de4b1e25d8999c6b2d37c512131b165adacaf4f67574b77a05b611",
+        "overlap_metrics.py": "5e08a207a1ac29123805a37bcac4ac74e6cac96bfad0d61c8d4e1e223f14814d"
+      },
+      "train_sha256": "6587d3be58dfc8b1601244bcf7fa05e3cb5dba1b14b7a49871dcb1fe3ef3276c",
+      "val_sha256": "c4763636e2ca9914c62aec45f5f6f238e0cfa9269343f27571e6c0acdb3d01ee",
+      "dino_sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "pyramid_sha256": "3a38824391e22b33bb3e10377c7736243fd8a2fbf1561446e7e133e497c35758",
+      "ghim_sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "train_pairs": 34652,
+      "val_pairs": 3848,
+      "total_steps": 8663,
+      "initialize_checkpoint_sha256": "4af7846f8111a64efae182005ba7fa9d1e90fecf9553815d5b88395d80280d7d",
+      "provenance": {
+        "loma_root": "/home/disk1/LoMa",
+        "loma_checkpoint": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+        "dino_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+        "selected_stage1_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+        "loretta_loaded_keys": 807,
+        "locator": {
+          "source": "official_loretta_checkpoint",
+          "overridden": false
+        },
+        "descriptor_initialization": {
+          "migrated_tensors": 364,
+          "vgg_tensors": 84,
+          "decoder_tensors": 280,
+          "top_refiner_mapping": "LoMa-B scale 14 -> DINOv3 scale 16"
+        },
+        "ownership": {
+          "dino_wrapper_instances": 1,
+          "mvt_object_references": 1,
+          "stage1_head_contains_dino": 0,
+          "stage1_head_contains_mvt": 0,
+          "decoder_scales": [
+            "16",
+            "8",
+            "4",
+            "2",
+            "1"
+          ]
+        },
+        "legacy_training_wrappers_reused": false,
+        "safe_stage1_fitter": true,
+        "initialized_from": "/home/disk1/MHINet/outputs/shared_descriptor_frozen_tier2_seed0/latest.pt",
+        "source_optimizer_step": 8663
+      },
+      "torch": "2.11.0+cu128",
+      "output": "/home/disk1/MHINet/outputs/shared_descriptor_frozen_tier3_seed0"
+    }
+  },
+  {
+    "checkpoint": "/home/disk1/MHINet/outputs/shared_descriptor_frozen_tier2_seed0/latest.pt",
+    "record": {
+      "task": "shared_descriptor_v1",
+      "config": {
+        "runtime": "/home/disk1/MHINet/configs/runtime_paths.quadrant.server.json",
+        "seed": 0,
+        "tier": 2,
+        "lora": false,
+        "accumulation": 4,
+        "queries": 1024,
+        "save_every": 1000,
+        "learning_rate_scale": 0.5,
+        "initialize_checkpoint": "/home/disk1/MHINet/outputs/shared_descriptor_frozen_seed0/latest.pt"
+      },
+      "implementation": {
+        "model.py": "05c57f11629e9375d218df8346b7096474cdf7d2ac68fe342d5cfdaa44a7e8e6",
+        "loss.py": "be3fb841e19e0a9743eebe98b42a77ad2a160f09dec794699ad242e4014d8c6b",
+        "train.py": "16094bc0d0d53a65da618446779812bc9f4496aabfe57ab5fa3b89ed38cbf774",
+        "evaluation.py": "041a13c253dfb191136d6cb33df0c4aee309e009a3a39fd84cec5b88445e5c31",
+        "data.py": "7404b055c4de4b1e25d8999c6b2d37c512131b165adacaf4f67574b77a05b611",
+        "overlap_metrics.py": "5e08a207a1ac29123805a37bcac4ac74e6cac96bfad0d61c8d4e1e223f14814d"
+      },
+      "train_sha256": "6587d3be58dfc8b1601244bcf7fa05e3cb5dba1b14b7a49871dcb1fe3ef3276c",
+      "val_sha256": "c4763636e2ca9914c62aec45f5f6f238e0cfa9269343f27571e6c0acdb3d01ee",
+      "dino_sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "pyramid_sha256": "3a38824391e22b33bb3e10377c7736243fd8a2fbf1561446e7e133e497c35758",
+      "ghim_sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "train_pairs": 34652,
+      "val_pairs": 3848,
+      "total_steps": 8663,
+      "initialize_checkpoint_sha256": "df3ec90b9bc53fd983cc1945a3c028ccdf9bf688325a60055101232c509cc25e",
+      "provenance": {
+        "loma_root": "/home/disk1/LoMa",
+        "loma_checkpoint": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+        "dino_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+        "selected_stage1_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+        "loretta_loaded_keys": 807,
+        "locator": {
+          "source": "official_loretta_checkpoint",
+          "overridden": false
+        },
+        "descriptor_initialization": {
+          "migrated_tensors": 364,
+          "vgg_tensors": 84,
+          "decoder_tensors": 280,
+          "top_refiner_mapping": "LoMa-B scale 14 -> DINOv3 scale 16"
+        },
+        "ownership": {
+          "dino_wrapper_instances": 1,
+          "mvt_object_references": 1,
+          "stage1_head_contains_dino": 0,
+          "stage1_head_contains_mvt": 0,
+          "decoder_scales": [
+            "16",
+            "8",
+            "4",
+            "2",
+            "1"
+          ]
+        },
+        "legacy_training_wrappers_reused": false,
+        "safe_stage1_fitter": true,
+        "initialized_from": "/home/disk1/MHINet/outputs/shared_descriptor_frozen_seed0/latest.pt",
+        "source_optimizer_step": 12995
+      },
+      "torch": "2.11.0+cu128",
+      "output": "/home/disk1/MHINet/outputs/shared_descriptor_frozen_tier2_seed0"
+    }
+  },
+  {
+    "checkpoint": "/home/disk1/MHINet/outputs/shared_descriptor_frozen_seed0/latest.pt",
+    "record": {
+      "task": "shared_descriptor_v1",
+      "config": {
+        "runtime": "/home/disk1/MHINet/configs/runtime_paths.quadrant.server.json",
+        "seed": 0,
+        "lora": false,
+        "accumulation": 4,
+        "queries": 1024,
+        "save_every": 1000
+      },
+      "implementation": {
+        "model.py": "05c57f11629e9375d218df8346b7096474cdf7d2ac68fe342d5cfdaa44a7e8e6",
+        "loss.py": "be3fb841e19e0a9743eebe98b42a77ad2a160f09dec794699ad242e4014d8c6b",
+        "train.py": "1b7d860293085594981bdc1c3716fe41ed3e762f1011a0ddd23278faf604a570",
+        "evaluation.py": "041a13c253dfb191136d6cb33df0c4aee309e009a3a39fd84cec5b88445e5c31",
+        "data.py": "7404b055c4de4b1e25d8999c6b2d37c512131b165adacaf4f67574b77a05b611"
+      },
+      "train_sha256": "6587d3be58dfc8b1601244bcf7fa05e3cb5dba1b14b7a49871dcb1fe3ef3276c",
+      "val_sha256": "c4763636e2ca9914c62aec45f5f6f238e0cfa9269343f27571e6c0acdb3d01ee",
+      "dino_sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "pyramid_sha256": "3a38824391e22b33bb3e10377c7736243fd8a2fbf1561446e7e133e497c35758",
+      "ghim_sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "train_pairs": 51978,
+      "val_pairs": 5772,
+      "total_steps": 12995,
+      "provenance": {
+        "loma_root": "/home/disk1/LoMa",
+        "loma_checkpoint": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+        "dino_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+        "selected_stage1_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+        "loretta_loaded_keys": 807,
+        "locator": {
+          "source": "official_loretta_checkpoint",
+          "overridden": false
+        },
+        "descriptor_initialization": {
+          "migrated_tensors": 364,
+          "vgg_tensors": 84,
+          "decoder_tensors": 280,
+          "top_refiner_mapping": "LoMa-B scale 14 -> DINOv3 scale 16"
+        },
+        "ownership": {
+          "dino_wrapper_instances": 1,
+          "mvt_object_references": 1,
+          "stage1_head_contains_dino": 0,
+          "stage1_head_contains_mvt": 0,
+          "decoder_scales": [
+            "16",
+            "8",
+            "4",
+            "2",
+            "1"
+          ]
+        },
+        "legacy_training_wrappers_reused": false,
+        "safe_stage1_fitter": true
+      },
+      "torch": "2.11.0+cu128",
+      "output": "/home/disk1/MHINet/outputs/shared_descriptor_frozen_seed0"
+    }
+  }
+]
+
+本权重内嵌训练元数据（权威快照，保留原路径和哈希）：
+{
+  "task": "semidense_qrru_v1",
+  "config": {
+    "runtime": "/home/disk1/MHINet/configs/runtime_paths.stable_v2.server.json",
+    "seed": 0,
+    "tier": 2,
+    "epochs": 1,
+    "accumulation": 4,
+    "shared_lr": 1e-05,
+    "head_lr": 0.0001,
+    "save_every": 100,
+    "validate_every": 5000,
+    "matcher": {
+      "coarse_queries": 1024,
+      "fine_windows": 64,
+      "qrru_queries": 128,
+      "window_chunk": 32,
+      "iterations": 4,
+      "radius": 1.5,
+      "gamma": 0.8,
+      "lambda_c": 1.0,
+      "lambda_f": 1.0,
+      "lambda_q": 1.0
+    },
+    "visualization": {
+      "enabled": true,
+      "pairs": 12,
+      "every": 1000,
+      "curves_every": 100
+    },
+    "experiment_id": "semidense_tier2_lr_a",
+    "initialization": "Full Run A tier1 model; fresh AdamW and cosine schedule",
+    "continuation_entry_sha256": "60c965a70ac52421ec656f486dd0bad7a50de5035533b02d0146c6b3b4195dbf"
+  },
+  "matcher": {
+    "coarse_queries": 1024,
+    "fine_windows": 64,
+    "qrru_queries": 128,
+    "chunk": 128,
+    "window_chunk": 32,
+    "iterations": 4,
+    "radius": 1.5,
+    "gamma": 0.8,
+    "noise_std": 0.8,
+    "noise_bound": 2.4,
+    "temperature": 0.05,
+    "fine_gt_tolerance": 1.5,
+    "max_coarse": 6000,
+    "max_matches": 12000,
+    "confidence_threshold": 0.0,
+    "lambda_c": 1.0,
+    "lambda_f": 1.0,
+    "lambda_q": 1.0
+  },
+  "source_checkpoint": "/home/disk1/MHINet/outputs/semidense_stable_v2_tier1_lr_a_seed0/latest.pt",
+  "source_sha256": "b7cabb686174d090a6a64dbac4e047fa4ee1c930f37f9ea05651c8084925204d",
+  "runtime": {
+    "repo_root": "/home/disk1/MHINet",
+    "loma_root": "/home/disk1/LoMa",
+    "loretta_source_root": "/home/disk1/LoMa/third_party/LoRetta",
+    "dino_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+    "selected_stage1_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+    "pyramid_checkpoint": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+    "data_root": "/home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_stable_v2",
+    "split_manifest": "/home/disk1/Data/datasets/GoogleEarth_quadrant_tiers_stable_v2/train/pairs.jsonl",
+    "output_root": "/home/disk1/MHINet/outputs",
+    "device": "cuda:0",
+    "source_path": "/home/disk1/MHINet/configs/runtime_paths.stable_v2.server.json"
+  },
+  "train_sha256": "c48eb269be7e96a6be8d4eb43b668035d758f0aaf4268d9f6abb8e337e3aad23",
+  "val_sha256": "9e69f1af29dca1073ca3f12a618d61b52b66a76e67346d2ab39830de17ec5f44",
+  "train_pairs": 34652,
+  "val_pairs": 3848,
+  "total_steps": 8663,
+  "dino_sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+  "implementation": {
+    "evaluate.py": "7e08974daa1c8a92649b9cef0d9b39bac7a9f3314c3d61f32b1ac8869cf91d70",
+    "semidense.py": "c6f605ecb1e7d23dc99767f70841c5f65cd5939520c00d45874414595809d4f5",
+    "dense.py": "9435169de4c21d527ae842896caed1a752dc9e7f8011f433637c01d937777f7d",
+    "losses.py": "ddb47c2c474c5932f08a8549fabb355890ecaa37986ac521f815b43aa9970d2c",
+    "__init__.py": "87f1d8e739b320eda4f0cb6afee29469928286abc98ffc824de8baac9d8da998",
+    "evaluate_semidense.py": "e6c73c2bba032a3f2464c8b8fbdfae0abf32163cc3015db90b9045bf27edf5b3",
+    "visualize.py": "bd0db8f0e5b3889397787e99acf338886c305c7922083f9f83b9f639710cca62",
+    "metrics.py": "e279a427f7f9da4c30d61b2fb24abdfa166da9ffb8f6c9b2d73c926271001879",
+    "train.py": "2331c3157cf9dc75e3676fce7e75da68fa55202b847a80af99d01227714bd5ae",
+    "qrru.py": "6508838da7f3f35661d1aa0ec38a5d3f34ce4bc837223d10e7383fe26ff74b40",
+    "supervision.py": "318781b2425caffd9fc0cccd527230f7ff1d802ed0b9490cda07c4bdb44767d9",
+    "training.py": "3ce4ad5f39d76860c2060857be6de6ba188bfd33296cba5dcc6e41cbc209dafb"
+  },
+  "freeze_policy": "DINOv3, MVT, GHIM/H0 head frozen; VGG BN running stats fixed; D1 inactive",
+  "initial_matcher_sha256": "0ba048920816b31b4058cb73766aab36c22b3714a1f8f49dce8aed4605a45f7b"
+}
+
+本权重数据进度：
+{
+  "optimizer_step": 8663,
+  "microbatch": null,
+  "data": {
+    "cursor": 34652,
+    "epoch": 0
+  }
+}

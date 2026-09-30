@@ -1,0 +1,119 @@
+[
+  {
+    "file": "loretta_base.pth",
+    "description": "loretta_base.txt",
+    "source": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/snapshots/95bf3670465cc80ffca8b1edf94b5eb651211194/loretta.pth",
+    "sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+    "bytes": 1294957584,
+    "step": null,
+    "total_steps": null
+  },
+  {
+    "file": "loma_B_base.pt",
+    "description": "loma_B_base.txt",
+    "source": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+    "sha256": "3a38824391e22b33bb3e10377c7736243fd8a2fbf1561446e7e133e497c35758",
+    "bytes": 757888113,
+    "step": null,
+    "total_steps": null
+  },
+  {
+    "file": "shared_stable_v2_full_tier1_seed0.pt",
+    "description": "shared_stable_v2_full_tier1_seed0.txt",
+    "source": "/home/disk1/MHINet/outputs/shared_stable_v2_full_tier1_seed0/shared_descriptor.pt",
+    "sha256": "5061c90656d098fd2e3a2600c4bd93eb7296b4dbf51cd38bd4bd982594783c7b",
+    "bytes": 437033567,
+    "step": 12995,
+    "total_steps": 12995
+  },
+  {
+    "file": "shared_stable_v2_full_tier2_seed0.pt",
+    "description": "shared_stable_v2_full_tier2_seed0.txt",
+    "source": "/home/disk1/MHINet/outputs/shared_stable_v2_full_tier2_seed0/shared_descriptor.pt",
+    "sha256": "3164338a455893654c49047767c3086c5df508e1aac900176e510864ef75ad57",
+    "bytes": 437033567,
+    "step": 8663,
+    "total_steps": 8663
+  },
+  {
+    "file": "shared_stable_v2_full_tier3_seed0.pt",
+    "description": "shared_stable_v2_full_tier3_seed0.txt",
+    "source": "/home/disk1/MHINet/outputs/shared_stable_v2_full_tier3_seed0/shared_descriptor.pt",
+    "sha256": "b8dd5132120dd3e3a1a69f10d3159f24860df8c860ab90c5a8caece40383a32e",
+    "bytes": 437033567,
+    "step": 8663,
+    "total_steps": 8663
+  },
+  {
+    "file": "semidense_stable_v2_tier1_lr_a_seed0.pt",
+    "description": "semidense_stable_v2_tier1_lr_a_seed0.txt",
+    "source": "/home/disk1/MHINet/outputs/semidense_stable_v2_tier1_lr_a_seed0/latest.pt",
+    "sha256": "b7cabb686174d090a6a64dbac4e047fa4ee1c930f37f9ea05651c8084925204d",
+    "bytes": 1044109958,
+    "step": 12995,
+    "total_steps": 12995
+  },
+  {
+    "file": "semidense_stable_v2_tier1_lr_b_seed0.pt",
+    "description": "semidense_stable_v2_tier1_lr_b_seed0.txt",
+    "source": "/home/disk1/MHINet/outputs/semidense_stable_v2_tier1_lr_b_seed0/latest.pt",
+    "sha256": "4e40242ed86f339ee9ec0e81ec391c8d97e7bdfc623f7937e0e12e4e128cad3a",
+    "bytes": 1044109958,
+    "step": 12995,
+    "total_steps": 12995
+  },
+  {
+    "file": "semidense_stable_v2_tier1_lr_c_seed0.pt",
+    "description": "semidense_stable_v2_tier1_lr_c_seed0.txt",
+    "source": "/home/disk1/MHINet/outputs/semidense_stable_v2_tier1_lr_c_seed0/latest.pt",
+    "sha256": "aa63bcb3a081cbf45b3fd3708c1d808bd1ac497f45d8624b55612ab220d66926",
+    "bytes": 1044109958,
+    "step": 12995,
+    "total_steps": 12995
+  },
+  {
+    "file": "semidense_stable_v2_tier2_lr_a_seed0.pt",
+    "description": "semidense_stable_v2_tier2_lr_a_seed0.txt",
+    "source": "/home/disk1/MHINet/outputs/semidense_stable_v2_tier2_lr_a_seed0/latest.pt",
+    "sha256": "9df3fd39c0b77ba6b8911a0d416044d304be9c1414a4abef5c73809991e8232d",
+    "bytes": 1044110150,
+    "step": 8663,
+    "total_steps": 8663
+  },
+  {
+    "file": "semidense_stable_v2_tier3_lr_c_seed0.pt",
+    "description": "semidense_stable_v2_tier3_lr_c_seed0.txt",
+    "source": "/home/disk1/MHINet/outputs/semidense_stable_v2_tier3_lr_c_seed0/latest.pt",
+    "sha256": "f8c7c72509c681ae8f8a35c27743e69475e1bfcff0f7d81b568db0ae0af15199",
+    "bytes": 1044110150,
+    "step": 8663,
+    "total_steps": 8663
+  },
+  {
+    "file": "semidense_stable_v2_tier3_lr_d_seed0.pt",
+    "description": "semidense_stable_v2_tier3_lr_d_seed0.txt",
+    "source": "/home/disk1/MHINet/outputs/semidense_stable_v2_tier3_lr_d_seed0/latest.pt",
+    "sha256": "75dc50cadb81aa3f45ea72680275453bbef614013acc18bd26ba6396dda0774f",
+    "bytes": 1044110150,
+    "step": 8663,
+    "total_steps": 8663
+  },
+  {
+    "file": "semidense_stable_v2_tier3_lr_e_seed0.pt",
+    "description": "semidense_stable_v2_tier3_lr_e_seed0.txt",
+    "source": "/home/disk1/MHINet/outputs/semidense_stable_v2_tier3_lr_e_seed0/latest.pt",
+    "sha256": "b5995d184240be0be70d24a44dfbdc6e6f79050c735b0f8e7547542b40d97f50",
+    "bytes": 1044110150,
+    "step": 8663,
+    "total_steps": 8663
+  },
+  {
+    "file": "semidense_rgb512_synth_seed42_5ep.pt",
+    "description": "semidense_rgb512_synth_seed42_5ep.txt",
+    "source": "/home/disk1/MHINet/outputs/semidense_rgb512_synth_seed42_5ep/latest.pt",
+    "sha256": "78946b1a4090e7258af0ab2ac56eb2e5480ce6eb701ff78b49fb8a985341d854",
+    "bytes": 1744142672,
+    "step": 18250,
+    "total_steps": 25535
+  }
+]

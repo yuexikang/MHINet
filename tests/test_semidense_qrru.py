@@ -129,11 +129,14 @@ class SemidenseTests(unittest.TestCase):
             qrru_queries=4,window_chunk=2,iterations=2),channels=8)
         d8=torch.randn(2,2,8,8,8,requires_grad=True)
         d2=torch.randn(2,2,8,32,32,requires_grad=True)
-        h=torch.eye(3).repeat(2,1,1);h[1]=0
+        h=torch.eye(3).repeat(2,1,1);h[1]=0;h.requires_grad_()
         shared={'pyramid':{8:d8,2:d2},'H0_norm':h,'stage1_valid':torch.ones(2,dtype=torch.bool)}
         loss,records=matcher.training_losses(shared,torch.eye(3).repeat(2,1,1),
             torch.ones(2,1,32,32),torch.ones(2,1,32,32))
         loss.backward()
+        # H0 selects local grids as a detached prior; enabling requires_grad on
+        # the GHIM head alone does not supply an H0 supervision signal.
+        self.assertIsNone(h.grad)
         self.assertTrue(torch.isfinite(loss))
         self.assertGreater(d8.grad.abs().sum(),0)
         self.assertGreater(d2.grad.abs().sum(),0)

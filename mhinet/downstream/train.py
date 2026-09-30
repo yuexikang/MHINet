@@ -8,15 +8,23 @@ import os
 import random
 import time
 import atexit
+from datetime import timedelta
+from contextlib import nullcontext
+from copy import deepcopy
 from pathlib import Path
 import numpy as np
 import torch
 from torch.utils.data import DataLoader,Subset
 from mhinet.config import RuntimePaths,sha256_file
 from mhinet.pretraining.data import SharedPairDataset
-from mhinet.engine.checkpointing import save_checkpoint,load_checkpoint,capture_rng_state,restore_rng_state
+from mhinet.engine.checkpointing import load_checkpoint,capture_rng_state,restore_rng_state
 from .semidense import SemidenseConfig
 from .training import load_first_stage
+from mhinet.engine.semidense_runtime import (
+    boundary_actions, rank_zero_work, reconcile_training_log, resume_expectations,
+    restore_training_rng, save_training_checkpoint, validation_indices,
+    restore_rank_buffers, validation_buffers, restore_model_buffers,
+)
 
 
 def batch_loss(system,batch,device):
@@ -27,30 +35,64 @@ def batch_loss(system,batch,device):
 
 
 @torch.no_grad()
-def validate(system,dataset,device,output,step):
-    state=capture_rng_state()
-    system.eval();torch.manual_seed(0)
-    rows=[]
+def validate(system,dataset,device,output,step,*,sample_count=None,rank=0,world_size=1,control_group=None):
+    state=capture_rng_state(current_cuda_only=True)
+    was_training=system.training
+    indices=validation_indices(len(dataset),sample_count)
+    local_indices=indices[rank::world_size]
+    rows=[];error=None
+    saved_buffers=None
+    started=time.perf_counter()
     try:
-        for batch in DataLoader(dataset,batch_size=1,num_workers=0):
-            loss,records=batch_loss(system,batch,device)
-            rows.append(dict(pair_id=batch['pair_id'][0],loss=float(loss),**records[0]))
-        report=dict(step=step,pairs=len(rows),loss=float(np.mean([x['loss'] for x in rows])),
-            metrics={key:float(np.mean([x[key] for x in rows])) for key in ('lc','lf','lq','fine_coverage','q_control','q_center')},
-            scope='GT-decoupled validation losses; use evaluate-semidense for cascaded matching accuracy')
-        folder=output/'validation';folder.mkdir(exist_ok=True)
-        (folder/f'step_{step:07d}.json').write_text(json.dumps(dict(summary=report,pairs=rows),indent=2))
-        return report
+        saved_buffers=validation_buffers(system,rank=rank,control_group=control_group)
+        system.eval()
+        loader=DataLoader(Subset(dataset,local_indices),batch_size=1,num_workers=0,
+                          generator=torch.Generator().manual_seed(0))
+        try:
+            for number,(index,batch) in enumerate(zip(local_indices,loader),1):
+                # Fixed per-pair draws make the metric independent of rank count.
+                random.seed(index);np.random.seed(index);torch.manual_seed(index)
+                loss,records=batch_loss(system,batch,device)
+                rows.append(dict(index=index,pair_id=batch['pair_id'][0],loss=float(loss),**records[0]))
+                if rank==0 and (number%128==0 or number==len(local_indices)):
+                    print(f'VAL step={step} rank0_pairs={number}/{len(local_indices)}',flush=True)
+        except Exception as exc:
+            error=f'rank {rank}: {type(exc).__name__}: {exc}'
+        shards=[dict(rows=rows,error=error)]
+        if control_group is not None:
+            import torch.distributed as dist
+            shards=[None]*world_size
+            dist.all_gather_object(shards,dict(rows=rows,error=error),group=control_group)
+        errors=[shard['error'] for shard in shards if shard['error']]
+        if errors:raise RuntimeError('Validation failed: '+'; '.join(errors))
+        rows=sorted([row for shard in shards for row in shard['rows']],key=lambda row:row['index'])
+        if [row['index'] for row in rows]!=indices:raise RuntimeError('Validation coverage mismatch')
+        def write_report():
+            report=dict(step=step,pairs=len(rows),loss=float(np.mean([x['loss'] for x in rows])),
+                metrics={key:float(np.mean([x[key] for x in rows])) for key in ('lc','lf','lq','fine_coverage','q_control','q_center')},
+                validation_total_pairs=len(dataset),validation_indices=indices,
+                validation_sample='full' if len(rows)==len(dataset) else 'evenly spaced',
+                rng_policy='per_manifest_index_v1',world_size=world_size,seconds=time.perf_counter()-started,
+                scope='GT-decoupled validation losses; use evaluate-semidense for cascaded matching accuracy')
+            folder=output/'validation';folder.mkdir(exist_ok=True)
+            target=folder/f'step_{step:07d}.json'
+            temporary=target.with_suffix('.json.tmp')
+            temporary.write_text(json.dumps(dict(summary=report,pairs=rows),indent=2));temporary.replace(target)
+            print(f'VAL completed step={step} pairs={len(rows)} seconds={report["seconds"]:.1f}',flush=True)
+            return report
+        return rank_zero_work(write_report,rank=rank,control_group=control_group)
     finally:
-        restore_rng_state(state);system.train()
+        if saved_buffers is not None:restore_model_buffers(system,saved_buffers)
+        restore_rng_state(state);system.train(was_training)
 
 
-def main(argv=None):
+def main(argv=None,*,source_loader=None):
     p=argparse.ArgumentParser()
-    p.add_argument('--config',required=True,type=Path)
-    p.add_argument('--checkpoint',required=True,type=Path,help='First-stage source, including when resuming')
+    p.add_argument('--config',type=Path,help='New-run configuration; resumes default to the saved configuration')
+    p.add_argument('--checkpoint',type=Path,help='New-run source; resumes default to the recorded source')
     p.add_argument('--output',required=True,type=Path)
     p.add_argument('--resume',type=Path)
+    p.add_argument('--validation-pairs',type=int,help='Evenly spaced validation cohort; 0=full; resumes retain the saved policy')
     p.add_argument('--device',default='cuda:0')
     p.add_argument('--max-steps',type=int,help='Diagnostic stop, preserves configured schedule')
     p.add_argument('--limit-train',type=int);p.add_argument('--limit-val',type=int)
@@ -60,18 +102,29 @@ def main(argv=None):
     distributed=world_size>1
     rank=int(os.environ.get('RANK','0'))
     local_rank=int(os.environ.get('LOCAL_RANK','0'))
+    control_group=None
     if distributed:
         if not torch.cuda.is_available():raise RuntimeError('Distributed semidense training requires CUDA')
         import torch.distributed as dist
         torch.cuda.set_device(local_rank)
         dist.init_process_group(backend='nccl')
+        # CPU control collectives may span a full validation or plot export.
+        # NCCL retains its short failure timeout for actual gradient collectives.
+        control_group=dist.new_group(backend='gloo',timeout=timedelta(hours=2))
         atexit.register(dist.destroy_process_group)
-    config=json.loads(args.config.read_text())
+    resume_payload=torch.load(args.resume,map_location='cpu',weights_only=True,mmap=True) if args.resume else None
+    if not args.resume and (args.config is None or args.checkpoint is None):
+        p.error('New runs require --config and --checkpoint')
+    config=json.loads(args.config.read_text()) if args.config else deepcopy(resume_payload['metadata']['config'])
+    if args.checkpoint is None:args.checkpoint=Path(resume_payload['metadata']['source_checkpoint'])
+    if args.validation_pairs is None and args.resume:
+        args.validation_pairs=(resume_payload.get('auxiliary_state') or {}).get('execution',{}).get('validation_pairs')
+    if args.validation_pairs==0:args.validation_pairs=None
     if args.input_size is not None:config.setdefault('matcher',{})['input_size']=args.input_size
     mc=SemidenseConfig(**config.get('matcher',{}))
     for key in ('epochs','accumulation','save_every','validate_every'):
         if config[key]<1:raise ValueError(key)
-    if any(x is not None and x<1 for x in (args.max_steps,args.limit_train,args.limit_val)):raise ValueError('Invalid diagnostic limit')
+    if any(x is not None and x<1 for x in (args.max_steps,args.limit_train,args.limit_val,args.validation_pairs)):raise ValueError('Invalid diagnostic limit')
     device=f'cuda:{local_rank}' if distributed else args.device
     runtime=replace(RuntimePaths.from_json(config['runtime']),device=device)
     os.environ.setdefault('CUBLAS_WORKSPACE_CONFIG', ':4096:8')
@@ -87,11 +140,12 @@ def main(argv=None):
         or {x.parent_group for x in train.index}&{x.parent_group for x in val.index}):raise ValueError('Train/val group leakage')
     out=args.output.resolve()
     lock=None
-    if rank==0:
+    def prepare_output():
+        nonlocal lock
         if not args.resume and out.exists() and any(out.iterdir()):raise FileExistsError(out)
         out.mkdir(parents=True,exist_ok=True)
         lock=(out/'.training.lock').open('a');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
-    if distributed:dist.barrier()
+    rank_zero_work(prepare_output,rank=rank,control_group=control_group)
     accumulation=config['accumulation']
     local_epoch_size=math.ceil(len(train)/world_size) if distributed else len(train)
     per_epoch=math.ceil(local_epoch_size/accumulation)
@@ -103,46 +157,86 @@ def main(argv=None):
         global_batch_pairs=accumulation*world_size,
         dino_sha256=sha256_file(runtime.dino_checkpoint),
         implementation={x.name:sha256_file(x) for x in Path(__file__).parent.glob('*.py')},
-        data_loader_sha256=sha256_file(Path(__file__).resolve().parents[1]/'dataio'/'data.py'))
+        data_loader_sha256=sha256_file(Path(__file__).resolve().parents[1]/'dataio'/'data.py'),
+        shared_data_loader_sha256=sha256_file(Path(__file__).resolve().parents[1]/'pretraining'/'data.py'),
+        training_runtime_sha256=sha256_file(Path(__file__).resolve().parents[1]/'engine'/'semidense_runtime.py'),
+        checkpoint_io_sha256=sha256_file(Path(__file__).resolve().parents[1]/'engine'/'checkpointing.py'))
     freeze_mvt=bool(config.get('freeze_mvt',True))
     freeze_h0=bool(config.get('freeze_h0',True))
     metadata['freeze_policy']=f"DINOv3 frozen; MVT={'frozen' if freeze_mvt else 'trainable'}; GHIM/H0={'frozen' if freeze_h0 else 'trainable'}; VGG BN running stats fixed; D1 inactive"
     metadata=json.loads(json.dumps(metadata,default=str))
-    system=load_first_stage(runtime,args.checkpoint,mc)
+    if args.resume:
+        from mhinet.pretraining.model import build_shared_network
+        from .training import SemidenseSystem
+        from .semidense import SemidenseMatcher
+        shared,_=build_shared_network(runtime,lora=False)
+        system=SemidenseSystem(shared,SemidenseMatcher(mc)).to(runtime.device)
+    else:
+        system=(source_loader or load_first_stage)(runtime,args.checkpoint,mc)
     system.shared.set_training_groups(mvt=not freeze_mvt,vgg=True,dedode=True,ghim_head=not freeze_h0)
     if any(p.requires_grad for p in system.shared.dino.parameters()):
         raise RuntimeError('Freeze policy violated: DINOv3 must remain frozen')
     for name,expected_frozen in (('mvt',freeze_mvt),('stage1_head',freeze_h0)):
         if any(p.requires_grad==expected_frozen for p in getattr(system.shared,name).parameters()):
             raise RuntimeError(f'Freeze policy violated: {name} expected frozen={expected_frozen}')
-    import hashlib
-    initial_digest=hashlib.sha256()
-    for name,value in sorted(system.matcher.state_dict().items()):
-        initial_digest.update(name.encode());initial_digest.update(value.detach().cpu().numpy().tobytes())
-    metadata['initial_matcher_sha256']=initial_digest.hexdigest()
+    if args.resume:
+        metadata['initial_matcher_sha256']=resume_payload['metadata']['initial_matcher_sha256']
+    else:
+        import hashlib
+        initial_digest=hashlib.sha256()
+        for name,value in sorted(system.matcher.state_dict().items()):
+            initial_digest.update(name.encode());initial_digest.update(value.detach().cpu().numpy().tobytes())
+        metadata['initial_matcher_sha256']=initial_digest.hexdigest()
     optimizer=torch.optim.AdamW(system.optimizer_groups(config.get('shared_lr',1e-5),config.get('head_lr',1e-4)),weight_decay=1e-4)
     scheduler=torch.optim.lr_scheduler.CosineAnnealingLR(optimizer,T_max=total_steps)
     completed=cursor=epoch=0
     if args.resume:
         state=load_checkpoint(args.resume,model=system,optimizer=optimizer,scheduler=scheduler,
-            map_location='cpu',expected_metadata=metadata)
+            map_location='cpu',restore_rng=False,checkpoint_payload=resume_payload,
+            expected_metadata=resume_expectations(metadata,resume_payload['metadata']))
         completed=state['optimizer_step'];cursor=state['data_progress']['cursor'];epoch=state['data_progress']['epoch']
     train_system=system
     if distributed:
         from torch.nn.parallel import DistributedDataParallel
         train_system=DistributedDataParallel(system,device_ids=[local_rank],output_device=local_rank,
             broadcast_buffers=False,find_unused_parameters=True)
-        torch.manual_seed(seed+rank)
-    if rank==0:(out/'run.json').write_text(json.dumps(metadata,indent=2))
-    if distributed:dist.barrier()
-    system.train()
     from .visualize import snapshot,update_overview
+    if args.resume:restore_rank_buffers(resume_payload,system,rank)
+    if not args.resume:
+        random.seed(seed+rank);np.random.seed(seed+rank);torch.manual_seed(seed+rank)
+    rng_continuity=(restore_training_rng(resume_payload,rank=rank,world_size=world_size,seed=seed)
+                    if args.resume else 'new_run')
+    def write_run():
+        if args.resume:
+            discarded=reconcile_training_log(out,completed)
+            event=dict(step=completed,checkpoint=str(args.resume.resolve()),discarded_log_rows=discarded,
+                       rng_continuity=rng_continuity,previous_implementation=resume_payload['metadata']['implementation'],
+                       current_implementation=metadata['implementation'],time=time.time())
+            with (out/'resume_events.jsonl').open('a') as stream:stream.write(json.dumps(event)+'\n')
+            print(f'RESUMED step={completed} epoch={epoch} cursor={cursor} RNG={rng_continuity}',flush=True)
+        (out/'run.json').write_text(json.dumps(metadata,indent=2))
+        execution=dict(validation_pairs=args.validation_pairs,validation_total_pairs=len(val),
+                       validation_indices=validation_indices(len(val),args.validation_pairs),
+                       validation_rng_policy='per_manifest_index_v1',world_size=world_size,
+                       cuda_visible_devices=os.environ.get('CUDA_VISIBLE_DEVICES'),resume_step=completed,
+                       h0_gradient_path='Detached prior; Lc/Lf/Lq do not directly update the GHIM H0 head',
+                       training_records_scope='rank0 local microbatches')
+        (out/'execution.json').write_text(json.dumps(execution,indent=2))
+    rank_zero_work(write_run,rank=rank,control_group=control_group)
+    del resume_payload
+    system.train()
     vis=config.get('visualization',{})
-    if rank==0 and vis.get('enabled') and not (out/'visualizations'/f'step_{completed:07d}'/'summary.json').exists():
-        if completed==0:
-            save_checkpoint(out/'latest.pt',model=system,optimizer=optimizer,scheduler=scheduler,
-                optimizer_step=0,data_progress=dict(cursor=cursor,epoch=epoch),metadata=metadata)
-        snapshot(system,val,runtime.device,out,completed,pairs=vis.get('pairs',12),all_channels=True)
+    def save_boundary():
+        save_training_checkpoint(out/'latest.pt',model=system,optimizer=optimizer,scheduler=scheduler,
+            step=completed,cursor=cursor,epoch=epoch,metadata=metadata,rank=rank,
+            world_size=world_size,control_group=control_group,
+            execution_settings=dict(validation_pairs=args.validation_pairs))
+    if not args.resume and vis.get('enabled'):
+        save_boundary()
+        rank_zero_work(lambda:snapshot(system,val,runtime.device,out,completed,
+            pairs=vis.get('pairs',12),all_channels=True),rank=rank,control_group=control_group)
+    frozen_parameters=[(name,p) for name,p in system.shared.named_parameters() if not p.requires_grad]
+    trainable_parameters=[p for p in system.parameters() if p.requires_grad]
     while completed<end:
         if cursor==local_epoch_size:epoch+=1;cursor=0
         if distributed:
@@ -158,40 +252,40 @@ def main(argv=None):
             started=time.perf_counter();optimizer.zero_grad(set_to_none=True)
             count=min(accumulation,local_epoch_size-cursor);records=[]
             for micro in range(count):
-                sync_context=(train_system.no_sync() if distributed and micro<count-1 else __import__('contextlib').nullcontext())
+                sync_context=(train_system.no_sync() if distributed and micro<count-1 else nullcontext())
                 with sync_context:
                     loss,info=batch_loss(train_system,next(loader),runtime.device)
                     (loss/count).backward()
                 records.extend(info);cursor+=1
-            frozen_bad=[name for name,param in system.shared.named_parameters() if not param.requires_grad and param.grad is not None]
+            frozen_bad=[name for name,param in frozen_parameters if param.grad is not None]
             if frozen_bad:raise RuntimeError(f'Frozen gradients: {frozen_bad[:3]}')
-            group_grads={group['name']:float(torch.stack([p.grad.detach().float().square().sum() for p in group['params'] if p.grad is not None]).sum().sqrt()) for group in optimizer.param_groups}
-            grad=torch.nn.utils.clip_grad_norm_([x for x in system.parameters() if x.requires_grad],1.,error_if_nonfinite=True)
-            optimizer.step();scheduler.step();completed+=1
-            row=dict(step=completed,epoch=epoch,cursor=cursor,gradient_norm=float(grad),
-                seconds=time.perf_counter()-started,records=records,gradient_groups=group_grads,
-                lr_shared=optimizer.param_groups[0]['lr'],lr_head=optimizer.param_groups[1]['lr'],
-                tau_c=float(system.matcher.tau_c.detach()),tau_f=float(system.matcher.tau_f.detach()),
-                peak_allocated_bytes=torch.cuda.max_memory_allocated() if args.device.startswith('cuda') else 0)
+            group_grads={}
             if rank==0:
+                for group in optimizer.param_groups:
+                    squares=[p.grad.detach().float().square().sum() for p in group['params'] if p.grad is not None]
+                    group_grads[group['name']]=float(torch.stack(squares).sum().sqrt()) if squares else 0.
+            grad=torch.nn.utils.clip_grad_norm_(trainable_parameters,1.,error_if_nonfinite=True)
+            optimizer.step();scheduler.step();completed+=1
+            if rank==0:
+                row=dict(step=completed,epoch=epoch,cursor=cursor,gradient_norm=float(grad),
+                    seconds=time.perf_counter()-started,records=records,gradient_groups=group_grads,
+                    lr_shared=optimizer.param_groups[0]['lr'],lr_head=optimizer.param_groups[1]['lr'],
+                    tau_c=float(system.matcher.tau_c.detach()),tau_f=float(system.matcher.tau_f.detach()),
+                    records_scope='rank0_local_microbatches',world_size=world_size,
+                    peak_allocated_bytes=torch.cuda.max_memory_allocated() if runtime.device.startswith('cuda') else 0)
                 with (out/'train.jsonl').open('a') as f:f.write(json.dumps(row)+'\n')
                 print(json.dumps(row),flush=True)
-            if rank==0 and (completed%config['save_every']==0 or completed==end):
-                save_checkpoint(out/'latest.pt',model=system,optimizer=optimizer,scheduler=scheduler,
-                    optimizer_step=completed,data_progress=dict(cursor=cursor,epoch=epoch),metadata=metadata)
-            if distributed:dist.barrier()
-            if rank==0 and vis.get('enabled') and (completed%vis.get('curves_every',100)==0 or completed==end):
-                update_overview(out)
-            if rank==0 and (completed%config['validate_every']==0 or completed==end):
-                validate(system,val,runtime.device,out,completed)
-            if distributed:dist.barrier()
-            if rank==0 and vis.get('enabled') and (completed%vis.get('every',1000)==0 or completed==end):
-                # Save exact diagnostic state even if intervals do not coincide.
-                save_checkpoint(out/'latest.pt',model=system,optimizer=optimizer,scheduler=scheduler,
-                    optimizer_step=completed,data_progress=dict(cursor=cursor,epoch=epoch),metadata=metadata)
-                snapshot(system,val,runtime.device,out,completed,pairs=vis.get('pairs',12),
-                    all_channels=completed==end or completed==math.ceil(total_steps/2/vis.get('every',1000))*vis.get('every',1000))
-            if distributed:dist.barrier()
+            actions=boundary_actions(completed,end,config)
+            if actions['save']:save_boundary()
+            if actions['validation']:
+                validate(system,val,runtime.device,out,completed,sample_count=args.validation_pairs,
+                         rank=rank,world_size=world_size,control_group=control_group)
+            if actions['snapshot']:
+                rank_zero_work(lambda:snapshot(system,val,runtime.device,out,completed,pairs=vis.get('pairs',12),
+                    all_channels=completed==end or completed==math.ceil(total_steps/2/vis.get('every',1000))*vis.get('every',1000)),
+                    rank=rank,control_group=control_group)
+            elif actions['curves']:
+                rank_zero_work(lambda:update_overview(out),rank=rank,control_group=control_group)
     return 0
 
 

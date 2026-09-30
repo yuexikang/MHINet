@@ -44,5 +44,4 @@ def load_completed_semidense(runtime, path, config):
 
 
 if __name__ == '__main__':
-    train.load_first_stage = load_completed_semidense
-    raise SystemExit(train.main())
+    raise SystemExit(train.main(source_loader=load_completed_semidense))

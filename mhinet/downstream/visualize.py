@@ -309,7 +309,7 @@ def snapshot(system,dataset,device,output,step,*,pairs=12,all_channels=False):
     """Separate validation pass with RNG and module mode restoration."""
     from torch.utils.data import default_collate
     from mhinet.config import sha256_file
-    state=capture_rng_state();was_training=system.training
+    state=capture_rng_state(current_cuda_only=True);was_training=system.training
     system.eval();started=time.perf_counter();root=Path(output);visual=root/'visualizations'
     folder=visual/f'step_{step:07d}';folder.mkdir(parents=True,exist_ok=True)
     manifest_path=visual/'manifest.json'
@@ -339,7 +339,6 @@ def snapshot(system,dataset,device,output,step,*,pairs=12,all_channels=False):
                 record['same_retained_points_qrru']=dict(count=len(a),improved_fraction=float((eq<ef).mean()),
                     worsened_fraction=float((eq>ef).mean()),before_epe=float(ef.mean()),after_epe=float(eq.mean()))
             records.append(record);(folder/'pairs.json').write_text(json.dumps(records,indent=2))
-            update_overview(root)
             print(f'VIS step={step} pair={n+1}/{len(ids)} saved={pair_folder}',flush=True)
             del shared,result
         stages={}

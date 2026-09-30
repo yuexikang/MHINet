@@ -253,6 +253,23 @@ class CheckpointRoundTripTests(unittest.TestCase):
                         "runtime": {"device": "cuda:1", "data_root": "/other"}
                     },
                 )
+            with self.assertRaisesRegex(RuntimeError, "runtime"):
+                load_checkpoint(path, model=model, map_location="cpu", restore_rng=False,
+                    expected_metadata={"runtime": {"device": "cpu", "data_root": "/data"}})
+
+    def test_local_cuda_rng_does_not_initialize_other_devices(self) -> None:
+        from unittest.mock import patch
+        from mhinet.engine.checkpointing import capture_rng_state, restore_rng_state
+        with patch('torch.cuda.is_available', return_value=True), \
+             patch('torch.cuda.is_initialized', return_value=True), \
+             patch('torch.cuda.get_rng_state', return_value=torch.arange(4, dtype=torch.uint8)), \
+             patch('torch.cuda.get_rng_state_all', side_effect=AssertionError('touches other GPUs')):
+            state = capture_rng_state(current_cuda_only=True)
+        with patch('torch.cuda.is_available', return_value=True), \
+             patch('torch.cuda.set_rng_state') as set_current, \
+             patch('torch.cuda.set_rng_state_all', side_effect=AssertionError('touches other GPUs')):
+            restore_rng_state(state)
+            set_current.assert_called_once()
 
 
 if __name__ == "__main__":

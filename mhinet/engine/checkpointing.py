@@ -66,7 +66,7 @@ def _safe_value(value: Any, *, location: str) -> Any:
     )
 
 
-def capture_rng_state() -> dict[str, Any]:
+def capture_rng_state(*, current_cuda_only: bool = False) -> dict[str, Any]:
     """Capture Python, NumPy, Torch CPU, and initialized CUDA RNG streams."""
 
     python_version, python_state, python_gauss = random.getstate()
@@ -74,7 +74,9 @@ def capture_rng_state() -> dict[str, Any]:
         np.random.get_state()
     )
     cuda_initialized = bool(torch.cuda.is_available() and torch.cuda.is_initialized())
-    cuda_states = torch.cuda.get_rng_state_all() if cuda_initialized else []
+    cuda_states = (
+        [torch.cuda.get_rng_state()] if current_cuda_only else torch.cuda.get_rng_state_all()
+    ) if cuda_initialized else []
     return {
         "python": {
             "version": int(python_version),
@@ -92,6 +94,7 @@ def capture_rng_state() -> dict[str, Any]:
         "torch_cuda": [state.cpu().clone() for state in cuda_states],
         "cuda_initialized": cuda_initialized,
         "cuda_device_count": len(cuda_states),
+        "cuda_current_device_only": current_cuda_only,
     }
 
 
@@ -141,13 +144,17 @@ def restore_rng_state(state: Mapping[str, Any]) -> dict[str, bool]:
                 "Checkpoint contains initialized CUDA RNG state but CUDA is unavailable; "
                 "load with restore_rng=False for evaluation-only use"
             )
-        current_devices = torch.cuda.device_count()
+        current_only = bool(state.get("cuda_current_device_only", False))
+        current_devices = 1 if current_only else torch.cuda.device_count()
         if len(cuda_states) != current_devices:
             raise RuntimeError(
                 "CUDA RNG device-count mismatch: checkpoint has "
                 f"{len(cuda_states)}, current runtime has {current_devices}"
             )
-        torch.cuda.set_rng_state_all([item.detach().cpu() for item in cuda_states])
+        if current_only:
+            torch.cuda.set_rng_state(cuda_states[0].detach().cpu())
+        else:
+            torch.cuda.set_rng_state_all([item.detach().cpu() for item in cuda_states])
         cuda_restored = True
 
     return {"cpu": True, "cuda": cuda_restored}
@@ -196,6 +203,7 @@ def save_checkpoint(
     data_progress: Any = None,
     metadata: Mapping[str, Any] | None = None,
     auxiliary_state: Any = None,
+    rng_state: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Atomically save all state required for exact training continuation."""
 
@@ -206,7 +214,7 @@ def save_checkpoint(
     safe_data = _safe_value(data_progress, location="data_progress")
     safe_metadata = _safe_value(dict(metadata or {}), location="metadata")
     safe_auxiliary = _safe_value(auxiliary_state, location="auxiliary_state")
-    rng_state = capture_rng_state()
+    rng_state = capture_rng_state() if rng_state is None else _safe_value(rng_state, location="rng")
     payload = {
         "format": CHECKPOINT_FORMAT,
         "version": CHECKPOINT_VERSION,
@@ -248,6 +256,7 @@ def load_checkpoint(
     strict: bool = True,
     restore_rng: bool = True,
     expected_metadata: Mapping[str, Any] | None = None,
+    checkpoint_payload: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Load an MHINet-owned checkpoint with PyTorch's restricted loader.
 
@@ -256,7 +265,8 @@ def load_checkpoint(
     """
 
     source = Path(path).expanduser().resolve()
-    payload = torch.load(source, map_location=map_location, weights_only=True)
+    payload = (torch.load(source, map_location=map_location, weights_only=True)
+               if checkpoint_payload is None else checkpoint_payload)
     if not isinstance(payload, dict):
         raise ValueError("MHINet checkpoint root must be a dictionary")
     if payload.get("format") != CHECKPOINT_FORMAT:
@@ -277,7 +287,9 @@ def load_checkpoint(
         # CUDA ordinals are local to a process and can differ across DDP ranks
         # or when resuming on a different set of physical GPUs.  They do not
         # change the training task, so compare the rest of the runtime record.
-        if key == "runtime" and isinstance(actual, Mapping) and isinstance(expected, Mapping):
+        if (key == "runtime" and isinstance(actual, Mapping) and isinstance(expected, Mapping)
+                and str(actual.get("device", "")).startswith("cuda:")
+                and str(expected.get("device", "")).startswith("cuda:")):
             actual = {name: value for name, value in actual.items() if name != "device"}
             expected = {name: value for name, value in expected.items() if name != "device"}
         if actual != expected:

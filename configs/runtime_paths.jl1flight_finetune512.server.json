@@ -1,0 +1,13 @@
+{
+  "repo_root": "/home/disk1/MHINet",
+  "loma_root": "/home/disk1/LoMa",
+  "loretta_source_root": "/home/disk1/LoMa/third_party/LoRetta",
+  "dino_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/snapshots/95bf3670465cc80ffca8b1edf94b5eb651211194/loretta.pth",
+  "selected_stage1_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/snapshots/95bf3670465cc80ffca8b1edf94b5eb651211194/loretta.pth",
+  "pyramid_checkpoint": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+  "data_root": "/home/disk1/MHINet/outputs/jl1flight_finetune512_dataset",
+  "split_manifest": "/home/disk1/MHINet/outputs/jl1flight_finetune512_dataset/train/pairs.jsonl",
+  "output_root": "/home/disk1/MHINet/outputs",
+  "device": "cuda:0",
+  "selection_note": "JL train-only spatial holdout. 512 loader. Original test excluded."
+}

@@ -1,0 +1,34 @@
+{
+  "runtime": "/home/disk1/MHINet/configs/runtime_paths.jl1flight_finetune512.server.json",
+  "seed": 42,
+  "tier": null,
+  "epochs": 5,
+  "accumulation": 8,
+  "shared_lr": 8e-06,
+  "head_lr": 8e-06,
+  "save_every": 100,
+  "validate_every": 843,
+  "matcher": {
+    "coarse_queries": 1024,
+    "fine_windows": 64,
+    "qrru_queries": 128,
+    "window_chunk": 32,
+    "inference_window_chunk": 1024,
+    "iterations": 4,
+    "radius": 1.5,
+    "gamma": 0.8,
+    "lambda_c": 1.0,
+    "lambda_f": 1.0,
+    "lambda_q": 1.0,
+    "input_size": 512
+  },
+  "freeze_mvt": false,
+  "freeze_h0": false,
+  "visualization": {
+    "enabled": true,
+    "pairs": 4,
+    "every": 843,
+    "curves_every": 100
+  },
+  "experiment_id": "semidense_jl1flight_512_lr8e6_5ep_seed42"
+}

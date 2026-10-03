@@ -1,0 +1,47 @@
+JL1Flight 512 小学习率微调（2026-10-03）
+
+任务目录：/home/disk1/MHINet/outputs/semidense_jl1flight_512_lr8e6_5ep_seed42
+模型输入：512×512，原始影像为 640×640；PIL bicubic 缩放，真值以原始 A→B 单应矩阵和原始尺寸转换为 align_corners=False 归一化坐标。
+
+初始化：/home/disk1/MHINet/outputs/semidense_rgb512_synth_seed42_5ep/latest.pt
+已经核实初始化训练完成：25535/25535 步，共 5 epoch。
+没有使用 weight/ 中之前复制的 18250 步中间快照。
+完整加载共享网络与半密集匹配头；新建 AdamW 与学习率调度，优化器状态不从合成预训练继承。
+
+训练数据：/home/disk1/Data/datasets/jl1flight/train/affine_pairs_train
+官方训练索引：/home/disk1/Data/datasets/jl1flight/index/scene_info/affine_pairs_train.npz
+准备后的清单：/home/disk1/MHINet/outputs/jl1flight_finetune512_dataset/{train,val}/pairs.jsonl
+共 7490 对，749 张源影像，每张 10 种原数据变换。
+训练 6740 对（674 张源影像），验证 750 对（75 张源影像）。
+按原训练场景连续空间条带划分：文件名第二个坐标 >=19440 的最后三列用于验证。
+同一源影像全部变换放在同一集合；已检查跨集合的原图块范围不重叠。
+官方 val_list 实际指向 affine_pairs_test，因此不采用该列表；原测试集不参与训练或验证。
+每对 TXT 单应矩阵均与官方 NPZ 变换逐一校验。
+重叠掩码由 H 与逆 H 在原始 640 坐标中生成，加载时 nearest 缩放到 512。
+没有新增几何或辐射增强。
+
+训练计划：5 epoch；单卡 GPU 2；每次 1 对，梯度累计 8 次，有效批量 8 对（每轮最后一步 4 对）。
+每轮 ceil(6740/8)=843 步，总计 4215 步。
+随机种子：42。
+初始 shared_lr=head_lr=8e-6，是上一阶段 8e-5 的十分之一。
+AdamW，weight_decay=1e-4，梯度范数裁剪=1.0。
+CosineAnnealingLR，T_max=4215，eta_min=0，无 warmup。
+冻结 DINO；MVT、VGG、DeDoDe 和半密集头训练；VGG BN 统计固定，D1 不启用。
+H0 头配置为可训练，但当前 Lc/Lf/Lq 经 detach 先验不会直接更新 H0 头；本次沿用既有算法。
+
+损失：Lc + Lf + Lq，各权重均为 1。
+D8 粗监督 queries=1024、归一化分块=128。
+D2 细监督 fine_windows=64。
+QRRU queries=128、迭代=4、radius=1.5、gamma=0.8、noise_std=0.8、noise_bound=2.4。
+训练 window_chunk=32；推理 inference_window_chunk=1024。
+H0 用作细匹配窗口先验，不输入 QRRU。
+
+保存：每 100 步及验证/可视化前更新 latest.pt，包含模型、优化器、调度器、RNG 和数据进度。
+验证：每轮 843 步，完整 750 对，统计 GT 解耦 Lc/Lf/Lq；不是最终测试集配准指标。
+可视化：初始化及每轮固定 4 对，包含粗细匹配、特征图、QRRU 等；曲线每 100 步更新。
+日志：/tmp/semidense_jl1flight_512_lr8e6_5ep_seed42.log
+
+启动/恢复同名任务：
+CUDA_VISIBLE_DEVICES=2 bash /home/disk1/MHINet/scripts/train_semidense_jl1flight_512.sh
+该入口检测 latest.pt 后自动恢复同一任务；首次启动从完整合成预训练权重初始化。
+数据准备脚本：/home/disk1/MHINet/scripts/prepare_jl1flight_finetune.py（已有输出时拒绝覆盖）。

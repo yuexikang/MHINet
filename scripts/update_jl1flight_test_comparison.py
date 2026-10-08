@@ -1,6 +1,7 @@
 """Expose NCM/NM from complete four-run reports without rerunning inference."""
 import csv
 from datetime import datetime, timezone
+import hashlib
 import html
 import json
 from pathlib import Path
@@ -9,7 +10,7 @@ import statistics
 ROOT = Path(__file__).resolve().parents[1] / 'outputs/jl1flight_pre_post_tests_512_20261004'
 PROTOCOL_URL = 'https://app.notion.com/p/3eabcd67ec6b81e88327cadb0fd4826d'
 JOBS = [(p, d) for p in ('before', 'after') for d in ('GoogleEarth', 'JL1Flight')]
-COUNTS = {'GoogleEarth': 500, 'JL1Flight': 1755}
+DATASETS = tuple(dict.fromkeys(dataset for _, dataset in JOBS))
 
 
 def augment(metrics):
@@ -22,18 +23,55 @@ def write_json(path, value):
     tmp.replace(path)
 
 
+def validate_dataset_records(name, phase, dataset, registration, report, pairs):
+    """Reject stale or mixed predictions even when their row counts agree."""
+    if registration['phase'] != phase or registration['dataset'] != dataset:
+        raise ValueError(f'Registration identity mismatch: {name}')
+    if report['registration']['phase'] != phase or report['registration']['dataset'] != dataset:
+        raise ValueError(f'Report registration identity mismatch: {name}')
+    manifest = registration['manifest']
+    if report['registration']['manifest'] != manifest:
+        raise ValueError(f'Report/registration manifest mismatch: {name}')
+    manifest_path = Path(manifest['path'])
+    manifest_bytes = manifest_path.read_bytes()
+    if hashlib.sha256(manifest_bytes).hexdigest() != manifest['sha256']:
+        raise ValueError(f'Current dataset manifest SHA256 mismatch: {name}')
+    expected = [json.loads(line) for line in manifest_bytes.decode().splitlines() if line.strip()]
+    expected_ids = [row['pair_id'] for row in expected]
+    actual_ids = [row['pair_id'] for row in pairs]
+    if len(set(expected_ids)) != len(expected_ids) or len(set(actual_ids)) != len(actual_ids):
+        raise ValueError(f'Duplicate pair_id: {name}')
+    if not report['complete'] or not pairs or len(pairs) != manifest['pairs']:
+        raise ValueError(f'Incomplete results: {name}')
+    if len(expected) != manifest['pairs'] or report['overall']['pairs'] != len(pairs):
+        raise ValueError(f'Pair count mismatch: {name}')
+    if actual_ids != expected_ids:
+        raise ValueError(f'Prediction pair_id/order differs from current dataset manifest: {name}')
+    return manifest
+
+
 def main():
     reports, groups, stage_reports, stages = {}, {}, {}, []
+    dataset_manifests = {}
+    curation_path = ROOT/'googleearth_curation.json'
+    curation = json.loads(curation_path.read_text()) if curation_path.exists() else None
     rows = []
     for phase, dataset in JOBS:
         name = f'{phase}_{dataset}'
         folder = ROOT/name
         report = json.loads((folder/'report.json').read_text())
-        pairs = [json.loads(x) for x in (folder/'pairs.jsonl').read_text().splitlines()]
-        if not report['complete'] or len(pairs) != COUNTS[dataset]:
-            raise ValueError(f'Incomplete results: {name}')
+        registration = json.loads((folder/'registration.json').read_text())
+        pairs = [json.loads(x) for x in (folder/'pairs.jsonl').read_text().splitlines() if x.strip()]
+        manifest = validate_dataset_records(name, phase, dataset, registration, report, pairs)
+        if dataset in dataset_manifests and manifest != dataset_manifests[dataset]:
+            raise ValueError(f'Before/after dataset manifest mismatch: {dataset}')
+        dataset_manifests[dataset] = manifest
+        if dataset == 'GoogleEarth' and curation is not None:
+            if curation['status'] != 'complete' or curation['current_manifest'] != manifest:
+                raise ValueError(f'Curation/current manifest mismatch: {name}')
+            if set(curation['excluded_pair_ids']) & {r['pair_id'] for r in pairs}:
+                raise ValueError(f'Excluded pair still present: {name}')
         m = augment(report['overall'])
-        if m['pairs'] != len(pairs): raise ValueError(f'Pair count mismatch: {name}')
         # The denominator includes every pair, including zero-match failures.
         nm = statistics.mean(r['metrics']['matches'] for r in pairs)
         if abs(nm-m['NM']) > 1e-8: raise ValueError('NM aggregation mismatch')
@@ -61,13 +99,14 @@ def main():
             stages.append(stage_row)
         stage_reports[name] = {r['stage']:r for r in stages if r['dataset']==dataset and r['phase']==phase}
     deltas = {}
-    for dataset in COUNTS:
+    for dataset in DATASETS:
         a,b = reports[f'before_{dataset}'],reports[f'after_{dataset}']
         deltas[dataset] = dict(
             precision_change_pp={t:100*(b['precision'][t]-a['precision'][t]) for t in ('1','3','5')},
             sr3_change_pp=100*(b['sr']['3']-a['sr']['3']),
             NCM_change={t:b['NCM'][t]-a['NCM'][t] for t in ('1','3','5')},NM_change=b['NM']-a['NM'])
     result = dict(reports=reports,by_group=groups,stages=stage_reports,after_minus_before=deltas,
+        dataset_manifests=dataset_manifests,dataset_curation=curation,
         metric_definitions=dict(protocol_url=PROTOCOL_URL,coordinate_unit='stored_512_target_pixels',
             NCM='Number of GT-correct matches at <=1/3/5px in GT-visible geometric support and image bounds; mean over ALL pairs, empty output=0.',
             NM='All final model-returned match pairs; mean over ALL image pairs, empty output=0.',
@@ -102,6 +141,10 @@ def main():
     content+='<style>body{font-family:sans-serif;margin:24px}table{border-collapse:collapse}td,th{padding:9px;border-bottom:1px solid #ddd;white-space:nowrap}.scroll{overflow-x:auto}p{max-width:1000px;line-height:1.6}</style>'
     content+='<h1>512 微调前后：GoogleEarth / JL1Flight</h1>'
     content+=f'<p>已核对 <a href="{PROTOCOL_URL}">Notion 指标定义</a>。NCM 是正确匹配点对数量；NM 是总输出点对数量。均按全部影像对平均，无匹配计0。P 为逐对宏平均，不能直接用平均 NCM ÷ 平均 NM 替代。</p>'
+    if curation is not None:
+        note = f"GoogleEarth 经人工确认删除 {', '.join(curation['excluded_pair_ids'])}：预测正确，原始影像配对与 GT 错误。当前有效 {dataset_manifests['GoogleEarth']['pairs']} 对；JL 数据保持不变。其余预测保留，仅重新汇总指标。"
+        content += '<p>'+html.escape(note)+' <a href="googleearth_curation.json">人工排除记录</a></p>'
+        markdown.extend(['', note])
     content+='<p>阈值采用存储影像的512目标像素。RMSE：SR@3成功对统计≤5px正确匹配，失败记10。GoogleEarth 标签是名义原始配准上的合成几何。耗时保留原测试记录，运行卡及系统负载不同。</p>'
     content+='<div class="scroll"><table><tr>'+''.join('<th>'+x+'</th>' for x in labels)+'</tr>'+''.join(tables)+'</table></div>'
     content+='<h2>各阶段指标</h2><div class="scroll"><table><tr>'+''.join('<th>'+x+'</th>' for x in ['数据集','权重','阶段','P@1px','P@3px','P@5px','SR@3px','网格RMSE中位数'])+'</tr>'+''.join(stage_html)+'</table></div>'

@@ -269,8 +269,9 @@ def update_overview(output):
             ax.plot(steps,values,alpha=.25,lw=.6)
             window=min(20,len(values));smooth=np.convolve(values,np.ones(window)/window,'valid')
             ax.plot(steps[window-1:],smooth,label=label,lw=1.2)
-        plot(axes[0,0],[np.mean([x['lc']+x['lf']+x['lq'] for x in r['records']]) for r in train],'sum (weights=1)')
-        for key in ('lc','lf','lq'):
+        plot(axes[0,0],[r.get('loss',np.mean([x['lc']+x['lf']+x['lq'] for x in r['records']])) for r in train],'total')
+        for key in ('lc','lf','lq','lh0'):
+            if not all(key in x for r in train for x in r['records']):continue
             plot(axes[0,0],[np.mean([x[key] for x in r['records']]) for r in train],key)
         for key in ('q_control','q_center','fine_coverage'):
             plot(axes[0,1],[np.mean([x[key] for x in r['records']]) for r in train],key)
@@ -284,6 +285,19 @@ def update_overview(output):
         for ax,title in zip(axes.flat,('GT-decoupled losses','Supervision / QRRU losses','Gradient norms','Learning rates','Temperatures','Training timing')):
             ax.set_title(title);ax.set_xlabel('optimizer step');ax.grid(alpha=.2);ax.legend(fontsize=7)
         savefig(fig,visual/'training_curves.png')
+        if all('lh0' in x for r in train for x in r['records']):
+            fig,axes=plt.subplots(1,3,figsize=(16,4))
+            for key in ('lh0','h0_geo','h0_mat','h0_cls','h0_h'):
+                plot(axes[0],[np.mean([x[key] for x in r['records']]) for r in train],key+' (unweighted)')
+            for key in ('h0_fit_valid','h0_valid','fine_coverage'):
+                plot(axes[1],[np.mean([x[key] for x in r['records']]) for r in train],key)
+            for key in ('ghim_h0','mvt'):
+                if all(key in r['gradient_groups'] for r in train):
+                    plot(axes[2],[r['gradient_groups'][key] for r in train],key)
+            for ax,title in zip(axes,('GHIM/H0 supervision','H0 fit validity and fine coverage','Upstream gradient norms before clipping')):
+                ax.set_title(title);ax.set_xlabel('optimizer step');ax.grid(alpha=.2);ax.legend(fontsize=7)
+            axes[1].set_ylim(-.05,1.05)
+            savefig(fig,visual/'h0_curves.png')
     summaries=[]
     for p in sorted(visual.glob('step_*/summary.json')):
         summaries.append(json.loads(p.read_text()))

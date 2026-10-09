@@ -1,0 +1,41 @@
+{
+  "runtime": "/home/disk1/MHINet/configs/runtime_paths.mhinet_rgb512.server.json",
+  "seed": 42,
+  "tier": null,
+  "epochs": 5,
+  "accumulation": 8,
+  "shared_lr": 8e-05,
+  "head_lr": 8e-05,
+  "save_every": 250,
+  "validate_every": 5107,
+  "h0_loss_weight": 1.0,
+  "h0_loss_weights": {
+    "mat": 0.01,
+    "cls": 0.0001,
+    "H": 0.05,
+    "robust_scale": 0.1
+  },
+  "matcher": {
+    "coarse_queries": 1024,
+    "fine_windows": 64,
+    "qrru_queries": 128,
+    "window_chunk": 32,
+    "inference_window_chunk": 1024,
+    "iterations": 4,
+    "radius": 1.5,
+    "gamma": 0.8,
+    "lambda_c": 1.0,
+    "lambda_f": 1.0,
+    "lambda_q": 1.0,
+    "input_size": 512
+  },
+  "freeze_mvt": false,
+  "freeze_h0": false,
+  "visualization": {
+    "enabled": true,
+    "pairs": 8,
+    "every": 2000,
+    "curves_every": 100
+  },
+  "experiment_id": "semidense_rgb512_h0joint_from_e_lr8e5_seed42_5ep"
+}

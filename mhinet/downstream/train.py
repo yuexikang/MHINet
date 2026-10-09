@@ -1,4 +1,4 @@
-"""Independent Lc/Lf/Lq trainer; leaves first-stage training untouched."""
+"""Joint GHIM/H0 and GT-decoupled Lc/Lf/Lq training."""
 import argparse
 from dataclasses import asdict,replace
 import fcntl
@@ -32,6 +32,21 @@ def batch_loss(system,batch,device):
     loss,records=system(tensors['images'],tensors['H_gt_norm'],tensors['mask_A_overlap'],tensors['mask_B_overlap'])
     if not bool(torch.isfinite(loss)):raise FloatingPointError('Nonfinite semidense loss')
     return loss,records
+
+
+def configure_h0_training(system,config):
+    """Require direct supervision whenever the GHIM head is trainable."""
+    frozen=bool(config.get('freeze_h0',True))
+    weight=config.get('h0_loss_weight',0. if frozen else 1.)
+    system.configure_h0_supervision(weight,config.get('h0_loss_weights'))
+    if not frozen and system.h0_loss_weight==0:
+        raise ValueError('Trainable GHIM/H0 requires h0_loss_weight > 0')
+    return dict(weight=system.h0_loss_weight,**system.h0_loss_weights)
+
+
+def parameter_gradient_norm(parameters):
+    squares=[p.grad.detach().float().square().sum() for p in parameters if p.grad is not None]
+    return float(torch.stack(squares).sum().sqrt()) if squares else 0.
 
 
 @torch.no_grad()
@@ -68,12 +83,16 @@ def validate(system,dataset,device,output,step,*,sample_count=None,rank=0,world_
         rows=sorted([row for shard in shards for row in shard['rows']],key=lambda row:row['index'])
         if [row['index'] for row in rows]!=indices:raise RuntimeError('Validation coverage mismatch')
         def write_report():
+            metric_keys=['lc','lf','lq','fine_coverage','q_control','q_center']
+            metric_keys += [key for key in ('lh0','h0_geo','h0_mat','h0_cls','h0_h',
+                'h0_supervised_points','h0_fit_valid','h0_valid_H_pairs') if all(key in x for x in rows)]
             report=dict(step=step,pairs=len(rows),loss=float(np.mean([x['loss'] for x in rows])),
-                metrics={key:float(np.mean([x[key] for x in rows])) for key in ('lc','lf','lq','fine_coverage','q_control','q_center')},
+                metrics={key:float(np.mean([x[key] for x in rows])) for key in metric_keys},
+                h0_valid_rate=float(np.mean([x['h0_valid'] for x in rows])) if all('h0_valid' in x for x in rows) else None,
                 validation_total_pairs=len(dataset),validation_indices=indices,
                 validation_sample='full' if len(rows)==len(dataset) else 'evenly spaced',
                 rng_policy='per_manifest_index_v1',world_size=world_size,seconds=time.perf_counter()-started,
-                scope='GT-decoupled validation losses; use evaluate-semidense for cascaded matching accuracy')
+                scope='Independent GHIM/H0 and GT-decoupled matching losses; use evaluate-semidense for cascaded accuracy')
             folder=output/'validation';folder.mkdir(exist_ok=True)
             target=folder/f'step_{step:07d}.json'
             temporary=target.with_suffix('.json.tmp')
@@ -174,6 +193,10 @@ def main(argv=None,*,source_loader=None):
     else:
         system=(source_loader or load_first_stage)(runtime,args.checkpoint,mc)
     system.shared.set_training_groups(mvt=not freeze_mvt,vgg=True,dedode=True,ghim_head=not freeze_h0)
+    metadata['h0_supervision']=configure_h0_training(system,config)
+    if system.h0_loss_weight>0:
+        from mhinet.engine import ghim_losses
+        metadata['ghim_loss_sha256']=sha256_file(Path(ghim_losses.__file__))
     if any(p.requires_grad for p in system.shared.dino.parameters()):
         raise RuntimeError('Freeze policy violated: DINOv3 must remain frozen')
     for name,expected_frozen in (('mvt',freeze_mvt),('stage1_head',freeze_h0)):
@@ -219,7 +242,9 @@ def main(argv=None,*,source_loader=None):
                        validation_indices=validation_indices(len(val),args.validation_pairs),
                        validation_rng_policy='per_manifest_index_v1',world_size=world_size,
                        cuda_visible_devices=os.environ.get('CUDA_VISIBLE_DEVICES'),resume_step=completed,
-                       h0_gradient_path='Detached prior; Lc/Lf/Lq do not directly update the GHIM H0 head',
+                       h0_gradient_path=('Independent GHIM geo/mat/cls/H supervision updates H0 and its upstream MVT; matcher prior remains detached'
+                           if system.h0_loss_weight>0 else 'Detached prior; GHIM/H0 supervision disabled'),
+                       h0_supervision=metadata['h0_supervision'],
                        training_records_scope='rank0 local microbatches')
         (out/'execution.json').write_text(json.dumps(execution,indent=2))
     rank_zero_work(write_run,rank=rank,control_group=control_group)
@@ -250,24 +275,33 @@ def main(argv=None,*,source_loader=None):
             generator=torch.Generator().manual_seed(seed+epoch)))
         while cursor<local_epoch_size and completed<end:
             started=time.perf_counter();optimizer.zero_grad(set_to_none=True)
-            count=min(accumulation,local_epoch_size-cursor);records=[]
+            count=min(accumulation,local_epoch_size-cursor);records=[];micro_losses=[]
             for micro in range(count):
                 sync_context=(train_system.no_sync() if distributed and micro<count-1 else nullcontext())
                 with sync_context:
-                    loss,info=batch_loss(train_system,next(loader),runtime.device)
+                    batch=next(loader)
+                    loss,info=batch_loss(train_system,batch,runtime.device)
                     (loss/count).backward()
+                micro_losses.append(float(loss.detach()))
+                for index,record in enumerate(info):
+                    record['pair_id']=batch['pair_id'][index]
+                    record['dataset_index']=order[cursor+index]
                 records.extend(info);cursor+=1
             frozen_bad=[name for name,param in frozen_parameters if param.grad is not None]
             if frozen_bad:raise RuntimeError(f'Frozen gradients: {frozen_bad[:3]}')
+            if not freeze_h0 and all(p.grad is None for p in system.shared.stage1_head.parameters()):
+                raise RuntimeError('Trainable GHIM/H0 received no gradient despite enabled supervision')
             group_grads={}
             if rank==0:
                 for group in optimizer.param_groups:
-                    squares=[p.grad.detach().float().square().sum() for p in group['params'] if p.grad is not None]
-                    group_grads[group['name']]=float(torch.stack(squares).sum().sqrt()) if squares else 0.
+                    group_grads[group['name']]=parameter_gradient_norm(group['params'])
+                group_grads['ghim_h0']=parameter_gradient_norm(system.shared.stage1_head.parameters())
+                group_grads['mvt']=parameter_gradient_norm(system.shared.mvt.parameters())
             grad=torch.nn.utils.clip_grad_norm_(trainable_parameters,1.,error_if_nonfinite=True)
             optimizer.step();scheduler.step();completed+=1
             if rank==0:
                 row=dict(step=completed,epoch=epoch,cursor=cursor,gradient_norm=float(grad),
+                    loss=float(np.mean(micro_losses)),
                     seconds=time.perf_counter()-started,records=records,gradient_groups=group_grads,
                     lr_shared=optimizer.param_groups[0]['lr'],lr_head=optimizer.param_groups[1]['lr'],
                     tau_c=float(system.matcher.tau_c.detach()),tau_f=float(system.matcher.tau_f.detach()),

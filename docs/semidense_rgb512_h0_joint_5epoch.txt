@@ -1,0 +1,53 @@
+RGB512 GHIM/H0 与半密集联合训练
+日期：2026-10-09（北京时间）
+分支：codex/semidense-512-synthetic-jl1
+
+问题与修复
+旧半密集训练把 H0 用作 detached prior，只有 Lc/Lf/Lq。
+即使 freeze_h0=false，GHIM 头也没有梯度，而 MVT 被描述子损失更新。
+本轮为 GHIM 头接入独立监督，同时保留匹配先验 detach 和 QRRU 无 H0 输入。
+总损失 = Lc + Lf + Lq + Lh0。
+Lh0 = geo + 0.01*mat + 0.0001*cls + 0.05*H。
+geo 使用 GT 可见区域的粗坐标监督，归一化坐标 robust_scale=0.1。
+mat 为可匹配性监督；cls 为匹配候选分类监督；H 为有效拟合的矩阵监督。
+拟合失败时跳过 H 矩阵项，保留其他有效监督；不以预测 H0 有效性屏蔽整个 Lh0。
+GHIM/H0 可训练而监督权重为0的配置会被拒绝，训练时检查 H0 梯度是否存在。
+
+初始化与数据
+完整 E 组权重：/home/disk1/MHINet/weight/semidense_stable_v2_tier3_lr_e_seed0.pt。
+来源权重已完成8663/8663步；新优化器、新余弦学习率，不续用旧优化器。
+E 权重 SHA256：b5995d184240be0be70d24a44dfbdc6e6f79050c735b0f8e7547542b40d97f50。
+数据根目录：/home/disk1/Data/datasets/MHINet_RGB_512。
+train 40849对、val 5106对，输入512×512；test 不用于训练或选择。
+训练数据来源：FLAIR RGB 29360对、GoogleEarth Current 7701对、WHU 3788对。
+JL1 数据不进入本轮训练。
+train 清单 SHA256：11f37bcfcebc61a24310421a5eff2e1921c618d461b8dac8142ff050843f88dc。
+val 清单 SHA256：ad281e31dfd612a239ddfa63f25a42812511e22445f571359477e709c8207f5b。
+
+冻结、超参与执行
+只冻结 DINOv3 的主干权重；MVT、GHIM/H0、VGG、CGMDP、半密集/QRRU 均可训练。
+保留既有 VGG BN running statistics 固定策略，BN affine 可训练；D1 兼容分支不参与此路径。
+物理GPU0单卡；microbatch=1对，梯度累积8，有效batch=8对。
+全域初始学习率8e-5，AdamW weight_decay=1e-4，clip_grad_norm=1。
+seed42，5 epoch；每epoch5107优化步，总25535步，余弦衰减至0。
+训练集40849不能整除8，每epoch末尾最后一个优化步只含1对，不重复补样本。
+D8粗监督1024查询，D2精监督64窗口，QRRU128查询，4次迭代。
+训练窗口分块32，推理窗口分块1024，loss权重Lc/Lf/Lq/Lh0均1。
+每250步保存latest.pt；每epoch验证完整5106对。
+每2000步及最终输出固定8对的特征、点选择、相似度、级联诊断；每100步更新曲线。
+额外记录lh0及四项分量、H0拟合有效率、GHIM/MVT梯度范数和训练pair_id。
+gradient_groups的GHIM/MVT是cgmdp大组的子集，不能把所有组相加当成总范数。
+
+配置：configs/semidense_rgb512_h0_joint_5epoch.json。
+输出：outputs/semidense_rgb512_h0joint_from_e_lr8e5_seed42_5ep。
+启动/续训：CUDA_VISIBLE_DEVICES=0 bash scripts/train_semidense_rgb512_h0.sh outputs/semidense_rgb512_h0joint_from_e_lr8e5_seed42_5ep。
+latest.pt的真实训练进度以checkpoint内progress与train.jsonl为准，本说明中的5epoch是训练计划。
+
+启动前验证
+6个相关测试文件共34项回归通过，包含监督梯度、失效拟合处理、512坐标、匹配、可视化和续训。
+物理GPU0上从E重新加载，对实际shuffle首批8对计算联合损失并完成1次优化更新。
+H0头10/10个参数张量更新，梯度范数7.93747；MVT梯度范数1.24488。
+DINO梯度全部为None，完整state_dict的SHA在更新前后相同。
+每对联合损失与Lc+Lf+Lq+Lh0核对一致；显存峰值约4.49GiB。
+证据：outputs/h0_joint_preflight_20261009.json。
+该诊断更新没有用作本轮初始化；正式run仍重新加载原始E权重。

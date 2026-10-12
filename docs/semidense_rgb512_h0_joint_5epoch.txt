@@ -2,6 +2,15 @@ RGB512 GHIM/H0 与半密集联合训练
 日期：2026-10-09（北京时间）
 分支：codex/semidense-512-synthetic-jl1
 
+2026-10-12完成核验
+已完成5/5 epoch、25535/25535优化步，最终数据游标epoch=4/cursor=40849。
+最终完整验证5106对：总loss0.724480，Lc0.119172，Lf0.141713，Lq0.458855，Lh0 0.004740。
+最后epoch全40849对训练平均loss0.592873。
+DINOv3的278个状态张量与E完全一致；H0头10个参数张量全部更新。
+最终权重独立副本：weight/semidense_rgb512_h0joint_from_e_lr8e5_seed42_5ep.pt。
+同名TXT保存训练方法、完成进度与SHA256。
+最终权重SHA256：43c020b213306c1ba517460092e4007799c2f445edce09cb00bf88fc8ac69cb4。
+
 问题与修复
 旧半密集训练把 H0 用作 detached prior，只有 Lc/Lf/Lq。
 即使 freeze_h0=false，GHIM 头也没有梯度，而 MVT 被描述子损失更新。
@@ -41,7 +50,7 @@ gradient_groups的GHIM/MVT是cgmdp大组的子集，不能把所有组相加当�
 配置：configs/semidense_rgb512_h0_joint_5epoch.json。
 输出：outputs/semidense_rgb512_h0joint_from_e_lr8e5_seed42_5ep。
 启动/续训：CUDA_VISIBLE_DEVICES=0 bash scripts/train_semidense_rgb512_h0.sh outputs/semidense_rgb512_h0joint_from_e_lr8e5_seed42_5ep。
-latest.pt的真实训练进度以checkpoint内progress与train.jsonl为准，本说明中的5epoch是训练计划。
+latest.pt的真实训练进度以checkpoint内progress与train.jsonl为准；本轮已经完整训练5epoch。
 
 启动前验证
 6个相关测试文件共34项回归通过，包含监督梯度、失效拟合处理、512坐标、匹配、可视化和续训。

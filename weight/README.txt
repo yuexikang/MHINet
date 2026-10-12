@@ -4,6 +4,7 @@
 基础权重：loretta_base.pth 与 loma_B_base.pt。
 常用 E 组：semidense_stable_v2_tier3_lr_e_seed0.pt。
 当前 512 训练快照：semidense_rgb512_synth_seed42_5ep.pt；具体步数见同名 TXT，不能视为自动跟随 latest.pt 的最终结果。
+H0联合监督后的完整512权重：semidense_rgb512_h0joint_from_e_lr8e5_seed42_5ep.pt；已完成5epoch、25535步，尚未做JL微调。
 原 outputs/ 与运行配置不变，以保证正在运行的训练和历史来源校验可继续使用。新配置可显式引用这里的基础权重副本。
 二进制权重被 Git 忽略，仅存本机；说明与索引可提交 Git。
 
@@ -23,3 +24,4 @@ semidense_stable_v2_tier3_lr_c_seed0.pt -> semidense_stable_v2_tier3_lr_c_seed0.
 semidense_stable_v2_tier3_lr_d_seed0.pt -> semidense_stable_v2_tier3_lr_d_seed0.txt
 semidense_stable_v2_tier3_lr_e_seed0.pt -> semidense_stable_v2_tier3_lr_e_seed0.txt
 semidense_rgb512_synth_seed42_5ep.pt -> semidense_rgb512_synth_seed42_5ep.txt
+semidense_rgb512_h0joint_from_e_lr8e5_seed42_5ep.pt -> semidense_rgb512_h0joint_from_e_lr8e5_seed42_5ep.txt

@@ -75,13 +75,20 @@ def training_description(target, source):
         '优化器：AdamW；weight_decay=1e-4；梯度范数裁剪=1.0。',
     ]
     if semidense:
+        h0=meta.get('h0_supervision',{})
+        h0_weight=float(h0.get('weight',0.))
+        h0_note=('独立GHIM/H0监督直接更新H0头及上游MVT；匹配先验仍detach。'
+                 if h0_weight>0 else
+                 'H0头即使requires_grad=True，Lc/Lf/Lq也不直接更新该头；共享MVT解冻时可通过描述子路径更新。')
         lines += [
             f'训练轮数：{config["epochs"]}；初始 shared_lr={config["shared_lr"]}，head_lr={config["head_lr"]}。',
             f'调度：CosineAnnealingLR，T_max={total}，eta_min=0。',
-            '损失：lambda_c*Lc + lambda_f*Lf + lambda_q*Lq。Lc 为 GT 粗对应的正样本 focal；Lf 为 GT 监督的局部细匹配；Lq 为多轮 2×2 控制流场及中心位移监督。',
+            '损失：lambda_c*Lc + lambda_f*Lf + lambda_q*Lq'
+                + (f' + {h0_weight:g}*Lh0。Lh0=geo + {h0["mat"]:g}*mat + {h0["cls"]:g}*cls + {h0["H"]:g}*H；归一化robust_scale={h0["robust_scale"]:g}。' if h0_weight>0 else '。')
+                + 'Lc为GT粗对应正样本focal；Lf为GT监督的局部细匹配；Lq为多轮2×2控制流场及中心位移监督。',
             'H0 保留为细匹配窗口的几何先验并 detach；QRRU 使用独立 GT 中心与扰动监督，不输入 H0。',
             '冻结策略：' + meta.get('freeze_policy', '未记录'),
-            '注意：H0 头即使 requires_grad=True，当前 Lc/Lf/Lq 也不直接更新该头；共享 MVT 解冻时可通过描述子路径更新。',
+            h0_note,
             '匹配器完整参数（旧权重未记录 input_size 时为 784；旧 inference_window_chunk 未记录时请在评测配置显式确认）：\n' + dump(meta['matcher']),
             '检查点时优化器参数组（lr 是保存时值，不是初始值）：\n' + dump([
                 {k: v for k, v in group.items() if k != 'params'}
@@ -129,6 +136,8 @@ def main():
     trained = sorted((ROOT / 'outputs').glob('shared_stable_v2_full_tier*_seed0/shared_descriptor.pt'))
     trained += sorted((ROOT / 'outputs').glob('semidense_stable_v2_tier*_seed0/latest.pt'))
     trained += [ROOT / 'outputs/semidense_rgb512_synth_seed42_5ep/latest.pt']
+    joint=ROOT/'outputs/semidense_rgb512_h0joint_from_e_lr8e5_seed42_5ep/latest.pt'
+    if joint.exists():trained.append(joint)
     entries += [(p, p.parent.name + '.pt', None) for p in trained]
     manifest = []
     for source, name, basic in entries:
@@ -152,6 +161,7 @@ def main():
         '基础权重：loretta_base.pth 与 loma_B_base.pt。\n'
         '常用 E 组：semidense_stable_v2_tier3_lr_e_seed0.pt。\n'
         '当前 512 训练快照：semidense_rgb512_synth_seed42_5ep.pt；具体步数见同名 TXT，不能视为自动跟随 latest.pt 的最终结果。\n'
+        'H0联合监督后的512权重：semidense_rgb512_h0joint_from_e_lr8e5_seed42_5ep.pt；实际训练进度见同名TXT。\n'
         '原 outputs/ 与运行配置不变，以保证正在运行的训练和历史来源校验可继续使用。新配置可显式引用这里的基础权重副本。\n'
         '二进制权重被 Git 忽略，仅存本机；说明与索引可提交 Git。\n\n'
         '更新副本与说明：\n/root/miniconda3/envs/loma-repro/bin/python /home/disk1/MHINet/scripts/collect_common_weights.py\n\n'

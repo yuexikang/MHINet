@@ -78,6 +78,21 @@ def fine_grids(i, j, H0, coarse_hw, fine_hw):
     return a,b
 
 
+def unwarped_fine_grids(i, j, coarse_hw, fine_hw):
+    """Regular 4x4 children of both matched D8 cells, without an H0 prior."""
+    hc, wc = coarse_hw
+    hf, wf = fine_hw
+    if (hf, wf) != (hc*4, wc*4):
+        raise ValueError('Require D8→D2 scale ratio four')
+    off = torch.arange(4, device=i.device)
+    oy, ox = torch.meshgrid(off, off, indexing='ij')
+    def children(indices):
+        uv = torch.stack(((indices%wc)[:,None]*4+ox.flatten(),
+                          (indices//wc)[:,None]*4+oy.flatten()), -1).float()
+        return to_norm(uv, fine_hw)
+    return children(i), children(j)
+
+
 @torch.no_grad()
 def fine_labels(a, b, H, mask_a, mask_b, fine_hw, tolerance=1.5):
     """Mutual nearest GT geometry on the actual warped target lattice."""

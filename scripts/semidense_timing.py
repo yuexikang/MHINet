@@ -18,7 +18,7 @@ def distribution(values):
         p99=float(np.percentile(a,99)),max=float(a.max()))
 
 
-def timed_inference(system, images, sizes):
+def timed_inference(system, images, sizes, *, inference_options=None):
     """Batch1 only. Stage events include stream idle/CPU submission gaps, not kernel-only time.
 
     Events require only one final synchronization, not a barrier per stage. No GT is used.
@@ -52,14 +52,18 @@ def timed_inference(system, images, sizes):
         for obj,method,key in [(shared,'_extract_batched_descriptors','dino'),(shared,'_contextualize','mvt'),
             (shared.stage1_head,'forward','h0'),(shared.vgg,'forward','vgg'),(shared,'_decode_pyramid','cgmdp')]:
             wrap(obj,method,key,stack)
-        original_masks=matching.predicted_overlap_masks
+        # This setup helper also runs for full-image support when H0 is disabled.
+        # Legacy/mocked matchers retain the original rasterizer instrumentation.
+        mask_attribute=('inference_overlap_masks' if hasattr(matching,'inference_overlap_masks')
+                        else 'predicted_overlap_masks')
+        original_masks=getattr(matching,mask_attribute)
         def masks(*a,**kw):
             resolution=a[1] if len(a)>1 else kw.get('resolution')
             if resolution==system.matcher.config.input_size//8:switch('coarse')
             elif resolution==system.matcher.config.input_size//2:switch('fine')
             else:raise ValueError(f'Unregistered timing mask resolution {resolution}')
             return original_masks(*a,**kw)
-        matching.predicted_overlap_masks=masks;stack.callback(setattr,matching,'predicted_overlap_masks',original_masks)
+        setattr(matching,mask_attribute,masks);stack.callback(setattr,matching,mask_attribute,original_masks)
         project=system.matcher.qrru.project;original_project=project.forward
         owned='forward' in project.__dict__;saved=project.__dict__.get('forward')
         def project_call(*a,**kw):switch('qrru');return original_project(*a,**kw)
@@ -70,7 +74,7 @@ def timed_inference(system, images, sizes):
         stack.callback(restore_project)
         wall_start=time.perf_counter();total_start=stamp();shared_start=stamp()
         features=system(images);shared_end=stamp();switch('matcher_setup')
-        result=system.matcher.infer(features,sizes);switch(None);total_end=stamp()
+        result=system.matcher.infer(features,sizes,**(inference_options or {}));switch(None);total_end=stamp()
         if cuda:torch.cuda.synchronize(images.device)
         wall_ms=(time.perf_counter()-wall_start)*1000
     measured={k:sum(elapsed(a,b) for a,b in v) for k,v in spans.items()}

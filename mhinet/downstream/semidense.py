@@ -5,12 +5,12 @@ import torch
 import torch.nn.functional as F
 from torch import nn
 from torch.utils.checkpoint import checkpoint
-from .supervision import (coarse_labels,fine_grids,fine_labels,to_uv,to_norm,
+from .supervision import (coarse_labels,fine_grids,unwarped_fine_grids,fine_labels,to_uv,to_norm,
     sample_uv,valid_points,legal_h,qrru_targets)
 from .losses import coarse_positive_logp,positive_focal,dual_log_probability,qrru_loss
 from .qrru import QRRU
 from .loma_reference.matching_utils import normalized_cell_centers,centers_to_native,flat_indices_to_centers
-from .loma_reference.overlap_masks import predicted_overlap_masks
+from .loma_reference.overlap_masks import MaskPair,predicted_overlap_masks
 from .loma_reference.coarse_matcher import match_d8
 
 
@@ -50,6 +50,14 @@ class SemidenseConfig:
 
 def subset(n,cap,device):
     return torch.randperm(n,device=device)[:cap]
+
+
+def inference_overlap_masks(H,resolution,enabled,*,device):
+    """Keep inference phase boundaries explicit even when H0 support is disabled."""
+    if enabled:
+        return predicted_overlap_masks(H[None],resolution)
+    full=torch.ones((resolution,resolution),dtype=torch.bool,device=device)
+    return MaskPair(full,full.clone())
 
 
 class SemidenseMatcher(nn.Module):
@@ -152,29 +160,40 @@ class SemidenseMatcher(nn.Module):
         return torch.stack(totals).mean(),records
 
     @torch.no_grad()
-    def infer(self,shared,sizes=None,*,diagnostics=False):
-        """No GT argument. Returns one variable-length match set per image pair."""
+    def infer(self,shared,sizes=None,*,diagnostics=False,use_h0_d8_mask=True,use_h0_d2_warp=True):
+        """Cascaded inference with independent, weight-free H0 ablation switches.
+
+        D2 guidance includes its H0 overlap support and H-residual target lattice.
+        Disabling it uses regular children of the predicted target D8 cell, with
+        only image-boundary validity. QRRU never receives H0 in any setting.
+        """
+        if not isinstance(use_h0_d8_mask,bool) or not isinstance(use_h0_d2_warp,bool):
+            raise TypeError('H0 inference switches must be bool')
         results=[];c=self.config
         hc=(c.input_size//8,)*2;hf=(c.input_size//2,)*2
-        for batch in range(len(shared['H0_norm'])):
+        needs_h0=use_h0_d8_mask or use_h0_d2_warp
+        for batch in range(len(shared['pyramid'][8])):
             d8=shared['pyramid'][8][batch].float();d2=shared['pyramid'][2][batch].float()
-            H=shared['H0_norm'][batch].float()
+            H=shared['H0_norm'][batch].float() if needs_h0 else None
             size=sizes[batch] if sizes is not None else ((c.input_size,c.input_size),(c.input_size,c.input_size))
             empty=d2.new_empty((0,2))
-            if not bool(shared['stage1_valid'][batch]) or not legal_h(H):
+            if needs_h0 and (not bool(shared['stage1_valid'][batch]) or not legal_h(H)):
                 results.append(dict(points_a=empty,points_b=empty,confidence=empty[:,0],failure_reason='invalid_h0'));continue
             if d8.shape != (2,256,*hc) or d2.shape != (2,256,*hf):
                 raise ValueError(f'Inference requires registered {c.input_size}/D8/D2 feature contract')
-            masks=predicted_overlap_masks(H[None],hc[0])
+            masks=inference_overlap_masks(H,hc[0],use_h0_d8_mask,device=d8.device)
             coarse=match_d8(d8[0],d8[1],masks.a,masks.b,temperature=float(self.tau_c),
                 threshold=c.confidence_threshold,max_coarse=c.max_coarse,policy='mutual',
                 chunk_rows=c.chunk,force_chunked=True)
-            mask2=predicted_overlap_masks(H[None],hf[0])
+            mask2=inference_overlap_masks(H,hf[0],use_h0_d2_warp,device=d2.device)
             matches=[];fine_trace=[];qrru_trace=[]
             probe_parents=set(torch.linspace(0,max(0,len(coarse.source_flat)-1),4).long().tolist())
             for start in range(0,len(coarse.source_flat),c.inference_window_chunk):
                 end=start+c.inference_window_chunk
-                ga,gb=fine_grids(coarse.source_flat[start:end],coarse.target_flat[start:end],H,hc,hf)
+                if use_h0_d2_warp:
+                    ga,gb=fine_grids(coarse.source_flat[start:end],coarse.target_flat[start:end],H,hc,hf)
+                else:
+                    ga,gb=unwarped_fine_grids(coarse.source_flat[start:end],coarse.target_flat[start:end],hc,hf)
                 va=valid_points(mask2.a,ga);vb=valid_points(mask2.b,gb)
                 lp=self.fine_scores(d2[0],d2[1],ga,gb,va,vb)
                 if diagnostics and len(fine_trace)<4:

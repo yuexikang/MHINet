@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["status", "title", "report_markdown", "research_memory_markdown", "sources", "breakthrough_verified", "next_focus"],
+  "properties": {
+    "status": {"type": "string", "enum": ["completed", "limited"]},
+    "title": {"type": "string"},
+    "report_markdown": {"type": "string"},
+    "research_memory_markdown": {"type": "string"},
+    "sources": {"type": "array", "items": {"type": "string"}},
+    "breakthrough_verified": {"type": "boolean"},
+    "next_focus": {"type": "string"}
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "status": "limited",
+  "title": "第七轮：fine起点精确重建、缓存选择偏差与GE隔离资格",
+  "report_markdown": "## 1．范围与核心结论\n\n本轮开始于2026-10-13北京时间02:00。已读取state、首轮综合及最近00时、22时报告，先核GE定位材料，材料不足后执行排队的fine起点诊断。12项downstream实现、4项数据/runtime实现和train/val清单共18项SHA256与训练run.json一致；tracked diff为空。未修改文件、启动GPU、推理、训练或H拟合；Python诊断设置OMP/MKL/OpenBLAS线程为1、禁止字节码写入，各项均在120秒内结束。\n\n**供findings收录：可精确重建的247个截断后fine起点，只占8对96000个保留点的0.257%；其中245个GT可见点全部处于QRRU训练噪声方框范围内。另有完整QRRU轨迹的64点来自每对置信度排序最前8点，与上述247点没有lineage交集。现有可视化因此不能代表全量真实上游误差，也不能证明“级联输入超出训练噪声范围”是本组主因。** 这是对首轮假设的局部反证，不是对跨时相/JL任务的否定，更不是已验证改进。\n\n## 2．GE定位核验：仍不能确认95对候选隔离\n\n原始目录为`/home/disk1/Data/datasets/GoogleEarth/training_data`；生成器来源配置见`mhinet/dataio/generate_rgb512.py:34`。确定性读取RGB512 val清单中前16个GE源JPEG，16/16为1080×1080，EXIF均为空，PIL信息仅含JFIF字段。本地发现的train_pair.csv与val_pair.csv分别有36000、625条数据记录；第1行字段为current/past路径和六个仿射参数，没有地面分辨率、坐标锚点或footprint。目录检查未发现可直接使用的KML/XML定位旁车。该检查不等于证明全部文件不存在其他元数据。\n\n实时检索日期为2026-10-13北京时间。作者原仓库列出training_data及CSV，但已读取页面没有给出文件名坐标锚点或地面幅宽。核验旧论文《A Two-Stream Symmetric Network with Bidirectional Ensemble for Aerial Image Matching》，Jae-Hyun Park、Woo-Jeoung Nam、Seong-Whan Lee；arXiv v1提交于2020-02-04，期刊为Remote Sensing 12(3)，文章465。这里只核来源，不将其PCK与本项目P@1排名。([arxiv.org](https://arxiv.org/abs/2002.01325))\n\n所以前轮95个未见0.01°单元验证对仍是资格未定候选：1080像素不能换算米，JFIF密度不能替代地面分辨率；不能把文件名坐标默认为中心，也不能由最近坐标距离证明影像不重叠。部分网页请求失败，包括一次MDPI 429；作者仓库和arXiv可访问，但可信footprint证据未取得，故本轮status=limited。\n\n## 3．精确重建与选择偏差\n\n令V=`outputs/semidense_rgb512_h0joint_from_e_lr8e5_seed42_5ep/visualizations/step_0025535`。读取`V/pair_00`至`pair_07`的trace.json、selected_lineage.npz、32份fine NPZ及8份qrru_trace.npz，关联val清单第1、730、1459、2188、2918、3647、4376、5106行。仅作既有验证缓存历史诊断，不用来选K或阈值。\n\n`semidense.py:174`固定抽粗列表四个等距父窗口；第183行缓存实际a/b网格，第191行形成父/源/目标lineage，第195行按联合分数全局截断。联合分数是sqrt(fine概率×coarse置信度)，不是fine概率单独排序；第211行QRRU后仍沿用该分数。`visualize.py:174`保存lineage，第214行保存局部网格。故不需要拟合H0即可恢复这些起点。\n\n八对共有11674个粗父窗口、132172个截断前fine对应、96000个截断后对应；截断后涉及9796个父窗口。32个已缓存父窗口中27个仍有保留点，占截断后父窗口的0.276%。每对可重建点数为39/29/12/31/23/28/50/35，共247；两点按正式双侧重叠mask及GT投影可见性排除后为245。各对GT可见重建数为39/29/12/30/23/27/50/35。\n\n坐标按`supervision.py:8`的像素中心约定换算，直接使用manifest原生double H计算GT。下表残差为目标D2像素；正确数阈值为输入512像素，属于匹配微平均计数，不是配准SR。\n\n| 固定缓存集合 | 点数 | 初始EPE中位/95分位/最大，D2 | 任一轴超±2.4 | NCM@1/3/5 |\n| --- | ---: | --- | ---: | --- |\n| 局部fine预测，GT可见、截断前 | 335 | 0.646/1.400/4.535 | 1 | 89/322/331 |\n| 同窗口截断后可重建点 | 245 | 0.572/1.089/1.327 | 0 | 71/245/245 |\n| 同窗口被截断点 | 90 | 0.956/1.725/4.535 | 1 | 18/77/86 |\n\n截断后245点的绝对二维残差最大值分别为1.327、0.843 D2；GT到合法目标候选的最小距离全部≤3输入px。在32窗口的433个GT可见源查询中，仅377个满足同一候选可达条件。**保留预测的100%可达率不能外推全部查询**，因为已经经过预测mutual和全局截断选择。可达也不等于正式fine标签通过：后者还要求几何mutual及独立逆检查，见`supervision.py:89`。\n\n## 4．QRRU证据的边界与方法解释\n\n`semidense.py:203`仅记录排序后首批最前8点，每对8点、共64点。其初始EPE中位/最大为0.225/0.539 D2，最终为0.037/0.292；NCM@1从60变64，@3/5均为64。64个最终合法标记全部为true；本轮重算初始EPE与trace存值最大差0.0000188 D2。它们与32份fine窗口的保留lineage交集为0，因此不能拼成同点的“局部候选竞争→QRRU更新”证据链。\n\n**已验证：**这组被选择的高分合成验证点能被现有QRRU精修；不需要先扩大噪声范围解释它们。**尚未验证：**全量低分点、错父对应及真实跨域输入是否落在训练分布之外。只有最高分点的轨迹改善，不构成独立验证突破。\n\n截断后245点按联合分数从低到高分四组，NCM@1为13/61、14/61、8/61、36/62，@3均全对。排序与亚像素质量在这里并非逐组单调，且混杂来源、父窗口与格点相位；不能据此训练运行时GT筛点或推荐阈值。缺全量最终坐标，仍无法检验QRRU后质量排序。大量对应可能涉及相关误差和空间集中，但本轮未运行固定预算H拟合，不能宣称多点有害。\n\n## 5．按收益/成本排序的最小后续核查\n\n1. **零推理、先闭合历史机制：**只读分析这64个完整轨迹的二维逐轮更新、收益/退化及置信度—残差关系，明确高分选择偏差；若没有明显异常，停止从本缓存推断全量失败机制，不扩大噪声或改点数。\n2. **元数据前置：**补足GE坐标锚点/幅宽及FLAIR空间块资格。没有可信定位则报告开发panel资格未定，不用中心距离或模型成绩降低隔离标准。\n3. **待授权完整缓存后再实验：**冻结同一候选池、检查点和来源/地理隔离开发组，比较原输出、置信top-K、固定多种子同K随机、置信分层随机、空间均衡。只改变选点方式；K示例256/512/1000/2000/4000/全部，最终预算只在隔离开发集锁定。固定RANSAC拟合预算、阈值、配对种子及评分，报告P@1/3/5、NCM、NM、双侧覆盖、SR、失败率和网格RMSE分位数。P升但覆盖/NCM/SR降仅称权衡；同K随机也稳定改善才支持冗余解释，只有置信筛选改善更支持质量筛选。输出后筛点收益与fine/QRRU前剪枝计算收益分开。\n\n当前材料更支持“缓存选择偏差需要先排除”，尚不支持扩大训练噪声或减少点数的确定性结论。无严格独立验证改进，breakthrough_verified=false。",
+  "sources": [
+    "docs/research/mhinet_breakthrough/state.json",
+    "docs/research/mhinet_breakthrough/round_0001_synthesis.md",
+    "docs/research/mhinet_breakthrough/runs/20261013T000001/report.md",
+    "docs/research/mhinet_breakthrough/runs/20261012T220001/report.md",
+    "outputs/semidense_rgb512_h0joint_from_e_lr8e5_seed42_5ep/run.json",
+    "outputs/semidense_rgb512_h0joint_from_e_lr8e5_seed42_5ep/visualizations/step_0025535",
+    "/home/disk1/Data/datasets/MHINet_RGB_512/val/pairs.jsonl",
+    "/home/disk1/Data/datasets/GoogleEarth/training_data/train_pair.csv",
+    "/home/disk1/Data/datasets/GoogleEarth/training_data/val_pair.csv",
+    "mhinet/downstream/semidense.py:174",
+    "mhinet/downstream/semidense.py:189",
+    "mhinet/downstream/semidense.py:203",
+    "mhinet/downstream/visualize.py:174",
+    "mhinet/downstream/visualize.py:214",
+    "mhinet/downstream/supervision.py:8",
+    "mhinet/downstream/supervision.py:82",
+    "https://arxiv.org/abs/2002.01325",
+    "https://arxiv.org/html/2002.01325",
+    "https://github.com/jaehyunnn/DeepAerialMatching_pytorch"
+  ],
+  "breakthrough_verified": false,
+  "next_focus": "只读核验末步8对共64个高分QRRU完整轨迹：按lineage关联联合置信度，重算每轮二维残差、更新幅度、收益/退化和合法性，区分初始量化误差与精修退化；不外推未缓存的95936点，不选K/阈值、不启动推理。若该选择性缓存无异常，明确停止强化输入噪声不足故事，并列出取得可信地理隔离及全量最终质量缓存所缺的最小元数据。"
+}

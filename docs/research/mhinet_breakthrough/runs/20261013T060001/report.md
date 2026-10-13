@@ -1,0 +1,40 @@
+**本轮结论：本地FLAIR的459个区域全部进入过当前训练清单，14个原始ZIP也没有额外未解压影像。按区域留出标准，无法从这批材料补出当前检查点的隔离开发集。** 这闭合了前轮的来源核查，不证明减少输出点有效；breakthrough_verified=false。
+
+本轮为2026-10-13北京时间06时研究。已读取state、首轮综合、最近04时报告及必要的点数、地理隔离专题。训练run记录的18项源码/runtime/train与val清单SHA256全部一致，联合配置一致，tracked diff为空；该训练run顶层日志无前轮以来更新。此核验不覆盖原始TIFF内容，也不表示未跟踪用户文件不存在。CPU诊断均单线程、禁字节码、120秒封顶，主要统计约0.55–2.01秒；未写文件、读取影像像素、启动推理、训练或H拟合。
+
+**新增来源证据。** 令R=`/home/disk1/Data/datasets/MHINet_RGB_512`。全读R/source_split_manifest.jsonl的51061行及三个pairs.jsonl；各split的pair_id集合完全一致，六个来源字段逐行差异0，来源路径重复0。以“完整部门—年份采集目录＋二级ROI目录”为区域键，核对`/home/disk1/Data/datasets/FLAIR-HUB/extracted`的全部文件名：
+
+| 集合 | FLAIR影像数 | 采集目录数 | 区域数 |
+| --- | ---: | ---: | ---: |
+| 原始extracted | 36700 | 14 | 459 |
+| RGB512 train | 29360 | 14 | 459 |
+| RGB512 val | 3670 | 14 | 455 |
+| RGB512 test | 3670 | 14 | 455 |
+
+14个采集目录对应13个部门，D017有2018、2021两次采集。原始TIFF集合与三split的FLAIR来源并集完全相等：未用原图0、清单缺失原图0。所有val/test区域都属于train已有区域，451个区域同时跨三个split；每个区域已有15–227张训练影像。统计与[dataset_summary.json:70](/home/disk1/Data/datasets/MHINet_RGB_512/dataset_summary.json:70)吻合。
+
+进一步只读`FLAIR-HUB/data/*.zip`的中央目录：14个ZIP共36700个TIFF条目，与extracted逐个完整相对文件名等集；未解压新增TIFF、重复条目和额外解压TIFF均为0。因此“原始压缩包可能还留有未用区域”的替代解释，在这14个本地包内被否定。候选为空，未继续扫描GeoTIFF头。
+
+区域裸名不能独立作分组键：459组只有343个裸名，其中93个跨采集目录复用。例如`UU-S1-1`分别出现在train清单[第246行](/home/disk1/Data/datasets/MHINet_RGB_512/train/pairs.jsonl:246)、[第425行](/home/disk1/Data/datasets/MHINet_RGB_512/train/pairs.jsonl:425)、[第3189行](/home/disk1/Data/datasets/MHINet_RGB_512/train/pairs.jsonl:3189)，对应不同部门。反过来，目录键不同也不自动证明footprint互不重叠。
+
+已观察GE498与JL1755的清单身份由[评估plan:12](/home/disk1/MHINet/outputs/semidense_rgb512_h0joint_test512_20261012/plan.json:12)及第17行、清单哈希核对。其原生图像路径与FLAIR来源交集均为0；这只证明路径分离，因缺可信footprint，不能宣称地理零交叠。本轮仅读来源元数据，没有重算测试表现；RGB512目录中的test亦不能自动称为未观察或封存。
+
+**数据与训练实现的解释。** [generate_rgb512.py:82](/home/disk1/MHINet/mhinet/dataio/generate_rgb512.py:82)按dataset随机打乱单文件后分配80/10/10，没有区域留出。[data.py:41](/home/disk1/MHINet/mhinet/dataio/data.py:41)以源路径作为geo_group；[train.py:155](/home/disk1/MHINet/mhinet/downstream/train.py:155)检查该组交集，对FLAIR实际检验的是文件隔离。summary中的source_leakage=0与本轮区域共享并不矛盾。
+
+全部51061个pair拥有相同36字段；[生成器:509](/home/disk1/MHINet/mhinet/dataio/generate_rgb512.py:509)保留源路径、尺寸、像素变换与种子，未显式保存CRS、像素到地面的affine、footprint、采集/母图组。`T_source_to_A/B`是图像像素变换，不能当作地面affine。原始目录链及GeoTIFF仍可追溯，但重新组织清单不能消除现检查点已经见过的区域。
+
+**实时文献补证。** 检索日期2026-10-13北京时间。《FLAIR-HUB: Large-scale Multimodal Dataset for Land Cover and Crop Mapping》，Anatol Garioud、Sébastien Giordano、Nicolas David、Nicolas Gonthier：arXiv v1为2025-06-08，核验v2为2026-03-05；作者官网列ISPRS Journal第237卷、2026年、271–300页及DOI，本轮未另核出版全文。[版本页](https://arxiv.org/abs/2506.07080)、[作者官网](https://ignf.github.io/FLAIR/FLAIR-HUB/flairhub)
+
+v2 §III、§IV-B明确：ROI名不全局唯一；官方train/val按ROI划分，test按domain留出。GLOBAL_ALL_MTD_GEOM提供EPSG:2154下patch与ROI边界，GLOBAL_ALL_MTD_SPLIT提供官方分区；AERIAL_MTD_DATES提供采集及原始影像信息。本地FLAIR根下未列到这些GeoPackage。[论文正文](https://arxiv.org/html/2506.07080v2) 这些字段为未来来源资格审计提供具体入口，不能把官方split事后套回已训练检查点。其语义分割指标不用于匹配方法排名。
+
+**事实、假设与点数专题的连接。** 已验证的是本地区域候选为空和现行文件分组的局限；没有验证“地理共享造成了多少精度高估”。可能的解释是现有合成val更偏向训练域内插值，不能充分约束跨域置信排序；这是待检验假设，也不能单独解释GE/JL低精度。
+
+点数专题已在18时报告覆盖，本轮不重复局部缓存统计。[semidense.py:189](/home/disk1/MHINet/mhinet/downstream/semidense.py:189)仍以fine概率与父粗置信度组合排序，QRRU后沿用旧分数。隔离开发来源缺失，使“低分错配被保留”“空间冗余干扰拟合”和“QRRU后分数失效”仍无法通过现有选择性缓存作独立判断；内容matchability也不能由几何overlap替代。停止从64个高分轨迹继续强化噪声不足假设。
+
+**按证据收益与成本排序的最小后续方案：**
+
+1. 零推理先寻找其他已存在、MHINet训练未用的地理来源；或为未来按区域分组重训准备清单。资格记录需含源文件身份、部门/采集/ROI/母图组、CRS、地面affine及像素中心约定、完整源footprint、训练祖先与已观察来源交集。A使用完整原图，应检查完整源范围，不能只检查B裁块。缺定位即标记资格未定；事后删训练记录不算隔离。
+2. 隔离panel成立且另获执行授权后，冻结同一检查点与候选池，最低缓存全部最终a/b、原分数、稳定lineage、合法mask、来源组及哈希；检验QRRU退化时再加完整fine起点。全点缓存应覆盖低分与错父候选，不能继续仅用最高分探针。
+3. 沿用固定预算对照：原输出、置信top-K、同K多种子随机、置信分层随机及空间均衡；K=256/512/1000/2000/4000/全部只是预注册示例，仅在隔离开发集锁定。单次只改变选点方式，固定RANSAC假设尝试预算、阈值、配对种子、退化与评分规则，按来源、重叠、尺度、纹理和覆盖分层。报告P@1/3/5、NCM、NM、双侧覆盖、SR、失败率及网格RMSE中位/P90/P95/P99。P升而NCM/覆盖/SR降仅称权衡；随机也稳定改善才支持冗余或拟合负担，只有置信筛选改善更支持质量筛选。输出后拟合收益与推理前剪枝收益分开；方案锁定后再使用新的封存测试集。
+
+本轮没有新增上述匹配或配准指标，不能据来源核查宣称实际提升。**供findings收录：本地FLAIR原始与压缩包来源均已全部分配，459区域均训练已见；当前区域隔离开发集需要其他新地理来源，或未来从训练前重新分组。** 下一轮转查本地WHU原始val/test的使用历史与母图定位资格，避免继续无候选地扫描FLAIR头部。

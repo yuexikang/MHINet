@@ -1,5 +1,10 @@
 JL1Flight 512 小学习率微调（2026-10-03）
 
+文档状态（2026-10-14）：历史 JL 域适配记录，实际已完成5/5 epoch、4215/4215优化步；下文保留该次训练的原始超参和方法。
+该任务从旧 RGB512 合成权重初始化，不是最新 H0 联合权重的微调；跨数据集影响见 docs/jl1flight_finetune_transfer_analysis.md。
+当前路线见 docs/mainline_d8_d2.md；当前基线见 docs/semidense_rgb512_h0_joint_test512_results.md，默认 H0 推理配置为 A。
+下文 Lc/Lf/Lq 与 H0 无直接梯度属于历史算法。当前训练器对 freeze_h0=false 且未指定 h0_loss_weight 的旧配置默认启用 Lh0=1，旧 launcher/config 原样开启新任务不能严格复现历史训练；恢复还受实现哈希校验约束。
+
 任务目录：/home/disk1/MHINet/outputs/semidense_jl1flight_512_lr8e6_5ep_seed42
 模型输入：512×512，原始影像为 640×640；PIL bicubic 缩放，真值以原始 A→B 单应矩阵和原始尺寸转换为 align_corners=False 归一化坐标。
 

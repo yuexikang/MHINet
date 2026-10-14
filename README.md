@@ -1,332 +1,50 @@
 # MHINet
 
-当前主线：共享 GHIM/CGMDP，支持 MHIR 与 H0 引导粗细匹配下游。
-DINOv3 默认冻结，**LoRA 暂不启用**；LoRA 实现及独立实验入口仅保留供后续研究。
-稳定几何数据与当前适应实验见 [实验登记](docs/shared_stable_v2_adaptation.md)，
-下游迁移范围与验证限制见 [下游登记](docs/shared_downstream_integration.md)。
+当前主路线（2026-10-14）：**共享 GHIM/CGMDP → D8 粗匹配 → D2 细匹配 → 4 轮 QRRU**，以 RGB512 H0 联合训练版本作为可复用基线。
 
-This repository implements MHINet under training protocol v1.2. The current
-mainline is deliberately truncated at `D2`: it has three functional modules
-and six homography updates, not the former four-scale/eight-update path.
+路线决策、默认设置和证据边界见[主路线说明](docs/mainline_d8_d2.md)；所有文档的用途与过时项见[文档入口](docs/README.md)和[筛查清单](docs/document_status_20261014.md)。
 
-1. **Global Homography Initialization Module (GHIM):** shared DINOv3 and MVT
-   infer the initial global homography `H0` and cross-image context
-   `F_MVT = (F_MVT^A, F_MVT^B)`.
-2. **Cross-image Guided Multi-scale Descriptor Pyramid (CGMDP):** MVT context
-   and VGG local features enter a DeDoDe-style cumulative decoder with active
-   flow `F_MVT -> D16 -> D8 -> D4 -> D2`.
-3. **Multi-scale Homography Iterative Refinement Module (MHIR):** an adapter,
-   H-guided local correlation, and an MCNet-style correlation decoder perform
-   two updates at each of `D8`, `D4`, and `D2`, giving
-   `H0 -> H1 -> ... -> H6 = H_final`.
+## 模型与命名
 
-`Ds` means a fused matching descriptor at image scale `1/s`; it does not name
-a DeDoDe layer or a feature produced by DeDoDe alone. The D1 implementation is
-retained for future controlled comparisons, but the main model neither asks
-CGMDP to decode `D1` nor executes the D1 adapter, correlation, or refinement
-decoder. Thus the inactive D1 code has no full-resolution feature or compute
-cost in a normal mainline forward. See
-[`docs/model_architecture.md`](docs/model_architecture.md) for the precise
-contracts and MCNet adaptation.
+GHIM 通过冻结的 DINOv3 和可训练 MVT 提供 H0 及跨图像上下文；CGMDP 融合上下文与 VGG 特征，累计解码至 D2。下游消费 D8 和 D2，先生成粗父对应，再展开局部细对应并由 QRRU 精修匹配点。
 
-Python/config fields named `stage1_*` and external LoRetta source names remain
-legacy compatibility aliases for GHIM. They do not denote another model
-stage. Planar, FGO, overlap, and auxiliary-correlation losses remain disabled
-on the mainline.
+本路线统一称“D8→D2 密集匹配下游”。现有实现与检查点仍命名为 `SemidenseSystem` / `SemidenseMatcher` / `semidense_qrru_v1`：返回的是经互选、置信筛选和数量截断后的匹配集合，并非每个像素都有对应。D4 是共享金字塔的中间层；D1 不启用。结构与梯度说明见[模型架构](docs/model_architecture.md)。
 
-## Code layout and shell entry points
+DINOv3 冻结，LoRA 暂不启用。当前 H0 联合配置训练 MVT、GHIM/H0、VGG、CGMDP 与匹配/QRRU，固定 VGG BN running statistics；损失为 `Lc + Lf + Lq + Lh0`。匹配先验仍 detach，GHIM 头通过独立 Lh0 获得监督。
 
-The Python source is organized by responsibility (not experiment run):
+## 当前基线与结果
 
-```text
-mhinet/
-  models/          # GHIM/CGMDP provider, MHIR layers/iteration, complete model
-  ops/             # guarded homography geometry and local correlation
-  engine/          # training, evaluation, losses, metrics, checkpoints
-  dataio/          # pair loading and geographic grouping
-  diagnostics/     # alignment, gradients, profiling, tiny-overfit and gates
-  visualization/   # H0 plus six refinement overlay images
-  config.py        # configuration and resource paths
-  cli.py           # stable unified command dispatcher
-  __init__.py
-scripts/
-  train_e01.sh      # E01 training, physical GPU 1 by default
-  test_e00.sh       # pretrained H0 baseline on the full test split (1000 pairs)
-  test.sh           # real-image accuracy evaluation with an explicit checkpoint
-  unit_tests.sh     # CPU engineering unit tests
-```
+- 权重：`weight/semidense_rgb512_h0joint_from_e_lr8e5_seed42_5ep.pt`，已完成 5 epoch、25,535 步，尚未做 JL 微调。
+- [联合训练及两数据集测试](docs/semidense_rgb512_h0_joint_test512_results.md)：GoogleEarth 498 对、JL1Flight 1755 对，SR@3 分别为 47.59% / 43.65%。这不是已验证精度突破。
+- [H0 推理位置消融结果](docs/H0推理位置消融实验结果.md)：默认保留 A，即 D8 H0 mask 与 D2 H0 几何引导都开启；其余组为固定权重对照，不按测试集结果改默认。
+- 后续实施顺序见[实验计划](docs/experiment_plan.md)，累计诊断见[研究阅读指南](docs/research/mhinet_breakthrough/reading_guide.md)。
+
+## 当前入口
+
+在 `/home/disk1/MHINet` 使用已有 `loma-repro` 环境。主线配置为 `configs/semidense_rgb512_h0_joint_5epoch.json`，runtime 为 `configs/runtime_paths.mhinet_rgb512.server.json`。
 
 ```bash
-# Unit tests only; no real dataset or GPU required
-bash scripts/unit_tests.sh
+# 查看可训练匹配路线的入口参数
+conda run --no-capture-output -n loma-repro python -m mhinet.cli train-semidense --help
+conda run --no-capture-output -n loma-repro python -m mhinet.cli evaluate-semidense --help
 
-# Real-image accuracy, full test split by default (replace with your checkpoint)
-bash scripts/test.sh /absolute/path/to/checkpoint.pt
-
-# Optional small evaluation subset; not a replacement for full test results
-bash scripts/test.sh /absolute/path/to/checkpoint.pt --max-pairs 16
-
-# Inspect the command without training
-DRY_RUN=1 bash scripts/train_e01.sh
-
-# Independent E00 H0 baseline (no training checkpoint needed)
-bash scripts/test_e00.sh
-
-# Start formal E01 on physical GPU 1 (train=train, in-training validation=val)
-bash scripts/train_e01.sh
-
-# Optional GPU override or resume from an existing checkpoint
-GPU_ID=2 bash scripts/train_e01.sh
-bash scripts/train_e01.sh --resume /absolute/path/to/step_0000500.pt
+# 在新输出目录复现已登记 H0 联合训练；按实际空闲设备选择 GPU
+CUDA_VISIBLE_DEVICES=0 bash scripts/train_semidense_rgb512_h0.sh outputs/your_new_h0joint_run
 ```
 
-训练输出目录的语义是自动的：新目录或空目录从头训练；非空目录若有
-`checkpoints/step_*.pt`，且未提供 `--resume`，自动从最新checkpoint继续。
-恢复仍强制检查配置、架构和profile hash。非空但没有checkpoint会安全报错；
-要开始新实验请使用新的输出目录。`--overwrite`是显式例外，只应在确认目录后使用。
+训练 launcher 在目标目录已有 `latest.pt` 时自动恢复；新目录从 E 组权重初始化并建立新优化器。已完成的基线目录保留原样，新实验使用独立输出目录。`evaluate-semidense` 是按 tier 的原生坐标匹配评价入口，不等同于最新 Test_Data 的拟合 H / SR 协议；正式对照以已冻结的清单、实现和指标为准，详见[主路线说明](docs/mainline_d8_d2.md)。
 
-当前脚本默认使用 `configs/e01_heads_v1.2 bs_2.json`（BS2、有效batch8，已显式
-标记为实验性，因为批量H0对齐尚未通过）。若要运行协议主线的BS1配置，请执行：
+`evaluate-dense` 对应早期 P3/P6 零样本消费者；`train` / `resume` / `evaluate` 对应旧 MHIR 路线。源码与旧入口保留供历史复现，日常主线使用上述 `*-semidense` 入口。
 
-```bash
-MHINET_CONFIG="$PWD/configs/e01_heads_v1.2.json" \
-MHINET_OUTPUT_DIR="$PWD/outputs/E01_heads_seed0" \
-bash scripts/train_e01.sh
-```
+## 代码与资源
 
-These scripts resolve the repository from their own location and can be invoked
-from another working directory. They use the existing `loma-repro` interpreter;
-override `MHINET_PYTHON` when relocating the environment. Training retains the
-existing configuration, tiny gate, progress bars and seven validation overlays.
-It does not silently overwrite output or automatically run E00.
+| 路径 | 用途 |
+| --- | --- |
+| `mhinet/pretraining/`、`mhinet/models/` | 共享 GHIM/CGMDP 及历史 MHIR 实现 |
+| `mhinet/downstream/semidense.py`、`qrru.py` | 当前 D8→D2 匹配与 QRRU |
+| `mhinet/downstream/training.py`、`train.py` | 独立 H0 监督、参数组与训练/恢复 |
+| `scripts/train_semidense_rgb512_h0.sh` | 当前 H0 联合训练 launcher |
+| `scripts/evaluate_h0_position_ablation.py` | 固定权重 H0 位置消融 |
+| `weight/README.txt`、`weight/manifest.json` | 常用权重与来源登记 |
 
-Real-image evaluation writes `report.md`, `metrics/summary.json`, per-pair
-CSV/JSONL and `visualizations/pair_0000/` (H0 + six updates). It reports MACE,
-5x5 grid error, all-pair success@1/3/5 px and normalized empirical-recall
-AUC@1/3/5 px, invalid/rejected rates, memory and latency. Metrics include H0
-through H6; failed outputs remain in the success/AUC denominator. Training uses
-train (36000 pairs), in-training validation uses val (2500 pairs), and independent
-evaluation (including E00) defaults to test (1000 pairs). Test results must not
-be used to select hyperparameters or checkpoints. Full command
-examples and metric conventions: [real-image evaluation](docs/real_image_evaluation.md).
-
-每次发现的评估summary都会登记到[评估总表](docs/evaluation_summary.md)和机器可读的
-`artifacts/evaluation_registry.json`；重新扫描已有输出可运行
-`python -m mhinet.engine.evaluation_registry --scan outputs`。
-
-`python -m mhinet.cli <command>` is unchanged. Direct Python imports now use
-the subpackages, e.g. `from mhinet.models.model import MHINet` and
-`from mhinet.engine.train import TrainConfig`. Historical logs/artifacts retain
-their original paths and hashes; they are not rewritten as new evidence.
-
-## Validation status
-
-The MCNet-style MHIR rewrite and the D2 truncation change the architecture
-identity. Therefore former D1, TINY-8, decoder zero-init, gradient-audit, and
-eight-update tiny-overfit artifacts are **legacy evidence only** and cannot
-open the current training gate. The current `TINY-S-D8`, `TINY-S-D4`,
-`TINY-S-D2`, and `TINY-6` checks have passed, together with P0–P4 engineering
-checks, independent checkpoint replays, and the merged gate. Work is stopped
-before E00/E01 as requested. D8/D4/TINY-6 use the preregistered averaged
-diagnostic readout; D2 passes with raw parameters. See the full
-[pretraining results table](docs/pretraining_mcnet_d2_summary.md) and
-[interpretation](docs/results_mcnet_d2.md). These checks use one exact training
-image pair with 32 controlled H0 conditions; they do not demonstrate held-out
-accuracy or joint-training convergence.
-
-An artifact saying a command completed is not evidence that the model is
-accurate. Model validation additionally requires the registered validation
-metrics, failure rates, resource measurements, and comparisons. Current and
-historical evidence is recorded in `implementation_log.md`.
-
-## Server environment and resources
-
-Run from `/home/disk1/MHINet` in the existing conda environment:
-
-```bash
-conda run --no-capture-output -n loma-repro python -m mhinet.cli --help
-```
-
-Resolved server paths live in `configs/runtime_paths.server.json`. The known
-resources are:
-
-- LoMa source: `/home/disk1/LoMa`
-- LoRetta source: `/home/disk1/LoMa/third_party/LoRetta`
-- data: `/home/disk1/Data/datasets/GoogleEarth_scale_pairs`
-- LoMa-B weights: `/root/.cache/torch/hub/checkpoints/loma_B.pt`
-- shared official LoRetta weights: the resolved snapshot and content-addressed
-  hash recorded in `implementation_log.md`
-
-Do not silently substitute checkpoints. The test split is sealed and is not
-used for implementation choices, tiny diagnostics, checkpoint selection, or
-ablation selection.
-
-## Fast verification
-
-```bash
-conda run --no-capture-output -n loma-repro python -m compileall -q mhinet tests
-conda run --no-capture-output -n loma-repro \
-  python -m unittest discover -s tests -v
-
-conda run --no-capture-output -n loma-repro \
-  python -m mhinet.cli geometry-corr-check \
-  --output artifacts/p2_reference_checks.json --overwrite
-```
-
-The real-resource checks require a free CUDA device. Select it explicitly
-with `CUDA_VISIBLE_DEVICES`; the process then sees that device as `cuda:0`.
-Use new artifact names so the MCNet/D2 results cannot overwrite or be confused
-with the superseded eight-update artifacts:
-
-```bash
-CUDA_VISIBLE_DEVICES=3 conda run --no-capture-output -n loma-repro \
-  python -m mhinet.cli preflight \
-  --runtime configs/runtime_paths.server.json \
-  --output artifacts/p0_preflight_mcnet_d2.json --overwrite
-
-CUDA_VISIBLE_DEVICES=3 conda run --no-capture-output -n loma-repro \
-  python -m mhinet.cli alignment \
-  --runtime configs/runtime_paths.server.json \
-  --output artifacts/p0_p1_alignment_mcnet_d2.json --overwrite
-
-CUDA_VISIBLE_DEVICES=3 conda run --no-capture-output -n loma-repro \
-  python -m mhinet.cli zero-init-smoke \
-  --runtime configs/runtime_paths.server.json \
-  --output artifacts/p3_zero_init_smoke_mcnet_d2.json --overwrite
-
-CUDA_VISIBLE_DEVICES=3 conda run --no-capture-output -n loma-repro \
-  python -m mhinet.cli gradient-audit \
-  --runtime configs/runtime_paths.server.json \
-  --output artifacts/p4_gradient_audit_mcnet_d2.json --overwrite
-```
-
-Zero initialization can make gradients before the output projection zero on
-the first optimizer step. The audit must therefore check the second and later
-steps, both MVT gradient routes, and that freezing the GHIM head does not wrap
-its forward in `no_grad` or `inference_mode`. `H0` and the cumulative corner
-state must stay attached through all six updates.
-
-## Tiny-overfit gate
-
-The current P4 gate contains four independent experiments:
-
-| Experiment | Active scales | Updates |
-| --- | --- | ---: |
-| `TINY-S-D8` | `D8` | 2 |
-| `TINY-S-D4` | `D4` | 2 |
-| `TINY-S-D2` | `D2` | 2 |
-| `TINY-6` | `D8 -> D4 -> D2` | 6 |
-
-The baseline diagnostic uses B=1, effective batch 4, AdamW lr `1e-3`, zero
-weight decay, no scheduler, clip 1, and only the adapters/refinement decoders.
-Controlled `H0` belongs only to this diagnostic and is never substituted into
-formal training. Run one experiment per process with distinct output and
-progress paths; for example:
-
-```bash
-CUDA_VISIBLE_DEVICES=3 conda run --no-capture-output -n loma-repro \
-  python -u -m mhinet.cli tiny-overfit \
-  --runtime configs/runtime_paths.server.json --experiments D2 \
-  --sample-protocol one_pair_residuals \
-  --residual-profile translation --residual-bound-fraction 0.5 \
-  --precision bf16 --sample-count 32 --seed 0 \
-  --max-steps 2000 --eval-interval 32 --threshold-mace-px 0.1 \
-  --weight-average-start-step 1536 --heartbeat-interval 8 \
-  --progress-checkpoint outputs/tiny_overfit/mcnet_d2_scale_d2_progress.pt \
-  --output artifacts/p4_tiny_s_d2_mcnet.json --overwrite
-```
-
-Repeat with `D8`, `D4`, and `TINY-6`, changing both paths. If a process is
-interrupted, repeat every trajectory-defining argument and replace
-`--progress-checkpoint PATH --overwrite` with `--resume-progress PATH`. A
-progress checkpoint is accepted only when its architecture, data manifest,
-runtime, weight hashes, RNG/data cursor, and protocol signature match exactly.
-Never resume a pre-rewrite D1 or TINY-8 checkpoint into this model.
-
-Merge only after all four current artifacts have completed and passed:
-
-```bash
-conda run --no-capture-output -n loma-repro \
-  python -m mhinet.cli tiny-gate-merge \
-  --inputs artifacts/p4_tiny_s_d8_mcnet.json \
-           artifacts/p4_tiny_s_d4_mcnet.json \
-           artifacts/p4_tiny_s_d2_mcnet.json \
-           artifacts/p4_tiny_6_mcnet.json \
-  --output artifacts/p4_tiny_gate_mcnet_d2.json --overwrite
-```
-
-The merger must fail closed on a missing experiment, an architecture/protocol
-hash mismatch, rejected/non-finite geometry, or a registered metric that does
-not pass. Weight-averaged tiny readout is a diagnostic and remains
-non-resumable; raw endpoint metrics must still be retained.
-
-## D1 is deferred, not deleted
-
-D1 adapter/correlation/decoder code remains available for a future explicitly
-selected experiment. It is not part of the current model, current P4 gate, or
-E00--E05. In particular, CGMDP stops after `D2`, so merely leaving D1 classes
-in the source does not allocate a `784 x 784` descriptor.
-
-The old dense-D1 5x5 runs, interrupted checkpoints, TINY-8 gate design, and
-sparse/3x3 proposals are archived as legacy/pending revalidation. If D1 is
-reactivated later, compare it against the frozen D2 mainline from a separately
-registered branch, report accuracy as well as latency/memory, and never use
-old D1 results as if they came from the MCNet-style decoder. The deferred plan
-is detailed in [`docs/experiment_plan.md`](docs/experiment_plan.md).
-
-## Minimal training and exact-boundary resume
-
-The following two-step run checks the entrypoint and exact optimizer-boundary
-resume only; it is not E01 and is not accuracy evidence:
-
-```bash
-CUDA_VISIBLE_DEVICES=3 conda run --no-capture-output -n loma-repro \
-  python -u -m mhinet.cli train \
-  --runtime configs/runtime_paths.server.json \
-  --config configs/train_minimal_smoke.json \
-  --output-dir outputs/mhinet_resume_smoke_mcnet_d2 \
-  --stop-after-optimizer-step 1 --overwrite
-
-CUDA_VISIBLE_DEVICES=3 conda run --no-capture-output -n loma-repro \
-  python -u -m mhinet.cli resume \
-  --runtime configs/runtime_paths.server.json \
-  --config configs/train_minimal_smoke.json \
-  --output-dir outputs/mhinet_resume_smoke_mcnet_d2 \
-  --resume outputs/mhinet_resume_smoke_mcnet_d2/checkpoints/step_0000001.pt
-```
-
-Formal E01 is gated. Run it only after the current four-experiment gate is
-explicitly `passed`:
-
-```bash
-CUDA_VISIBLE_DEVICES=3 conda run --no-capture-output -n loma-repro \
-  python -u -m mhinet.cli train \
-  --runtime configs/runtime_paths.server.json \
-  --config configs/e01_heads_v1.2.json \
-  --tiny-gate-artifact artifacts/p4_tiny_gate_mcnet_d2.json \
-  --output-dir outputs/E01_heads_mcnet_d2_seed0
-```
-
-## Evaluation and profiling
-
-Evaluation must report `H0`, all six update states, explicit `H_final`, solve
-failures, input/native-pixel geometry, per-pair rows, latency, and peak memory.
-Use grouped `val` during development.
-
-```bash
-CUDA_VISIBLE_DEVICES=3 conda run --no-capture-output -n loma-repro \
-  python -m mhinet.cli evaluate \
-  --runtime configs/runtime_paths.server.json --split val \
-  --checkpoint outputs/E01_heads_mcnet_d2_seed0/checkpoints/step_0010000.pt \
-  --output-dir outputs/E01_heads_mcnet_d2_seed0/final_val
-
-CUDA_VISIBLE_DEVICES=3 conda run --no-capture-output -n loma-repro \
-  python -m mhinet.cli profile \
-  --runtime configs/runtime_paths.server.json --profile joint \
-  --optimizer-steps 2 \
-  --output artifacts/p4_profile_joint_mcnet_d2.json --overwrite
-```
-
-`completed` in `run.json` means only that the requested optimizer budget
-finished. It must never be relabeled as model validation success without the
-registered held-out evidence.
+LoMa/LoRetta 源码、官方初始化权重和数据路径由 runtime 配置登记。Test_Data 只用于冻结协议评价，不用于选择超参、checkpoint、H0 开关或点数。过时方案和说明已删除，清单见[文档状态](docs/document_status_20261014.md)；保留的 MHIR tiny gate、H0→H6 实验结果和评估注册表按其原始范围阅读。

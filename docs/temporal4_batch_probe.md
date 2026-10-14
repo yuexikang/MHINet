@@ -1,5 +1,8 @@
 # temporal4：有效batch8的真实BS1/BS2对照
 
+> 文档状态（2026-10-14）：**历史结果**。本文保留旧 frozen_dino_mvt/MHIR 模型的 BS1/BS2 吞吐、显存和 BF16 输出差异证据。结论限于登记模型、数据和环境，不作为当前 D8→D2/QRRU 模型的批量对齐或速度结论。
+> 当前路线：[D8→D2 主路线](mainline_d8_d2.md)；分类依据：[文档状态索引](document_status_20261014.md)。
+
 2026-09-11，同一张物理GPU0（RTX4090）顺序运行，开始时GPU0/1空闲、没有MHINet正式训练。
 使用新train的前16对循环，seed0、原始预训练初始化、frozen_dino_mvt模式与四项GHIM监督。
 两组均有效batch8、原正式学习率及500步warmup，3步性能预热、6步计时；每组9次优化。

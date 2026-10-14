@@ -1,5 +1,7 @@
 # RGB512 H0 联合训练与两数据集测试
 
+文档状态（2026-10-14）：当前 [D8→D2 密集匹配下游主路线](mainline_d8_d2.md)的 RGB512 已完成基线。代码及 checkpoint 标识沿用 `semidense`；本页实验数值不因路线确立而更改。[固定权重 H0 推理位置消融](h0_inference_position_ablation_results_20261013.md)之后，默认仍为 A（D8 H0 mask、D2 H0 warp 与支持区 mask 均启用）。
+
 2026-10-12 核验：训练完成 5 epoch、25,535/25,535 步，两套测试集全量评估完成。H0 监督修复了头部缺少梯度的问题，但测试精度与旧 RGB512 预训练模型基本持平，没有明显的迁移精度提升。
 
 最终权重：`weight/semidense_rgb512_h0joint_from_e_lr8e5_seed42_5ep.pt`，同名 TXT 保存训练方法和完整进度。SHA256：`43c020b213306c1ba517460092e4007799c2f445edce09cb00bf88fc8ac69cb4`。模型尚未做 JL 微调。

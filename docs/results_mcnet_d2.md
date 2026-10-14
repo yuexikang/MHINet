@@ -1,5 +1,8 @@
 # MCNet 解码器、D2 截断主线实验记录
 
+> 文档状态（2026-10-14）：**历史结果**。本文所称 D8/D4/D2 各两轮“主线”指历史 MCNet/MHIR 六次单应更新。工程检查、失败轨迹、tiny gate 与恢复差异仍是有效的登记证据，适用范围限于该架构和受控实验。
+> 当前路线：[D8→D2 主路线](mainline_d8_d2.md)；分类依据：[文档状态索引](document_status_20261014.md)。 后续参考：[pretraining_mcnet_d2_summary.md](pretraining_mcnet_d2_summary.md)。
+
 当前架构 SHA256：`92095ffe16a5e650bab641df3fd17e16a0bf1f34ab47c82c59f37faa43ae092a`。
 主线为 D8/D4/D2 各两轮；D1 代码保留，默认不执行。以下工程检查不能替代完整 tiny gate 或模型精度验证。
 

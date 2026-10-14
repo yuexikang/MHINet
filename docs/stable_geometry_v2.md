@@ -1,5 +1,8 @@
 # 稳定几何三档数据 v2
 
+> 文档状态（2026-10-14）：**专项参考**。本文继续作为 stable_v2 数据生成、几何安全界和验收说明；其中“为后续 MCNet 四角更新”是历史设计动机。未切训练 runtime、未训练等语句记录生成验收时状态，当前主路线另见 D8→D2 密集匹配说明。
+> 当前路线：[D8→D2 主路线](mainline_d8_d2.md)；分类依据：[文档状态索引](document_status_20261014.md)。 后续参考：[stable_geometry_v2_extrapolation.md](stable_geometry_v2_extrapolation.md)。
+
 ## 2026-09-20 完整生成验收
 
 生成及数据验收已完成，机器报告 `artifacts/stable_geometry_v2_verification.json`。

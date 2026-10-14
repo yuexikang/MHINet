@@ -1,5 +1,7 @@
 # E组 expanded MRSI 全量真值评估
 
+文档状态（2026-10-14）：历史 E 权重、784 输入的 600 对 MRSI 评估及重评分证据；模态表现、无效 H0 和 RMSE 诊断仍有效。它不是当前 RGB512 H0 联合权重的 MRSI 成绩。当前路线见 [D8→D2 主路线](mainline_d8_d2.md)，当前基线见 [RGB512 H0 联合双数据集测试](semidense_rgb512_h0_joint_test512_results.md)。以下命令中的独立 worktree 与 main 状态记录当时执行环境，当前仓库已具备半密集/QRRU 实现。
+
 ## 当前RMSE口径（按用户修订）
 
 成功条件沿用配准SR@3px（预测H在GT可见网格上的配准RMSE≤3px）；正确匹配为GT重投影误差≤5px且支持区有效。成功对计算 sqrt(sum(e_i²)/NCM)，只用正确匹配；失败对RMSE=10。变换源点使用H_GT。最后对全体600对逐对取平均，包含失败对。
@@ -38,7 +40,7 @@
 - 数据：`/home/disk1/Data/datasets/MRSI/expanded_MRSI_dataset`，600对，6个模态目录各100对。每场景00.PNG为源，01至10.PNG为目标；00_.PNG仅作辅助参考。
 - 真值：目标影像同名.npy中的原图像素3×3单应矩阵，方向source→target。与remote_archive归档0to1矩阵核对，600个矩阵最大元素绝对差约5e-10（文本精度）。不使用原始46对的恒等映射假设。
 - 权重：`outputs/semidense_stable_v2_tier3_lr_e_seed0/latest.pt`，完整E最终权重；DINO依赖SHA核验、模型strict加载；不在MRSI上训练或选权重。
-- 实现：正式推理1024版本`7cddb2a`，独立detached worktree加载；当前主工作区保留main，不合并实验训练分支。main本身没有半密集QRRU模型代码。
+- 实现：正式推理1024版本`7cddb2a`，当时通过独立detached worktree加载；评测时主工作区保留main，没有合并实验训练分支，当时main尚无半密集QRRU代码。该实现随后已集成，当前使用方式见[512 输入说明](semidense_input512_usage.md)。
 - 推理：D8→H残差D2→4轮QRRU，inference_window_chunk=1024，固定输入784，坐标映射回各原图像素；预测不读取GT。
 - GPU1，固定权重、seed0；首对额外预热，随后模块CUDA event计时，排除读图、传输前等待、GT评分、RANSAC和绘图IO。
 

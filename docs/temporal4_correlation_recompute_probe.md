@@ -1,5 +1,8 @@
 # BS1关闭相关性重计算短测
 
+> 文档状态（2026-10-14）：**历史结果**。本文保留旧 MHIR 相关性 activation checkpoint 的同权重预测、梯度及资源对照。该开关与训练 checkpoint 保存不同，测得加速和显存变化只适用于登记的旧精修实现。
+> 当前路线：[D8→D2 主路线](mainline_d8_d2.md)；分类依据：[文档状态索引](document_status_20261014.md)。
+
 2026-09-11。按用户要求，仅测试关闭相关性activation checkpoint，不修改正式训练配置。
 这不是关闭训练checkpoint保存。物理GPU0 RTX4090顺序测off/on，新train前16对循环，
 BS1×累积8、相同原始预训练初始化、frozen_dino_mvt、GHIM四项监督和500步warmup。

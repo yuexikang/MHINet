@@ -1,5 +1,8 @@
 # 真实影像精度评估
 
+> 文档状态（2026-10-14）：**历史结果**。本文评价仅训练两步的工程权重在旧 16 对 val 上的 H0→H6 几何轨迹。原数字和局限保留，不作为当前 D8→D2 密集匹配全量精度或模型排名。
+> 当前路线：[D8→D2 主路线](mainline_d8_d2.md)；分类依据：[文档状态索引](document_status_20261014.md)。
+
 影像对数：16；manifest：`/home/disk1/Data/datasets/GoogleEarth_scale_pairs/val/pairs.jsonl`。
 checkpoint角色：`engineering_batch_visualization_smoke`；仅完成评估不等于模型验证成功。
 

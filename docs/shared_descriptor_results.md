@@ -1,5 +1,8 @@
 # 共享描述子预训练：实施验收记录
 
+> 文档状态（2026-10-14）：**历史结果**。本文的工程诊断、严格确定性、恢复和 bundle 重载审计仍适用于登记版本。开头“正式两组训练尚未自动启动”是 2026-09-16 的状态，后续两组均已有第一档最终验证记录；两步小样本结果仍不能作为收敛或精度结论。
+> 当前路线：[D8→D2 主路线](mainline_d8_d2.md)；分类依据：[文档状态索引](document_status_20261014.md)。
+
 日期：2026-09-16。以下全部是工程诊断，不是正式训练/测试集排名。正式两组训练尚未自动启动。
 
 ## 已完成检查
@@ -68,4 +71,4 @@ OMP_NUM_THREADS=4 /root/miniconda3/envs/loma-repro/bin/python -m scripts.check_s
 CUDA_VISIBLE_DEVICES=2 OMP_NUM_THREADS=4 /root/miniconda3/envs/loma-repro/bin/python -m scripts.check_shared_bundle --run outputs/diagnostics/shared_lora_strict_split --output artifacts/shared_lora_bundle_audit.json
 ```
 
-正式入口、参数与两项目共享加载接口见 `docs/shared_descriptor_pretraining.md`。
+本文对应的旧预训练操作说明已删除，历史版本由 Git 追溯；当前入口、参数与共享加载边界见[主路线](mainline_d8_d2.md)。

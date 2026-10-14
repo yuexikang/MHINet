@@ -1,8 +1,10 @@
-# 当前实验总结与对比基准 v1（2026-09-29）
+# 历史实验总结与对比基准 v1（2026-09-29）
+
+文档状态（2026-10-14）：2026-09-29 的 stable_v2 第三档历史基准。保留其 C/D/E 对照、固定回归集和当时协议，不能用它覆盖当前 RGB512 主路线的训练冻结范围、权重阶段或双数据集指标。当前定义见 [D8→D2 主路线](mainline_d8_d2.md)，现行基线证据见 [RGB512 H0 联合测试](semidense_rgb512_h0_joint_test512_results.md)及 [H0 推理位置消融](h0_inference_position_ablation_results_20261013.md)。历史 784 合成点匹配协议与当前 512 双数据集配准协议分别报告。
 
 ## 1. 已有结论及适用范围
 
-当前最佳候选是半密集第三档 E：GHIM/CGMDP → D8粗匹配 → D2细匹配 → 4轮QRRU。它不是 README 中早期的 MHIR 六次单应更新实验。以下数字来自 artifacts/semidense_cde_timed_test_results.json，均为同一合成 test 2000 对、逐对宏平均；没有不同真实数据集的完整排名证据。
+截至 2026-09-29，本节合成第三档对照中的最佳候选是半密集第三档 E：GHIM/CGMDP → D8粗匹配 → D2细匹配 → 4轮QRRU。它不是早期的 MHIR 六次单应更新实验。以下数字来自 artifacts/semidense_cde_timed_test_results.json，均为同一合成 test 2000 对、逐对宏平均；本节不提供不同真实数据集的完整排名证据。
 
 | 第三档方案 | VGG/CGMDP LR | 温度/QRRU LR | 完整val解耦loss↓ | final P@1px↑ | final EPE↓ |
 |---|---:|---:|---:|---:|---:|
@@ -58,7 +60,7 @@ CUDA_VISIBLE_DEVICES=0 /root/miniconda3/envs/loma-repro/bin/python \
 - NCM@阈值、平均匹配数、16×16空间覆盖率同时报告；success定义为每对至少20个5px正确匹配，空输出失败。
 - coarse/fine/final分别输出；fine使用QRRU过滤前完整集合。跨方法可另报固定top-K匹配预算（例如K=1000，按各自置信度排序），并保持原生输出结果；不得把top-K结果混入历史表。
 - 推理failure_reason、非有限点、出界及QRRU拒绝数单列；全体pair必须出现，进程中断算未完成，不能把部分输出标为全量。
-- legacy_RMSE_correct5_or_failure10是正确子集条件指标，不是配准RMSE。当前没有拟合单应矩阵的精度证据；若比较配准算法，另注册相同RANSAC/拟合预算、MACE/grid error、失败计入分母的success/AUC，不能与这里的点匹配P@1混为同一指标。
+- legacy_RMSE_correct5_or_failure10是正确子集条件指标，不是配准RMSE。本节的合成对照没有拟合单应矩阵的精度证据；后续 RGB512 双数据集测试已另外记录 RANSAC 和网格配准 SR 协议，不能与这里的点匹配P@1或至少20个正确点的success混为同一指标。
 
 ## 5. 两条执行轨道
 

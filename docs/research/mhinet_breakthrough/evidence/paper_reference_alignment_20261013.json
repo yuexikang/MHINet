@@ -1,0 +1,59 @@
+{
+  "checked_at": "2026-10-13T17:05:18+08:00",
+  "references": [
+    {
+      "method": "LoRetta",
+      "reported": {
+        "PCK@1": 38.7,
+        "PCK@2": 67.6,
+        "PCK@3": 81.3,
+        "PCK@5": 91.4,
+        "AUC": 83.3
+      },
+      "numbers_verified": true,
+      "primary_source": "https://arxiv.org/html/2608.04106v1",
+      "protocol": "512, RANSAC+TPS dense warp, fully-matchable GT pixels; PCK-curve AUC"
+    },
+    {
+      "method": "SwinMatcher",
+      "subset_user_description": "可见光图像对",
+      "reported": {
+        "precision": 63.3,
+        "SR": 100.0,
+        "RMSE": 2.831
+      },
+      "numbers_verified": false,
+      "primary_source": "https://ieeexplore.ieee.org/document/11095750/",
+      "official_code": "https://github.com/LotrL/SwinMatcher",
+      "remaining": "Exact result table, precision threshold, SR criterion, RMSE set/failure handling and cohort.",
+      "official_code_commit": "9dc1de0cddafa4f23eb6cbec7fe3fe3da0fda6d3",
+      "verified_code_mechanisms": [
+        "bidirectional_softmax_OR_coarse_candidates",
+        "best_fine_match_per_coarse_window",
+        "two_endpoint_3x3_convolutional_offset_refinement"
+      ],
+      "demo_is_not_benchmark": true
+    }
+  ],
+  "mhinet_success_definition_check": [
+    {
+      "dataset": "GoogleEarth",
+      "pairs": 498,
+      "match_success20_at5": 497,
+      "sr3_success": 237,
+      "source": "/home/disk1/MHINet/outputs/semidense_rgb512_h0joint_test512_20261012/h0joint_GoogleEarth/pairs.jsonl",
+      "sha256": "64a53a393f00fe48c58ec5c0c202bdb2e49e45bca52ef2e56aea5a51fdb0da76",
+      "operation": "Only aggregate saved metrics; no inference, fitting, selection or tuning."
+    },
+    {
+      "dataset": "JL1Flight",
+      "pairs": 1755,
+      "match_success20_at5": 1711,
+      "sr3_success": 766,
+      "source": "/home/disk1/MHINet/outputs/semidense_rgb512_h0joint_test512_20261012/h0joint_JL1Flight/pairs.jsonl",
+      "sha256": "12fcff58458120c1e07b16594614f343c4df365c21c40a01d0936716f3f82ef3",
+      "operation": "Only aggregate saved metrics; no inference, fitting, selection or tuning."
+    }
+  ],
+  "code_checked_at": "2026-10-13T17:08:38+08:00"
+}

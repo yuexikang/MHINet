@@ -1,5 +1,8 @@
 # 极端外推：标签正确不等于整幅四角稳定
 
+> 文档状态（2026-10-14）：**历史结果**。本文的 v1 全量标签外推审计和噪声控制实验仍有效，解释的是合法投影条件与四角外推敏感性。下一版安全界建议已由 stable_v2 接续实现，不能把旧 v1 极端外推结论套用于新版真值或直接否定重叠区指标。
+> 当前路线：[D8→D2 主路线](mainline_d8_d2.md)；分类依据：[文档状态索引](document_status_20261014.md)。 后续参考：[stable_geometry_v2_extrapolation.md](stable_geometry_v2_extrapolation.md)。
+
 ## 审计范围与证据
 
 只读审计全部val的13468对标签（第一档5772、第二档3848、第三档3848），未过滤、重生成或修改数据。第二档误差来自冻结DINO第二档最终模型的完整val。脚本`scripts/analyze_homography_extrapolation.py`，机器可读证据`artifacts/homography_extrapolation_audit.json`，绑定manifest及评估JSONL的SHA256。

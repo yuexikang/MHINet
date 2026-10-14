@@ -2,6 +2,10 @@
 
 分支：`codex/h0-inference-position-ablation`，建立于2026-10-13。使用已经完成的H0联合RGB512权重，比较H0在D8与D2的使用位置，全程不训练。
 
+全量实验已于2026-10-13 18:01（UTC+8）完成，GoogleEarth 498对、JL1Flight 1755对，四组共9012份匹配结果。2253对共享特征在四组间完全一致，运行前后全部参数及buffers哈希一致；A的2253对输出与旧结果逐点完全相同。CPU独立重新核验全部新NPZ与2253份历史A结果通过。
+
+完整指标、粗细阶段和结论见[全量结果](h0_inference_position_ablation_results_20261013.md)，机器可读指标见[CSV](h0_inference_position_ablation_results_20261013.csv)，一致性证据见[审计JSON](h0_inference_position_ablation_audit_20261013.json)。当前没有一组在两套数据的匹配精度和SR上全面胜出，默认配置仍为A。
+
 | 实验 | D8 H0 Mask | D2 H0几何引导 |
 |---|---|---|
 | A 原始模型 | 使用 | 使用 |

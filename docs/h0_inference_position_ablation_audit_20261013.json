@@ -1,0 +1,64 @@
+{
+  "run_root": "/home/disk1/MHINet/outputs/h0_position_ablation_512_20261013",
+  "branch": "codex/h0-inference-position-ablation",
+  "validation": {
+    "complete": true,
+    "model_state_sha256_before": "22904e86900c1122fca29d0caabda47194944f4d97165e31bd33b14aae71217d",
+    "model_state_sha256_after": "22904e86900c1122fca29d0caabda47194944f4d97165e31bd33b14aae71217d",
+    "checkpoint_model_state_sha256": "22904e86900c1122fca29d0caabda47194944f4d97165e31bd33b14aae71217d",
+    "model_unchanged": true,
+    "feature_hash_checked_pairs": 2253,
+    "baseline_validation": {
+      "GoogleEarth": {
+        "a_baseline_exact_pairs": 498,
+        "first_pair_legacy_exact": true,
+        "feature_hash_checked_pairs": 498
+      },
+      "JL1Flight": {
+        "a_baseline_exact_pairs": 1755,
+        "first_pair_legacy_exact": true,
+        "feature_hash_checked_pairs": 1755
+      }
+    },
+    "plan_fingerprint": "b7e62503e333d126ade1899d84f78d53e01127f7af40e81ee09c01a8fafcc6f4",
+    "memory": {
+      "budget_gib": 6.0,
+      "budget_bytes": 6442450944,
+      "allocator_fraction": 0.25486307176579476,
+      "total_bytes": 25278087168,
+      "free_bytes_at_start": 19867762688,
+      "required_neighbor_reserve_bytes": 4294967296,
+      "note": "PyTorch allocator cap; other jobs are never stopped. Concurrent GPU timing is descriptive only.",
+      "max_memory_allocated_bytes": 1391496704,
+      "max_memory_reserved_bytes": 1606418432
+    },
+    "finished": "2026-10-13T18:01:51.183102+08:00"
+  },
+  "report_audit": {
+    "model_state_sha256": "22904e86900c1122fca29d0caabda47194944f4d97165e31bd33b14aae71217d",
+    "checkpoint_sha256": "43c020b213306c1ba517460092e4007799c2f445edce09cb00bf88fc8ac69cb4",
+    "feature_pairs": 2253,
+    "a_baseline_exact_pairs": 2253,
+    "verified_npz": 9012,
+    "verified_historical_a_npz": 2253,
+    "datasets": {
+      "GoogleEarth": {
+        "pairs": 498,
+        "manifest_sha256": "55088ef26b24170cad2da2feb7917bcc3e2051e94b576a48a9018ecd12872b51",
+        "all_variants_model_state_identical": true,
+        "all_pairs_features_identical": true,
+        "a_historical_baseline_exact": true,
+        "invalid_h0_pairs": 0
+      },
+      "JL1Flight": {
+        "pairs": 1755,
+        "manifest_sha256": "d932203978e3da5d3ae96779447afdc69dc3b1d0dc26f0ef5041d0979a3aaaf5",
+        "all_variants_model_state_identical": true,
+        "all_pairs_features_identical": true,
+        "a_historical_baseline_exact": true,
+        "invalid_h0_pairs": 0
+      }
+    },
+    "verify_matches_requested": true
+  }
+}

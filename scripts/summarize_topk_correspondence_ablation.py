@@ -473,7 +473,7 @@ def plot(root, results):
                 ax.scatter(nm[index], p3[index], color=colors[variant], s=95 if variant == "Full" else 58,
                            marker="*" if variant == "Full" else "o", zorder=3)
                 ax.annotate(f"{variant}\n{p3[index]:.2f}%", (nm[index], p3[index]),
-                            xytext=(0, 9 if index % 2 else -31), textcoords="offset points",
+                            xytext=(0, 12 if index in (0, 3) else -31), textcoords="offset points",
                             ha="center", fontsize=9)
             ax.set(title=f"{dataset}: precision vs retained matches",
                    xlabel="Mean returned matches (NM)", ylabel="P@3px (%)")

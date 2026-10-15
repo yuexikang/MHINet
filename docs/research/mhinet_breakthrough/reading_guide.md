@@ -1,5 +1,7 @@
 # MHINet研究成果阅读指南
 
+**定时研究已于北京时间2026-10-14 20:27停止。** 现在先读[最终长篇报告](final_report_20261014.md)，它集中给出原因、原理、方案、实施与证据边界。下列入口用于回查历史研究；“下一轮”和`next_focus`是留档，不是正在执行的任务。
+
 ## 当前主路线（2026-10-14 用户决策）
 
 当前唯一主路线为 **D8→D2 密集匹配下游：共享 GHIM/CGMDP → D8 粗匹配 → D2 细匹配 → 4 轮 QRRU**。现有半密集代码与配置保留 `semidense` 命名；旧六轮 MHIR、零样本 P3/P6 按历史对照阅读。
@@ -8,25 +10,25 @@
 
 ## 1. 先了解目前总体判断
 
-读[累计研究记忆](/home/disk1/MHINet/docs/research/mhinet_breakthrough/research_memory.md)，重点看“历史判断的修正与关联”和“已完成诊断、未解项和优先级”。这里汇总稳定事实、支持/反证、旧观点如何收窄，以及下一步为什么值得做。开头标明证据截止时间；它是压缩总结，细节可沿所引报告回查。
+读[累计研究记忆](research_memory.md)，重点看“历史判断的修正与关联”和“已完成诊断、未解项和优先级”。这里汇总稳定事实、支持/反证、旧观点如何收窄，以及下一步为什么值得做。开头标明证据截止时间；它是压缩总结，细节可沿所引报告回查。
 
 目前成果主要是问题定位、已有预测的CPU诊断、论文机制与可证伪实验方案，尚未通过新训练和受控验证证明精度突破。当前重要边界是：密集输出和QRRU在合成验证可以有效，真实跨域低精度还不能统一归因于点数或QRRU。
 
 ## 2. 再看最近一次交付新增了什么
 
-读[最新报告](/home/disk1/MHINet/docs/research/mhinet_breakthrough/latest.md)，按三个问题阅读：本轮补了什么证据？它保留、修正或否定了哪个旧判断？下一项最小验证是什么？新的定位材料或数据资格审计是实验前置工作，应看它通向哪个精度问题，不将资料查齐等同模型提升。
+读[最新报告](latest.md)，按三个问题阅读：本轮补了什么证据？它保留、修正或否定了哪个旧判断？下一项最小验证是什么？新的定位材料或数据资格审计是实验前置工作，应看它通向哪个精度问题，不将资料查齐等同模型提升。
 
-`latest.md`始终指向最近一次成功或limited交付，failed轮不会替换它。查看[运行状态](/home/disk1/MHINet/docs/research/mhinet_breakthrough/state.json)中的`last_attempt_at`、`last_status`、`last_success_at`、`last_report`和`next_focus`，能区分“最近一次尝试”与“最近一份成果”。
+`latest.md`始终指向最近一次成功或limited交付，failed轮不会替换它。查看[运行状态](state.json)中的`last_attempt_at`、`last_status`、`last_success_at`、`last_report`和`next_focus`，能区分“最近一次尝试”与“最近一份成果”。
 
 ## 3. 按关心的问题回查专题
 
 | 想回答的问题 | 建议阅读 |
 | --- | --- |
-| 点数是否过多，删点是否真的提高精度 | [10月12日18时点数专题](/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261012T180001/report.md)，结合累计记忆中的后续修正 |
-| 数据分布、GT和失败样本有什么问题 | [数据与逐对结果](/home/disk1/MHINet/docs/research/mhinet_breakthrough/round_0001_data_results.md) |
-| H0、fine、QRRU、损失和训练方式限制在哪里 | [模型与训练审计](/home/disk1/MHINet/docs/research/mhinet_breakthrough/round_0001_model_training.md) |
-| 新论文的哪些机制能迁移、成本多大 | [论文研究](/home/disk1/MHINet/docs/research/mhinet_breakthrough/round_0001_literature.md)，版本/发表状态以之后的核验为准 |
-| 最初为什么优先考虑这些方向 | [首轮综合报告](/home/disk1/MHINet/docs/research/mhinet_breakthrough/round_0001_synthesis.md)，作为历史起点阅读 |
+| 点数是否过多，删点是否真的提高精度 | [10月12日18时点数专题](runs/20261012T180001/report.md)，结合累计记忆中的后续修正 |
+| 数据分布、GT和失败样本有什么问题 | [数据与逐对结果](round_0001_data_results.md) |
+| H0、fine、QRRU、损失和训练方式限制在哪里 | [模型与训练审计](round_0001_model_training.md) |
+| 新论文的哪些机制能迁移、成本多大 | [论文研究](round_0001_literature.md)，版本/发表状态以之后的核验为准 |
+| 最初为什么优先考虑这些方向 | [首轮综合报告](round_0001_synthesis.md)，作为历史起点阅读 |
 
 `round_0001_*.md`、`evidence/`及每轮`runs/<时间戳>/`保存历史研究与原始证据，不删除或改写当时结论；其“当前”“下一小时”“下一轮”及运行频率均以记录时间为准。累计记忆和最新报告中的有证据修正应优先于较早的假设；遇到矛盾时沿路径核查原始范围与指标，不直接将“新报告”当成必然正确。新增记忆机制之后，每轮另存`research_memory.md`快照，便于追踪判断的演变。
 
@@ -53,4 +55,4 @@
 
 优先看累计记忆的未解项，再看对应报告的最小方案：是否单因素、是否有固定基线和来源隔离开发集、是否能区分替代解释、结果怎样才支持或否定假设、需要补什么缓存以及预算。历史GE/JL测试已保存完整最终对应和分数；当前缺口是合格的来源/地理隔离开发缓存，以及全fine起点、逐轮轨迹和lineage，不能把最终缓存当作这些字段的替代。缺件时，研究应明确适用范围并推进独立可做的分支。
 
-日常只需查看累计记忆和最新报告；源码、NPZ、机器JSON及私有运行日志留给需要复算或排查时使用。定时运行方式见[README](/home/disk1/MHINet/docs/research/mhinet_breakthrough/README.md)。
+日常只需查看累计记忆和最新报告；源码、NPZ、机器JSON及私有运行日志留给需要复算或排查时使用。定时运行方式见[README](README.md)。

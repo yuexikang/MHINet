@@ -1,0 +1,439 @@
+{
+  "report": {
+    "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/final_report_20261014.md",
+    "sha256": "a9b592eefdec10929a4f647b6fc77b7b0fcfb9ceadeb3fda43b21932e6f814aa",
+    "bytes": 28797
+  },
+  "finalized_at": "2026-10-14T20:46:36+08:00",
+  "timezone": "Asia/Shanghai",
+  "evidence_cutoff_at": "2026-10-14T20:14:19+08:00",
+  "code_head": "077e9d1f85a48eee188156967eb855fdd6cbeeda",
+  "task_status": "stopped",
+  "stopped_at": "2026-10-14T20:27:26+08:00",
+  "research_delivery_summary": {
+    "initial_manually_coordinated_rounds": 1,
+    "scheduled_attempts": 31,
+    "scheduled_attempt_status_counts": {
+      "failed": 10,
+      "completed": 15,
+      "limited": 6
+    },
+    "delivered_research_rounds_including_initial": 22,
+    "smoke_runs_excluded": [
+      "20261012T111818_smoke",
+      "20261012T112058_smoke"
+    ]
+  },
+  "final_stop_verification": {
+    "verified_at": "2026-10-14T20:46:36+08:00",
+    "cron_task_entries_absent": true,
+    "paused_marker_present": true,
+    "schedule_enabled": false,
+    "next_scheduled_run_at": null,
+    "active_research_launchers": []
+  },
+  "scope": "Synthesis and CPU/read-only audit of existing evidence; proposed experiments are not executed performance improvements.",
+  "sources": [
+    {
+      "path": "/home/disk1/MHINet/docs/mainline_d8_d2.md",
+      "sha256": "8390a75818cfaa18d0f981ad26a340d27b801a61185b30e5e8782e6c8596742a",
+      "bytes": 9488
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/jl1flight_finetune_transfer_analysis.md",
+      "sha256": "925703051cf05d5c3fbeafa870597fe3bc575b17cfe2cb78b19c1a7b7669483e",
+      "bytes": 8584
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/semidense_rgb512_h0_joint_test512_results.md",
+      "sha256": "c02428927cc2094734ab9df9368f2e361efb175604b8ec622cb3842fc8c1331f",
+      "bytes": 3378
+    },
+    {
+      "path": "/home/disk1/MHINet/scripts/mrsi_gt_metrics.py",
+      "sha256": "cfd3783301b194f3bc0fc26eecc0f7efddb7bfe538a20660d8624f17347c130b",
+      "bytes": 5596
+    },
+    {
+      "path": "/home/disk1/MHINet/mhinet/downstream/semidense.py",
+      "sha256": "5ad0c4f181995b3fe8ea269dfee12df501385f9e74422af3319653a1cf9be7d5",
+      "bytes": 14732
+    },
+    {
+      "path": "/home/disk1/MHINet/mhinet/downstream/qrru.py",
+      "sha256": "6508838da7f3f35661d1aa0ec38a5d3f34ce4bc837223d10e7383fe26ff74b40",
+      "bytes": 2561
+    },
+    {
+      "path": "/home/disk1/MHINet/outputs/h0_position_ablation_512_20261013/summary.md",
+      "sha256": "2cb2b3bdd5a55619a85218da3d2b2df57e894948aa00575dd3cfde1b71b7c635",
+      "bytes": 7305,
+      "repository_copy": "docs/research/mhinet_breakthrough/evidence/h0_position_ablation_20261013/summary.md",
+      "repository_copy_sha256": "32d110e69a300243eb5b54020d1c8c2a26b086d41bcd8b4fd8956b857262e9eb",
+      "repository_copy_bytes": 7304,
+      "repository_copy_normalization": "仅去除Markdown末尾额外空白行，原文件hash保留，数据和正文不变。"
+    },
+    {
+      "path": "/home/disk1/MHINet/outputs/h0_position_ablation_512_20261013/validation.json",
+      "sha256": "598d3f1435538ebee46e5e2c2c4bd39a004bc43c036188c9bf7a9bc088748754",
+      "bytes": 1292,
+      "repository_copy": "docs/research/mhinet_breakthrough/evidence/h0_position_ablation_20261013/validation.json",
+      "repository_copy_sha256": "598d3f1435538ebee46e5e2c2c4bd39a004bc43c036188c9bf7a9bc088748754",
+      "repository_copy_bytes": 1292
+    },
+    {
+      "path": "/home/disk1/MHINet/outputs/h0_position_ablation_512_20261013/plan.json",
+      "sha256": "a8b682b6bca673ef0556c6d00098d96952c433cd0bbc643233f1bb7ff26293b5",
+      "bytes": 6146,
+      "repository_copy": "docs/research/mhinet_breakthrough/evidence/h0_position_ablation_20261013/plan.json",
+      "repository_copy_sha256": "a8b682b6bca673ef0556c6d00098d96952c433cd0bbc643233f1bb7ff26293b5",
+      "repository_copy_bytes": 6146
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/round_0001_synthesis.md",
+      "sha256": "eadcc7ecf770aefc843926f0bd8efd87d10f7d5ff8bf0300d5bbc0998032027f",
+      "bytes": 9531
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/round_0001_data_results.md",
+      "sha256": "8aeec6fe1d47e86e33c2f90c1c7b76605fc84a2a3e42ebb1b4040fe72c9802d6",
+      "bytes": 21138
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/round_0001_model_training.md",
+      "sha256": "ac2daaec35f85a798506eaabfc58052fb6cc1b317795cd8872353d1f2664ef5a",
+      "bytes": 22145
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/round_0001_literature.md",
+      "sha256": "1b2099d21cec363da7c543fe634761a09651090451dba8252b5836a879ae9830",
+      "bytes": 20293
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/research_memory.md",
+      "sha256": "39e6aed4838da1b29307e7993e9d9e82648715e09a3744d442ca169eebef235a",
+      "bytes": 6831
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/paper_reference_clarification_20261013.md",
+      "sha256": "ab00c26385e863fbd0e4caa6d3daa78113a9ae54d9e51ee424a2e7da421f890c",
+      "bytes": 6124
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/accuracy_ceiling_request_20261013.md",
+      "sha256": "012ee2f3b6f4d751782003d464f5646a20d582b145bd203c1fc79994a5b30c01",
+      "bytes": 7306
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/state.json",
+      "sha256": "f0c13c38bcbe46e6fdce4f8683c345be29c5a1f6e41549822c562a380c358654",
+      "bytes": 7631
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/schedule.json",
+      "sha256": "ea096aa7546c0cf8234e6abe3e6883024608e467a8d25fc9bf0d2feb79da0e5a",
+      "bytes": 1167
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/stop_record_20261014.json",
+      "sha256": "caaeeda2ee7c7322bdc161722326bb997f0749c119ab5a3aae31bae72479c6ec",
+      "bytes": 943
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/PAUSED",
+      "sha256": "fa922bfe39631f6ce06958a36e7b9d3e97c096b58c46a0e039c885ced83ea0e5",
+      "bytes": 110
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261012T111818_smoke/report.md",
+      "sha256": "3a885b5a34a14f8c65c7ca979acc5f72dbdf1bed47cf46fb1477f86457e30082",
+      "bytes": 603
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261012T112058_smoke/report.md",
+      "sha256": "e21dc79dcf28115f5b4081079984ed8930850b3fed5e31e9e03fc1b7408514c7",
+      "bytes": 629
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261012T150001/report.md",
+      "sha256": "698eb98be2d7ceca1e5f9bdb5ce630da0cfcc072ee465ae6f42cfb1bd6a6e450",
+      "bytes": 8076
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261012T180001/report.md",
+      "sha256": "1e5f897bcb20120667de01ede308e21d920cc8205be0842ed55313cf7c1559db",
+      "bytes": 7687
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261012T200001/report.md",
+      "sha256": "541361158c7ec25465c18eda53fe6e3bbdeed79744220218ac2c32ca5f35f899",
+      "bytes": 7459
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261012T220001/report.md",
+      "sha256": "bc9672e86e67cb275edd9707eb1e4abbdc702ecac59e2d0aecfb0920e07b669e",
+      "bytes": 7873
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261013T000001/report.md",
+      "sha256": "59092e0fcc9df7b0964ce04ec738654ec0f428ef8ca300db21dc064b740f949d",
+      "bytes": 7536
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261013T020001/report.md",
+      "sha256": "4ff3621db5b30fcbc0796b8617cad35e28dac68a66a3a627d8c8103604889f33",
+      "bytes": 7272
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261013T040001/report.md",
+      "sha256": "cc2aa2e491087b3ae10e53f105b2dbebb3938c0e988171da91b60325993b8b52",
+      "bytes": 7492
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261013T060001/report.md",
+      "sha256": "27535a9911672fdafc5ee9f40fbdcfb3b25c981d3f6c778fe682e4548c9b7ad8",
+      "bytes": 7781
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261013T080001/report.md",
+      "sha256": "95e085f6b35f1914acb0349cf95b0cf07b7a54bda1ad8adb333ed5395775c7f4",
+      "bytes": 7680
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261013T140001/report.md",
+      "sha256": "1536b9c7453a5f35a6661da9311268c385cf6f72595ad9e8568495795e9321a8",
+      "bytes": 7460
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261013T160002/report.md",
+      "sha256": "79c9fe668e2825cc853d5a6b3a6a5574097bd44acbca5ba77fc424ab0be1f3a9",
+      "bytes": 8203
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261013T200001/report.md",
+      "sha256": "d1d829d61744ea116a25d5a426661639e0ee58d5cfd6581abfd2bd8f3f7d0de0",
+      "bytes": 10626
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261013T220001/report.md",
+      "sha256": "423ddb084a197f5067b678aa4dbb5f79517e29a2d1004462fbc1f63d9fdf37a1",
+      "bytes": 7880
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261014T000001/report.md",
+      "sha256": "89fd70a9095c6e94be07e948352f090070a3294060cf0cbf4b182836da2f27b0",
+      "bytes": 7114
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261014T020001/report.md",
+      "sha256": "404bdc2a25d0697405dc1dac03d1a0aa792be76f0493bdb77e7e8d7587959f20",
+      "bytes": 7416
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261014T040001/report.md",
+      "sha256": "45d586264485e3696b8082f7e8f7de72ccd57dffeffb0987eeb8784e95b71f21",
+      "bytes": 8864
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261014T060001/report.md",
+      "sha256": "5e406371c13aeca829a668a1dbc1e3f65ce5fdb1138fa8222118fc2bced09e4c",
+      "bytes": 8759
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261014T080001/report.md",
+      "sha256": "d017bcf59bd0eb4842223ac2eb684b153ccb307060b81da81ec97895a5aef659",
+      "bytes": 8203
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261014T100001/report.md",
+      "sha256": "691cd779eb2d1fbf1547ca45f33d5e59200b9996486a18e39930ef2e2f675a25",
+      "bytes": 7989
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261014T140001/report.md",
+      "sha256": "bb6565a3aae132ff41334dcc53a0efb479a8f1a8286d993cf0499c2f704ba8c6",
+      "bytes": 8170
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261014T200001/report.md",
+      "sha256": "3467059d9203c117af82fe61ee29d567dac19c810bff35fd55a7305c6986176d",
+      "bytes": 8152
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261012T120001/run.json",
+      "sha256": "a7cf0b80dedfffb6fa205feefd2355529d3492552703040eb207d75b4f8c6dc9",
+      "bytes": 275
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261012T130001/run.json",
+      "sha256": "1c30a2e0eabd81baf282ab80cb30747ef2ac3baffcf73d6437ad7d7788f826e3",
+      "bytes": 274
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261012T140001/run.json",
+      "sha256": "086661586f5a44054d39af8d5f24cf36aee3d11ace6fdf19fd2f73251f428b08",
+      "bytes": 273
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261012T150001/run.json",
+      "sha256": "687cf47ca19df5d6d5b2d546dd4dfd1c074899282d0fa47598d5b8712d2e5b33",
+      "bytes": 332
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261012T160001/run.json",
+      "sha256": "e5db26ce10547caa5837947c20e2e03f1a5bd605051c9bfd1696dc37eab047fc",
+      "bytes": 275
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261012T180001/run.json",
+      "sha256": "31090ac3ab8c2df24603e7499df55be557b2022c16679845b90a95537f9c66c8",
+      "bytes": 325
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261012T200001/run.json",
+      "sha256": "b430b5a3eaa34ff500bc60c774272423e2acea0d20fb693f90674cb7994ec167",
+      "bytes": 350
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261012T220001/run.json",
+      "sha256": "781f9df23f98d3771b3def3198bc0214b492f88f84e940ccf237925cabea65c1",
+      "bytes": 331
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261013T000001/run.json",
+      "sha256": "b8b0ed2c57c16505cd6feaf290868356b66538254fcfa7e83913289818191af4",
+      "bytes": 376
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261013T020001/run.json",
+      "sha256": "6ea6a4eab8b95590fd6181883aad5bff858cc4b2d5fc0125f44caa5af061b96b",
+      "bytes": 334
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261013T040001/run.json",
+      "sha256": "61bcba88d75e4b572d8cbd4525f098ad3ad5ad3ec543c1a2099e4b84975b6b32",
+      "bytes": 328
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261013T060001/run.json",
+      "sha256": "1c5e8285887c71ad1a6f817ccbab396cfec3736564385f1d0fb5e921abecf76a",
+      "bytes": 349
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261013T080001/run.json",
+      "sha256": "238af18b240ed5152dcb61302ac526dbc304e6f8d0dc530b1fbc7f2878aaba42",
+      "bytes": 338
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261013T100001/run.json",
+      "sha256": "1de12f0da2861c1822252437dcd77e2e207740a159d4ad920cd4590c922d5f7d",
+      "bytes": 275
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261013T120001/run.json",
+      "sha256": "3efe947c427ac7a752f36cbfc09923fb4cdd4734defb940a25e56eff4404b52f",
+      "bytes": 274
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261013T140001/run.json",
+      "sha256": "519b29ab6aaafbd48ed72be4267fe40a13ce2b449b9d59794be7d6f14ee6483e",
+      "bytes": 340
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261013T160002/run.json",
+      "sha256": "071261d92300fc2c309250db42cf20de98e91703967dbd697c43a4b55f2a11bd",
+      "bytes": 337
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261013T180001/run.json",
+      "sha256": "8d9d421691605d2587ee5e6579cb15209c8ee1d928678e1bf32bee74083c46f2",
+      "bytes": 274
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261013T200001/run.json",
+      "sha256": "5cb8b9386e1a4f55e0bd833807dc576b34a01fe6150791950fbed6a77908ffdd",
+      "bytes": 334
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261013T220001/run.json",
+      "sha256": "decfb165dd575f831b9120675f5657f633d3d740a86548ba490c8f1f2bfcc908",
+      "bytes": 355
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261014T000001/run.json",
+      "sha256": "6dc6d575761178dced9cbd3d1fc8acf541f69a88a284b82e15bf9ba70822c746",
+      "bytes": 357
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261014T020001/run.json",
+      "sha256": "bfbbe568ab21cf06697bc2c86e5dbda6700e8f483148d974c17414df831a2597",
+      "bytes": 352
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261014T040001/run.json",
+      "sha256": "efe0d2d260222156204e4e9f9ffb81953ae44b28dcb634603396671c61eda573",
+      "bytes": 338
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261014T060001/run.json",
+      "sha256": "705b32af052b74307790310233bc9523a8c1622e548967140dc445eb3bcf8e2b",
+      "bytes": 331
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261014T080001/run.json",
+      "sha256": "d2f28f9253f10a58672370f43e8a62e8a733199edca6446611d879d81b61fbdd",
+      "bytes": 336
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261014T100001/run.json",
+      "sha256": "6f4998e3e0e89457b707642f81503e945ee282d8eef25360af9b4d003bc7c009",
+      "bytes": 383
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261014T120001/run.json",
+      "sha256": "b688218a91d42d9be6cdd28b90b45ffce0c23b5f61cd3fe6fd14192cc341ee88",
+      "bytes": 274
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261014T140001/run.json",
+      "sha256": "2d9e01dedd561757a6bfcb62b60a2e49e813bb28722323dd089f07dca5c1ab54",
+      "bytes": 356
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261014T160001/run.json",
+      "sha256": "0930c68ea75143334152cdfea88d8426a081e404306eb1a0c9b80cb947316897",
+      "bytes": 274
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261014T180001/run.json",
+      "sha256": "1bab26d680acd9f1daf110a2cb2d0e1640e2edc6256f5b3f422d26f2eb94a508",
+      "bytes": 274
+    },
+    {
+      "path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261014T200001/run.json",
+      "sha256": "bb61f7ee279d12aa7497da4500867e8aab5b67e2935d26aeda8f558cfdda298a",
+      "bytes": 326
+    }
+  ],
+  "primary_literature_urls": [
+    "https://arxiv.org/html/2608.04106v1",
+    "https://ieeexplore.ieee.org/document/11095750/",
+    "https://github.com/LotrL/SwinMatcher/tree/9dc1de0cddafa4f23eb6cbec7fe3fe3da0fda6d3",
+    "https://arxiv.org/html/2511.15706v3"
+  ],
+  "limitations": [
+    "SwinMatcher exact table metric definitions remain unverified.",
+    "Historical implementation/version limitations are retained; source hashes do not prove every historical run was reproduced.",
+    "No new controlled training has established 80–90% accuracy."
+  ],
+  "publication_preparation": {
+    "prepared_at": "2026-10-15T09:25:12+08:00",
+    "change": "仅将最终报告与阅读入口的仓库内Markdown链接改为相对路径，方便GitHub阅读；保留科学结论、证据截止时间和停止状态。",
+    "relative_links_updated": {
+      "final_report_20261014.md": 26,
+      "README.md": 6,
+      "reading_guide.md": 10
+    },
+    "experiment_metadata_snapshots": "为原本位于outputs忽略目录的三份小体量元数据保存副本，并在sources中登记repository_copy及其hash；summary仅规范化末尾空白行，不包含权重、影像或匹配NPZ。"
+  }
+}

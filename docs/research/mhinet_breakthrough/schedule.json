@@ -1,10 +1,10 @@
 {
   "kind": "server_cron",
-  "enabled": true,
-  "entry": "0 */2 * * * /usr/bin/nice -n 10 /usr/bin/python3 /home/disk1/MHINet/scripts/run_mhinet_breakthrough_research.py >> /home/disk1/.mhinet-breakthrough-research/launcher.log 2>&1 # mhinet-breakthrough-every-2-hours",
+  "enabled": false,
+  "entry": null,
   "cadence": "every_2_hours_at_minute_00",
   "user_timezone": "Asia/Shanghai",
-  "next_scheduled_run_at": "2026-10-12T18:00:00+08:00",
+  "next_scheduled_run_at": null,
   "native_automation_tool_available": false,
   "cron_pid": "1042425",
   "notification_policy": "silent",
@@ -21,5 +21,8 @@
     "report": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261012T112058_smoke/report.md"
   },
   "updated_at": "2026-10-12T15:46:19+08:00",
-  "refreshed_at": "2026-10-12T16:04:20+08:00"
+  "refreshed_at": "2026-10-13T16:18:40+08:00",
+  "previous_entry": "0 */2 * * * /usr/bin/nice -n 10 /usr/bin/python3 /home/disk1/MHINet/scripts/run_mhinet_breakthrough_research.py >> /home/disk1/.mhinet-breakthrough-research/launcher.log 2>&1 # mhinet-breakthrough-every-2-hours",
+  "stopped_at": "2026-10-14T20:27:26+08:00",
+  "stop_reason": "explicit_user_request"
 }

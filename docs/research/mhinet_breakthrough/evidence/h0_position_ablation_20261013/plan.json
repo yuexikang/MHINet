@@ -1,0 +1,115 @@
+{
+  "experiment": "Fixed-weight H0 inference-position 2x2 ablation",
+  "checkpoint": {
+    "path": "/home/disk1/MHINet/weight/semidense_rgb512_h0joint_from_e_lr8e5_seed42_5ep.pt",
+    "sha256": "43c020b213306c1ba517460092e4007799c2f445edce09cb00bf88fc8ac69cb4",
+    "step": 25535,
+    "total_steps": 25535
+  },
+  "datasets": {
+    "GoogleEarth": {
+      "path": "/home/disk1/Data/datasets/Test_Data/GoogleEarth/val/pairs.jsonl",
+      "sha256": "55088ef26b24170cad2da2feb7917bcc3e2051e94b576a48a9018ecd12872b51",
+      "pairs": 498,
+      "evaluated_pairs": 498,
+      "input_inventory_sha256": "3767bfae7c34edc75e404e7669f57bd4108b2fbe87f665ce85343bf98de5812d",
+      "baseline_root": "/home/disk1/MHINet/outputs/semidense_rgb512_h0joint_test512_20261012/h0joint_GoogleEarth",
+      "baseline_report_sha256": "33c13ce15c20c6a862ab0a139b489bf1171dbc6402bc8bc95b727ab20ea7b202",
+      "baseline_pairs_sha256": "64a53a393f00fe48c58ec5c0c202bdb2e49e45bca52ef2e56aea5a51fdb0da76",
+      "baseline_npz_inventory_sha256": "281f982f30d256768bea0fb29f028ead681174c80a8bc5ab17f20841ed8943a7"
+    },
+    "JL1Flight": {
+      "path": "/home/disk1/Data/datasets/Test_Data/JL1Flight/test/pairs.jsonl",
+      "sha256": "d932203978e3da5d3ae96779447afdc69dc3b1d0dc26f0ef5041d0979a3aaaf5",
+      "pairs": 1755,
+      "evaluated_pairs": 1755,
+      "input_inventory_sha256": "4e5f42a2e45a74d9f2e1c1b02393a1303fdaa1931be20ed0df8a3e572988bf2c",
+      "baseline_root": "/home/disk1/MHINet/outputs/semidense_rgb512_h0joint_test512_20261012/h0joint_JL1Flight",
+      "baseline_report_sha256": "2c3160401397f2f057ffe4b71aea6796bd72e15a4d846edb7f3147e06f3bd42b",
+      "baseline_pairs_sha256": "12fcff58458120c1e07b16594614f343c4df365c21c40a01d0936716f3f82ef3",
+      "baseline_npz_inventory_sha256": "ce75d75ff422a11dcdb1d5df054008f5bba96e20cb4bdfdefb65fd7707780ca7"
+    }
+  },
+  "variants": {
+    "A": {
+      "use_h0_d8_mask": true,
+      "use_h0_d2_warp": true
+    },
+    "B": {
+      "use_h0_d8_mask": true,
+      "use_h0_d2_warp": false
+    },
+    "C": {
+      "use_h0_d8_mask": false,
+      "use_h0_d2_warp": true
+    },
+    "D": {
+      "use_h0_d8_mask": false,
+      "use_h0_d2_warp": false
+    }
+  },
+  "matcher": {
+    "input_size": 512,
+    "coarse_queries": 1024,
+    "fine_windows": 64,
+    "qrru_queries": 128,
+    "chunk": 128,
+    "window_chunk": 32,
+    "inference_window_chunk": 1024,
+    "iterations": 4,
+    "radius": 1.5,
+    "gamma": 0.8,
+    "noise_std": 0.8,
+    "noise_bound": 2.4,
+    "temperature": 0.05,
+    "fine_gt_tolerance": 1.5,
+    "max_coarse": 6000,
+    "max_matches": 12000,
+    "confidence_threshold": 0.0,
+    "lambda_c": 1.0,
+    "lambda_f": 1.0,
+    "lambda_q": 1.0
+  },
+  "scope": "full_test_cohorts",
+  "limit": 0,
+  "input_size": 512,
+  "inference_window_chunk": 1024,
+  "memory_budget_gib": 6.0,
+  "d2_support_policy": "H0 D2 overlap masks follow use_h0_d2_warp; disabled means image-bounds validity only.",
+  "weight_policy": "One strict-loaded eval model; no optimizer/backward; all parameters and buffers hashed before/after.",
+  "feature_policy": "One shared forward per pair; A/B/C/D use the same dictionary; D8/D2/H0/valid raw bytes checked before/after.",
+  "baseline_policy": "A exactly equals every original NPZ points_a/points_b/confidence; first pair additionally checks the old infer function.",
+  "legacy_commit": "be04d1f",
+  "legacy_infer_source_sha256": "ff87ed824ba05084342bcec7122b451912871d38d8951d12759caa60df637e52",
+  "coordinate_unit": "stored_512_target_pixels",
+  "precision_protocol": "GT support and <=1/3/5 target pixels; all predicted matches in denominator; pair macro.",
+  "sr_protocol": "Predictions-only RANSAC H(3px,10000 iterations,.999 confidence,seed0), GT-visible 20x20 source grid; failures included.",
+  "rmse_protocol": "SR@3px success: RMSE over GT-correct <=5px matches; failed pairs=10; success with zero correct matches undefined and counted.",
+  "raster_mask_protocol": "dense_metrics uses manifest overlap masks separately from headline GT-geometric-support metrics.",
+  "timing_note": "Shared forward measured once; variant matcher measured separately. wall_total_ms is estimated standalone shared_wall_ms+matcher_wall_ms. IO/metrics/hashes/warmup excluded.",
+  "googleearth_label_scope": "Synthetic geometry relative to nominal cross-temporal co-registration; native registration is not independently measured.",
+  "versions": {
+    "torch": "2.11.0+cu128",
+    "cv2": "4.13.0",
+    "numpy": "2.2.6",
+    "pillow": "12.2.0"
+  },
+  "implementation": {
+    "scripts/evaluate_h0_position_ablation.py": "1f058f3a1caa04ca25903093287df69a6ee98be61a9b4b648ddd0cfb15dc251c",
+    "mhinet/downstream/semidense.py": "5ad0c4f181995b3fe8ea269dfee12df501385f9e74422af3319653a1cf9be7d5",
+    "mhinet/downstream/supervision.py": "f9b2d2ea93896967b9576dffabab5b635ffe64ad946b93f60e0619a1e7c27d5b",
+    "mhinet/downstream/losses.py": "ddb47c2c474c5932f08a8549fabb355890ecaa37986ac521f815b43aa9970d2c",
+    "mhinet/downstream/qrru.py": "6508838da7f3f35661d1aa0ec38a5d3f34ce4bc837223d10e7383fe26ff74b40",
+    "mhinet/downstream/loma_reference/coarse_matcher.py": "2e65565f71c1425ced5d98593def52de5ab1cdcc8517da7e8f87eb92c7df4fa9",
+    "mhinet/downstream/loma_reference/matching_utils.py": "c1f66a03715a98aa3e270bc1f7c3d6e2041072047ad74d95c5fadee1403fb0bd",
+    "mhinet/downstream/loma_reference/overlap_masks.py": "1807b9b485d1ea09f7d2bf85564df65e03fe69784ade5e4eb55c4616bfdcf7e2",
+    "mhinet/models/feature_provider.py": "a32d80bf0c16f3cac4f9dd49439e3fed6153d1ba9c157a9385986072930c49f3",
+    "mhinet/pretraining/model.py": "05c57f11629e9375d218df8346b7096474cdf7d2ac68fe342d5cfdaa44a7e8e6",
+    "mhinet/dataio/data.py": "58d6d2a0bab32c141ec0ac22f88dffd9d0048a11e8b1a6b6a32bf693e23e8a30",
+    "mhinet/downstream/metrics.py": "e279a427f7f9da4c30d61b2fb24abdfa166da9ffb8f6c9b2d73c926271001879",
+    "scripts/mrsi_gt_metrics.py": "cfd3783301b194f3bc0fc26eecc0f7efddb7bfe538a20660d8624f17347c130b"
+  },
+  "git_commit": "4c7a105d6fc07f93a1c4eff0c4cf4c984d130afe",
+  "fingerprint": "b7e62503e333d126ade1899d84f78d53e01127f7af40e81ee09c01a8fafcc6f4",
+  "created": "2026-10-13T16:35:17.598236+08:00"
+}

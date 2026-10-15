@@ -1,0 +1,15 @@
+{
+  "stopped_at": "2026-10-14T20:27:26+08:00",
+  "removed_entries": [
+    "0 */2 * * * /usr/bin/nice -n 10 /usr/bin/python3 /home/disk1/MHINet/scripts/run_mhinet_breakthrough_research.py >> /home/disk1/.mhinet-breakthrough-research/launcher.log 2>&1 # mhinet-breakthrough-every-2-hours"
+  ],
+  "terminated_launchers": [],
+  "paused_marker": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/PAUSED",
+  "previous_crontab_backup": "/home/disk1/.mhinet-breakthrough-research/crontab_before_stop_20261014T122726.txt",
+  "other_cron_entries_preserved": true,
+  "research_and_evidence_preserved": true,
+  "final_report_path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/final_report_20261014.md",
+  "final_report_manifest_path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/final_report_manifest_20261014.json",
+  "final_verification_at": "2026-10-14T20:46:36+08:00",
+  "active_research_launchers_at_final_verification": []
+}

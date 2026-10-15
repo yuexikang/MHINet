@@ -1,12 +1,20 @@
 # MHINet 静默研究记录
 
+## 最终交付与停止状态（2026-10-14）
+
+**本任务已于北京时间2026-10-14 20:27停止。** 每两小时的cron条目已移除，`PAUSED`已设置，停止时没有正在运行的研究进程；既有研究和实验证据保留。未经用户新的启动要求，不恢复研究。
+
+现在请先读[最终长篇报告](final_report_20261014.md)：按指标、机制、数据训练、理论空间、实施步骤和验证组织全部结论。配套[证据manifest](final_report_manifest_20261014.json)登记版本、文件hash和交付统计，[停止记录](stop_record_20261014.json)登记调度移除。
+
+以下频率、运行方式和“下一轮”均为历史记录，不表示还有后续计划运行。
+
 ## 当前主路线（2026-10-14 用户决策）
 
 当前唯一主路线为 **D8→D2 密集匹配下游：共享 GHIM/CGMDP → D8 粗匹配 → D2 细匹配 → 4 轮 QRRU**。现有实现和配置保留 `semidense` 命名，描述半密集返回匹配；旧六轮 MHIR、零样本 P3/P6 作为历史对照保存。
 
 路线、基线与权威文档以[当前 D8→D2 主路线](../../mainline_d8_d2.md)为准；过时内容及保留方式见[文档状态清单](../../document_status_20261014.md)。以下研究主题围绕这条路线推进，历史报告中的优先级和“下一轮”描述按其记录时间解读。
 
-第一次阅读请先看[研究成果阅读指南](/home/disk1/MHINet/docs/research/mhinet_breakthrough/reading_guide.md)，日常看[累计研究记忆](/home/disk1/MHINet/docs/research/mhinet_breakthrough/research_memory.md)和[最新报告](/home/disk1/MHINet/docs/research/mhinet_breakthrough/latest.md)。
+第一次阅读请先看[研究成果阅读指南](reading_guide.md)，日常看[累计研究记忆](research_memory.md)和[最新报告](latest.md)。
 
 任务通过服务器cron运行，2026-10-12按用户要求改为**每两小时一次，北京时间偶数小时整点（00、02、04…22点）**。当时变更后的首个计划时点为2026-10-12北京时间16:00；后续运行读取已有结论和状态，推进未解问题。最新尝试、交付和研究轮数以`state.json`为准，历史计划时间不表示当前下一次运行。
 
@@ -14,6 +22,7 @@
 
 ## 阅读入口
 
+- `evidence/h0_position_ablation_20261013/`：本报告引用的H0消融摘要、验证与计划快照，保留原始数据，并登记原文件与快照hash；大体量原始匹配输出仍保留在本机。
 - `round_0001_synthesis.md`：2026-10-12首轮综合结论、候选突破和当时验证顺序，作为历史起点。
 - `round_0001_data_results.md`、`round_0001_model_training.md`、`round_0001_literature.md`：首轮专题证据，假设及优先级须结合后续修正。
 - `latest.md`：最近一次有效交付的研究报告（ok或limited，failed不替换）。
@@ -30,7 +39,7 @@
 
 私有运行日志/代理环境保存于`/home/disk1/.mhinet-breakthrough-research`，目录权限700，代理配置权限600，未复制账户令牌。cron的标准输出和错误均重定向到该目录，避免cron邮件。每轮原始事件和错误日志也保存在该目录。
 
-实际cron条目：
+历史cron条目（已移除）：
 
 ```cron
 0 */2 * * * /usr/bin/nice -n 10 /usr/bin/python3 /home/disk1/MHINet/scripts/run_mhinet_breakthrough_research.py >> /home/disk1/.mhinet-breakthrough-research/launcher.log 2>&1 # mhinet-breakthrough-every-2-hours
@@ -40,7 +49,7 @@
 
 ## 停止与恢复
 
-在本目录创建`PAUSED`文件，下一个计划时点立即退出，不启动研究；这不打断已运行的轮次。移除该文件后，从下一个计划时点恢复。需要立即取消或彻底移除调度时，向Codex明确提出；取消只移除带`# mhinet-breakthrough-every-2-hours`的条目，保留其他任务。
+当前已同时移除本任务cron条目并创建`PAUSED`，其他cron任务保留。单独删除`PAUSED`不会恢复调度。仅在用户重新明确要求启动后，才重新设置调度并移除停止标记；不因历史报告中的“下一轮”自动恢复。
 
 ## 验证记录
 

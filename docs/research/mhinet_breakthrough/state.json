@@ -1,23 +1,29 @@
 {
   "task": "MHINet每两小时静默突破研究",
   "timezone": "Asia/Shanghai",
-  "completed_rounds": 11,
-  "last_status": "limited",
-  "last_success_at": "2026-10-13T14:06:50+08:00",
-  "last_report": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261013T140001/report.md",
-  "next_focus": "暂停WHU定位分支，待外部切片映射/边界材料。下一轮只读追踪512评估实际入口、registration及已保存候选字段，核查OpenCV版本、候选稳定ID与排序、全局/局部随机源、早停和重拟合预算是否有记录；将本轮固定局部RNG证据转成固定K实验的最小可重复契约，明确选点随机性与拟合随机性如何分离，以及顺序置换对照需要哪些现有字段。不修改评估器、不生成新推理、不对历史测试扫K；缺完整开发缓存则只列准确缺项和未来最小验证。",
+  "completed_rounds": 22,
+  "last_status": "completed",
+  "last_success_at": "2026-10-14T20:14:19+08:00",
+  "last_report": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261014T200001/report.md",
+  "next_focus": "固定沿用JL同15对A/C，不扩样。仅用177215个共同源且B uint32逐位相同点，按保存顺序关联A/C，统计严格分数逆序，拆分同源D8父内与父间；将exact ties导致的稳定顺序差另列，并描述逆序对应的置信间距。主分母不按GT正确性筛选，GT可见仅另列；不改变拟合输入、不拟合、不删点、不扫描K/阈值、不恢复缺失lineage。用于辨别已观察变序主要来自父间分数变化还是同分/微小间距，不能据此断言H翻转因果。纯归一因果所需coarse目标、fine起点/logits/LSE仍待外部缓存，不继续用最终坐标替代；保留真实起点QRRU和多域保留优先级。",
   "breakthrough_verified": false,
   "initial_round_mode": "parallel_read_only_research",
   "notifications": "silent_local_records_only",
-  "last_attempt_at": "2026-10-13T14:00:01+08:00",
-  "last_attempt_hour": "2026-10-13T14",
-  "last_attempt_dir": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261013T140001",
+  "last_attempt_at": "2026-10-14T20:00:01+08:00",
+  "last_attempt_hour": "2026-10-14T20",
+  "last_attempt_dir": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/runs/20261014T200001",
   "cadence": "every_2_hours_at_minute_00",
-  "queued_research_focus": [],
+  "queued_research_focus": [
+    "完整隔离开发缓存与WHU映射转为待外部证据，不再重复扫描。下一轮对本轮预先固定的GE首末、JL首末4份历史最终NPZ，按预定分数分位组只读描述最终GT误差/P@1/3/5、NCM、双侧空间覆盖、预测H残差与GT正确性的区别；同时核实同分处理和GT支持分母。保留历史标签残差、来源/尺度/重叠混杂，不做删点、重拟合、K/阈值扫描或检查点选择，不把这4样本作为隔离开发集。目的是检验旧fine分数能否排序QRRU后质量，并决定未来隔离开发实验应优先质量筛选还是空间均衡；任何收益仍待独立验证。"
+  ],
   "latest_user_research_request": {
-    "added_at": "2026-10-13T09:22:11+08:00",
-    "topic": "结合之前思考的内容迭代研究，新旧结合",
-    "priority": "persistent_research_policy"
+    "added_at": "2026-10-13T16:18:40+08:00",
+    "topic": "理论精度上限与大幅提升路线，解释论文80%–90%与当前不到50%的差距",
+    "priority": "next_successful_research_round",
+    "metric_assumption": "用户已指定LoRetta PCK/AUC与SwinMatcher precision/SR/RMSE；同时研究定位误差与严格配准，SwinMatcher定义待核。",
+    "request_file": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/accuracy_ceiling_request_20261013.md",
+    "clarified_at": "2026-10-13T17:05:18+08:00",
+    "reference_clarification_file": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/paper_reference_clarification_20261013.md"
   },
   "user_research_requests": [
     {
@@ -29,10 +35,50 @@
       "added_at": "2026-10-13T09:22:11+08:00",
       "topic": "结合之前思考的内容迭代研究，新旧结合",
       "priority": "persistent_research_policy"
+    },
+    {
+      "added_at": "2026-10-13T16:18:40+08:00",
+      "topic": "理论精度上限与大幅提升路线，解释论文80%–90%与当前不到50%的差距",
+      "priority": "next_successful_research_round",
+      "metric_assumption": "暂按SR@3；具体论文和指标已向用户询问，待明确",
+      "request_file": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/accuracy_ceiling_request_20261013.md"
+    },
+    {
+      "added_at": "2026-10-13T17:05:18+08:00",
+      "topic": "用户明确参考论文与数值",
+      "references": [
+        {
+          "method": "LoRetta",
+          "reported": {
+            "PCK@1": 38.7,
+            "PCK@2": 67.6,
+            "PCK@3": 81.3,
+            "PCK@5": 91.4,
+            "AUC": 83.3
+          },
+          "numbers_verified": true,
+          "primary_source": "https://arxiv.org/html/2608.04106v1",
+          "protocol": "512, RANSAC+TPS dense warp, fully-matchable GT pixels; PCK-curve AUC"
+        },
+        {
+          "method": "SwinMatcher",
+          "subset_user_description": "可见光图像对",
+          "reported": {
+            "precision": 63.3,
+            "SR": 100.0,
+            "RMSE": 2.831
+          },
+          "numbers_verified": false,
+          "primary_source": "https://ieeexplore.ieee.org/document/11095750/",
+          "official_code": "https://github.com/LotrL/SwinMatcher",
+          "remaining": "Exact result table, precision threshold, SR criterion, RMSE set/failure handling and cohort."
+        }
+      ],
+      "priority": "next_successful_research_round"
     }
   ],
   "research_memory_path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/research_memory.md",
-  "research_memory_updated_at": "2026-10-13T14:06:50+08:00",
+  "research_memory_updated_at": "2026-10-14T20:14:19+08:00",
   "research_policy": "cumulative_iteration_with_support_and_counterevidence",
   "research_focus_history": [
     {
@@ -44,5 +90,51 @@
       ],
       "remaining_limitation": "全fine/final坐标与完整逐轮尾部仍缺，不能外推真实域。"
     }
-  ]
+  ],
+  "paper_reference_clarification": {
+    "received_at": "2026-10-13T17:05:18+08:00",
+    "references": [
+      {
+        "method": "LoRetta",
+        "reported": {
+          "PCK@1": 38.7,
+          "PCK@2": 67.6,
+          "PCK@3": 81.3,
+          "PCK@5": 91.4,
+          "AUC": 83.3
+        },
+        "numbers_verified": true,
+        "primary_source": "https://arxiv.org/html/2608.04106v1",
+        "protocol": "512, RANSAC+TPS dense warp, fully-matchable GT pixels; PCK-curve AUC"
+      },
+      {
+        "method": "SwinMatcher",
+        "subset_user_description": "可见光图像对",
+        "reported": {
+          "precision": 63.3,
+          "SR": 100.0,
+          "RMSE": 2.831
+        },
+        "numbers_verified": false,
+        "primary_source": "https://ieeexplore.ieee.org/document/11095750/",
+        "official_code": "https://github.com/LotrL/SwinMatcher",
+        "remaining": "Exact result table, precision threshold, SR criterion, RMSE set/failure handling and cohort.",
+        "official_code_commit": "9dc1de0cddafa4f23eb6cbec7fe3fe3da0fda6d3",
+        "verified_code_mechanisms": [
+          "bidirectional_softmax_OR_coarse_candidates",
+          "best_fine_match_per_coarse_window",
+          "two_endpoint_3x3_convolutional_offset_refinement"
+        ],
+        "demo_is_not_benchmark": true
+      }
+    ],
+    "request_file": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/paper_reference_clarification_20261013.md"
+  },
+  "task_status": "stopped",
+  "scheduled_research_enabled": false,
+  "stopped_at": "2026-10-14T20:27:26+08:00",
+  "stop_reason": "User requested stopping scheduled research and producing a final comprehensive report.",
+  "final_report_path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/final_report_20261014.md",
+  "final_report_manifest_path": "/home/disk1/MHINet/docs/research/mhinet_breakthrough/final_report_manifest_20261014.json",
+  "final_report_finalized_at": "2026-10-14T20:46:36+08:00"
 }

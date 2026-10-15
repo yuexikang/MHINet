@@ -1,0 +1,33 @@
+{
+  "complete": true,
+  "model_state_sha256_before": "22904e86900c1122fca29d0caabda47194944f4d97165e31bd33b14aae71217d",
+  "model_state_sha256_after": "22904e86900c1122fca29d0caabda47194944f4d97165e31bd33b14aae71217d",
+  "checkpoint_model_state_sha256": "22904e86900c1122fca29d0caabda47194944f4d97165e31bd33b14aae71217d",
+  "model_unchanged": true,
+  "feature_hash_checked_pairs": 2253,
+  "baseline_validation": {
+    "GoogleEarth": {
+      "a_baseline_exact_pairs": 498,
+      "first_pair_legacy_exact": true,
+      "feature_hash_checked_pairs": 498
+    },
+    "JL1Flight": {
+      "a_baseline_exact_pairs": 1755,
+      "first_pair_legacy_exact": true,
+      "feature_hash_checked_pairs": 1755
+    }
+  },
+  "plan_fingerprint": "b7e62503e333d126ade1899d84f78d53e01127f7af40e81ee09c01a8fafcc6f4",
+  "memory": {
+    "budget_gib": 6.0,
+    "budget_bytes": 6442450944,
+    "allocator_fraction": 0.25486307176579476,
+    "total_bytes": 25278087168,
+    "free_bytes_at_start": 19867762688,
+    "required_neighbor_reserve_bytes": 4294967296,
+    "note": "PyTorch allocator cap; other jobs are never stopped. Concurrent GPU timing is descriptive only.",
+    "max_memory_allocated_bytes": 1391496704,
+    "max_memory_reserved_bytes": 1606418432
+  },
+  "finished": "2026-10-13T18:01:51.183102+08:00"
+}

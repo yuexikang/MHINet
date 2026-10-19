@@ -1,0 +1,458 @@
+{
+  "schema": "mhi.experiment-plan.v1",
+  "model_line": "MHI v2",
+  "status": "planned",
+  "executable": false,
+  "training_started": false,
+  "purpose": "Planning registry only; this is not a SemidenseConfig or an executable training configuration.",
+  "created_on": "2026-10-19",
+  "baseline": {
+    "model_line": "MHI v1",
+    "tag": "mhi-v1",
+    "commit": "522d9bd5565e88267e72866bd829fb05274762e4",
+    "freeze_manifest": "artifacts/mhi_v1_freeze.json",
+    "reference_checkpoint": "weight/semidense_rgb512_h0joint_from_e_lr8e5_seed42_5ep.pt",
+    "reference_checkpoint_sha256": "43c020b213306c1ba517460092e4007799c2f445edce09cb00bf88fc8ac69cb4",
+    "existing_checkpoint_task": "semidense_qrru_v1",
+    "legacy_loading_policy": "Retain the existing strict v1 loading and default H0 behavior. A v2 migration may only initialize an explicit allowlist of new parameters; mismatched legacy tensors must fail."
+  },
+  "experiment_branch": "codex/mhi-v2",
+  "proposed_checkpoint_task": "mhi_semidense_v2",
+  "output_prefix": "outputs/mhi_v2/",
+  "implementation_scope": {
+    "new_mechanisms": [
+      "Expose the existing D16 target-coordinate and matchability predictions without executing the H0 fitter in Flow mode.",
+      "Add a bounded confidence-weighted Gaussian geometry reward before D8 global dual-softmax.",
+      "Add normalized absolute feature discrepancy and optional local DGFO residual adapters to QRRU."
+    ],
+    "necessary_interface_adaptation": "Construct the D2 4x4 target lattice directly from the predicted D8 parent correspondence in all no-H0 experiments.",
+    "preserved_structure": [
+      "Shared DINOv3 and MVT backbone",
+      "CGMDP D8/D4/D2 descriptor pyramid",
+      "Global D8 cosine matching, FP32 dual-softmax and chunked execution",
+      "D2 16x16 local matching and confidence composition",
+      "QRRU 4x4 feature patch, 2x2 controls and recurrent update mechanism"
+    ],
+    "out_of_scope": [
+      "A separate D8 flow update network",
+      "D2 Flow Refinement or a new D2 geometry model",
+      "Replacing QRRU with unconstrained dense flow",
+      "Inference masks derived from ground truth",
+      "Training, full evaluation or claiming v2 accuracy before the corresponding stage is implemented and verified"
+    ]
+  },
+  "data_policy": {
+    "training_manifest": "/home/disk1/Data/datasets/MHINet_RGB_512/train/pairs.jsonl",
+    "validation_manifest": "/home/disk1/Data/datasets/MHINet_RGB_512/val/pairs.jsonl",
+    "validation_role": "Select flow prior hyperparameters, training mixture and update budget before locked evaluation.",
+    "locked_evaluation_reference": "artifacts/mhi_v1_freeze.json",
+    "locked_evaluation_manifests": [
+      "/home/disk1/Data/datasets/Test_Data/GoogleEarth/val/pairs.jsonl",
+      "/home/disk1/Data/datasets/Test_Data/JL1Flight/test/pairs.jsonl"
+    ],
+    "googleearth_val_directory_policy": "Test_Data/GoogleEarth/val is locked evaluation data despite its directory name; it is different from MHINet_RGB_512/val and must not select hyperparameters.",
+    "reproducibility": "Register manifest hashes, geographic and parent-group isolation, initialization hash, seed, update budget, match caps and code commit before each run.",
+    "manual_gcp_policy": "Only completed and reviewed human annotations are eligible. Report GCP geometry evaluation separately from synthetic-H correspondence evaluation; offline fitted H never enters v2 inference."
+  },
+  "initial_experiment_settings": {
+    "settings_status": "draft_pending_validation_preregistration",
+    "input_size": 512,
+    "shape_test_input_sizes": [
+      512,
+      784
+    ],
+    "descriptor_shapes": {
+      "512": {
+        "D16": [
+          32,
+          32
+        ],
+        "D8": [
+          64,
+          64
+        ],
+        "D2": [
+          256,
+          256
+        ]
+      },
+      "784": {
+        "D16": [
+          49,
+          49
+        ],
+        "D8": [
+          98,
+          98
+        ],
+        "D2": [
+          392,
+          392
+        ]
+      }
+    },
+    "matching": {
+      "max_coarse": 6000,
+      "max_matches": 12000,
+      "confidence_threshold": 0.0,
+      "coarse_chunk_rows": 128,
+      "training_window_chunk": 32,
+      "inference_window_chunk": 1024,
+      "temperature_policy": "Preserve learned D8/D2 temperatures from the fixed initialization; 0.05 is only the legacy constructor initialization."
+    },
+    "flow_guidance": {
+      "mode": "soft_gaussian",
+      "lambda_initial": 3.0,
+      "sigma_d8_initial": 4.0,
+      "use_matchability": true,
+      "hyperparameter_status": "Unvalidated initial values; tune only on MHINet_RGB_512/val.",
+      "formula": "S_ij = cosine(D_A(i), D_B(j))/tau + lambda*c_i*exp(-||q_j-qhat_i||^2/(2*sigma_d8^2))",
+      "candidate_support": "All D8 cells on both sides; invalid, out-of-bounds or unreliable Flow predictions contribute zero reward and do not reject the image pair.",
+      "coordinate_contract": "A-to-B, align_corners=False cell-center normalized coordinates. flow16_norm = flow16_target_norm - source_grid16. Interpolate displacement to D8, add source_grid8, and compute Gaussian distances in D8 pixels."
+    },
+    "qrru": {
+      "patch_size": [
+        4,
+        4
+      ],
+      "control_size": [
+        2,
+        2
+      ],
+      "iterations": 4,
+      "radius_d2": 1.5,
+      "discrepancy_definition": "abs(normalize(wa, channel)-normalize(wb, channel))",
+      "discrepancy_dim": 32,
+      "dgfo_dim": 32,
+      "dgfo_neighborhood_radius": 1,
+      "dgfo_neighborhood_size": [
+        3,
+        3
+      ],
+      "adapter_initialization": "Zero-initialize both 1x1 residual adapters; retain legacy encoder tensor shapes and names.",
+      "control_interpolation": "Reuse interpolate_controls with actual control positions +/-1 and feature offsets +/-1.5, including its polynomial extrapolation.",
+      "mask_policy": "Use real source and warped-target sampling validity plus patch-neighborhood validity; mask invalid neighbors and define a finite fallback for an empty neighborhood. Do not use GT masks at inference.",
+      "first_iteration_dgfo": "Zero initial controls imply zero propagated flow and zero DGFO residual; discrepancy remains an independent branch from the first iteration.",
+      "flow_adapter_bias": false
+    }
+  },
+  "training_plan": {
+    "status": "not_started",
+    "update_budget": null,
+    "update_budget_status": "pending_validation_preregistration",
+    "optimizer_policy": "Fresh optimizer and scheduler for v2; never resume the v1 optimizer across architecture changes.",
+    "flow_head_stage": {
+      "trainable": [
+        "Flow Head"
+      ],
+      "frozen": [
+        "DINOv3",
+        "MVT",
+        "VGG",
+        "CGMDP",
+        "D8/D2 matcher",
+        "QRRU"
+      ],
+      "supervision": [
+        "D16 target-coordinate geometry",
+        "matchability",
+        "matching classification"
+      ],
+      "interface_requirement": "Separate locator prediction from H fitting and split geo/mat/cls losses from the H loss; setting h_weight=0 alone does not remove existing H-output dependencies."
+    },
+    "qrru_stages": {
+      "trainable": [
+        "QRRU",
+        "enabled discrepancy and DGFO branches"
+      ],
+      "frozen": [
+        "Flow Head",
+        "DINOv3",
+        "MVT",
+        "VGG",
+        "CGMDP",
+        "D8/D2 matcher"
+      ],
+      "training_input_mixture": {
+        "status": "draft_only",
+        "gt_noise_fraction": 0.5,
+        "predicted_d2_fraction": 0.5,
+        "noise_std_d2": 0.8,
+        "noise_bound_d2": 2.4,
+        "eligibility": "Use GT only to label geometrically valid predicted D2 inputs within a preregistered local correction range. Do not force severe parent mismatches to be repaired by a small patch.",
+        "selection_policy": "Confirm mixture and correction range using training and validation data before locked evaluation."
+      },
+      "controlled_comparison": "Independently initialize matched-training legacy C, D and E from the same legacy checkpoint; share data, cached C D2 inputs, seeds and optimizer update budgets. D adds discrepancy and E adds DGFO. Retain frozen C for the fixed-weight B-to-C prior comparison.",
+      "legacy_qrru_control": {
+        "experiment": "MHIv2-C",
+        "run_arms": [
+          "frozen_qrru",
+          "matched_qrru_training"
+        ],
+        "matched_arm_policy": "Train the original QRRU without new branches on the identical mixture and budget used for D/E; compare this arm with D to isolate discrepancy."
+      },
+      "f_control": "For the primary E-versus-F inference contrast, reuse the same E-trained weights and only disable the Flow prior. Any additional F training on B-generated D2 inputs is a separately registered equal-budget run."
+    },
+    "joint_training": "Optional only after separate Flow and QRRU gains pass stage acceptance; define its own freeze policy and preregistered budget."
+  },
+  "stages": [
+    {
+      "id": "P0",
+      "status": "completed",
+      "depends_on": [],
+      "scope": "Freeze the current MHI v1 baseline and register the MHI v2 branch and implementation plan.",
+      "acceptance": [
+        "mhi-v1 points to the recorded baseline commit.",
+        "The freeze manifest records the fixed checkpoint and evaluation references.",
+        "The v2 plan is explicitly non-executable and no training has started."
+      ]
+    },
+    {
+      "id": "P1",
+      "status": "planned",
+      "depends_on": [
+        "P0"
+      ],
+      "scope": "Expose D16 Flow0 target coordinates, displacement, matchability and validity while retaining legacy H0 mode.",
+      "files": [
+        "mhinet/models/feature_provider.py",
+        "mhinet/engine/ghim_losses.py"
+      ],
+      "acceptance": [
+        "512 and 784 shape contracts and A-to-B coordinate direction pass.",
+        "Zero displacement preserves identity including boundaries.",
+        "Flow mode does not execute the H fitter and supports independent EPE and valid-coverage measurement.",
+        "Legacy H0 checkpoint loading and inference remain available."
+      ]
+    },
+    {
+      "id": "P2",
+      "status": "planned",
+      "depends_on": [
+        "P1"
+      ],
+      "scope": "Implement the no-H0 Direct-D8 fine baseline and optional D8 Flow reward before dual-softmax; establish MHIv2-B then MHIv2-C.",
+      "files": [
+        "mhinet/downstream/loma_reference/coarse_matcher.py",
+        "mhinet/downstream/supervision.py",
+        "mhinet/downstream/semidense.py"
+      ],
+      "acceptance": [
+        "flow_prior=None retains the legacy matcher path; lambda=0 matches the no-H0 baseline.",
+        "Full and chunked paths agree for logits, mutual selections and dual-softmax confidence.",
+        "Direct-D8 forms exactly 16 child points per parent without H0.",
+        "No-H0 modes remove H validity and predicted-H overlap gates in both training and inference.",
+        "Invalid Flow falls back to appearance matching without NaNs or pair failure.",
+        "D8 timing and memory are measured independently before full evaluation."
+      ]
+    },
+    {
+      "id": "P3",
+      "status": "planned",
+      "depends_on": [
+        "P2"
+      ],
+      "scope": "Add discrepancy encoding and a zero-initialized residual adapter to legacy QRRU; evaluate MHIv2-D against MHIv2-C.",
+      "files": [
+        "mhinet/downstream/qrru.py",
+        "mhinet/downstream/training.py"
+      ],
+      "acceptance": [
+        "Explicit v1-to-v2 weight migration allows only new branch parameters to be missing.",
+        "Before training, migrated QRRU reproduces legacy outputs within a declared numerical tolerance.",
+        "Existing 4x4 patches, 2x2 controls and four recurrent updates are preserved.",
+        "Gradients reach the discrepancy branch after the expected zero-adapter warm-up."
+      ]
+    },
+    {
+      "id": "P4",
+      "status": "planned",
+      "depends_on": [
+        "P3"
+      ],
+      "scope": "Add masked 3x3 local DGFO using discrepancy Q/K and interpolated control-flow values; evaluate MHIv2-E and MHIv2-F.",
+      "files": [
+        "mhinet/downstream/qrru.py",
+        "mhinet/downstream/supervision.py"
+      ],
+      "acceptance": [
+        "Attention normalizes over valid neighbors with finite empty-neighborhood handling.",
+        "Zero adapters preserve the migrated legacy output at initialization.",
+        "The first iteration has zero DGFO flow residual as expected.",
+        "Later iterations provide finite gradients and logged propagation-residual magnitudes.",
+        "No invalid sampling, NaNs or unexplained large peak-memory increase is introduced."
+      ]
+    },
+    {
+      "id": "P5",
+      "status": "planned",
+      "depends_on": [
+        "P2",
+        "P3",
+        "P4"
+      ],
+      "scope": "Run separately supervised Flow and controlled QRRU training, then fixed-protocol A-F evaluation; consider joint fine-tuning only after independent gains.",
+      "files": [
+        "mhinet/downstream/training.py",
+        "mhinet/downstream/train.py",
+        "mhinet/downstream/evaluate_semidense.py"
+      ],
+      "acceptance": [
+        "Validation selection and equal legacy-C/D/E QRRU update budgets are registered before locked evaluation.",
+        "All runs preserve fixed manifests, initialization provenance, output caps and stage-specific freeze policies.",
+        "Report stage-wise precision, EPE, QRRU improvement/degradation, timing and memory alongside final Pre@3.",
+        "Human GCP and synthetic-H evaluation remain separate.",
+        "Stop conditions are assessed before any optional joint-training expansion."
+      ]
+    }
+  ],
+  "ablation_matrix": {
+    "id_policy": "Always use MHIv2-A through MHIv2-F in filenames and reports. original_proposal_id refers only to the supplied v2 proposal, never the historical H0-position A-D experiment.",
+    "experiments": [
+      {
+        "id": "MHIv2-A",
+        "original_proposal_id": "A",
+        "status": "planned",
+        "d8_geometry": "h0",
+        "d2_prior": "h0",
+        "qrru": "legacy",
+        "purpose": "Fixed complete legacy baseline"
+      },
+      {
+        "id": "MHIv2-B",
+        "original_proposal_id": "B",
+        "status": "planned",
+        "d8_geometry": "none",
+        "d2_prior": "direct_d8",
+        "qrru": "legacy",
+        "purpose": "No-H0 control for the Flow reward"
+      },
+      {
+        "id": "MHIv2-C",
+        "original_proposal_id": "C",
+        "status": "planned",
+        "d8_geometry": "flow_d16_soft_gaussian",
+        "d2_prior": "direct_d8",
+        "qrru": "legacy",
+        "purpose": "Isolate Flow-guided D8 matching"
+      },
+      {
+        "id": "MHIv2-D",
+        "original_proposal_id": "D",
+        "status": "planned",
+        "d8_geometry": "flow_d16_soft_gaussian",
+        "d2_prior": "direct_d8",
+        "qrru": "discrepancy",
+        "purpose": "Isolate feature discrepancy"
+      },
+      {
+        "id": "MHIv2-E",
+        "original_proposal_id": "E",
+        "status": "planned",
+        "d8_geometry": "flow_d16_soft_gaussian",
+        "d2_prior": "direct_d8",
+        "qrru": "discrepancy_dgfo",
+        "purpose": "Isolate DGFO under matched training conditions"
+      },
+      {
+        "id": "MHIv2-F",
+        "original_proposal_id": "F",
+        "status": "planned",
+        "d8_geometry": "none",
+        "d2_prior": "direct_d8",
+        "qrru": "discrepancy_dgfo",
+        "purpose": "Check QRRU gains without the Flow reward"
+      }
+    ],
+    "primary_contrasts": [
+      {
+        "from": "MHIv2-B",
+        "to": "MHIv2-C",
+        "attribution": "Flow-guided D8",
+        "comparison_arm": "same frozen weights; toggle only Flow prior"
+      },
+      {
+        "from": "MHIv2-C",
+        "to": "MHIv2-D",
+        "attribution": "Feature discrepancy",
+        "comparison_arm": "matched_qrru_training for C and D; same input mixture and optimizer update budget"
+      },
+      {
+        "from": "MHIv2-D",
+        "to": "MHIv2-E",
+        "attribution": "Local DGFO"
+      },
+      {
+        "from": "MHIv2-A",
+        "to": "MHIv2-E",
+        "attribution": "Complete architecture comparison; cannot assign gain to a single module"
+      },
+      {
+        "from": "MHIv2-E",
+        "to": "MHIv2-F",
+        "attribution": "Flow prior dependence with the same trained E weights; inference toggle only"
+      }
+    ]
+  },
+  "evaluation_plan": {
+    "primary": [
+      "Pre@1/3/5/10 stored_512_target_pixels",
+      "RMSE with named protocol"
+    ],
+    "d16": [
+      "Flow EPE",
+      "finite and in-bounds coverage",
+      "matchability calibration"
+    ],
+    "d8": [
+      "Pre@3",
+      "correct parent correspondence fraction",
+      "independent matching time"
+    ],
+    "d2": [
+      "Pre@3",
+      "fine coverage",
+      "correct candidate retention"
+    ],
+    "qrru": [
+      "EPE before and after each iteration",
+      "improved and degraded fractions",
+      "repair and damage of initially correct points",
+      "DGFO residual and gradient by iteration"
+    ],
+    "qrru_initial_error_bins_d2": [
+      "0-1",
+      "1-3",
+      "3-6",
+      ">6"
+    ],
+    "auxiliary": [
+      "NM",
+      "NCM",
+      "spatial coverage",
+      "failure rate"
+    ],
+    "efficiency": [
+      "Module inference time",
+      "peak allocated GPU memory"
+    ],
+    "optional_final_output_caps": [
+      1024,
+      2048,
+      4096
+    ],
+    "tolerance_and_threshold_policy": "Numerical tolerances, Flow quality gates and material-regression thresholds must be registered from engineering requirements or training/validation evidence before locked evaluation.",
+    "coordinate_unit": "stored_512_target_pixels",
+    "legacy_pre_at_10": {
+      "status": "pending_offline_rescoring",
+      "value": null,
+      "source": "Frozen historical A match NPZs; use identical support, macro averaging and denominator rules as new variants."
+    }
+  },
+  "stop_conditions": [
+    "If Flow predictions are inaccurate and geometric rewards promote wrong candidates, stop increasing lambda and first improve independent Flow supervision.",
+    "If D8 improves but Direct-D8 fine matching loses too many correct candidates, stop attributing the issue to QRRU; any new D2 geometry model requires a separate experiment.",
+    "If DGFO has no repeatable Pre@3 benefit over discrepancy-only QRRU at matched budget, retain the simpler discrepancy model. Match-count growth alone is insufficient."
+  ],
+  "created_timezone": "Asia/Shanghai"
+}

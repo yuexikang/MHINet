@@ -1,5 +1,11 @@
 # MHINet
 
+2026-10-19 起，当前代码以 **MHI v1** 固定在标签 `mhi-v1`
+（`522d9bd`）；**MHI v2** 在 `codex/mhi-v2` 分支开展独立实验。
+v2 的 [分阶段计划](docs/mhi_v2_plan.md)、[v1 冻结清单](artifacts/mhi_v1_freeze.json)
+与 [A–F 实验登记](artifacts/mhi_v2_experiment_plan.json) 已建立，模型改造及训练尚未开始。
+这里的模型版本与历史训练协议 `v1.2`、数据集 `stable_v2`、Python 包版本分别管理。
+
 当前主线：共享 GHIM/CGMDP，支持 MHIR 与 H0 引导粗细匹配下游。
 DINOv3 默认冻结，**LoRA 暂不启用**；LoRA 实现及独立实验入口仅保留供后续研究。
 稳定几何数据与当前适应实验见 [实验登记](docs/shared_stable_v2_adaptation.md)，

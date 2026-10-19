@@ -1,0 +1,406 @@
+{
+  "schema": "mhi.baseline-freeze.v1",
+  "model_line": "MHI v1",
+  "frozen_at": "2026-10-19T15:32:50+08:00",
+  "timezone": "Asia/Shanghai",
+  "code": {
+    "tag": "mhi-v1",
+    "commit": "522d9bd5565e88267e72866bd829fb05274762e4",
+    "branch_at_freeze": "main",
+    "initial_worktree_clean": true,
+    "proposal_referenced_commit": "a1d32e3",
+    "latest_added_commit_subject": "功能：增加二十组随机撒点与候选点批量确认",
+    "experiment_branch": "codex/mhi-v2",
+    "tracked_file_sha256": {
+      "pyproject.toml": "0f1b038188328319ae4f39d0a5501f1db804dff2d2482407f5510ed29f0e04f5",
+      "configs/semidense_qrru_512.json": "2150aa6b0fa78f33bc6d9b4973abfd03ba57e3b3f41f1fbc17f499a4e2b4fbec",
+      "artifacts/loma_downstream_source.json": "f5cfd0c95901d4bb43c351b2de61d539e915eee9d43f6909bc24123890fcde3a",
+      "mhinet/models/feature_provider.py": "a32d80bf0c16f3cac4f9dd49439e3fed6153d1ba9c157a9385986072930c49f3",
+      "mhinet/downstream/loma_reference/coarse_matcher.py": "2e65565f71c1425ced5d98593def52de5ab1cdcc8517da7e8f87eb92c7df4fa9",
+      "mhinet/downstream/supervision.py": "318781b2425caffd9fc0cccd527230f7ff1d802ed0b9490cda07c4bdb44767d9",
+      "mhinet/downstream/semidense.py": "ff87ed824ba05084342bcec7122b451912871d38d8951d12759caa60df637e52",
+      "mhinet/downstream/qrru.py": "6508838da7f3f35661d1aa0ec38a5d3f34ce4bc837223d10e7383fe26ff74b40",
+      "mhinet/downstream/training.py": "3676fcba8425a84db11320945256c91a93fd596e3d297da2c2cf932d38c4739c",
+      "mhinet/downstream/train.py": "4646da1b85fc5c14934d1363c44244c2d5ffbb587c0bc3be76f68c8460b79148",
+      "mhinet/downstream/evaluate_semidense.py": "b0945deae0c8d847d7a6d8511db8f7fef87c61ef9f4f7d3f624daba991ccd758",
+      "mhinet/engine/ghim_losses.py": "3293553afa0b20ba9098a5c2e089df9d7c63889c3c8d6360b8c32fb72e66475b"
+    }
+  },
+  "checkpoint": {
+    "path": "/home/disk1/MHINet/weight/semidense_rgb512_h0joint_from_e_lr8e5_seed42_5ep.pt",
+    "bytes": 1767527948,
+    "sha256": "43c020b213306c1ba517460092e4007799c2f445edce09cb00bf88fc8ac69cb4",
+    "verification": "actual_sha256sum_matched_expected_in_this_task_before_manifest_creation",
+    "optimizer_step": 25535,
+    "total_steps": 25535,
+    "task": "semidense_qrru_v1",
+    "training_metadata_snapshot": {
+      "task": "semidense_qrru_v1",
+      "config": {
+        "runtime": "/home/disk1/MHINet/configs/runtime_paths.mhinet_rgb512.server.json",
+        "seed": 42,
+        "tier": null,
+        "epochs": 5,
+        "accumulation": 8,
+        "shared_lr": 8e-05,
+        "head_lr": 8e-05,
+        "save_every": 250,
+        "validate_every": 5107,
+        "h0_loss_weight": 1.0,
+        "h0_loss_weights": {
+          "mat": 0.01,
+          "cls": 0.0001,
+          "H": 0.05,
+          "robust_scale": 0.1
+        },
+        "matcher": {
+          "coarse_queries": 1024,
+          "fine_windows": 64,
+          "qrru_queries": 128,
+          "window_chunk": 32,
+          "inference_window_chunk": 1024,
+          "iterations": 4,
+          "radius": 1.5,
+          "gamma": 0.8,
+          "lambda_c": 1.0,
+          "lambda_f": 1.0,
+          "lambda_q": 1.0,
+          "input_size": 512
+        },
+        "freeze_mvt": false,
+        "freeze_h0": false,
+        "visualization": {
+          "enabled": true,
+          "pairs": 8,
+          "every": 2000,
+          "curves_every": 100
+        },
+        "experiment_id": "semidense_rgb512_h0joint_from_e_lr8e5_seed42_5ep"
+      },
+      "matcher": {
+        "input_size": 512,
+        "coarse_queries": 1024,
+        "fine_windows": 64,
+        "qrru_queries": 128,
+        "chunk": 128,
+        "window_chunk": 32,
+        "inference_window_chunk": 1024,
+        "iterations": 4,
+        "radius": 1.5,
+        "gamma": 0.8,
+        "noise_std": 0.8,
+        "noise_bound": 2.4,
+        "temperature": 0.05,
+        "fine_gt_tolerance": 1.5,
+        "max_coarse": 6000,
+        "max_matches": 12000,
+        "confidence_threshold": 0.0,
+        "lambda_c": 1.0,
+        "lambda_f": 1.0,
+        "lambda_q": 1.0
+      },
+      "source_checkpoint": "/home/disk1/MHINet/weight/semidense_stable_v2_tier3_lr_e_seed0.pt",
+      "source_sha256": "b5995d184240be0be70d24a44dfbdc6e6f79050c735b0f8e7547542b40d97f50",
+      "runtime": {
+        "repo_root": "/home/disk1/MHINet",
+        "loma_root": "/home/disk1/LoMa",
+        "loretta_source_root": "/home/disk1/LoMa/third_party/LoRetta",
+        "dino_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+        "selected_stage1_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+        "pyramid_checkpoint": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+        "data_root": "/home/disk1/Data/datasets/MHINet_RGB_512",
+        "split_manifest": "/home/disk1/Data/datasets/MHINet_RGB_512/train/pairs.jsonl",
+        "output_root": "/home/disk1/MHINet/outputs",
+        "device": "cuda:0",
+        "source_path": "/home/disk1/MHINet/configs/runtime_paths.mhinet_rgb512.server.json"
+      },
+      "train_sha256": "11f37bcfcebc61a24310421a5eff2e1921c618d461b8dac8142ff050843f88dc",
+      "val_sha256": "ad281e31dfd612a239ddfa63f25a42812511e22445f571359477e709c8207f5b",
+      "train_pairs": 40849,
+      "val_pairs": 5106,
+      "total_steps": 25535,
+      "world_size": 1,
+      "global_batch_pairs": 8,
+      "dino_sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "implementation": {
+        "evaluate.py": "7e08974daa1c8a92649b9cef0d9b39bac7a9f3314c3d61f32b1ac8869cf91d70",
+        "semidense.py": "ff87ed824ba05084342bcec7122b451912871d38d8951d12759caa60df637e52",
+        "dense.py": "9435169de4c21d527ae842896caed1a752dc9e7f8011f433637c01d937777f7d",
+        "losses.py": "ddb47c2c474c5932f08a8549fabb355890ecaa37986ac521f815b43aa9970d2c",
+        "__init__.py": "87f1d8e739b320eda4f0cb6afee29469928286abc98ffc824de8baac9d8da998",
+        "evaluate_semidense.py": "b0945deae0c8d847d7a6d8511db8f7fef87c61ef9f4f7d3f624daba991ccd758",
+        "visualize.py": "fdde797b03503a3e75cb271c44cfef082806a1dcc931e9851146bcecd9e53ec2",
+        "metrics.py": "e279a427f7f9da4c30d61b2fb24abdfa166da9ffb8f6c9b2d73c926271001879",
+        "train.py": "1219df18c08cdf2cd1241eb59f2af07aac967431e5526b44939c5932695cf3cc",
+        "qrru.py": "6508838da7f3f35661d1aa0ec38a5d3f34ce4bc837223d10e7383fe26ff74b40",
+        "supervision.py": "318781b2425caffd9fc0cccd527230f7ff1d802ed0b9490cda07c4bdb44767d9",
+        "training.py": "4b1f15c15799e9cda927c2a45c4edc0ae703d345a1c0efd746a7313b3410a22e"
+      },
+      "data_loader_sha256": "58d6d2a0bab32c141ec0ac22f88dffd9d0048a11e8b1a6b6a32bf693e23e8a30",
+      "shared_data_loader_sha256": "7404b055c4de4b1e25d8999c6b2d37c512131b165adacaf4f67574b77a05b611",
+      "training_runtime_sha256": "9b4f209530f2c3aff5df9238596b82290e801e4e29f3d51a7075345b2341bddb",
+      "checkpoint_io_sha256": "a4985c86303f28617528ae0d264b9dee2307328e948d2b0c333d944e58cb7179",
+      "freeze_policy": "DINOv3 frozen; MVT=trainable; GHIM/H0=trainable; VGG BN running stats fixed; D1 inactive",
+      "h0_supervision": {
+        "weight": 1.0,
+        "mat": 0.01,
+        "cls": 0.0001,
+        "H": 0.05,
+        "robust_scale": 0.1
+      },
+      "ghim_loss_sha256": "3293553afa0b20ba9098a5c2e089df9d7c63889c3c8d6360b8c32fb72e66475b",
+      "initial_matcher_sha256": "6e23b2266b051b550114eebcd766d9332e005407555e23ac1ac751e9f84fe8e0"
+    }
+  },
+  "runtime_resources": {
+    "dino_checkpoint": {
+      "path": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "bytes": 1294957584,
+      "sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "verification": "file_hash_checked_at_freeze"
+    },
+    "selected_stage1_checkpoint": {
+      "path": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "bytes": 1294957584,
+      "sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+      "verification": "file_hash_checked_at_freeze"
+    },
+    "pyramid_checkpoint": {
+      "path": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+      "bytes": 757888113,
+      "sha256": "3a38824391e22b33bb3e10377c7736243fd8a2fbf1561446e7e133e497c35758",
+      "verification": "file_hash_checked_at_freeze"
+    }
+  },
+  "training_manifests": {
+    "train": {
+      "path": "/home/disk1/Data/datasets/MHINet_RGB_512/train/pairs.jsonl",
+      "bytes": 131785843,
+      "sha256": "11f37bcfcebc61a24310421a5eff2e1921c618d461b8dac8142ff050843f88dc",
+      "verification": "file_hash_checked_at_freeze",
+      "pairs": 40849,
+      "role": "training"
+    },
+    "val": {
+      "path": "/home/disk1/Data/datasets/MHINet_RGB_512/val/pairs.jsonl",
+      "bytes": 16504369,
+      "sha256": "ad281e31dfd612a239ddfa63f25a42812511e22445f571359477e709c8207f5b",
+      "verification": "file_hash_checked_at_freeze",
+      "pairs": 5106,
+      "role": "model_selection_validation"
+    }
+  },
+  "locked_evaluation_manifests": {
+    "GoogleEarth": {
+      "path": "/home/disk1/Data/datasets/Test_Data/GoogleEarth/val/pairs.jsonl",
+      "bytes": 2099343,
+      "sha256": "55088ef26b24170cad2da2feb7917bcc3e2051e94b576a48a9018ecd12872b51",
+      "verification": "file_hash_checked_at_freeze",
+      "pairs": 498,
+      "role": "locked_evaluation_not_for_model_selection",
+      "historical_input_inventory_sha256": "3767bfae7c34edc75e404e7669f57bd4108b2fbe87f665ce85343bf98de5812d"
+    },
+    "JL1Flight": {
+      "path": "/home/disk1/Data/datasets/Test_Data/JL1Flight/test/pairs.jsonl",
+      "bytes": 3884794,
+      "sha256": "d932203978e3da5d3ae96779447afdc69dc3b1d0dc26f0ef5041d0979a3aaaf5",
+      "verification": "file_hash_checked_at_freeze",
+      "pairs": 1755,
+      "role": "locked_evaluation_not_for_model_selection",
+      "historical_input_inventory_sha256": "4e5f42a2e45a74d9f2e1c1b02393a1303fdaa1931be20ed0df8a3e572988bf2c"
+    }
+  },
+  "historical_training_registration": {
+    "path": "/home/disk1/MHINet/outputs/semidense_rgb512_h0joint_from_e_lr8e5_seed42_5ep/run.json",
+    "bytes": 4868,
+    "sha256": "00812f95049f65b8aecc188e610ce8b8779b00fa450fbda72d905f8806717c82",
+    "verification": "file_hash_checked_at_freeze"
+  },
+  "historical_evaluation": {
+    "implementation_commit": "4c7a105d6fc07f93a1c4eff0c4cf4c984d130afe",
+    "model_state_sha256": "22904e86900c1122fca29d0caabda47194944f4d97165e31bd33b14aae71217d",
+    "source_plan": {
+      "path": "/home/disk1/MHINet/outputs/h0_position_ablation_512_20261013/plan.json",
+      "bytes": 6146,
+      "sha256": "a8b682b6bca673ef0556c6d00098d96952c433cd0bbc643233f1bb7ff26293b5",
+      "verification": "file_hash_checked_at_freeze"
+    },
+    "source_summary": {
+      "path": "/home/disk1/MHINet/outputs/h0_position_ablation_512_20261013/summary.json",
+      "bytes": 47683,
+      "sha256": "d8f72fe23eadd17ef01140af94c89efed9053d15d23d0251d7e84e36ad5a551f",
+      "verification": "file_hash_checked_at_freeze"
+    },
+    "source_validation": {
+      "path": "/home/disk1/MHINet/outputs/h0_position_ablation_512_20261013/validation.json",
+      "bytes": 1292,
+      "sha256": "598d3f1435538ebee46e5e2c2c4bd39a004bc43c036188c9bf7a9bc088748754",
+      "verification": "file_hash_checked_at_freeze"
+    },
+    "reports": {
+      "GoogleEarth": {
+        "report": {
+          "path": "/home/disk1/MHINet/outputs/h0_position_ablation_512_20261013/A_GoogleEarth/report.json",
+          "bytes": 26524,
+          "sha256": "ddd45094737ad6aeedd418e7e1ab5483eb964d602cef092740ca30ad730454e4",
+          "verification": "file_hash_checked_at_freeze"
+        },
+        "historical_group": "A",
+        "historical_metrics": {
+          "pairs": 498,
+          "precision": {
+            "1": 0.0824949652385728,
+            "3": 0.33244859266808124,
+            "5": 0.5342487334160771
+          },
+          "precision_micro": {
+            "1": 0.0835323282611232,
+            "3": 0.3355943137028817,
+            "5": 0.5385483308646591
+          },
+          "matching_rmse": 9.399570165400766,
+          "matching_rmse_pairs": 498,
+          "matching_epe": 7.423724790873917,
+          "registration_rmse": 5.158827471503448,
+          "registration_rmse_pairs": 498,
+          "sr": {
+            "1": 0.05421686746987952,
+            "3": 0.4759036144578313,
+            "5": 0.7630522088353414
+          },
+          "match_success20_at5": 0.9979919678714859,
+          "mean_ncm": {
+            "1": 983.3995983935743,
+            "3": 3950.8453815261046,
+            "5": 6340.158634538153
+          },
+          "mean_matches": 11772.682730923694,
+          "inference_failure_rate": 0.0,
+          "registration_failure_rate": 0.0,
+          "inference_ms_mean": 448.6738501404633,
+          "inference_ms_p95": 593.4134821873158,
+          "rmse_correct5_or_failure10": 6.520274162638733,
+          "rmse_defined_pairs": 498,
+          "rmse_undefined_pairs": 0
+        },
+        "new_evaluation_run_in_this_task": false,
+        "precision_at_10_status": "not_in_historical_headline_table_rescore_saved_matches_before_comparison"
+      },
+      "JL1Flight": {
+        "report": {
+          "path": "/home/disk1/MHINet/outputs/h0_position_ablation_512_20261013/A_JL1Flight/report.json",
+          "bytes": 39946,
+          "sha256": "14d48947723953653cc595c8cb5e5a5dc2525bd7b5b85f4ae735c2f5f03220d9",
+          "verification": "file_hash_checked_at_freeze"
+        },
+        "historical_group": "A",
+        "historical_metrics": {
+          "pairs": 1755,
+          "precision": {
+            "1": 0.07100427181004876,
+            "3": 0.3792390466938994,
+            "5": 0.595066048396075
+          },
+          "precision_micro": {
+            "1": 0.07209329268180552,
+            "3": 0.38509029627538327,
+            "5": 0.6040242476729917
+          },
+          "matching_rmse": 19.422040462264896,
+          "matching_rmse_pairs": 1755,
+          "matching_epe": 15.715329050548029,
+          "registration_rmse": 16.003594806874936,
+          "registration_rmse_pairs": 1755,
+          "sr": {
+            "1": 0.02678062678062678,
+            "3": 0.43646723646723645,
+            "5": 0.6660968660968661
+          },
+          "match_success20_at5": 0.9749287749287749,
+          "mean_ncm": {
+            "1": 848.8558404558405,
+            "3": 4534.210256410256,
+            "5": 7112.02792022792
+          },
+          "mean_matches": 11774.407977207977,
+          "inference_failure_rate": 0.0,
+          "registration_failure_rate": 0.0,
+          "inference_ms_mean": 412.9177783634461,
+          "inference_ms_p95": 537.7131206914783,
+          "rmse_correct5_or_failure10": 6.790555191745098,
+          "rmse_defined_pairs": 1755,
+          "rmse_undefined_pairs": 0
+        },
+        "new_evaluation_run_in_this_task": false,
+        "precision_at_10_status": "not_in_historical_headline_table_rescore_saved_matches_before_comparison"
+      }
+    },
+    "metric_protocol": {
+      "coordinate_unit": "stored_512_target_pixels",
+      "precision_protocol": "GT support and <=1/3/5 target pixels; all predicted matches in denominator; pair macro.",
+      "sr_protocol": "Predictions-only RANSAC H(3px,10000 iterations,.999 confidence,seed0), GT-visible 20x20 source grid; failures included.",
+      "rmse_protocol": "SR@3px success: RMSE over GT-correct <=5px matches; failed pairs=10; success with zero correct matches undefined and counted.",
+      "timing_note": "Shared forward measured once; variant matcher measured separately. wall_total_ms is estimated standalone shared_wall_ms+matcher_wall_ms. IO/metrics/hashes/warmup excluded.",
+      "googleearth_label_scope": "Synthetic geometry relative to nominal cross-temporal co-registration; native registration is not independently measured."
+    }
+  },
+  "reproduction_gaps": {
+    "files": [
+      {
+        "path": "configs/semidense_rgb512_h0_joint_5epoch.json",
+        "present_at_v1_code_tag": false,
+        "historical_source_commit": "6b01b654156ed1a6ccb32d8d47624684f908384f",
+        "historical_file_sha256": "a8a89925d038198f80d01ec64402d61efbce6a3edf72c0fd1c706f2b6324e92f"
+      },
+      {
+        "path": "configs/runtime_paths.mhinet_rgb512.server.json",
+        "present_at_v1_code_tag": false,
+        "historical_source_commit": "be04d1f028b17aa1fd83c48492a3932c582a8f65",
+        "historical_file_sha256": "1559e865d0f076a18e671044bab3464c0ae0255a6bc7af716dd7f63bb7925599"
+      },
+      {
+        "path": "scripts/train_semidense_rgb512_h0.sh",
+        "present_at_v1_code_tag": false,
+        "historical_source_commit": "6b01b654156ed1a6ccb32d8d47624684f908384f",
+        "historical_file_sha256": "479be93f37fb3ce30034ede8a24677c09ed232abcd7db10e2f8dea524bc5b465"
+      },
+      {
+        "path": "scripts/evaluate_h0_position_ablation.py",
+        "present_at_v1_code_tag": false,
+        "historical_source_commit": "4c7a105d6fc07f93a1c4eff0c4cf4c984d130afe",
+        "historical_file_sha256": "1f058f3a1caa04ca25903093287df69a6ee98be61a9b4b648ddd0cfb15dc251c"
+      },
+      {
+        "path": "scripts/evaluate_topk_correspondence_ablation.py",
+        "present_at_v1_code_tag": false,
+        "historical_source_commit": "8d48c2f684e77370be829eb75fa44b224162c176",
+        "historical_file_sha256": "0f9588c0c630df153286550d9d96246cc71e5030ab3cbb5e26e042cb68b0ac25"
+      }
+    ],
+    "action": "Resolve historical runtime/config and adapt v2 loader in P1; do not substitute quadrant template for formal RGB512 config.",
+    "runtime_snapshot_location": "checkpoint.training_metadata_snapshot.runtime"
+  },
+  "proposal": {
+    "archive": "docs/proposals/mhi_v2_proposal_20261019.md",
+    "sha256": "deb10d6f4696b6e347c7790f661d08064daedcade059269a360a9f0bc4ff2327",
+    "preservation": "Original user attachment text; only CRLF line endings normalized to LF for the repository.",
+    "source_attachment_sha256": "7e0eb9ed5092a43e5f546686ab85b0c7e6335bfe74708f3b51f35bc869d952d5"
+  },
+  "gcp_policy": {
+    "status": "no_completed_reviewed_reference_registered_for_this_freeze",
+    "action": "Version reviewed GCP separately when available; keep synthetic-H evaluation separate."
+  },
+  "storage_policy": {
+    "git_tag_covers": "tracked_source_only",
+    "external_files": [
+      "weight/",
+      "outputs/",
+      "dataset_roots",
+      "runtime_resources"
+    ],
+    "note": "External files remain in place; no copies, uploads, deletions or permission changes performed. Hashes identify content but are not a backup."
+  },
+  "model_rewrite_started": false,
+  "new_training_started": false,
+  "new_accuracy_evaluation_started": false
+}

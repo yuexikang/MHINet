@@ -93,11 +93,24 @@ function fromView(side,p){return G.snapBounds(mode==='test'?p:G.project(meta.ima
 function legal(side,p){
   return G.inside(p,meta.images[side].test_size)&&G.inside(G.project(meta.images[side].test_to_native,p),meta.images[side].native_size);
 }
+function zoomTogether(source,screen,factor){
+  const ready=Object.values(views).filter(v=>v.image);
+  if(!source.image)return;
+  // Clamp the shared factor so neither pane keeps zooming after the other
+  // reaches its limit. Each pane retains its own image point under the anchor.
+  const lower=Math.max(...ready.map(v=>.01/v.v.scale)),upper=Math.min(...ready.map(v=>100/v.v.scale));
+  factor=Math.min(upper,Math.max(lower,factor));
+  const [sw,sh]=source.size();
+  for(const v of ready){
+    const [w,h]=v.size(),anchor=v===source?screen:[screen[0]*w/sw,screen[1]*h/sh];
+    v.v=G.zoomAt(v.v,anchor,factor);v.draw();
+  }
+}
 class Viewer{
   constructor(side){
     this.side=side;this.canvas=$('canvas'+side);this.ctx=this.canvas.getContext('2d');this.v={x:0,y:0,scale:1};this.image=null;this.pointer=null;this.drag=null;
     new ResizeObserver(()=>{this.resize();}).observe(this.canvas);
-    this.canvas.addEventListener('wheel',e=>{e.preventDefault();this.pointer=this.screen(e);this.v=G.zoomAt(this.v,this.pointer,Math.exp(-e.deltaY*.0015));this.draw();},{passive:false});
+    this.canvas.addEventListener('wheel',e=>{e.preventDefault();this.pointer=this.screen(e);zoomTogether(this,this.pointer,Math.exp(-e.deltaY*.0015));},{passive:false});
     this.canvas.addEventListener('pointerdown',e=>this.down(e));this.canvas.addEventListener('pointermove',e=>this.move(e));this.canvas.addEventListener('pointerup',e=>this.up(e));
     this.canvas.addEventListener('pointercancel',()=>this.cancel());
     this.canvas.addEventListener('pointerleave',()=>{if(!this.drag){this.pointer=null;this.draw();}});

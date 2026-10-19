@@ -89,19 +89,43 @@ def run(args):
                 check('A_B_pair_id_association',stored['id']=='GCP-001')
                 check('native_to_test_click_coordinate_accuracy',max(abs(x-y) for x,y in zip(stored['a']+stored['b'],expected_a+expected_b))<1e-9)
                 check('floating_point_coordinates_preserved',any(abs(x-round(x))>1e-5 for x in stored['a']+stored['b']))
-                before_b=page.evaluate('JSON.stringify(views.B.v)')
+                before_scales=page.evaluate('[views.A.v.scale,views.B.v.scale]')
+                points_before_zoom=page.evaluate('JSON.stringify(doc.points)')
                 box=page.locator('#canvasA').bounding_box();page.mouse.move(box['x']+box['width']*.4,box['y']+box['height']*.4)
                 # Chromium may quantize wheel coordinates differently from a
                 # preceding pointermove; measure the actual wheel event anchor.
                 page.evaluate('''()=>views.A.canvas.addEventListener('wheel',e=>{
                   window.qaWheelScreen=views.A.screen(e);
                   window.qaWheelBefore=G.screenToImage(window.qaWheelScreen,views.A.v);
+                  const [aw,ah]=views.A.size(),[bw,bh]=views.B.size();
+                  window.qaPeerScreen=[window.qaWheelScreen[0]*bw/aw,window.qaWheelScreen[1]*bh/ah];
+                  window.qaPeerBefore=G.screenToImage(window.qaPeerScreen,views.B.v);
                 },{once:true,capture:true})''')
                 page.mouse.wheel(0,-220);page.wait_for_timeout(100)
                 before=page.evaluate('window.qaWheelBefore')
                 after=page.evaluate('G.screenToImage(window.qaWheelScreen,views.A.v)')
                 check('wheel_keeps_cursor_image_position',max(abs(x-y) for x,y in zip(before,after))<1e-9)
-                check('views_zoom_independently',page.evaluate('JSON.stringify(views.B.v)')==before_b)
+                scales=page.evaluate('[views.A.v.scale,views.B.v.scale]')
+                check('A_wheel_zooms_both_views_equally',scales[0]>before_scales[0] and abs(scales[0]/before_scales[0]-scales[1]/before_scales[1])<1e-12)
+                peer_after=page.evaluate('G.screenToImage(window.qaPeerScreen,views.B.v)')
+                peer_before=page.evaluate('window.qaPeerBefore')
+                check('peer_zoom_keeps_relative_screen_anchor',max(abs(x-y) for x,y in zip(peer_before,peer_after))<1e-9)
+                box_b=page.locator('#canvasB').bounding_box();page.mouse.move(box_b['x']+box_b['width']*.6,box_b['y']+box_b['height']*.5)
+                page.mouse.wheel(0,180);page.wait_for_timeout(100)
+                after_b_zoom=page.evaluate('[views.A.v.scale,views.B.v.scale]')
+                check('B_wheel_zooms_both_views_equally',after_b_zoom[1]<scales[1] and abs(after_b_zoom[0]/scales[0]-after_b_zoom[1]/scales[1])<1e-12)
+                check('synchronized_zoom_never_changes_GCP_coordinates',page.evaluate('JSON.stringify(doc.points)')==points_before_zoom)
+                page.evaluate('views.A.v.scale=95;views.B.v.scale=50')
+                page.mouse.wheel(0,-100000);page.wait_for_timeout(100)
+                upper=page.evaluate('[views.A.v.scale,views.B.v.scale]')
+                page.mouse.wheel(0,-100000);page.wait_for_timeout(100)
+                check('zoom_upper_limit_stops_both_views',upper[0]==100 and page.evaluate('[views.A.v.scale,views.B.v.scale]')==upper)
+                page.mouse.wheel(0,100000);page.wait_for_timeout(100)
+                lower=page.evaluate('[views.A.v.scale,views.B.v.scale]')
+                page.mouse.wheel(0,100000);page.wait_for_timeout(100)
+                check('zoom_lower_limit_stops_both_views',lower[1]==.01 and page.evaluate('[views.A.v.scale,views.B.v.scale]')==lower)
+                page.locator('#fit').click()
+                page.mouse.move(box['x']+box['width']*.4,box['y']+box['height']*.4)
                 pan_before=page.evaluate('({...views.A.v})')
                 page.keyboard.down('Space');page.mouse.down();page.mouse.move(box['x']+box['width']*.4+30,box['y']+box['height']*.4+20,steps=5);page.mouse.up();page.keyboard.up('Space')
                 pan_after=page.evaluate('({...views.A.v})')

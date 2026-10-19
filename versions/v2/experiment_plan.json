@@ -480,7 +480,7 @@
     "v1_replay_outputs": "outputs/mhi_v1_replay/"
   },
   "source_isolation_policy": "Legacy source, CLI and reference-kernel hashes remain unchanged. Put v2-specific implementations in mhinet/v2, with explicit v2 entrypoints; reuse stable legacy utilities by import and preserve checkpoint key names through tested migration.",
-  "preparation_status": "pending_preflight",
+  "preparation_status": "accepted",
   "execution_checklist": "versions/v2/ACCEPTANCE.md",
   "execution_state": "versions/v2/acceptance_status.json",
   "preflight_report": "versions/v2/evidence/preparation.json",
@@ -489,5 +489,8 @@
       "path": "scripts/mhi_v2/preflight.py",
       "scope": "Preparation audit only; no model training or inference"
     }
-  ]
+  ],
+  "preparation_acceptance": "versions/v2/evidence/V2-P0-04/acceptance.json",
+  "preparation_implementation_commit": "7981634f593cc2a8bfea5f2b73d1a3071e7028ca",
+  "next_item": "V2-P1-01"
 }

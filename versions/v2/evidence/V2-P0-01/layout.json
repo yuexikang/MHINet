@@ -1,0 +1,77 @@
+{
+  "schema": "mhi.v2-layout-audit.v1",
+  "item_id": "V2-P0-01",
+  "status": "pass",
+  "checked_at": "2026-10-19T15:47:16+08:00",
+  "execution_base_commit": "3cab6997d292ed6796e283d9353242a2a3d05d51",
+  "checks": [
+    {
+      "id": "v1_archive_hashes_and_historical_sources",
+      "status": "pass",
+      "files": 14
+    },
+    {
+      "id": "immutable_freeze_bytes",
+      "status": "pass",
+      "sha256": "76c2412a117061e90b34ed80e57857af94d6e17364b74159f8f6616e6390f239"
+    },
+    {
+      "id": "single_canonical_archive_paths",
+      "status": "pass",
+      "path_mapping": {
+        "artifacts/mhi_v1_freeze.json": "versions/v1/freeze_manifest.json",
+        "artifacts/mhi_v2_experiment_plan.json": "versions/v2/experiment_plan.json",
+        "docs/mhi_v2_plan.md": "versions/v2/PLAN.md",
+        "docs/proposals/mhi_v2_proposal_20261019.md": "versions/v2/proposal.md"
+      }
+    },
+    {
+      "id": "legacy_base_unchanged",
+      "status": "pass",
+      "only_allowed_new_files": [
+        "A\tconfigs/mhi_v2/README.md",
+        "A\tmhinet/v2/README.md",
+        "A\tscripts/mhi_v2/preflight.py",
+        "A\ttests/v2/README.md"
+      ]
+    },
+    {
+      "id": "local_document_links",
+      "status": "pass",
+      "documents": 12,
+      "links": 43
+    },
+    {
+      "id": "acceptance_item_ids",
+      "status": "pass",
+      "items": 27,
+      "stages": {
+        "P0": 4,
+        "P1": 5,
+        "P2": 4,
+        "P3": 3,
+        "P4": 3,
+        "P5": 8
+      }
+    },
+    {
+      "id": "separate_source_import_identity",
+      "status": "pass",
+      "actual": {
+        "/home/disk1/MHINet": "/home/disk1/MHINet/mhinet/__init__.py",
+        "/home/disk1/MHINet-v1": "/home/disk1/MHINet-v1/mhinet/__init__.py"
+      }
+    },
+    {
+      "id": "existing_evidence_overwrite_refused",
+      "status": "pass",
+      "exit_code": 2,
+      "report_sha256_unchanged": "4fd61d2fb76ad08fbc0401c795bfabbf74e4486e04873f3094634ab7059a103b"
+    }
+  ],
+  "engineering": "pass",
+  "training": "not_started",
+  "accuracy": "not_started",
+  "actual_command": "python - <<'MHI_LAYOUT_AUDIT'\nimport hashlib,json,re,subprocess,sys\nfrom datetime import datetime\nfrom zoneinfo import ZoneInfo\nfrom pathlib import Path\nroot=Path('/home/disk1/MHINet')\ndef digest(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()\ndef git(*args):return subprocess.check_output(['git',*args],cwd=root,text=True).strip()\nindex=json.loads((root/'versions/v1/archive_index.json').read_text())\nchecks=[]\nfor entry in index['files']:\n actual=digest(root/entry['archive'])\n assert actual==entry['sha256'],entry['archive']\n if entry.get('source_commit'):\n  raw=subprocess.check_output(['git','show',entry['source_commit']+':'+entry['source']],cwd=root)\n  assert hashlib.sha256(raw).hexdigest()==entry['sha256']\nchecks.append({'id':'v1_archive_hashes_and_historical_sources','status':'pass','files':len(index['files'])})\noriginal=subprocess.check_output(['git','show','3cab699:artifacts/mhi_v1_freeze.json'],cwd=root)\nassert original==(root/'versions/v1/freeze_manifest.json').read_bytes()\nchecks.append({'id':'immutable_freeze_bytes','status':'pass','sha256':digest(root/'versions/v1/freeze_manifest.json')})\nrelocations=json.loads((root/'versions/relocations.json').read_text())\nassert all(not (root/old).exists() and (root/new).is_file() for old,new in relocations['paths'].items())\nchecks.append({'id':'single_canonical_archive_paths','status':'pass','path_mapping':relocations['paths']})\nlegacy=git('diff','--name-status','mhi-v1','--','mhinet','configs','scripts','tests','artifacts/loma_downstream_source.json')\nallowed=('mhinet/v2/','configs/mhi_v2/','scripts/mhi_v2/','tests/v2/')\nfor line in legacy.splitlines():\n status,path=line.split('\\t',1)\n assert status=='A' and path.startswith(allowed),line\nchecks.append({'id':'legacy_base_unchanged','status':'pass','only_allowed_new_files':legacy.splitlines()})\nmd=[root/'README.md',*(root/'versions').rglob('*.md'),*(root/'mhinet/v2').rglob('*.md'),*(root/'configs/mhi_v2').rglob('*.md'),*(root/'tests/v2').rglob('*.md'),*(root/'weight/mhi_v2').rglob('*.md')]\nlinks=0\nfor p in md:\n for destination in re.findall(r'\\]\\(([^)]+)\\)',p.read_text()):\n  if '://' not in destination and not destination.startswith('#'):\n   assert (p.parent/destination.split('#')[0]).exists(),(str(p),destination)\n   links+=1\nchecks.append({'id':'local_document_links','status':'pass','documents':len(md),'links':links})\nchecklist=(root/'versions/v2/ACCEPTANCE.md').read_text()\nids=re.findall(r'^### \\[ [x ] \\] (V2-P\\d-\\d{2})：',checklist,re.M)\nif not ids:ids=re.findall(r'^### \\[[x ]\\] (V2-P\\d-\\d{2})：',checklist,re.M)\nstate=json.loads((root/'versions/v2/acceptance_status.json').read_text())\nassert len(ids)==len(set(ids))==27\nassert ids==[x['id'] for x in state['items']]\nchecks.append({'id':'acceptance_item_ids','status':'pass','items':27,'stages':{f'P{i}':sum(x.startswith(f'V2-P{i}-') for x in ids) for i in range(6)}})\norigins={}\ncode='import json,mhinet; print(json.dumps({\"module\":mhinet.__file__}))'\nfor worktree in (root,Path('/home/disk1/MHINet-v1')):\n result=subprocess.run([sys.executable,'-c',code],cwd=worktree,capture_output=True,text=True,check=True)\n module=json.loads(result.stdout)['module']\n assert Path(module).resolve()==worktree/'mhinet/__init__.py'\n origins[str(worktree)]=module\nchecks.append({'id':'separate_source_import_identity','status':'pass','actual':origins})\npreparation=root/'versions/v2/evidence/preparation.json'\nbefore=digest(preparation)\nprobe=subprocess.run([sys.executable,str(root/'scripts/mhi_v2/preflight.py'),'--output',str(preparation)],capture_output=True,text=True)\nassert probe.returncode==2 and 'already exists' in probe.stderr and digest(preparation)==before\nchecks.append({'id':'existing_evidence_overwrite_refused','status':'pass','exit_code':probe.returncode,'report_sha256_unchanged':before})\nprint(json.dumps({'schema':'mhi.v2-layout-audit.v1','item_id':'V2-P0-01','status':'pass','checked_at':datetime.now(ZoneInfo('Asia/Shanghai')).isoformat(timespec='seconds'),'execution_base_commit':git('rev-parse','HEAD'),'checks':checks,'engineering':'pass','training':'not_started','accuracy':'not_started'},ensure_ascii=False))\n\nMHI_LAYOUT_AUDIT",
+  "exit_code": 0
+}

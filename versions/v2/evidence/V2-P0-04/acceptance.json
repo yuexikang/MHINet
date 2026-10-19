@@ -1,0 +1,84 @@
+{
+  "schema": "mhi.stage-acceptance.v1",
+  "stage": "P0",
+  "item_id": "V2-P0-04",
+  "accepted_at": "2026-10-19T15:48:10+08:00",
+  "decision": "accepted",
+  "accepted_by": "Codex evidence review with independent read-only archive review",
+  "engineering": "pass",
+  "training": "not_started",
+  "accuracy": "not_started",
+  "implementation_commit": "7981634f593cc2a8bfea5f2b73d1a3071e7028ca",
+  "source_execution_context": {
+    "execution_base_commit": "3cab6997d292ed6796e283d9353242a2a3d05d51",
+    "note": "Checks executed against working-tree files subsequently committed unchanged in implementation_commit; evidence review follows that commit.",
+    "preflight_script_sha256": "709d54ccdd76f14a088f9a1f985a78110b5f8595cce004eba904c458bb04e054"
+  },
+  "accepted_items": [
+    "V2-P0-01",
+    "V2-P0-02",
+    "V2-P0-03",
+    "V2-P0-04"
+  ],
+  "evidence": [
+    {
+      "path": "versions/v2/evidence/preparation.json",
+      "sha256": "4fd61d2fb76ad08fbc0401c795bfabbf74e4486e04873f3094634ab7059a103b"
+    },
+    {
+      "path": "versions/v2/evidence/V2-P0-01/layout.json",
+      "sha256": "04a97a8dd0b864672d69948849405d235916de72c74f37a83be6f24daf16a9e1"
+    }
+  ],
+  "actual_preflight_command": "python scripts/mhi_v2/preflight.py --baseline-worktree /home/disk1/MHINet-v1 --verify-large-hashes --output versions/v2/evidence/preparation.json",
+  "preflight_exit_code": 0,
+  "result_summary": {
+    "preflight_passed": 62,
+    "known_next_tasks": 3,
+    "layout_checks_passed": 8,
+    "archive_files_verified": 14,
+    "model_task_items": 27
+  },
+  "known_next_tasks": [
+    {
+      "id": "v1:historical_reproduction_gaps",
+      "status": "known_next_task",
+      "expected": "Historical config absence stays documented; snapshot availability does not prove runnable reproduction",
+      "actual": {
+        "historically_missing_files": [
+          "configs/semidense_rgb512_h0_joint_5epoch.json",
+          "configs/runtime_paths.mhinet_rgb512.server.json",
+          "scripts/train_semidense_rgb512_h0.sh",
+          "scripts/evaluate_h0_position_ablation.py",
+          "scripts/evaluate_topk_correspondence_ablation.py"
+        ],
+        "runtime_snapshot_readable": true
+      },
+      "evidence": [
+        "versions/v1/freeze_manifest.json:reproduction_gaps",
+        "versions/v1/configs/runtime_snapshot.json",
+        "versions/v1/configs/training_snapshot.json"
+      ]
+    },
+    {
+      "id": "v2:configuration_and_loader",
+      "status": "known_next_task",
+      "expected": "V2-P1-01",
+      "actual": "Versioned configuration parsing, runtime adaptation and strict v1-to-v2 weight migration remain unimplemented",
+      "evidence": "Preparation does not require a v2 model implementation; this report cannot accept P1"
+    },
+    {
+      "id": "v1:evaluator_runtime_adaptation",
+      "status": "known_next_task",
+      "expected": "V2-P1-01",
+      "actual": "The existing v1 evaluator still reads its historical absolute runtime path; archived snapshots are not yet a replay interface",
+      "evidence": "Adapt runtime resolution and verify an actual v1 replay in P1; no GPU replay was performed by preflight"
+    }
+  ],
+  "limits": [
+    "No v2 model, GPU inference, gradient test, training or accuracy evaluation has run.",
+    "The old v1 evaluator requires explicit runtime adaptation before an actual GPU replay.",
+    "Preparation is accepted; P1-P5 and all A-F new runs remain not started."
+  ],
+  "next_item": "V2-P1-01"
+}

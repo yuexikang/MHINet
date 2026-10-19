@@ -1,0 +1,692 @@
+{
+  "schema": "mhi.v2-preflight.v1",
+  "phase": "preparation_only",
+  "status": "passed",
+  "checked_at": "2026-10-19T15:45:09+08:00",
+  "timezone": "Asia/Shanghai",
+  "repository": "/home/disk1/MHINet",
+  "large_hash_verification_requested": true,
+  "checks": [
+    {
+      "id": "archive:required_files",
+      "status": "passed",
+      "expected": {
+        "versions/README.md": true,
+        "versions/v1/freeze_manifest.json": true,
+        "versions/v1/configs/runtime_snapshot.json": true,
+        "versions/v1/configs/training_snapshot.json": true,
+        "versions/v2/experiment_plan.json": true,
+        "versions/v2/PLAN.md": true,
+        "versions/v2/ACCEPTANCE.md": true,
+        "versions/v2/proposal.md": true
+      },
+      "actual": {
+        "versions/README.md": true,
+        "versions/v1/freeze_manifest.json": true,
+        "versions/v1/configs/runtime_snapshot.json": true,
+        "versions/v1/configs/training_snapshot.json": true,
+        "versions/v2/experiment_plan.json": true,
+        "versions/v2/PLAN.md": true,
+        "versions/v2/ACCEPTANCE.md": true,
+        "versions/v2/proposal.md": true
+      },
+      "evidence": "/home/disk1/MHINet"
+    },
+    {
+      "id": "json:versions/v1/freeze_manifest.json",
+      "status": "passed",
+      "expected": "readable JSON object",
+      "actual": "readable",
+      "evidence": "versions/v1/freeze_manifest.json"
+    },
+    {
+      "id": "json:versions/v2/experiment_plan.json",
+      "status": "passed",
+      "expected": "readable JSON object",
+      "actual": "readable",
+      "evidence": "versions/v2/experiment_plan.json"
+    },
+    {
+      "id": "json:versions/v1/configs/runtime_snapshot.json",
+      "status": "passed",
+      "expected": "readable JSON object",
+      "actual": "readable",
+      "evidence": "versions/v1/configs/runtime_snapshot.json"
+    },
+    {
+      "id": "json:versions/v1/configs/training_snapshot.json",
+      "status": "passed",
+      "expected": "readable JSON object",
+      "actual": "readable",
+      "evidence": "versions/v1/configs/training_snapshot.json"
+    },
+    {
+      "id": "git:experiment_branch",
+      "status": "passed",
+      "expected": "codex/mhi-v2",
+      "actual": "codex/mhi-v2",
+      "evidence": [
+        "branch",
+        "--show-current"
+      ]
+    },
+    {
+      "id": "git:v1_tag",
+      "status": "passed",
+      "expected": "522d9bd5565e88267e72866bd829fb05274762e4",
+      "actual": "522d9bd5565e88267e72866bd829fb05274762e4",
+      "evidence": [
+        "rev-parse",
+        "--verify",
+        "mhi-v1^{commit}"
+      ]
+    },
+    {
+      "id": "git:main_unchanged",
+      "status": "passed",
+      "expected": "522d9bd5565e88267e72866bd829fb05274762e4",
+      "actual": "522d9bd5565e88267e72866bd829fb05274762e4",
+      "evidence": [
+        "rev-parse",
+        "--verify",
+        "refs/heads/main^{commit}"
+      ]
+    },
+    {
+      "id": "git:baseline_ancestry",
+      "status": "passed",
+      "expected": true,
+      "actual": true,
+      "evidence": [
+        "merge-base",
+        "--is-ancestor",
+        "522d9bd5565e88267e72866bd829fb05274762e4",
+        "HEAD"
+      ]
+    },
+    {
+      "id": "plan:baseline_identity",
+      "status": "passed",
+      "expected": {
+        "tag": "mhi-v1",
+        "commit": "522d9bd5565e88267e72866bd829fb05274762e4"
+      },
+      "actual": {
+        "tag": "mhi-v1",
+        "commit": "522d9bd5565e88267e72866bd829fb05274762e4"
+      },
+      "evidence": [
+        "versions/v1/freeze_manifest.json",
+        "versions/v2/experiment_plan.json"
+      ]
+    },
+    {
+      "id": "v1_tag_source:pyproject.toml",
+      "status": "passed",
+      "expected": "0f1b038188328319ae4f39d0a5501f1db804dff2d2482407f5510ed29f0e04f5",
+      "actual": "0f1b038188328319ae4f39d0a5501f1db804dff2d2482407f5510ed29f0e04f5",
+      "evidence": "git show 522d9bd5565e88267e72866bd829fb05274762e4:pyproject.toml; current v2 source is not compared"
+    },
+    {
+      "id": "v1_tag_source:configs/semidense_qrru_512.json",
+      "status": "passed",
+      "expected": "2150aa6b0fa78f33bc6d9b4973abfd03ba57e3b3f41f1fbc17f499a4e2b4fbec",
+      "actual": "2150aa6b0fa78f33bc6d9b4973abfd03ba57e3b3f41f1fbc17f499a4e2b4fbec",
+      "evidence": "git show 522d9bd5565e88267e72866bd829fb05274762e4:configs/semidense_qrru_512.json; current v2 source is not compared"
+    },
+    {
+      "id": "v1_tag_source:artifacts/loma_downstream_source.json",
+      "status": "passed",
+      "expected": "f5cfd0c95901d4bb43c351b2de61d539e915eee9d43f6909bc24123890fcde3a",
+      "actual": "f5cfd0c95901d4bb43c351b2de61d539e915eee9d43f6909bc24123890fcde3a",
+      "evidence": "git show 522d9bd5565e88267e72866bd829fb05274762e4:artifacts/loma_downstream_source.json; current v2 source is not compared"
+    },
+    {
+      "id": "v1_tag_source:mhinet/models/feature_provider.py",
+      "status": "passed",
+      "expected": "a32d80bf0c16f3cac4f9dd49439e3fed6153d1ba9c157a9385986072930c49f3",
+      "actual": "a32d80bf0c16f3cac4f9dd49439e3fed6153d1ba9c157a9385986072930c49f3",
+      "evidence": "git show 522d9bd5565e88267e72866bd829fb05274762e4:mhinet/models/feature_provider.py; current v2 source is not compared"
+    },
+    {
+      "id": "v1_tag_source:mhinet/downstream/loma_reference/coarse_matcher.py",
+      "status": "passed",
+      "expected": "2e65565f71c1425ced5d98593def52de5ab1cdcc8517da7e8f87eb92c7df4fa9",
+      "actual": "2e65565f71c1425ced5d98593def52de5ab1cdcc8517da7e8f87eb92c7df4fa9",
+      "evidence": "git show 522d9bd5565e88267e72866bd829fb05274762e4:mhinet/downstream/loma_reference/coarse_matcher.py; current v2 source is not compared"
+    },
+    {
+      "id": "v1_tag_source:mhinet/downstream/supervision.py",
+      "status": "passed",
+      "expected": "318781b2425caffd9fc0cccd527230f7ff1d802ed0b9490cda07c4bdb44767d9",
+      "actual": "318781b2425caffd9fc0cccd527230f7ff1d802ed0b9490cda07c4bdb44767d9",
+      "evidence": "git show 522d9bd5565e88267e72866bd829fb05274762e4:mhinet/downstream/supervision.py; current v2 source is not compared"
+    },
+    {
+      "id": "v1_tag_source:mhinet/downstream/semidense.py",
+      "status": "passed",
+      "expected": "ff87ed824ba05084342bcec7122b451912871d38d8951d12759caa60df637e52",
+      "actual": "ff87ed824ba05084342bcec7122b451912871d38d8951d12759caa60df637e52",
+      "evidence": "git show 522d9bd5565e88267e72866bd829fb05274762e4:mhinet/downstream/semidense.py; current v2 source is not compared"
+    },
+    {
+      "id": "v1_tag_source:mhinet/downstream/qrru.py",
+      "status": "passed",
+      "expected": "6508838da7f3f35661d1aa0ec38a5d3f34ce4bc837223d10e7383fe26ff74b40",
+      "actual": "6508838da7f3f35661d1aa0ec38a5d3f34ce4bc837223d10e7383fe26ff74b40",
+      "evidence": "git show 522d9bd5565e88267e72866bd829fb05274762e4:mhinet/downstream/qrru.py; current v2 source is not compared"
+    },
+    {
+      "id": "v1_tag_source:mhinet/downstream/training.py",
+      "status": "passed",
+      "expected": "3676fcba8425a84db11320945256c91a93fd596e3d297da2c2cf932d38c4739c",
+      "actual": "3676fcba8425a84db11320945256c91a93fd596e3d297da2c2cf932d38c4739c",
+      "evidence": "git show 522d9bd5565e88267e72866bd829fb05274762e4:mhinet/downstream/training.py; current v2 source is not compared"
+    },
+    {
+      "id": "v1_tag_source:mhinet/downstream/train.py",
+      "status": "passed",
+      "expected": "4646da1b85fc5c14934d1363c44244c2d5ffbb587c0bc3be76f68c8460b79148",
+      "actual": "4646da1b85fc5c14934d1363c44244c2d5ffbb587c0bc3be76f68c8460b79148",
+      "evidence": "git show 522d9bd5565e88267e72866bd829fb05274762e4:mhinet/downstream/train.py; current v2 source is not compared"
+    },
+    {
+      "id": "v1_tag_source:mhinet/downstream/evaluate_semidense.py",
+      "status": "passed",
+      "expected": "b0945deae0c8d847d7a6d8511db8f7fef87c61ef9f4f7d3f624daba991ccd758",
+      "actual": "b0945deae0c8d847d7a6d8511db8f7fef87c61ef9f4f7d3f624daba991ccd758",
+      "evidence": "git show 522d9bd5565e88267e72866bd829fb05274762e4:mhinet/downstream/evaluate_semidense.py; current v2 source is not compared"
+    },
+    {
+      "id": "v1_tag_source:mhinet/engine/ghim_losses.py",
+      "status": "passed",
+      "expected": "3293553afa0b20ba9098a5c2e089df9d7c63889c3c8d6360b8c32fb72e66475b",
+      "actual": "3293553afa0b20ba9098a5c2e089df9d7c63889c3c8d6360b8c32fb72e66475b",
+      "evidence": "git show 522d9bd5565e88267e72866bd829fb05274762e4:mhinet/engine/ghim_losses.py; current v2 source is not compared"
+    },
+    {
+      "id": "v1:runtime_snapshot",
+      "status": "passed",
+      "expected": "Exact checkpoint-embedded runtime object",
+      "actual": "matches",
+      "evidence": [
+        "versions/v1/configs/runtime_snapshot.json",
+        "versions/v1/freeze_manifest.json:checkpoint.training_metadata_snapshot.runtime"
+      ]
+    },
+    {
+      "id": "v1:training_snapshot",
+      "status": "passed",
+      "expected": "Exact checkpoint-embedded training_metadata_snapshot object",
+      "actual": "matches",
+      "evidence": [
+        "versions/v1/configs/training_snapshot.json",
+        "versions/v1/freeze_manifest.json:checkpoint.training_metadata_snapshot"
+      ]
+    },
+    {
+      "id": "v1:historical_reproduction_gaps",
+      "status": "known_next_task",
+      "expected": "Historical config absence stays documented; snapshot availability does not prove runnable reproduction",
+      "actual": {
+        "historically_missing_files": [
+          "configs/semidense_rgb512_h0_joint_5epoch.json",
+          "configs/runtime_paths.mhinet_rgb512.server.json",
+          "scripts/train_semidense_rgb512_h0.sh",
+          "scripts/evaluate_h0_position_ablation.py",
+          "scripts/evaluate_topk_correspondence_ablation.py"
+        ],
+        "runtime_snapshot_readable": true
+      },
+      "evidence": [
+        "versions/v1/freeze_manifest.json:reproduction_gaps",
+        "versions/v1/configs/runtime_snapshot.json",
+        "versions/v1/configs/training_snapshot.json"
+      ]
+    },
+    {
+      "id": "v2:configuration_and_loader",
+      "status": "known_next_task",
+      "expected": "V2-P1-01",
+      "actual": "Versioned configuration parsing, runtime adaptation and strict v1-to-v2 weight migration remain unimplemented",
+      "evidence": "Preparation does not require a v2 model implementation; this report cannot accept P1"
+    },
+    {
+      "id": "v1:evaluator_runtime_adaptation",
+      "status": "known_next_task",
+      "expected": "V2-P1-01",
+      "actual": "The existing v1 evaluator still reads its historical absolute runtime path; archived snapshots are not yet a replay interface",
+      "evidence": "Adapt runtime resolution and verify an actual v1 replay in P1; no GPU replay was performed by preflight"
+    },
+    {
+      "id": "json:versions/relocations.json",
+      "status": "passed",
+      "expected": "readable JSON object",
+      "actual": "readable",
+      "evidence": "versions/relocations.json"
+    },
+    {
+      "id": "archive:frozen_manifest_bytes",
+      "status": "passed",
+      "expected": "76c2412a117061e90b34ed80e57857af94d6e17364b74159f8f6616e6390f239",
+      "actual": "76c2412a117061e90b34ed80e57857af94d6e17364b74159f8f6616e6390f239",
+      "evidence": [
+        "versions/v1/freeze_manifest.json",
+        "versions/relocations.json:frozen_manifest_sha256"
+      ]
+    },
+    {
+      "id": "archive:proposal_bytes",
+      "status": "passed",
+      "expected": "deb10d6f4696b6e347c7790f661d08064daedcade059269a360a9f0bc4ff2327",
+      "actual": "deb10d6f4696b6e347c7790f661d08064daedcade059269a360a9f0bc4ff2327",
+      "evidence": {
+        "frozen_reference": "docs/proposals/mhi_v2_proposal_20261019.md",
+        "relocated_path": "versions/v2/proposal.md"
+      }
+    },
+    {
+      "id": "plan:freeze_manifest_path",
+      "status": "passed",
+      "expected": "versions/v1/freeze_manifest.json",
+      "actual": "versions/v1/freeze_manifest.json",
+      "evidence": "versions/v2/experiment_plan.json:baseline.freeze_manifest"
+    },
+    {
+      "id": "plan:locked_evaluation_reference",
+      "status": "passed",
+      "expected": "versions/v1/freeze_manifest.json",
+      "actual": "versions/v1/freeze_manifest.json",
+      "evidence": "versions/v2/experiment_plan.json:data_policy.locked_evaluation_reference"
+    },
+    {
+      "id": "plan:preparation_flags",
+      "status": "passed",
+      "expected": {
+        "executable": false,
+        "training_started": false
+      },
+      "actual": {
+        "executable": false,
+        "training_started": false
+      },
+      "evidence": "versions/v2/experiment_plan.json"
+    },
+    {
+      "id": "plan:stage_states",
+      "status": "passed",
+      "expected": {
+        "P0": "completed",
+        "P1": "planned",
+        "P2": "planned",
+        "P3": "planned",
+        "P4": "planned",
+        "P5": "planned"
+      },
+      "actual": {
+        "P0": "completed",
+        "P1": "planned",
+        "P2": "planned",
+        "P3": "planned",
+        "P4": "planned",
+        "P5": "planned"
+      },
+      "evidence": "versions/v2/experiment_plan.json:stages"
+    },
+    {
+      "id": "plan:ablation_states",
+      "status": "passed",
+      "expected": {
+        "MHIv2-A": "planned",
+        "MHIv2-B": "planned",
+        "MHIv2-C": "planned",
+        "MHIv2-D": "planned",
+        "MHIv2-E": "planned",
+        "MHIv2-F": "planned"
+      },
+      "actual": {
+        "MHIv2-A": "planned",
+        "MHIv2-B": "planned",
+        "MHIv2-C": "planned",
+        "MHIv2-D": "planned",
+        "MHIv2-E": "planned",
+        "MHIv2-F": "planned"
+      },
+      "evidence": "versions/v2/experiment_plan.json:ablation_matrix.experiments"
+    },
+    {
+      "id": "plan:storage_layout:v1_archive",
+      "status": "passed",
+      "expected": "versions/v1/",
+      "actual": "versions/v1/",
+      "evidence": "versions/v2/experiment_plan.json:storage_layout; planned directories need not contain implementations"
+    },
+    {
+      "id": "plan:storage_layout:v2_archive",
+      "status": "passed",
+      "expected": "versions/v2/",
+      "actual": "versions/v2/",
+      "evidence": "versions/v2/experiment_plan.json:storage_layout; planned directories need not contain implementations"
+    },
+    {
+      "id": "plan:storage_layout:v2_configs",
+      "status": "passed",
+      "expected": "configs/mhi_v2/",
+      "actual": "configs/mhi_v2/",
+      "evidence": "versions/v2/experiment_plan.json:storage_layout; planned directories need not contain implementations"
+    },
+    {
+      "id": "plan:storage_layout:v2_scripts",
+      "status": "passed",
+      "expected": "scripts/mhi_v2/",
+      "actual": "scripts/mhi_v2/",
+      "evidence": "versions/v2/experiment_plan.json:storage_layout; planned directories need not contain implementations"
+    },
+    {
+      "id": "plan:storage_layout:v2_outputs",
+      "status": "passed",
+      "expected": "outputs/mhi_v2/",
+      "actual": "outputs/mhi_v2/",
+      "evidence": "versions/v2/experiment_plan.json:storage_layout; planned directories need not contain implementations"
+    },
+    {
+      "id": "plan:storage_layout:v2_weights",
+      "status": "passed",
+      "expected": "weight/mhi_v2/",
+      "actual": "weight/mhi_v2/",
+      "evidence": "versions/v2/experiment_plan.json:storage_layout; planned directories need not contain implementations"
+    },
+    {
+      "id": "plan:storage_layout:v2_source",
+      "status": "passed",
+      "expected": "mhinet/v2/",
+      "actual": "mhinet/v2/",
+      "evidence": "versions/v2/experiment_plan.json:storage_layout; planned directories need not contain implementations"
+    },
+    {
+      "id": "plan:storage_layout:v2_tests",
+      "status": "passed",
+      "expected": "tests/v2/",
+      "actual": "tests/v2/",
+      "evidence": "versions/v2/experiment_plan.json:storage_layout; planned directories need not contain implementations"
+    },
+    {
+      "id": "plan:output_prefix",
+      "status": "passed",
+      "expected": "outputs/mhi_v2/",
+      "actual": "outputs/mhi_v2/",
+      "evidence": "versions/v2/experiment_plan.json:output_prefix"
+    },
+    {
+      "id": "manifests:training_manifests:inventory",
+      "status": "passed",
+      "expected": [
+        "train",
+        "val"
+      ],
+      "actual": [
+        "train",
+        "val"
+      ],
+      "evidence": "versions/v1/freeze_manifest.json:training_manifests"
+    },
+    {
+      "id": "manifest:training_manifests:train",
+      "status": "passed",
+      "expected": {
+        "sha256": "11f37bcfcebc61a24310421a5eff2e1921c618d461b8dac8142ff050843f88dc",
+        "bytes": 131785843,
+        "pairs": 40849
+      },
+      "actual": {
+        "sha256": "11f37bcfcebc61a24310421a5eff2e1921c618d461b8dac8142ff050843f88dc",
+        "bytes": 131785843,
+        "pairs": 40849,
+        "blank_lines": 0,
+        "invalid_rows": 0,
+        "first_invalid_lines": []
+      },
+      "evidence": "/home/disk1/Data/datasets/MHINet_RGB_512/train/pairs.jsonl"
+    },
+    {
+      "id": "manifest:training_manifests:val",
+      "status": "passed",
+      "expected": {
+        "sha256": "ad281e31dfd612a239ddfa63f25a42812511e22445f571359477e709c8207f5b",
+        "bytes": 16504369,
+        "pairs": 5106
+      },
+      "actual": {
+        "sha256": "ad281e31dfd612a239ddfa63f25a42812511e22445f571359477e709c8207f5b",
+        "bytes": 16504369,
+        "pairs": 5106,
+        "blank_lines": 0,
+        "invalid_rows": 0,
+        "first_invalid_lines": []
+      },
+      "evidence": "/home/disk1/Data/datasets/MHINet_RGB_512/val/pairs.jsonl"
+    },
+    {
+      "id": "manifests:locked_evaluation_manifests:inventory",
+      "status": "passed",
+      "expected": [
+        "GoogleEarth",
+        "JL1Flight"
+      ],
+      "actual": [
+        "GoogleEarth",
+        "JL1Flight"
+      ],
+      "evidence": "versions/v1/freeze_manifest.json:locked_evaluation_manifests"
+    },
+    {
+      "id": "manifest:locked_evaluation_manifests:GoogleEarth",
+      "status": "passed",
+      "expected": {
+        "sha256": "55088ef26b24170cad2da2feb7917bcc3e2051e94b576a48a9018ecd12872b51",
+        "bytes": 2099343,
+        "pairs": 498
+      },
+      "actual": {
+        "sha256": "55088ef26b24170cad2da2feb7917bcc3e2051e94b576a48a9018ecd12872b51",
+        "bytes": 2099343,
+        "pairs": 498,
+        "blank_lines": 0,
+        "invalid_rows": 0,
+        "first_invalid_lines": []
+      },
+      "evidence": "/home/disk1/Data/datasets/Test_Data/GoogleEarth/val/pairs.jsonl"
+    },
+    {
+      "id": "manifest:locked_evaluation_manifests:JL1Flight",
+      "status": "passed",
+      "expected": {
+        "sha256": "d932203978e3da5d3ae96779447afdc69dc3b1d0dc26f0ef5041d0979a3aaaf5",
+        "bytes": 3884794,
+        "pairs": 1755
+      },
+      "actual": {
+        "sha256": "d932203978e3da5d3ae96779447afdc69dc3b1d0dc26f0ef5041d0979a3aaaf5",
+        "bytes": 3884794,
+        "pairs": 1755,
+        "blank_lines": 0,
+        "invalid_rows": 0,
+        "first_invalid_lines": []
+      },
+      "evidence": "/home/disk1/Data/datasets/Test_Data/JL1Flight/test/pairs.jsonl"
+    },
+    {
+      "id": "plan:manifest_references",
+      "status": "passed",
+      "expected": {
+        "training_manifest": "/home/disk1/Data/datasets/MHINet_RGB_512/train/pairs.jsonl",
+        "validation_manifest": "/home/disk1/Data/datasets/MHINet_RGB_512/val/pairs.jsonl",
+        "locked_evaluation_manifests": [
+          "/home/disk1/Data/datasets/Test_Data/GoogleEarth/val/pairs.jsonl",
+          "/home/disk1/Data/datasets/Test_Data/JL1Flight/test/pairs.jsonl"
+        ]
+      },
+      "actual": {
+        "training_manifest": "/home/disk1/Data/datasets/MHINet_RGB_512/train/pairs.jsonl",
+        "validation_manifest": "/home/disk1/Data/datasets/MHINet_RGB_512/val/pairs.jsonl",
+        "locked_evaluation_manifests": [
+          "/home/disk1/Data/datasets/Test_Data/GoogleEarth/val/pairs.jsonl",
+          "/home/disk1/Data/datasets/Test_Data/JL1Flight/test/pairs.jsonl"
+        ]
+      },
+      "evidence": "versions/v2/experiment_plan.json"
+    },
+    {
+      "id": "resource:v1_checkpoint",
+      "status": "passed",
+      "expected": {
+        "bytes": 1767527948,
+        "prior_frozen_sha256": "43c020b213306c1ba517460092e4007799c2f445edce09cb00bf88fc8ac69cb4"
+      },
+      "actual": {
+        "exists": true,
+        "bytes": 1767527948,
+        "verification": "streamed_sha256_and_size",
+        "current_sha256_verified": true,
+        "sha256": "43c020b213306c1ba517460092e4007799c2f445edce09cb00bf88fc8ac69cb4",
+        "file_stable_during_hash": true
+      },
+      "evidence": "/home/disk1/MHINet/weight/semidense_rgb512_h0joint_from_e_lr8e5_seed42_5ep.pt"
+    },
+    {
+      "id": "resource:dino_checkpoint",
+      "status": "passed",
+      "expected": {
+        "bytes": 1294957584,
+        "prior_frozen_sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e"
+      },
+      "actual": {
+        "exists": true,
+        "bytes": 1294957584,
+        "verification": "streamed_sha256_and_size",
+        "current_sha256_verified": true,
+        "sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+        "file_stable_during_hash": true
+      },
+      "evidence": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e"
+    },
+    {
+      "id": "resource:selected_stage1_checkpoint",
+      "status": "passed",
+      "expected": {
+        "bytes": 1294957584,
+        "prior_frozen_sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e"
+      },
+      "actual": {
+        "exists": true,
+        "bytes": 1294957584,
+        "verification": "streamed_sha256_and_size",
+        "current_sha256_verified": true,
+        "sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+        "file_stable_during_hash": true
+      },
+      "evidence": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e"
+    },
+    {
+      "id": "resource:pyramid_checkpoint",
+      "status": "passed",
+      "expected": {
+        "bytes": 757888113,
+        "prior_frozen_sha256": "3a38824391e22b33bb3e10377c7736243fd8a2fbf1561446e7e133e497c35758"
+      },
+      "actual": {
+        "exists": true,
+        "bytes": 757888113,
+        "verification": "streamed_sha256_and_size",
+        "current_sha256_verified": true,
+        "sha256": "3a38824391e22b33bb3e10377c7736243fd8a2fbf1561446e7e133e497c35758",
+        "file_stable_during_hash": true
+      },
+      "evidence": "/root/.cache/torch/hub/checkpoints/loma_B.pt"
+    },
+    {
+      "id": "v1:baseline_worktree",
+      "status": "passed",
+      "expected": {
+        "commit": "522d9bd5565e88267e72866bd829fb05274762e4",
+        "branch": ""
+      },
+      "actual": {
+        "commit": "522d9bd5565e88267e72866bd829fb05274762e4",
+        "branch": ""
+      },
+      "evidence": "/home/disk1/MHINet-v1"
+    },
+    {
+      "id": "v1_worktree_source:mhinet/models/feature_provider.py",
+      "status": "passed",
+      "expected": "a32d80bf0c16f3cac4f9dd49439e3fed6153d1ba9c157a9385986072930c49f3",
+      "actual": "a32d80bf0c16f3cac4f9dd49439e3fed6153d1ba9c157a9385986072930c49f3",
+      "evidence": "/home/disk1/MHINet-v1/mhinet/models/feature_provider.py"
+    },
+    {
+      "id": "v1_worktree_source:mhinet/downstream/loma_reference/coarse_matcher.py",
+      "status": "passed",
+      "expected": "2e65565f71c1425ced5d98593def52de5ab1cdcc8517da7e8f87eb92c7df4fa9",
+      "actual": "2e65565f71c1425ced5d98593def52de5ab1cdcc8517da7e8f87eb92c7df4fa9",
+      "evidence": "/home/disk1/MHINet-v1/mhinet/downstream/loma_reference/coarse_matcher.py"
+    },
+    {
+      "id": "v1_worktree_source:mhinet/downstream/supervision.py",
+      "status": "passed",
+      "expected": "318781b2425caffd9fc0cccd527230f7ff1d802ed0b9490cda07c4bdb44767d9",
+      "actual": "318781b2425caffd9fc0cccd527230f7ff1d802ed0b9490cda07c4bdb44767d9",
+      "evidence": "/home/disk1/MHINet-v1/mhinet/downstream/supervision.py"
+    },
+    {
+      "id": "v1_worktree_source:mhinet/downstream/semidense.py",
+      "status": "passed",
+      "expected": "ff87ed824ba05084342bcec7122b451912871d38d8951d12759caa60df637e52",
+      "actual": "ff87ed824ba05084342bcec7122b451912871d38d8951d12759caa60df637e52",
+      "evidence": "/home/disk1/MHINet-v1/mhinet/downstream/semidense.py"
+    },
+    {
+      "id": "v1_worktree_source:mhinet/downstream/qrru.py",
+      "status": "passed",
+      "expected": "6508838da7f3f35661d1aa0ec38a5d3f34ce4bc837223d10e7383fe26ff74b40",
+      "actual": "6508838da7f3f35661d1aa0ec38a5d3f34ce4bc837223d10e7383fe26ff74b40",
+      "evidence": "/home/disk1/MHINet-v1/mhinet/downstream/qrru.py"
+    },
+    {
+      "id": "v1_worktree_source:mhinet/downstream/training.py",
+      "status": "passed",
+      "expected": "3676fcba8425a84db11320945256c91a93fd596e3d297da2c2cf932d38c4739c",
+      "actual": "3676fcba8425a84db11320945256c91a93fd596e3d297da2c2cf932d38c4739c",
+      "evidence": "/home/disk1/MHINet-v1/mhinet/downstream/training.py"
+    },
+    {
+      "id": "v1_worktree_source:mhinet/downstream/train.py",
+      "status": "passed",
+      "expected": "4646da1b85fc5c14934d1363c44244c2d5ffbb587c0bc3be76f68c8460b79148",
+      "actual": "4646da1b85fc5c14934d1363c44244c2d5ffbb587c0bc3be76f68c8460b79148",
+      "evidence": "/home/disk1/MHINet-v1/mhinet/downstream/train.py"
+    },
+    {
+      "id": "v1_worktree_source:mhinet/downstream/evaluate_semidense.py",
+      "status": "passed",
+      "expected": "b0945deae0c8d847d7a6d8511db8f7fef87c61ef9f4f7d3f624daba991ccd758",
+      "actual": "b0945deae0c8d847d7a6d8511db8f7fef87c61ef9f4f7d3f624daba991ccd758",
+      "evidence": "/home/disk1/MHINet-v1/mhinet/downstream/evaluate_semidense.py"
+    },
+    {
+      "id": "v1_worktree_source:mhinet/engine/ghim_losses.py",
+      "status": "passed",
+      "expected": "3293553afa0b20ba9098a5c2e089df9d7c63889c3c8d6360b8c32fb72e66475b",
+      "actual": "3293553afa0b20ba9098a5c2e089df9d7c63889c3c8d6360b8c32fb72e66475b",
+      "evidence": "/home/disk1/MHINet-v1/mhinet/engine/ghim_losses.py"
+    }
+  ],
+  "limitations": [
+    "No model code or torch was imported; no GPU, forward-pass, gradient, training or accuracy check ran.",
+    "All registered checkpoint/runtime resources passed current streamed SHA256 and byte-size checks. File integrity does not demonstrate checkpoint loading or model behavior.",
+    "Historical reproduction gaps remain documented. Readable embedded snapshots do not demonstrate a runnable v1 or v2 loader.",
+    "The existing v1 evaluator still uses its historical absolute runtime reference; snapshot archival is not a successful GPU replay.",
+    "A passed preparation report cannot accept P1 or any later implementation/experiment stage."
+  ],
+  "next_item": "V2-P1-01"
+}

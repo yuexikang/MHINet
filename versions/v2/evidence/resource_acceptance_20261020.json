@@ -1,0 +1,301 @@
+{
+  "schema": "mhi.v2.resource_acceptance.v1",
+  "status": "passed",
+  "preregistered_at": "2026-10-20T03:23:35.343333+08:00",
+  "resource_budget_preregistered": {
+    "device": "physical GPU 0, RTX 4090 24 GiB, observed idle before start",
+    "maximum_peak_reserved_bytes": 8589934592,
+    "maximum_peak_allocated_bytes": 8589934592,
+    "acceptance_rule": "Every measured phase must stay strictly below 8 GiB peak reserved and allocated.",
+    "timing_rule": "Record measured cost only; no speedup threshold or accuracy/model-selection decision."
+  },
+  "protocol": {
+    "input_size": 512,
+    "d8_shape": [
+      256,
+      64,
+      64
+    ],
+    "d8_tokens_per_image": 4096,
+    "d8_matrix_elements": 16777216,
+    "d8_chunk_rows": 128,
+    "d8_policy": "mutual",
+    "max_coarse": 6000,
+    "d8_temperature": 0.05,
+    "flow_lambda": 3.0,
+    "flow_sigma_d8": 4.0,
+    "d2_shape": [
+      256,
+      256,
+      256
+    ],
+    "qrru_inference_candidates": 1024,
+    "qrru_training_window_chunk": 32,
+    "qrru_iterations": 4,
+    "qrru_radius": 1.5,
+    "dtype": "FP32",
+    "tf32": false,
+    "seed": 20261020,
+    "warmup_calls": 2,
+    "timed_repeats": 5,
+    "timing": "CUDA synchronize immediately before/after each wall-clock interval; excludes I/O, checks, hashing.",
+    "d8_tolerance": {
+      "rtol": 2e-05,
+      "atol": 2e-06
+    },
+    "qrru_tolerance": {
+      "rtol": 1e-05,
+      "atol": 1e-06
+    },
+    "scope": "Synthetic module resource acceptance, not end-to-end throughput or precision/accuracy evidence."
+  },
+  "gpu_before": "0, NVIDIA GeForce RTX 4090, 4 MiB, 24564 MiB\n1, NVIDIA GeForce RTX 4090, 15433 MiB, 24564 MiB\n2, NVIDIA GeForce RTX 4090, 9359 MiB, 24564 MiB",
+  "source_files_sha256": {
+    "mhinet/v2/coarse_matcher.py": "415052967f238a5417406a19d7a8cfb57fe4e904239624e04b1634d1afd126c3",
+    "mhinet/v2/qrru.py": "7442d014d84b4d180a08cf6e35df214838997cd4c9802563e3a2d884db7e752c",
+    "mhinet/v2/dgfo.py": "66d9fdab3fcb949eace03cc84d23153602f50098ecfa06bccee2ecd10013c69d"
+  },
+  "measurements": {
+    "d8_appearance_full": {
+      "milliseconds_samples": [
+        6.015431019477546,
+        2.328236005268991,
+        2.265217946842313,
+        2.2680129623040557,
+        2.2473150165751576
+      ],
+      "milliseconds_median": 2.2680129623040557,
+      "milliseconds_min": 2.2473150165751576,
+      "baseline_allocated_bytes": 42030080,
+      "peak_allocated_bytes": 520353280,
+      "peak_reserved_bytes": 694157312,
+      "incremental_peak_allocated_bytes": 478323200,
+      "under_preregistered_budget": true
+    },
+    "d8_appearance_chunk128": {
+      "milliseconds_samples": [
+        20.60738595901057,
+        19.55501298652962,
+        19.609374983701855,
+        19.466475991066545,
+        19.53445398248732
+      ],
+      "milliseconds_median": 19.55501298652962,
+      "milliseconds_min": 19.466475991066545,
+      "baseline_allocated_bytes": 42030080,
+      "peak_allocated_bytes": 59065344,
+      "peak_reserved_bytes": 77594624,
+      "incremental_peak_allocated_bytes": 17035264,
+      "under_preregistered_budget": true
+    },
+    "d8_flow_prior_full": {
+      "milliseconds_samples": [
+        7.9279179917648435,
+        3.8438179763033986,
+        3.9371030288748443,
+        4.083187959622592,
+        4.035358026158065
+      ],
+      "milliseconds_median": 4.035358026158065,
+      "milliseconds_min": 3.8438179763033986,
+      "baseline_allocated_bytes": 42030080,
+      "peak_allocated_bytes": 520353280,
+      "peak_reserved_bytes": 794820608,
+      "incremental_peak_allocated_bytes": 478323200,
+      "under_preregistered_budget": true
+    },
+    "d8_flow_prior_chunk128": {
+      "milliseconds_samples": [
+        31.267267011571676,
+        29.816225985996425,
+        29.80218903394416,
+        29.97965196846053,
+        43.77894097706303
+      ],
+      "milliseconds_median": 29.97965196846053,
+      "milliseconds_min": 29.80218903394416,
+      "baseline_allocated_bytes": 42030080,
+      "peak_allocated_bytes": 63279104,
+      "peak_reserved_bytes": 77594624,
+      "incremental_peak_allocated_bytes": 21249024,
+      "under_preregistered_budget": true
+    },
+    "qrru_legacy_inference_N1024": {
+      "milliseconds_samples": [
+        9.109904000069946,
+        7.635599991772324,
+        7.583582017105073,
+        7.659533992409706,
+        7.542384963016957
+      ],
+      "milliseconds_median": 7.635599991772324,
+      "milliseconds_min": 7.542384963016957,
+      "baseline_allocated_bytes": 168642048,
+      "peak_allocated_bytes": 230410240,
+      "peak_reserved_bytes": 260046848,
+      "incremental_peak_allocated_bytes": 61768192,
+      "under_preregistered_budget": true
+    },
+    "qrru_E_inference_N1024": {
+      "milliseconds_samples": [
+        47.94389195740223,
+        45.013667026069015,
+        44.00283197173849,
+        47.4868249730207,
+        48.20020298939198
+      ],
+      "milliseconds_median": 47.4868249730207,
+      "milliseconds_min": 44.00283197173849,
+      "baseline_allocated_bytes": 168642048,
+      "peak_allocated_bytes": 258254848,
+      "peak_reserved_bytes": 278921216,
+      "incremental_peak_allocated_bytes": 89612800,
+      "under_preregistered_budget": true
+    },
+    "qrru_legacy_forward_backward_N32": {
+      "milliseconds_samples": [
+        21.774114982690662,
+        20.136253035161644,
+        19.920416991226375,
+        19.85047699417919,
+        19.988476007711142
+      ],
+      "milliseconds_median": 19.988476007711142,
+      "milliseconds_min": 19.85047699417919,
+      "baseline_allocated_bytes": 202585600,
+      "peak_allocated_bytes": 244112896,
+      "peak_reserved_bytes": 249561088,
+      "incremental_peak_allocated_bytes": 41527296,
+      "under_preregistered_budget": true
+    },
+    "qrru_E_forward_backward_N32": {
+      "milliseconds_samples": [
+        34.01857701828703,
+        30.87275702273473,
+        31.43017302500084,
+        33.14817504724488,
+        32.969630032312125
+      ],
+      "milliseconds_median": 32.969630032312125,
+      "milliseconds_min": 30.87275702273473,
+      "baseline_allocated_bytes": 202607616,
+      "peak_allocated_bytes": 246886400,
+      "peak_reserved_bytes": 253755392,
+      "incremental_peak_allocated_bytes": 44278784,
+      "under_preregistered_budget": true
+    },
+    "qrru_E_increment_inference_N1024": {
+      "milliseconds_median_delta": 39.85122498124838,
+      "milliseconds_ratio": 6.219134714258176,
+      "peak_allocated_bytes_delta": 27844608,
+      "incremental_peak_allocated_bytes_delta": 27844608,
+      "interpretation": "Module cost only; no model efficacy or precision claim."
+    },
+    "qrru_E_increment_forward_backward_N32": {
+      "milliseconds_median_delta": 12.981154024600983,
+      "milliseconds_ratio": 1.649431903642535,
+      "peak_allocated_bytes_delta": 2773504,
+      "incremental_peak_allocated_bytes_delta": 2751488,
+      "interpretation": "Module cost only; no model efficacy or precision claim."
+    }
+  },
+  "checks": {
+    "d8_appearance": {
+      "candidate_count": 2040,
+      "candidate_set_exact": true,
+      "ordered_source_exact": true,
+      "ordered_target_exact": true,
+      "prefilter_exact": true,
+      "confidence_max_absolute_error": 2.3283064365386963e-08,
+      "confidence_equivalent": true,
+      "passed": true
+    },
+    "d8_flow_prior": {
+      "candidate_count": 1888,
+      "candidate_set_exact": true,
+      "ordered_source_exact": true,
+      "ordered_target_exact": true,
+      "prefilter_exact": true,
+      "confidence_max_absolute_error": 3.725290298461914e-08,
+      "confidence_equivalent": true,
+      "passed": true
+    },
+    "qrru_legacy_E_four_round_equivalence": {
+      "passed": true,
+      "nontrivial_legacy_head": true,
+      "legacy_total_absolute_flow": 2148.045654296875,
+      "zero_initialized_adapters": true,
+      "fields": {
+        "flows": {
+          "shape": [
+            4,
+            1024,
+            2,
+            2,
+            2
+          ],
+          "max_absolute_error": 0.0,
+          "bitwise_equal": true
+        },
+        "centers": {
+          "shape": [
+            4,
+            1024,
+            2
+          ],
+          "max_absolute_error": 0.0,
+          "bitwise_equal": true
+        },
+        "grids": {
+          "shape": [
+            4,
+            1024,
+            4,
+            4,
+            2
+          ],
+          "max_absolute_error": 0.0,
+          "bitwise_equal": true
+        },
+        "gates": {
+          "shape": [
+            4,
+            1024,
+            1,
+            2,
+            2
+          ],
+          "max_absolute_error": 0.0,
+          "bitwise_equal": true
+        }
+      },
+      "legacy_parameters_loaded": 18,
+      "new_parameter_names": [
+        "diff_encoder.0.weight",
+        "diff_encoder.0.bias",
+        "diff_encoder.1.weight",
+        "diff_encoder.1.bias",
+        "diff_adapter.weight",
+        "diff_adapter.bias",
+        "dgfo.query.weight",
+        "dgfo.query.bias",
+        "dgfo.key.weight",
+        "dgfo.key.bias",
+        "flow_adapter.weight"
+      ]
+    },
+    "all_phase_memory_budgets": {
+      "passed": true
+    }
+  },
+  "environment": {
+    "python": "3.10.20 (main, Jun 11 2026, 15:17:37) [GCC 14.3.0]",
+    "executable": "/root/miniconda3/envs/loma-repro/bin/python",
+    "torch": "2.11.0+cu128",
+    "cuda": "12.8",
+    "cuda_visible_devices": "0",
+    "device_name": "NVIDIA GeForce RTX 4090",
+    "total_memory_bytes": 25278087168
+  },
+  "completed_at": "2026-10-20T03:23:39.695460+08:00"
+}

@@ -1,10 +1,10 @@
 {
   "schema": "mhi.experiment-plan.v1",
   "model_line": "MHI v2",
-  "status": "planned",
+  "status": "flow_head_running_cde_queued",
   "executable": false,
-  "training_started": false,
-  "purpose": "Planning registry only; this is not a SemidenseConfig or an executable training configuration.",
+  "training_started": true,
+  "purpose": "Research and acceptance registry only; executable mhi.v2-run.v1 training configs are registered separately under configs/mhi_v2/.",
   "created_on": "2026-10-19",
   "baseline": {
     "model_line": "MHI v1",
@@ -51,11 +51,21 @@
       "/home/disk1/Data/datasets/Test_Data/JL1Flight/test/pairs.jsonl"
     ],
     "googleearth_val_directory_policy": "Test_Data/GoogleEarth/val is locked evaluation data despite its directory name; it is different from MHINet_RGB_512/val and must not select hyperparameters.",
-    "reproducibility": "Register manifest hashes, geographic and parent-group isolation, initialization hash, seed, update budget, match caps and code commit before each run.",
-    "manual_gcp_policy": "Only completed and reviewed human annotations are eligible. Report GCP geometry evaluation separately from synthetic-H correspondence evaluation; offline fitted H never enters v2 inference."
+    "reproducibility": "Register fixed manifest hashes, source-image identity audit, initialization hash, seed, update budget, match caps and code identity before every run; do not infer geographic isolation from source-image isolation.",
+    "manual_gcp_policy": "Only completed and reviewed human annotations are eligible. Report GCP geometry evaluation separately from synthetic-H correspondence evaluation; offline fitted H never enters v2 inference.",
+    "split_policy": {
+      "status": "fixed_original_rgb512_split",
+      "train_pairs": 40849,
+      "validation_pairs": 5106,
+      "source_identity_key": "source_dataset + source_relative_path (fallback source_path)",
+      "source_identity_intersection": 0,
+      "geographic_neighbour_isolation": "not_established",
+      "spatial_isolation_claim_allowed": false,
+      "active_data_scope": "Only fixed RGB_512 train/val; sealed evaluation is not read for this campaign."
+    }
   },
   "initial_experiment_settings": {
-    "settings_status": "draft_pending_validation_preregistration",
+    "settings_status": "registered_first_seed42_campaign",
     "input_size": 512,
     "shape_test_input_sizes": [
       512
@@ -107,7 +117,7 @@
       "lambda_initial": 3.0,
       "sigma_d8_initial": 4.0,
       "use_matchability": true,
-      "hyperparameter_status": "Unvalidated initial values; tune only on MHINet_RGB_512/val.",
+      "hyperparameter_status": "Registered initial lambda=3 and sigma_d8=4 for the first campaign; no claim of full-validation optimality.",
       "formula": "S_ij = cosine(D_A(i), D_B(j))/tau + lambda*c_i*exp(-||q_j-qhat_i||^2/(2*sigma_d8^2))",
       "candidate_support": "All D8 cells on both sides; invalid, out-of-bounds or unreliable Flow predictions contribute zero reward and do not reject the image pair.",
       "coordinate_contract": "A-to-B, align_corners=False cell-center normalized coordinates. flow16_norm = flow16_target_norm - source_grid16. Interpolate displacement to D8, add source_grid8, and compute Gaussian distances in D8 pixels."
@@ -140,9 +150,9 @@
     "input_size_policy": "Only 512x512 model inputs are supported or accepted in MHI v2. Reject other model input sizes explicitly; legacy checkpoint size support does not extend the v2 contract."
   },
   "training_plan": {
-    "status": "not_started",
-    "update_budget": null,
-    "update_budget_status": "pending_validation_preregistration",
+    "status": "running_flow_head_cde_queued",
+    "update_budget": 25535,
+    "update_budget_status": "registered_per_stage",
     "optimizer_policy": "Fresh optimizer and scheduler for v2; never resume the v1 optimizer across architecture changes.",
     "flow_head_stage": {
       "trainable": [
@@ -161,7 +171,12 @@
         "matchability",
         "matching classification"
       ],
-      "interface_requirement": "Separate locator prediction from H fitting and split geo/mat/cls losses from the H loss; setting h_weight=0 alone does not remove existing H-output dependencies."
+      "interface_requirement": "Separate locator prediction from H fitting and split geo/mat/cls losses from the H loss; setting h_weight=0 alone does not remove existing H-output dependencies.",
+      "config": "configs/mhi_v2/flow_head_rgb512_seed42.json",
+      "formal_status": "running",
+      "epochs": 5,
+      "optimizer_updates": 25535,
+      "selection": "minimum epoch-end full-val Flow EPE"
     },
     "qrru_stages": {
       "trainable": [
@@ -177,15 +192,17 @@
         "D8/D2 matcher"
       ],
       "training_input_mixture": {
-        "status": "draft_only",
+        "status": "registered",
         "gt_noise_fraction": 0.5,
         "predicted_d2_fraction": 0.5,
         "noise_std_d2": 0.8,
         "noise_bound_d2": 2.4,
-        "eligibility": "Use GT only to label geometrically valid predicted D2 inputs within a preregistered local correction range. Do not force severe parent mismatches to be repaired by a small patch.",
-        "selection_policy": "Confirm mixture and correction range using training and validation data before locked evaluation."
+        "eligibility": "Only GT-visible predicted correspondences whose target and valid control errors fit the registered <=6 D2-pixel correction range; severe mismatches are excluded and counted separately.",
+        "selection_policy": "Registered first-campaign mixture; only original RGB_512 train/val may diagnose it, and sealed evaluation cannot change it.",
+        "correction_limit_d2": 6.0,
+        "shortfall_policy": "Fill missing eligible predicted-D2 slots with GT-noise samples; log actual predicted/noise query counts instead of claiming an exact 50/50 mixture in every batch."
       },
-      "controlled_comparison": "Independently initialize matched-training legacy C, D and E from the same legacy checkpoint; share data, cached C D2 inputs, seeds and optimizer update budgets. D adds discrepancy and E adds DGFO. Retain frozen C for the fixed-weight B-to-C prior comparison.",
+      "controlled_comparison": "Independently initialize C/D/E from the same selected Flow Head checkpoint, whose legacy QRRU remains the frozen v1 initialization; share fixed C D2 cache, data order, seed42, 5 epochs/25535 optimizer updates and full-val selection rules. D adds zero-initialized discrepancy and E adds zero-initialized DGFO. Retain frozen C for same-weight B-to-C prior contrast.",
       "legacy_qrru_control": {
         "experiment": "MHIv2-C",
         "run_arms": [
@@ -194,10 +211,107 @@
         ],
         "matched_arm_policy": "Train the original QRRU without new branches on the identical mixture and budget used for D/E; compare this arm with D to isolate discrepancy."
       },
-      "f_control": "For the primary E-versus-F inference contrast, reuse the same E-trained weights and only disable the Flow prior. Any additional F training on B-generated D2 inputs is a separately registered equal-budget run."
+      "f_control": "For the primary E-versus-F inference contrast, reuse the same E-trained weights and only disable the Flow prior. Any additional F training on B-generated D2 inputs is a separately registered equal-budget run.",
+      "configs": {
+        "C": "configs/mhi_v2/qrru_c_rgb512_seed42.json",
+        "D": "configs/mhi_v2/qrru_d_rgb512_seed42.json",
+        "E": "configs/mhi_v2/qrru_e_rgb512_seed42.json"
+      },
+      "formal_status": "queued",
+      "epochs_each": 5,
+      "optimizer_updates_each": 25535,
+      "selection": "maximum epoch-end full-val cascaded Pre@3"
     },
     "joint_training": "Optional only after separate Flow and QRRU gains pass stage acceptance; define its own freeze policy and preregistered budget.",
-    "trainable_configuration_status": "No executable v2 training config until its parser and protocol pass acceptance. Planning specifications remain under versions/v2."
+    "trainable_configuration_status": "Executable independent v2 configs and explicit mhinet.v2.train/evaluate entrypoints implemented; the experiment registry itself remains non-executable.",
+    "formal_training_started": true,
+    "epochs_per_stage": 5,
+    "optimizer_updates_per_epoch": 5107,
+    "accumulation": 8,
+    "seed": 42,
+    "seeds": [
+      42
+    ],
+    "multi_seed_validation_status": "not_started",
+    "multi_seed_claim_allowed": false,
+    "campaign": {
+      "status": "running",
+      "runner": "scripts/mhi_v2/run_campaign.py",
+      "sequence": [
+        "Flow0",
+        "MHIv2-C",
+        "MHIv2-D",
+        "MHIv2-E"
+      ],
+      "state_file": "outputs/mhi_v2/campaign_rgb512_seed42_20261020/campaign.json",
+      "phase_state_file": "outputs/mhi_v2/<experiment>/<stage>/<run>/status.json",
+      "state_authority": "Read actual campaign/phase state for launch, completed steps and completion; registration is not evidence of execution.",
+      "started_at": "2026-10-20T03:24:37+08:00",
+      "gpu": 0,
+      "tmux_session": "mhi-v2-rgb512-20261020",
+      "pid": 32188,
+      "flow_phase": "running",
+      "qrru_cde_phases": "queued"
+    },
+    "validation_protocol": {
+      "intermediate_limit": 64,
+      "intermediate_role": "diagnostic_only",
+      "epoch_end_limit": 5106,
+      "epoch_end_role": "full_validation_model_selection",
+      "flow_head_selection": "minimum full-val Flow EPE",
+      "qrru_selection": "maximum full-val cascaded Pre@3",
+      "sealed_evaluation_used": false
+    },
+    "registered_run_configs": [
+      {
+        "path": "configs/mhi_v2/flow_head_rgb512_seed42.json",
+        "sha256": "a382a931207fc1c36e5c96817abe781350c22e4c91d6c8baf0a053c0766cd96f",
+        "schema": "mhi.v2-run.v1",
+        "task": "mhi_semidense_v2",
+        "stage": "flow_head",
+        "variant": "C",
+        "seed": 42,
+        "epochs": 5,
+        "optimizer_updates": 25535,
+        "formal_status": "running"
+      },
+      {
+        "path": "configs/mhi_v2/qrru_c_rgb512_seed42.json",
+        "sha256": "b3851d0c953ae24d836868a0788476275a6f86849cef5febc746f677dae07839",
+        "schema": "mhi.v2-run.v1",
+        "task": "mhi_semidense_v2",
+        "stage": "qrru",
+        "variant": "C",
+        "seed": 42,
+        "epochs": 5,
+        "optimizer_updates": 25535,
+        "formal_status": "queued"
+      },
+      {
+        "path": "configs/mhi_v2/qrru_d_rgb512_seed42.json",
+        "sha256": "b22c5b5441bb7408d4daf938d08b75d4778e64de5316530c89a2e547754fc5cc",
+        "schema": "mhi.v2-run.v1",
+        "task": "mhi_semidense_v2",
+        "stage": "qrru",
+        "variant": "D",
+        "seed": 42,
+        "epochs": 5,
+        "optimizer_updates": 25535,
+        "formal_status": "queued"
+      },
+      {
+        "path": "configs/mhi_v2/qrru_e_rgb512_seed42.json",
+        "sha256": "bc6bc8ea3b5f06be1d86ef323f7343c8f38ba46abf463756c55041e3a2e3fc74",
+        "schema": "mhi.v2-run.v1",
+        "task": "mhi_semidense_v2",
+        "stage": "qrru",
+        "variant": "E",
+        "seed": 42,
+        "epochs": 5,
+        "optimizer_updates": 25535,
+        "formal_status": "queued"
+      }
+    ]
   },
   "stages": [
     {
@@ -213,7 +327,7 @@
     },
     {
       "id": "P1",
-      "status": "planned",
+      "status": "engineering_evidence_passed",
       "depends_on": [
         "P0"
       ],
@@ -232,11 +346,14 @@
         "Flow mode does not execute the H fitter and supports independent EPE and valid-coverage measurement.",
         "Legacy H0 checkpoint loading and inference remain available.",
         "The new max_output_matches defaults to 2048, validates positive integer overrides and is distinct from legacy max_matches=12000 before QRRU."
-      ]
+      ],
+      "implementation_status": "implemented",
+      "engineering_evidence": "versions/v2/evidence/real_feature_acceptance_20261020_final.json",
+      "accuracy_status": "not_established"
     },
     {
       "id": "P2",
-      "status": "planned",
+      "status": "implemented_engineering_partially_accepted",
       "depends_on": [
         "P1"
       ],
@@ -255,11 +372,17 @@
         "Invalid Flow falls back to appearance matching without NaNs or pair failure.",
         "D8 timing and memory are measured independently before full evaluation.",
         "After QRRU and final validity filtering, stable confidence selection returns at most max_output_matches per pair; empty, short, exact-cap, over-cap and tied-score cases pass without GT or padding."
+      ],
+      "implementation_status": "implemented",
+      "engineering_evidence": "versions/v2/evidence/real_feature_acceptance_20261020_final.json",
+      "accuracy_status": "not_established",
+      "pending_acceptance": [
+        "V2-P2-04 complete D8/D2 retention and coverage diagnostic"
       ]
     },
     {
       "id": "P3",
-      "status": "planned",
+      "status": "engineering_evidence_passed",
       "depends_on": [
         "P2"
       ],
@@ -274,11 +397,14 @@
         "Before training, migrated QRRU reproduces legacy outputs within a declared numerical tolerance.",
         "Existing 4x4 patches, 2x2 controls and four recurrent updates are preserved.",
         "Gradients reach the discrepancy branch after the expected zero-adapter warm-up."
-      ]
+      ],
+      "implementation_status": "implemented",
+      "engineering_evidence": "versions/v2/evidence/real_feature_acceptance_20261020_final.json",
+      "accuracy_status": "not_established"
     },
     {
       "id": "P4",
-      "status": "planned",
+      "status": "engineering_evidence_passed",
       "depends_on": [
         "P3"
       ],
@@ -294,11 +420,14 @@
         "The first iteration has zero DGFO flow residual as expected.",
         "Later iterations provide finite gradients and logged propagation-residual magnitudes.",
         "No invalid sampling, NaNs or unexplained large peak-memory increase is introduced."
-      ]
+      ],
+      "implementation_status": "implemented",
+      "engineering_evidence": "versions/v2/evidence/real_feature_acceptance_20261020_final.json",
+      "accuracy_status": "not_established"
     },
     {
       "id": "P5",
-      "status": "planned",
+      "status": "flow_head_running_cde_queued",
       "depends_on": [
         "P2",
         "P3",
@@ -321,7 +450,12 @@
         "Human GCP and synthetic-H evaluation remain separate.",
         "Stop conditions are assessed before any optional joint-training expansion.",
         "All main A-F results use 512x512 input, max_output_matches=2048 and the same pre-QRRU candidate budget. Recompute capped A metrics rather than reusing the historical 12000-cap table."
-      ]
+      ],
+      "implementation_status": "implemented",
+      "engineering_evidence": "versions/v2/evidence/real_feature_acceptance_20261020_final.json",
+      "accuracy_status": "not_established",
+      "formal_training_status": "running_flow_head_cde_queued",
+      "diagnostic_training_status": "passed"
     }
   ],
   "ablation_matrix": {
@@ -334,7 +468,9 @@
         "d8_geometry": "h0",
         "d2_prior": "h0",
         "qrru": "legacy",
-        "purpose": "Fixed complete legacy baseline"
+        "purpose": "Fixed complete legacy baseline",
+        "implementation_status": "legacy_frozen",
+        "evaluation_status": "not_started"
       },
       {
         "id": "MHIv2-B",
@@ -343,7 +479,9 @@
         "d8_geometry": "none",
         "d2_prior": "direct_d8",
         "qrru": "legacy",
-        "purpose": "No-H0 control for the Flow reward"
+        "purpose": "No-H0 control for the Flow reward",
+        "implementation_status": "implemented",
+        "evaluation_status": "not_started"
       },
       {
         "id": "MHIv2-C",
@@ -352,7 +490,10 @@
         "d8_geometry": "flow_d16_soft_gaussian",
         "d2_prior": "direct_d8",
         "qrru": "legacy",
-        "purpose": "Isolate Flow-guided D8 matching"
+        "purpose": "Isolate Flow-guided D8 matching",
+        "implementation_status": "implemented",
+        "evaluation_status": "not_started",
+        "training_status": "queued_after_flow_head"
       },
       {
         "id": "MHIv2-D",
@@ -361,7 +502,10 @@
         "d8_geometry": "flow_d16_soft_gaussian",
         "d2_prior": "direct_d8",
         "qrru": "discrepancy",
-        "purpose": "Isolate feature discrepancy"
+        "purpose": "Isolate feature discrepancy",
+        "implementation_status": "implemented",
+        "evaluation_status": "not_started",
+        "training_status": "queued_after_flow_head"
       },
       {
         "id": "MHIv2-E",
@@ -370,7 +514,10 @@
         "d8_geometry": "flow_d16_soft_gaussian",
         "d2_prior": "direct_d8",
         "qrru": "discrepancy_dgfo",
-        "purpose": "Isolate DGFO under matched training conditions"
+        "purpose": "Isolate DGFO under matched training conditions",
+        "implementation_status": "implemented",
+        "evaluation_status": "not_started",
+        "training_status": "queued_after_flow_head"
       },
       {
         "id": "MHIv2-F",
@@ -379,7 +526,9 @@
         "d8_geometry": "none",
         "d2_prior": "direct_d8",
         "qrru": "discrepancy_dgfo",
-        "purpose": "Check QRRU gains without the Flow reward"
+        "purpose": "Check QRRU gains without the Flow reward",
+        "implementation_status": "implemented",
+        "evaluation_status": "not_started"
       }
     ],
     "primary_contrasts": [
@@ -503,12 +652,28 @@
     {
       "path": "scripts/mhi_v2/preflight.py",
       "scope": "Preparation audit only; no model training or inference"
+    },
+    {
+      "path": "scripts/mhi_v2/validate_real.py",
+      "scope": "Real-resource engineering validation and short diagnostic QRRU updates"
+    },
+    {
+      "module": "mhinet.v2.train",
+      "scope": "Independent schema-validated v2 training and same-protocol resume"
+    },
+    {
+      "module": "mhinet.v2.evaluate",
+      "scope": "Strict v2 checkpoint cascaded evaluation; same-weight Flow-prior toggle"
+    },
+    {
+      "path": "scripts/mhi_v2/run_campaign.py",
+      "scope": "Sequential single-GPU Flow Head -> equal-budget C/D/E campaign, gated by a passed real-resource report"
     }
   ],
   "preparation_acceptance": "versions/v2/evidence/V2-P0-04/acceptance.json",
   "preparation_implementation_commit": "7981634f593cc2a8bfea5f2b73d1a3071e7028ca",
-  "next_item": "V2-P1-01",
-  "requirements_revision": 2,
+  "next_item": "V2-P5-03",
+  "requirements_revision": 3,
   "requirements_updates": [
     {
       "revision": 2,
@@ -519,7 +684,59 @@
         "Restrict v2 input and shape acceptance to 512x512."
       ],
       "preserved_history": "v1 archives, original proposal and accepted P0 evidence stay byte-for-byte unchanged.",
-      "implementation_status": "Planning and acceptance requirements updated; no v2 matcher implementation or new model acceptance is claimed."
+      "implementation_status": "Planning and acceptance requirements updated; no v2 matcher implementation or new model acceptance is claimed.",
+      "historical_record": true
+    },
+    {
+      "revision": 3,
+      "recorded_on": "2026-10-20",
+      "changes": [
+        "Independent MHI v2 implementation and explicit training/evaluation entrypoints completed.",
+        "57 CPU tests, final real GPU engineering report, resource acceptance and real-data Flow Head smoke plus resume passed.",
+        "Register seed42 Flow Head then equal-budget C/D/E, each 5 epochs/25535 updates, with <=6-D2 predicted-input eligibility and GT-noise shortfall fill.",
+        "Preserve original RGB_512 train/val and do not claim geographic isolation or multi-seed evidence."
+      ],
+      "formal_launch_status": "Flow Head started at 2026-10-20T03:24:37+08:00 on GPU0; C/D/E queued; actual progress is authoritative in campaign.json.",
+      "preserved_history": "P0 evidence, v1 archives, original proposal and earlier requirements records remain historical."
     }
+  ],
+  "formal_training_started": true,
+  "formal_training_status": "running_flow_head_cde_queued",
+  "launch_status_authority": "outputs/mhi_v2/campaign_rgb512_seed42_20261020/campaign.json and per-phase status.json",
+  "last_updated_on": "2026-10-20",
+  "implementation_status": "implemented",
+  "engineering_status": "passed_cpu_and_real_gpu_evidence",
+  "accuracy_status": "not_established",
+  "engineering_evidence": {
+    "cpu_tests": {
+      "status": "passed",
+      "count": 57,
+      "command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 /root/miniconda3/envs/loma-repro/bin/python -m unittest discover -s tests/v2 -v",
+      "scope": "CPU engineering invariants; not full training or accuracy",
+      "report": "versions/v2/evidence/cpu_acceptance_20261020.json"
+    },
+    "real_gpu": {
+      "status": "passed",
+      "report": "versions/v2/evidence/real_feature_acceptance_20261020_final.json",
+      "scope": "Two fixed validation pairs and three diagnostic QRRU updates; no full-dataset accuracy claim"
+    },
+    "flow_head_smoke": {
+      "status": "passed",
+      "updates": 2,
+      "resume_verified": true,
+      "run": "outputs/mhi_v2/engineering/flow_head_smoke_20261020/run.json",
+      "progress": "outputs/mhi_v2/engineering/flow_head_smoke_20261020/status.json",
+      "scope": "Real-data diagnostic smoke and same-protocol resume; not formal long training",
+      "report": "versions/v2/evidence/flow_head_smoke_resume_20261020.json"
+    },
+    "resources": {
+      "status": "passed",
+      "report": "versions/v2/evidence/resource_acceptance_20261020.json"
+    }
+  },
+  "next_action": "Track running Flow Head and queued equal-budget C/D/E via campaign.json; complete the still-pending P2-04 retention/coverage diagnostic. P5 accuracy acceptance has not started.",
+  "implementation_commit": "88fee1b",
+  "engineering_pending": [
+    "V2-P2-04: complete D8/D2 retention and coverage diagnostic; checklist remains unsigned until full evidence exists."
   ]
 }

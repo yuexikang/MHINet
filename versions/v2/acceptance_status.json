@@ -2,13 +2,13 @@
   "schema": "mhi.acceptance-status.v1",
   "model_line": "MHI v2",
   "branch": "codex/mhi-v2",
-  "overall_status": "ready_for_P1",
+  "overall_status": "long_experiment_running",
   "preparation": {
     "engineering": "pass",
-    "training": "not_started",
+    "training": "in_progress",
     "accuracy": "not_started"
   },
-  "next_item": "V2-P1-01",
+  "next_item": "V2-P5-03",
   "source_checklist": "versions/v2/ACCEPTANCE.md",
   "status_policy": "Accept an item only with actual evidence; preparation acceptance does not imply P1-P5 acceptance. Formal training and accuracy statuses remain separate.",
   "items": [
@@ -107,8 +107,8 @@
       "id": "V2-P1-01",
       "title": "登记接口与数值验收协议",
       "stage": "P1",
-      "status": "not_started",
-      "engineering": "not_started",
+      "status": "accepted",
+      "engineering": "pass",
       "training": "not_started",
       "accuracy": "not_started",
       "depends_on": [
@@ -117,17 +117,21 @@
       "planned_evidence": [
         "versions/v2/evidence/V2-P1-01/contracts.json"
       ],
-      "accepted_evidence": [],
+      "accepted_evidence": [
+        "versions/v2/evidence/V2-P1-01/contracts.json"
+      ],
       "actual_command": null,
       "exit_code": null,
-      "ready": true
+      "ready": false,
+      "accepted_at": "2026-10-20T03:25:30+08:00",
+      "action_kind": "evidence_review"
     },
     {
       "id": "V2-P1-02",
       "title": "实现严格迁移与 v1 回归基线",
       "stage": "P1",
-      "status": "not_started",
-      "engineering": "not_started",
+      "status": "accepted",
+      "engineering": "pass",
       "training": "not_started",
       "accuracy": "not_started",
       "depends_on": [
@@ -136,17 +140,22 @@
       "planned_evidence": [
         "versions/v2/evidence/V2-P1-02/migration.json"
       ],
-      "accepted_evidence": [],
-      "actual_command": null,
-      "exit_code": null,
-      "ready": false
+      "accepted_evidence": [
+        "versions/v2/evidence/V2-P1-02/migration.json"
+      ],
+      "actual_command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 /root/miniconda3/envs/loma-repro/bin/python -m unittest discover -s tests/v2 -v",
+      "exit_code": 0,
+      "ready": false,
+      "execution_evidence": "versions/v2/evidence/V2-P1-02/migration.json",
+      "notes": "826 original tensors migrated; only 11 allowlisted E keys initialized. Missing/extra/shape/task rejection tests pass; real four-iteration legacy QRRU trajectory matches exactly. Complete capped-A headline rerun remains P5 work.",
+      "accepted_at": "2026-10-20T03:25:30+08:00"
     },
     {
       "id": "V2-P1-03",
       "title": "拆出 Flow0，跳过 H Fitter",
       "stage": "P1",
-      "status": "not_started",
-      "engineering": "not_started",
+      "status": "accepted",
+      "engineering": "pass",
       "training": "not_started",
       "accuracy": "not_started",
       "depends_on": [
@@ -155,17 +164,22 @@
       "planned_evidence": [
         "versions/v2/evidence/V2-P1-03/flow_interface.json"
       ],
-      "accepted_evidence": [],
-      "actual_command": null,
-      "exit_code": null,
-      "ready": false
+      "accepted_evidence": [
+        "versions/v2/evidence/V2-P1-03/flow_interface.json"
+      ],
+      "actual_command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 /root/miniconda3/envs/loma-repro/bin/python -m unittest discover -s tests/v2 -v",
+      "exit_code": 0,
+      "ready": false,
+      "execution_evidence": "versions/v2/evidence/V2-P1-03/flow_interface.json",
+      "notes": "Actual homography fitter hook calls=0 on real pairs; target/displacement/probability/validity contract and H0 compatibility path tests pass.",
+      "accepted_at": "2026-10-20T03:25:30+08:00"
     },
     {
       "id": "V2-P1-04",
       "title": "坐标、形状与异常回退",
       "stage": "P1",
-      "status": "not_started",
-      "engineering": "not_started",
+      "status": "accepted",
+      "engineering": "pass",
       "training": "not_started",
       "accuracy": "not_started",
       "depends_on": [
@@ -174,17 +188,22 @@
       "planned_evidence": [
         "versions/v2/evidence/V2-P1-04/coordinates.json"
       ],
-      "accepted_evidence": [],
-      "actual_command": null,
-      "exit_code": null,
-      "ready": false
+      "accepted_evidence": [
+        "versions/v2/evidence/V2-P1-04/coordinates.json"
+      ],
+      "actual_command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 /root/miniconda3/envs/loma-repro/bin/python -m unittest discover -s tests/v2 -v",
+      "exit_code": 0,
+      "ready": false,
+      "execution_evidence": "versions/v2/evidence/V2-P1-04/coordinates.json",
+      "notes": "Identity/translation/cell-center and invalid/low-confidence/out-of-bounds fallback tests pass. Real input/pyramid shapes match 512 only.",
+      "accepted_at": "2026-10-20T03:25:30+08:00"
     },
     {
       "id": "V2-P1-05",
       "title": "真实资源烟测与 P1 签收",
       "stage": "P1",
-      "status": "not_started",
-      "engineering": "not_started",
+      "status": "accepted",
+      "engineering": "pass",
       "training": "not_started",
       "accuracy": "not_started",
       "depends_on": [
@@ -193,17 +212,22 @@
       "planned_evidence": [
         "versions/v2/evidence/V2-P1-05/smoke.json"
       ],
-      "accepted_evidence": [],
-      "actual_command": null,
-      "exit_code": null,
-      "ready": false
+      "accepted_evidence": [
+        "versions/v2/evidence/V2-P1-05/smoke.json"
+      ],
+      "actual_command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 /root/miniconda3/envs/loma-repro/bin/python -m unittest discover -s tests/v2 -v",
+      "exit_code": 0,
+      "ready": false,
+      "execution_evidence": "versions/v2/evidence/V2-P1-05/smoke.json",
+      "notes": "Two fixed validation pairs and three real train QRRU updates pass; no model saved or accuracy selection. Flow smoke separately proves optimizer and exact restart mechanics.",
+      "accepted_at": "2026-10-20T03:25:30+08:00"
     },
     {
       "id": "V2-P2-01",
       "title": "实现无 H 的 MHIv2-B",
       "stage": "P2",
-      "status": "not_started",
-      "engineering": "not_started",
+      "status": "accepted",
+      "engineering": "pass",
       "training": "not_started",
       "accuracy": "not_started",
       "depends_on": [
@@ -212,17 +236,22 @@
       "planned_evidence": [
         "versions/v2/evidence/V2-P2-01/no_h_baseline.json"
       ],
-      "accepted_evidence": [],
-      "actual_command": null,
-      "exit_code": null,
-      "ready": false
+      "accepted_evidence": [
+        "versions/v2/evidence/V2-P2-01/no_h_baseline.json"
+      ],
+      "actual_command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 /root/miniconda3/envs/loma-repro/bin/python -m unittest discover -s tests/v2 -v",
+      "exit_code": 0,
+      "ready": false,
+      "execution_evidence": "versions/v2/evidence/V2-P2-01/no_h_baseline.json",
+      "notes": "Direct-D8 sixteen children, no-H inference and supervision, stable final cap/aligned lineage tests pass; GT is separate from inference.",
+      "accepted_at": "2026-10-20T03:25:30+08:00"
     },
     {
       "id": "V2-P2-02",
       "title": "验证 B 的 full/chunked 与成本",
       "stage": "P2",
-      "status": "not_started",
-      "engineering": "not_started",
+      "status": "accepted",
+      "engineering": "pass",
       "training": "not_started",
       "accuracy": "not_started",
       "depends_on": [
@@ -231,17 +260,22 @@
       "planned_evidence": [
         "versions/v2/evidence/V2-P2-02/b_equivalence.json"
       ],
-      "accepted_evidence": [],
-      "actual_command": null,
-      "exit_code": null,
-      "ready": false
+      "accepted_evidence": [
+        "versions/v2/evidence/V2-P2-02/b_equivalence.json"
+      ],
+      "actual_command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 /root/miniconda3/envs/loma-repro/bin/python -m unittest discover -s tests/v2 -v",
+      "exit_code": 0,
+      "ready": false,
+      "execution_evidence": "versions/v2/evidence/V2-P2-02/b_equivalence.json",
+      "notes": "Full/chunked mutual/top-k tests and actual 4096x4096 GPU comparison pass; cost scope excludes I/O. Output cap corner cases are unit-tested at a small isomorphic cap; two real outputs cap to2048.",
+      "accepted_at": "2026-10-20T03:25:30+08:00"
     },
     {
       "id": "V2-P2-03",
       "title": "实现 MHIv2-C 的有界几何软奖励",
       "stage": "P2",
-      "status": "not_started",
-      "engineering": "not_started",
+      "status": "accepted",
+      "engineering": "pass",
       "training": "not_started",
       "accuracy": "not_started",
       "depends_on": [
@@ -250,17 +284,22 @@
       "planned_evidence": [
         "versions/v2/evidence/V2-P2-03/prior.json"
       ],
-      "accepted_evidence": [],
-      "actual_command": null,
-      "exit_code": null,
-      "ready": false
+      "accepted_evidence": [
+        "versions/v2/evidence/V2-P2-03/prior.json"
+      ],
+      "actual_command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 /root/miniconda3/envs/loma-repro/bin/python -m unittest discover -s tests/v2 -v",
+      "exit_code": 0,
+      "ready": false,
+      "execution_evidence": "versions/v2/evidence/V2-P2-03/prior.json",
+      "notes": "Bounded [0,lambda] prior; invalid fallback; full/chunk consistency; B vs C(lambda0) real outputs exact. lambda3/sigma4 fixed exploratory settings, no benefit claimed.",
+      "accepted_at": "2026-10-20T03:25:30+08:00"
     },
     {
       "id": "V2-P2-04",
       "title": "固定权重 B→C 配对诊断与 P2 签收",
       "stage": "P2",
-      "status": "not_started",
-      "engineering": "not_started",
+      "status": "in_progress",
+      "engineering": "in_progress",
       "training": "not_started",
       "accuracy": "not_started",
       "depends_on": [
@@ -270,16 +309,18 @@
         "versions/v2/evidence/V2-P2-04/b_vs_c.json"
       ],
       "accepted_evidence": [],
-      "actual_command": null,
-      "exit_code": null,
-      "ready": false
+      "actual_command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 /root/miniconda3/envs/loma-repro/bin/python -m unittest discover -s tests/v2 -v",
+      "exit_code": 0,
+      "ready": false,
+      "execution_evidence": "versions/v2/evidence/V2-P2-04/b_vs_c.json",
+      "notes": "Two-pair frozen-weight prior toggle passed, with final raster-mask metrics. Full stage-wise D8/D2 parent retention and spatial-coverage report remains outstanding; partial diagnostic only."
     },
     {
       "id": "V2-P3-01",
       "title": "独立实现差异编码和零残差注入",
       "stage": "P3",
-      "status": "not_started",
-      "engineering": "not_started",
+      "status": "accepted",
+      "engineering": "pass",
       "training": "not_started",
       "accuracy": "not_started",
       "depends_on": [
@@ -288,17 +329,22 @@
       "planned_evidence": [
         "versions/v2/evidence/V2-P3-01/architecture.json"
       ],
-      "accepted_evidence": [],
-      "actual_command": null,
-      "exit_code": null,
-      "ready": false
+      "accepted_evidence": [
+        "versions/v2/evidence/V2-P3-01/architecture.json"
+      ],
+      "actual_command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 /root/miniconda3/envs/loma-repro/bin/python -m unittest discover -s tests/v2 -v",
+      "exit_code": 0,
+      "ready": false,
+      "execution_evidence": "versions/v2/evidence/V2-P3-01/architecture.json",
+      "notes": "Discrepancy normalization+48to32 Conv/GN/GELU and zero adapter; legacy encoder and four recurrent updates retained. Independent D unit tests pass.",
+      "accepted_at": "2026-10-20T03:25:30+08:00"
     },
     {
       "id": "V2-P3-02",
       "title": "零 adapter 的旧输出等价",
       "stage": "P3",
-      "status": "not_started",
-      "engineering": "not_started",
+      "status": "accepted",
+      "engineering": "pass",
       "training": "not_started",
       "accuracy": "not_started",
       "depends_on": [
@@ -307,17 +353,22 @@
       "planned_evidence": [
         "versions/v2/evidence/V2-P3-02/zero_equivalence.json"
       ],
-      "accepted_evidence": [],
-      "actual_command": null,
-      "exit_code": null,
-      "ready": false
+      "accepted_evidence": [
+        "versions/v2/evidence/V2-P3-02/zero_equivalence.json"
+      ],
+      "actual_command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 /root/miniconda3/envs/loma-repro/bin/python -m unittest discover -s tests/v2 -v",
+      "exit_code": 0,
+      "ready": false,
+      "execution_evidence": "versions/v2/evidence/V2-P3-02/zero_equivalence.json",
+      "notes": "Disabled/D/E zero adapters preserve legacy trajectories in unit tests; real E vs legacy four-iteration flows/centers/grids/gates max difference0 at tolerance1e-6.",
+      "accepted_at": "2026-10-20T03:25:30+08:00"
     },
     {
       "id": "V2-P3-03",
       "title": "诊断梯度与 P3 签收",
       "stage": "P3",
-      "status": "not_started",
-      "engineering": "not_started",
+      "status": "accepted",
+      "engineering": "pass",
       "training": "not_started",
       "accuracy": "not_started",
       "depends_on": [
@@ -326,17 +377,22 @@
       "planned_evidence": [
         "versions/v2/evidence/V2-P3-03/gradients.json"
       ],
-      "accepted_evidence": [],
-      "actual_command": null,
-      "exit_code": null,
-      "ready": false
+      "accepted_evidence": [
+        "versions/v2/evidence/V2-P3-03/gradients.json"
+      ],
+      "actual_command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 /root/miniconda3/envs/loma-repro/bin/python -m unittest discover -s tests/v2 -v",
+      "exit_code": 0,
+      "ready": false,
+      "execution_evidence": "versions/v2/evidence/V2-P3-03/gradients.json",
+      "notes": "Unit six-step Adam and real three-step diagnostic gradients finite. Adapter gradient arrives first; upstream discrepancy gradient nonzero after adapter update. Frozen parameters/buffers unchanged.",
+      "accepted_at": "2026-10-20T03:25:30+08:00"
     },
     {
       "id": "V2-P4-01",
       "title": "实现局部传播残差",
       "stage": "P4",
-      "status": "not_started",
-      "engineering": "not_started",
+      "status": "accepted",
+      "engineering": "pass",
       "training": "not_started",
       "accuracy": "not_started",
       "depends_on": [
@@ -345,17 +401,22 @@
       "planned_evidence": [
         "versions/v2/evidence/V2-P4-01/architecture.json"
       ],
-      "accepted_evidence": [],
-      "actual_command": null,
-      "exit_code": null,
-      "ready": false
+      "accepted_evidence": [
+        "versions/v2/evidence/V2-P4-01/architecture.json"
+      ],
+      "actual_command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 /root/miniconda3/envs/loma-repro/bin/python -m unittest discover -s tests/v2 -v",
+      "exit_code": 0,
+      "ready": false,
+      "execution_evidence": "versions/v2/evidence/V2-P4-01/architecture.json",
+      "notes": "3x3 local masked DGFO Q/K from discrepancy, V from extrapolated control flow, bias-free zero flow adapter. No independent new flow updater.",
+      "accepted_at": "2026-10-20T03:25:30+08:00"
     },
     {
       "id": "V2-P4-02",
       "title": "mask、守恒与退化用例",
       "stage": "P4",
-      "status": "not_started",
-      "engineering": "not_started",
+      "status": "accepted",
+      "engineering": "pass",
       "training": "not_started",
       "accuracy": "not_started",
       "depends_on": [
@@ -364,17 +425,22 @@
       "planned_evidence": [
         "versions/v2/evidence/V2-P4-02/propagation.json"
       ],
-      "accepted_evidence": [],
-      "actual_command": null,
-      "exit_code": null,
-      "ready": false
+      "accepted_evidence": [
+        "versions/v2/evidence/V2-P4-02/propagation.json"
+      ],
+      "actual_command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 /root/miniconda3/envs/loma-repro/bin/python -m unittest discover -s tests/v2 -v",
+      "exit_code": 0,
+      "ready": false,
+      "execution_evidence": "versions/v2/evidence/V2-P4-02/propagation.json",
+      "notes": "Zero/constant/edge/empty-neighborhood/true sampling mask tests pass. Empty-neighbor residual0, finite softmax; initial residual0.",
+      "accepted_at": "2026-10-20T03:25:30+08:00"
     },
     {
       "id": "V2-P4-03",
       "title": "等价、梯度、资源与 P4 签收",
       "stage": "P4",
-      "status": "not_started",
-      "engineering": "not_started",
+      "status": "accepted",
+      "engineering": "pass",
       "training": "not_started",
       "accuracy": "not_started",
       "depends_on": [
@@ -383,17 +449,22 @@
       "planned_evidence": [
         "versions/v2/evidence/V2-P4-03/diagnostics.json"
       ],
-      "accepted_evidence": [],
-      "actual_command": null,
-      "exit_code": null,
-      "ready": false
+      "accepted_evidence": [
+        "versions/v2/evidence/V2-P4-03/diagnostics.json"
+      ],
+      "actual_command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 /root/miniconda3/envs/loma-repro/bin/python -m unittest discover -s tests/v2 -v",
+      "exit_code": 0,
+      "ready": false,
+      "execution_evidence": "versions/v2/evidence/V2-P4-03/diagnostics.json",
+      "notes": "Zero adapter equality, finite upstream Q/K gradients after updates and actual GPU resource gate pass. E has measurable added runtime; resource result is synthetic module cost, not end-to-end speed.",
+      "accepted_at": "2026-10-20T03:25:30+08:00"
     },
     {
       "id": "V2-P5-01",
       "title": "落地训练/评价入口与损失隔离",
       "stage": "P5",
-      "status": "not_started",
-      "engineering": "not_started",
+      "status": "accepted",
+      "engineering": "pass",
       "training": "not_started",
       "accuracy": "not_started",
       "depends_on": [
@@ -402,17 +473,22 @@
       "planned_evidence": [
         "versions/v2/evidence/V2-P5-01/interfaces.json"
       ],
-      "accepted_evidence": [],
-      "actual_command": null,
-      "exit_code": null,
-      "ready": false
+      "accepted_evidence": [
+        "versions/v2/evidence/V2-P5-01/interfaces.json"
+      ],
+      "actual_command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 /root/miniconda3/envs/loma-repro/bin/python -m unittest discover -s tests/v2 -v",
+      "exit_code": 0,
+      "ready": false,
+      "execution_evidence": "versions/v2/evidence/V2-P5-01/interfaces.json",
+      "notes": "Explicit v2 train/eval schema and stage parameter ownership implemented. Flow no-H loss forbidden-field test and actual Head smoke+restart pass; frozen buffers unchanged. Locked evaluation entrypoint not executed on sealed data.",
+      "accepted_at": "2026-10-20T03:25:30+08:00"
     },
     {
       "id": "V2-P5-02",
       "title": "正式预算与选择规则预登记",
       "stage": "P5",
-      "status": "not_started",
-      "engineering": "not_started",
+      "status": "accepted",
+      "engineering": "pass",
       "training": "not_started",
       "accuracy": "not_started",
       "depends_on": [
@@ -421,18 +497,22 @@
       "planned_evidence": [
         "versions/v2/evidence/V2-P5-02/preregistration.json"
       ],
-      "accepted_evidence": [],
+      "accepted_evidence": [
+        "versions/v2/evidence/V2-P5-02/preregistration.json"
+      ],
       "actual_command": null,
       "exit_code": null,
-      "ready": false
+      "ready": false,
+      "accepted_at": "2026-10-20T03:25:30+08:00",
+      "action_kind": "evidence_review"
     },
     {
       "id": "V2-P5-03",
       "title": "Flow Head 独立监督与诊断",
       "stage": "P5",
-      "status": "not_started",
-      "engineering": "not_started",
-      "training": "not_started",
+      "status": "in_progress",
+      "engineering": "pass",
+      "training": "in_progress",
       "accuracy": "not_started",
       "depends_on": [
         "V2-P5-02"
@@ -441,9 +521,22 @@
         "versions/v2/evidence/V2-P5-03/flow_training.json"
       ],
       "accepted_evidence": [],
-      "actual_command": null,
+      "actual_command": [
+        "/root/miniconda3/envs/loma-repro/bin/python",
+        "-u",
+        "-m",
+        "mhinet.v2.train",
+        "--config",
+        "/home/disk1/MHINet/configs/mhi_v2/flow_head_rgb512_seed42.json",
+        "--output",
+        "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P5/flow_head_rgb512_seed42_5ep_20261020",
+        "--device",
+        "cuda:0"
+      ],
       "exit_code": null,
-      "ready": false
+      "ready": true,
+      "notes": "Long full RGB512 Flow Head run started; metrics/status read from campaign.json. Not completed.",
+      "execution_evidence": "versions/v2/evidence/V2-P5-03/flow_training.json"
     },
     {
       "id": "V2-P5-04",
@@ -462,7 +555,8 @@
       "accepted_evidence": [],
       "actual_command": null,
       "exit_code": null,
-      "ready": false
+      "ready": false,
+      "notes": "Queued after full Flow training completes. C/D/E share Flow-best source and candidate cache; none of these QRRU long runs has started yet."
     },
     {
       "id": "V2-P5-05",
@@ -481,7 +575,8 @@
       "accepted_evidence": [],
       "actual_command": null,
       "exit_code": null,
-      "ready": false
+      "ready": false,
+      "notes": "Queued after full Flow training completes. C/D/E share Flow-best source and candidate cache; none of these QRRU long runs has started yet."
     },
     {
       "id": "V2-P5-06",
@@ -553,5 +648,18 @@
     "pre_qrru_max_matches": 12000,
     "source": "versions/v2/experiment_plan.json"
   },
-  "requirements_change_note": "P0 evidence remains historical. P1-P5 must meet revision 2: 512-only input and an independent final output limit of 2048; no new model task was accepted."
+  "requirements_change_note": "P0 evidence remains historical. P1-P5 must meet revision 2: 512-only input and an independent final output limit of 2048; no new model task was accepted.",
+  "checked_at": "2026-10-20T03:25:30+08:00",
+  "implementation_commit": "88fee1bcf37c8403e2e4a17287c2d9432c0312ca",
+  "engineering_admission": {
+    "status": "pass",
+    "evidence": [
+      "versions/v2/evidence/cpu_acceptance_20261020.json",
+      "versions/v2/evidence/real_feature_acceptance_20261020_final.json",
+      "versions/v2/evidence/resource_acceptance_20261020.json",
+      "versions/v2/evidence/flow_head_smoke_resume_20261020.json"
+    ],
+    "scope": "Validated model paths, losses, frozen groups, gradients, memory and resume. Full stage-diagnostic research acceptance P2-04 remains open; it does not claim a gain or select a final model."
+  },
+  "campaign": "outputs/mhi_v2/campaign_rgb512_seed42_20261020/campaign.json"
 }

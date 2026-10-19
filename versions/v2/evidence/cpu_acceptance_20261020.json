@@ -1,0 +1,19 @@
+{
+  "schema": "mhi.v2-cpu-acceptance.v1",
+  "status": "pass",
+  "checked_at": "2026-10-20T03:23:57+08:00",
+  "command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 /root/miniconda3/envs/loma-repro/bin/python -m unittest discover -s tests/v2 -v",
+  "exit_code": 0,
+  "tests": 57,
+  "log": "versions/v2/evidence/cpu_acceptance_20261020.log",
+  "log_sha256": "5125abf27c43ae617ebf4222c77263162c40e4b406760b46de0a864f59e48f84",
+  "test_sha256": {
+    "tests/v2/test_checkpoint_migration.py": "e05707e244c2b9bc6c5954436b087e1b6c09b4d63c560e5402a5644f62da4527",
+    "tests/v2/test_dgfo.py": "1fb8799fada7902b555ceaf3b299987e526e396bfa0d3b3875abcba56cffed6c",
+    "tests/v2/test_discrepancy_qrru.py": "4cd1bc37d6c669220a2b966d22d93d208db3ef870a58108b19dcea1ce7ca7eb6",
+    "tests/v2/test_flow_interface.py": "d8d01730e79285e150bdf3278dcca09d2ccc8d47ea3e382f3dc70ed9f891a108",
+    "tests/v2/test_flow_matching.py": "59aaefb717cc3a337f72379c49dce061263d16067d2677cda58d6b4d3195ccf3",
+    "tests/v2/test_rgb512_data.py": "ca6b575ba2a6d3f6b07065cfbc80e1e19f772f2f41d3249546e21cacf8068323",
+    "tests/v2/test_v2_training.py": "fb52483e125652637323140d50cde5c2e22c8c1647f964a6f47e67e95c33dde3"
+  }
+}

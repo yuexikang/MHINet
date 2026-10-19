@@ -1,0 +1,55 @@
+{
+  "schema": "mhi.v2-contracts.v1",
+  "item_id": "V2-P1-01",
+  "engineering": "pass",
+  "training": "not_started",
+  "accuracy": "not_started",
+  "registered_at": "2026-10-20T03:23:57+08:00",
+  "input": [
+    1,
+    2,
+    3,
+    512,
+    512
+  ],
+  "other_input_sizes": "rejected",
+  "shape_pyramid": {
+    "D16": 32,
+    "D8": 64,
+    "D4": 128,
+    "D2": 256
+  },
+  "coordinates": "A-to-B xy normalized cell centers, align_corners=False; flow=target-source; upsample displacement then add D8 grid",
+  "flow_target_shape": [
+    "B",
+    2,
+    32,
+    32
+  ],
+  "flow_probability_shape": [
+    "B",
+    1,
+    32,
+    32
+  ],
+  "matchability": "probability in [0,1]; never sigmoid twice",
+  "validity": "finite target, confidence and in-bounds; invalid prior cancels only local reward",
+  "max_coarse": 6000,
+  "max_matches_before_qrru": 12000,
+  "max_output_matches_after_qrru_validity": 2048,
+  "selection": "stable descending confidence; aligned point fields; no padding or GT filtering",
+  "comparison_tolerances": {
+    "fp32_full_chunk": {
+      "rtol": 2e-05,
+      "atol": 2e-06
+    },
+    "real_zero_adapter_trajectory_atol": 1e-06,
+    "lambda_zero": "exact equality"
+  },
+  "evidence": [
+    "versions/v2/evidence/cpu_acceptance_20261020.json",
+    "versions/v2/evidence/real_feature_acceptance_20261020.json"
+  ],
+  "registration_note": "Tolerances were implemented in fixed tests before their execution; this record consolidates the implemented contracts.",
+  "implementation_commit": "88fee1bcf37c8403e2e4a17287c2d9432c0312ca"
+}

@@ -1,8 +1,17 @@
 # MHI v2 实验实施计划
 
-登记日期：2026-10-19（北京时间）。本计划已按版本分档，执行入口为 [逐条验收清单](ACCEPTANCE.md)，实际状态见 [验收登记](acceptance_status.json)。模型实现、训练及新精度评价尚未开始。
+登记日期：2026-10-19；状态更新：2026-10-20（北京时间）。本计划已按版本分档，执行入口为 [逐条验收清单](ACCEPTANCE.md)，逐项签收见 [验收登记](acceptance_status.json)。独立 v2 实现已落地，57 项 CPU 测试与 [真实 GPU 工程验收](evidence/real_feature_acceptance_20261020_final.json) 通过，Flow Head 两步实数据训练及断点恢复烟测通过。正式长程已于北京时间2026-10-20 03:24:37在 GPU0 启动 Flow Head，C/D/E 排队，实际状态以调度输出的 `campaign.json` 和阶段 `status.json` 为准；尚无正式完整训练或新精度收益结论。
 
 当前需求修订为：**模型输入与形状验收只覆盖 512×512；增加独立最终输出上限 `max_output_matches`，默认 2048 对/影像对**。该上限在 QRRU 与最终有效性过滤后生效，按置信度稳定降序选取；同分保留原顺序，不足上限时返回实际数量，不补点、不用 GT 筛点。配置可显式覆盖为正整数，各对照须统一限额。
+
+## 当前工程证据与首轮执行协议
+
+- `mhinet/v2/` 已实现 Flow0、D8 soft prior、Direct-D8、Discrepancy/DGFO、严格 checkpoint 迁移、独立训练/评价和 RGB_512 数据适配。显式入口为 `python -m mhinet.v2.train`、`python -m mhinet.v2.evaluate`；[run_campaign.py](../../scripts/mhi_v2/run_campaign.py) 串行调度，[validate_real.py](../../scripts/mhi_v2/validate_real.py) 生成真实工程证据。
+- [真实 GPU 报告](evidence/real_feature_acceptance_20261020_final.json) 为 `passed`：两对固定 val、三步 QRRU 反传诊断，H Fitter 调用为0，零 adapter 的四轮轨迹与旧 QRRU 一致，冻结参数/buffer 与新增上游梯度检查通过。两对结果只作工程诊断，不能当作完整精度对照。
+- 正式独立配置已经登记于 [configs/mhi_v2](../../configs/mhi_v2/README.md)：先 Flow Head，再 C、D、E，各 seed42、5 epoch、25535 次 optimizer 更新。每步累积8对，`ceil(40849/8)×5=25535`；每 epoch 完整5106对 val 选模，中途64对只诊断。Head 以 Flow EPE 最低选模；C/D/E 以级联 Pre@3 最高选模。
+- 只使用原 RGB_512 固定 train=40849/val=5106，不改变划分，不读取封存 GoogleEarth/JL1Flight 评价集。源图身份交叉为0；当前数据身份分组未证明地理邻近或真正空间隔离。
+- 首轮仅 seed42，不能声称多 seed 稳定性。完整精度、资源对照、跨 seed 复核和封存集评价都须另有实际证据；`campaign.json` 未显示完成时不能把注册预算写成实际完成预算。
+- 实现固定于 `88fee1b`；[资源验收](evidence/resource_acceptance_20261020.json) 已通过，[campaign 实时状态](../../outputs/mhi_v2/campaign_rgb512_seed42_20261020/campaign.json) 已生成。V2-P2-04 的完整 D8/D2 retention/coverage 诊断仍未签收，P5 精度验收尚未开始。
 
 ## 版本与交付范围
 
@@ -50,7 +59,9 @@ DINOv3 + MVT → F_MVT ─→ Flow0：D16 A→B 目标坐标、位移、Matchabi
 
 保留 DINOv3、MVT、CGMDP、D8 全局 dual-softmax、D2 16×16 局部匹配，以及 QRRU 的 4×4 特征窗口、2×2 控制点、四轮循环。新增学习机制集中在 Discrepancy 与 DGFO；Flow0 先复用已有定位预测。范围不含 D8 Flow 更新网络、D2 Flow Refinement、全图逆 Flow 或替换为 Dense Flow QRRU。H0 的旧代码、旧权重加载及默认推理路径继续作为 v1 对照。
 
-## 代码审计后的实施前提
+## v1 代码审计背景与 v2 适配要求
+
+以下记录的是冻结 v1 的接口限制；对应适配现已进入独立 v2 路径，保留这些背景便于复核设计约束。实现与工程证据不等同于正式训练和精度验收。
 
 1. `SharedFeatureProvider.forward()` 当前通过 `stage1` 输出 `coarse_warp/coarse_matchability`；`compute_stage1=False` 会连定位预测一起关闭。必须在 MHINet 内拆分定位预测和无参数 H Fitter，Flow 模式只跳过拟合。避免修改相邻 LoMa 仓库，并保持旧参数键名兼容。
 2. `SemidenseConfig` 位于 `mhinet/downstream/semidense.py`，是扁平 frozen dataclass。原方案的嵌套配置尚不能直接读取。新增版本化解析器，旧配置缺省解释为 H0 + H0 residual fine grid + 原 QRRU；未知字段应明确报错。
@@ -68,7 +79,7 @@ DINOv3 + MVT → F_MVT ─→ Flow0：D16 A→B 目标坐标、位移、Matchabi
 
 验收：v1 标签指向精确基点，v2 由该基点派生；本轮没有修改模型源码；所有新实验均为 planned，精度结果为空。
 
-### P1：D16 Flow0 接口与兼容加载
+### P1：D16 Flow0 接口与兼容加载（已实现，工程证据已生成）
 
 新增文件：`mhinet/v2/config.py`、`feature_provider.py`、`checkpointing.py`、`training.py`。参照旧 provider/training 接口实现独立适配，保持已有参数键名，避免将旧模块额外包一层后改变所有 checkpoint 前缀。先解决归档 runtime 显式加载与实际源码导入路径验证。
 
@@ -78,7 +89,7 @@ DINOv3 + MVT → F_MVT ─→ Flow0：D16 A→B 目标坐标、位移、Matchabi
 
 验收：仅接受 512×512 模型输入，D16=32×32、D8=64×64、D4=128×128、D2=256×256；其它模型输入尺寸明确拒绝。零 Flow 恒等，已知平移方向及半像素坐标正确；缺失、NaN、越界、低置信度可回退；Flow 模式 H Fitter 调用次数为零；512 下 v1 模式输出和旧 checkpoint 严格加载保持一致。用独立 GT 计算 Flow EPE 和有效覆盖率，真实图像烟测仅使用 train/val。
 
-### P2：D8 Flow 软引导与 D2 Direct-D8
+### P2：D8 Flow 软引导与 D2 Direct-D8（已实现，工程证据已生成）
 
 新增文件：`mhinet/v2/coarse_matcher.py`、`supervision.py`、`semidense.py`。参照旧 D8 参考核、fine grid 和 matcher 契约实现；保留旧来源核文件与哈希。
 
@@ -95,7 +106,7 @@ S(i,j) = dot(normalize(DA[i]), normalize(DB[j])) / tau
 
 验收：lambda=0 的 C 与 B 在相同输出限额下逐点相同；full/chunked 候选一致、置信度在预先登记的 FP32 容差内；包含空输入、并列分数、异常 Flow、无效 H0 测试；直接子格与恒等 H 的旧子格一致；训练与推理均不再通过 H0 门控 B/C。最终输出逐对不超过 `max_output_matches`，并验证空输出、不足/恰好/超过上限、同分稳定排序及显式覆盖。记录 D8 独立耗时与峰值显存，512 全图 4096² 候选，保留分块计算。
 
-### P3：QRRU Feature Discrepancy
+### P3：QRRU Feature Discrepancy（已实现，工程证据已生成）
 
 新增文件：`mhinet/v2/qrru.py`，以及 v2 checkpoint 迁移与版本化配置；旧 `mhinet/downstream/qrru.py` 作为对照保留。
 
@@ -103,7 +114,7 @@ S(i,j) = dot(normalize(DA[i]), normalize(DB[j])) / tau
 
 验收：同一旧权重、输入、采样与分块设置下，新增分支初始化为零时所有迭代控制点、中心、最终匹配及置信度与旧 QRRU 对齐；空匹配和边界采样无 NaN；训练若干步后 adapter 与差异编码器均得到有效梯度。通过后才报告 C→D 收益。
 
-### P4：局部 DGFO
+### P4：局部 DGFO（已实现，工程证据已生成）
 
 实现文件：`mhinet/v2/qrru.py`、`mhinet/v2/dgfo.py`。
 
@@ -115,9 +126,9 @@ mask 同时检查 patch 邻域和真实采样位置；无有效邻居时令传�
 
 验收：有效邻域权重和为1，越界权重为0，无有效邻居稳定回退；零/常量 Flow 的传播行为正确；首轮传播残差为0；后续轮次梯度可达 Q/K。记录每轮 E 范数、控制点增量、有效邻居数、分支梯度、耗时/显存；零 adapter 的旧输出等价和数步优化后的上游梯度均须验证。
 
-### P5：分离训练、等预算消融与最终评价
+### P5：分离训练、等预算消融与最终评价（入口/烟测通过，Flow Head 已启动、C/D/E 排队）
 
-新增文件：`mhinet/v2/train.py`、`training.py`、`semidense.py`、`losses.py`、`evaluate.py`，入口与配置分别放入 `scripts/mhi_v2/`、`configs/mhi_v2/`。规划中的模块命令在实现并通过入口验收前不能作为可执行训练命令。
+实现文件：`mhinet/v2/train.py`、`training.py`、`semidense.py`、`losses.py`、`evaluate.py`，入口与配置分别放入 `scripts/mhi_v2/`、`configs/mhi_v2/`。显式入口及运行配置已实现；[研究登记](experiment_plan.json) 仍然不可作为训练配置执行。
 
 | 子阶段 | 可训练 | 冻结 |
 | --- | --- | --- |
@@ -130,15 +141,15 @@ mask 同时检查 patch 邻域和真实采样位置；无有效邻居时令传�
 
 Flow 监督使用位置、matchability、分类项，不依赖预测 H；现有离散候选选择与 coarse loss 不构成自动可微的 Flow 训练链。各组保存实际参数名单、优化器组、冻结梯度与 BN buffer 审计。
 
-QRRU 训练输入初步采用 1:1 混合“GT+有界随机扰动”和“当前预测 D2 对应”；这只是受控起点。只对 GT 能确定、且在可修正范围内的预测点做位移监督，严重错误单独统计。先缓存同一固定 C 模型的 D2 预测，由原 QRRU 受控重训 C、D、E 复用。F 主对照复用 E 已训练的 QRRU，仅关闭 D8 Flow prior；若另用 B 的预测输入重训 F，须单列等预算 run。按 D2 初始误差 0–1、1–3、3–6、>6px 分组统计修好/破坏比例。
+本轮 QRRU 输入目标固定为 50%“GT+有界随机扰动”与50%“当前预测 D2 对应”。预测只在 GT 可见、目标与控制点误差满足6 D2像素修正范围时入选；严重错误单列，合格预测不足时用噪声补齐，必须报告实际预测/噪声数量。噪声标准差0.8、界限2.4 D2像素。缓存同一冻结 C 来源的 D2 预测，由原 QRRU 受控重训 C、D、E 复用。F 主对照复用 E 已训练的 QRRU，仅关闭 D8 Flow prior；若另用 B 的预测输入重训 F，须单列等预算 run。按 D2 初始误差 0–1、1–3、3–6、>6px 分组统计修好/破坏比例。
 
-C 的原 QRRU 受控重训、D、E 从同一旧 checkpoint 独立初始化，使用相同 seed、训练顺序、样本数、optimizer step 预算和模型选择规则；D 增加 Difference，E 再增加 DGFO。C 同时保留冻结 QRRU 的推理结果：B→C 用冻结版本，C→D 用等预算重训版本，避免把重训收益归因于差异分支。先做短程梯度/小样本诊断，再冻结正式预算；正式步数在验证集预登记后写入配置，当前留空，不沿用“旧训练5 epoch即新实验预算”的假设。候选入选后在多个固定 seed（建议42/43/44）复核稳定性，均报告实际完成预算。
+C 的原 QRRU 受控重训、D、E 均从同一个 Flow Head 最佳 checkpoint 独立初始化；其中旧 QRRU 权重仍来源于冻结 v1，D 增加零初始化 Difference，E 再增加零初始化 DGFO。三组固定 seed42、训练顺序、样本数、5 epoch/25535 次 optimizer 更新和完整 val Pre@3 选模规则。C 同时保留冻结 QRRU 的推理结果：B→C 用冻结版本，C→D 用等预算重训版本，避免把重训收益归因于差异分支。正式配置已登记，实际完成量从运行状态读取；中断/诊断步数不计为完成预算。本轮为单 seed42 的首轮实验；后续多 seed 稳定性复核须另行登记并实际执行。
 
 所有新实验只迁移模型权重，重新建立 optimizer/scheduler/scaler，不恢复 v1 optimizer 状态。真正的 v2 同协议续训再严格匹配架构、配置、数据和 RNG/游标。保存基点提交、实现提交、协议/schema、来源权重 hash、配置 hash、清单 hash、训练组、随机种子、环境和每次评价命令。
 
 ## 六组消融登记
 
-采用完整实验 ID，避免与历史 H0 位置消融 A–D 混淆。**历史 H0-D 对应本轮 B 的结构，不是本轮 D。** 当前 main 尚未集成历史无 H 开关，应复用其设计并验证，不直接把旧报告视为新实现结果。
+采用完整实验 ID，避免与历史 H0 位置消融 A–D 混淆。**历史 H0-D 对应本轮 B 的结构，不是本轮 D。** 独立 v2 路径已实现无 H 模式；旧报告只保留历史来源身份，不直接作为新实现结果。
 
 | ID | 原方案编号 | D8 | D2 | QRRU | 作用 |
 | --- | --- | --- | --- | --- | --- |
@@ -157,7 +168,7 @@ B→C 先采用同一冻结权重，仅切换 prior；若微调 Flow Head，还�
 
 ## 数据、评价与选型
 
-默认沿用正式 RGB512 的 train/val 数据：`/home/disk1/Data/datasets/MHINet_RGB_512/{train,val}/pairs.jsonl`，40849/5106对，按冻结清单核对 SHA256 和分组无泄漏。调参与模型选择只使用该 val；Flow lambda/sigma 的小范围候选表在运行前登记。
+固定沿用正式 RGB512 的 train/val 数据：`/home/disk1/Data/datasets/MHINet_RGB_512/{train,val}/pairs.jsonl`，40849/5106对，按冻结清单核对 SHA256。当前以 `source_dataset + source_relative_path`（缺失时用 source_path）核验源图身份，train/val 交叉为0；这不代表地理邻近隔离，不能声称真正空间隔离。调参与模型选择只使用该 val；首轮使用登记的 lambda=3、sigma_d8=4，未经完整 val 证明为最优。
 
 | 锁定评价集 | 清单 | 对数 |
 | --- | --- | --- |
@@ -180,6 +191,6 @@ v1 历史 A 的参考 Pre@3：GoogleEarth 33.24%、JL1Flight 37.92%；论文 RMS
 
 1. **Flow 不可靠**：若几何奖励经常提升错误候选，不扩大 lambda；先查坐标、置信度校准及独立 Flow 监督，只在 val 上作决定。
 2. **Direct-D8 成为瓶颈**：若 C 在 D8 改善，但 D2 丢失大量正确候选，停止扩大 QRRU 修正范围。另立 D2 几何实验，不混入本轮。
-3. **DGFO 无独立增益**：若相同预算、多 seed 下 E 不能重复优于 D 的 Pre@3，或收益仅是NM增加，优先保留 Difference-QRRU。报告负结果。
+3. **DGFO 无独立增益**：先检查本轮相同预算、seed42 的 E 与 D；无收益或收益仅是NM增加时，优先保留 Difference-QRRU并报告负结果。单seed有收益也只作为候选；多seed可重复性须另行实际复核，不能从本轮推断。
 
 每阶段单独提交代码、工程检查和验证结果；通过验收后更新实验登记的状态与实际产物。P1–P4工程通过不等于精度提升；训练损失下降也不能替代固定清单级联推理评价。最终交付含 A–F 成对结果、错误分组、资源成本、来源清单及是否保留 Flow/DGFO 的证据结论。只有完成实际验证后才考虑 v2 发布标签或集成 main。

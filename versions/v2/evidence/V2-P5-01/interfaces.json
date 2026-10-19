@@ -1,0 +1,54 @@
+{
+  "schema": "mhi.v2-item-engineering.v1",
+  "item_id": "V2-P5-01",
+  "engineering": "pass",
+  "training": "not_started",
+  "accuracy": "not_started",
+  "checked_at": "2026-10-20T03:25:30+08:00",
+  "implementation_commit": "88fee1bcf37c8403e2e4a17287c2d9432c0312ca",
+  "actual_commands": [
+    "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 /root/miniconda3/envs/loma-repro/bin/python -m unittest discover -s tests/v2 -v",
+    [
+      "/root/miniconda3/envs/loma-repro/bin/python",
+      "/home/disk1/MHINet/scripts/mhi_v2/validate_real.py",
+      "--device",
+      "cuda:0",
+      "--output",
+      "versions/v2/evidence/real_feature_acceptance_20261020_final.json"
+    ]
+  ],
+  "exit_codes": [
+    0,
+    0
+  ],
+  "environment": {
+    "torch_version": "2.11.0+cu128",
+    "cuda_version": "12.8",
+    "device": "cuda:0",
+    "cuda_visible_devices": "0",
+    "device_name": "NVIDIA GeForce RTX 4090",
+    "peak_allocated_bytes": 2143825920,
+    "peak_reserved_bytes": 2447376384
+  },
+  "input_configuration_weight_manifest_identities": "See linked real acceptance identities and preregistration, with SHA256 checked at execution",
+  "evidence": [
+    {
+      "path": "versions/v2/evidence/cpu_acceptance_20261020.json",
+      "sha256": "cf58c6e73aebed15b3d3de28ef722f27c2ebef508b8f16d4befc0ac131ddc732"
+    },
+    {
+      "path": "versions/v2/evidence/real_feature_acceptance_20261020_final.json",
+      "sha256": "e5d80f71902888c44fbcf59aa0cfa4da3d6b16564714813743a6957e2cbc1493"
+    },
+    {
+      "path": "versions/v2/evidence/resource_acceptance_20261020.json",
+      "sha256": "24cf10ccf477bbb372d5791b4e3750da6e205a98c3c4f5c16eb976d3cb99860f"
+    },
+    {
+      "path": "versions/v2/evidence/flow_head_smoke_resume_20261020.json",
+      "sha256": "4447a1024692648b4f50b827122c22e547a4535b55eeab5c0ddea43025a5684c"
+    }
+  ],
+  "result": "Explicit v2 train/eval schema and stage parameter ownership implemented. Flow no-H loss forbidden-field test and actual Head smoke+restart pass; frozen buffers unchanged. Locked evaluation entrypoint not executed on sealed data.",
+  "acceptance_scope": "Engineering diagnostic only; no formal accuracy gain or locked-set claim"
+}

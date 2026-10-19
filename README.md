@@ -4,7 +4,12 @@
 （`522d9bd`）；**MHI v2** 在 `codex/mhi-v2` 分支开展独立实验。
 文件按版本归档，入口为 [版本目录](versions/README.md)：
 [v1 冻结档案](versions/v1/README.md) 与 [v2 实验工作区](versions/v2/README.md) 分别管理。
-v2 按 [逐条验收清单](versions/v2/ACCEPTANCE.md) 推进；模型改造及训练尚未开始。
+v2 已实现独立 Flow0/匹配/Discrepancy/DGFO 与 `mhinet.v2.train/evaluate` 入口；57项CPU测试及
+[真实GPU工程验收](versions/v2/evidence/real_feature_acceptance_20261020_final.json) 通过，Flow Head 两步实数据训练/断点恢复烟测通过。
+正式 Flow Head 已于北京时间2026-10-20 03:24:37在 GPU0 启动，C/D/E 排队，实际状态见 [campaign.json](outputs/mhi_v2/campaign_rgb512_seed42_20261020/campaign.json)；
+[逐条验收清单](versions/v2/ACCEPTANCE.md) 与 [运行配置](configs/mhi_v2/README.md) 分别管理签收和执行协议。
+首轮只用固定 RGB_512 train/val、seed42、各5 epoch/25535更新；512输入、最终2048、QRRU前12000候选。
+源图身份交叉为0，未证明地理邻近隔离；短程验收尚不支持正式精度或多seed结论。
 这里的模型版本与历史训练协议 `v1.2`、数据集 `stable_v2`、Python 包版本分别管理。
 
 当前主线：共享 GHIM/CGMDP，支持 MHIR 与 H0 引导粗细匹配下游。

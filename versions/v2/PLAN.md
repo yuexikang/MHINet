@@ -1,6 +1,6 @@
 # MHI v2 实验实施计划
 
-登记日期：2026-10-19（北京时间）。状态：版本冻结和实验规划完成，模型实现、训练及新精度评价尚未开始。
+登记日期：2026-10-19（北京时间）。本计划已按版本分档，执行入口为 [逐条验收清单](ACCEPTANCE.md)，实际状态见 [验收登记](acceptance_status.json)。模型实现、训练及新精度评价尚未开始。
 
 ## 版本与交付范围
 
@@ -10,14 +10,22 @@
 | MHI v2 实验分支 | `codex/mhi-v2`，从上述提交创建 |
 | 正式 v1 半密集权重 | `weight/semidense_rgb512_h0joint_from_e_lr8e5_seed42_5ep.pt`，25535/25535 步 |
 | v1 权重 SHA256 | `43c020b213306c1ba517460092e4007799c2f445edce09cb00bf88fc8ac69cb4` |
-| 机器可读冻结清单 | [artifacts/mhi_v1_freeze.json](../artifacts/mhi_v1_freeze.json) |
-| 机器可读实验登记 | [artifacts/mhi_v2_experiment_plan.json](../artifacts/mhi_v2_experiment_plan.json)，是规划规格，不能传给现有训练入口 |
-| 用户原始方案 | [mhi_v2_proposal_20261019.md](proposals/mhi_v2_proposal_20261019.md) |
+| 机器可读冻结清单 | [versions/v1/freeze_manifest.json](../v1/freeze_manifest.json)，保留原文件字节与 SHA256 |
+| 机器可读实验登记 | [experiment_plan.json](experiment_plan.json)，是规划规格，不能传给现有训练入口 |
+| 用户原始方案 | [proposal.md](proposal.md) |
+| v1 源码工作区 | `/home/disk1/MHINet-v1`，detached 于 `mhi-v1` |
+| v2 新实现 | `mhinet/v2/`；专属入口 `scripts/mhi_v2/`，配置 `configs/mhi_v2/`，测试 `tests/v2/` |
 | 新输出目录 | `outputs/mhi_v2/<实验ID>/<阶段>/<运行ID>/`，每次新实验使用独立目录 |
 
 原方案引用的 `a1d32e3` 后，main 新增了标注工具更新 `522d9bd`。以本次实际 HEAD 为 v1，包含这次更新；标签建立后不移动、不覆盖。后续模型修改只进入 v2 实验分支，main 的本次基点保持不变。这里的 MHI v1/v2 是研究版本命名，仓库名仍为 MHINet；历史 `v1.2` 训练协议、`stable_v2` 数据集、`semidense_qrru_v1` checkpoint task 和 Python 包 `0.1.0` 不做全局替换。
 
-本次交付包括 v1 标签、v2 分支、来源快照、计划和消融登记。P1–P5 是后续按顺序实施的工作，不把规划登记为已实现功能，也不启动正式训练或重跑历史测试。
+准备阶段交付包括 v1 标签与独立源码工作区、分版本档案、实际资源预检、27项任务清单及证据登记。P1–P5 按清单逐条实施验收；准备通过不代表模型改造或精度通过。
+
+## 文件隔离规则
+
+v1 档案只进入 `versions/v1/`，新研究计划和证据只进入 `versions/v2/`；旧归档路径通过 [relocations.json](../relocations.json) 查询。冻结清单不因整理而重写。大权重和历史原始预测保留冻结清单中的原路径，新 v2 权重使用 `weight/mhi_v2/`，新推理/训练产物只进入 `outputs/mhi_v2/`。
+
+原 `mhinet/models/`、`mhinet/downstream/`、旧 CLI 和 LoMa 来源核作为 v1 兼容底座保留。下面的旧文件引用用于解释现状；所有 **v2 专属实现进入 `mhinet/v2/`**，通过 wrapper、子类或显式适配复用稳定功能，不往旧文件加入 v2 分支。v1 默认入口与 checkpoint 严格加载行为不变。v1 回放必须记录实际导入源码路径并显式映射归档 runtime；独立 worktree 不会自动修复 checkpoint 内嵌的旧绝对路径。
 
 ## 研究问题和改造边界
 
@@ -60,7 +68,7 @@ DINOv3 + MVT → F_MVT ─→ Flow0：D16 A→B 目标坐标、位移、Matchabi
 
 ### P1：D16 Flow0 接口与兼容加载
 
-主要文件：`mhinet/models/feature_provider.py`、`mhinet/downstream/training.py`；新增 v2 配置解析及 checkpoint 迁移辅助模块。
+新增文件：`mhinet/v2/config.py`、`feature_provider.py`、`checkpointing.py`、`training.py`。参照旧 provider/training 接口实现独立适配，保持已有参数键名，避免将旧模块额外包一层后改变所有 checkpoint 前缀。先解决归档 runtime 显式加载与实际源码导入路径验证。
 
 输出契约：`flow16_target_norm:[B,2,H16,W16]`、`flow16_norm` 同形状、`flow16_matchability:[B,1,H16,W16]`，并显式输出预测有效性。方向为 A→B，归一化采用 `align_corners=False` 的 cell centers。`flow16_norm = target_norm - source_grid_norm`。确认实际 matchability 是概率还是 logits，再统一为 [0,1] 概率，避免重复 sigmoid。
 
@@ -70,7 +78,7 @@ DINOv3 + MVT → F_MVT ─→ Flow0：D16 A→B 目标坐标、位移、Matchabi
 
 ### P2：D8 Flow 软引导与 D2 Direct-D8
 
-主要文件：`mhinet/downstream/loma_reference/coarse_matcher.py`、`mhinet/downstream/supervision.py`、`mhinet/downstream/semidense.py`。
+新增文件：`mhinet/v2/coarse_matcher.py`、`supervision.py`、`semidense.py`。参照旧 D8 参考核、fine grid 和 matcher 契约实现；保留旧来源核文件与哈希。
 
 先实现 MHIv2-B 的无 H 基线，再实现 MHIv2-C 的 Flow 软先验。D8 保留两侧全图候选与 FP32 dual-softmax，对有效 A 查询加入有界正奖励：
 
@@ -87,7 +95,7 @@ S(i,j) = dot(normalize(DA[i]), normalize(DB[j])) / tau
 
 ### P3：QRRU Feature Discrepancy
 
-主要文件：`mhinet/downstream/qrru.py`，checkpoint 迁移与版本化配置。
+新增文件：`mhinet/v2/qrru.py`，以及 v2 checkpoint 迁移与版本化配置；旧 `mhinet/downstream/qrru.py` 作为对照保留。
 
 每轮重采样 `wb` 后，按通道归一化计算 `D=abs(normalize(wa)-normalize(wb))`；使用 1×1 Conv(48,32)+GN+GELU 得到 R。保留原 128 通道 encoder 和所有旧参数形状，采用零初始化 1×1 `DiffAdapter(32,32)` 残差注入。此阶段关闭 DGFO。
 
@@ -95,7 +103,7 @@ S(i,j) = dot(normalize(DA[i]), normalize(DB[j])) / tau
 
 ### P4：局部 DGFO
 
-主要文件：`mhinet/downstream/qrru.py`；可新增独立局部 attention 辅助模块。
+实现文件：`mhinet/v2/qrru.py`、`mhinet/v2/dgfo.py`。
 
 用现有 `interpolate_controls(flow, off)` 从 2×2 控制点构造 4×4 局部残差，Q/K 来自 R（32维），V 为局部位移（2维）；对半径1的3×3有效邻居做 masked softmax。`E=propagated-local_flow` 经零初始化 `FlowAdapter(2,32)` 加入原 z 更新，控制点仍由原 Gate/Down/Head 更新，不从传播结果拟合或覆盖控制点。
 
@@ -107,7 +115,7 @@ mask 同时检查 patch 邻域和真实采样位置；无有效邻居时令传�
 
 ### P5：分离训练、等预算消融与最终评价
 
-主要文件：`mhinet/downstream/train.py`、`training.py`、`semidense.py`、`mhinet/engine/ghim_losses.py`、`evaluate_semidense.py` 及独立 v2 训练/评价入口。
+新增文件：`mhinet/v2/train.py`、`training.py`、`semidense.py`、`losses.py`、`evaluate.py`，入口与配置分别放入 `scripts/mhi_v2/`、`configs/mhi_v2/`。规划中的模块命令在实现并通过入口验收前不能作为可执行训练命令。
 
 | 子阶段 | 可训练 | 冻结 |
 | --- | --- | --- |
@@ -162,7 +170,7 @@ RMSE 明确区分：全部匹配 RMSE、预测 H 网格 RMSE、论文口径 RMSE
 
 人工 GCP 与合成 H 评价分开报告。只有实际完成审核的人工同名点能进入 GCP 参考集；随机候选、待复核点和未完成影像对不能当作真值。标注工具只提供采集能力，不代表已有有效人工基准。离线拟合 H 不进入 v2 几何预测。
 
-v1 历史 A 的参考 Pre@3：GoogleEarth 33.24%、JL1Flight 37.92%；论文 RMSE 6.520/6.791。它们来自已归档的固定权重消融，详见 [H0推理位置消融实验结果](H0推理位置消融实验结果.md)，不是本轮重跑。历史主表只有 Pre@1/3/5；新增 Pre@10 须从同批冻结 A 匹配 NPZ 离线重评分，完成前 A@10 留空。v2 各组结果保持为空，实际完成后再填。
+v1 历史 A 的参考 Pre@3：GoogleEarth 33.24%、JL1Flight 37.92%；论文 RMSE 6.520/6.791。它们来自已归档的固定权重消融，详见 [v1 的 H0 推理位置消融结果](../v1/reports/H0_position_ablation.md)，不是本轮重跑。历史主表只有 Pre@1/3/5；新增 Pre@10 须从同批冻结 A 匹配 NPZ 离线重评分，完成前 A@10 留空。v2 各组结果保持为空，实际完成后再填。
 
 ## 停止条件与交付检查点
 

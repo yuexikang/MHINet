@@ -1,0 +1,89 @@
+{
+  "schema": "mhi.version-archive.v1",
+  "model_line": "MHI v1",
+  "code_tag": "mhi-v1",
+  "code_commit": "522d9bd5565e88267e72866bd829fb05274762e4",
+  "freeze_manifest_sha256": "76c2412a117061e90b34ed80e57857af94d6e17364b74159f8f6616e6390f239",
+  "source_worktree": "/home/disk1/MHINet-v1",
+  "files": [
+    {
+      "archive": "versions/v1/configs/training_snapshot.json",
+      "sha256": "68fe6de179934a3fd3934017a6f1fdae9e85edc31a5454585d1e5ccce300d3dc",
+      "source": "freeze_manifest.json#checkpoint.training_metadata_snapshot"
+    },
+    {
+      "archive": "versions/v1/configs/runtime_snapshot.json",
+      "sha256": "57b85298555eb13f4774d09e595f2ff5076daf4e67d5b2243f3950b9027c50e1",
+      "source": "freeze_manifest.json#checkpoint.training_metadata_snapshot.runtime"
+    },
+    {
+      "archive": "versions/v1/reports/H0_position_ablation.md",
+      "sha256": "e840e8d93e54dda3dcda05da687fbc1a90df031e876fdb875209a75a3ff6f83f",
+      "source": "docs/H0推理位置消融实验结果.md",
+      "source_commit": "522d9bd5565e88267e72866bd829fb05274762e4"
+    },
+    {
+      "archive": "versions/v1/provenance/loma_downstream_source.json",
+      "sha256": "f5cfd0c95901d4bb43c351b2de61d539e915eee9d43f6909bc24123890fcde3a",
+      "source": "artifacts/loma_downstream_source.json",
+      "source_commit": "522d9bd5565e88267e72866bd829fb05274762e4"
+    },
+    {
+      "archive": "versions/v1/reports/h0_position_ablation/GoogleEarth_A_report.json",
+      "sha256": "ddd45094737ad6aeedd418e7e1ab5483eb964d602cef092740ca30ad730454e4",
+      "source": "/home/disk1/MHINet/outputs/h0_position_ablation_512_20261013/A_GoogleEarth/report.json"
+    },
+    {
+      "archive": "versions/v1/reports/h0_position_ablation/JL1Flight_A_report.json",
+      "sha256": "14d48947723953653cc595c8cb5e5a5dc2525bd7b5b85f4ae735c2f5f03220d9",
+      "source": "/home/disk1/MHINet/outputs/h0_position_ablation_512_20261013/A_JL1Flight/report.json"
+    },
+    {
+      "archive": "versions/v1/reports/h0_position_ablation/plan.json",
+      "sha256": "a8b682b6bca673ef0556c6d00098d96952c433cd0bbc643233f1bb7ff26293b5",
+      "source": "/home/disk1/MHINet/outputs/h0_position_ablation_512_20261013/plan.json"
+    },
+    {
+      "archive": "versions/v1/reports/h0_position_ablation/summary.json",
+      "sha256": "d8f72fe23eadd17ef01140af94c89efed9053d15d23d0251d7e84e36ad5a551f",
+      "source": "/home/disk1/MHINet/outputs/h0_position_ablation_512_20261013/summary.json"
+    },
+    {
+      "archive": "versions/v1/reports/h0_position_ablation/validation.json",
+      "sha256": "598d3f1435538ebee46e5e2c2c4bd39a004bc43c036188c9bf7a9bc088748754",
+      "source": "/home/disk1/MHINet/outputs/h0_position_ablation_512_20261013/validation.json"
+    },
+    {
+      "archive": "versions/v1/historical/configs/semidense_rgb512_h0_joint_5epoch.json",
+      "sha256": "a8a89925d038198f80d01ec64402d61efbce6a3edf72c0fd1c706f2b6324e92f",
+      "source": "configs/semidense_rgb512_h0_joint_5epoch.json",
+      "source_commit": "6b01b654156ed1a6ccb32d8d47624684f908384f"
+    },
+    {
+      "archive": "versions/v1/historical/configs/runtime_paths.mhinet_rgb512.server.json",
+      "sha256": "1559e865d0f076a18e671044bab3464c0ae0255a6bc7af716dd7f63bb7925599",
+      "source": "configs/runtime_paths.mhinet_rgb512.server.json",
+      "source_commit": "be04d1f028b17aa1fd83c48492a3932c582a8f65"
+    },
+    {
+      "archive": "versions/v1/historical/scripts/train_semidense_rgb512_h0.sh",
+      "sha256": "479be93f37fb3ce30034ede8a24677c09ed232abcd7db10e2f8dea524bc5b465",
+      "source": "scripts/train_semidense_rgb512_h0.sh",
+      "source_commit": "6b01b654156ed1a6ccb32d8d47624684f908384f"
+    },
+    {
+      "archive": "versions/v1/historical/scripts/evaluate_h0_position_ablation.py",
+      "sha256": "1f058f3a1caa04ca25903093287df69a6ee98be61a9b4b648ddd0cfb15dc251c",
+      "source": "scripts/evaluate_h0_position_ablation.py",
+      "source_commit": "4c7a105d6fc07f93a1c4eff0c4cf4c984d130afe"
+    },
+    {
+      "archive": "versions/v1/historical/scripts/evaluate_topk_correspondence_ablation.py",
+      "sha256": "0f9588c0c630df153286550d9d96246cc71e5030ab3cbb5e26e042cb68b0ac25",
+      "source": "scripts/evaluate_topk_correspondence_ablation.py",
+      "source_commit": "8d48c2f684e77370be829eb75fa44b224162c176"
+    }
+  ],
+  "large_resources": "Original weight/outputs/data files remain at frozen absolute paths; no multi-GB copies or moves.",
+  "historical_entrypoints": "Recovered scripts/configs preserve history; not patched into active v2 or declared runnable without explicit runtime mapping."
+}

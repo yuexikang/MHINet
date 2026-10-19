@@ -1,0 +1,500 @@
+{
+  "schema": "mhi.acceptance-status.v1",
+  "model_line": "MHI v2",
+  "branch": "codex/mhi-v2",
+  "overall_status": "preparation_in_progress",
+  "preparation": {
+    "engineering": "in_progress",
+    "training": "not_started",
+    "accuracy": "not_started"
+  },
+  "next_item": "V2-P0-01",
+  "source_checklist": "versions/v2/ACCEPTANCE.md",
+  "status_policy": "Accept an item only with actual evidence; preparation acceptance does not imply P1-P5 acceptance. Formal training and accuracy statuses remain separate.",
+  "items": [
+    {
+      "id": "V2-P0-01",
+      "title": "建立分档边界",
+      "stage": "P0",
+      "status": "not_started",
+      "engineering": "not_started",
+      "training": "not_started",
+      "accuracy": "not_started",
+      "depends_on": [],
+      "planned_evidence": [
+        "versions/v2/evidence/V2-P0-01/layout.json"
+      ],
+      "accepted_evidence": [],
+      "actual_command": null,
+      "exit_code": null
+    },
+    {
+      "id": "V2-P0-02",
+      "title": "核验 v1 冻结与 v2 血缘",
+      "stage": "P0",
+      "status": "not_started",
+      "engineering": "not_started",
+      "training": "not_started",
+      "accuracy": "not_started",
+      "depends_on": [
+        "V2-P0-01"
+      ],
+      "planned_evidence": [
+        "versions/v2/evidence/preparation.json"
+      ],
+      "accepted_evidence": [],
+      "actual_command": null,
+      "exit_code": null
+    },
+    {
+      "id": "V2-P0-03",
+      "title": "执行唯一已落地的准备命令",
+      "stage": "P0",
+      "status": "not_started",
+      "engineering": "not_started",
+      "training": "not_started",
+      "accuracy": "not_started",
+      "depends_on": [
+        "V2-P0-02"
+      ],
+      "planned_evidence": [
+        "versions/v2/evidence/preparation.json"
+      ],
+      "accepted_evidence": [],
+      "actual_command": null,
+      "exit_code": null
+    },
+    {
+      "id": "V2-P0-04",
+      "title": "签收准备阶段",
+      "stage": "P0",
+      "status": "not_started",
+      "engineering": "not_started",
+      "training": "not_started",
+      "accuracy": "not_started",
+      "depends_on": [
+        "V2-P0-03"
+      ],
+      "planned_evidence": [
+        "versions/v2/evidence/V2-P0-04/acceptance.json"
+      ],
+      "accepted_evidence": [],
+      "actual_command": null,
+      "exit_code": null
+    },
+    {
+      "id": "V2-P1-01",
+      "title": "登记接口与数值验收协议",
+      "stage": "P1",
+      "status": "not_started",
+      "engineering": "not_started",
+      "training": "not_started",
+      "accuracy": "not_started",
+      "depends_on": [
+        "V2-P0-04"
+      ],
+      "planned_evidence": [
+        "versions/v2/evidence/V2-P1-01/contracts.json"
+      ],
+      "accepted_evidence": [],
+      "actual_command": null,
+      "exit_code": null
+    },
+    {
+      "id": "V2-P1-02",
+      "title": "实现严格迁移与 v1 回归基线",
+      "stage": "P1",
+      "status": "not_started",
+      "engineering": "not_started",
+      "training": "not_started",
+      "accuracy": "not_started",
+      "depends_on": [
+        "V2-P1-01"
+      ],
+      "planned_evidence": [
+        "versions/v2/evidence/V2-P1-02/migration.json"
+      ],
+      "accepted_evidence": [],
+      "actual_command": null,
+      "exit_code": null
+    },
+    {
+      "id": "V2-P1-03",
+      "title": "拆出 Flow0，跳过 H Fitter",
+      "stage": "P1",
+      "status": "not_started",
+      "engineering": "not_started",
+      "training": "not_started",
+      "accuracy": "not_started",
+      "depends_on": [
+        "V2-P1-02"
+      ],
+      "planned_evidence": [
+        "versions/v2/evidence/V2-P1-03/flow_interface.json"
+      ],
+      "accepted_evidence": [],
+      "actual_command": null,
+      "exit_code": null
+    },
+    {
+      "id": "V2-P1-04",
+      "title": "坐标、形状与异常回退",
+      "stage": "P1",
+      "status": "not_started",
+      "engineering": "not_started",
+      "training": "not_started",
+      "accuracy": "not_started",
+      "depends_on": [
+        "V2-P1-03"
+      ],
+      "planned_evidence": [
+        "versions/v2/evidence/V2-P1-04/coordinates.json"
+      ],
+      "accepted_evidence": [],
+      "actual_command": null,
+      "exit_code": null
+    },
+    {
+      "id": "V2-P1-05",
+      "title": "真实资源烟测与 P1 签收",
+      "stage": "P1",
+      "status": "not_started",
+      "engineering": "not_started",
+      "training": "not_started",
+      "accuracy": "not_started",
+      "depends_on": [
+        "V2-P1-04"
+      ],
+      "planned_evidence": [
+        "versions/v2/evidence/V2-P1-05/smoke.json"
+      ],
+      "accepted_evidence": [],
+      "actual_command": null,
+      "exit_code": null
+    },
+    {
+      "id": "V2-P2-01",
+      "title": "实现无 H 的 MHIv2-B",
+      "stage": "P2",
+      "status": "not_started",
+      "engineering": "not_started",
+      "training": "not_started",
+      "accuracy": "not_started",
+      "depends_on": [
+        "V2-P1-05"
+      ],
+      "planned_evidence": [
+        "versions/v2/evidence/V2-P2-01/no_h_baseline.json"
+      ],
+      "accepted_evidence": [],
+      "actual_command": null,
+      "exit_code": null
+    },
+    {
+      "id": "V2-P2-02",
+      "title": "验证 B 的 full/chunked 与成本",
+      "stage": "P2",
+      "status": "not_started",
+      "engineering": "not_started",
+      "training": "not_started",
+      "accuracy": "not_started",
+      "depends_on": [
+        "V2-P2-01"
+      ],
+      "planned_evidence": [
+        "versions/v2/evidence/V2-P2-02/b_equivalence.json"
+      ],
+      "accepted_evidence": [],
+      "actual_command": null,
+      "exit_code": null
+    },
+    {
+      "id": "V2-P2-03",
+      "title": "实现 MHIv2-C 的有界几何软奖励",
+      "stage": "P2",
+      "status": "not_started",
+      "engineering": "not_started",
+      "training": "not_started",
+      "accuracy": "not_started",
+      "depends_on": [
+        "V2-P2-02"
+      ],
+      "planned_evidence": [
+        "versions/v2/evidence/V2-P2-03/prior.json"
+      ],
+      "accepted_evidence": [],
+      "actual_command": null,
+      "exit_code": null
+    },
+    {
+      "id": "V2-P2-04",
+      "title": "固定权重 B→C 配对诊断与 P2 签收",
+      "stage": "P2",
+      "status": "not_started",
+      "engineering": "not_started",
+      "training": "not_started",
+      "accuracy": "not_started",
+      "depends_on": [
+        "V2-P2-03"
+      ],
+      "planned_evidence": [
+        "versions/v2/evidence/V2-P2-04/b_vs_c.json"
+      ],
+      "accepted_evidence": [],
+      "actual_command": null,
+      "exit_code": null
+    },
+    {
+      "id": "V2-P3-01",
+      "title": "独立实现差异编码和零残差注入",
+      "stage": "P3",
+      "status": "not_started",
+      "engineering": "not_started",
+      "training": "not_started",
+      "accuracy": "not_started",
+      "depends_on": [
+        "V2-P2-04"
+      ],
+      "planned_evidence": [
+        "versions/v2/evidence/V2-P3-01/architecture.json"
+      ],
+      "accepted_evidence": [],
+      "actual_command": null,
+      "exit_code": null
+    },
+    {
+      "id": "V2-P3-02",
+      "title": "零 adapter 的旧输出等价",
+      "stage": "P3",
+      "status": "not_started",
+      "engineering": "not_started",
+      "training": "not_started",
+      "accuracy": "not_started",
+      "depends_on": [
+        "V2-P3-01"
+      ],
+      "planned_evidence": [
+        "versions/v2/evidence/V2-P3-02/zero_equivalence.json"
+      ],
+      "accepted_evidence": [],
+      "actual_command": null,
+      "exit_code": null
+    },
+    {
+      "id": "V2-P3-03",
+      "title": "诊断梯度与 P3 签收",
+      "stage": "P3",
+      "status": "not_started",
+      "engineering": "not_started",
+      "training": "not_started",
+      "accuracy": "not_started",
+      "depends_on": [
+        "V2-P3-02"
+      ],
+      "planned_evidence": [
+        "versions/v2/evidence/V2-P3-03/gradients.json"
+      ],
+      "accepted_evidence": [],
+      "actual_command": null,
+      "exit_code": null
+    },
+    {
+      "id": "V2-P4-01",
+      "title": "实现局部传播残差",
+      "stage": "P4",
+      "status": "not_started",
+      "engineering": "not_started",
+      "training": "not_started",
+      "accuracy": "not_started",
+      "depends_on": [
+        "V2-P3-03"
+      ],
+      "planned_evidence": [
+        "versions/v2/evidence/V2-P4-01/architecture.json"
+      ],
+      "accepted_evidence": [],
+      "actual_command": null,
+      "exit_code": null
+    },
+    {
+      "id": "V2-P4-02",
+      "title": "mask、守恒与退化用例",
+      "stage": "P4",
+      "status": "not_started",
+      "engineering": "not_started",
+      "training": "not_started",
+      "accuracy": "not_started",
+      "depends_on": [
+        "V2-P4-01"
+      ],
+      "planned_evidence": [
+        "versions/v2/evidence/V2-P4-02/propagation.json"
+      ],
+      "accepted_evidence": [],
+      "actual_command": null,
+      "exit_code": null
+    },
+    {
+      "id": "V2-P4-03",
+      "title": "等价、梯度、资源与 P4 签收",
+      "stage": "P4",
+      "status": "not_started",
+      "engineering": "not_started",
+      "training": "not_started",
+      "accuracy": "not_started",
+      "depends_on": [
+        "V2-P4-02"
+      ],
+      "planned_evidence": [
+        "versions/v2/evidence/V2-P4-03/diagnostics.json"
+      ],
+      "accepted_evidence": [],
+      "actual_command": null,
+      "exit_code": null
+    },
+    {
+      "id": "V2-P5-01",
+      "title": "落地训练/评价入口与损失隔离",
+      "stage": "P5",
+      "status": "not_started",
+      "engineering": "not_started",
+      "training": "not_started",
+      "accuracy": "not_started",
+      "depends_on": [
+        "V2-P4-03"
+      ],
+      "planned_evidence": [
+        "versions/v2/evidence/V2-P5-01/interfaces.json"
+      ],
+      "accepted_evidence": [],
+      "actual_command": null,
+      "exit_code": null
+    },
+    {
+      "id": "V2-P5-02",
+      "title": "正式预算与选择规则预登记",
+      "stage": "P5",
+      "status": "not_started",
+      "engineering": "not_started",
+      "training": "not_started",
+      "accuracy": "not_started",
+      "depends_on": [
+        "V2-P5-01"
+      ],
+      "planned_evidence": [
+        "versions/v2/evidence/V2-P5-02/preregistration.json"
+      ],
+      "accepted_evidence": [],
+      "actual_command": null,
+      "exit_code": null
+    },
+    {
+      "id": "V2-P5-03",
+      "title": "Flow Head 独立监督与诊断",
+      "stage": "P5",
+      "status": "not_started",
+      "engineering": "not_started",
+      "training": "not_started",
+      "accuracy": "not_started",
+      "depends_on": [
+        "V2-P5-02"
+      ],
+      "planned_evidence": [
+        "versions/v2/evidence/V2-P5-03/flow_training.json"
+      ],
+      "accepted_evidence": [],
+      "actual_command": null,
+      "exit_code": null
+    },
+    {
+      "id": "V2-P5-04",
+      "title": "冻结 C 的 D2 缓存与 C/D/E 初始化",
+      "stage": "P5",
+      "status": "not_started",
+      "engineering": "not_started",
+      "training": "not_started",
+      "accuracy": "not_started",
+      "depends_on": [
+        "V2-P5-03"
+      ],
+      "planned_evidence": [
+        "versions/v2/evidence/V2-P5-04/cache_and_initialization.json"
+      ],
+      "accepted_evidence": [],
+      "actual_command": null,
+      "exit_code": null
+    },
+    {
+      "id": "V2-P5-05",
+      "title": "执行等预算 C/D/E 训练",
+      "stage": "P5",
+      "status": "not_started",
+      "engineering": "not_started",
+      "training": "not_started",
+      "accuracy": "not_started",
+      "depends_on": [
+        "V2-P5-04"
+      ],
+      "planned_evidence": [
+        "versions/v2/evidence/V2-P5-05/training_comparison.json"
+      ],
+      "accepted_evidence": [],
+      "actual_command": null,
+      "exit_code": null
+    },
+    {
+      "id": "V2-P5-06",
+      "title": "验证集选型、多 seed 与阶段停止条件",
+      "stage": "P5",
+      "status": "not_started",
+      "engineering": "not_started",
+      "training": "not_started",
+      "accuracy": "not_started",
+      "depends_on": [
+        "V2-P5-05"
+      ],
+      "planned_evidence": [
+        "versions/v2/evidence/V2-P5-06/validation_selection.json"
+      ],
+      "accepted_evidence": [],
+      "actual_command": null,
+      "exit_code": null
+    },
+    {
+      "id": "V2-P5-07",
+      "title": "固定协议复核 A–F",
+      "stage": "P5",
+      "status": "not_started",
+      "engineering": "not_started",
+      "training": "not_started",
+      "accuracy": "not_started",
+      "depends_on": [
+        "V2-P5-06"
+      ],
+      "planned_evidence": [
+        "versions/v2/evidence/V2-P5-07/locked_evaluation.json"
+      ],
+      "accepted_evidence": [],
+      "actual_command": null,
+      "exit_code": null
+    },
+    {
+      "id": "V2-P5-08",
+      "title": "RMSE/GCP 口径与最终逐项验收",
+      "stage": "P5",
+      "status": "not_started",
+      "engineering": "not_started",
+      "training": "not_started",
+      "accuracy": "not_started",
+      "depends_on": [
+        "V2-P5-07"
+      ],
+      "planned_evidence": [
+        "versions/v2/evidence/V2-P5-08/final_acceptance.json"
+      ],
+      "accepted_evidence": [],
+      "actual_command": null,
+      "exit_code": null
+    }
+  ]
+}

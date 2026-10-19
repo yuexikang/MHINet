@@ -2,8 +2,9 @@
 
 2026-10-19 起，当前代码以 **MHI v1** 固定在标签 `mhi-v1`
 （`522d9bd`）；**MHI v2** 在 `codex/mhi-v2` 分支开展独立实验。
-v2 的 [分阶段计划](docs/mhi_v2_plan.md)、[v1 冻结清单](artifacts/mhi_v1_freeze.json)
-与 [A–F 实验登记](artifacts/mhi_v2_experiment_plan.json) 已建立，模型改造及训练尚未开始。
+文件按版本归档，入口为 [版本目录](versions/README.md)：
+[v1 冻结档案](versions/v1/README.md) 与 [v2 实验工作区](versions/v2/README.md) 分别管理。
+v2 按 [逐条验收清单](versions/v2/ACCEPTANCE.md) 推进；模型改造及训练尚未开始。
 这里的模型版本与历史训练协议 `v1.2`、数据集 `stable_v2`、Python 包版本分别管理。
 
 当前主线：共享 GHIM/CGMDP，支持 MHIR 与 H0 引导粗细匹配下游。

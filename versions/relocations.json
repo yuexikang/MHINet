@@ -1,0 +1,11 @@
+{
+  "schema": "mhi.archive-relocations.v1",
+  "frozen_manifest_sha256": "76c2412a117061e90b34ed80e57857af94d6e17364b74159f8f6616e6390f239",
+  "policy": "Frozen v1 manifest bytes stay unchanged. Resolve historical repository-relative archive references with this map.",
+  "paths": {
+    "artifacts/mhi_v1_freeze.json": "versions/v1/freeze_manifest.json",
+    "artifacts/mhi_v2_experiment_plan.json": "versions/v2/experiment_plan.json",
+    "docs/mhi_v2_plan.md": "versions/v2/PLAN.md",
+    "docs/proposals/mhi_v2_proposal_20261019.md": "versions/v2/proposal.md"
+  }
+}

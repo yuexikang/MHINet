@@ -1,0 +1,13 @@
+{
+  "repo_root": "/home/disk1/MHINet",
+  "loma_root": "/home/disk1/LoMa",
+  "loretta_source_root": "/home/disk1/LoMa/third_party/LoRetta",
+  "dino_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+  "selected_stage1_checkpoint": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+  "pyramid_checkpoint": "/root/.cache/torch/hub/checkpoints/loma_B.pt",
+  "data_root": "/home/disk1/Data/datasets/MHINet_RGB_512",
+  "split_manifest": "/home/disk1/Data/datasets/MHINet_RGB_512/train/pairs.jsonl",
+  "output_root": "/home/disk1/MHINet/outputs",
+  "device": "cuda:0",
+  "source_path": "/home/disk1/MHINet/configs/runtime_paths.mhinet_rgb512.server.json"
+}

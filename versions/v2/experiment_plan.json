@@ -10,7 +10,7 @@
     "model_line": "MHI v1",
     "tag": "mhi-v1",
     "commit": "522d9bd5565e88267e72866bd829fb05274762e4",
-    "freeze_manifest": "artifacts/mhi_v1_freeze.json",
+    "freeze_manifest": "versions/v1/freeze_manifest.json",
     "reference_checkpoint": "weight/semidense_rgb512_h0joint_from_e_lr8e5_seed42_5ep.pt",
     "reference_checkpoint_sha256": "43c020b213306c1ba517460092e4007799c2f445edce09cb00bf88fc8ac69cb4",
     "existing_checkpoint_task": "semidense_qrru_v1",
@@ -45,7 +45,7 @@
     "training_manifest": "/home/disk1/Data/datasets/MHINet_RGB_512/train/pairs.jsonl",
     "validation_manifest": "/home/disk1/Data/datasets/MHINet_RGB_512/val/pairs.jsonl",
     "validation_role": "Select flow prior hyperparameters, training mixture and update budget before locked evaluation.",
-    "locked_evaluation_reference": "artifacts/mhi_v1_freeze.json",
+    "locked_evaluation_reference": "versions/v1/freeze_manifest.json",
     "locked_evaluation_manifests": [
       "/home/disk1/Data/datasets/Test_Data/GoogleEarth/val/pairs.jsonl",
       "/home/disk1/Data/datasets/Test_Data/JL1Flight/test/pairs.jsonl"
@@ -193,7 +193,8 @@
       },
       "f_control": "For the primary E-versus-F inference contrast, reuse the same E-trained weights and only disable the Flow prior. Any additional F training on B-generated D2 inputs is a separately registered equal-budget run."
     },
-    "joint_training": "Optional only after separate Flow and QRRU gains pass stage acceptance; define its own freeze policy and preregistered budget."
+    "joint_training": "Optional only after separate Flow and QRRU gains pass stage acceptance; define its own freeze policy and preregistered budget.",
+    "trainable_configuration_status": "No executable v2 training config until its parser and protocol pass acceptance. Planning specifications remain under versions/v2."
   },
   "stages": [
     {
@@ -215,8 +216,12 @@
       ],
       "scope": "Expose D16 Flow0 target coordinates, displacement, matchability and validity while retaining legacy H0 mode.",
       "files": [
-        "mhinet/models/feature_provider.py",
-        "mhinet/engine/ghim_losses.py"
+        "mhinet/v2/config.py",
+        "mhinet/v2/feature_provider.py",
+        "mhinet/v2/checkpointing.py",
+        "mhinet/v2/training.py",
+        "tests/v2/test_flow_interface.py",
+        "tests/v2/test_checkpoint_migration.py"
       ],
       "acceptance": [
         "512 and 784 shape contracts and A-to-B coordinate direction pass.",
@@ -233,9 +238,10 @@
       ],
       "scope": "Implement the no-H0 Direct-D8 fine baseline and optional D8 Flow reward before dual-softmax; establish MHIv2-B then MHIv2-C.",
       "files": [
-        "mhinet/downstream/loma_reference/coarse_matcher.py",
-        "mhinet/downstream/supervision.py",
-        "mhinet/downstream/semidense.py"
+        "mhinet/v2/coarse_matcher.py",
+        "mhinet/v2/supervision.py",
+        "mhinet/v2/semidense.py",
+        "tests/v2/test_flow_matching.py"
       ],
       "acceptance": [
         "flow_prior=None retains the legacy matcher path; lambda=0 matches the no-H0 baseline.",
@@ -254,8 +260,9 @@
       ],
       "scope": "Add discrepancy encoding and a zero-initialized residual adapter to legacy QRRU; evaluate MHIv2-D against MHIv2-C.",
       "files": [
-        "mhinet/downstream/qrru.py",
-        "mhinet/downstream/training.py"
+        "mhinet/v2/qrru.py",
+        "mhinet/v2/checkpointing.py",
+        "tests/v2/test_discrepancy_qrru.py"
       ],
       "acceptance": [
         "Explicit v1-to-v2 weight migration allows only new branch parameters to be missing.",
@@ -272,8 +279,9 @@
       ],
       "scope": "Add masked 3x3 local DGFO using discrepancy Q/K and interpolated control-flow values; evaluate MHIv2-E and MHIv2-F.",
       "files": [
-        "mhinet/downstream/qrru.py",
-        "mhinet/downstream/supervision.py"
+        "mhinet/v2/dgfo.py",
+        "mhinet/v2/qrru.py",
+        "tests/v2/test_dgfo.py"
       ],
       "acceptance": [
         "Attention normalizes over valid neighbors with finite empty-neighborhood handling.",
@@ -293,9 +301,13 @@
       ],
       "scope": "Run separately supervised Flow and controlled QRRU training, then fixed-protocol A-F evaluation; consider joint fine-tuning only after independent gains.",
       "files": [
-        "mhinet/downstream/training.py",
-        "mhinet/downstream/train.py",
-        "mhinet/downstream/evaluate_semidense.py"
+        "mhinet/v2/train.py",
+        "mhinet/v2/training.py",
+        "mhinet/v2/losses.py",
+        "mhinet/v2/evaluate.py",
+        "scripts/mhi_v2/",
+        "configs/mhi_v2/",
+        "tests/v2/"
       ],
       "acceptance": [
         "Validation selection and equal legacy-C/D/E QRRU update budgets are registered before locked evaluation.",
@@ -454,5 +466,28 @@
     "If D8 improves but Direct-D8 fine matching loses too many correct candidates, stop attributing the issue to QRRU; any new D2 geometry model requires a separate experiment.",
     "If DGFO has no repeatable Pre@3 benefit over discrepancy-only QRRU at matched budget, retain the simpler discrepancy model. Match-count growth alone is insufficient."
   ],
-  "created_timezone": "Asia/Shanghai"
+  "created_timezone": "Asia/Shanghai",
+  "storage_layout": {
+    "v1_archive": "versions/v1/",
+    "v2_archive": "versions/v2/",
+    "v1_worktree": "/home/disk1/MHINet-v1",
+    "v2_source": "mhinet/v2/",
+    "v2_configs": "configs/mhi_v2/",
+    "v2_scripts": "scripts/mhi_v2/",
+    "v2_tests": "tests/v2/",
+    "v2_outputs": "outputs/mhi_v2/",
+    "v2_weights": "weight/mhi_v2/",
+    "v1_replay_outputs": "outputs/mhi_v1_replay/"
+  },
+  "source_isolation_policy": "Legacy source, CLI and reference-kernel hashes remain unchanged. Put v2-specific implementations in mhinet/v2, with explicit v2 entrypoints; reuse stable legacy utilities by import and preserve checkpoint key names through tested migration.",
+  "preparation_status": "pending_preflight",
+  "execution_checklist": "versions/v2/ACCEPTANCE.md",
+  "execution_state": "versions/v2/acceptance_status.json",
+  "preflight_report": "versions/v2/evidence/preparation.json",
+  "executable_entrypoints": [
+    {
+      "path": "scripts/mhi_v2/preflight.py",
+      "scope": "Preparation audit only; no model training or inference"
+    }
+  ]
 }

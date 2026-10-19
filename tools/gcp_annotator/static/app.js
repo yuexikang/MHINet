@@ -106,6 +106,16 @@ function zoomTogether(source,screen,factor){
     v.v=G.zoomAt(v.v,anchor,factor);v.draw();
   }
 }
+function panTogether(source,starts,dx,dy){
+  const [sw,sh]=source.size();
+  for(const v of Object.values(views)){
+    const start=starts[v.side];
+    if(!v.image||!start)continue;
+    const [w,h]=v.size();
+    v.v={...start,x:start.x+dx*w/sw,y:start.y+dy*h/sh};
+  }
+  drawAll();
+}
 class Viewer{
   constructor(side){
     this.side=side;this.canvas=$('canvas'+side);this.ctx=this.canvas.getContext('2d');this.v={x:0,y:0,scale:1};this.image=null;this.pointer=null;this.drag=null;
@@ -126,7 +136,7 @@ class Viewer{
     this.canvas.focus();this.canvas.setPointerCapture(e.pointerId);
     const s=this.screen(e),hit=this.hit(s),pan=e.button!==0||space;
     if(hit&&!pan){selected=hit.id;render();}
-    this.drag={start:s,last:s,view:{...this.v},hit:!pan&&hit?hit.id:null,pan, moved:false, before:G.clone(doc)};
+    this.drag={start:s,last:s,viewStarts:Object.fromEntries(Object.entries(views).map(([side,v])=>[side,{...v.v}])),hit:!pan&&hit?hit.id:null,pan, moved:false, before:G.clone(doc)};
   }
   move(e){
     const s=this.screen(e);this.pointer=s;
@@ -141,7 +151,7 @@ class Viewer{
             doc.review={status:'unreviewed',reviewer:doc.review.reviewer,checked_ids:[]};doc.status='in_progress';
             changed();drawAll();
           }
-        }else if(!d.hit||d.pan){this.v={...d.view,x:d.view.x+dx,y:d.view.y+dy};}
+        }else if(!d.hit||d.pan){panTogether(this,d.viewStarts,dx,dy);}
       }
       d.last=s;
     }
@@ -261,4 +271,4 @@ window.addEventListener('keydown',e=>{
   else if(key==='['||key===']')navigate(key==='['?-1:1).catch(x=>tell(x.message));
 });
 window.addEventListener('keyup',e=>{if(e.code==='Space')space=false;});window.addEventListener('blur',()=>space=false);
-(async()=>{try{views.A=new Viewer('A');views.B=new Viewer('B');catalog=await api('/api/catalog');renderList();await openPair(catalog.selection.pair_ids[0]);}catch(e){tell('载入失败：'+e.message);$('saveState').textContent='载入失败';}})();
+(async()=>{try{views.A=new Viewer('A');views.B=new Viewer('B');$('viewSyncState').textContent='双图联动 v2：缩放＋平移';catalog=await api('/api/catalog');renderList();await openPair(catalog.selection.pair_ids[0]);}catch(e){tell('载入失败：'+e.message);$('saveState').textContent='载入失败';}})();

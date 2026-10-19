@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GoogleEarth · 地面同名点标注</title>
-<link rel="stylesheet" href="/static/style.css">
+<link rel="stylesheet" href="/static/style.css?v=20261019-sync2">
 </head>
 <body>
-<header><div><strong>MHINet · 地面同名点</strong><small>人工 Ground GCP / GoogleEarth</small></div><span id="saveState" role="status">连接中…</span><button id="save">保存 Ctrl+S</button><button id="export">导出 JSONL / CSV</button></header>
+<header><div><strong>MHINet · 地面同名点</strong><small>人工 Ground GCP / GoogleEarth · <span id="viewSyncState">联动功能载入中…</span></small></div><span id="saveState" role="status">连接中…</span><button id="save">保存 Ctrl+S</button><button id="export">导出 JSONL / CSV</button></header>
 <main>
 <aside class="pairs">
 <label>数据集<select id="dataset"><option>GoogleEarth</option></select></label>
@@ -35,9 +35,9 @@
 <label class="inline"><input id="reviewMode" type="checkbox">独立审核模式（锁定坐标）</label>
 <label>审核者<input id="reviewer" placeholder="审核者姓名或代号"></label><button id="approve">全部检查后通过审核</button><span id="reviewState"></span>
 </section></div>
-<footer>左键点击标注 / 拖动已有点修正 · 空白处拖动或中键 / Space+拖动独立平移 · 滚轮双图同步缩放 · [ / ] 切换影像对 · 表格点击定位<br>建议 12–16 组，分散在有效地面重叠区域。有效范围仅来自数据生成几何，两侧地面位置由人工独立选择。</footer>
+<footer>左键点击标注 / 拖动已有点修正 · 空白处拖动或中键 / Space+拖动双图同步平移 · 滚轮双图同步缩放 · [ / ] 切换影像对 · 表格点击定位<br>建议 12–16 组，分散在有效地面重叠区域。有效范围仅来自数据生成几何，两侧地面位置由人工独立选择。</footer>
 </section></main>
 <div id="message" role="alert" hidden></div>
 <div id="recovery" hidden><span id="recoveryText">发现尚未同步的本地修改。</span><button id="restoreLocal">恢复本地修改</button><button id="downloadLocal">下载恢复 JSON</button><button id="discardLocal">使用服务器版本</button></div>
-<script src="/static/geometry.js"></script><script src="/static/app.js"></script>
+<script src="/static/geometry.js?v=20261019-sync2"></script><script src="/static/app.js?v=20261019-sync2"></script>
 </body></html>

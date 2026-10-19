@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GoogleEarth · 地面同名点标注</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header><div><strong>MHINet · 地面同名点</strong><small>人工 Ground GCP / GoogleEarth</small></div><span id="saveState" role="status">连接中…</span><button id="save">保存 Ctrl+S</button><button id="export">导出 JSONL / CSV</button></header>
+<main>
+<aside class="pairs">
+<label>数据集<select id="dataset"><option>GoogleEarth</option></select></label>
+<label>影像范围<select id="scope"><option value="sample">固定试标注清单</option><option value="all">全部 498 对</option></select></label>
+<label>搜索 pair_id<input id="search" type="search" placeholder="例如 024"></label>
+<label>状态筛选<select id="filter"><option value="all">全部状态</option><option value="not_started">未开始</option><option value="in_progress">标注中</option><option value="completed">已完成</option><option value="skipped">跳过</option></select></label>
+<div id="progress" aria-live="polite"></div><div id="pairList" role="list" aria-label="影像对"></div>
+<div id="outputPath" class="path"></div>
+</aside>
+<section class="workspace">
+<div class="toolbar"><button id="prev">← 上一对</button><strong id="pairTitle">选择影像对</strong><button id="next">下一对 →</button><select id="mode" aria-label="预览方式"><option value="native">原貌预览（去除自制 H 变形）</option><option value="test">测试影像（512 × 512）</option></select><button id="fit">完整视图 F</button><label class="inline"><input id="magnifier" type="checkbox" checked>放大镜</label><label class="inline"><input id="footprint" type="checkbox" checked>有效范围</label></div>
+<div id="guidance" role="status">先点 A，再点 B。请选择道路交叉点、地面标线和铺装角点，避开楼顶、树冠和车辆。</div>
+<div class="viewers">
+<div class="pane"><div class="paneHead"><strong>A · target</strong><span id="coordA">—</span></div><canvas id="canvasA" tabindex="0" aria-label="A 图标注画布"></canvas></div>
+<div class="pane"><div class="paneHead"><strong>B · source</strong><span id="coordB">—</span></div><canvas id="canvasB" tabindex="0" aria-label="B 图标注画布"></canvas></div>
+</div>
+<div class="toolbar"><button id="undo">撤销 Ctrl+Z</button><button id="redo">重做 Ctrl+Y</button><button id="delete">删除选中 Delete</button><button id="cancelDraft">取消待配对点 Esc</button><span id="pointCount">0 组</span><span id="coverage"></span></div>
+<div class="details">
+<section class="pointPanel"><div class="panelTitle"><strong>控制点 · 数值为测试影像坐标</strong><span>原点：左上像素中心 (0,0)，x 向右 / y 向下</span></div>
+<div class="tableWrap"><table><thead><tr><th>ID</th><th>A X</th><th>A Y</th><th>B X</th><th>B Y</th><th>待复核</th><th>审核已看</th><th>操作</th></tr></thead><tbody id="pointRows"></tbody></table></div></section>
+<section class="metaPanel">
+<label>标注者<input id="annotator" autocomplete="name" placeholder="姓名或代号"></label>
+<label>影像对状态<select id="status"><option value="not_started">未开始</option><option value="in_progress">标注中</option><option value="completed">已完成</option><option value="skipped">无法可靠标注 / 跳过</option></select></label>
+<label>跳过原因<input id="skipReason" placeholder="跳过时必填"></label>
+<label>备注<textarea id="notes" rows="2"></textarea></label>
+<label class="inline"><input id="reviewMode" type="checkbox">独立审核模式（锁定坐标）</label>
+<label>审核者<input id="reviewer" placeholder="审核者姓名或代号"></label><button id="approve">全部检查后通过审核</button><span id="reviewState"></span>
+</section></div>
+<footer>左键点击标注 / 拖动已有点修正 · 空白处拖动或中键 / Space+拖动平移 · 滚轮以光标为中心缩放 · [ / ] 切换影像对 · 表格点击定位<br>建议 12–16 组，分散在有效地面重叠区域。有效范围仅来自数据生成几何，两侧地面位置由人工独立选择。</footer>
+</section></main>
+<div id="message" role="alert" hidden></div>
+<div id="recovery" hidden><span id="recoveryText">发现尚未同步的本地修改。</span><button id="restoreLocal">恢复本地修改</button><button id="downloadLocal">下载恢复 JSON</button><button id="discardLocal">使用服务器版本</button></div>
+<script src="/static/geometry.js"></script><script src="/static/app.js"></script>
+</body></html>

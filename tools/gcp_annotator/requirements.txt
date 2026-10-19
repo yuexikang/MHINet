@@ -1,0 +1,8 @@
+# Existing MHINet image/geometry dependencies + lightweight local web server.
+numpy>=1.24
+Pillow>=9
+opencv-python-headless>=4.10
+fastapi>=0.100
+uvicorn>=0.23
+# Tests only (python -m unittest discover ...)
+httpx>=0.24

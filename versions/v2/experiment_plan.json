@@ -58,8 +58,7 @@
     "settings_status": "draft_pending_validation_preregistration",
     "input_size": 512,
     "shape_test_input_sizes": [
-      512,
-      784
+      512
     ],
     "descriptor_shapes": {
       "512": {
@@ -71,23 +70,13 @@
           64,
           64
         ],
+        "D4": [
+          128,
+          128
+        ],
         "D2": [
           256,
           256
-        ]
-      },
-      "784": {
-        "D16": [
-          49,
-          49
-        ],
-        "D8": [
-          98,
-          98
-        ],
-        "D2": [
-          392,
-          392
         ]
       }
     },
@@ -98,7 +87,20 @@
       "coarse_chunk_rows": 128,
       "training_window_chunk": 32,
       "inference_window_chunk": 1024,
-      "temperature_policy": "Preserve learned D8/D2 temperatures from the fixed initialization; 0.05 is only the legacy constructor initialization."
+      "temperature_policy": "Preserve learned D8/D2 temperatures from the fixed initialization; 0.05 is only the legacy constructor initialization.",
+      "max_output_matches": 2048,
+      "max_matches_role": "Legacy-compatible pre-QRRU candidate budget, independent of the final max_output_matches limit.",
+      "output_limit_policy": {
+        "parameter": "max_output_matches",
+        "default": 2048,
+        "validation": "A positive integer; booleans, zero, negative and fractional values are rejected.",
+        "scope": "Per image pair, final valid matches only.",
+        "application_stage": "After QRRU refinement and final finite/in-bounds filtering; before any RANSAC fitting or export.",
+        "selection": "Stable descending confidence; tied scores retain the original match order. Apply identical selected indices to every per-match field, including points_a, points_b, confidence, fine_points_b and lineage if present; pre-cap candidate diagnostics keep separately documented semantics.",
+        "shortfall": "Return all available valid matches when fewer than the cap, including empty outputs. Never pad, duplicate or fetch discarded candidates to fill the cap.",
+        "gt_policy": "No GT-guided selection. Never use the output limit to constrain the global D8 search.",
+        "checkpoint_policy": "Keep legacy max_matches=12000 as the pre-QRRU candidate budget when migrating; absence of the new output field uses the v2 default 2048."
+      }
     },
     "flow_guidance": {
       "mode": "soft_gaussian",
@@ -134,7 +136,8 @@
       "mask_policy": "Use real source and warped-target sampling validity plus patch-neighborhood validity; mask invalid neighbors and define a finite fallback for an empty neighborhood. Do not use GT masks at inference.",
       "first_iteration_dgfo": "Zero initial controls imply zero propagated flow and zero DGFO residual; discrepancy remains an independent branch from the first iteration.",
       "flow_adapter_bias": false
-    }
+    },
+    "input_size_policy": "Only 512x512 model inputs are supported or accepted in MHI v2. Reject other model input sizes explicitly; legacy checkpoint size support does not extend the v2 contract."
   },
   "training_plan": {
     "status": "not_started",
@@ -224,10 +227,11 @@
         "tests/v2/test_checkpoint_migration.py"
       ],
       "acceptance": [
-        "512 and 784 shape contracts and A-to-B coordinate direction pass.",
+        "Only 512x512 shape contracts (D16=32, D8=64, D4=128, D2=256) and A-to-B coordinate direction pass; unsupported model input sizes are rejected.",
         "Zero displacement preserves identity including boundaries.",
         "Flow mode does not execute the H fitter and supports independent EPE and valid-coverage measurement.",
-        "Legacy H0 checkpoint loading and inference remain available."
+        "Legacy H0 checkpoint loading and inference remain available.",
+        "The new max_output_matches defaults to 2048, validates positive integer overrides and is distinct from legacy max_matches=12000 before QRRU."
       ]
     },
     {
@@ -249,7 +253,8 @@
         "Direct-D8 forms exactly 16 child points per parent without H0.",
         "No-H0 modes remove H validity and predicted-H overlap gates in both training and inference.",
         "Invalid Flow falls back to appearance matching without NaNs or pair failure.",
-        "D8 timing and memory are measured independently before full evaluation."
+        "D8 timing and memory are measured independently before full evaluation.",
+        "After QRRU and final validity filtering, stable confidence selection returns at most max_output_matches per pair; empty, short, exact-cap, over-cap and tied-score cases pass without GT or padding."
       ]
     },
     {
@@ -314,7 +319,8 @@
         "All runs preserve fixed manifests, initialization provenance, output caps and stage-specific freeze policies.",
         "Report stage-wise precision, EPE, QRRU improvement/degradation, timing and memory alongside final Pre@3.",
         "Human GCP and synthetic-H evaluation remain separate.",
-        "Stop conditions are assessed before any optional joint-training expansion."
+        "Stop conditions are assessed before any optional joint-training expansion.",
+        "All main A-F results use 512x512 input, max_output_matches=2048 and the same pre-QRRU candidate budget. Recompute capped A metrics rather than reusing the historical 12000-cap table."
       ]
     }
   ],
@@ -450,7 +456,6 @@
     ],
     "optional_final_output_caps": [
       1024,
-      2048,
       4096
     ],
     "tolerance_and_threshold_policy": "Numerical tolerances, Flow quality gates and material-regression thresholds must be registered from engineering requirements or training/validation evidence before locked evaluation.",
@@ -458,7 +463,17 @@
     "legacy_pre_at_10": {
       "status": "pending_offline_rescoring",
       "value": null,
-      "source": "Frozen historical A match NPZs; use identical support, macro averaging and denominator rules as new variants."
+      "source": "Rescore frozen A matches under the same 512 input and final-2048 output protocol as new groups, after checking the original pre-QRRU candidate budget and validity rules."
+    },
+    "main_final_output_cap": 2048,
+    "output_cap_comparison_policy": "A-F main comparisons share max_output_matches=2048, the same pre-QRRU max_matches=12000 budget and post-QRRU validity/selection rules. Any override or optional cap is a separately labeled comparison applied uniformly to its participating groups.",
+    "legacy_baseline_rescoring": {
+      "status": "not_started",
+      "main_cap": 2048,
+      "pre_qrru_candidate_cap": 12000,
+      "policy": "Frozen historical A final NPZs may be stably confidence-capped to 2048 after confirming their 512 input, pre-QRRU budget, validity and ordering match this protocol. Recompute all metrics, including NM/NCM/coverage/RANSAC/RMSE and Pre@10. Label as offline rescoring; never call this an original max_matches=2048 rerun.",
+      "historical_metrics_policy": "Keep original 12000-candidate historical reports unchanged and label their different output protocol; do not copy their scores into the new 2048 main table.",
+      "timing_policy": "Offline capping cannot establish new inference latency; measure new runs under the same timing protocol for speed comparisons."
     }
   },
   "stop_conditions": [
@@ -492,5 +507,19 @@
   ],
   "preparation_acceptance": "versions/v2/evidence/V2-P0-04/acceptance.json",
   "preparation_implementation_commit": "7981634f593cc2a8bfea5f2b73d1a3071e7028ca",
-  "next_item": "V2-P1-01"
+  "next_item": "V2-P1-01",
+  "requirements_revision": 2,
+  "requirements_updates": [
+    {
+      "revision": 2,
+      "recorded_at": "2026-10-19T19:52:42+08:00",
+      "user_request": "再增加输出上限，默认2048，然后形状只要512",
+      "changes": [
+        "Add an independent final max_output_matches limit, default 2048, with explicit positive-integer override.",
+        "Restrict v2 input and shape acceptance to 512x512."
+      ],
+      "preserved_history": "v1 archives, original proposal and accepted P0 evidence stay byte-for-byte unchanged.",
+      "implementation_status": "Planning and acceptance requirements updated; no v2 matcher implementation or new model acceptance is claimed."
+    }
+  ]
 }

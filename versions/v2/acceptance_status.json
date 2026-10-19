@@ -541,6 +541,17 @@
       "ready": false
     }
   ],
-  "updated_at": "2026-10-19T15:48:10+08:00",
-  "preparation_implementation_commit": "7981634f593cc2a8bfea5f2b73d1a3071e7028ca"
+  "updated_at": "2026-10-19T19:52:42+08:00",
+  "preparation_implementation_commit": "7981634f593cc2a8bfea5f2b73d1a3071e7028ca",
+  "requirements_revision": 2,
+  "current_requirements": {
+    "input_size": 512,
+    "shape_test_input_sizes": [
+      512
+    ],
+    "max_output_matches": 2048,
+    "pre_qrru_max_matches": 12000,
+    "source": "versions/v2/experiment_plan.json"
+  },
+  "requirements_change_note": "P0 evidence remains historical. P1-P5 must meet revision 2: 512-only input and an independent final output limit of 2048; no new model task was accepted."
 }

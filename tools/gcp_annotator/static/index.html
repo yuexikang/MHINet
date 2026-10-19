@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GoogleEarth · 地面同名点标注</title>
-<link rel="stylesheet" href="/static/style.css?v=20261019-sync2">
+<link rel="stylesheet" href="/static/style.css?v=20261019-scatter1">
 </head>
 <body>
 <header><div><strong>MHINet · 地面同名点</strong><small>人工 Ground GCP / GoogleEarth · <span id="viewSyncState">联动功能载入中…</span></small></div><span id="saveState" role="status">连接中…</span><button id="save">保存 Ctrl+S</button><button id="export">导出 JSONL / CSV</button></header>
@@ -23,7 +23,7 @@
 <div class="pane"><div class="paneHead"><strong>A · target</strong><span id="coordA">—</span></div><canvas id="canvasA" tabindex="0" aria-label="A 图标注画布"></canvas></div>
 <div class="pane"><div class="paneHead"><strong>B · source</strong><span id="coordB">—</span></div><canvas id="canvasB" tabindex="0" aria-label="B 图标注画布"></canvas></div>
 </div>
-<div class="toolbar"><button id="undo">撤销 Ctrl+Z</button><button id="redo">重做 Ctrl+Y</button><button id="delete">删除选中 Delete</button><button id="cancelDraft">取消待配对点 Esc</button><span id="pointCount">0 组</span><span id="coverage"></span></div>
+<div class="toolbar"><button id="scatter" disabled>随机撒点</button><button id="confirmScatter" hidden title="请先核对候选点均为同一稳定地面位置">确认撒点</button><button id="undo">撤销 Ctrl+Z</button><button id="redo">重做 Ctrl+Y</button><button id="delete">删除选中 Delete</button><button id="cancelDraft">取消待配对点 Esc</button><span id="pointCount">0 组</span><span id="coverage"></span></div>
 <div class="details">
 <section class="pointPanel"><div class="panelTitle"><strong>控制点 · 数值为测试影像坐标</strong><span>原点：左上像素中心 (0,0)，x 向右 / y 向下</span></div>
 <div class="tableWrap"><table><thead><tr><th>ID</th><th>A X</th><th>A Y</th><th>B X</th><th>B Y</th><th>待复核</th><th>审核已看</th><th>操作</th></tr></thead><tbody id="pointRows"></tbody></table></div></section>
@@ -39,5 +39,5 @@
 </section></main>
 <div id="message" role="alert" hidden></div>
 <div id="recovery" hidden><span id="recoveryText">发现尚未同步的本地修改。</span><button id="restoreLocal">恢复本地修改</button><button id="downloadLocal">下载恢复 JSON</button><button id="discardLocal">使用服务器版本</button></div>
-<script src="/static/geometry.js?v=20261019-sync2"></script><script src="/static/app.js?v=20261019-sync2"></script>
+<script src="/static/geometry.js?v=20261019-scatter1"></script><script src="/static/app.js?v=20261019-scatter1"></script>
 </body></html>

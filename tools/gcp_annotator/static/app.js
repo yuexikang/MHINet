@@ -93,6 +93,38 @@ function fromView(side,p){return G.snapBounds(mode==='test'?p:G.project(meta.ima
 function legal(side,p){
   return G.inside(p,meta.images[side].test_size)&&G.inside(G.project(meta.images[side].test_to_native,p),meta.images[side].native_size);
 }
+function scatterCandidates(seed){
+  return G.randomPairs(seed,uv=>{
+    try{
+      const pair={};
+      for(const side of ['A','B']){
+        const v=views[side],[w,h]=v.size(),p=fromView(side,G.screenToImage([uv[0]*w,uv[1]*h],v.v));
+        if(!legal(side,p))return null;
+        pair[side.toLowerCase()]=p;
+      }
+      return pair;
+    }catch{return null;}
+  },doc.points,20);
+}
+function scatterInfo(point){try{const info=JSON.parse(point.note||'{}');return info?.origin==='random_scatter'?info:null;}catch{return null;}}
+function pendingScatter(){return doc.points.filter(p=>p.needs_review&&scatterInfo(p));}
+function scatterPoints(){
+  if(!editable()||doc.draft)return;
+  if(doc.points.length>980){tell('当前影像对已接近 1000 组上限，请先清理不需要的点');return;}
+  try{
+    const seed=crypto.getRandomValues(new Uint32Array(1))[0],pairs=scatterCandidates(seed);
+    const note=JSON.stringify({origin:'random_scatter',algorithm:'seeded_farthest_view_v1',seed,count:20,mode,
+      placement:'same_relative_visible_view_position',
+      views:Object.fromEntries(Object.entries(views).map(([side,v])=>[side,{...v.v,size:v.size()}]))});
+    edit(()=>{for(const p of pairs)doc.points.push({...p,id:G.nextId(doc.points),type:'ground',needs_review:true,note});doc.status='in_progress';selected=doc.points.at(-20).id;});
+    tell('已追加 20 组待复核候选点，可拖动修正。核对同名地面位置后点击“确认撒点”；Ctrl+Z 可整批撤销。',true);
+  }catch(e){tell(e.message);}
+}
+function confirmScatter(){
+  if(!editable())return;
+  const pending=pendingScatter();if(!pending.length)return;
+  edit(()=>{for(const p of pending){p.needs_review=false;p.note=JSON.stringify({...scatterInfo(p),confirmed_at:new Date().toISOString(),confirmed_by:doc.annotator});}});
+}
 function zoomTogether(source,screen,factor){
   const ready=Object.values(views).filter(v=>v.image);
   if(!source.image)return;
@@ -217,8 +249,9 @@ function renderTable(){
 }
 function render(){
   if(!doc)return;
-  $('guidance').textContent=$('reviewMode').checked?'审核模式：逐点点击编号检查 A / B 两侧，勾选“审核已看”，全部确认后通过审核。':doc.draft?'A 点已记录，请在 B 图独立点击对应地面位置。Esc 取消，重新点击 A 可更换待配对点。':'先点 A，再点 B。请选择道路交叉点、地面标线和铺装角点，避开楼顶、树冠和车辆。';
-  $('pointCount').textContent=doc.points.length+' 组 / 建议 12–16 组'+(doc.draft?' · 1 个待配对草稿':'');
+  const pending=pendingScatter(),awaiting=doc.points.filter(p=>p.needs_review).length;
+  $('guidance').textContent=$('reviewMode').checked?'审核模式：逐点点击编号检查 A / B 两侧，勾选“审核已看”，全部确认后通过审核。':doc.draft?'A 点已记录，请在 B 图独立点击对应地面位置。Esc 取消，重新点击 A 可更换待配对点。':pending.length?`有 ${pending.length} 组随机候选点待复核：请拖动修正或删除，核对均为同名地面位置后点击“确认撒点”。`:'先点 A，再点 B。请选择道路交叉点、地面标线和铺装角点，避开楼顶、树冠和车辆。';
+  $('pointCount').textContent=doc.points.length+' 组 / 建议 12–16 组'+(awaiting?` · 待复核 ${awaiting} 组`:'')+(doc.draft?' · 1 个待配对草稿':'');
   const ranges=['a','b'].map(side=>{const ps=doc.points.map(p=>p[side]),size=meta.images[side.toUpperCase()].test_size;return ps.length?((Math.max(...ps.map(p=>p[0]))-Math.min(...ps.map(p=>p[0])))/(size[0]-1)*(Math.max(...ps.map(p=>p[1]))-Math.min(...ps.map(p=>p[1])))/(size[1]-1)*100).toFixed(0):0;});
   $('coverage').textContent=`点集包围框占图面积 A ${ranges[0]}% / B ${ranges[1]}%（仅供分散度参考）`;
   $('annotator').value=doc.annotator;$('status').value=doc.status;$('skipReason').value=doc.skip_reason;$('notes').value=doc.notes;$('reviewer').value=doc.review.reviewer;
@@ -226,6 +259,9 @@ function render(){
   $('undo').disabled=!history.undoStack.length||$('reviewMode').checked;$('redo').disabled=!history.redoStack.length||$('reviewMode').checked;
   ['status','annotator','notes','skipReason'].forEach(id=>$(id).disabled=$('reviewMode').checked);
   $('delete').disabled=!selected||$('reviewMode').checked;$('cancelDraft').disabled=!doc.draft||$('reviewMode').checked;$('approve').disabled=!$('reviewMode').checked;
+  $('scatter').disabled=$('reviewMode').checked||!!doc.draft;
+  $('scatter').title=doc.draft?'请先完成或取消待配对点':'在两侧当前可见有效区域追加 20 组同位置候选点，已有点保留';
+  $('confirmScatter').hidden=!pending.length;$('confirmScatter').disabled=$('reviewMode').checked;
   renderTable();drawAll();
 }
 function removePoint(id=selected){if(!editable()||!id)return;edit(()=>{doc.points=doc.points.filter(p=>p.id!==id);selected=null;});}
@@ -235,6 +271,7 @@ $('scope').onchange=renderList;$('search').oninput=renderList;$('filter').onchan
 $('prev').onclick=()=>navigate(-1).catch(e=>tell(e.message));$('next').onclick=()=>navigate(1).catch(e=>tell(e.message));
 $('save').onclick=()=>flush().then(()=>tell('服务器保存成功',true)).catch(e=>tell(e.message));
 $('fit').onclick=()=>Object.values(views).forEach(v=>v.fit());
+$('scatter').onclick=scatterPoints;$('confirmScatter').onclick=confirmScatter;
 $('magnifier').onchange=drawAll;$('footprint').onchange=drawAll;
 $('mode').onchange=async()=>{if(loading)return;loading=true;document.body.classList.add('loading');const before=mode;try{mode=$('mode').value;await loadImages();}catch(e){mode=before;$('mode').value=before;await loadImages();tell(e.message);}finally{loading=false;document.body.classList.remove('loading');}};
 $('undo').onclick=()=>undo();$('redo').onclick=()=>undo(true);$('delete').onclick=()=>removePoint();$('cancelDraft').onclick=()=>{if(editable()&&doc.draft)edit(()=>doc.draft=null);};
@@ -271,4 +308,4 @@ window.addEventListener('keydown',e=>{
   else if(key==='['||key===']')navigate(key==='['?-1:1).catch(x=>tell(x.message));
 });
 window.addEventListener('keyup',e=>{if(e.code==='Space')space=false;});window.addEventListener('blur',()=>space=false);
-(async()=>{try{views.A=new Viewer('A');views.B=new Viewer('B');$('viewSyncState').textContent='双图联动 v2：缩放＋平移';catalog=await api('/api/catalog');renderList();await openPair(catalog.selection.pair_ids[0]);}catch(e){tell('载入失败：'+e.message);$('saveState').textContent='载入失败';}})();
+(async()=>{try{views.A=new Viewer('A');views.B=new Viewer('B');$('viewSyncState').textContent='双图联动 v3：缩放＋平移';catalog=await api('/api/catalog');renderList();await openPair(catalog.selection.pair_ids[0]);}catch(e){tell('载入失败：'+e.message);$('saveState').textContent='载入失败';}})();

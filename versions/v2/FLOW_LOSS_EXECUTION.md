@@ -21,7 +21,7 @@
 
 ## 自动执行顺序与验收
 
-1. 等待物理 GPU2 空闲：连续三次检查显存<512MiB、利用率<5%。同时核验冻结的代码、配置、数据及源检查点SHA。该检查不依赖进程列表，以覆盖容器外不可见任务。
+1. 等待物理 GPU1 空闲：连续三次检查显存<512MiB、利用率<5%。同时核验冻结的代码、配置、数据及源检查点SHA。该检查不依赖进程列表，以覆盖容器外不可见任务。
 2. 真实32对训练样本校准，保存系数和梯度诊断。任何非有限值、源身份变化、意外H拟合或冻结buffer变化均停止队列。
 3. 真实工程验收：L0连续2更新，对照L0训练1更新后重启到2；模型、AdamW、scheduler、progress、RNG及训练pair顺序必须完全一致。L1独立1更新，必须与L0同源、同首批输入，所有冻结张量保持不变。工程输出独立于正式实验。
 4. 新目录执行正式L0、L1各5107更新，每250步存档；每1000步固定64对诊断。终点完整5106对val完成后才标记完成；最终验证中断后可恢复。主要比较固定预算的 `last.pt`。
@@ -36,9 +36,11 @@
 
 ```bash
 /root/miniconda3/envs/loma-repro/bin/python scripts/mhi_v2/run_flow_loss_experiment.py \
-  --registration versions/v2/evidence/flow_loss_pilot_20261020/registration.json
+  --registration versions/v2/evidence/flow_loss_pilot_20261020/registration.gpu1.json
 ```
 
 队列用独立tmux会话常驻。重启入口增加 `--resume`，已完成阶段按artifact SHA核验后跳过；正式训练沿用各自latest检查点。当前状态以输出根目录 `status.json` 为准，登记文件不是完成结果。
 
 数据仍是原RGB_512 source-image隔离划分及逐字节验证的NVMe缓存，没有证明地理邻近隔离。评价属于raster-mask诊断；GoogleEarth498、JL1Flight1755不参与训练、选择或本轮评价。
+
+2026-10-20 执行修订：按用户要求将尚未开始任何校准/训练的等待队列从GPU2移到GPU1。原登记和等待记录保留；新登记见 `evidence/flow_loss_pilot_20261020/registration.gpu1.json`，迁移证据见 `gpu1_relocation.json`。两卡均为RTX4090；新子进程仅可见物理GPU1，内部逻辑设备仍为cuda:0，单GPU RNG流、损失、数据顺序与预算不变。

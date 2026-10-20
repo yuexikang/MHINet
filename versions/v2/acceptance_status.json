@@ -2,13 +2,13 @@
   "schema": "mhi.acceptance-status.v1",
   "model_line": "MHI v2",
   "branch": "codex/mhi-v2",
-  "overall_status": "long_experiment_running",
+  "overall_status": "qrru_C_running_D_E_queued",
   "preparation": {
     "engineering": "pass",
     "training": "in_progress",
     "accuracy": "not_started"
   },
-  "next_item": "V2-P5-03",
+  "next_item": "V2-P5-05",
   "source_checklist": "versions/v2/ACCEPTANCE.md",
   "status_policy": "Accept an item only with actual evidence; preparation acceptance does not imply P1-P5 acceptance. Formal training and accuracy statuses remain separate.",
   "items": [
@@ -512,7 +512,7 @@
       "stage": "P5",
       "status": "in_progress",
       "engineering": "pass",
-      "training": "in_progress",
+      "training": "pass",
       "accuracy": "not_started",
       "depends_on": [
         "V2-P5-02"
@@ -535,15 +535,16 @@
       ],
       "exit_code": null,
       "ready": true,
-      "notes": "Long full RGB512 Flow Head run started; metrics/status read from campaign.json. Not completed.",
-      "execution_evidence": "versions/v2/evidence/V2-P5-03/flow_training.json"
+      "notes": "Flow5epochs25535updates and all5106-pair epoch validations completed. Best final EPE0.76118px. Full frozen baseline and same-weight B/C toggle still required before formal accuracy acceptance.",
+      "execution_evidence": "versions/v2/evidence/V2-P5-03/flow_training.json",
+      "result_evidence": "versions/v2/evidence/V2-P5-03/flow_completion_20261020.json"
     },
     {
       "id": "V2-P5-04",
       "title": "冻结 C 的 D2 缓存与 C/D/E 初始化",
       "stage": "P5",
-      "status": "not_started",
-      "engineering": "not_started",
+      "status": "in_progress",
+      "engineering": "in_progress",
       "training": "not_started",
       "accuracy": "not_started",
       "depends_on": [
@@ -556,15 +557,15 @@
       "actual_command": null,
       "exit_code": null,
       "ready": false,
-      "notes": "Queued after full Flow training completes. C/D/E share Flow-best source and candidate cache; none of these QRRU long runs has started yet."
+      "notes": "C initialized from completed Flow best, generating common D2 cache on demand. D/E reference same Flow source/cache; their actual initialization audit is pending."
     },
     {
       "id": "V2-P5-05",
       "title": "执行等预算 C/D/E 训练",
       "stage": "P5",
-      "status": "not_started",
-      "engineering": "not_started",
-      "training": "not_started",
+      "status": "in_progress",
+      "engineering": "pass",
+      "training": "in_progress",
       "accuracy": "not_started",
       "depends_on": [
         "V2-P5-04"
@@ -576,7 +577,7 @@
       "actual_command": null,
       "exit_code": null,
       "ready": false,
-      "notes": "Queued after full Flow training completes. C/D/E share Flow-best source and candidate cache; none of these QRRU long runs has started yet."
+      "notes": "C running at snapshot step794/25535; D/E queued. QRRU training input diagnostics are not final matching accuracy."
     },
     {
       "id": "V2-P5-06",
@@ -649,7 +650,7 @@
     "source": "versions/v2/experiment_plan.json"
   },
   "requirements_change_note": "P0 evidence remains historical. P1-P5 must meet revision 2: 512-only input and an independent final output limit of 2048; no new model task was accepted.",
-  "checked_at": "2026-10-20T03:25:30+08:00",
+  "checked_at": "2026-10-20T04:12:18.435897+00:00",
   "implementation_commit": "88fee1bcf37c8403e2e4a17287c2d9432c0312ca",
   "engineering_admission": {
     "status": "pass",
@@ -671,5 +672,6 @@
       "mean_step_speedup": 4.984816294119544,
       "training_accuracy_claim": false
     }
-  ]
+  ],
+  "nvme_storage_amendment": "versions/v2/evidence/performance_20261020/nvme_activation/activation.json"
 }

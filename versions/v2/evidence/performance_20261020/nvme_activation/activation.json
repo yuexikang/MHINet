@@ -1,0 +1,106 @@
+{
+  "schema": "mhi.v2-execution-storage-amendment.v1",
+  "checked_at": "2026-10-20T04:11:11.587051+00:00",
+  "status": "activated_for_queued_D_E",
+  "cache_status": {
+    "schema": "mhi.rgb512.cache-status.v1",
+    "status": "completed",
+    "pid": 39034,
+    "started_at": "2026-10-20T10:25:47+08:00",
+    "checked_at": "2026-10-20T10:57:00+08:00",
+    "files_completed": 183822,
+    "bytes_verified": 32157538405,
+    "reused_files": 0,
+    "total_files": 183822,
+    "progress_interval_seconds": 5,
+    "journal": "/home/u2ssd2_TQL/mhi_v2_cache/MHINet_RGB_512/cache_files.jsonl",
+    "identity": {
+      "schema": "mhi.rgb512.verified-cache.v1",
+      "source_root": "/home/disk1/Data/datasets/MHINet_RGB_512",
+      "splits": [
+        "train",
+        "val"
+      ],
+      "fields": [
+        "image_A",
+        "image_B",
+        "mask_A_overlap",
+        "mask_B_overlap"
+      ],
+      "manifests": {
+        "train": {
+          "sha256": "11f37bcfcebc61a24310421a5eff2e1921c618d461b8dac8142ff050843f88dc",
+          "bytes": 131785843,
+          "pairs": 40849
+        },
+        "val": {
+          "sha256": "ad281e31dfd612a239ddfa63f25a42812511e22445f571359477e709c8207f5b",
+          "bytes": 16504369,
+          "pairs": 5106
+        }
+      },
+      "referenced_files": 183820,
+      "referenced_paths_sha256": "3bfa80fe2af0862a0ea08938eaa3f4f814df26981060d25b304ee3aeb3e2ca27",
+      "policy": "Only train/val manifest-referenced PNGs; sealed test excluded; source remains read-only"
+    },
+    "destination_root": "/home/u2ssd2_TQL/mhi_v2_cache/MHINet_RGB_512",
+    "workers": 8,
+    "estimated_bytes": 28045988136,
+    "estimated_GiB": 26.119861878454685,
+    "estimate_sample_files": 128,
+    "destination_free_bytes": 763682865152,
+    "estimate_policy": "Mean compressed size of 64 image and 64 mask train references (32 pairs); estimate only",
+    "elapsed_seconds": 1876.0688596179825,
+    "completed_at": "2026-10-20T10:57:00+08:00",
+    "manifests_verified": true,
+    "manifest_sha256": {
+      "train": "11f37bcfcebc61a24310421a5eff2e1921c618d461b8dac8142ff050843f88dc",
+      "val": "ad281e31dfd612a239ddfa63f25a42812511e22445f571359477e709c8207f5b"
+    }
+  },
+  "changes": [
+    {
+      "config": "configs/mhi_v2/qrru_d_rgb512_seed42.json",
+      "before_sha256": "b22c5b5441bb7408d4daf938d08b75d4778e64de5316530c89a2e547754fc5cc",
+      "after_sha256": "61f476a9041924b49367774f37f1624ac333b5a204409aa0e43ebbec660d4600",
+      "changed_fields": [
+        "runtime"
+      ]
+    },
+    {
+      "config": "configs/mhi_v2/qrru_e_rgb512_seed42.json",
+      "before_sha256": "bc6bc8ea3b5f06be1d86ef323f7343c8f38ba46abf463756c55041e3a2e3fc74",
+      "after_sha256": "c85785283d9c24c592ab88bb4ea2673cd36803c829df998de9cd1fb93ae7198f",
+      "changed_fields": [
+        "runtime"
+      ]
+    }
+  ],
+  "original_runtime": "configs/mhi_v2/runtime.rgb512.server.json",
+  "new_runtime": "configs/mhi_v2/runtime.rgb512.nvme.server.json",
+  "unchanged": [
+    "train/val manifest bytes and source image bytes",
+    "sample order and fixed seed42",
+    "effective batch8 and25535 optimizer updates",
+    "model initialization and trainable parameter groups",
+    "matching budgets and loss",
+    "shared D2 candidate cache identity"
+  ],
+  "running_C": "No restart or metadata migration; C continues on its original dataset path. D/E use the verified exact-byte NVMe copy. Data I/O wall timing cannot be compared as a model speed metric.",
+  "dry_run_validation": {
+    "commands": [
+      "/root/miniconda3/envs/loma-repro/bin/python -m mhinet.v2.train --config configs/mhi_v2/qrru_d_rgb512_seed42.json --output outputs/mhi_v2/engineering/nvme_d_dry_run --dry-run",
+      "/root/miniconda3/envs/loma-repro/bin/python -m mhinet.v2.train --config configs/mhi_v2/qrru_e_rgb512_seed42.json --output outputs/mhi_v2/engineering/nvme_e_dry_run --dry-run"
+    ],
+    "exit_codes": [
+      0,
+      0
+    ],
+    "train_pairs": 40849,
+    "val_pairs": 5106,
+    "steps": 25535,
+    "effective_batch": 8,
+    "input_size": 512,
+    "max_output_matches": 2048
+  }
+}

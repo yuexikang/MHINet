@@ -1,7 +1,7 @@
 {
   "schema": "mhi.v2-run.v1",
   "task": "mhi_semidense_v2",
-  "runtime": "/home/disk1/MHINet/configs/mhi_v2/runtime.rgb512.server.json",
+  "runtime": "/home/disk1/MHINet/configs/mhi_v2/runtime.rgb512.nvme.server.json",
   "seed": 42,
   "epochs": 5,
   "accumulation": 8,

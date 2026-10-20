@@ -6,10 +6,11 @@
 [v1 冻结档案](versions/v1/README.md) 与 [v2 实验工作区](versions/v2/README.md) 分别管理。
 v2 已实现独立 Flow0/匹配/Discrepancy/DGFO 与 `mhinet.v2.train/evaluate` 入口；57项CPU测试及
 [真实GPU工程验收](versions/v2/evidence/real_feature_acceptance_20261020_final.json) 通过，Flow Head 两步实数据训练/断点恢复烟测通过。
-正式 Flow Head 已于北京时间2026-10-20 03:24:37在 GPU0 启动，C/D/E 排队，实际状态见 [campaign.json](outputs/mhi_v2/campaign_rgb512_seed42_20261020/campaign.json)；
+Flow Head已完成5 epoch/25535步，完整5106对 val 最佳EPE为0.7611818px；C在GPU0约800/25535步、D/E排队，实时状态见 [campaign.json](outputs/mhi_v2/campaign_rgb512_seed42_20261020/campaign.json)；
 [逐条验收清单](versions/v2/ACCEPTANCE.md) 与 [运行配置](configs/mhi_v2/README.md) 分别管理签收和执行协议。
 首轮只用固定 RGB_512 train/val、seed42、各5 epoch/25535更新；512输入、最终2048、QRRU前12000候选。
-源图身份交叉为0，未证明地理邻近隔离；短程验收尚不支持正式精度或多seed结论。
+源图身份交叉为0，未证明地理邻近隔离。固定64对FLAIR仅见Flow EPE下降3.49%；训练前完整val基线和同权重B/C诊断尚待补齐，尚不支持最终匹配或多seed结论。
+NVMe副本已通过双SHA核验，仅排队D/E切换数据位置，当前C保持原路径；见 [执行修订](versions/v2/evidence/performance_20261020/nvme_activation/activation.json)。
 这里的模型版本与历史训练协议 `v1.2`、数据集 `stable_v2`、Python 包版本分别管理。
 
 当前主线：共享 GHIM/CGMDP，支持 MHIR 与 H0 引导粗细匹配下游。

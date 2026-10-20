@@ -1,7 +1,7 @@
 {
   "schema": "mhi.experiment-plan.v1",
   "model_line": "MHI v2",
-  "status": "flow_head_running_cde_queued",
+  "status": "flow_completed_qrru_C_running_D_E_queued",
   "executable": false,
   "training_started": true,
   "purpose": "Research and acceptance registry only; executable mhi.v2-run.v1 training configs are registered separately under configs/mhi_v2/.",
@@ -150,7 +150,7 @@
     "input_size_policy": "Only 512x512 model inputs are supported or accepted in MHI v2. Reject other model input sizes explicitly; legacy checkpoint size support does not extend the v2 contract."
   },
   "training_plan": {
-    "status": "running_flow_head_cde_queued",
+    "status": "flow_completed_qrru_C_running_D_E_queued",
     "update_budget": 25535,
     "update_budget_status": "registered_per_stage",
     "optimizer_policy": "Fresh optimizer and scheduler for v2; never resume the v1 optimizer across architecture changes.",
@@ -173,10 +173,14 @@
       ],
       "interface_requirement": "Separate locator prediction from H fitting and split geo/mat/cls losses from the H loss; setting h_weight=0 alone does not remove existing H-output dependencies.",
       "config": "configs/mhi_v2/flow_head_rgb512_seed42.json",
-      "formal_status": "running",
+      "formal_status": "completed",
       "epochs": 5,
       "optimizer_updates": 25535,
-      "selection": "minimum epoch-end full-val Flow EPE"
+      "selection": "minimum epoch-end full-val Flow EPE",
+      "actual_optimizer_updates": 25535,
+      "actual_epochs": 5,
+      "best_full_val_epe_px": 0.7611818104410377,
+      "result_evidence": "versions/v2/evidence/V2-P5-03/flow_completion_20261020.json"
     },
     "qrru_stages": {
       "trainable": [
@@ -217,10 +221,15 @@
         "D": "configs/mhi_v2/qrru_d_rgb512_seed42.json",
         "E": "configs/mhi_v2/qrru_e_rgb512_seed42.json"
       },
-      "formal_status": "queued",
+      "formal_status": "C_running_D_E_queued",
       "epochs_each": 5,
       "optimizer_updates_each": 25535,
-      "selection": "maximum epoch-end full-val cascaded Pre@3"
+      "selection": "maximum epoch-end full-val cascaded Pre@3",
+      "phase_status": {
+        "C": "running",
+        "D": "queued",
+        "E": "queued"
+      }
     },
     "joint_training": "Optional only after separate Flow and QRRU gains pass stage acceptance; define its own freeze policy and preregistered budget.",
     "trainable_configuration_status": "Executable independent v2 configs and explicit mhinet.v2.train/evaluate entrypoints implemented; the experiment registry itself remains non-executable.",
@@ -250,8 +259,14 @@
       "gpu": 0,
       "tmux_session": "mhi-v2-rgb512-20261020",
       "pid": 32188,
-      "flow_phase": "running",
-      "qrru_cde_phases": "queued"
+      "flow_phase": "completed",
+      "qrru_cde_phases": "C_running_D_E_queued",
+      "phase_status": {
+        "Flow0": "completed",
+        "MHIv2-C": "running",
+        "MHIv2-D": "queued",
+        "MHIv2-E": "queued"
+      }
     },
     "validation_protocol": {
       "intermediate_limit": 64,
@@ -273,7 +288,8 @@
         "seed": 42,
         "epochs": 5,
         "optimizer_updates": 25535,
-        "formal_status": "running"
+        "formal_status": "completed",
+        "sha256_role": "Original P5 preregistered hash preserved; runtime-only execution amendments are referenced separately."
       },
       {
         "path": "configs/mhi_v2/qrru_c_rgb512_seed42.json",
@@ -285,7 +301,8 @@
         "seed": 42,
         "epochs": 5,
         "optimizer_updates": 25535,
-        "formal_status": "queued"
+        "formal_status": "running",
+        "sha256_role": "Original P5 preregistered hash preserved; runtime-only execution amendments are referenced separately."
       },
       {
         "path": "configs/mhi_v2/qrru_d_rgb512_seed42.json",
@@ -297,7 +314,8 @@
         "seed": 42,
         "epochs": 5,
         "optimizer_updates": 25535,
-        "formal_status": "queued"
+        "formal_status": "queued",
+        "sha256_role": "Original P5 preregistered hash preserved; runtime-only execution amendments are referenced separately."
       },
       {
         "path": "configs/mhi_v2/qrru_e_rgb512_seed42.json",
@@ -309,7 +327,34 @@
         "seed": 42,
         "epochs": 5,
         "optimizer_updates": 25535,
-        "formal_status": "queued"
+        "formal_status": "queued",
+        "sha256_role": "Original P5 preregistered hash preserved; runtime-only execution amendments are referenced separately."
+      }
+    ],
+    "execution_amendments": [
+      {
+        "kind": "runtime_data_location_only",
+        "evidence": "versions/v2/evidence/performance_20261020/nvme_activation/activation.json",
+        "applies_to": [
+          "MHIv2-D",
+          "MHIv2-E"
+        ],
+        "new_runtime": "configs/mhi_v2/runtime.rgb512.nvme.server.json",
+        "running_C": "unchanged original path and progress",
+        "original_preregistration_preserved": true,
+        "current_config_hashes": {
+          "configs/mhi_v2/qrru_d_rgb512_seed42.json": "61f476a9041924b49367774f37f1624ac333b5a204409aa0e43ebbec660d4600",
+          "configs/mhi_v2/qrru_e_rgb512_seed42.json": "c85785283d9c24c592ab88bb4ea2673cd36803c829df998de9cd1fb93ae7198f"
+        },
+        "unchanged": [
+          "train/val manifest bytes and source image bytes",
+          "sample order and fixed seed42",
+          "effective batch8 and25535 optimizer updates",
+          "model initialization and trainable parameter groups",
+          "matching budgets and loss",
+          "shared D2 candidate cache identity"
+        ],
+        "timing_policy": "Different storage wall-clock times are not a controlled model-speed comparison."
       }
     ]
   },
@@ -427,7 +472,7 @@
     },
     {
       "id": "P5",
-      "status": "flow_head_running_cde_queued",
+      "status": "flow_completed_qrru_C_running_D_E_queued",
       "depends_on": [
         "P2",
         "P3",
@@ -454,8 +499,9 @@
       "implementation_status": "implemented",
       "engineering_evidence": "versions/v2/evidence/real_feature_acceptance_20261020_final.json",
       "accuracy_status": "not_established",
-      "formal_training_status": "running_flow_head_cde_queued",
-      "diagnostic_training_status": "passed"
+      "formal_training_status": "flow_completed_qrru_C_running_D_E_queued",
+      "diagnostic_training_status": "passed",
+      "flow_training_status": "completed"
     }
   ],
   "ablation_matrix": {
@@ -493,7 +539,7 @@
         "purpose": "Isolate Flow-guided D8 matching",
         "implementation_status": "implemented",
         "evaluation_status": "not_started",
-        "training_status": "queued_after_flow_head"
+        "training_status": "running"
       },
       {
         "id": "MHIv2-D",
@@ -505,7 +551,7 @@
         "purpose": "Isolate feature discrepancy",
         "implementation_status": "implemented",
         "evaluation_status": "not_started",
-        "training_status": "queued_after_flow_head"
+        "training_status": "queued_after_C"
       },
       {
         "id": "MHIv2-E",
@@ -517,7 +563,7 @@
         "purpose": "Isolate DGFO under matched training conditions",
         "implementation_status": "implemented",
         "evaluation_status": "not_started",
-        "training_status": "queued_after_flow_head"
+        "training_status": "queued_after_C"
       },
       {
         "id": "MHIv2-F",
@@ -672,7 +718,7 @@
   ],
   "preparation_acceptance": "versions/v2/evidence/V2-P0-04/acceptance.json",
   "preparation_implementation_commit": "7981634f593cc2a8bfea5f2b73d1a3071e7028ca",
-  "next_item": "V2-P5-03",
+  "next_item": "V2-P5-05",
   "requirements_revision": 3,
   "requirements_updates": [
     {
@@ -697,11 +743,12 @@
         "Preserve original RGB_512 train/val and do not claim geographic isolation or multi-seed evidence."
       ],
       "formal_launch_status": "Flow Head started at 2026-10-20T03:24:37+08:00 on GPU0; C/D/E queued; actual progress is authoritative in campaign.json.",
-      "preserved_history": "P0 evidence, v1 archives, original proposal and earlier requirements records remain historical."
+      "preserved_history": "P0 evidence, v1 archives, original proposal and earlier requirements records remain historical.",
+      "historical_record": true
     }
   ],
   "formal_training_started": true,
-  "formal_training_status": "running_flow_head_cde_queued",
+  "formal_training_status": "flow_completed_qrru_C_running_D_E_queued",
   "launch_status_authority": "outputs/mhi_v2/campaign_rgb512_seed42_20261020/campaign.json and per-phase status.json",
   "last_updated_on": "2026-10-20",
   "implementation_status": "implemented",
@@ -734,9 +781,43 @@
       "report": "versions/v2/evidence/resource_acceptance_20261020.json"
     }
   },
-  "next_action": "Track running Flow Head and queued equal-budget C/D/E via campaign.json; complete the still-pending P2-04 retention/coverage diagnostic. P5 accuracy acceptance has not started.",
+  "next_action": "Track C training and queued D/E; complete GPU2 frozen full-val Flow baseline and same-Flow-best/frozen-QRRU full-val B/C prior-toggle diagnostics before accuracy attribution. Original P5 hashes stay preserved; NVMe activation is an execution amendment.",
   "implementation_commit": "88fee1b",
   "engineering_pending": [
     "V2-P2-04: complete D8/D2 retention and coverage diagnostic; checklist remains unsigned until full evidence exists."
-  ]
+  ],
+  "latest_execution_evidence": "versions/v2/evidence/V2-P5-03/flow_completion_20261020.json",
+  "execution_storage_amendment": "versions/v2/evidence/performance_20261020/nvme_activation/activation.json",
+  "storage_execution": {
+    "nvme_status": "verified_and_activated_for_queued_D_E",
+    "files": 183822,
+    "bytes": 32157538405,
+    "verification": "complete per-file source and destination SHA256 plus manifest identity",
+    "evidence": "versions/v2/evidence/performance_20261020/nvme_activation/activation.json"
+  },
+  "flow_results": {
+    "training_status": "completed",
+    "epochs": 5,
+    "updates": 25535,
+    "full_val_pairs": 5106,
+    "best_full_val_epe_px": 0.7611818104410377,
+    "fixed64_flair": {
+      "pairs": 64,
+      "epe_before": 0.6923853484913707,
+      "epe_after": 0.6682163579389453,
+      "epe_relative_reduction_percent": 3.490684862856627,
+      "epe_improved_pairs": 47,
+      "matchability_loss_before": 0.06732398134772666,
+      "matchability_loss_after": 0.007135115534765646,
+      "matchability_loss_relative_reduction_percent": 89.4018217699976,
+      "predicted_in_bounds_before_percent": 92.02728271484375,
+      "predicted_in_bounds_after_percent": 91.6259765625,
+      "predicted_in_bounds_delta_percentage_points": -0.40130615234375,
+      "in_bounds_is_matching_recall": false
+    },
+    "frozen_full_val_baseline_status": "pure_evaluation_running_on_GPU2",
+    "same_flow_best_frozen_qrru_B_C_full_val_status": "queued_pending_execution",
+    "accuracy_attribution_status": "not_established",
+    "evidence": "versions/v2/evidence/V2-P5-03/flow_completion_20261020.json"
+  }
 }

@@ -2,7 +2,9 @@
 
 分支：`codex/mhi-v2`。v1 基线单独保存在 [../v1/](../v1/README.md) 与源码工作区 `/home/disk1/MHINet-v1`。
 
-2026-10-20（北京时间）状态：`mhinet/v2/` 的 Flow0、D8 soft prior、Direct-D8、Discrepancy/DGFO、严格迁移与训练/评价入口已实现；57 项 CPU 测试通过，[真实 GPU 工程验收](evidence/real_feature_acceptance_20261020_final.json) 为 `passed`。Flow Head 的 2 步实数据训练烟测及断点恢复也已通过。正式长程已于北京时间2026-10-20 03:24:37在 GPU0 启动 Flow Head，C/D/E 排队；实际步数和完成状态以调度输出目录中的 `campaign.json` 及各阶段 `status.json` 为准。上述短程证据不代表完整训练或精度收益。
+2026-10-20（北京时间）状态：`mhinet/v2/` 的 Flow0、D8 soft prior、Direct-D8、Discrepancy/DGFO、严格迁移与训练/评价入口已实现；57 项 CPU 测试通过，[真实 GPU 工程验收](evidence/real_feature_acceptance_20261020_final.json) 为 `passed`。Flow Head 的 2 步实数据训练烟测及断点恢复也已通过。Flow Head已完成5 epoch/25535步，完整5106对 val 最佳EPE为0.7611818px；C在GPU0约800/25535步，D/E排队。实时状态以 `campaign.json` 与各阶段 `status.json` 为准；尚无最终匹配精度收益结论。
+
+[Flow完成证据](evidence/V2-P5-03/flow_completion_20261020.json)：同64对FLAIR的EPE为0.692385→0.668216（下降3.49%，47/64改善），matchability loss为0.067324→0.007135（下降89.4%）；预测坐标在图内比例92.0273%→91.6260%（下降0.4013个百分点），不是匹配召回。训练前完整5106基线正在GPU2补纯评价；同Flow-best+冻结QRRU的B/C prior开关完整val诊断待执行，不能据此声称完整val或最终匹配增益。
 
 当前 v2 约定已实现：输入只支持 **512×512**；最终输出上限 **`max_output_matches=2048` 对/影像对**，可显式设置正整数。最终按置信度稳定选取，不足时不补点。D16/D8/D4/D2 分别为32/64/128/256；QRRU 前候选预算 **`max_matches=12000`** 与最终输出上限分开登记。
 
@@ -16,7 +18,7 @@
 | [evidence/preparation.json](evidence/preparation.json) | 本轮实际资源预检报告，仅验收准备阶段 |
 | [evidence/real_feature_acceptance_20261020_final.json](evidence/real_feature_acceptance_20261020_final.json) | 两对真实 val 与三步 QRRU 梯度诊断的 GPU 工程验收 |
 | [evidence/resource_acceptance_20261020.json](evidence/resource_acceptance_20261020.json) | 已通过的资源与耗时/显存验收 |
-| [campaign.json](../../outputs/mhi_v2/campaign_rgb512_seed42_20261020/campaign.json) | 已启动 Flow Head 与排队 C/D/E 的实时状态 |
+| [campaign.json](../../outputs/mhi_v2/campaign_rgb512_seed42_20261020/campaign.json) | Flow完成、C运行与D/E排队的实时状态 |
 | [训练配置](../../configs/mhi_v2/README.md) | Flow Head → 同预算 C/D/E 的独立运行配置 |
 | [脚本入口](../../scripts/mhi_v2/README.md) | preflight、真实验收与串行训练调度 |
 
@@ -36,3 +38,5 @@ P0 准备阶段4项、62项资源预检与8项分档核验的历史证据保持�
 V2-P2-04 的完整 D8/D2 retention/coverage 诊断仍待完成，清单保持未签收；P5 精度验收尚未开始。工程报告通过不能替代这些证据。
 
 正式协议登记为：Flow Head 先跑 seed42、5 epoch、25535 次 optimizer 更新，再从同一 Flow Head 最佳权重独立初始化 C/D/E，各跑相同 seed42、5 epoch、25535 次更新。QRRU 每批目标为 50% 合格预测 D2 + 50% GT 有界噪声；预测修正范围为 6 D2 像素，合格预测不足时以噪声样本补齐，并记录实际比例。固定原 RGB_512 的 train=40849/val=5106，只用 train/val，不读取封存评价集。源图身份交叉为 0，尚不能证明地理邻近或真正空间隔离；本轮只有单 seed42，不能声称多 seed 稳定性。
+
+NVMe副本183822文件、32157538405字节已通过双SHA验证；仅排队D/E启用新runtime，C保持原路径。原预登记哈希不改，见 [执行修订](evidence/performance_20261020/nvme_activation/activation.json)。数据字节、数学、预算与seed不变，跨存储墙钟时间不可直接作模型速度比较。

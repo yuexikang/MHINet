@@ -1,0 +1,218 @@
+{
+  "schema": "mhi.v2-full-flow-paired-comparison.v1",
+  "checked_at": "2026-10-20T04:16:46.855875+00:00",
+  "scope": "All5106 RGB512 val pairs, frozen original v1 Flow vs trained5epoch v2 Flow Head; macro perpair, stored512 pixels",
+  "source_checkpoint_sha256": "43c020b213306c1ba517460092e4007799c2f445edce09cb00bf88fc8ac69cb4",
+  "trained_checkpoint_sha256": "26a24e5239a1b7a3719c638ec7b040a8490c226a7341a0606137d25f0c63c33a",
+  "val_manifest_sha256": "ad281e31dfd612a239ddfa63f25a42812511e22445f571359477e709c8207f5b",
+  "pair_ids_and_order_identical": true,
+  "GT_valid_counts_identical": true,
+  "protocol_reproduction": "Frozen first64 exactly reproduces original initial64 metrics; B1, eval/no_grad, H-fitter0, deterministic, same loss/metric implementation",
+  "metrics": {
+    "flow_epe_px": {
+      "pairs": 5106,
+      "before_mean": 0.7901033694271102,
+      "after_mean": 0.7611818104410377,
+      "absolute_change": -0.028921558986072515,
+      "relative_reduction": 0.03660477869755576,
+      "before_median": 0.564804881811142,
+      "after_median": 0.5447067320346832,
+      "decreased_pairs": 3593,
+      "increased_pairs": 1513,
+      "equal_pairs": 0
+    },
+    "mat": {
+      "pairs": 5106,
+      "before_mean": 0.06983107836565745,
+      "after_mean": 0.008943536882151043,
+      "absolute_change": -0.06088754148350641,
+      "relative_reduction": 0.871926123848183,
+      "before_median": 0.06180331110954285,
+      "after_median": 0.005961541319265962,
+      "decreased_pairs": 5092,
+      "increased_pairs": 14,
+      "equal_pairs": 0
+    },
+    "geo": {
+      "pairs": 5106,
+      "before_mean": 0.004412993694604822,
+      "after_mean": 0.0042491366415567475,
+      "absolute_change": -0.0001638570530480745,
+      "relative_reduction": 0.03713058852733024,
+      "before_median": 0.00035894296888727695,
+      "after_median": 0.00031136447796598077,
+      "decreased_pairs": 3922,
+      "increased_pairs": 1184,
+      "equal_pairs": 0
+    },
+    "cls": {
+      "pairs": 5106,
+      "before_mean": 3.4379185638472562,
+      "after_mean": 3.3506685742853763,
+      "absolute_change": -0.0872499895618799,
+      "relative_reduction": 0.025378724929493807,
+      "before_median": 3.409069299697876,
+      "after_median": 3.322392225265503,
+      "decreased_pairs": 5106,
+      "increased_pairs": 0,
+      "equal_pairs": 0
+    },
+    "loss": {
+      "pairs": 5106,
+      "before_mean": 0.005455096275381498,
+      "after_mean": 0.00467363889837227,
+      "absolute_change": -0.0007814573770092287,
+      "relative_reduction": 0.14325271957818525,
+      "before_median": 0.0013396827271208167,
+      "after_median": 0.0007066466205287725,
+      "decreased_pairs": 5089,
+      "increased_pairs": 17,
+      "equal_pairs": 0
+    },
+    "predicted_valid_coverage": {
+      "pairs": 5106,
+      "before_mean": 0.9211218266500196,
+      "after_mean": 0.9170707944697415,
+      "absolute_change": -0.004051032180278136,
+      "relative_reduction": 0.004397933110554035,
+      "before_median": 0.921875,
+      "after_median": 0.9169921875,
+      "decreased_pairs": 3447,
+      "increased_pairs": 1401,
+      "equal_pairs": 258
+    },
+    "mean_matchability": {
+      "pairs": 5106,
+      "before_mean": 0.35001103108390563,
+      "after_mean": 0.3435664901949824,
+      "absolute_change": -0.006444540888923211,
+      "relative_reduction": 0.018412393657896764,
+      "before_median": 0.34668146073818207,
+      "after_median": 0.3404245227575302,
+      "decreased_pairs": 4574,
+      "increased_pairs": 532,
+      "equal_pairs": 0
+    }
+  },
+  "by_source": {
+    "flair_rgb": {
+      "pairs": 3670,
+      "before_epe": 0.8828850008730018,
+      "after_epe": 0.8526809628555495,
+      "reduction_percent": 3.421061405232434,
+      "improved_pairs": 2611
+    },
+    "googleearth_current": {
+      "pairs": 962,
+      "before_epe": 0.5573011037899402,
+      "after_epe": 0.5299991283434097,
+      "reduction_percent": 4.898963102865362,
+      "improved_pairs": 660
+    },
+    "whu": {
+      "pairs": 474,
+      "before_epe": 0.5442113697151595,
+      "after_epe": 0.521932550560573,
+      "reduction_percent": 4.093780540867285,
+      "improved_pairs": 322
+    }
+  },
+  "baseline_summary": {
+    "step": 0,
+    "pairs": 5106,
+    "scope": "full_val",
+    "complete": true,
+    "metrics": {
+      "cls": 3.4379185638472562,
+      "flow_epe_px": 0.7901033694271102,
+      "geo": 0.004412993694604822,
+      "loss": 0.005455096275381498,
+      "mat": 0.06983107836565745,
+      "mean_matchability": 0.35001103108390563,
+      "predicted_valid_coverage": 0.9211218266500196,
+      "valid_gt_points": 350.0113591852722
+    },
+    "seconds": 226.10089801100548,
+    "label": "frozen_v1_flow_baseline",
+    "checked_at": "2026-10-20T12:16:43+08:00",
+    "selection_protocol": "Pure frozen baseline; Flow EPE, macro per pair, fixed full RGB512 val",
+    "actual_homography_fitter_calls": 0,
+    "source_checkpoint_actual_sha256": "43c020b213306c1ba517460092e4007799c2f445edce09cb00bf88fc8ac69cb4",
+    "by_source_dataset": {
+      "flair_rgb": {
+        "pairs": 3670,
+        "metrics": {
+          "cls": 3.4450553357438753,
+          "flow_epe_px": 0.8828850008730018,
+          "geo": 0.0059548506997138696,
+          "loss": 0.007003083138308571,
+          "mat": 0.07037269776428184,
+          "mean_matchability": 0.3500509656904829,
+          "predicted_valid_coverage": 0.9213015688862398,
+          "valid_gt_points": 349.7874659400545
+        }
+      },
+      "googleearth_current": {
+        "pairs": 962,
+        "metrics": {
+          "cls": 3.422719737844011,
+          "flow_epe_px": 0.5573011037899402,
+          "geo": 0.0005007667327287613,
+          "loss": 0.001522615712231389,
+          "mat": 0.06795770291765675,
+          "mean_matchability": 0.34829907969662655,
+          "predicted_valid_coverage": 0.9202304768711018,
+          "valid_gt_points": 348.5031185031185
+        }
+      },
+      "whu": {
+        "pairs": 474,
+        "metrics": {
+          "cls": 3.4135078418103952,
+          "flow_epe_px": 0.5442113697151595,
+          "geo": 0.0004149918561545397,
+          "loss": 0.0014507387116853981,
+          "mat": 0.06943960998596364,
+          "mean_matchability": 0.35317629949830254,
+          "predicted_valid_coverage": 0.9215391778744726,
+          "valid_gt_points": 354.8059071729958
+        }
+      }
+    }
+  },
+  "trained_summary": {
+    "step": 25535,
+    "pairs": 5106,
+    "scope": "full_val",
+    "complete": true,
+    "metrics": {
+      "cls": 3.3506685742853763,
+      "flow_epe_px": 0.7611818104410377,
+      "geo": 0.0042491366415567475,
+      "loss": 0.00467363889837227,
+      "mat": 0.008943536882151043,
+      "mean_matchability": 0.3435664901949824,
+      "predicted_valid_coverage": 0.9170707944697415,
+      "valid_gt_points": 350.0113591852722
+    },
+    "seconds": 487.1886923519778,
+    "label": "validation",
+    "checked_at": "2026-10-20T11:44:52+08:00",
+    "selection_protocol": "Flow EPE"
+  },
+  "evidence": {
+    "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P5/frozen_flow_fullval_20261020/run.json": "af801f6017438ca04fce50ecfd657a55c814d704c698a58c2d78665f227d247b",
+    "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P5/frozen_flow_fullval_20261020/validation_0000000.json": "6d444e4a63a7bbe49f61a5ee62f34f78d9a5907dcfa650fe8aa4471f16fcf3c2",
+    "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P5/flow_head_rgb512_seed42_5ep_20261020/run.json": "3f1cbc1ec55b1dcdbb612c2def4e7588dc36c32e12a73287e4efc201abcd2a38",
+    "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P5/flow_head_rgb512_seed42_5ep_20261020/validation/validation_0025535.json": "62ba0d6d502dd6f74874bf58138a4c7bc0027d2cbd42095b0a62434d0bd1f69a"
+  },
+  "analysis_script": {
+    "path": "/home/disk1/MHINet/outputs/mhi_v2/engineering/report_flow_comparison_20261020.py",
+    "sha256": "adab1f69d605df2bc0b0c10f2d469e2c94ccb1f1a13d6c123c81d26ddc7a9a81"
+  },
+  "accuracy_limits": [
+    "Validation-set result after selecting best Flow checkpoint on that validation set; not independent sealed-test accuracy.",
+    "Flow EPE improvement and matchability loss reduction do not prove final semidense matching Pre@3 gain.",
+    "No discrepancy/DGFO gain claim; C/D/E training and B/C same-weight prior-toggle diagnostics still pending."
+  ]
+}

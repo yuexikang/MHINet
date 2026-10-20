@@ -781,7 +781,7 @@
       "report": "versions/v2/evidence/resource_acceptance_20261020.json"
     }
   },
-  "next_action": "Track C training and queued D/E; complete GPU2 frozen full-val Flow baseline and same-Flow-best/frozen-QRRU full-val B/C prior-toggle diagnostics before accuracy attribution. Original P5 hashes stay preserved; NVMe activation is an execution amendment.",
+  "next_action": "Continue C training and queued D/E; GPU2 sequentially evaluates same-weight B/C prior toggle. Frozen full-val Flow baseline is complete; do not attribute final matching gains yet.",
   "implementation_commit": "88fee1b",
   "engineering_pending": [
     "V2-P2-04: complete D8/D2 retention and coverage diagnostic; checklist remains unsigned until full evidence exists."
@@ -815,9 +815,19 @@
       "predicted_in_bounds_delta_percentage_points": -0.40130615234375,
       "in_bounds_is_matching_recall": false
     },
-    "frozen_full_val_baseline_status": "pure_evaluation_running_on_GPU2",
+    "frozen_full_val_baseline_status": "completed5106",
     "same_flow_best_frozen_qrru_B_C_full_val_status": "queued_pending_execution",
     "accuracy_attribution_status": "not_established",
     "evidence": "versions/v2/evidence/V2-P5-03/flow_completion_20261020.json"
+  },
+  "full_flow_paired_validation": {
+    "evidence": "versions/v2/evidence/V2-P5-03/flow_fullval_paired_20261020.json",
+    "pairs": 5106,
+    "before_epe": 0.7901033694271102,
+    "after_epe": 0.7611818104410377,
+    "relative_reduction": 0.03660477869755576,
+    "improved_pairs": 3593,
+    "worsened_pairs": 1513,
+    "scope": "Selected validation checkpoint, not sealed evaluation or final matching accuracy"
   }
 }

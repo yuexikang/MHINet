@@ -190,7 +190,7 @@
 - **前置**：V2-P5-02 通过。
 - **动作**：先保留原始 Flow0 直接测试结果；若需训练 Head，只训练定位/可匹配性 Head，冻结 DINO/MVT/VGG/CGMDP/D8/D2/QRRU。按预登记预算运行，检查梯度、BN、EPE/覆盖率/置信度校准；用同一微调后权重成对比较 B/C。
 - **证据**：`versions/v2/evidence/V2-P5-03/flow_training.json`；训练产物 `outputs/mhi_v2/Flow0/P5/<运行ID>/`。
-- **实际进展**：[Flow完成报告](evidence/V2-P5-03/flow_completion_20261020.json)确认5 epoch/25535步及完整5106对 val 全部完成，最佳EPE0.7611818px。固定64对FLAIR的EPE为0.692385→0.668216（下降3.49%，47/64改善），matchability loss为0.067324→0.007135（下降89.4%）；预测坐标在图内比例92.0273%→91.6260%（下降0.4013个百分点），这不是匹配召回。训练前完整5106基线正在GPU2补纯评价；同Flow-best+冻结QRRU的B/C prior开关完整val诊断待执行，尚不判定最终匹配收益。
+- **实际进展**：[完整Flow配对结果](evidence/V2-P5-03/flow_fullval_paired_20261020.json)确认5 epoch/25535步完成。完整5106对验证已做训练前后配对：Flow EPE 0.790103→0.761182px（下降3.66%，3593/5106对改善）；matchability loss 0.069831→0.008944（下降87.19%）；预测在图内比例92.1122%→91.7071%（下降0.4051个百分点），这不是匹配召回。三个来源平均EPE均改善。该结果来自训练选模所用val，不是封存集精度；最终匹配Pre@3与Discrepancy/DGFO收益仍待对照。 GPU2已完成冻结Flow全val基线，现顺序评价冻结QRRU的B/C prior开关。
 - **通过标准**：实际预算、参数更新与冻结策略一致；损失不依赖预测 H；与未训练 Flow0 的区别明确；prior 收益只来自同权重开关比较。若不采用 Head 训练，记录有依据的 `not_applicable` 和固定原始 Flow0 身份，不伪造训练完成。
 
 ### [ ] V2-P5-04：冻结 C 的 D2 缓存与 C/D/E 初始化
@@ -230,4 +230,4 @@
 
 ## 下一步入口
 
-当前执行 **V2-P5-05：等预算C/D/E训练**：C在GPU0约800/25535步，D/E排队。Flow训练已完成，V2-P5-03因完整训练前基线与同权重B/C诊断待补而保持未完全签收。P2-04、后续多seed及封存评价也未签收；实际进度以 `outputs/mhi_v2/campaign_rgb512_seed42_20261020/campaign.json` 为准。
+当前执行 **V2-P5-05：等预算C/D/E训练**：C在GPU0约800/25535步，D/E排队。Flow训练已完成，V2-P5-03因同权重B/C诊断待完成而保持未完全签收。P2-04、后续多seed及封存评价也未签收；实际进度以 `outputs/mhi_v2/campaign_rgb512_seed42_20261020/campaign.json` 为准。

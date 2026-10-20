@@ -299,9 +299,9 @@
       "title": "固定权重 B→C 配对诊断与 P2 签收",
       "stage": "P2",
       "status": "in_progress",
-      "engineering": "in_progress",
+      "engineering": "pass",
       "training": "not_started",
-      "accuracy": "not_started",
+      "accuracy": "in_progress",
       "depends_on": [
         "V2-P2-03"
       ],
@@ -313,7 +313,8 @@
       "exit_code": 0,
       "ready": false,
       "execution_evidence": "versions/v2/evidence/V2-P2-04/b_vs_c.json",
-      "notes": "Two-pair frozen-weight prior toggle passed, with final raster-mask metrics. Full stage-wise D8/D2 parent retention and spatial-coverage report remains outstanding; partial diagnostic only."
+      "notes": "Full5106 B/C same-Flow-best and frozen-QRRU prior toggle now running sequentially onGPU2. No result claimed until both complete.",
+      "live_diagnostics": "outputs/mhi_v2/diagnostics/flow_best_prior_toggle_rgb512_20261020/status.json"
     },
     {
       "id": "V2-P3-01",
@@ -513,7 +514,7 @@
       "status": "in_progress",
       "engineering": "pass",
       "training": "pass",
-      "accuracy": "not_started",
+      "accuracy": "in_progress",
       "depends_on": [
         "V2-P5-02"
       ],
@@ -535,9 +536,10 @@
       ],
       "exit_code": null,
       "ready": true,
-      "notes": "Flow5epochs25535updates and all5106-pair epoch validations completed. Best final EPE0.76118px. Full frozen baseline and same-weight B/C toggle still required before formal accuracy acceptance.",
+      "notes": "Training5epochs complete; all5106 frozen-vs-trained paired val EPE0.790103->0.761182(-3.66%). Matchability loss-87.19%; in-bounds fraction-.4051pp. Frozen fullval baseline complete. B/C prior-toggle still pending before final matching attribution.",
       "execution_evidence": "versions/v2/evidence/V2-P5-03/flow_training.json",
-      "result_evidence": "versions/v2/evidence/V2-P5-03/flow_completion_20261020.json"
+      "result_evidence": "versions/v2/evidence/V2-P5-03/flow_completion_20261020.json",
+      "paired_validation_evidence": "versions/v2/evidence/V2-P5-03/flow_fullval_paired_20261020.json"
     },
     {
       "id": "V2-P5-04",
@@ -650,7 +652,7 @@
     "source": "versions/v2/experiment_plan.json"
   },
   "requirements_change_note": "P0 evidence remains historical. P1-P5 must meet revision 2: 512-only input and an independent final output limit of 2048; no new model task was accepted.",
-  "checked_at": "2026-10-20T04:12:18.435897+00:00",
+  "checked_at": "2026-10-20T04:17:47.871895+00:00",
   "implementation_commit": "88fee1bcf37c8403e2e4a17287c2d9432c0312ca",
   "engineering_admission": {
     "status": "pass",

@@ -1,0 +1,20 @@
+{
+  "schema": "mhi.flow-loss-gpu1-activation.v1",
+  "status": "gpu1_calibration_passed",
+  "checked_at": "2026-10-20T10:30:55.162160+00:00",
+  "supervisor_pid": 50466,
+  "physical_gpu": 1,
+  "logical_device": "cuda:0",
+  "registration": "/home/disk1/MHINet/versions/v2/evidence/flow_loss_pilot_20261020/registration.gpu1.runtimefix.json",
+  "registration_sha256": "b7b89357524a4ab2b98bf5345f4e97b87b62a4942ff596210a96684b601cc013",
+  "actual_child_environment_verified": {
+    "CUDA_VISIBLE_DEVICES": "1",
+    "TMPDIR": "/home/u2ssd2_TQL/mhi_v2_tmp/1342424d46c4fe0c"
+  },
+  "calibration_pairs": 32,
+  "alpha": 0.0014079573286070715,
+  "calibration_sha256": "5ae02a68b1ded35946bd1597a144ba78e107c341f6c66d2d02794268820f1ba9",
+  "next_stage": "smoke_L0_continuous",
+  "live_status": "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/status.json",
+  "note": "Real GPU calibration passed. Engineering replay and formal two-arm training remain automatic subsequent stages; no loss-performance claim."
+}

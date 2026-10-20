@@ -1,0 +1,40 @@
+{
+  "schema": "mhi.v2-qrru-c-readonly-prefetch-launch.v1",
+  "checked_at": "2026-10-20T09:32:59.986129+00:00",
+  "pid": 49088,
+  "tmux": "mhi-v2-c-prefetch-20261020",
+  "live_status": "/home/disk1/MHINet/outputs/mhi_v2/engineering/qrru_c_prefetch_20261020/status.json",
+  "script_sha256": "6bc7a027685bc60c50fb27fd4d69f5eb3e9fa3947b5781c69dee89da36311253",
+  "source_run": "/home/disk1/MHINet/outputs/mhi_v2/MHIv2-C/P5/qrru_rgb512_seed42_5ep_20261020",
+  "workers": 8,
+  "lookahead_pairs": 128,
+  "training_mutation": false,
+  "cuda_visible_devices": "",
+  "snapshot": {
+    "schema": "mhi.v2-readonly-prefetch.v1",
+    "pid": 49088,
+    "status": "running",
+    "started_at": "2026-10-20T09:31:58.114991+00:00",
+    "run": "/home/disk1/MHINet/outputs/mhi_v2/MHIv2-C/P5/qrru_rgb512_seed42_5ep_20261020",
+    "workers": 8,
+    "lookahead_pairs": 128,
+    "train_manifest_sha256": "11f37bcfcebc61a24310421a5eff2e1921c618d461b8dac8142ff050843f88dc",
+    "policy": "Reads only registered train PNG bytes, in future seeded sample order; no checkpoint, data, config, math or training RNG mutation",
+    "checked_at": "2026-10-20T09:32:58.504938+00:00",
+    "completed_pairs": 432,
+    "read_bytes": 300361231,
+    "pending_pairs": 0,
+    "elapsed_seconds": 60.39000076398952,
+    "training_snapshot": {
+      "status": "running",
+      "step": 8629,
+      "total_steps": 25535,
+      "epoch": 1,
+      "cursor": 28176,
+      "best_score": 0.9968727431575597,
+      "best_step": 5107,
+      "checked_at": "2026-10-20T17:32:57+08:00"
+    }
+  },
+  "policy": "Independent read-only warming of same seeded future PNG/manifest bytes. No model/config/checkpoint/RNG edits; no GPU context."
+}

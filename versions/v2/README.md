@@ -2,9 +2,9 @@
 
 分支：`codex/mhi-v2`。v1 基线单独保存在 [../v1/](../v1/README.md) 与源码工作区 `/home/disk1/MHINet-v1`。
 
-2026-10-20（北京时间）状态：`mhinet/v2/` 的 Flow0、D8 soft prior、Direct-D8、Discrepancy/DGFO、严格迁移与训练/评价入口已实现；57 项 CPU 测试通过，[真实 GPU 工程验收](evidence/real_feature_acceptance_20261020_final.json) 为 `passed`。Flow Head 的 2 步实数据训练烟测及断点恢复也已通过。Flow Head已完成5 epoch/25535步，完整5106对 val 最佳EPE为0.7611818px；C在GPU0约800/25535步，D/E排队。实时状态以 `campaign.json` 与各阶段 `status.json` 为准；尚无最终匹配精度收益结论。
+2026-10-20（北京时间）状态：`mhinet/v2/` 的 Flow0、D8 soft prior、Direct-D8、Discrepancy/DGFO、严格迁移与训练/评价入口已实现；85 项 CPU 测试通过（含独立损失实验），[真实 GPU 工程验收](evidence/real_feature_acceptance_20261020_final.json) 为 `passed`。Flow Head 的 2 步实数据训练烟测及断点恢复也已通过。Flow Head已完成5 epoch/25535步，完整5106对 val 最佳EPE为0.7611818px；C在GPU0继续训练，D/E排队。实时状态以 `campaign.json` 与各阶段 `status.json` 为准；尚无最终匹配精度收益结论。
 
-[完整Flow配对结果](evidence/V2-P5-03/flow_fullval_paired_20261020.json)：完整5106对验证已做训练前后配对：Flow EPE 0.790103→0.761182px（下降3.66%，3593/5106对改善）；matchability loss 0.069831→0.008944（下降87.19%）；预测在图内比例92.1122%→91.7071%（下降0.4051个百分点），这不是匹配召回。三个来源平均EPE均改善。该结果来自训练选模所用val，不是封存集精度；最终匹配Pre@3与Discrepancy/DGFO收益仍待对照。 原始冻结Flow全val评价已完成，GPU2正在串行执行同Flow-best+冻结QRRU的B/C prior开关诊断。
+[完整Flow配对结果](evidence/V2-P5-03/flow_fullval_paired_20261020.json)：完整5106对验证已做训练前后配对：Flow EPE 0.790103→0.761182px（下降3.66%，3593/5106对改善）；matchability loss 0.069831→0.008944（下降87.19%）；预测在图内比例92.1122%→91.7071%（下降0.4051个百分点），这不是匹配召回。三个来源平均EPE均改善。该结果来自训练选模所用val，不是封存集精度；最终匹配Pre@3与Discrepancy/DGFO收益仍待对照。 原始冻结Flow全val评价已完成，同Flow-best+冻结QRRU的B/C prior开关诊断已完成，见本页P6研究入口。
 
 当前 v2 约定已实现：输入只支持 **512×512**；最终输出上限 **`max_output_matches=2048` 对/影像对**，可显式设置正整数。最终按置信度稳定选取，不足时不补点。D16/D8/D4/D2 分别为32/64/128/256；QRRU 前候选预算 **`max_matches=12000`** 与最终输出上限分开登记。
 

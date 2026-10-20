@@ -1,0 +1,23 @@
+{
+  "schema": "mhi.flow-loss-pilot-preflight.v1",
+  "status": "passed",
+  "checked_at": "2026-10-20T09:30:49.218998+00:00",
+  "cpu_tests": 85,
+  "cpu_test_log": "/home/disk1/MHINet/outputs/mhi_v2/engineering/flow_loss_pilot_preflight_20261020/cpu_tests.log",
+  "cpu_test_log_sha256": "2beebb9ddb0acfaf577de2f004d54403e18a6bac132be881f2ac9e51f1308c59",
+  "real_gpu_calibration": "pending",
+  "real_gpu_smoke_and_replay": "pending",
+  "note": "CPU tests include synthetic fixtures; real GPU acceptance remains a mandatory queue stage.",
+  "locked_source_implementation_files_verified": 106,
+  "source_checkpoint_sha256": "26a24e5239a1b7a3719c638ec7b040a8490c226a7341a0606137d25f0c63c33a",
+  "data": {
+    "train_pairs": 40849,
+    "val_pairs": 5106,
+    "calibration_training_pairs": 32,
+    "calibration_counts": {
+      "flair_rgb": 23,
+      "googleearth_current": 6,
+      "whu": 3
+    }
+  }
+}

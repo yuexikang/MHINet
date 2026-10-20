@@ -1,0 +1,30 @@
+{
+  "schema": "mhi.flow-loss-pilot-launch.v1",
+  "status": "queue_started",
+  "checked_at": "2026-10-20T09:32:59.972703+00:00",
+  "implementation_commit": "96a9bf8184aff8b16ee0850b91a401d7030db0f1",
+  "registration_sha256": "f7f8fcbfd5a8315f9fe54770de0ddeba0133d61a494f5288db587a9ecc53161e",
+  "tmux": "mhi-v2-flow-loss-20261020",
+  "supervisor_pid": 49069,
+  "queue_status_at_launch": "waiting_gpu_idle",
+  "next_stage": "calibration",
+  "actual_gpu_snapshot": {
+    "memory_used_mib": 16131,
+    "utilization_percent": 91,
+    "available": false
+  },
+  "live_status": "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/status.json",
+  "actual_command": [
+    "/root/miniconda3/envs/loma-repro/bin/python",
+    "-u",
+    "scripts/mhi_v2/run_flow_loss_experiment.py",
+    "--registration",
+    "versions/v2/evidence/flow_loss_pilot_20261020/registration.json"
+  ],
+  "commands_sha256": "b23aad5eed42cfc28f8475ce92c50929cba3ce47bf9099fc6bcfee3cd33411cd",
+  "cpu_tests": 85,
+  "real_gpu_calibration": "pending",
+  "real_gpu_replay_acceptance": "pending",
+  "existing_campaign": "continues independently on GPU0; source/config/checkpoints unchanged",
+  "v1_fixed_commit": "522d9bd5565e88267e72866bd829fb05274762e4"
+}

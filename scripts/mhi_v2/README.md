@@ -11,7 +11,7 @@
 | `python -m mhinet.v2.train` | 独立运行配置、训练、完整 val 选模、checkpoint 与严格续训 |
 | `python -m mhinet.v2.evaluate` | v2 checkpoint 在指定 RGB_512 清单上的级联评价，可同权重切换 prior |
 
-真实验收已生成 [passed 报告](../../versions/v2/evidence/real_feature_acceptance_20261020_final.json)；重复验收须指定新的 `--output` 文件名以保存历史。Flow Head 的两步实数据烟测与断点恢复已通过，Flow Head已完成5 epoch/25535步，完整5106对 val 最佳EPE为0.7611818px；C在GPU0约800/25535步，D/E排队。实时进度以 `campaign.json`、各阶段 `status.json` 和日志为准。
+真实验收已生成 [passed 报告](../../versions/v2/evidence/real_feature_acceptance_20261020_final.json)；重复验收须指定新的 `--output` 文件名以保存历史。Flow Head 的两步实数据烟测与断点恢复已通过，Flow Head已完成5 epoch/25535步，完整5106对 val 最佳EPE为0.7611818px；C在GPU0继续训练，D/E排队。实时进度以 `campaign.json`、各阶段 `status.json` 和日志为准。
 
 `run_campaign.py` 要求 `--output`、`--engineering-report`，`--gpu` 选择物理 GPU。它检查真实工程报告为通过，并按 [注册配置](../../configs/mhi_v2/README.md) 串行运行；不会跳过失败阶段。阶段输出固定在各实验的独立 P5 目录；恢复只允许符合元数据、源码/数据身份与 RNG/游标检查的同协议 checkpoint。
 

@@ -1,0 +1,372 @@
+[
+  {
+    "name": "calibration",
+    "command": [
+      "/root/miniconda3/envs/loma-repro/bin/python",
+      "-u",
+      "-m",
+      "mhinet.v2.flow_loss.calibrate",
+      "--base-config",
+      "/home/disk1/MHINet/configs/mhi_v2/flow_head_rgb512_seed42.json",
+      "--runtime",
+      "/home/disk1/MHINet/configs/mhi_v2/runtime.rgb512.nvme.server.json",
+      "--checkpoint",
+      "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P5/flow_head_rgb512_seed42_5ep_20261020/best.pt",
+      "--output",
+      "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/calibration",
+      "--device",
+      "cuda:0",
+      "--selection",
+      "/home/disk1/MHINet/versions/v2/evidence/flow_loss_pilot_20261020/train_calibration_ids.json"
+    ],
+    "artifact": "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/calibration/calibration.json"
+  },
+  {
+    "name": "smoke_L0_continuous",
+    "command": [
+      "/root/miniconda3/envs/loma-repro/bin/python",
+      "-u",
+      "-m",
+      "mhinet.v2.flow_loss.train",
+      "--config",
+      "/home/disk1/MHINet/configs/mhi_v2/flow_loss/l0_rgb512_seed42.json",
+      "--output",
+      "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/engineering/L0_continuous",
+      "--device",
+      "cuda:0",
+      "--max-steps",
+      "2"
+    ],
+    "artifact": "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/engineering/L0_continuous/status.json",
+    "training": true
+  },
+  {
+    "name": "smoke_L0_first",
+    "command": [
+      "/root/miniconda3/envs/loma-repro/bin/python",
+      "-u",
+      "-m",
+      "mhinet.v2.flow_loss.train",
+      "--config",
+      "/home/disk1/MHINet/configs/mhi_v2/flow_loss/l0_rgb512_seed42.json",
+      "--output",
+      "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/engineering/L0_resumed",
+      "--device",
+      "cuda:0",
+      "--max-steps",
+      "1"
+    ],
+    "artifact": "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/engineering/L0_resumed/status.json",
+    "training": true
+  },
+  {
+    "name": "smoke_L0_resume",
+    "command": [
+      "/root/miniconda3/envs/loma-repro/bin/python",
+      "-u",
+      "-m",
+      "mhinet.v2.flow_loss.train",
+      "--config",
+      "/home/disk1/MHINet/configs/mhi_v2/flow_loss/l0_rgb512_seed42.json",
+      "--output",
+      "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/engineering/L0_resumed",
+      "--device",
+      "cuda:0",
+      "--max-steps",
+      "2"
+    ],
+    "artifact": "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/engineering/L0_resumed/status.json",
+    "training": true
+  },
+  {
+    "name": "smoke_L1",
+    "command": [
+      "/root/miniconda3/envs/loma-repro/bin/python",
+      "-u",
+      "-m",
+      "mhinet.v2.flow_loss.train",
+      "--config",
+      "/home/disk1/MHINet/configs/mhi_v2/flow_loss/l1_rgb512_seed42.json",
+      "--output",
+      "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/engineering/L1",
+      "--device",
+      "cuda:0",
+      "--max-steps",
+      "1"
+    ],
+    "artifact": "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/engineering/L1/status.json",
+    "training": true
+  },
+  {
+    "name": "engineering_acceptance",
+    "command": [
+      "/root/miniconda3/envs/loma-repro/bin/python",
+      "-u",
+      "-m",
+      "mhinet.v2.flow_loss.acceptance",
+      "--output",
+      "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020"
+    ],
+    "artifact": "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/engineering/acceptance.json",
+    "cpu": true
+  },
+  {
+    "name": "train_L0",
+    "command": [
+      "/root/miniconda3/envs/loma-repro/bin/python",
+      "-u",
+      "-m",
+      "mhinet.v2.flow_loss.train",
+      "--config",
+      "/home/disk1/MHINet/configs/mhi_v2/flow_loss/l0_rgb512_seed42.json",
+      "--output",
+      "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/L0",
+      "--device",
+      "cuda:0"
+    ],
+    "artifact": "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/L0/status.json",
+    "training": true,
+    "full": true
+  },
+  {
+    "name": "train_L1",
+    "command": [
+      "/root/miniconda3/envs/loma-repro/bin/python",
+      "-u",
+      "-m",
+      "mhinet.v2.flow_loss.train",
+      "--config",
+      "/home/disk1/MHINet/configs/mhi_v2/flow_loss/l1_rgb512_seed42.json",
+      "--output",
+      "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/L1",
+      "--device",
+      "cuda:0"
+    ],
+    "artifact": "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/L1/status.json",
+    "training": true,
+    "full": true
+  },
+  {
+    "name": "flow_source",
+    "command": [
+      "/root/miniconda3/envs/loma-repro/bin/python",
+      "-u",
+      "-m",
+      "mhinet.v2.flow_loss.evaluate",
+      "flow",
+      "--checkpoint",
+      "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P5/flow_head_rgb512_seed42_5ep_20261020/best.pt",
+      "--manifest",
+      "/home/u2ssd2_TQL/mhi_v2_cache/MHINet_RGB_512/val/pairs.jsonl",
+      "--runtime",
+      "/home/disk1/MHINet/configs/mhi_v2/runtime.rgb512.nvme.server.json",
+      "--hard-cases",
+      "/home/disk1/MHINet/versions/v2/evidence/flow_loss_pilot_20261020/hard_cases.json",
+      "--output",
+      "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/evaluations/source",
+      "--device",
+      "cuda:0"
+    ],
+    "artifact": "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/evaluations/source/summary.json",
+    "full": true
+  },
+  {
+    "name": "flow_L0",
+    "command": [
+      "/root/miniconda3/envs/loma-repro/bin/python",
+      "-u",
+      "-m",
+      "mhinet.v2.flow_loss.evaluate",
+      "flow",
+      "--checkpoint",
+      "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/L0/last.pt",
+      "--manifest",
+      "/home/u2ssd2_TQL/mhi_v2_cache/MHINet_RGB_512/val/pairs.jsonl",
+      "--runtime",
+      "/home/disk1/MHINet/configs/mhi_v2/runtime.rgb512.nvme.server.json",
+      "--hard-cases",
+      "/home/disk1/MHINet/versions/v2/evidence/flow_loss_pilot_20261020/hard_cases.json",
+      "--output",
+      "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/evaluations/L0",
+      "--device",
+      "cuda:0"
+    ],
+    "artifact": "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/evaluations/L0/summary.json",
+    "full": true
+  },
+  {
+    "name": "flow_L1",
+    "command": [
+      "/root/miniconda3/envs/loma-repro/bin/python",
+      "-u",
+      "-m",
+      "mhinet.v2.flow_loss.evaluate",
+      "flow",
+      "--checkpoint",
+      "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/L1/last.pt",
+      "--manifest",
+      "/home/u2ssd2_TQL/mhi_v2_cache/MHINet_RGB_512/val/pairs.jsonl",
+      "--runtime",
+      "/home/disk1/MHINet/configs/mhi_v2/runtime.rgb512.nvme.server.json",
+      "--hard-cases",
+      "/home/disk1/MHINet/versions/v2/evidence/flow_loss_pilot_20261020/hard_cases.json",
+      "--output",
+      "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/evaluations/L1",
+      "--device",
+      "cuda:0"
+    ],
+    "artifact": "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/evaluations/L1/summary.json",
+    "full": true
+  },
+  {
+    "name": "flow_comparison",
+    "command": [
+      "/root/miniconda3/envs/loma-repro/bin/python",
+      "-u",
+      "-m",
+      "mhinet.v2.flow_loss.evaluate",
+      "compare",
+      "--arm-a",
+      "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/evaluations/L0",
+      "--arm-b",
+      "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/evaluations/L1",
+      "--source",
+      "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/evaluations/source",
+      "--output",
+      "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/evaluations/comparison"
+    ],
+    "artifact": "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/evaluations/comparison/comparison.json",
+    "cpu": true
+  },
+  {
+    "name": "negative_control",
+    "command": [
+      "/root/miniconda3/envs/loma-repro/bin/python",
+      "-u",
+      "-m",
+      "mhinet.v2.flow_loss.evaluate",
+      "negative-control",
+      "--arm-a",
+      "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/L0/last.pt",
+      "--arm-b",
+      "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/L1/last.pt",
+      "--manifest",
+      "/home/u2ssd2_TQL/mhi_v2_cache/MHINet_RGB_512/val/pairs.jsonl",
+      "--runtime",
+      "/home/disk1/MHINet/configs/mhi_v2/runtime.rgb512.nvme.server.json",
+      "--output",
+      "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/evaluations/negative_control",
+      "--limit",
+      "64",
+      "--device",
+      "cuda:0"
+    ],
+    "artifact": "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/evaluations/negative_control/negative_control.json"
+  },
+  {
+    "name": "matching_L0_B",
+    "command": [
+      "/root/miniconda3/envs/loma-repro/bin/python",
+      "-u",
+      "-m",
+      "mhinet.v2.evaluate",
+      "--checkpoint",
+      "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/L0/last.pt",
+      "--manifest",
+      "/home/u2ssd2_TQL/mhi_v2_cache/MHINet_RGB_512/val/pairs.jsonl",
+      "--output",
+      "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/evaluations/L0_B",
+      "--device",
+      "cuda:0",
+      "--limit",
+      "0",
+      "--variant",
+      "B"
+    ],
+    "artifact": "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/evaluations/L0_B/summary.json",
+    "full": true
+  },
+  {
+    "name": "matching_L0_C",
+    "command": [
+      "/root/miniconda3/envs/loma-repro/bin/python",
+      "-u",
+      "-m",
+      "mhinet.v2.evaluate",
+      "--checkpoint",
+      "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/L0/last.pt",
+      "--manifest",
+      "/home/u2ssd2_TQL/mhi_v2_cache/MHINet_RGB_512/val/pairs.jsonl",
+      "--output",
+      "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/evaluations/L0_C",
+      "--device",
+      "cuda:0",
+      "--limit",
+      "0",
+      "--variant",
+      "C"
+    ],
+    "artifact": "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/evaluations/L0_C/summary.json",
+    "full": true
+  },
+  {
+    "name": "matching_L1_B",
+    "command": [
+      "/root/miniconda3/envs/loma-repro/bin/python",
+      "-u",
+      "-m",
+      "mhinet.v2.evaluate",
+      "--checkpoint",
+      "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/L1/last.pt",
+      "--manifest",
+      "/home/u2ssd2_TQL/mhi_v2_cache/MHINet_RGB_512/val/pairs.jsonl",
+      "--output",
+      "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/evaluations/L1_B",
+      "--device",
+      "cuda:0",
+      "--limit",
+      "0",
+      "--variant",
+      "B"
+    ],
+    "artifact": "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/evaluations/L1_B/summary.json",
+    "full": true
+  },
+  {
+    "name": "matching_L1_C",
+    "command": [
+      "/root/miniconda3/envs/loma-repro/bin/python",
+      "-u",
+      "-m",
+      "mhinet.v2.evaluate",
+      "--checkpoint",
+      "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/L1/last.pt",
+      "--manifest",
+      "/home/u2ssd2_TQL/mhi_v2_cache/MHINet_RGB_512/val/pairs.jsonl",
+      "--output",
+      "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/evaluations/L1_C",
+      "--device",
+      "cuda:0",
+      "--limit",
+      "0",
+      "--variant",
+      "C"
+    ],
+    "artifact": "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/evaluations/L1_C/summary.json",
+    "full": true
+  },
+  {
+    "name": "decision",
+    "command": [
+      "/root/miniconda3/envs/loma-repro/bin/python",
+      "-u",
+      "-m",
+      "mhinet.v2.flow_loss.acceptance",
+      "--output",
+      "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020",
+      "--decision"
+    ],
+    "artifact": "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/decision.json",
+    "cpu": true
+  }
+]

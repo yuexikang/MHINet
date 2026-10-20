@@ -1,0 +1,189 @@
+{
+  "schema": "mhi.v2-io-performance.v1",
+  "checked_at": "2026-10-20T02:24:10.287340+00:00",
+  "training_pid": 32188,
+  "training_status": {
+    "status": "running",
+    "step": 20240,
+    "total_steps": 25535,
+    "epoch": 3,
+    "cursor": 39352,
+    "best_score": 0.8491437925785325,
+    "best_step": 15321,
+    "checked_at": "2026-10-20T10:24:09+08:00"
+  },
+  "diagnosis": "Four PNG reads plus two seeks into random JSONL rows on HDD/ZFS; 8GiB ARC; observed blocked data workers. CPU benchmark cold19.142s vs warm0.477s for fixed32 pairs.",
+  "intervention": "Read-only separate CPU/I/O process preloads future manifest blocks and4 PNGs in exact seed+epoch order, 8threads,128pair window. Training process/algorithm/loss/batch/LR/checkpoint remain unchanged.",
+  "before": {
+    "first_step": 19800,
+    "last_step": 19989,
+    "updates": 190,
+    "mean_seconds": 2.622302717246777,
+    "median_seconds": 1.9716549739823677,
+    "p95_seconds": 4.965904837998096,
+    "pairs_per_second": 3.0507538078591496
+  },
+  "after": {
+    "first_step": 20124,
+    "last_step": 20223,
+    "updates": 100,
+    "mean_seconds": 0.5260580455773742,
+    "median_seconds": 0.3846222644788213,
+    "p95_seconds": 1.1296672699972987,
+    "pairs_per_second": 15.207447290763534
+  },
+  "mean_step_speedup": 4.984816294119544,
+  "cuda_samples": [
+    {
+      "timestamp": "2026/10/20 02:23:35.244",
+      "utilization_percent": 46.0,
+      "power_watts": 214.03,
+      "memory_mib": 1681.0
+    },
+    {
+      "timestamp": "2026/10/20 02:23:36.264",
+      "utilization_percent": 38.0,
+      "power_watts": 160.22,
+      "memory_mib": 1681.0
+    },
+    {
+      "timestamp": "2026/10/20 02:23:37.289",
+      "utilization_percent": 38.0,
+      "power_watts": 164.1,
+      "memory_mib": 1681.0
+    },
+    {
+      "timestamp": "2026/10/20 02:23:38.309",
+      "utilization_percent": 0.0,
+      "power_watts": 135.33,
+      "memory_mib": 1681.0
+    },
+    {
+      "timestamp": "2026/10/20 02:23:39.330",
+      "utilization_percent": 0.0,
+      "power_watts": 178.31,
+      "memory_mib": 1681.0
+    },
+    {
+      "timestamp": "2026/10/20 02:23:40.352",
+      "utilization_percent": 51.0,
+      "power_watts": 157.04,
+      "memory_mib": 1681.0
+    },
+    {
+      "timestamp": "2026/10/20 02:23:41.374",
+      "utilization_percent": 0.0,
+      "power_watts": 151.79,
+      "memory_mib": 1681.0
+    },
+    {
+      "timestamp": "2026/10/20 02:23:42.394",
+      "utilization_percent": 44.0,
+      "power_watts": 151.56,
+      "memory_mib": 1681.0
+    },
+    {
+      "timestamp": "2026/10/20 02:23:43.414",
+      "utilization_percent": 43.0,
+      "power_watts": 132.18,
+      "memory_mib": 1681.0
+    },
+    {
+      "timestamp": "2026/10/20 02:23:44.435",
+      "utilization_percent": 57.0,
+      "power_watts": 132.73,
+      "memory_mib": 1681.0
+    },
+    {
+      "timestamp": "2026/10/20 02:23:45.458",
+      "utilization_percent": 0.0,
+      "power_watts": 132.19,
+      "memory_mib": 1681.0
+    },
+    {
+      "timestamp": "2026/10/20 02:23:46.484",
+      "utilization_percent": 7.0,
+      "power_watts": 115.85,
+      "memory_mib": 1681.0
+    },
+    {
+      "timestamp": "2026/10/20 02:23:47.502",
+      "utilization_percent": 0.0,
+      "power_watts": 125.89,
+      "memory_mib": 1681.0
+    },
+    {
+      "timestamp": "2026/10/20 02:23:48.526",
+      "utilization_percent": 0.0,
+      "power_watts": 96.38,
+      "memory_mib": 1681.0
+    },
+    {
+      "timestamp": "2026/10/20 02:23:49.547",
+      "utilization_percent": 49.0,
+      "power_watts": 152.85,
+      "memory_mib": 1681.0
+    },
+    {
+      "timestamp": "2026/10/20 02:23:50.567",
+      "utilization_percent": 0.0,
+      "power_watts": 177.32,
+      "memory_mib": 1681.0
+    },
+    {
+      "timestamp": "2026/10/20 02:23:51.586",
+      "utilization_percent": 0.0,
+      "power_watts": 134.43,
+      "memory_mib": 1681.0
+    },
+    {
+      "timestamp": "2026/10/20 02:23:52.606",
+      "utilization_percent": 0.0,
+      "power_watts": 97.5,
+      "memory_mib": 1681.0
+    },
+    {
+      "timestamp": "2026/10/20 02:23:53.626",
+      "utilization_percent": 12.0,
+      "power_watts": 125.75,
+      "memory_mib": 1681.0
+    },
+    {
+      "timestamp": "2026/10/20 02:23:54.647",
+      "utilization_percent": 0.0,
+      "power_watts": 149.05,
+      "memory_mib": 1681.0
+    }
+  ],
+  "cuda_after_mean_utilization": 19.25,
+  "prefetch_snapshot": {
+    "schema": "mhi.v2-readonly-prefetch.v1",
+    "pid": 38763,
+    "status": "running",
+    "started_at": "2026-10-20T02:22:15.074634+00:00",
+    "run": "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P5/flow_head_rgb512_seed42_5ep_20261020",
+    "workers": 8,
+    "lookahead_pairs": 128,
+    "train_manifest_sha256": "11f37bcfcebc61a24310421a5eff2e1921c618d461b8dac8142ff050843f88dc",
+    "policy": "Reads only registered train PNG bytes, in future seeded sample order; no checkpoint, data, config, math or training RNG mutation",
+    "checked_at": "2026-10-20T02:24:08.292593+00:00",
+    "completed_pairs": 1352,
+    "read_bytes": 952828525,
+    "pending_pairs": 32,
+    "elapsed_seconds": 113.21802497497993,
+    "training_snapshot": {
+      "status": "running",
+      "step": 20238,
+      "total_steps": 25535,
+      "epoch": 3,
+      "cursor": 39336,
+      "best_score": 0.8491437925785325,
+      "best_step": 15321,
+      "checked_at": "2026-10-20T10:24:07+08:00"
+    }
+  },
+  "prefetch_source_sha256": "6bc7a027685bc60c50fb27fd4d69f5eb3e9fa3947b5781c69dee89da36311253",
+  "original_implementation_hashes_all_match": true,
+  "model_selection": "No accuracy choice or hyperparameter change",
+  "limits": "Sequential before/after sample, not randomized benchmark. Training still uses B1 accumulation8; future batches can have different disk latency. Checkpoint/validation wall time excluded from logged step time; NVMe copy is prepared separately."
+}

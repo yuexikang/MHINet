@@ -661,5 +661,15 @@
     ],
     "scope": "Validated model paths, losses, frozen groups, gradients, memory and resume. Full stage-diagnostic research acceptance P2-04 remains open; it does not claim a gain or select a final model."
   },
-  "campaign": "outputs/mhi_v2/campaign_rgb512_seed42_20261020/campaign.json"
+  "campaign": "outputs/mhi_v2/campaign_rgb512_seed42_20261020/campaign.json",
+  "runtime_optimizations": [
+    {
+      "kind": "readonly_ordered_io_prefetch",
+      "scope": "Flow Head running process unchanged",
+      "evidence": "versions/v2/evidence/performance_20261020/prefetch_acceptance.json",
+      "status": "engineering_measured",
+      "mean_step_speedup": 4.984816294119544,
+      "training_accuracy_claim": false
+    }
+  ]
 }

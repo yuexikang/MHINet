@@ -13,6 +13,10 @@
 - 首轮仅 seed42，不能声称多 seed 稳定性。完整精度、资源对照、跨 seed 复核和封存集评价都须另有实际证据；`campaign.json` 未显示完成时不能把注册预算写成实际完成预算。
 - 实现固定于 `88fee1b`；[资源验收](evidence/resource_acceptance_20261020.json) 已通过，[campaign 实时状态](../../outputs/mhi_v2/campaign_rgb512_seed42_20261020/campaign.json) 已生成。V2-P2-04 的完整 D8/D2 retention/coverage 诊断仍未签收，P5 精度验收尚未开始。
 
+## 当前运行性能优化
+
+Flow Head的机械盘随机读取已增加独立预读，按原顺序提前读取清单块与PNG。连续100步平均耗时从2.62秒降至0.53秒，约4.98倍；原训练进程、源码、配置和优化轨迹保持。该结果不包含完整验证/保存耗时，也不表示精度变化；GPU仍有小batch和同步开销。详见 [性能证据](evidence/performance_20261020/README.md)。NVMe数据副本准备中，校验完成前不切换后续配置。
+
 ## 版本与交付范围
 
 | 项目 | 固定约定 |

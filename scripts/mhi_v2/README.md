@@ -4,6 +4,8 @@
 | --- | --- |
 | [preflight.py](preflight.py) | 只读复现 P0 提交的分档/资源预检；保留历史 planned 状态断言 |
 | [validate_real.py](validate_real.py) | 真实共享特征、Flow/B/C、零 adapter 轨迹、三步 QRRU 梯度及冻结审计 |
+| [prefetch_rgb512.py](prefetch_rgb512.py) | 独立只读预读未来清单块与PNG，按运行seed/epoch/cursor，不改变训练进程 |
+| [cache_rgb512.py](cache_rgb512.py) | 只复制train/val引用文件到新NVMe目录，逐文件双SHA验证，完成后发布manifest |
 | [run_campaign.py](run_campaign.py) | 单 GPU 串行调度 Flow Head → 等预算 C → D → E，阶段成功后才继续 |
 | `python -m mhinet.v2.train` | 独立运行配置、训练、完整 val 选模、checkpoint 与严格续训 |
 | `python -m mhinet.v2.evaluate` | v2 checkpoint 在指定 RGB_512 清单上的级联评价，可同权重切换 prior |
@@ -22,3 +24,5 @@ python -m mhinet.v2.evaluate --help
 python scripts/mhi_v2/run_campaign.py --help
 python scripts/mhi_v2/validate_real.py --help
 ```
+
+2026-10-20 性能诊断：机械盘/ZFS随机读取受8GiB ARC限制，新增独立预读后连续100步平均耗时约2.62→0.53秒；训练源码/配置/状态不变。NVMe副本正在后台校验复制，未切换训练数据。详见 [实际性能证据](../../versions/v2/evidence/performance_20261020/README.md)。

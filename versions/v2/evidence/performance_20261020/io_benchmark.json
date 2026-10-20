@@ -1,0 +1,125 @@
+{
+  "metadata": {
+    "unique_fixed_pairs": 32,
+    "files_per_pair": 4,
+    "file_count": 128,
+    "compressed_bytes_total": 19426098,
+    "mean_compressed_bytes_per_pair": 607065.5625,
+    "formats": {
+      "('image_A', 'PNG')": 32,
+      "('image_B', 'PNG')": 32,
+      "('mask_A_overlap', 'PNG')": 32,
+      "('mask_B_overlap', 'PNG')": 32
+    },
+    "modes": {
+      "('image_A', 'RGB')": 32,
+      "('image_B', 'RGB')": 32,
+      "('mask_A_overlap', 'L')": 32,
+      "('mask_B_overlap', 'L')": 32
+    },
+    "shapes": {
+      "(512, 512)": 128
+    },
+    "returned_float_tensor_MiB_per_pair": 8,
+    "main_threads": 4,
+    "protocol": "Same first 32 train pairs each run; CPU only, no pin memory, shuffle false; 0/2/4/8 workers; no cache flushing. Later runs warm cache; per-run startup included in total and separately first batch."
+  },
+  "results": [
+    {
+      "batch_size": 1,
+      "num_workers": 0,
+      "pairs": 32,
+      "total_seconds": 0.47692362300585955,
+      "pairs_per_second": 67.09669736700555,
+      "first_batch_seconds": 0.023924247012473643,
+      "after_first_seconds": 0.4529415770084597,
+      "after_first_pairs_per_second": 68.44149791844127,
+      "batch_wait_median_seconds": 0.014642209484009072,
+      "checksum": 7.2901962753385305
+    },
+    {
+      "batch_size": 1,
+      "num_workers": 2,
+      "pairs": 32,
+      "total_seconds": 0.4489458749885671,
+      "pairs_per_second": 71.27808001535801,
+      "first_batch_seconds": 0.06361506099347025,
+      "after_first_seconds": 0.3652364799636416,
+      "after_first_pairs_per_second": 84.87651617682323,
+      "batch_wait_median_seconds": 0.012006165983621031,
+      "checksum": 7.2901962753385305
+    },
+    {
+      "batch_size": 1,
+      "num_workers": 4,
+      "pairs": 32,
+      "total_seconds": 0.2706455379957333,
+      "pairs_per_second": 118.2358306624086,
+      "first_batch_seconds": 0.073461166000925,
+      "after_first_seconds": 0.18086407496593893,
+      "after_first_pairs_per_second": 171.39943355715084,
+      "batch_wait_median_seconds": 0.0023874525213614106,
+      "checksum": 7.2901962753385305
+    },
+    {
+      "batch_size": 1,
+      "num_workers": 8,
+      "pairs": 32,
+      "total_seconds": 0.202350240026135,
+      "pairs_per_second": 158.1416458703828,
+      "first_batch_seconds": 0.08636216999730095,
+      "after_first_seconds": 0.0960014879819937,
+      "after_first_pairs_per_second": 322.911661596479,
+      "batch_wait_median_seconds": 0.0026656444824766368,
+      "checksum": 7.2901962753385305
+    },
+    {
+      "batch_size": 8,
+      "num_workers": 0,
+      "pairs": 32,
+      "total_seconds": 0.5179475869517773,
+      "pairs_per_second": 61.782313126172184,
+      "first_batch_seconds": 0.12810101499781013,
+      "after_first_seconds": 0.3897180809872225,
+      "after_first_pairs_per_second": 61.582977980400344,
+      "batch_wait_median_seconds": 0.12874573899898678,
+      "checksum": 0.7882353290915489
+    },
+    {
+      "batch_size": 8,
+      "num_workers": 2,
+      "pairs": 32,
+      "total_seconds": 0.4763276349985972,
+      "pairs_per_second": 67.18064972252606,
+      "first_batch_seconds": 0.2638663239777088,
+      "after_first_seconds": 0.19601089000934735,
+      "after_first_pairs_per_second": 122.44217654873916,
+      "batch_wait_median_seconds": 0.09331559500424191,
+      "checksum": 0.7882353290915489
+    },
+    {
+      "batch_size": 8,
+      "num_workers": 4,
+      "pairs": 32,
+      "total_seconds": 0.3058348700287752,
+      "pairs_per_second": 104.63162685467881,
+      "first_batch_seconds": 0.25127963902195916,
+      "after_first_seconds": 0.035814113973174244,
+      "after_first_pairs_per_second": 670.126867245038,
+      "batch_wait_median_seconds": 0.012583233008626848,
+      "checksum": 0.7882353290915489
+    },
+    {
+      "batch_size": 8,
+      "num_workers": 8,
+      "pairs": 32,
+      "total_seconds": 0.3324479989823885,
+      "pairs_per_second": 96.25565531436754,
+      "first_batch_seconds": 0.27377224096562713,
+      "after_first_seconds": 0.0407441399875097,
+      "after_first_pairs_per_second": 589.0417617688656,
+      "batch_wait_median_seconds": 0.01591509149875492,
+      "checksum": 0.7882353290915489
+    }
+  ]
+}

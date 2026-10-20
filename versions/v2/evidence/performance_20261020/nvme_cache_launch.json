@@ -1,0 +1,61 @@
+{
+  "schema": "mhi.rgb512-cache-launch.v1",
+  "checked_at": "2026-10-20T02:26:29.386428+00:00",
+  "status": "copying",
+  "tmux": "mhi-v2-rgb512-nvme-cache-20261020",
+  "actual_command": "nice -n 10 ionice -c 2 -n 7 /root/miniconda3/envs/loma-repro/bin/python -u /home/disk1/MHINet/scripts/mhi_v2/cache_rgb512.py --copy --workers 8 --source /home/disk1/Data/datasets/MHINet_RGB_512 --destination /home/u2ssd2_TQL/mhi_v2_cache/MHINet_RGB_512",
+  "script_sha256": "ab16f9d7f5a9c4065124b6d44e4ec80bc0cbbbfa34fe92155ec61464a2d84dcb",
+  "snapshot": {
+    "schema": "mhi.rgb512.cache-status.v1",
+    "status": "copying",
+    "pid": 39034,
+    "started_at": "2026-10-20T10:25:47+08:00",
+    "checked_at": "2026-10-20T10:26:27+08:00",
+    "files_completed": 2270,
+    "bytes_verified": 682767457,
+    "reused_files": 0,
+    "total_files": 183822,
+    "progress_interval_seconds": 5,
+    "journal": "/home/u2ssd2_TQL/mhi_v2_cache/MHINet_RGB_512/cache_files.jsonl",
+    "identity": {
+      "schema": "mhi.rgb512.verified-cache.v1",
+      "source_root": "/home/disk1/Data/datasets/MHINet_RGB_512",
+      "splits": [
+        "train",
+        "val"
+      ],
+      "fields": [
+        "image_A",
+        "image_B",
+        "mask_A_overlap",
+        "mask_B_overlap"
+      ],
+      "manifests": {
+        "train": {
+          "sha256": "11f37bcfcebc61a24310421a5eff2e1921c618d461b8dac8142ff050843f88dc",
+          "bytes": 131785843,
+          "pairs": 40849
+        },
+        "val": {
+          "sha256": "ad281e31dfd612a239ddfa63f25a42812511e22445f571359477e709c8207f5b",
+          "bytes": 16504369,
+          "pairs": 5106
+        }
+      },
+      "referenced_files": 183820,
+      "referenced_paths_sha256": "3bfa80fe2af0862a0ea08938eaa3f4f814df26981060d25b304ee3aeb3e2ca27",
+      "policy": "Only train/val manifest-referenced PNGs; sealed test excluded; source remains read-only"
+    },
+    "destination_root": "/home/u2ssd2_TQL/mhi_v2_cache/MHINet_RGB_512",
+    "workers": 8,
+    "estimated_bytes": 28045988136,
+    "estimated_GiB": 26.119861878454685,
+    "estimate_sample_files": 128,
+    "destination_free_bytes": 763682865152,
+    "estimate_policy": "Mean compressed size of 64 image and 64 mask train references (32 pairs); estimate only",
+    "elapsed_seconds": 42.517022693995386
+  },
+  "status_file": "/home/u2ssd2_TQL/mhi_v2_cache/MHINet_RGB_512/cache_status.json",
+  "training_config_changed": false,
+  "policy": "Train/val-only exact-byte copy; each file source-read SHA and target-read SHA verified; manifests published only after full completion; source immutable; no cache activation before completion"
+}

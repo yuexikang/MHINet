@@ -36,7 +36,7 @@
 
 ```bash
 /root/miniconda3/envs/loma-repro/bin/python scripts/mhi_v2/run_flow_loss_experiment.py \
-  --registration versions/v2/evidence/flow_loss_pilot_20261020/registration.gpu1.json
+  --registration versions/v2/evidence/flow_loss_pilot_20261020/registration.gpu1.runtimefix.json
 ```
 
 队列用独立tmux会话常驻。重启入口增加 `--resume`，已完成阶段按artifact SHA核验后跳过；正式训练沿用各自latest检查点。当前状态以输出根目录 `status.json` 为准，登记文件不是完成结果。
@@ -44,3 +44,5 @@
 数据仍是原RGB_512 source-image隔离划分及逐字节验证的NVMe缓存，没有证明地理邻近隔离。评价属于raster-mask诊断；GoogleEarth498、JL1Flight1755不参与训练、选择或本轮评价。
 
 2026-10-20 执行修订：按用户要求将尚未开始任何校准/训练的等待队列从GPU2移到GPU1。原登记和等待记录保留；新登记见 `evidence/flow_loss_pilot_20261020/registration.gpu1.json`，迁移证据见 `gpu1_relocation.json`。两卡均为RTX4090；新子进程仅可见物理GPU1，内部逻辑设备仍为cuda:0，单GPU RNG流、损失、数据顺序与预算不变。
+
+GPU1首次校准揭示多进程AF_UNIX临时socket路径长度限制，未执行任何优化更新。已保留该尝试并将queue的TMPDIR缩短到NVMe专用目录；真实76字节socket创建与6项相关回归验收通过。当前可执行登记为 `registration.gpu1.runtimefix.json`，仅更新queue临时路径及对应测试哈希；loss、训练源码与预算不变。

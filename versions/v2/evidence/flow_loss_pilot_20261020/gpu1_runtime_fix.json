@@ -1,0 +1,21 @@
+{
+  "schema": "mhi.flow-loss-gpu1-runtime-fix.v1",
+  "status": "regression_passed_queue_restart_registered",
+  "registration": "/home/disk1/MHINet/versions/v2/evidence/flow_loss_pilot_20261020/registration.gpu1.runtimefix.json",
+  "archive": "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020_gpu1_temp_path_archive_20261020T1028",
+  "error": "OSError: AF_UNIX path too long",
+  "fix": "76-byte AF_UNIX socket path under short NVMe TMPDIR",
+  "targeted_tests": 6,
+  "targeted_test_log_sha256": "39cec4481c5765326b83ff0756da4e50516777f8fd5ce15c46ca54d213f00a41",
+  "training_updates": 0,
+  "changed_files": {
+    "scripts/mhi_v2/run_flow_loss_experiment.py": {
+      "previous": "3ed2dd8ea0e4df86706e4ca3699b6590765567e23356d253f9c43f48d0ff69fb",
+      "actual": "48ff30989304d27ed74ac5f93c9db4748ab331921454c2121ba5061640b1f376"
+    },
+    "tests/v2/flow_loss/test_acceptance.py": {
+      "previous": "447939b62f186eb418dce16ad0edf7fcbb49cc45acaf766ae6ec1001bea3b8d3",
+      "actual": "09a9c35fa48b3b8408c90e6a6ec20790d94bf34a19f4e4b36624551b2900092f"
+    }
+  }
+}

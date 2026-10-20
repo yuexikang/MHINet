@@ -1,0 +1,109 @@
+{
+  "schema": "mhi.flow-loss-units.v1",
+  "checked_at": "2026-10-20T04:29:48.150593+00:00",
+  "actual_loss_path": "mhinet/v2/losses.py",
+  "actual_loss_sha256": "3141a883bd2d0424151177702860adf0f279e9599fbd73f79acf0e30c110f8b3",
+  "normalized_scale": 0.1,
+  "pixel_scale": 25.6,
+  "coordinate_conversion": "512/2=256 input pixels per normalized unit",
+  "old_formula": "sum_xy log1p(0.5*(residual_normalized/0.1)^2)",
+  "new_candidate_formula": "sqrt(dx_px^2+dy_px^2+epsilon_px^2)-epsilon_px",
+  "epsilon_px": 0.5,
+  "reference_illustration_geometry_coefficient": 0.001704683909294506,
+  "rows": [
+    {
+      "residual_px": 0.1,
+      "old_penalty_one_axis": 7.6293654275675724e-06,
+      "old_derivative_wrt_pixel": 0.00015258672648066343,
+      "old_derivative_wrt_normalized_head_output": 0.03906220197904984,
+      "smooth_epe_raw_derivative_wrt_pixel": 0.19611613513818402,
+      "smooth_epe_reference1px_gradient_matched_derivative": 0.0003343160199230892
+    },
+    {
+      "residual_px": 0.25,
+      "old_penalty_one_axis": 4.7682578988074067e-05,
+      "old_derivative_wrt_pixel": 0.00038145153753578486,
+      "old_derivative_wrt_normalized_head_output": 0.09765159360916092,
+      "smooth_epe_raw_derivative_wrt_pixel": 0.4472135954999579,
+      "smooth_epe_reference1px_gradient_matched_derivative": 0.0007623578202665201
+    },
+    {
+      "residual_px": 0.5,
+      "old_penalty_one_axis": 0.00019071667569984835,
+      "old_derivative_wrt_pixel": 0.0007627939617229989,
+      "old_derivative_wrt_normalized_head_output": 0.1952752542010877,
+      "smooth_epe_raw_derivative_wrt_pixel": 0.7071067811865475,
+      "smooth_epe_reference1px_gradient_matched_derivative": 0.0012053935520417386
+    },
+    {
+      "residual_px": 0.75,
+      "old_penalty_one_axis": 0.0004290613823818938,
+      "old_derivative_wrt_pixel": 0.0011439182632270314,
+      "old_derivative_wrt_normalized_head_output": 0.29284307538612003,
+      "smooth_epe_raw_derivative_wrt_pixel": 0.8320502943378437,
+      "smooth_epe_reference1px_gradient_matched_derivative": 0.0014183827484814799
+    },
+    {
+      "residual_px": 1,
+      "old_penalty_one_axis": 0.0007626485627655177,
+      "old_derivative_wrt_pixel": 0.0015247156405330403,
+      "old_derivative_wrt_normalized_head_output": 0.3903272039764583,
+      "smooth_epe_raw_derivative_wrt_pixel": 0.8944271909999159,
+      "smooth_epe_reference1px_gradient_matched_derivative": 0.0015247156405330403
+    },
+    {
+      "residual_px": 3,
+      "old_penalty_one_axis": 0.0068429883364301185,
+      "old_derivative_wrt_pixel": 0.004546418937350346,
+      "old_derivative_wrt_normalized_head_output": 1.1638832479616885,
+      "smooth_epe_raw_derivative_wrt_pixel": 0.9863939238321437,
+      "smooth_epe_reference1px_gradient_matched_derivative": 0.001681489850182526
+    },
+    {
+      "residual_px": 6,
+      "old_penalty_one_axis": 0.027095401932287076,
+      "old_derivative_wrt_pixel": 0.008910538196507067,
+      "old_derivative_wrt_normalized_head_output": 2.281097778305809,
+      "smooth_epe_raw_derivative_wrt_pixel": 0.9965457582448796,
+      "smooth_epe_reference1px_gradient_matched_derivative": 0.001698795518955739
+    },
+    {
+      "residual_px": 16,
+      "old_penalty_one_axis": 0.17840765747281828,
+      "old_derivative_wrt_pixel": 0.020424836601307186,
+      "old_derivative_wrt_normalized_head_output": 5.22875816993464,
+      "smooth_epe_raw_derivative_wrt_pixel": 0.9995120760870788,
+      "smooth_epe_reference1px_gradient_matched_derivative": 0.0017038521532511894
+    },
+    {
+      "residual_px": 32,
+      "old_penalty_one_axis": 0.5773153650348236,
+      "old_derivative_wrt_pixel": 0.027412280701754384,
+      "old_derivative_wrt_normalized_head_output": 7.017543859649122,
+      "smooth_epe_raw_derivative_wrt_pixel": 0.9998779520346953,
+      "smooth_epe_reference1px_gradient_matched_derivative": 0.001704475856091889
+    },
+    {
+      "residual_px": 64,
+      "old_penalty_one_axis": 1.4170660197866443,
+      "old_derivative_wrt_pixel": 0.023674242424242424,
+      "old_derivative_wrt_normalized_head_output": 6.0606060606060606,
+      "smooth_epe_raw_derivative_wrt_pixel": 0.9999694838187878,
+      "smooth_epe_reference1px_gradient_matched_derivative": 0.0017046318888514205
+    },
+    {
+      "residual_px": 150,
+      "old_penalty_one_axis": 2.8995592948879403,
+      "old_derivative_wrt_pixel": 0.012599367007801527,
+      "old_derivative_wrt_normalized_head_output": 3.225437953997191,
+      "smooth_epe_raw_derivative_wrt_pixel": 0.9999944444907404,
+      "smooth_epe_reference1px_gradient_matched_derivative": 0.0017046744389072632
+    }
+  ],
+  "limitations": [
+    "One-axis mathematical sensitivity illustration only, not actual parameter-gradient measurement.",
+    "Head outputs normalized coordinates; backprop to Head includes times256. Pixel derivative alone cannot prove weak training gradient.",
+    "Reference1px scale matching is illustrative; real experiment must match shared-trunk gradient norms on a fixed train-only subset.",
+    "No new loss was trained; all currently running train/eval jobs remain unchanged."
+  ]
+}

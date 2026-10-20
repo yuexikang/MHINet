@@ -1,0 +1,76 @@
+{
+  "schema": "mhi.flow-loss-ablation-proposal.v1",
+  "status": "diagnosis_complete_experiment_not_started",
+  "executable": false,
+  "created_at": "2026-10-20T04:29:48.150967+00:00",
+  "current_campaign_policy": "Keep current C/D/E Flow source, source checkpoints and candidate cache identity locked; no training loss/config mutation.",
+  "hypotheses": {
+    "objective_alignment": "Current per-axis Cauchy optimizes a different function from radial pixel EPE; an EPE-aligned robust function may improve subpixel localization.",
+    "frozen_classification": "Classification only reaches no_match_logit; increasing its weight cannot learn target ordering under frozen context.",
+    "tail": "Worst52 pair-mean errors contribute about24percent of trained mean and remain almost unchanged; point-level tail/confidence evidence is not yet available.",
+    "budget": "Last epoch EPE improves9.37percent; early epochs worse than original frozen baseline. Loss, learning-rate transients and extra budget are unresolved confounders."
+  },
+  "prerequisite_diagnostics": [
+    "Fixed train-only seed42 proportional sample32 pairs:23FLAIR/6GoogleEarth/3WHU, recordIDs before gradients.",
+    "Use real frozen context and current GT masks, inspect gradient norms and cosine for geo,0.01mat,0.0001cls on shared decoder trunk; report dustbin separately.",
+    "On fixed difficult validation IDs, report per-query error/matchability/boundary distance and D8-interpolated prior validity. Validation cases are diagnostics only, never added to training."
+  ],
+  "candidate": {
+    "name": "radial_pixel_smooth_EPE",
+    "formula": "sqrt(dx_px^2+dy_px^2+0.5^2)-0.5",
+    "epsilon_px": 0.5,
+    "geometry_weight": "Fixed train-only calibration: match median initial shared-trunk gradient norm to the old geo loss; record value before pilot. Do not use val to choose it.",
+    "mat_weight": 0.01,
+    "cls_weight": 0.0001,
+    "supervision": "Identical GT matchable masks and cell-center conventions; per-pair normalization and macro mean; never weight geometry by predicted confidence."
+  },
+  "pilot": {
+    "status": "not_started",
+    "arms": [
+      "old_loss_extra_budget_control",
+      "new_radial_pixel_loss"
+    ],
+    "common_source_checkpoint": "outputs/mhi_v2/Flow0/P5/flow_head_rgb512_seed42_5ep_20261020/best.pt",
+    "source_checkpoint_sha256": "26a24e5239a1b7a3719c638ec7b040a8490c226a7341a0606137d25f0c63c33a",
+    "optimizer": "Clone the same saved Flow optimizer state for both arms; preserve moment/step tensors. New runner must explicitly audit this execution extension.",
+    "additional_epochs": 1,
+    "additional_optimizer_updates": 5107,
+    "learning_rate": 1e-06,
+    "learning_rate_policy": "Same fixed terminal learning rate in both pilot arms; no unequal scheduler reset.",
+    "order": "Same sixth-pass seed47 order, effective batch8 asB1 accumulation8, and same RNG start in both arms.",
+    "trainable_parameters": "Same10 existing Head tensors; freezeDINO/MVT/VGG/CGMDP/D8/D2/QRRU.",
+    "output": "Independent new run directories and weights; do not overwrite current Flow-best or shared C/D/E cache.",
+    "actual_command": null
+  },
+  "confirmatory": {
+    "status": "conditional_not_started",
+    "arms": "Old vs new loss independently initialized from identical frozenv1",
+    "budgets": "Same5epochs25535updates with registered seed/data/LR schedule; extra seeds separately registered.",
+    "prerequisite": "Pilot shows improved relevant metrics; record final coefficient/config/parser/tests first."
+  },
+  "evaluation": [
+    "Full5106 paired Flow macroEPE/p50/p90/p95/p99 and pair-mean worst52, with per-query tails reported separately.",
+    "Highmatchability thresholds0.25/0.5/0.75: endpoint EPE,valid coverage andconfidence-weighted >8/16/32pixel errors.",
+    "D8-interpolated prior error/validity,GTparent retention and final rasterPre@3 under frozenQRRU.",
+    "2x2 negativecontrol: old/newFlow weights each prioroff/on; prioroff final outputs must match because matching features/QRRU are frozen.",
+    "Any final adoption uses preregistered main matching/coverage/failure rules and fixed seeds; EPE alone does not authorize replacing the locked campaign source."
+  ],
+  "deferred_variables": [
+    "smaller Cauchy scale",
+    "classification trainable Q/K or unfreezeMVT",
+    "hard-tail mining",
+    "multi-scale/spatial-gradient consistency",
+    "bidirectional supervision",
+    "confidence quality targets rather than visibility"
+  ],
+  "sources": [
+    {
+      "url": "https://arxiv.org/html/2608.04106v1#S3.SS5",
+      "supports": "LoRetta Eq18 Cauchy/Lorentzian robust coordinate loss was motivated by noisy pseudo-warp targets; c=.1 and loss weights in SecIV-A."
+    },
+    {
+      "url": "https://github.com/Parskatt/RoMa/blob/main/romatch/losses/robust_loss.py",
+      "supports": "Primary implementation reference for dense matching robust loss; no hyperparameter copied without task-specific calibration."
+    }
+  ]
+}

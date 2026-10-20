@@ -1,0 +1,434 @@
+{
+  "schema": "mhi.flow-loss-gradient-topology.v1",
+  "status": "passed",
+  "checked_at": "2026-10-20T12:27:44+08:00",
+  "command": [
+    "/root/miniconda3/envs/loma-repro/bin/python",
+    "/home/disk1/MHINet/outputs/mhi_v2/engineering/flow_loss_review_20261020/gradient_topology.py",
+    "--output",
+    "versions/v2/evidence/flow_loss_review_20261020/gradient_topology.json"
+  ],
+  "environment": {
+    "device": "cpu",
+    "torch_version": "2.11.0+cu128",
+    "cuda_build": "12.8",
+    "cuda_visible_devices": "",
+    "cpu_threads": 2,
+    "deterministic_algorithms": true,
+    "python_version": "3.10.20 (main, Jun 11 2026, 15:17:37) [GCC 14.3.0]"
+  },
+  "source_checkpoint": {
+    "path": "/home/disk1/MHINet/weight/semidense_rgb512_h0joint_from_e_lr8e5_seed42_5ep.pt",
+    "expected_sha256": "43c020b213306c1ba517460092e4007799c2f445edce09cb00bf88fc8ac69cb4",
+    "actual_sha256": "43c020b213306c1ba517460092e4007799c2f445edce09cb00bf88fc8ac69cb4",
+    "task": "semidense_qrru_v1",
+    "loader": "torch.load CPU mmap weights_only=True"
+  },
+  "source_freeze_manifest": {
+    "path": "/home/disk1/MHINet/versions/v1/freeze_manifest.json",
+    "actual_sha256": "76c2412a117061e90b34ed80e57857af94d6e17364b74159f8f6616e6390f239"
+  },
+  "source_sha256": {
+    "/home/disk1/LoMa/third_party/LoRetta/src/loretta/__init__.py": "1583cfc69462d6c99590c678d140993d7b49315bbfdfdf3922b94d909799dd21",
+    "/home/disk1/LoMa/third_party/LoRetta/src/loretta/backbone/__init__.py": "6b2de3789938c534fcc496da4bd17723f369b6f293d141267347977a6f286082",
+    "/home/disk1/LoMa/third_party/LoRetta/src/loretta/backbone/dinov3.py": "7bbcb23dde2a54f589b95aaab3c0c19321f95cb82d0d9900eaa5b875a9584c01",
+    "/home/disk1/LoMa/third_party/LoRetta/src/loretta/backbone/vgg.py": "76cda21a7b1d7c992102de7b3926bc5733c8d173fec47814daa953a6b42c8f49",
+    "/home/disk1/LoMa/third_party/LoRetta/src/loretta/model.py": "05d6f2c8048229d011539b037333dc124eba15a6ef907ba21d3d08407bd3fed1",
+    "/home/disk1/LoMa/third_party/LoRetta/src/loretta/module/__init__.py": "d3284a05b2d8a8bd7240082fbb23ea8047c22474ddae58640abc98b02a61b7de",
+    "/home/disk1/LoMa/third_party/LoRetta/src/loretta/module/affine_fitter.py": "d2d9b6c96346e5e379b785a5ec625f53989f2cc57c980064f968d8da0dd95a6a",
+    "/home/disk1/LoMa/third_party/LoRetta/src/loretta/module/affine_locator.py": "6c36d48306347997b9c7018db51e90032a6f8443005f8aa84721347bd4ba094c",
+    "/home/disk1/LoMa/third_party/LoRetta/src/loretta/module/dense_register.py": "e59e0a414a043397e7a420317313b4f711222593060c7de0d7a061a04f52296b",
+    "/home/disk1/LoMa/third_party/LoRetta/src/loretta/module/match_embedding.py": "218aad28f24a83819bc00f3e2f41f4ee4a4adb00f7f7b3dbe9ccf2d81c608dc6",
+    "/home/disk1/LoMa/third_party/LoRetta/src/loretta/module/vit/__init__.py": "f7a764364e16f5f0183cb9557f1783b88d3d93311cf9ed8b17a6ee52ce0e6736",
+    "/home/disk1/LoMa/third_party/LoRetta/src/loretta/module/vit/attention.py": "06e812bed756eb976d5d8d15868747f5625309dca535bdc32596ec687a988853",
+    "/home/disk1/LoMa/third_party/LoRetta/src/loretta/module/vit/block.py": "7e711a9bf81ee29fd305bb5f5e2034f117ce6e7feb67eee19b2a866ffd57e5c3",
+    "/home/disk1/LoMa/third_party/LoRetta/src/loretta/module/vit/multi_view_transformer.py": "d7649137bdf48e11bfc6d4a9dac7dab499fb21ca28a19a4af34a53521fd635fe",
+    "/home/disk1/LoMa/third_party/LoRetta/src/loretta/module/vit/rope.py": "7c41c86e58277371166ec48fb4930fdbcbee6f19dc2b434d92081b1f3db86807",
+    "/home/disk1/LoMa/third_party/LoRetta/src/loretta/third_party/__init__.py": "749f4a4ad1998627296952dae4415d843ff9dd80e6259b62140210eb816d88c5",
+    "/home/disk1/LoMa/third_party/LoRetta/src/loretta/third_party/dinov3/__init__.py": "a8b4dc4e0d5c494bba5b82ada9293b83f17eb35fce584eb2d2bac799d812c77b",
+    "/home/disk1/LoMa/third_party/LoRetta/src/loretta/third_party/dinov3/builder.py": "4ba680de0b3ab25adb2d9053ffb90fdcd8503e0d9a004d18cd22a382ef46e098",
+    "/home/disk1/LoMa/third_party/LoRetta/src/loretta/third_party/dinov3/layers/__init__.py": "585a060c503edd40afab68f808fab964e70555aa85d1f3e7ffa9c24921aaa85e",
+    "/home/disk1/LoMa/third_party/LoRetta/src/loretta/third_party/dinov3/layers/attention.py": "d3223edeeaaef56965146e565d8fc700cef18a9e4141650906b899df8fd6c7ef",
+    "/home/disk1/LoMa/third_party/LoRetta/src/loretta/third_party/dinov3/layers/block.py": "d78d14eaeee1741986e1c5363b57fbdd9d385599ba34c9460c9657f1f1a8cc95",
+    "/home/disk1/LoMa/third_party/LoRetta/src/loretta/third_party/dinov3/layers/ffn_layers.py": "398b40e2f64e8630c47a41e63193a85a540a5fa986e4bb02fa28254759413893",
+    "/home/disk1/LoMa/third_party/LoRetta/src/loretta/third_party/dinov3/layers/layer_scale.py": "f9a10ee763a62136f9e814bfe2f2209c2cb501dfdc5573f858ab01ba9a69c23f",
+    "/home/disk1/LoMa/third_party/LoRetta/src/loretta/third_party/dinov3/layers/patch_embed.py": "c592c7262779c8e1789ed502aee81bdd55eba4607065f8d04ae95eea683d0ef1",
+    "/home/disk1/LoMa/third_party/LoRetta/src/loretta/third_party/dinov3/layers/rms_norm.py": "8509ffc53f0bbe9e353a8b9e57ca2396795640b4ecc85140c27b17127c971869",
+    "/home/disk1/LoMa/third_party/LoRetta/src/loretta/third_party/dinov3/layers/rope_position_encoding.py": "af8ea35acb76d18ad4d53b844d5057bf01472a848375c51d70583a87f044efd1",
+    "/home/disk1/LoMa/third_party/LoRetta/src/loretta/third_party/dinov3/models/__init__.py": "020284d96b4ccbd376bc0327f626889cd2847add6ade2d8da9c3ccf7044b797f",
+    "/home/disk1/LoMa/third_party/LoRetta/src/loretta/third_party/dinov3/models/vision_transformer.py": "d754a67474e08ab6cda14b032ebd0c979190b6dbf0011b41a723ff7ddc848956",
+    "/home/disk1/LoMa/third_party/LoRetta/src/loretta/third_party/dinov3/utils/__init__.py": "a624b6c2f2f15a9f5e4a46a2ee855c3246ca499cf425d4c70954356b67a90e15",
+    "/home/disk1/LoMa/third_party/LoRetta/src/loretta/third_party/dinov3/utils/utils.py": "70ecf080e29449c8bb1df4ea3e30996a4d02bd7e7956cb857ba1c838dc3936c8",
+    "/home/disk1/LoMa/third_party/LoRetta/src/loretta/utils/__init__.py": "420a376be6d927777aaa0f13c80ff4bf22a36d599a192675fd6cba356d670a0c",
+    "/home/disk1/LoMa/third_party/LoRetta/src/loretta/utils/geometry.py": "4eb06426384d5c9f63fbdc2c6afa548587e5d72ce98fac7b9af6f5387fd87fd9",
+    "/home/disk1/LoMa/third_party/LoRetta/src/loretta/utils/local_correlation.py": "cbcf5a1a1455cfabfb8412d29b89f29029b0966baa85b342887b68d84ff61f31",
+    "/home/disk1/MHINet/mhinet/__init__.py": "3a1af21cab3738cf7e950a2280b2247de612e21b857203ba59e54e4d7fcfb0b0",
+    "/home/disk1/MHINet/mhinet/config.py": "ba51ac06961c374f4a79a020dd9ce47f68bb4507886e35fca62681a8981bdd80",
+    "/home/disk1/MHINet/mhinet/models/__init__.py": "5fc4af06b5e25f005934fa5ac91a5854e8b3bebb609b52b45dc3074367a8d6b2",
+    "/home/disk1/MHINet/mhinet/models/feature_provider.py": "a32d80bf0c16f3cac4f9dd49439e3fed6153d1ba9c157a9385986072930c49f3",
+    "/home/disk1/MHINet/mhinet/ops/__init__.py": "b3719fe55eeb5ddd66749f9291d37151bd7b412efc16010d184c49d6174d8eef",
+    "/home/disk1/MHINet/mhinet/ops/geometry.py": "46bb0b7242bb48758de636dbbe550cf5a4033e8eb405331d4a18f0b21ccf94bb",
+    "/home/disk1/MHINet/mhinet/pretraining/__init__.py": "40bcf00e740aabfca02d8040e89686e8956f8acedef13b79dd257f177ca6d30e",
+    "/home/disk1/MHINet/mhinet/pretraining/loss.py": "be3fb841e19e0a9743eebe98b42a77ad2a160f09dec794699ad242e4014d8c6b",
+    "/home/disk1/MHINet/mhinet/pretraining/model.py": "05c57f11629e9375d218df8346b7096474cdf7d2ac68fe342d5cfdaa44a7e8e6",
+    "/home/disk1/MHINet/mhinet/v2/__init__.py": "172b8feaf8fd21461ac48735f0dd142cf4fb6131015da50fb20021a55aa44786",
+    "/home/disk1/MHINet/mhinet/v2/feature_provider.py": "8098063adfdc8db54a8eea427e3d28f7aab04d680941c30f2dae658b17ad9026",
+    "/home/disk1/MHINet/mhinet/v2/losses.py": "3141a883bd2d0424151177702860adf0f279e9599fbd73f79acf0e30c110f8b3",
+    "/home/disk1/MHINet/outputs/mhi_v2/engineering/flow_loss_review_20261020/gradient_topology.py": "266ca1c7df7ce7195ed7bf7cb7189a588f9f576a7d2abc0adcd5244868c1ae69"
+  },
+  "source_identity_sha256": "24427eafce3a6121b1f44d9500e3f02d7891dd13ea82b569d58b5fd91f23f33c",
+  "diagnostic": {
+    "actual_frozen_v1_head_weights": true,
+    "head_loaded_strictly": true,
+    "head_trainable_tensor_count": 10,
+    "head_parameter_count": 2957572,
+    "context_shape": [
+      1,
+      2,
+      8,
+      8,
+      1024
+    ],
+    "context_dtype": "torch.float32",
+    "context_requires_grad": false,
+    "seed": 20261020,
+    "context": "Synthetic Gaussian reference; sensed=reference+0.2*Gaussian noise",
+    "GT": "Identity H; source mask x<256 and target mask all valid at 512x512",
+    "valid_points": 32,
+    "loss_component_reconstruction_verified": true,
+    "raw_components": {
+      "geo": 0.586005449295044,
+      "mat": 5.087107181549072,
+      "cls": 4.153502464294434
+    },
+    "production_loss_metrics": {
+      "geo": 0.586005449295044,
+      "mat": 5.087107181549072,
+      "cls": 4.153502464294434,
+      "flow_epe_px": 24.189157485961914,
+      "valid_gt_points": 32,
+      "predicted_valid_coverage": 1.0,
+      "mean_matchability": 0.9477327466011047
+    },
+    "optimizer_created": false,
+    "optimizer_steps": 0,
+    "GPU_used": false,
+    "source_checkpoint_modified": false,
+    "model_saved": false
+  },
+  "connectivity": {
+    "shared.stage1_head.no_match_embedding": {
+      "shape": [
+        1024
+      ],
+      "geo": {
+        "connected": true,
+        "nonzero": true,
+        "finite": true,
+        "synthetic_only_l2_norm": 0.0001137745421146974,
+        "synthetic_only_absolute_sum": 0.0027549457736313343
+      },
+      "mat": {
+        "connected": true,
+        "nonzero": true,
+        "finite": true,
+        "synthetic_only_l2_norm": 0.000184761403943412,
+        "synthetic_only_absolute_sum": 0.003978450782597065
+      },
+      "cls": {
+        "connected": false,
+        "nonzero": null,
+        "finite": null,
+        "synthetic_only_l2_norm": null,
+        "synthetic_only_absolute_sum": null
+      }
+    },
+    "shared.stage1_head.no_match_logit": {
+      "shape": [],
+      "geo": {
+        "connected": true,
+        "nonzero": true,
+        "finite": true,
+        "synthetic_only_l2_norm": 0.0005161313456483185,
+        "synthetic_only_absolute_sum": 0.0005161313456483185
+      },
+      "mat": {
+        "connected": true,
+        "nonzero": true,
+        "finite": true,
+        "synthetic_only_l2_norm": 0.0005827059503644705,
+        "synthetic_only_absolute_sum": 0.0005827059503644705
+      },
+      "cls": {
+        "connected": true,
+        "nonzero": true,
+        "finite": true,
+        "synthetic_only_l2_norm": 0.4997521936893463,
+        "synthetic_only_absolute_sum": 0.4997521936893463
+      }
+    },
+    "shared.stage1_head.match_embedding_decoder.net.0.weight": {
+      "shape": [
+        256,
+        1024,
+        3,
+        3
+      ],
+      "geo": {
+        "connected": true,
+        "nonzero": true,
+        "finite": true,
+        "synthetic_only_l2_norm": 5.176544666290283,
+        "synthetic_only_absolute_sum": 4506.2744140625
+      },
+      "mat": {
+        "connected": true,
+        "nonzero": true,
+        "finite": true,
+        "synthetic_only_l2_norm": 9.766942977905273,
+        "synthetic_only_absolute_sum": 9291.609375
+      },
+      "cls": {
+        "connected": false,
+        "nonzero": null,
+        "finite": null,
+        "synthetic_only_l2_norm": null,
+        "synthetic_only_absolute_sum": null
+      }
+    },
+    "shared.stage1_head.match_embedding_decoder.net.0.bias": {
+      "shape": [
+        256
+      ],
+      "geo": {
+        "connected": true,
+        "nonzero": true,
+        "finite": true,
+        "synthetic_only_l2_norm": 0.22171208262443542,
+        "synthetic_only_absolute_sum": 2.105692148208618
+      },
+      "mat": {
+        "connected": true,
+        "nonzero": true,
+        "finite": true,
+        "synthetic_only_l2_norm": 0.4040907919406891,
+        "synthetic_only_absolute_sum": 4.472720146179199
+      },
+      "cls": {
+        "connected": false,
+        "nonzero": null,
+        "finite": null,
+        "synthetic_only_l2_norm": null,
+        "synthetic_only_absolute_sum": null
+      }
+    },
+    "shared.stage1_head.match_embedding_decoder.net.2.weight": {
+      "shape": [
+        256,
+        256,
+        3,
+        3
+      ],
+      "geo": {
+        "connected": true,
+        "nonzero": true,
+        "finite": true,
+        "synthetic_only_l2_norm": 6.9149017333984375,
+        "synthetic_only_absolute_sum": 1508.4007568359375
+      },
+      "mat": {
+        "connected": true,
+        "nonzero": true,
+        "finite": true,
+        "synthetic_only_l2_norm": 12.515932083129883,
+        "synthetic_only_absolute_sum": 3368.539306640625
+      },
+      "cls": {
+        "connected": false,
+        "nonzero": null,
+        "finite": null,
+        "synthetic_only_l2_norm": null,
+        "synthetic_only_absolute_sum": null
+      }
+    },
+    "shared.stage1_head.match_embedding_decoder.net.2.bias": {
+      "shape": [
+        256
+      ],
+      "geo": {
+        "connected": true,
+        "nonzero": true,
+        "finite": true,
+        "synthetic_only_l2_norm": 0.347962349653244,
+        "synthetic_only_absolute_sum": 3.343879222869873
+      },
+      "mat": {
+        "connected": true,
+        "nonzero": true,
+        "finite": true,
+        "synthetic_only_l2_norm": 0.6415456533432007,
+        "synthetic_only_absolute_sum": 6.902754306793213
+      },
+      "cls": {
+        "connected": false,
+        "nonzero": null,
+        "finite": null,
+        "synthetic_only_l2_norm": null,
+        "synthetic_only_absolute_sum": null
+      }
+    },
+    "shared.stage1_head.match_embedding_decoder.warp_head.weight": {
+      "shape": [
+        2,
+        256,
+        3,
+        3
+      ],
+      "geo": {
+        "connected": true,
+        "nonzero": true,
+        "finite": true,
+        "synthetic_only_l2_norm": 36.29879379272461,
+        "synthetic_only_absolute_sum": 1321.828369140625
+      },
+      "mat": {
+        "connected": false,
+        "nonzero": null,
+        "finite": null,
+        "synthetic_only_l2_norm": null,
+        "synthetic_only_absolute_sum": null
+      },
+      "cls": {
+        "connected": false,
+        "nonzero": null,
+        "finite": null,
+        "synthetic_only_l2_norm": null,
+        "synthetic_only_absolute_sum": null
+      }
+    },
+    "shared.stage1_head.match_embedding_decoder.warp_head.bias": {
+      "shape": [
+        2
+      ],
+      "geo": {
+        "connected": true,
+        "nonzero": true,
+        "finite": true,
+        "synthetic_only_l2_norm": 2.2382607460021973,
+        "synthetic_only_absolute_sum": 2.350019931793213
+      },
+      "mat": {
+        "connected": false,
+        "nonzero": null,
+        "finite": null,
+        "synthetic_only_l2_norm": null,
+        "synthetic_only_absolute_sum": null
+      },
+      "cls": {
+        "connected": false,
+        "nonzero": null,
+        "finite": null,
+        "synthetic_only_l2_norm": null,
+        "synthetic_only_absolute_sum": null
+      }
+    },
+    "shared.stage1_head.match_embedding_decoder.matchability_head.weight": {
+      "shape": [
+        1,
+        256,
+        3,
+        3
+      ],
+      "geo": {
+        "connected": false,
+        "nonzero": null,
+        "finite": null,
+        "synthetic_only_l2_norm": null,
+        "synthetic_only_absolute_sum": null
+      },
+      "mat": {
+        "connected": true,
+        "nonzero": true,
+        "finite": true,
+        "synthetic_only_l2_norm": 2.1920676231384277,
+        "synthetic_only_absolute_sum": 60.489959716796875
+      },
+      "cls": {
+        "connected": false,
+        "nonzero": null,
+        "finite": null,
+        "synthetic_only_l2_norm": null,
+        "synthetic_only_absolute_sum": null
+      }
+    },
+    "shared.stage1_head.match_embedding_decoder.matchability_head.bias": {
+      "shape": [
+        1
+      ],
+      "geo": {
+        "connected": false,
+        "nonzero": null,
+        "finite": null,
+        "synthetic_only_l2_norm": null,
+        "synthetic_only_absolute_sum": null
+      },
+      "mat": {
+        "connected": true,
+        "nonzero": true,
+        "finite": true,
+        "synthetic_only_l2_norm": 0.16648335754871368,
+        "synthetic_only_absolute_sum": 0.16648335754871368
+      },
+      "cls": {
+        "connected": false,
+        "nonzero": null,
+        "finite": null,
+        "synthetic_only_l2_norm": null,
+        "synthetic_only_absolute_sum": null
+      }
+    }
+  },
+  "connectivity_order": [
+    "geo",
+    "mat",
+    "cls"
+  ],
+  "connectivity_summary": {
+    "geo": 8,
+    "mat": 8,
+    "cls": 1
+  },
+  "dustbin_invariance": {
+    "no_match_logit_before": 1.507477879524231,
+    "no_match_logit_perturbation": 1.0,
+    "checked": "log(P(source,target_j)/P(source,target_0)) for every real target",
+    "maximum_absolute_change": 9.5367431640625e-07,
+    "numerical_tolerance": 2e-06,
+    "target_probability_ranking_can_be_learned_by_cls": false,
+    "interpretation": "Frozen context and temperature fix all target-to-target logits; cls can update only the shared dustbin scalar"
+  },
+  "units": {
+    "input_size": 512,
+    "normalized_to_pixel_scale": 256.0,
+    "robust_scale_normalized": 0.1,
+    "robust_scale_pixels": 25.6,
+    "geo_formula": "mean_valid sum_xy log1p(0.5*(residual_normalized/0.1)^2)",
+    "weighted_total": "geo + 0.01*mat + 0.0001*cls",
+    "geometry_is_radial_EPE": false,
+    "small_error_derivative_per_pixel": "r_px/(25.6^2)",
+    "normalized_output_chain_rule_factor": 256.0,
+    "note": "A small scalar loss or pixel-space derivative does not establish weak warp-head parameter gradients"
+  },
+  "limitations": [
+    "Topology was measured on synthetic 8x8 frozen context, not real image features or the production 32x32 grid",
+    "Gradient magnitudes here cannot establish real-data task dominance, interference, accuracy, or benefit of an alternative loss",
+    "geo and mat share no-match parameters and the two trunk convolutions; competing gradients require real-data weighted norms/cosines",
+    "No current C/D/E or B/C frozen comparison was changed or interrupted"
+  ],
+  "executed_shell_command": "CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 /root/miniconda3/envs/loma-repro/bin/python outputs/mhi_v2/engineering/flow_loss_review_20261020/gradient_topology.py --output versions/v2/evidence/flow_loss_review_20261020/gradient_topology.json",
+  "launch_environment": {
+    "CUDA_VISIBLE_DEVICES": "",
+    "OMP_NUM_THREADS": "2",
+    "MKL_NUM_THREADS": "2"
+  }
+}

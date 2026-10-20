@@ -829,5 +829,11 @@
     "improved_pairs": 3593,
     "worsened_pairs": 1513,
     "scope": "Selected validation checkpoint, not sealed evaluation or final matching accuracy"
+  },
+  "flow_loss_review": {
+    "status": "diagnosis_complete_new_training_not_started",
+    "review": "versions/v2/FLOW_LOSS_REVIEW.md",
+    "proposal": "versions/v2/flow_loss_ablation_plan.json",
+    "current_campaign_unchanged": true
   }
 }

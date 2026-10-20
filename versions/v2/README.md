@@ -40,3 +40,5 @@ V2-P2-04 的完整 D8/D2 retention/coverage 诊断仍待完成，清单保持未
 正式协议登记为：Flow Head 先跑 seed42、5 epoch、25535 次 optimizer 更新，再从同一 Flow Head 最佳权重独立初始化 C/D/E，各跑相同 seed42、5 epoch、25535 次更新。QRRU 每批目标为 50% 合格预测 D2 + 50% GT 有界噪声；预测修正范围为 6 D2 像素，合格预测不足时以噪声样本补齐，并记录实际比例。固定原 RGB_512 的 train=40849/val=5106，只用 train/val，不读取封存评价集。源图身份交叉为 0，尚不能证明地理邻近或真正空间隔离；本轮只有单 seed42，不能声称多 seed 稳定性。
 
 NVMe副本183822文件、32157538405字节已通过双SHA验证；仅排队D/E启用新runtime，C保持原路径。原预登记哈希不改，见 [执行修订](evidence/performance_20261020/nvme_activation/activation.json)。数据字节、数学、预算与seed不变，跨存储墙钟时间不可直接作模型速度比较。
+
+独立研究：[Flow损失审查与消融提案](FLOW_LOSS_REVIEW.md)。已完成CPU拓扑/误差审计；新loss尚未训练，当前C/D/E与B/C不变。

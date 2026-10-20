@@ -1,0 +1,173 @@
+{
+  "schema": "mhi.flow-loss-training-calibration-selection.v1",
+  "seed": 42,
+  "train_sha256": "11f37bcfcebc61a24310421a5eff2e1921c618d461b8dac8142ff050843f88dc",
+  "counts": {
+    "flair_rgb": 23,
+    "googleearth_current": 6,
+    "whu": 3
+  },
+  "selected": [
+    {
+      "index": 2521,
+      "pair_id": "flair_rgb__15a56c6afcf8c76d",
+      "source": "flair_rgb"
+    },
+    {
+      "index": 25193,
+      "pair_id": "flair_rgb__db96d210db0e6be4",
+      "source": "flair_rgb"
+    },
+    {
+      "index": 14689,
+      "pair_id": "flair_rgb__80388b0b203f6068",
+      "source": "flair_rgb"
+    },
+    {
+      "index": 5359,
+      "pair_id": "flair_rgb__2ea03c0a7001fb7a",
+      "source": "flair_rgb"
+    },
+    {
+      "index": 21059,
+      "pair_id": "flair_rgb__b7d2a105734ca5f1",
+      "source": "flair_rgb"
+    },
+    {
+      "index": 28633,
+      "pair_id": "flair_rgb__f99cf775251edc00",
+      "source": "flair_rgb"
+    },
+    {
+      "index": 12705,
+      "pair_id": "flair_rgb__6e4c70e77427c975",
+      "source": "flair_rgb"
+    },
+    {
+      "index": 19205,
+      "pair_id": "flair_rgb__a7a8b83b5aba21f2",
+      "source": "flair_rgb"
+    },
+    {
+      "index": 21594,
+      "pair_id": "flair_rgb__bc9751501b322546",
+      "source": "flair_rgb"
+    },
+    {
+      "index": 13221,
+      "pair_id": "flair_rgb__72fce010945f1f05",
+      "source": "flair_rgb"
+    },
+    {
+      "index": 2618,
+      "pair_id": "flair_rgb__16768b9ea2319a9a",
+      "source": "flair_rgb"
+    },
+    {
+      "index": 15451,
+      "pair_id": "flair_rgb__868be9430030a648",
+      "source": "flair_rgb"
+    },
+    {
+      "index": 24651,
+      "pair_id": "flair_rgb__d7144561330487bf",
+      "source": "flair_rgb"
+    },
+    {
+      "index": 22707,
+      "pair_id": "flair_rgb__c623724962f0e14a",
+      "source": "flair_rgb"
+    },
+    {
+      "index": 12877,
+      "pair_id": "flair_rgb__6fe690ed1a7eda82",
+      "source": "flair_rgb"
+    },
+    {
+      "index": 15065,
+      "pair_id": "flair_rgb__835153b5ebdb4fb3",
+      "source": "flair_rgb"
+    },
+    {
+      "index": 20464,
+      "pair_id": "flair_rgb__b2b9781ff2ea25b7",
+      "source": "flair_rgb"
+    },
+    {
+      "index": 2763,
+      "pair_id": "flair_rgb__17a454cb3042fbb9",
+      "source": "flair_rgb"
+    },
+    {
+      "index": 23073,
+      "pair_id": "flair_rgb__c906738634e6cac9",
+      "source": "flair_rgb"
+    },
+    {
+      "index": 5912,
+      "pair_id": "flair_rgb__337653eec98520b4",
+      "source": "flair_rgb"
+    },
+    {
+      "index": 22340,
+      "pair_id": "flair_rgb__c2ee6c8a9876aac9",
+      "source": "flair_rgb"
+    },
+    {
+      "index": 3760,
+      "pair_id": "flair_rgb__20771edfb9e62784",
+      "source": "flair_rgb"
+    },
+    {
+      "index": 10886,
+      "pair_id": "flair_rgb__5ecad5c0ccfe5614",
+      "source": "flair_rgb"
+    },
+    {
+      "index": 36235,
+      "pair_id": "googleearth_current__e46658bea5264967",
+      "source": "googleearth_current"
+    },
+    {
+      "index": 36830,
+      "pair_id": "googleearth_current__f829e4b04a044751",
+      "source": "googleearth_current"
+    },
+    {
+      "index": 34579,
+      "pair_id": "googleearth_current__acb9c6e838e5709a",
+      "source": "googleearth_current"
+    },
+    {
+      "index": 35353,
+      "pair_id": "googleearth_current__c6cafde08c7c2623",
+      "source": "googleearth_current"
+    },
+    {
+      "index": 35211,
+      "pair_id": "googleearth_current__c1911d4474763795",
+      "source": "googleearth_current"
+    },
+    {
+      "index": 32790,
+      "pair_id": "googleearth_current__7073196878e4849b",
+      "source": "googleearth_current"
+    },
+    {
+      "index": 39130,
+      "pair_id": "whu__8dc0573ecd9c34fc",
+      "source": "whu"
+    },
+    {
+      "index": 37645,
+      "pair_id": "whu__28fdedaf5640fd17",
+      "source": "whu"
+    },
+    {
+      "index": 39876,
+      "pair_id": "whu__bf8ed63b54269dee",
+      "source": "whu"
+    }
+  ],
+  "policy": "Training only; IDs fixed before real calibration gradients. No validation case is used."
+}

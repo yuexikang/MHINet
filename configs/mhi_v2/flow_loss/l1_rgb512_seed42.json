@@ -1,0 +1,23 @@
+{
+  "schema": "mhi.flow-loss-pilot.v1",
+  "arm": "L1",
+  "base_config": "/home/disk1/MHINet/configs/mhi_v2/flow_head_rgb512_seed42.json",
+  "runtime": "/home/disk1/MHINet/configs/mhi_v2/runtime.rgb512.nvme.server.json",
+  "source_checkpoint": "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P5/flow_head_rgb512_seed42_5ep_20261020/best.pt",
+  "source_sha256": "26a24e5239a1b7a3719c638ec7b040a8490c226a7341a0606137d25f0c63c33a",
+  "calibration_report": "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/calibration/calibration.json",
+  "source_validation": "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P5/flow_head_rgb512_seed42_5ep_20261020/validation/validation_0025535.json",
+  "source_validation_sha256": "62ba0d6d502dd6f74874bf58138a4c7bc0027d2cbd42095b0a62434d0bd1f69a",
+  "seed": 42,
+  "order_seed": 47,
+  "additional_steps": 5107,
+  "learning_rate": 1e-06,
+  "accumulation": 8,
+  "workers": 4,
+  "save_every": 250,
+  "validate_every": 1000,
+  "validation_limit": 64,
+  "epsilon_px": 0.5,
+  "experiment_id": "FlowLoss_L1_rgb512_seed42_20261020",
+  "notes": "Matched sixth-pass pilot; same source model+AdamW moments+RNG. Frozen QRRU and current C/D/E source remain locked. L0 old objective; L1 train-only gradient-calibrated radial pixel loss."
+}

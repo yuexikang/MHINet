@@ -1,6 +1,6 @@
 {
   "schema": "mhi.flow-loss-ablation-proposal.v1",
-  "status": "diagnosis_complete_experiment_not_started",
+  "status": "isolated_pilot_implementation_and_execution_registered",
   "executable": false,
   "created_at": "2026-10-20T04:29:48.150967+00:00",
   "current_campaign_policy": "Keep current C/D/E Flow source, source checkpoints and candidate cache identity locked; no training loss/config mutation.",
@@ -25,7 +25,7 @@
     "supervision": "Identical GT matchable masks and cell-center conventions; per-pair normalization and macro mean; never weight geometry by predicted confidence."
   },
   "pilot": {
-    "status": "not_started",
+    "status": "registered_pending_gpu",
     "arms": [
       "old_loss_extra_budget_control",
       "new_radial_pixel_loss"
@@ -40,7 +40,16 @@
     "order": "Same sixth-pass seed47 order, effective batch8 asB1 accumulation8, and same RNG start in both arms.",
     "trainable_parameters": "Same10 existing Head tensors; freezeDINO/MVT/VGG/CGMDP/D8/D2/QRRU.",
     "output": "Independent new run directories and weights; do not overwrite current Flow-best or shared C/D/E cache.",
-    "actual_command": null
+    "actual_command": [
+      "/root/miniconda3/envs/loma-repro/bin/python",
+      "scripts/mhi_v2/run_flow_loss_experiment.py",
+      "--registration",
+      "versions/v2/evidence/flow_loss_pilot_20261020/registration.json"
+    ],
+    "configs": [
+      "configs/mhi_v2/flow_loss/l0_rgb512_seed42.json",
+      "configs/mhi_v2/flow_loss/l1_rgb512_seed42.json"
+    ]
   },
   "confirmatory": {
     "status": "conditional_not_started",
@@ -72,5 +81,14 @@
       "url": "https://github.com/Parskatt/RoMa/blob/main/romatch/losses/robust_loss.py",
       "supports": "Primary implementation reference for dense matching robust loss; no hyperparameter copied without task-specific calibration."
     }
-  ]
+  ],
+  "execution": {
+    "protocol": "versions/v2/FLOW_LOSS_EXECUTION.md",
+    "registration": "versions/v2/evidence/flow_loss_pilot_20261020/registration.json",
+    "executable": true,
+    "entrypoint": "scripts/mhi_v2/run_flow_loss_experiment.py",
+    "physical_gpu": 2,
+    "availability_policy": "Wait for three consecutive memory<512MiB and utilization<5percent samples; no change to C/D/E",
+    "scope": "calibration + real engineering replay + two-arm 5107-update pilot + full Flow/2x2 matching acceptance; confirmatory full-budget runs registered separately if pilot meets gates"
+  }
 }

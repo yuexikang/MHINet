@@ -1,0 +1,46 @@
+{
+  "schema": "mhi.v2-frozen-prior-comparison.v1",
+  "checkpoint_sha256": "26a24e5239a1b7a3719c638ec7b040a8490c226a7341a0606137d25f0c63c33a",
+  "manifest_sha256": "ad281e31dfd612a239ddfa63f25a42812511e22445f571359477e709c8207f5b",
+  "pairs": 5106,
+  "shared_output_budget": 2048,
+  "metric_protocol": "raster_mask_precision_validation_diagnostic",
+  "scope": "Same frozen Flow-best and QRRU; only prior toggled",
+  "stage_macro_precision_delta_C_minus_B": {
+    "d8": {
+      "1.0": 7.877439442174894e-05,
+      "3.0": 0.000700409326329865,
+      "5.0": 0.0013759208035707404,
+      "10.0": 0.0011344773033308275
+    },
+    "d2": {
+      "1.0": -0.0003354662406972464,
+      "3.0": 4.331989938299863e-05,
+      "5.0": 4.5225972353790667e-05,
+      "10.0": 4.498614110171051e-05
+    },
+    "final": {
+      "1.0": 4.3128641549095015e-05,
+      "3.0": 3.8439571933723826e-05,
+      "5.0": 3.764700120478803e-05,
+      "10.0": 4.185467355111161e-05
+    }
+  },
+  "status": "completed",
+  "inputs": {
+    "B": {
+      "summary": "/home/disk1/MHINet/outputs/mhi_v2/diagnostics/flow_best_prior_toggle_rgb512_20261020/B/summary.json",
+      "sha256": "527eec486df4d15838d2c131b66474761adeb3f48585d2877dd0c7085c53905a"
+    },
+    "C": {
+      "summary": "/home/disk1/MHINet/outputs/mhi_v2/diagnostics/flow_best_prior_toggle_rgb512_20261020/C/summary.json",
+      "sha256": "8dcb3f18df7b8dd6d445687c51df61f2d96091dc16ced8f3b25de6540c134f2f"
+    }
+  },
+  "final_pre3": {
+    "B": 0.9968276063087544,
+    "C": 0.9968660458806882
+  },
+  "final_pre3_delta_pp": 0.0038439571933723826,
+  "interpretation": "Full5106 frozen-QRRU raster diagnostic, prior-toggle only. Tiny first-seed gain; insufficient for module adoption. No GCP or sealed-set headline result."
+}

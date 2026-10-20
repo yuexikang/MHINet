@@ -41,4 +41,4 @@ V2-P2-04 的完整 D8/D2 retention/coverage 诊断仍待完成，清单保持未
 
 NVMe副本183822文件、32157538405字节已通过双SHA验证；仅排队D/E启用新runtime，C保持原路径。原预登记哈希不改，见 [执行修订](evidence/performance_20261020/nvme_activation/activation.json)。数据字节、数学、预算与seed不变，跨存储墙钟时间不可直接作模型速度比较。
 
-独立研究：[Flow损失审查与消融提案](FLOW_LOSS_REVIEW.md)。已完成CPU拓扑/误差审计；新loss尚未训练，当前C/D/E与B/C不变。
+独立研究：[Flow损失审查](FLOW_LOSS_REVIEW.md) 与 [P6自动损失对照实验](FLOW_LOSS_EXECUTION.md)。L0/L1均从相同Flow-best及AdamW/RNG续训5107步，LR1e-6；梯度校准、真实断点验收、完整Flow与2×2匹配评价按队列执行。新增实现与当前C/D/E分开存放；实时阶段见P6输出根的status.json。完整B/C冻结先验诊断已完成，最终Pre@3仅提高0.00384个百分点，尚不足以支持实质收益。

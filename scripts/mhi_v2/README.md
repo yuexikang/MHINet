@@ -7,6 +7,7 @@
 | [prefetch_rgb512.py](prefetch_rgb512.py) | 独立只读预读未来清单块与PNG，按运行seed/epoch/cursor，不改变训练进程 |
 | [cache_rgb512.py](cache_rgb512.py) | 只复制train/val引用文件到新NVMe目录，逐文件双SHA验证，完成后发布manifest |
 | [run_campaign.py](run_campaign.py) | 单 GPU 串行调度 Flow Head → 等预算 C → D → E，阶段成功后才继续 |
+| [run_flow_loss_experiment.py](run_flow_loss_experiment.py) | 独立P6损失校准、工程复现、等预算L0/L1与完整验证队列，等待GPU2空闲自动执行 |
 | `python -m mhinet.v2.train` | 独立运行配置、训练、完整 val 选模、checkpoint 与严格续训 |
 | `python -m mhinet.v2.evaluate` | v2 checkpoint 在指定 RGB_512 清单上的级联评价，可同权重切换 prior |
 

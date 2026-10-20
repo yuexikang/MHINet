@@ -28,6 +28,13 @@ def now():
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
 
+def temporary_directory(output):
+    # torch multiprocessing appends pymp-*/listener-* Unix socket names;
+    # Linux sun_path is limited to 108 bytes, so the long run path cannot host it.
+    identity = hashlib.sha256(str(output).encode()).hexdigest()[:16]
+    return Path("/home/u2ssd2_TQL/mhi_v2_tmp")/identity
+
+
 def write(path, value):
     temporary = path.with_suffix(path.suffix+".temporary")
     temporary.write_text(json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False)+"\n")
@@ -138,8 +145,8 @@ def main(argv=None):
         state["checked_at"] = now(); write(out/"status.json", state)
     env = dict(os.environ, CUDA_VISIBLE_DEVICES=str(reg["physical_gpu"]),
         OMP_NUM_THREADS="2", MKL_NUM_THREADS="2", CUBLAS_WORKSPACE_CONFIG=":4096:8",
-        PYTHONUNBUFFERED="1", TMPDIR=str(out/"temporary"))
-    (out/"temporary").mkdir(exist_ok=True)
+        PYTHONUNBUFFERED="1", TMPDIR=str(temporary_directory(out)))
+    temporary_directory(out).mkdir(parents=True, exist_ok=True, mode=0o700)
     try:
         for stage in stages:
             for completed in state["phases"]:

@@ -95,6 +95,8 @@ class AcceptanceTests(unittest.TestCase):
         path = Path(__file__).resolve().parents[3]/"scripts/mhi_v2/run_flow_loss_experiment.py"
         spec = importlib.util.spec_from_file_location("flow_loss_queue_test", path)
         queue = importlib.util.module_from_spec(spec); spec.loader.exec_module(queue)
+        temporary = queue.temporary_directory(Path('/long-run')/('x'*200))
+        self.assertLess(len(str(temporary/'pymp-12345678/listener-12345678').encode()),108)
         for response, available in (("16131, 0", False), ("0, 91", False), ("42, 0", True)):
             with patch.object(queue.subprocess, "check_output", return_value=response):
                 self.assertEqual(queue.gpu_status(2)["available"], available)

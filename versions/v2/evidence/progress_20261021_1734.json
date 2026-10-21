@@ -1,0 +1,606 @@
+{
+  "schema": "mhi.v2-progress-report.v1",
+  "checked_at": "2026-10-21T17:34:08+08:00",
+  "main_campaign": {
+    "C": {
+      "status": {
+        "status": "completed",
+        "step": 25535,
+        "total_steps": 25535,
+        "epoch": 4,
+        "cursor": 40849,
+        "best_score": 0.9968924427144535,
+        "best_step": 15321,
+        "checked_at": "2026-10-21T01:42:21+08:00"
+      },
+      "epoch_fullval": [
+        {
+          "step": 5107,
+          "pairs": 5106,
+          "scope": "full_val",
+          "complete": true,
+          "metrics": {
+            "failure": 0.0,
+            "matches": 2046.241284763024,
+            "pre_at_1": 0.9941339309758128,
+            "pre_at_10": 0.9974751988290419,
+            "pre_at_3": 0.9968727431575597,
+            "pre_at_5": 0.9972135581122382
+          },
+          "seconds": 1364.7583200479858,
+          "label": "validation",
+          "checked_at": "2026-10-20T15:09:02+08:00",
+          "selection_protocol": "Full-val cascaded raster-mask Pre@3; subset losses are diagnostics only"
+        },
+        {
+          "step": 10214,
+          "pairs": 5106,
+          "scope": "full_val",
+          "complete": true,
+          "metrics": {
+            "failure": 0.0,
+            "matches": 2046.241284763024,
+            "pre_at_1": 0.9941957072561692,
+            "pre_at_10": 0.9974739556531215,
+            "pre_at_3": 0.9968802978419996,
+            "pre_at_5": 0.9972128887098195
+          },
+          "seconds": 1071.6556475520483,
+          "label": "validation",
+          "checked_at": "2026-10-20T18:35:59+08:00",
+          "selection_protocol": "Full-val cascaded raster-mask Pre@3; subset losses are diagnostics only"
+        },
+        {
+          "step": 15321,
+          "pairs": 5106,
+          "scope": "full_val",
+          "complete": true,
+          "metrics": {
+            "failure": 0.0,
+            "matches": 2046.2414806110457,
+            "pre_at_1": 0.994232333131365,
+            "pre_at_10": 0.9974861005255754,
+            "pre_at_3": 0.9968924427144535,
+            "pre_at_5": 0.9972250335822734
+          },
+          "seconds": 1016.2704482529662,
+          "label": "validation",
+          "checked_at": "2026-10-20T20:59:05+08:00",
+          "selection_protocol": "Full-val cascaded raster-mask Pre@3; subset losses are diagnostics only"
+        },
+        {
+          "step": 20428,
+          "pairs": 5106,
+          "scope": "full_val",
+          "complete": true,
+          "metrics": {
+            "failure": 0.0,
+            "matches": 2046.241284763024,
+            "pre_at_1": 0.9942549015557677,
+            "pre_at_10": 0.9974780676965508,
+            "pre_at_3": 0.9968844098854289,
+            "pre_at_5": 0.9972156619484113
+          },
+          "seconds": 1008.9489585490082,
+          "label": "validation",
+          "checked_at": "2026-10-20T23:20:58+08:00",
+          "selection_protocol": "Full-val cascaded raster-mask Pre@3; subset losses are diagnostics only"
+        },
+        {
+          "step": 25535,
+          "pairs": 5106,
+          "scope": "full_val",
+          "complete": true,
+          "metrics": {
+            "failure": 0.0,
+            "matches": 2046.241284763024,
+            "pre_at_1": 0.9942533714930963,
+            "pre_at_10": 0.997477589551966,
+            "pre_at_3": 0.9968843142565119,
+            "pre_at_5": 0.9972158532062453
+          },
+          "seconds": 1032.3651489570038,
+          "label": "validation",
+          "checked_at": "2026-10-21T01:41:59+08:00",
+          "selection_protocol": "Full-val cascaded raster-mask Pre@3; subset losses are diagnostics only"
+        }
+      ]
+    },
+    "D": {
+      "status": {
+        "status": "completed",
+        "step": 25535,
+        "total_steps": 25535,
+        "epoch": 4,
+        "cursor": 40849,
+        "best_score": 0.9968861312059342,
+        "best_step": 15321,
+        "checked_at": "2026-10-21T15:15:35+08:00"
+      },
+      "epoch_fullval": [
+        {
+          "step": 5107,
+          "pairs": 5106,
+          "scope": "full_val",
+          "complete": true,
+          "metrics": {
+            "failure": 0.0,
+            "matches": 2046.241284763024,
+            "pre_at_1": 0.9941321140263906,
+            "pre_at_10": 0.9974795977592221,
+            "pre_at_3": 0.9968731256732276,
+            "pre_at_5": 0.997218626444837
+          },
+          "seconds": 1310.8219743680093,
+          "label": "validation",
+          "checked_at": "2026-10-21T04:18:45+08:00",
+          "selection_protocol": "Full-val cascaded raster-mask Pre@3; subset losses are diagnostics only"
+        },
+        {
+          "step": 10214,
+          "pairs": 5106,
+          "scope": "full_val",
+          "complete": true,
+          "metrics": {
+            "failure": 0.0,
+            "matches": 2046.241284763024,
+            "pre_at_1": 0.9941897782633177,
+            "pre_at_10": 0.9974668791132664,
+            "pre_at_3": 0.9968704480635526,
+            "pre_at_5": 0.9972058121699644
+          },
+          "seconds": 1144.590527704975,
+          "label": "validation",
+          "checked_at": "2026-10-21T06:58:53+08:00",
+          "selection_protocol": "Full-val cascaded raster-mask Pre@3; subset losses are diagnostics only"
+        },
+        {
+          "step": 15321,
+          "pairs": 5106,
+          "scope": "full_val",
+          "complete": true,
+          "metrics": {
+            "failure": 0.0,
+            "matches": 2046.2414806110457,
+            "pre_at_1": 0.9942307074397767,
+            "pre_at_10": 0.9974820841110631,
+            "pre_at_3": 0.9968861312059342,
+            "pre_at_5": 0.9972209215388441
+          },
+          "seconds": 1136.659955693991,
+          "label": "validation",
+          "checked_at": "2026-10-21T09:39:15+08:00",
+          "selection_protocol": "Full-val cascaded raster-mask Pre@3; subset losses are diagnostics only"
+        },
+        {
+          "step": 20428,
+          "pairs": 5106,
+          "scope": "full_val",
+          "complete": true,
+          "metrics": {
+            "failure": 0.0,
+            "matches": 2046.241284763024,
+            "pre_at_1": 0.9942494507075009,
+            "pre_at_10": 0.9974795021303051,
+            "pre_at_3": 0.9968835492251763,
+            "pre_at_5": 0.9972166182375809
+          },
+          "seconds": 1153.6252863709815,
+          "label": "validation",
+          "checked_at": "2026-10-21T12:22:23+08:00",
+          "selection_protocol": "Full-val cascaded raster-mask Pre@3; subset losses are diagnostics only"
+        },
+        {
+          "step": 25535,
+          "pairs": 5106,
+          "scope": "full_val",
+          "complete": true,
+          "metrics": {
+            "failure": 0.0,
+            "matches": 2046.241284763024,
+            "pre_at_1": 0.9942502157388367,
+            "pre_at_10": 0.9974769201495473,
+            "pre_at_3": 0.9968821147914219,
+            "pre_at_5": 0.9972149925459926
+          },
+          "seconds": 1154.6867279739818,
+          "label": "validation",
+          "checked_at": "2026-10-21T15:15:13+08:00",
+          "selection_protocol": "Full-val cascaded raster-mask Pre@3; subset losses are diagnostics only"
+        }
+      ]
+    },
+    "E": {
+      "status": {
+        "status": "running",
+        "step": 3910,
+        "total_steps": 25535,
+        "epoch": 0,
+        "cursor": 31280,
+        "best_score": null,
+        "best_step": null,
+        "checked_at": "2026-10-21T17:34:06+08:00"
+      },
+      "epoch_fullval": []
+    }
+  },
+  "D_minus_C_best_pre3_pp": -0.0006311508519374343,
+  "adoption_threshold_pre3_pp": 0.2,
+  "flow_point_evaluation": {
+    "source": {
+      "pair_macro_epe_px": 0.7611818090845389,
+      "point_statistics": {
+        "d16": {
+          "all_gt_matchable": {
+            "points": 1787158,
+            "coverage_of_gt": 1.0,
+            "epe_px": 0.7543271056311982,
+            "quantiles_px": {
+              "0.5": 0.49020442366600037,
+              "0.9": 1.0904202461242676,
+              "0.95": 1.3849073410034174,
+              "0.99": 2.5988606047630247
+            },
+            "tail_fraction": {
+              "8.0": 0.002972876488816322,
+              "16.0": 0.0022247613249639932,
+              "32.0": 0.0015952702559035071
+            }
+          },
+          "deployed": {
+            "points": 1787149,
+            "coverage_of_gt": 0.9999949640714475,
+            "epe_px": 0.7537127715770038,
+            "quantiles_px": {
+              "0.5": 0.49020296335220337,
+              "0.9": 1.0903959989547727,
+              "0.95": 1.3848672866821268,
+              "0.99": 2.5981802940368657
+            },
+            "tail_fraction": {
+              "8.0": 0.002967855506172121,
+              "16.0": 0.0022197365748463055,
+              "32.0": 0.001590242335697807
+            }
+          },
+          "deployed_confidence_ge_075": {
+            "points": 1776133,
+            "coverage_of_gt": 0.9938309875232072,
+            "epe_px": 0.7338753928384255,
+            "quantiles_px": {
+              "0.5": 0.488786518573761,
+              "0.9": 1.0833823919296268,
+              "0.95": 1.3730028152465816,
+              "0.99": 2.53722683906555
+            },
+            "tail_fraction": {
+              "8.0": 0.002733466469008796,
+              "16.0": 0.0020144887798379963,
+              "32.0": 0.0014182496468451405
+            }
+          }
+        },
+        "d8": {
+          "all_gt_matchable": {
+            "points": 7393604,
+            "coverage_of_gt": 1.0,
+            "epe_px": 2.4177486503818426,
+            "quantiles_px": {
+              "0.5": 0.5073827505111694,
+              "0.9": 1.6798954844474796,
+              "0.95": 8.76373944282526,
+              "0.99": 46.58801464080803
+            },
+            "tail_fraction": {
+              "8.0": 0.05127120684310385,
+              "16.0": 0.04041006253513171,
+              "32.0": 0.02343620242577233
+            }
+          },
+          "deployed": {
+            "points": 7023340,
+            "coverage_of_gt": 0.9499210398609392,
+            "epe_px": 0.8323950130704896,
+            "quantiles_px": {
+              "0.5": 0.4852691739797592,
+              "0.9": 1.1903974056243898,
+              "0.95": 1.7317637562751769,
+              "0.99": 4.872759313583383
+            },
+            "tail_fraction": {
+              "8.0": 0.004315752903889033,
+              "16.0": 0.002360700179686588,
+              "32.0": 0.0016825328120239089
+            }
+          },
+          "deployed_confidence_ge_075": {
+            "points": 6625435,
+            "coverage_of_gt": 0.8961035781737837,
+            "epe_px": 0.7230517895908611,
+            "quantiles_px": {
+              "0.5": 0.46561458706855774,
+              "0.9": 1.0307086229324343,
+              "0.95": 1.3146804332733153,
+              "0.99": 2.6598068189621022
+            },
+            "tail_fraction": {
+              "8.0": 0.0029614659263882295,
+              "16.0": 0.0021793286025747743,
+              "32.0": 0.0015448042279488064
+            }
+          }
+        }
+      }
+    },
+    "L0": {
+      "pair_macro_epe_px": 0.7506175374099163,
+      "point_statistics": {
+        "d16": {
+          "all_gt_matchable": {
+            "points": 1787158,
+            "coverage_of_gt": 1.0,
+            "epe_px": 0.7443879540467359,
+            "quantiles_px": {
+              "0.5": 0.481046199798584,
+              "0.9": 1.0706563949584962,
+              "0.95": 1.3644456088542933,
+              "0.99": 2.5739112663269026
+            },
+            "tail_fraction": {
+              "8.0": 0.0029734360364332643,
+              "16.0": 0.0022253208725809357,
+              "32.0": 0.0015935916130526793
+            }
+          },
+          "deployed": {
+            "points": 1787147,
+            "coverage_of_gt": 0.9999938449762137,
+            "epe_px": 0.7436217885412996,
+            "quantiles_px": {
+              "0.5": 0.48104438185691833,
+              "0.9": 1.0706294298172003,
+              "0.95": 1.3644017100334167,
+              "0.99": 2.5732143068313604
+            },
+            "tail_fraction": {
+              "8.0": 0.002967299276444523,
+              "16.0": 0.002219179507897224,
+              "32.0": 0.0015874463600364156
+            }
+          },
+          "deployed_confidence_ge_075": {
+            "points": 1775459,
+            "coverage_of_gt": 0.9934538524293879,
+            "epe_px": 0.7232047170655654,
+            "quantiles_px": {
+              "0.5": 0.47951164841651917,
+              "0.9": 1.0635262966156005,
+              "0.95": 1.3515492558479298,
+              "0.99": 2.513555355072013
+            },
+            "tail_fraction": {
+              "8.0": 0.002727182097699806,
+              "16.0": 0.0020096211740175357,
+              "32.0": 0.0014109027581036791
+            }
+          }
+        },
+        "d8": {
+          "all_gt_matchable": {
+            "points": 7393604,
+            "coverage_of_gt": 1.0,
+            "epe_px": 2.456144074761993,
+            "quantiles_px": {
+              "0.5": 0.49570925533771515,
+              "0.9": 1.6388864874839784,
+              "0.95": 9.698203468322731,
+              "0.99": 47.11406398773191
+            },
+            "tail_fraction": {
+              "8.0": 0.05279806708609225,
+              "16.0": 0.041733368462795684,
+              "32.0": 0.024156419521521574
+            }
+          },
+          "deployed": {
+            "points": 7010368,
+            "coverage_of_gt": 0.948166550440083,
+            "epe_px": 0.812672956569847,
+            "quantiles_px": {
+              "0.5": 0.473397359251976,
+              "0.9": 1.1494950294494621,
+              "0.95": 1.6544525086879673,
+              "0.99": 4.744779882431031
+            },
+            "tail_fraction": {
+              "8.0": 0.0042310189707587395,
+              "16.0": 0.0023607890484493824,
+              "32.0": 0.0016843623615764537
+            }
+          },
+          "deployed_confidence_ge_075": {
+            "points": 6618919,
+            "coverage_of_gt": 0.8952222759022528,
+            "epe_px": 0.71054675383573,
+            "quantiles_px": {
+              "0.5": 0.4554934799671173,
+              "0.9": 1.0067172288894652,
+              "0.95": 1.2865239977836598,
+              "0.99": 2.6124695587158335
+            },
+            "tail_fraction": {
+              "8.0": 0.0029441363461314455,
+              "16.0": 0.002173466694485912,
+              "32.0": 0.0015414903853635314
+            }
+          }
+        }
+      }
+    },
+    "L1": {
+      "pair_macro_epe_px": 0.7510587166499115,
+      "point_statistics": {
+        "d16": {
+          "all_gt_matchable": {
+            "points": 1787158,
+            "coverage_of_gt": 1.0,
+            "epe_px": 0.7448249070579114,
+            "quantiles_px": {
+              "0.5": 0.4809250831604004,
+              "0.9": 1.072172498703003,
+              "0.95": 1.3675805449485767,
+              "0.99": 2.5814868998527514
+            },
+            "tail_fraction": {
+              "8.0": 0.0029745551316671497,
+              "16.0": 0.0022242017773470503,
+              "32.0": 0.0015935916130526793
+            }
+          },
+          "deployed": {
+            "points": 1787147,
+            "coverage_of_gt": 0.9999938449762137,
+            "epe_px": 0.7440591032166305,
+            "quantiles_px": {
+              "0.5": 0.4809233844280243,
+              "0.9": 1.072158193588257,
+              "0.95": 1.3675153970718381,
+              "0.99": 2.580649795532229
+            },
+            "tail_fraction": {
+              "8.0": 0.0029684183785665084,
+              "16.0": 0.0022180604057752385,
+              "32.0": 0.0015874463600364156
+            }
+          },
+          "deployed_confidence_ge_075": {
+            "points": 1775408,
+            "coverage_of_gt": 0.9934253155009238,
+            "epe_px": 0.7221158301224908,
+            "quantiles_px": {
+              "0.5": 0.4794298857450485,
+              "0.9": 1.0649033188819887,
+              "0.95": 1.3546799600124357,
+              "0.99": 2.5154368877410844
+            },
+            "tail_fraction": {
+              "8.0": 0.00271205266620405,
+              "16.0": 0.0019939078792029774,
+              "32.0": 0.0013985517695087552
+            }
+          }
+        },
+        "d8": {
+          "all_gt_matchable": {
+            "points": 7393604,
+            "coverage_of_gt": 1.0,
+            "epe_px": 2.451408625945083,
+            "quantiles_px": {
+              "0.5": 0.49623623490333557,
+              "0.9": 1.6383000254631042,
+              "0.95": 9.662768602371207,
+              "0.99": 47.00185535430906
+            },
+            "tail_fraction": {
+              "8.0": 0.05276317206060806,
+              "16.0": 0.041659250346650974,
+              "32.0": 0.02407716182797997
+            }
+          },
+          "deployed": {
+            "points": 7010882,
+            "coverage_of_gt": 0.948236069986978,
+            "epe_px": 0.8138138486744858,
+            "quantiles_px": {
+              "0.5": 0.47404320538043976,
+              "0.9": 1.151402294635773,
+              "0.95": 1.6554662108421292,
+              "0.99": 4.772968463897669
+            },
+            "tail_fraction": {
+              "8.0": 0.004279632719535145,
+              "16.0": 0.0023624702284248972,
+              "32.0": 0.0016839536024140756
+            }
+          },
+          "deployed_confidence_ge_075": {
+            "points": 6619118,
+            "coverage_of_gt": 0.8952491910575682,
+            "epe_px": 0.7099127178407912,
+            "quantiles_px": {
+              "0.5": 0.4561927914619446,
+              "0.9": 1.0089385032653808,
+              "0.95": 1.289895290136335,
+              "0.99": 2.618056597709656
+            },
+            "tail_fraction": {
+              "8.0": 0.002929242234388328,
+              "16.0": 0.0021572360547130296,
+              "32.0": 0.0015266384433696453
+            }
+          }
+        }
+      }
+    }
+  },
+  "flow_comparison": {
+    "pairs": 5106,
+    "delta_L1_minus_L0": {
+      "mean_delta": 0.0004411792399950782,
+      "source_image_group_bootstrap_95ci": [
+        0.00010545526604790572,
+        0.0007832077452017965
+      ],
+      "iterations": 2000,
+      "seed": 42,
+      "resampling_unit": "original source image, stratified by source_dataset"
+    }
+  },
+  "negative_control": {
+    "status": "passed",
+    "pairs": 64,
+    "scope": "fixed_prefix",
+    "output_fields_exactly_equal": [
+      "points_a",
+      "points_b",
+      "confidence",
+      "fine_points_b",
+      "lineage"
+    ]
+  },
+  "queue_snapshot": {
+    "status": "waiting_gpu_idle",
+    "next_stage": "matching_L0_B",
+    "physical_gpu": 1,
+    "gpu_snapshot": {
+      "memory_used_mib": 8075,
+      "utilization_percent": 81,
+      "available": false
+    }
+  },
+  "inputs_sha256": {
+    "/home/disk1/MHINet/outputs/mhi_v2/MHIv2-C/P5/qrru_rgb512_seed42_5ep_20261020/validation/validation_0005107.json": "b2e0e499f18a903f774eb56c893d5cd3c5adc37e31e826d7a83c29c51ec816c8",
+    "/home/disk1/MHINet/outputs/mhi_v2/MHIv2-C/P5/qrru_rgb512_seed42_5ep_20261020/validation/validation_0010214.json": "e17687bd8a31765f4de9632e74e64d8233dd7a53b357dc6998b769d604d808e8",
+    "/home/disk1/MHINet/outputs/mhi_v2/MHIv2-C/P5/qrru_rgb512_seed42_5ep_20261020/validation/validation_0015321.json": "6fe46ad4df79a6aff02a099ba73083c6a9dde4c0ec02c8049a8ce0672747afdf",
+    "/home/disk1/MHINet/outputs/mhi_v2/MHIv2-C/P5/qrru_rgb512_seed42_5ep_20261020/validation/validation_0020428.json": "4fbfe17f69f7419442d8e2a7f212dc35342e8ec0ae0395e1d23fcb8abfd94a4b",
+    "/home/disk1/MHINet/outputs/mhi_v2/MHIv2-C/P5/qrru_rgb512_seed42_5ep_20261020/validation/validation_0025535.json": "b2bcd7e285253dadb81b46de1867cc4b0291de61764abcc623de503c3075b3e1",
+    "/home/disk1/MHINet/outputs/mhi_v2/MHIv2-D/P5/qrru_rgb512_seed42_5ep_20261020/validation/validation_0005107.json": "844844d10b3eb9174f736507347ba31a61b0cccfa5a85d2ddca7dcb32fc2fe1f",
+    "/home/disk1/MHINet/outputs/mhi_v2/MHIv2-D/P5/qrru_rgb512_seed42_5ep_20261020/validation/validation_0010214.json": "907ac42918de1ca763ae87bb141226f8a98cd7e391daf36fd0de3576a6e61529",
+    "/home/disk1/MHINet/outputs/mhi_v2/MHIv2-D/P5/qrru_rgb512_seed42_5ep_20261020/validation/validation_0015321.json": "849ecf864fd415b27f71e469c31f542cfe80abe031e8478cc82668e1072d61f3",
+    "/home/disk1/MHINet/outputs/mhi_v2/MHIv2-D/P5/qrru_rgb512_seed42_5ep_20261020/validation/validation_0020428.json": "15131310573c6fef9151b66ad7336c9f1de5cf7998e49a4c8f0eb6d6b71d1e08",
+    "/home/disk1/MHINet/outputs/mhi_v2/MHIv2-D/P5/qrru_rgb512_seed42_5ep_20261020/validation/validation_0025535.json": "d5dd6ee381f712396fb023070ea1cda75da2da6913e3110aed8de1a3894861a9",
+    "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/evaluations/source/summary.json": "84048a5e0747d881b3d63bea73d71d95f6a9a0d7747d3c1d6faf2a011e534798",
+    "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/evaluations/L0/summary.json": "2c9b2b4a105f209b4ed3fe0936843a9864b95130888363e6b685711e061bc0e5",
+    "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/evaluations/L1/summary.json": "b7065586626c71a6f791bba7600549a7d730876a556b7c114beeaf5f4feb46ce",
+    "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/evaluations/negative_control/negative_control.json": "8126ceeed9393e080fc86d51225d0347eecb4450e8f0d43bc87fdd58f99e8c2b",
+    "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/evaluations/comparison/comparison.json": "8475853e72a74d21b8000a2fc8358301707624356206125826d2c35b0254879f"
+  },
+  "conclusion": "C/D five-epoch training is complete. D does not improve main validation Pre@3 over C. E is training and has no epoch-full validation yet. L1 does not improve pair-macro Flow EPE or deployed D8 endpoint mean over L0. The 64-pair prior-off control passes; full four-way matching evaluation remains queued on GPU1. Keep the campaign Flow source locked.",
+  "limitations": [
+    "All precision is RGB512 raster-mask validation, not GCP or sealed evaluation.",
+    "Single seed; no cross-seed stability conclusion.",
+    "Point means and quantiles are separate from pair-macro EPE. Deployed D8 statistics are conditioned on actual prior validity; coverage is explicitly reported.",
+    "The raw D8 all-GT population includes queries with unusable interpolation support; those targets do not contribute to the deployed geometry reward.",
+    "64-pair exact prior-off control is a prefix test; full5106 negative control and matching adoption gates are not complete."
+  ]
+}

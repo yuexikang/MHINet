@@ -2,6 +2,8 @@
 
 分支：`codex/mhi-v2`。v1 基线单独保存在 [../v1/](../v1/README.md) 与源码工作区 `/home/disk1/MHINet-v1`。
 
+2026-10-21 17:34（北京时间）更新：C/D各完成5epoch，最佳完整val Pre@3分别99.689244%/99.688613%，D未显示主指标收益；E约15%。P6已完成source/L0/L1全5106对point诊断和64对prior-off精确负对照，新loss仍未胜过旧loss；完整2×2匹配验收在GPU1排队。见 [最新证据快照](evidence/progress_20261021_1734.json)。
+
 2026-10-21 09:05（北京时间）更新：C的5epoch已完成，D约58%、E排队。P6的L0/L1各5107步及完整5106对验证均完成，EPE为0.75061754/0.75105872px；新loss未胜过同预算旧loss，当前源权重保持锁定。后续point诊断和2×2匹配评价等待GPU1空闲，不能宣称最终匹配收益。见 [配对结果及状态快照](evidence/flow_loss_pilot_20261020/pilot_fullval_paired_20261021.json)。
 
 2026-10-20（北京时间）状态：`mhinet/v2/` 的 Flow0、D8 soft prior、Direct-D8、Discrepancy/DGFO、严格迁移与训练/评价入口已实现；85 项 CPU 测试通过（含独立损失实验），[真实 GPU 工程验收](evidence/real_feature_acceptance_20261020_final.json) 为 `passed`。Flow Head 的 2 步实数据训练烟测及断点恢复也已通过。Flow Head已完成5 epoch/25535步，完整5106对 val 最佳EPE为0.7611818px；C在GPU0继续训练，D/E排队。实时状态以 `campaign.json` 与各阶段 `status.json` 为准；尚无最终匹配精度收益结论。

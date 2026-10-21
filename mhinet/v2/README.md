@@ -1,9 +1,13 @@
-# MHI v2 专属算法目录
+# MHI v2 算法
 
-此处已实现独立 MHI v2。顺序与逐项签收见 [ACCEPTANCE.md](../../versions/v2/ACCEPTANCE.md) 和 [验收状态](../../versions/v2/acceptance_status.json)。
+当前优先优化基础 QRRU 推理，并用杭州数据进行小规模训练。见 [当前结论与计划](../../versions/v2/QRRU_RESTART.md)。
 
-Flow0 接口、D8 soft prior、Direct-D8 fine matching、Discrepancy/DGFO、严格版本化迁移、RGB_512 数据适配、独立损失及训练评价代码均放在此目录。可复用旧模块的稳定功能；使用 wrapper、子类或显式适配保留旧 checkpoint 参数键名，不往原 `models/`、`downstream/` 注入 v2 专属条件分支，不改写 v1 来源核或默认 CLI。
+- `qrru.py`：递归细化；训练保留轨迹，普通推理只返回末轮。
+- `coarse_matcher.py`：D8 全局匹配，可选整矩阵或分块。
+- `semidense.py`：D8 → D2 → QRRU；按置信度分批细化，满足最终有效输出预算后可提前停止。
+- `pilot.py`：杭州数据抽样、基础权重加载、近似地理参考弱监督、小试前后评价。
+- `benchmark.py`：512 实际推理速度和精度对照。
 
-显式入口为 `python -m mhinet.v2.train` 与 `python -m mhinet.v2.evaluate`，训练配置见 [配置目录](../../configs/mhi_v2/README.md)。只支持512×512输入；最终稳定置信度上限2048与 QRRU 前12000候选分别控制。Flow 模式跳过 H Fitter；GT 仅用于监督/预测后的评价。
+运行配置：`configs/mhi_v2/hangzhou_pilot.json`。输入仅 512，最终输出默认最多 2048。推理的 `inference_iterations` 与训练 `iterations` 独立；`max_matches` 是 QRRU 前候选上限。`qrru_early_stop` 在凑满有效输出后停止，诊断模式仍处理完整候选。
 
-57 项 CPU 测试和 [真实 GPU 验收](../../versions/v2/evidence/real_feature_acceptance_20261020_final.json) 已通过；后者只覆盖两对 val 和三步 QRRU 梯度诊断，未提供完整精度结论。Flow Head 两步实数据训练及断点恢复烟测已通过。正式 Flow Head 已在 GPU0 启动，C/D/E 排队；实际状态从 `campaign.json` 和阶段 `status.json` 读取。本轮固定原 train/val、单 seed42；源图身份隔离不能解释为真正空间隔离。
+`train.py`、`evaluate.py`、`flow_loss/` 保留上一轮 RGB_512 实验的恢复与追溯用途。当前小试不依赖这些入口的逐文件哈希和注册流程。v1 文件及基线工作区保持独立。

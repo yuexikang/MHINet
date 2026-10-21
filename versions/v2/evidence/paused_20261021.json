@@ -1,0 +1,16 @@
+{
+  "reason": "User requested pause and QRRU-first restart",
+  "E": {
+    "status": "interrupted",
+    "step": 5107,
+    "total_steps": 25535,
+    "epoch": 0,
+    "cursor": 40849,
+    "best_score": null,
+    "best_step": null,
+    "checked_at": "2026-10-21T18:56:31+08:00"
+  },
+  "flow_loss_queue": "interrupted",
+  "old_queues_running": false,
+  "source_commit": "7dec317"
+}

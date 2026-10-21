@@ -101,14 +101,15 @@ def match_d8(descriptor_a, descriptor_b, mask_a=None, mask_b=None, *,
     if not math.isfinite(flow_sigma_d8) or flow_sigma_d8 <= 0:
         raise ValueError('flow_sigma_d8 must be finite and positive')
     channels, height, width = descriptor_a.shape
+    full_a, full_b = mask_a is None, mask_b is None
     if mask_a is None:
         mask_a = torch.ones((height, width), dtype=torch.bool, device=descriptor_a.device)
     if mask_b is None:
         mask_b = torch.ones_like(mask_a)
     if mask_a.shape != (height, width) or mask_b.shape != (height, width):
         raise ValueError('D8 mask shape mismatch')
-    source = mask_a.flatten().nonzero().flatten()
-    target = mask_b.flatten().nonzero().flatten()
+    source = torch.arange(height*width, device=descriptor_a.device) if full_a else mask_a.flatten().nonzero().flatten()
+    target = torch.arange(height*width, device=descriptor_a.device) if full_b else mask_b.flatten().nonzero().flatten()
     rows, cols = len(source), len(target)
     if not rows or not cols:
         empty = torch.empty(0, dtype=torch.long, device=descriptor_a.device)
@@ -136,15 +137,15 @@ def match_d8(descriptor_a, descriptor_b, mask_a=None, mask_b=None, *,
         col_lse = torch.logsumexp(x, 0)
         row_best = x.argmax(1)
         col_best = x.argmax(0)
-        probability = torch.exp(2*x - row_lse[:, None] - col_lse[None])
         if policy == 'mutual':
             si = torch.arange(rows, device=fa.device)
             si = si[col_best[row_best] == si]
             ti = row_best[si]
-            confidence = probability[si, ti]
+            confidence = torch.exp(2*x[si, ti] - row_lse[si] - col_lse[ti])
             raw = len(si)
             thresholded = int((confidence >= threshold).sum())
         else:
+            probability = torch.exp(2*x - row_lse[:, None] - col_lse[None])
             raw = rows * cols
             thresholded = int((probability >= threshold).sum())
             confidence, index = torch.topk(probability.flatten(), min(max_coarse, raw), sorted=True)
@@ -164,8 +165,8 @@ def match_d8(descriptor_a, descriptor_b, mask_a=None, mask_b=None, *,
             col_lse = torch.logaddexp(col_lse, torch.logsumexp(x, 0))
             values, indices = x.max(0)
             improve = values > col_max
-            col_max[improve] = values[improve]
-            col_best[improve] = indices[improve] + start
+            col_max = torch.where(improve, values, col_max)
+            col_best = torch.where(improve, indices + start, col_best)
         if policy == 'mutual':
             si = torch.arange(rows, device=fa.device)
             si = si[col_best[row_best] == si]

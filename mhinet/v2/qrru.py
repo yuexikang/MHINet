@@ -19,8 +19,8 @@ class QRRUV2(QRRU):
     """Preserve all v1 parameter names, shapes, and control-point geometry.
 
     Both adapters start at zero. Disabling the branches registers no extra
-    parameters and directly calls the original implementation. No H0 or GT
-    geometry enters this module.
+    parameters. Training and inference share the recurrence; only trajectory
+    retention differs. No H0 or GT geometry enters this module.
     """
 
     def __init__(self, channels=256, iterations=4, radius=1.5, *,
@@ -41,9 +41,12 @@ class QRRUV2(QRRU):
             self.flow_adapter = nn.Conv2d(2, 32, 1, bias=False)
             nn.init.zeros_(self.flow_adapter.weight)
 
-    def forward(self, feature_a, feature_b, points_a_uv, points_b_uv, *, projected=False):
-        if not self.use_discrepancy and len(points_a_uv):
-            return super().forward(feature_a, feature_b, points_a_uv, points_b_uv, projected=projected)
+    def forward(self, feature_a, feature_b, points_a_uv, points_b_uv, *,
+                projected=False, history=True, iterations=None):
+        """Training keeps the trajectory; inference can retain only the last state."""
+        iterations = self.iterations if iterations is None else iterations
+        if iterations < 1:
+            raise ValueError("QRRU needs at least one iteration")
         if not projected:
             feature_a = self.project(feature_a[None])[0]
             feature_b = self.project(feature_b[None])[0]
@@ -53,30 +56,31 @@ class QRRUV2(QRRU):
             # input features if a caller accumulates an empty training loss.
             zero = (feature_a.sum()+feature_b.sum())*0
             empty = feature_a.new_empty
-            return dict(flows=empty((self.iterations, 0, 2, 2, 2))+zero,
-                        centers=empty((self.iterations, 0, 2))+zero,
-                        grids=empty((self.iterations, 0, 4, 4, 2))+zero,
-                        gates=empty((self.iterations, 0, 1, 2, 2))+zero)
+            steps = iterations if history else 1
+            return dict(flows=empty((steps, 0, 2, 2, 2))+zero,
+                        centers=empty((steps, 0, 2))+zero,
+                        grids=empty((steps, 0, 4, 4, 2))+zero,
+                        gates=empty((steps, 0, 1, 2, 2))+zero)
         off = offsets(points_a_uv.device)
         ga = points_a_uv[:, None, None, :]+off
         gb0 = points_b_uv[:, None, None, :]+off
         wa = sample_uv(feature_a, ga).permute(0, 3, 1, 2)
-        source_valid = _inside_samples(ga, feature_a.shape[-2:])
+        source_valid = _inside_samples(ga, feature_a.shape[-2:]) if self.use_discrepancy else None
         h = wa.new_zeros((n, 32, 4, 4))
         flow = wa.new_zeros((n, 2, 2, 2))
         flows, centers, grids, gates = [], [], [], []
-        for _ in range(self.iterations):
+        local_flow = interpolate_controls(flow, off)
+        for step in range(iterations):
             # The controls lie at +/-1 whereas samples lie at +/-1.5. This
             # polynomial extrapolation must not be replaced by image resizing.
-            local_flow = interpolate_controls(flow, off)
             gb = gb0+local_flow
             wb = sample_uv(feature_b, gb).permute(0, 3, 1, 2)
             z = self.encoder(torch.cat((h, wa, wb), 1))
-            valid = source_valid & _inside_samples(gb, feature_b.shape[-2:])
-            discrepancy = (F.normalize(wa, dim=1)-F.normalize(wb, dim=1)).abs()
-            discrepancy = discrepancy * valid[:, None]
-            representation = self.diff_encoder(discrepancy) * valid[:, None]
-            z = z+self.diff_adapter(representation)*valid[:, None]
+            if self.use_discrepancy:
+                valid = source_valid & _inside_samples(gb, feature_b.shape[-2:])
+                discrepancy = (F.normalize(wa, dim=1)-F.normalize(wb, dim=1)).abs()
+                representation = self.diff_encoder(discrepancy * valid[:, None]) * valid[:, None]
+                z = z+self.diff_adapter(representation)*valid[:, None]
             if self.use_dgfo:
                 flow_chw = local_flow.permute(0, 3, 1, 2)
                 propagated = self.dgfo(representation, flow_chw, valid)
@@ -84,10 +88,13 @@ class QRRUV2(QRRU):
             g = torch.sigmoid(self.gate(torch.cat((h, z), 1)))
             h = (1-g)*h+g*z
             out = self.head(self.down(h))
-            flow = flow+torch.sigmoid(out[:, 2:3])*self.radius*torch.tanh(out[:, :2])
-            flows.append(flow)
-            gates.append(torch.sigmoid(out[:, 2:3]))
-            centers.append(points_b_uv+flow.mean((-2, -1)))
-            grids.append(gb0+interpolate_controls(flow, off))
+            gate = torch.sigmoid(out[:, 2:3])
+            flow = flow+gate*self.radius*torch.tanh(out[:, :2])
+            local_flow = interpolate_controls(flow, off)
+            if history or step == iterations-1:
+                flows.append(flow)
+                gates.append(gate)
+                centers.append(points_b_uv+flow.mean((-2, -1)))
+                grids.append(gb0+local_flow)
         return dict(flows=torch.stack(flows), centers=torch.stack(centers),
                     grids=torch.stack(grids), gates=torch.stack(gates))

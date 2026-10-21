@@ -1,7 +1,7 @@
 {
   "schema": "mhi.experiment-plan.v1",
   "model_line": "MHI v2",
-  "status": "flow_completed_qrru_C_running_D_E_queued",
+  "status": "paused_by_user",
   "executable": false,
   "training_started": true,
   "purpose": "Research and acceptance registry only; executable mhi.v2-run.v1 training configs are registered separately under configs/mhi_v2/.",
@@ -748,7 +748,7 @@
     }
   ],
   "formal_training_started": true,
-  "formal_training_status": "flow_completed_qrru_C_running_D_E_queued",
+  "formal_training_status": "paused_by_user",
   "launch_status_authority": "outputs/mhi_v2/campaign_rgb512_seed42_20261020/campaign.json and per-phase status.json",
   "last_updated_on": "2026-10-20",
   "implementation_status": "implemented",
@@ -781,7 +781,7 @@
       "report": "versions/v2/evidence/resource_acceptance_20261020.json"
     }
   },
-  "next_action": "Continue C training and queued D/E; GPU2 sequentially evaluates same-weight B/C prior toggle. Frozen full-val Flow baseline is complete; do not attribute final matching gains yet.",
+  "next_action": "See QRRU_RESTART.md; do not automatically resume old queues",
   "implementation_commit": "88fee1b",
   "engineering_pending": [
     "V2-P2-04: complete D8/D2 retention and coverage diagnostic; checklist remains unsigned until full evidence exists."
@@ -835,5 +835,6 @@
     "review": "versions/v2/FLOW_LOSS_REVIEW.md",
     "proposal": "versions/v2/flow_loss_ablation_plan.json",
     "current_campaign_unchanged": true
-  }
+  },
+  "pause_reason": "2026-10-21: stop RGB512 long runs; prioritize QRRU inference and a small Hangzhou pilot"
 }

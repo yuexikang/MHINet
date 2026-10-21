@@ -19,8 +19,18 @@ class SemidenseConfigV2(SemidenseConfig):
     dgfo_radius: int = 1
     dgfo_dim: int = 32
     max_output_matches: int = 2048
+    coarse_mode: str = "chunked"
+    fine_precision: str = "fp32"
+    inference_iterations: int = 4
+    qrru_early_stop: bool = True
 
     def __post_init__(self):
+        if self.coarse_mode not in ("chunked", "full"):
+            raise ValueError("coarse_mode must be chunked or full")
+        if self.fine_precision not in ("fp32", "bf16", "fp16"):
+            raise ValueError("fine_precision must be fp32, bf16 or fp16")
+        if self.inference_iterations not in (1, 2, 3, 4):
+            raise ValueError("inference_iterations must be 1..4")
         for name in ("input_size", "coarse_queries", "fine_windows", "qrru_queries", "chunk",
                      "window_chunk", "inference_window_chunk", "iterations", "max_coarse",
                      "max_matches", "max_output_matches", "dgfo_radius", "dgfo_dim"):
@@ -46,6 +56,8 @@ class SemidenseConfigV2(SemidenseConfig):
         for name in ("flow_guidance_enabled", "use_discrepancy", "use_dgfo"):
             if type(getattr(self, name)) is not bool:
                 raise ValueError(f"{name} must be boolean")
+        if type(self.qrru_early_stop) is not bool:
+            raise ValueError('qrru_early_stop must be boolean')
         if self.use_dgfo and not self.use_discrepancy:
             raise ValueError("DGFO requires discrepancy features")
         for name in ("max_output_matches", "dgfo_radius", "dgfo_dim"):

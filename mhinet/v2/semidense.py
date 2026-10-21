@@ -13,6 +13,8 @@ from .qrru import QRRUV2
 from .coarse_matcher import match_d8, flow_prior_from_shared
 from .supervision import (direct_d8_fine_grids, coarse_labels, fine_labels, to_uv,
     to_norm, valid_points, qrru_targets)
+from mhinet.downstream.supervision import sample_uv
+from mhinet.downstream.losses import dual_log_probability
 
 
 _MATCH_FIELDS = ('points_a', 'points_b', 'confidence', 'fine_points_b', 'lineage')
@@ -56,6 +58,17 @@ class SemidenseMatcherV2(SemidenseMatcher):
         self.qrru = QRRUV2(channels, config.iterations, config.radius,
             use_discrepancy=config.use_discrepancy, use_dgfo=config.use_dgfo,
             dgfo_radius=config.dgfo_radius, dgfo_dim=config.dgfo_dim)
+
+    def fine_scores(self, da, db, a, b, va, vb):
+        # Sampling and normalization stay FP32; only inference correlation is optional AMP.
+        fa = F.normalize(sample_uv(da, to_uv(a, da.shape[-2:])), dim=-1)
+        fb = F.normalize(sample_uv(db, to_uv(b, db.shape[-2:])), dim=-1)
+        precision = self.config.fine_precision
+        amp = not torch.is_grad_enabled() and da.is_cuda and precision != 'fp32'
+        dtype = torch.bfloat16 if precision == 'bf16' else torch.float16
+        with torch.autocast(da.device.type, dtype=dtype, enabled=amp):
+            scores = fa @ fb.transpose(-1, -2)
+        return dual_log_probability(scores.float()/self.tau_f, va[:, :, None] & vb[:, None, :])
 
     def training_losses(self,shared,H_gt,mask_a,mask_b):
         """Labels are explicit; never called implicitly by forward/infer."""
@@ -164,7 +177,7 @@ class SemidenseMatcherV2(SemidenseMatcher):
                     min_matchability=c.flow_min_matchability)
             coarse = match_d8(d8[0], d8[1], temperature=float(self.tau_c),
                 threshold=c.confidence_threshold, max_coarse=c.max_coarse,
-                policy='mutual', chunk_rows=c.chunk, force_chunked=True,
+                policy='mutual', chunk_rows=c.chunk, force_chunked=c.coarse_mode == 'chunked',
                 flow_prior=prior, flow_lambda=c.flow_lambda, flow_sigma_d8=c.flow_sigma_d8)
             fine_matches, fine_trace, qrru_trace = [], [], []
             parent_probes = set(torch.linspace(0, max(0, len(coarse.source_flat)-1), 4).long().tolist())
@@ -221,24 +234,37 @@ class SemidenseMatcherV2(SemidenseMatcher):
                 results.append(cap_output_matches(output, c.max_output_matches))
                 continue
             projected = self.qrru.project(d2)
-            refined, outside = [], 0
+            refined, outside = [], d2.new_zeros((), dtype=torch.long)
+            accepted = 0
             for start in range(0, len(a), c.inference_window_chunk):
                 end = start + c.inference_window_chunk
                 qr = self.qrru(projected[0], projected[1], to_uv(a[start:end], hf),
-                    to_uv(b[start:end], hf), projected=True)
+                    to_uv(b[start:end], hf), projected=True, history=diagnostics,
+                    iterations=c.inference_iterations)
                 if diagnostics and start == 0:
                     qrru_trace.append(dict(a=a[start:end][:8].cpu(), b=b[start:end][:8].cpu(),
                         lineage=lineage[start:end][:8].cpu(),
                         **{key: value[:, :8].cpu() for key, value in qr.items()}))
-                refined.append(to_norm(qr['centers'][-1], hf))
+                points = to_norm(qr['centers'][-1], hf)
+                refined.append(points)
                 grid = qr['grids'][-1]
-                outside += int(((grid < 0) | (grid > grid.new_tensor([hf[1]-1, hf[0]-1]))).any(-1).sum())
+                outside += ((grid < 0) | (grid > grid.new_tensor([hf[1]-1, hf[0]-1]))).any(-1).sum()
+                # Confidence order is fixed and QRRU treats each match independently.
+                # Later candidates cannot displace an already valid output prefix.
+                if c.qrru_early_stop and not diagnostics:
+                    accepted += int((torch.isfinite(points).all(-1) & (points.abs() <= 1).all(-1)).sum())
+                    if accepted >= c.max_output_matches:
+                        break
             out = torch.cat(refined)
+            candidate_count = len(a)
+            a, b, score, lineage = a[:len(out)], b[:len(out)], score[:len(out)], lineage[:len(out)]
             valid = torch.isfinite(out).all(-1) & (out >= -1).all(-1) & (out <= 1).all(-1)
             output = dict(points_a=centers_to_native(a[valid], size[0]),
                 points_b=centers_to_native(out[valid], size[1]),
                 fine_points_b=centers_to_native(b[valid], size[1]), confidence=score[valid],
-                lineage=lineage[valid], qrru_outside_samples=outside,
+                lineage=lineage[valid], qrru_outside_samples=int(outside),
+                qrru_processed=len(out), qrru_candidates=candidate_count,
+                qrru_stopped_early=len(out) < candidate_count,
                 rejected_qrru=int((~valid).sum()), **candidate_fields,
                 failure_reason='none' if bool(valid.any()) else 'invalid_qrru_output')
             if diagnostics:

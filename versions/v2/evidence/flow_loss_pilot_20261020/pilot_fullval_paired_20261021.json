@@ -1,0 +1,144 @@
+{
+  "schema": "mhi.flow-loss-terminal-paired-report.v1",
+  "status": "training_complete_extended_diagnostics_and_matching_pending",
+  "checked_at": "2026-10-21T09:05:08+08:00",
+  "inputs": {
+    "source": {
+      "path": "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P5/flow_head_rgb512_seed42_5ep_20261020/validation/validation_0025535.json",
+      "sha256": "62ba0d6d502dd6f74874bf58138a4c7bc0027d2cbd42095b0a62434d0bd1f69a"
+    },
+    "L0": {
+      "path": "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/L0/validation/full_terminal_0030642.json",
+      "sha256": "181109f1765d846408edf3fd09509fffb735f47e24d50cfbf9c0fa5a9e7425a1"
+    },
+    "L1": {
+      "path": "/home/disk1/MHINet/outputs/mhi_v2/Flow0/P6/flow_loss_pilot_rgb512_seed42_20261020/L1/validation/full_terminal_0030642.json",
+      "sha256": "0b9781a6c2f66819e4c5ee2623c97e0ecd4410140f39aa9cf7dfefb862db17da"
+    }
+  },
+  "pairs": 5106,
+  "macro_epe_px": {
+    "source": 0.7611818104410377,
+    "L0": 0.7506175389651266,
+    "L1": 0.7510587203411602
+  },
+  "L1_minus_L0_epe_px": 0.00044118137603360813,
+  "L1_relative_delta_pct": 0.05877578835178365,
+  "delta_from_source_pct": {
+    "L0": -1.3878775518545328,
+    "L1": -1.3299174994752083
+  },
+  "L1_pairs_better": 2476,
+  "L1_pairs_worse": 2630,
+  "pair_mean_epe_quantiles": {
+    "source": {
+      "0.5": 0.5447067320346832,
+      "0.9": 0.7950865626335144,
+      "0.95": 0.9410306960344315,
+      "0.99": 2.0388780713081305
+    },
+    "L0": {
+      "0.5": 0.5323066413402557,
+      "0.9": 0.7855024635791779,
+      "0.95": 0.9453320503234863,
+      "0.99": 2.0003230571746826
+    },
+    "L1": {
+      "0.5": 0.5320570468902588,
+      "0.9": 0.7857838273048401,
+      "0.95": 0.948354184627533,
+      "0.99": 2.027800762653344
+    }
+  },
+  "fixed_hard52_mean_epe_px": {
+    "source": 17.937157126573418,
+    "L0": 17.945155872748447,
+    "L1": 17.94425316957327
+  },
+  "by_source": {
+    "flair_rgb": {
+      "source": 0.8526809628555495,
+      "L0": 0.8437822947953637,
+      "L1": 0.844244621137832
+    },
+    "googleearth_current": {
+      "source": 0.5299991283434097,
+      "L0": 0.5161328803662698,
+      "L1": 0.5176223527926666
+    },
+    "whu": {
+      "source": 0.521932550560573,
+      "L0": 0.5051736311067508,
+      "L1": 0.5033235508429853
+    }
+  },
+  "fairness": {
+    "extra_updates_each": 5107,
+    "actual_samples_each": 40849,
+    "actual_pair_order_exact": true,
+    "learning_rate_each": 1e-06,
+    "source_model_optimizer_rng_and_order_hashes_exact": true,
+    "calibration_sha256": "5ae02a68b1ded35946bd1597a144ba78e107c341f6c66d2d02794268820f1ba9"
+  },
+  "queue_snapshot": {
+    "status": "waiting_gpu_idle",
+    "gpu": 1,
+    "next_stage": "flow_source",
+    "gpu_snapshot": {
+      "memory_used_mib": 9045,
+      "utilization_percent": 18,
+      "available": false
+    },
+    "checked_at": "2026-10-21T01:05:02+00:00"
+  },
+  "main_campaign_snapshot": [
+    {
+      "name": "Flow0",
+      "status": "completed",
+      "progress": {
+        "status": "completed",
+        "step": 25535,
+        "total_steps": 25535,
+        "epoch": 4,
+        "cursor": 40849,
+        "best_score": 0.7611818104410377,
+        "best_step": 25535,
+        "checked_at": "2026-10-20T11:45:32+08:00"
+      }
+    },
+    {
+      "name": "MHIv2-C",
+      "status": "completed",
+      "progress": {
+        "status": "completed",
+        "step": 25535,
+        "total_steps": 25535,
+        "epoch": 4,
+        "cursor": 40849,
+        "best_score": 0.9968924427144535,
+        "best_step": 15321,
+        "checked_at": "2026-10-21T01:42:21+08:00"
+      }
+    },
+    {
+      "name": "MHIv2-D",
+      "status": "running",
+      "progress": {
+        "status": "running",
+        "step": 14773,
+        "total_steps": 25535,
+        "epoch": 2,
+        "cursor": 36472,
+        "best_score": 0.9968731256732276,
+        "best_step": 5107,
+        "checked_at": "2026-10-21T09:05:04+08:00"
+      }
+    }
+  ],
+  "conclusion": "L1 did not beat the equal-budget L0 on full-val macro EPE. Both improved over the source after one more epoch. Keep the locked campaign Flow source; final point-level and frozen-QRRU 2x2 matching conclusions remain pending.",
+  "limitations": [
+    "Single training seed; validation used for diagnostics, not sealed-set headline/GCP accuracy.",
+    "Quantiles and fixed52 means are over per-pair mean EPE, not individual endpoint quantiles.",
+    "Matching and extended point diagnostics are not completed; no final-loss adoption decision is claimed."
+  ]
+}

@@ -25,7 +25,7 @@
     "supervision": "Identical GT matchable masks and cell-center conventions; per-pair normalization and macro mean; never weight geometry by predicted confidence."
   },
   "pilot": {
-    "status": "registered_pending_gpu",
+    "status": "training_complete_fullval_compared_extended_matching_pending",
     "arms": [
       "old_loss_extra_budget_control",
       "new_radial_pixel_loss"
@@ -49,7 +49,8 @@
     "configs": [
       "configs/mhi_v2/flow_loss/l0_rgb512_seed42.json",
       "configs/mhi_v2/flow_loss/l1_rgb512_seed42.json"
-    ]
+    ],
+    "results_evidence": "versions/v2/evidence/flow_loss_pilot_20261020/pilot_fullval_paired_20261021.json"
   },
   "confirmatory": {
     "status": "conditional_not_started",
@@ -91,6 +92,7 @@
     "availability_policy": "Wait for three consecutive memory<512MiB and utilization<5percent samples; no change to C/D/E",
     "scope": "calibration + real engineering replay + two-arm 5107-update pilot + full Flow/2x2 matching acceptance; confirmatory full-budget runs registered separately if pilot meets gates",
     "gpu_amendment": "versions/v2/evidence/flow_loss_pilot_20261020/gpu1_relocation.json",
-    "runtime_amendment": "versions/v2/evidence/flow_loss_pilot_20261020/gpu1_runtime_fix.json"
+    "runtime_amendment": "versions/v2/evidence/flow_loss_pilot_20261020/gpu1_runtime_fix.json",
+    "status": "waiting_gpu1_for_extended_diagnostics_and_matching"
   }
 }

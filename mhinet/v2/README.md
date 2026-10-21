@@ -1,5 +1,9 @@
 # MHI v2 算法
 
+当前主线是 `train_hangzhou.py`：仅 DINO 预训练，其余活跃模块从头联合训练。`geometry_gt.py` 统一四类监督，`GeometryPairDataset` 加载标签，`observe_qrru.py` 记录逐轮修正。详见 [几何监督与杭州训练](../../versions/v2/GEOMETRY_TRAINING.md)。
+
+以下为此前 QRRU 推理优化入口：
+
 当前优先优化基础 QRRU 推理，并用杭州数据进行小规模训练。见 [当前结论与计划](../../versions/v2/QRRU_RESTART.md)。
 
 - `qrru.py`：递归细化；训练保留轨迹，普通推理只返回末轮。

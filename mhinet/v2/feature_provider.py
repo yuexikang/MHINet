@@ -118,6 +118,14 @@ class V2SharedDescriptorNetwork(SharedDescriptorNetwork):
         self.geometry_mode = geometry_mode
         self.lora_enabled = False
 
+    def train(self, mode=True):
+        super().train(mode)
+        # Fresh VGG needs to learn running statistics; legacy providers retain
+        # their original frozen-BN policy.
+        if getattr(self, 'fresh_training', False) and self._vgg_trainable:
+            self.vgg.train(mode)
+        return self
+
     def forward(self, images: torch.Tensor, *, pyramid_scales: tuple[int, ...] = (8, 4, 2),
                 compute_stage1: bool = True, compute_flow: bool | None = None) -> dict[str, Any]:
         if images.ndim != 5 or images.shape[0] < 1 or tuple(images.shape[1:]) != (2, 3, 512, 512):
@@ -156,6 +164,41 @@ def build_v2_shared(runtime, geometry_mode: str = "flow_d16") -> tuple[V2SharedD
               "stage1_parameter_keys_preserved": True,
               "homography_fitter_enabled": geometry_mode == "h0"}
     return model, report
+
+
+def build_fresh_shared(runtime):
+    """Load only original DINO tensors; construct all downstream modules fresh."""
+    from mhinet.models.feature_provider import make_loma_importable
+    make_loma_importable(runtime.loma_root, runtime.loretta_source_root)
+    from experiments.loma_dinov3_l17_v1.descriptor import (
+        FrozenDINOv3L17, FrozenDINOv3L11L17Stage1, build_l17_decoder)
+    from loma.descriptor.dedode import VGG
+    from loretta.module.vit import MultiViewTransformer
+    from loretta.module.affine_locator import MatchEmbeddingDecoder
+
+    class FreshPairEncoder(FrozenDINOv3L11L17Stage1):
+        def __init__(self, checkpoint):
+            # Bypass the subclass initializer that would load pretrained MVT.
+            FrozenDINOv3L17.__init__(self, checkpoint)
+            self.multi_view_transformer = MultiViewTransformer(in_dim=2048, out_dim=1024)
+
+    descriptor = nn.Module()
+    descriptor.encoder = nn.Module()
+    descriptor.encoder.frozen_dinov3 = FreshPairEncoder(runtime.dino_checkpoint)
+    descriptor.encoder.vgg = VGG(size='19', amp=True, amp_dtype=torch.bfloat16)
+    descriptor.decoder = build_l17_decoder(256)
+    head = nn.Module()
+    head.localization_dim = 1024
+    head.register_buffer('position_frequencies', 2*torch.pi*torch.randn(512, 2))
+    head.register_buffer('position_scale', torch.tensor(1.))
+    head.register_buffer('temperature', torch.tensor(.1))
+    head.no_match_embedding = nn.Parameter(torch.zeros(1024))
+    head.no_match_logit = nn.Parameter(torch.tensor(0.))
+    head.match_embedding_decoder = MatchEmbeddingDecoder(1024, 256)
+    model = V2SharedDescriptorNetwork(descriptor, head, geometry_mode='flow_d16')
+    model.fresh_training = True
+    model.set_training_groups(mvt=True, vgg=True, dedode=True, ghim_head=True)
+    return model.to(runtime.device)
 
 
 __all__ = ["FlowStage1Adapter", "V2SharedDescriptorNetwork", "build_v2_shared",

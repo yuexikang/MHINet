@@ -1,0 +1,109 @@
+{
+  "status": "implementation_verified_training_running",
+  "exact_H_flow_loss_delta": 0.0,
+  "exact_H_flow_gradient_max_deltas": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "geometry_checks": [
+    "sparse center labels only; controls ignored",
+    "sparse Flow loss uses only annotations",
+    "nonrigid dense holes ignored",
+    "absent dense reverse stays unknown",
+    "unlabeled supervised loss is zero"
+  ],
+  "compatibility_tests": {
+    "passed": 14
+  },
+  "smoke": {
+    "status": "passed",
+    "training": {
+      "final_epe_d2": 1.2336551398038864,
+      "epoch": 1.0,
+      "loss": 26.10754656791687,
+      "damaged_fraction": 0.2734375,
+      "cls": 9.245115518569946,
+      "valid_gt_points": 615.0,
+      "matching_loss": 20.56016504764557,
+      "lc": 15.476130247116089,
+      "pair": 4.5,
+      "initial_epe_d2": 1.2335591614246368,
+      "noise_queries": 110.0,
+      "predicted_queries": 18.0,
+      "mean_matchability": 0.5001916065812111,
+      "improved_fraction": 0.2265625,
+      "qrru_queries": 128.0,
+      "flow_loss": 4.397030830383301,
+      "geo": 4.390043139457703,
+      "mat": 0.6063192337751389,
+      "predicted_valid_coverage": 1.0,
+      "lf": 5.08403468132019,
+      "matching_labels": 548.375,
+      "lr": 0.0002,
+      "qrru_loss": 1.1503508761525154,
+      "flow_epe_px": 183.85269355773926
+    },
+    "peak_mb": 5723.1884765625
+  },
+  "initialization": {
+    "dino": "/home/disk1/LoMa/outputs/loretta_stage1_h/cache/huggingface/hub/models--BRoss123--LoRetta/blobs/09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+    "pretrained_modules": [
+      "DINOv3 L11/L17"
+    ],
+    "fresh_modules": [
+      "MVT",
+      "VGG",
+      "CGMDP",
+      "Flow Head",
+      "D8/D2 temperatures",
+      "QRRU"
+    ],
+    "trainable_parameters": 109259897,
+    "frozen_dino_parameters": 227564544,
+    "train_pairs": 256,
+    "val_pairs": 64,
+    "train_gt_types": [
+      "geo_approx"
+    ],
+    "dormant_branch": "D1 is not executed and excluded from training",
+    "started_at": "2026-10-22T00:12:34+08:00"
+  },
+  "current": {
+    "status": "running",
+    "epoch": 1,
+    "best_val_loss": 20.365716248750687,
+    "bad_epochs": 0,
+    "val": {
+      "predicted_valid_coverage": 0.9919891357421875,
+      "noise_queries": 128.0,
+      "pre1": 0.09199389041354791,
+      "matching_loss": 16.34846742451191,
+      "pre3": 0.18413522890241346,
+      "valid_gt_points": 691.765625,
+      "mean_matchability": 0.6097732102498412,
+      "improved_fraction": 0.4991455078125,
+      "geo": 3.3096451312303543,
+      "flow_loss": 3.316039750352502,
+      "initial_epe_d2": 1.0051552345976233,
+      "loss": 20.365716248750687,
+      "success20_at3": 0.609375,
+      "rmse_valid": 171.76609059423208,
+      "flow_epe_px": 134.7453172802925,
+      "predicted_queries": 0.0,
+      "qrru_queries": 128.0,
+      "final_epe_d2": 1.0050860373303294,
+      "damaged_fraction": 0.500732421875,
+      "cls": 9.098016858100891,
+      "lc": 11.044424012303352,
+      "lf": 5.304043360054493,
+      "matching_labels": 657.53125,
+      "mat": 0.5484814394731075,
+      "qrru_loss": 0.7012090875323338,
+      "matches": 1744.453125
+    },
+    "checked_at": "2026-10-22T00:14:07+08:00"
+  },
+  "result_directory": "outputs/mhi_v2/hangzhou_fresh_joint_20261021",
+  "note": "Snapshot only. Live status and per-epoch reports are authoritative. Initial trial archived and not resumed."
+}

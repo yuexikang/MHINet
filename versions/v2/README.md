@@ -1,4 +1,10 @@
-# MHI v2：QRRU 优先
+# MHI v2：杭州联合训练
+
+## 当前主线：杭州从头联合训练
+
+只保留原始 DINOv3 预训练权重并冻结，其余活跃模块重新初始化。新增 homography / dense_flow / sparse_points / unlabeled 几何接口；杭州近似 H 使用弱监督。256 对训练、64 对验证，最多 30 epoch，余弦退火和早停，自动记录 QRRU 前/中/后及每次迭代。
+
+见 [实际调用路径、接口和训练细节](GEOMETRY_TRAINING.md)。入口：`python -m mhinet.v2.train_hangzhou --config configs/mhi_v2/hangzhou_fresh_joint.json`。运行结果位于 `outputs/mhi_v2/hangzhou_fresh_joint_20261021`；下文为上一轮记录。
 
 当前分支 `codex/mhi-v2`，输入 **512×512**，最终最多 **2048** 对。
 

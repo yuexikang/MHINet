@@ -266,7 +266,10 @@ class V2TrainingOwnershipTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 system(torch.empty(shape))
         with self.assertRaises(ValueError):
-            system.configure_stage('joint')
+            system.configure_stage('unknown_stage')
+        system.configure_stage('joint')
+        self.assertTrue(all(p.requires_grad for p in matcher.parameters()))
+        self.assertTrue(all(not p.requires_grad for p in shared.dino.parameters()))
 
 
 class V2MixedQRRUTests(unittest.TestCase):

@@ -70,8 +70,14 @@ class SemidenseMatcherV2(SemidenseMatcher):
             scores = fa @ fb.transpose(-1, -2)
         return dual_log_probability(scores.float()/self.tau_f, va[:, :, None] & vb[:, None, :])
 
-    def training_losses(self,shared,H_gt,mask_a,mask_b):
+    def training_losses(self,shared,H_gt=None,mask_a=None,mask_b=None, *, geometry=None):
         """Labels are explicit; never called implicitly by forward/infer."""
+        if geometry is not None:
+            from types import SimpleNamespace
+            from .training import supervised_matching_loss, mixed_qrru_loss
+            matching, record = supervised_matching_loss(self, shared, geometry)
+            qrru, qrecord = mixed_qrru_loss(SimpleNamespace(matcher=self), shared, {}, '', geometry=geometry)
+            return matching+self.config.lambda_q*qrru, [{**record, **qrecord}]
         if self.config.geometry_mode == 'h0':
             return super().training_losses(shared,H_gt,mask_a,mask_b)
         c=self.config

@@ -1,0 +1,32 @@
+{
+  "dataset": "/home/disk1/Data/datasets/kewei/HangZhou_cloud0_rgb_RGBMatch_v4",
+  "runtime": "/home/disk1/MHINet/configs/mhi_v2/runtime.rgb512.nvme.server.json",
+  "output": "/home/disk1/MHINet/outputs/hangzhou_cleaned_restart/v2_20261022",
+  "seed": 42,
+  "train_per_group": 64,
+  "val_per_group": 16,
+  "epochs": 30,
+  "learning_rate": 0.0002,
+  "min_lr": 1e-06,
+  "patience": 6,
+  "min_epochs": 5,
+  "min_delta": 0.001,
+  "accumulation": 4,
+  "workers": 2,
+  "predicted_fraction": 0.5,
+  "qrru_weight": 1.0,
+  "matcher": {
+    "geometry_mode": "flow_d16",
+    "coarse_mode": "full",
+    "fine_precision": "fp32",
+    "iterations": 4,
+    "inference_iterations": 4,
+    "coarse_queries": 512,
+    "fine_windows": 64,
+    "qrru_queries": 128,
+    "max_output_matches": 2048,
+    "qrru_early_stop": true
+  },
+  "frozen_locator_checkpoint": "/home/disk1/MHINet/weight/semidense_rgb512_h0joint_from_e_lr8e5_seed42_5ep.pt",
+  "selection": "/home/disk1/MHINet/outputs/hangzhou_cleaned_restart/selection.json"
+}

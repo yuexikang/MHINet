@@ -1,0 +1,39 @@
+{
+  "completed_at": "2026-10-22T06:19:16.881497+00:00",
+  "removed_pairs": 636,
+  "counts": {
+    "train": {
+      "before": 79760,
+      "removed": 627,
+      "after": 79133
+    },
+    "val": {
+      "before": 1670,
+      "removed": 2,
+      "after": 1668
+    },
+    "test_controlled": {
+      "before": 1822,
+      "removed": 7,
+      "after": 1815
+    },
+    "test_real": {
+      "before": 235,
+      "removed": 0,
+      "after": 235
+    }
+  },
+  "small_subset": {
+    "train": {
+      "before": 256,
+      "after": 254
+    },
+    "val": {
+      "before": 64,
+      "after": 64
+    }
+  },
+  "selection": "/home/disk1/MHINet/outputs/hangzhou_cleaned_restart/selection.json",
+  "temporary_work_directory": "HangZhou_cloud0_rgb_RGBMatch_work_v4/temporary is empty",
+  "historical_run_manifests": "Preserved as records of completed runs; new experiment uses cleaned selection only"
+}

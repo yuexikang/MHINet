@@ -95,7 +95,8 @@ def main():
         selection = json.loads(selection_path.read_text())
     else:
         root = Path(config['dataset'])
-        selection = {split: select_rows(root, split, config[split+'_per_group'], config['seed']) for split in ('train', 'val')}
+        selection = (json.loads(Path(config['selection']).read_text()) if config.get('selection') else
+                     {split: select_rows(root, split, config[split+'_per_group'], config['seed']) for split in ('train', 'val')})
         train_blocks = {r['anchor_block_id'] for r in selection['train']}
         val_blocks = {r['anchor_block_id'] for r in selection['val']}
         if train_blocks & val_blocks:
@@ -107,6 +108,8 @@ def main():
     shared = build_fresh_shared(runtime)
     matcher = SemidenseMatcherV2(SemidenseConfigV2(**config['matcher']))
     system = SemidenseSystemV2(shared, matcher, 'joint').to(args.device)
+    from .frozen_locator import initialize_locator
+    initialization = initialize_locator(system, config)
     parameters = [p for p in system.parameters() if p.requires_grad]
     optimizer = torch.optim.AdamW(parameters, lr=config['learning_rate'], weight_decay=.01)
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=config['epochs'], eta_min=config['min_lr'])
@@ -122,7 +125,7 @@ def main():
         first_epoch, best, bad_epochs = state['epoch']+1, state['best'], state['bad_epochs']
         torch.set_rng_state(state['rng']); torch.cuda.set_rng_state_all(state['cuda_rng'])
     write_json(output/'initialization.json', dict(dino=str(runtime.dino_checkpoint),
-        pretrained_modules=['DINOv3 L11/L17'], fresh_modules=['MVT','VGG','CGMDP','Flow Head','D8/D2 temperatures','QRRU'],
+        **initialization,
         trainable_parameters=sum(p.numel() for p in parameters),
         frozen_dino_parameters=sum(p.numel() for p in system.shared.dino.parameters()),
         train_pairs=len(train), val_pairs=len(val), train_gt_types=sorted({r.get('gt_type','unknown') for r in selection['train']}),

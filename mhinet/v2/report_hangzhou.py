@@ -36,8 +36,10 @@ def write_report(output):
         axis.legend(fontsize=8)
     fig.savefig(output/'qrru_progress.png', dpi=160); plt.close(fig)
     (output/'qrru_summary.json').write_text(json.dumps(tables, indent=2)+'\n')
-    lines = ['# Hangzhou fresh joint training', '',
-        'Only DINOv3 is pretrained. Geographic labels are approximate; precision is reference agreement.', '',
+    initialization = json.loads((output/'initialization.json').read_text())
+    pretrained = ', '.join(initialization['pretrained_modules'])
+    lines = ['# Hangzhou joint training', '',
+        f'Pretrained modules: {pretrained}. Geographic labels are approximate; precision is reference agreement.', '',
         '| Stage | Epoch | Val loss | Pre@1 | Pre@3 | Flow EPE px |',
         '|---|---:|---:|---:|---:|---:|']
     for label, r in zip(names, chosen):

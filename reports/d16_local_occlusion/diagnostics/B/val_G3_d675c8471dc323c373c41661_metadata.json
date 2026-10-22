@@ -1,0 +1,540 @@
+{
+  "row": {
+    "kind": "G3",
+    "G": "G3",
+    "affine": false,
+    "anchor_xy": [
+      818140.6450661398,
+      3320828.641468685
+    ],
+    "center_A": [
+      817988.9880278842,
+      3320653.1489400365
+    ],
+    "center_B": [
+      818292.3021043953,
+      3321004.1339973337
+    ],
+    "J_A": [
+      [
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        -1.0
+      ]
+    ],
+    "J_B": [
+      [
+        1.9497713828481293,
+        0.4454116687138911
+      ],
+      [
+        0.4454116687138911,
+        -1.9497713828481293
+      ]
+    ],
+    "W_A": [
+      [
+        1.0,
+        0.0,
+        817733.4880278842
+      ],
+      [
+        0.0,
+        -1.0,
+        3320908.6489400365
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "W_B": [
+      [
+        1.9497713828481293,
+        0.4454116687138911,
+        817680.3328347213
+      ],
+      [
+        0.4454116687138911,
+        -1.9497713828481293,
+        3321388.497904295
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "H_A_to_B": [
+      [
+        0.4874428457120324,
+        -0.11135291717847279,
+        -27.522463355611432
+      ],
+      [
+        0.1113529171784728,
+        0.4874428457120324,
+        239.8179304721374
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "H_B_to_A": [
+      [
+        1.9497713828481293,
+        0.4454116687138911,
+        -53.15519316284917
+      ],
+      [
+        -0.4454116687138911,
+        1.9497713828481293,
+        -479.8489642585628
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "footprint_A": [
+      [
+        817732.9880278842,
+        3320909.1489400365
+      ],
+      [
+        818244.9880278842,
+        3320909.1489400365
+      ],
+      [
+        818244.9880278842,
+        3320397.1489400365
+      ],
+      [
+        817732.9880278842,
+        3320397.1489400365
+      ],
+      [
+        817732.9880278842,
+        3320909.1489400365
+      ]
+    ],
+    "footprint_B": [
+      [
+        817679.1352431956,
+        3321389.250084152
+      ],
+      [
+        818677.4181912137,
+        3321617.3008585335
+      ],
+      [
+        818905.4689655952,
+        3320619.0179105154
+      ],
+      [
+        817907.1860175771,
+        3320390.967136134
+      ],
+      [
+        817679.1352431956,
+        3321389.250084152
+      ]
+    ],
+    "source_product_gsd_A_m": 1.0,
+    "source_product_gsd_B_m": 2.0,
+    "output_gsd_A_m": 1.0,
+    "output_gsd_B_m": 1.9999999999999998,
+    "gsd_a_output": 1.0,
+    "gsd_b_output": 1.9999999999999998,
+    "baseline_gsd_A_m": 1.0,
+    "baseline_gsd_B_m": 2.0,
+    "singular_values_A": [
+      1.0,
+      1.0
+    ],
+    "singular_values_B": [
+      2.0,
+      2.0
+    ],
+    "source_product_scale_ratio": 2.0,
+    "output_scale_ratio": 1.9999999999999998,
+    "source_mapping_min_singular_A": 1.0,
+    "source_mapping_min_singular_B": 1.0,
+    "r_A": 0.7346759768597022,
+    "r_B": 0.18366899421497312,
+    "geometry_overlap_A": 0.7346759768597022,
+    "geometry_overlap_B": 0.18366899421497312,
+    "intersection_area_m2": 192590.89927790978,
+    "area_A_m2": 262144.0,
+    "area_B_m2": 1048575.9999997284,
+    "overlap_bin": null,
+    "params": {
+      "rotation_degrees": 12.868009549769369,
+      "rotation_positive": "counterclockwise_in_projected_map_XY",
+      "shear": 0.0,
+      "anisotropy": 1.0,
+      "matrix_order_B": "R_ccw @ shear_xy @ diag(a,1/a) @ diag(g,-g)",
+      "fine_output_side": "A",
+      "center_B_minus_A_m": [
+        303.31407651118934,
+        350.9850572971627
+      ],
+      "translation_ray_degrees": 49.16709768227894,
+      "translation_distance_m": 463.8856965413639,
+      "requested_smaller_footprint_overlap": 0.7346759768601134,
+      "deformation_attempts": 1,
+      "finite_ratio_palette": [
+        1.25,
+        1.5,
+        2.0,
+        3.0,
+        4.0
+      ]
+    },
+    "pixel_convention": "zero_based_centers; center=(255.5,255.5); edges=[-0.5,511.5]",
+    "pair_id": "val_G3_d675c8471dc323c373c41661",
+    "split": "val",
+    "spatial_split": "val",
+    "anchor_region_id": "818176_3320832",
+    "base_pair_id": "591fe4172267a61012e6",
+    "mother_pair_geometry_view_index": 0,
+    "anchor_block_id": "99,405",
+    "observation_pair_id": "fa07ed7dcb82599954ca",
+    "output_scale_provenance": "native_product_grids",
+    "source_category": "different_GF",
+    "time_difference_bin": "31_120_days",
+    "size_A": [
+      512,
+      512
+    ],
+    "size_B": [
+      512,
+      512
+    ],
+    "crs": "EPSG:32650",
+    "source_A": {
+      "relative_paths": [
+        "818176_3320832/tiff/1m_20241108_gf2_fusionsr_cloud0.tiff"
+      ],
+      "observation_id": "scene_GF2_PMS1_E120.3_N29.9_20241108_L1A14231798001",
+      "observation_confidence": "trusted_scene",
+      "sensor": "gf2",
+      "product": "gf2_fusionsr",
+      "date": "2024-11-08",
+      "date_precision": "day",
+      "rgb_bands": [
+        3,
+        2,
+        1
+      ],
+      "source_product_gsd_m": 1.0,
+      "patch_registration_status": "registered",
+      "quality_flags": []
+    },
+    "source_B": {
+      "relative_paths": [
+        "818176_3320832/tiff/2m_20241228_gf1_fusionsr_cloud0.tiff",
+        "818176_3321856/tiff/2m_20241228_gf1_fusionsr_cloud0.tiff",
+        "819200_3320832/tiff/2m_20241228_gf1_fusionsr_cloud0.tiff",
+        "819200_3321856/tiff/2m_20241228_gf1_fusionsr_cloud0.tiff"
+      ],
+      "observation_id": "scene_GF1_PMS2_E120.2_N29.9_20241228_L1A13698234001",
+      "observation_confidence": "trusted_scene",
+      "sensor": "gf1",
+      "product": "gf1_fusionsr",
+      "date": "2024-12-28",
+      "date_precision": "day",
+      "rgb_bands": [
+        3,
+        2,
+        1
+      ],
+      "source_product_gsd_m": 2.0,
+      "patch_registration_status": "registered",
+      "quality_flags": []
+    },
+    "source_product_gsd_m_A": 1.0,
+    "source_product_gsd_m_B": 2.0,
+    "image_A": "val/val_G3_d675c8471dc323c373c41661/A.png",
+    "image_B": "val/val_G3_d675c8471dc323c373c41661/B.png",
+    "valid_A": "val/val_G3_d675c8471dc323c373c41661/valid_A.png",
+    "valid_B": "val/val_G3_d675c8471dc323c373c41661/valid_B.png",
+    "meta_path": "val/val_G3_d675c8471dc323c373c41661/meta.json",
+    "sampling_A": {
+      "relative_paths": [
+        "818176_3320832/tiff/1m_20241108_gf2_fusionsr_cloud0.tiff"
+      ],
+      "sampling_support": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              817732.0,
+              3320910.0
+            ],
+            [
+              818245.0,
+              3320910.0
+            ],
+            [
+              818245.0,
+              3320397.0
+            ],
+            [
+              817732.0,
+              3320397.0
+            ],
+            [
+              817732.0,
+              3320910.0
+            ]
+          ]
+        ]
+      },
+      "sampling_support_definition": "finite native Gaussian square + bilinear contributors + native pixel area; exact axis-aligned extrema, conservative affine Minkowski hull",
+      "native_grid_transform": [
+        1.0,
+        0.0,
+        817664.0,
+        0.0,
+        -1.0,
+        3321344.0
+      ],
+      "native_window_shape": [
+        513,
+        513
+      ],
+      "native_window_origin_map": [
+        817732.0,
+        3320910.0
+      ],
+      "gaussian_sigma_native_pixels": 0.0,
+      "gaussian_radius_native_pixels": 0,
+      "source_mapping_singular_values": [
+        1.0,
+        1.0
+      ],
+      "valid_fraction": 1.0,
+      "validity_subset": "standard",
+      "neighbor_tiles": 1,
+      "seam_gradient_ratios": [],
+      "seam_status": "not_applicable"
+    },
+    "sampling_B": {
+      "relative_paths": [
+        "818176_3320832/tiff/2m_20241228_gf1_fusionsr_cloud0.tiff",
+        "818176_3321856/tiff/2m_20241228_gf1_fusionsr_cloud0.tiff",
+        "819200_3320832/tiff/2m_20241228_gf1_fusionsr_cloud0.tiff",
+        "819200_3321856/tiff/2m_20241228_gf1_fusionsr_cloud0.tiff"
+      ],
+      "sampling_support": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              817904.9381974341,
+              3320389.16472766
+            ],
+            [
+              817677.3328347213,
+              3321385.497904295
+            ],
+            [
+              817677.3328347213,
+              3321391.497904295
+            ],
+            [
+              818673.6660113567,
+              3321619.103267008
+            ],
+            [
+              818679.6660113567,
+              3321619.103267008
+            ],
+            [
+              818907.2713740695,
+              3320622.7700903723
+            ],
+            [
+              818907.2713740695,
+              3320616.7700903723
+            ],
+            [
+              817910.9381974341,
+              3320389.16472766
+            ],
+            [
+              817904.9381974341,
+              3320389.16472766
+            ]
+          ]
+        ]
+      },
+      "sampling_support_definition": "finite native Gaussian square + bilinear contributors + native pixel area; exact axis-aligned extrema, conservative affine Minkowski hull",
+      "native_grid_transform": [
+        2.0,
+        0.0,
+        817664.0,
+        0.0,
+        -2.0,
+        3321344.0
+      ],
+      "native_window_shape": [
+        616,
+        616
+      ],
+      "native_window_origin_map": [
+        817676.0,
+        3321620.0
+      ],
+      "gaussian_sigma_native_pixels": 0.0,
+      "gaussian_radius_native_pixels": 0,
+      "source_mapping_singular_values": [
+        1.0,
+        1.0
+      ],
+      "valid_fraction": 1.0,
+      "validity_subset": "standard",
+      "neighbor_tiles": 4,
+      "seam_gradient_ratios": [
+        0.6103895892875896,
+        0.6103895892875896,
+        0.7669902067346758,
+        0.7669902067346758
+      ],
+      "seam_status": "automated_heuristic_passed_pending_human_review"
+    },
+    "common_valid_overlap_A": 0.7346687316894531,
+    "common_valid_overlap_B": 0.1836700439453125,
+    "ignore_status": "unknown",
+    "reliable_supervision_coverage": "unknown",
+    "gt_type": "geo_approx",
+    "error_scale_m": 2.0,
+    "error_scale_source": "heuristic_coarser_source_product_pixel_not_measured_bound",
+    "soft_radius_A_px": 2.0,
+    "soft_radius_B_px": 1.0,
+    "strict_fine_supervision": false,
+    "normalization_version": "rgbmatch-v4-normalization-1",
+    "normalization_sha256": "f6a7196fba107d03f3043863b3138d2d94b61867855d378103fc9a3dcdc3f5b2",
+    "radiometric_augmentation": "none_offline; train_online_policy_in_config",
+    "seed": 4300362312169021979,
+    "job_number": 3904,
+    "candidate_attempts": 2,
+    "resampling": "float32 physical SR; finite Gaussian native lowpass; one bilinear remap; uint8 quantized once",
+    "quality_status": "automated_passed_pending_human_review",
+    "shadow_level": "unknown",
+    "terrain_level": "unknown",
+    "change_level": "unknown",
+    "annotation_status": "not_independently_annotated"
+  },
+  "metrics": {
+    "pair_id": "val_G3_d675c8471dc323c373c41661",
+    "group": "G3",
+    "all": {
+      "points": 749,
+      "epe": 236.0406951904297,
+      "p3": 0.0,
+      "ideal_epe": 13.472474098205566,
+      "ideal_p3": 0.01335113484646195
+    },
+    "rank1": {
+      "points": 0,
+      "epe": null,
+      "p3": null,
+      "ideal_epe": null,
+      "ideal_p3": null
+    },
+    "rank_above1": {
+      "points": 749,
+      "epe": 236.0406951904297,
+      "p3": 0.0,
+      "ideal_epe": 13.472474098205566,
+      "ideal_p3": 0.01335113484646195
+    },
+    "positive_mass_ge_0.9": {
+      "points": 0,
+      "epe": null,
+      "p3": null,
+      "ideal_epe": null,
+      "ideal_p3": null
+    },
+    "positive_top1_ge_0.9": {
+      "points": 0,
+      "epe": null,
+      "p3": null,
+      "ideal_epe": null,
+      "ideal_p3": null
+    },
+    "high_confidence_epe_gt8": {
+      "points": 0,
+      "epe": null,
+      "p3": null,
+      "ideal_epe": null,
+      "ideal_p3": null
+    },
+    "border_0_8": {
+      "points": 50,
+      "epe": 211.66502380371094,
+      "p3": 0.0,
+      "ideal_epe": 13.498841285705566,
+      "ideal_p3": 0.02
+    },
+    "border_8_16": {
+      "points": 51,
+      "epe": 214.47470092773438,
+      "p3": 0.0,
+      "ideal_epe": 18.341283798217773,
+      "ideal_p3": 0.0
+    },
+    "border_16_32": {
+      "points": 100,
+      "epe": 219.9227752685547,
+      "p3": 0.0,
+      "ideal_epe": 19.145648956298828,
+      "ideal_p3": 0.0
+    },
+    "border_32_inf": {
+      "points": 548,
+      "epe": 243.21304321289062,
+      "p3": 0.0,
+      "ideal_epe": 11.981697082519531,
+      "ideal_p3": 0.016423357664233577
+    },
+    "error_0_3": {
+      "points": 0,
+      "epe": null,
+      "p3": null,
+      "ideal_epe": null,
+      "ideal_p3": null
+    },
+    "error_3_8": {
+      "points": 0,
+      "epe": null,
+      "p3": null,
+      "ideal_epe": null,
+      "ideal_p3": null
+    },
+    "error_8_32": {
+      "points": 0,
+      "epe": null,
+      "p3": null,
+      "ideal_epe": null,
+      "ideal_p3": null
+    },
+    "error_32_inf": {
+      "points": 749,
+      "epe": 236.0406951904297,
+      "p3": 0.0,
+      "ideal_epe": 13.472474098205566,
+      "ideal_p3": 0.01335113484646195
+    }
+  },
+  "interpretation": "H/mask overlay is visual evidence only; label error versus unobservable correspondence is not established automatically."
+}

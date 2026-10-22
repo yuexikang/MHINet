@@ -1,0 +1,532 @@
+{
+  "row": {
+    "kind": "G3",
+    "G": "G3",
+    "affine": false,
+    "anchor_xy": [
+      719993.058130916,
+      3272750.1824549716
+    ],
+    "center_A": [
+      719881.1687310579,
+      3272653.5110994666
+    ],
+    "center_B": [
+      720104.947530774,
+      3272846.8538104766
+    ],
+    "J_A": [
+      [
+        0.5,
+        0.0
+      ],
+      [
+        0.0,
+        -0.5
+      ]
+    ],
+    "J_B": [
+      [
+        0.9990239361833148,
+        -0.04417210582252331
+      ],
+      [
+        -0.04417210582252331,
+        -0.9990239361833148
+      ]
+    ],
+    "W_A": [
+      [
+        0.5,
+        0.0,
+        719753.4187310579
+      ],
+      [
+        0.0,
+        -0.5,
+        3272781.2610994666
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "W_B": [
+      [
+        0.9990239361833148,
+        -0.04417210582252331,
+        719860.9828881169
+      ],
+      [
+        -0.04417210582252331,
+        -0.9990239361833148,
+        3273113.390399209
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "H_A_to_B": [
+      [
+        0.49951196809165743,
+        0.022086052911261655,
+        -92.78831700226307
+      ],
+      [
+        -0.022086052911261655,
+        0.4995119680916574,
+        336.55645567941457
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "H_B_to_A": [
+      [
+        1.9980478723666295,
+        -0.08834421164504662,
+        215.12831411790103
+      ],
+      [
+        0.08834421164504662,
+        1.9980478723666295,
+        -664.2585994852707
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "footprint_A": [
+      [
+        719753.1687310579,
+        3272781.5110994666
+      ],
+      [
+        720009.1687310579,
+        3272781.5110994666
+      ],
+      [
+        720009.1687310579,
+        3272525.5110994666
+      ],
+      [
+        719753.1687310579,
+        3272525.5110994666
+      ],
+      [
+        719753.1687310579,
+        3272781.5110994666
+      ]
+    ],
+    "footprint_B": [
+      [
+        719860.5054622017,
+        3273113.9119972303
+      ],
+      [
+        720372.0057175275,
+        3273091.295879049
+      ],
+      [
+        720349.3895993464,
+        3272579.7956237234
+      ],
+      [
+        719837.8893440205,
+        3272602.4117419044
+      ],
+      [
+        719860.5054622017,
+        3273113.9119972303
+      ]
+    ],
+    "source_product_gsd_A_m": 0.5,
+    "source_product_gsd_B_m": 1.0,
+    "output_gsd_A_m": 0.5,
+    "output_gsd_B_m": 1.0,
+    "gsd_a_output": 0.5,
+    "gsd_b_output": 1.0,
+    "baseline_gsd_A_m": 0.5,
+    "baseline_gsd_B_m": 1.0,
+    "singular_values_A": [
+      0.5,
+      0.5
+    ],
+    "singular_values_B": [
+      1.0,
+      1.0
+    ],
+    "source_product_scale_ratio": 2.0,
+    "output_scale_ratio": 2.0,
+    "source_mapping_min_singular_A": 1.0,
+    "source_mapping_min_singular_B": 1.0,
+    "r_A": 0.4671547599074434,
+    "r_B": 0.11678868997687092,
+    "geometry_overlap_A": 0.4671547599074434,
+    "geometry_overlap_B": 0.11678868997687092,
+    "intersection_area_m2": 30615.45434529421,
+    "area_A_m2": 65536.0,
+    "area_B_m2": 262143.9999999774,
+    "overlap_bin": null,
+    "params": {
+      "rotation_degrees": -2.5316989893732966,
+      "rotation_positive": "counterclockwise_in_projected_map_XY",
+      "shear": 0.0,
+      "anisotropy": 1.0,
+      "matrix_order_B": "R_ccw @ shear_xy @ diag(a,1/a) @ diag(g,-g)",
+      "fine_output_side": "A",
+      "center_B_minus_A_m": [
+        223.7787997161504,
+        193.3427110100165
+      ],
+      "translation_ray_degrees": 40.82669711379416,
+      "translation_distance_m": 295.7335880537986,
+      "requested_smaller_footprint_overlap": 0.46715475990723515,
+      "deformation_attempts": 1,
+      "finite_ratio_palette": [
+        1.25,
+        1.5,
+        2.0,
+        3.0,
+        4.0
+      ]
+    },
+    "pixel_convention": "zero_based_centers; center=(255.5,255.5); edges=[-0.5,511.5]",
+    "pair_id": "val_G3_a4e0a479df8364b40227e2c5",
+    "split": "val",
+    "spatial_split": "val",
+    "anchor_region_id": "719872_3272704",
+    "base_pair_id": "8d690b10925b58be19eb",
+    "mother_pair_geometry_view_index": 1,
+    "anchor_block_id": "87,399",
+    "observation_pair_id": "e88eca0b01d463313cbb",
+    "output_scale_provenance": "native_product_grids",
+    "source_category": "tianditu_GF",
+    "time_difference_bin": "unknown",
+    "size_A": [
+      512,
+      512
+    ],
+    "size_B": [
+      512,
+      512
+    ],
+    "crs": "EPSG:32650",
+    "source_A": {
+      "relative_paths": [
+        "719872_3272704/tiff/05m_2024_tianditu_rgb_cloud0.tiff"
+      ],
+      "observation_id": "tianditu_limited_year_2024",
+      "observation_confidence": "limited",
+      "sensor": "tianditu",
+      "product": "tianditu_rgb",
+      "date": "2024",
+      "date_precision": "year",
+      "rgb_bands": [
+        1,
+        2,
+        3
+      ],
+      "source_product_gsd_m": 0.5,
+      "patch_registration_status": "unknown",
+      "quality_flags": [
+        "tianditu_neighbor_identity_unverified",
+        "stale_validity_band_tag_actual_GDAL_mask_used"
+      ]
+    },
+    "source_B": {
+      "relative_paths": [
+        "719872_3272704/tiff/1m_20240723_gf2_fusionsr_cloud0.tiff"
+      ],
+      "observation_id": "scene_GF2_PMS2_E119.3_N29.5_20240723_L1A13978098001",
+      "observation_confidence": "trusted_scene",
+      "sensor": "gf2",
+      "product": "gf2_fusionsr",
+      "date": "2024-07-23",
+      "date_precision": "day",
+      "rgb_bands": [
+        3,
+        2,
+        1
+      ],
+      "source_product_gsd_m": 1.0,
+      "patch_registration_status": "registered",
+      "quality_flags": []
+    },
+    "source_product_gsd_m_A": 0.5,
+    "source_product_gsd_m_B": 1.0,
+    "image_A": "val/val_G3_a4e0a479df8364b40227e2c5/A.png",
+    "image_B": "val/val_G3_a4e0a479df8364b40227e2c5/B.png",
+    "valid_A": "val/val_G3_a4e0a479df8364b40227e2c5/valid_A.png",
+    "valid_B": "val/val_G3_a4e0a479df8364b40227e2c5/valid_B.png",
+    "meta_path": "val/val_G3_a4e0a479df8364b40227e2c5/meta.json",
+    "sampling_A": {
+      "relative_paths": [
+        "719872_3272704/tiff/05m_2024_tianditu_rgb_cloud0.tiff"
+      ],
+      "sampling_support": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              719753.0,
+              3272782.0
+            ],
+            [
+              720009.5,
+              3272782.0
+            ],
+            [
+              720009.5,
+              3272525.5
+            ],
+            [
+              719753.0,
+              3272525.5
+            ],
+            [
+              719753.0,
+              3272782.0
+            ]
+          ]
+        ]
+      },
+      "sampling_support_definition": "finite native Gaussian square + bilinear contributors + native pixel area; exact axis-aligned extrema, conservative affine Minkowski hull",
+      "native_grid_transform": [
+        0.5,
+        0.0,
+        719360.0,
+        0.0,
+        -0.5,
+        3273216.0
+      ],
+      "native_window_shape": [
+        513,
+        513
+      ],
+      "native_window_origin_map": [
+        719753.0,
+        3272782.0
+      ],
+      "gaussian_sigma_native_pixels": 0.0,
+      "gaussian_radius_native_pixels": 0,
+      "source_mapping_singular_values": [
+        1.0,
+        1.0
+      ],
+      "valid_fraction": 1.0,
+      "validity_subset": "standard",
+      "neighbor_tiles": 1,
+      "seam_gradient_ratios": [],
+      "seam_status": "not_applicable"
+    },
+    "sampling_B": {
+      "relative_paths": [
+        "719872_3272704/tiff/1m_20240723_gf2_fusionsr_cloud0.tiff"
+      ],
+      "sampling_support": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              720347.4121734313,
+              3272578.8172217445
+            ],
+            [
+              719836.9109420415,
+              3272601.3891678196
+            ],
+            [
+              719836.9109420415,
+              3272604.3891678196
+            ],
+            [
+              719859.4828881169,
+              3273114.890399209
+            ],
+            [
+              719862.4828881169,
+              3273114.890399209
+            ],
+            [
+              720372.9841195066,
+              3273092.318453134
+            ],
+            [
+              720372.9841195066,
+              3273089.318453134
+            ],
+            [
+              720350.4121734313,
+              3272578.8172217445
+            ],
+            [
+              720347.4121734313,
+              3272578.8172217445
+            ]
+          ]
+        ]
+      },
+      "sampling_support_definition": "finite native Gaussian square + bilinear contributors + native pixel area; exact axis-aligned extrema, conservative affine Minkowski hull",
+      "native_grid_transform": [
+        1.0,
+        0.0,
+        719360.0,
+        0.0,
+        -1.0,
+        3273216.0
+      ],
+      "native_window_shape": [
+        537,
+        537
+      ],
+      "native_window_origin_map": [
+        719836.0,
+        3273115.0
+      ],
+      "gaussian_sigma_native_pixels": 0.0,
+      "gaussian_radius_native_pixels": 0,
+      "source_mapping_singular_values": [
+        1.0,
+        1.0
+      ],
+      "valid_fraction": 1.0,
+      "validity_subset": "standard",
+      "neighbor_tiles": 1,
+      "seam_gradient_ratios": [],
+      "seam_status": "not_applicable"
+    },
+    "common_valid_overlap_A": 0.4671478271484375,
+    "common_valid_overlap_B": 0.11677169799804688,
+    "ignore_status": "unknown",
+    "reliable_supervision_coverage": "unknown",
+    "gt_type": "geo_approx",
+    "error_scale_m": 1.0,
+    "error_scale_source": "heuristic_coarser_source_product_pixel_not_measured_bound",
+    "soft_radius_A_px": 2.0,
+    "soft_radius_B_px": 1.0,
+    "strict_fine_supervision": false,
+    "normalization_version": "rgbmatch-v4-normalization-1",
+    "normalization_sha256": "f6a7196fba107d03f3043863b3138d2d94b61867855d378103fc9a3dcdc3f5b2",
+    "radiometric_augmentation": "none_offline; train_online_policy_in_config",
+    "seed": 596460194825446412,
+    "job_number": 3955,
+    "candidate_attempts": 3,
+    "resampling": "float32 physical SR; finite Gaussian native lowpass; one bilinear remap; uint8 quantized once",
+    "quality_status": "automated_passed_pending_human_review",
+    "shadow_level": "unknown",
+    "terrain_level": "unknown",
+    "change_level": "unknown",
+    "annotation_status": "not_independently_annotated"
+  },
+  "metrics": {
+    "pair_id": "val_G3_a4e0a479df8364b40227e2c5",
+    "group": "G3",
+    "all": {
+      "points": 476,
+      "epe": 287.22607421875,
+      "p3": 0.0,
+      "ideal_epe": 14.899460792541504,
+      "ideal_p3": 0.02100840336134454
+    },
+    "rank1": {
+      "points": 0,
+      "epe": null,
+      "p3": null,
+      "ideal_epe": null,
+      "ideal_p3": null
+    },
+    "rank_above1": {
+      "points": 476,
+      "epe": 287.22607421875,
+      "p3": 0.0,
+      "ideal_epe": 14.899460792541504,
+      "ideal_p3": 0.02100840336134454
+    },
+    "positive_mass_ge_0.9": {
+      "points": 0,
+      "epe": null,
+      "p3": null,
+      "ideal_epe": null,
+      "ideal_p3": null
+    },
+    "positive_top1_ge_0.9": {
+      "points": 0,
+      "epe": null,
+      "p3": null,
+      "ideal_epe": null,
+      "ideal_p3": null
+    },
+    "high_confidence_epe_gt8": {
+      "points": 0,
+      "epe": null,
+      "p3": null,
+      "ideal_epe": null,
+      "ideal_p3": null
+    },
+    "border_0_8": {
+      "points": 39,
+      "epe": 295.35498046875,
+      "p3": 0.0,
+      "ideal_epe": 15.578519821166992,
+      "ideal_p3": 0.15384615384615385
+    },
+    "border_8_16": {
+      "points": 40,
+      "epe": 294.4668884277344,
+      "p3": 0.0,
+      "ideal_epe": 17.735660552978516,
+      "ideal_p3": 0.0
+    },
+    "border_16_32": {
+      "points": 76,
+      "epe": 292.2627868652344,
+      "p3": 0.0,
+      "ideal_epe": 19.64922523498535,
+      "ideal_p3": 0.0
+    },
+    "border_32_inf": {
+      "points": 321,
+      "epe": 284.1435852050781,
+      "p3": 0.0,
+      "ideal_epe": 13.338982582092285,
+      "ideal_p3": 0.012461059190031152
+    },
+    "error_0_3": {
+      "points": 0,
+      "epe": null,
+      "p3": null,
+      "ideal_epe": null,
+      "ideal_p3": null
+    },
+    "error_3_8": {
+      "points": 0,
+      "epe": null,
+      "p3": null,
+      "ideal_epe": null,
+      "ideal_p3": null
+    },
+    "error_8_32": {
+      "points": 0,
+      "epe": null,
+      "p3": null,
+      "ideal_epe": null,
+      "ideal_p3": null
+    },
+    "error_32_inf": {
+      "points": 476,
+      "epe": 287.22607421875,
+      "p3": 0.0,
+      "ideal_epe": 14.899460792541504,
+      "ideal_p3": 0.02100840336134454
+    }
+  },
+  "interpretation": "H/mask overlay is visual evidence only; label error versus unobservable correspondence is not established automatically."
+}

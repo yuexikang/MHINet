@@ -1,0 +1,6795 @@
+{
+  "variant": "U",
+  "checkpoint": "/home/disk1/MHINet/outputs/d16_correspondence_20261022/U/latest.pt",
+  "epoch": 30,
+  "full": {
+    "all": {
+      "points": 45361,
+      "epe": 11.388188362121582,
+      "p3": 0.6881241595202927,
+      "ideal_epe": 6.8287529945373535,
+      "ideal_p3": 0.14935737748285974
+    },
+    "rank1": {
+      "points": 39958,
+      "epe": 2.3816795349121094,
+      "p3": 0.7663296461284349,
+      "ideal_epe": 6.84891414642334,
+      "ideal_p3": 0.13917112968617049
+    },
+    "rank_above1": {
+      "points": 5403,
+      "epe": 77.99600982666016,
+      "p3": 0.10975384045900426,
+      "ideal_epe": 6.679648399353027,
+      "ideal_p3": 0.22468998704423468
+    },
+    "positive_mass_ge_0.9": {
+      "points": 372,
+      "epe": 4.7198805809021,
+      "p3": 0.5188172043010753,
+      "ideal_epe": 5.706166744232178,
+      "ideal_p3": 0.3548387096774194
+    },
+    "positive_top1_ge_0.9": {
+      "points": 288,
+      "epe": 4.170100688934326,
+      "p3": 0.5763888888888888,
+      "ideal_epe": 4.745584487915039,
+      "ideal_p3": 0.4513888888888889
+    },
+    "high_confidence_epe_gt8": {
+      "points": 48,
+      "epe": 16.673452377319336,
+      "p3": 0.0,
+      "ideal_epe": 18.17777442932129,
+      "ideal_p3": 0.0
+    },
+    "border_0_8": {
+      "points": 1088,
+      "epe": 28.517499923706055,
+      "p3": 0.2261029411764706,
+      "ideal_epe": 22.373708724975586,
+      "ideal_p3": 0.019301470588235295
+    },
+    "border_8_16": {
+      "points": 2860,
+      "epe": 11.51315689086914,
+      "p3": 0.6423076923076924,
+      "ideal_epe": 12.030333518981934,
+      "ideal_p3": 0.010839160839160839
+    },
+    "border_16_32": {
+      "points": 4054,
+      "epe": 15.169571876525879,
+      "p3": 0.6188949185989147,
+      "ideal_epe": 10.42928695678711,
+      "ideal_p3": 0.012580167735569808
+    },
+    "border_32_inf": {
+      "points": 37359,
+      "epe": 10.46943187713623,
+      "p3": 0.7125993736449049,
+      "ideal_epe": 5.587123870849609,
+      "ideal_p3": 0.17859150405524774
+    },
+    "error_0_3": {
+      "points": 31214,
+      "epe": 1.309179425239563,
+      "p3": 1.0,
+      "ideal_epe": 6.302113056182861,
+      "ideal_p3": 0.15605177164093034
+    },
+    "error_3_8": {
+      "points": 9166,
+      "epe": 4.742586135864258,
+      "p3": 0.0,
+      "ideal_epe": 7.711985111236572,
+      "ideal_p3": 0.08793366790312022
+    },
+    "error_8_32": {
+      "points": 2879,
+      "epe": 13.292474746704102,
+      "p3": 0.0,
+      "ideal_epe": 9.036772727966309,
+      "ideal_p3": 0.16047238624522403
+    },
+    "error_32_inf": {
+      "points": 2102,
+      "epe": 187.42877197265625,
+      "p3": 0.0,
+      "ideal_epe": 7.773529052734375,
+      "ideal_p3": 0.30256898192197906
+    }
+  },
+  "excluding_three_diagnostic_only": {
+    "all": {
+      "points": 44103,
+      "epe": 4.104843616485596,
+      "p3": 0.7077523070992903,
+      "ideal_epe": 6.774466037750244,
+      "ideal_p3": 0.15191710314491078
+    },
+    "rank1": {
+      "points": 39958,
+      "epe": 2.3816795349121094,
+      "p3": 0.7663296461284349,
+      "ideal_epe": 6.84891414642334,
+      "ideal_p3": 0.13917112968617049
+    },
+    "rank_above1": {
+      "points": 4145,
+      "epe": 20.716228485107422,
+      "p3": 0.14306393244873342,
+      "ideal_epe": 6.0567851066589355,
+      "ideal_p3": 0.274788902291918
+    },
+    "positive_mass_ge_0.9": {
+      "points": 372,
+      "epe": 4.7198805809021,
+      "p3": 0.5188172043010753,
+      "ideal_epe": 5.706166744232178,
+      "ideal_p3": 0.3548387096774194
+    },
+    "positive_top1_ge_0.9": {
+      "points": 288,
+      "epe": 4.170100688934326,
+      "p3": 0.5763888888888888,
+      "ideal_epe": 4.745584487915039,
+      "ideal_p3": 0.4513888888888889
+    },
+    "high_confidence_epe_gt8": {
+      "points": 48,
+      "epe": 16.673452377319336,
+      "p3": 0.0,
+      "ideal_epe": 18.17777442932129,
+      "ideal_p3": 0.0
+    },
+    "border_0_8": {
+      "points": 998,
+      "epe": 7.36906099319458,
+      "p3": 0.24649298597194388,
+      "ideal_epe": 22.76726531982422,
+      "ideal_p3": 0.01903807615230461
+    },
+    "border_8_16": {
+      "points": 2766,
+      "epe": 2.8954849243164062,
+      "p3": 0.6641359363702097,
+      "ideal_epe": 11.986933708190918,
+      "ideal_p3": 0.010484454085321764
+    },
+    "border_16_32": {
+      "points": 3874,
+      "epe": 3.6455442905426025,
+      "p3": 0.6476510067114094,
+      "ideal_epe": 10.436203956604004,
+      "ideal_p3": 0.012648425400103252
+    },
+    "border_32_inf": {
+      "points": 36465,
+      "epe": 4.156035900115967,
+      "p3": 0.73006993006993,
+      "ideal_epe": 5.552360534667969,
+      "ideal_p3": 0.18107774578362815
+    },
+    "error_0_3": {
+      "points": 31214,
+      "epe": 1.309179425239563,
+      "p3": 1.0,
+      "ideal_epe": 6.302113056182861,
+      "ideal_p3": 0.15605177164093034
+    },
+    "error_3_8": {
+      "points": 9166,
+      "epe": 4.742586135864258,
+      "p3": 0.0,
+      "ideal_epe": 7.711985111236572,
+      "ideal_p3": 0.08793366790312022
+    },
+    "error_8_32": {
+      "points": 2879,
+      "epe": 13.292474746704102,
+      "p3": 0.0,
+      "ideal_epe": 9.036772727966309,
+      "ideal_p3": 0.16047238624522403
+    },
+    "error_32_inf": {
+      "points": 844,
+      "epe": 69.23175811767578,
+      "p3": 0.0,
+      "ideal_epe": 6.345014572143555,
+      "ideal_p3": 0.6646919431279621
+    }
+  },
+  "pairs": [
+    {
+      "pair_id": "val_G0_763d789ca7b5ae6ec96d4423",
+      "group": "G0",
+      "all": {
+        "points": 1024,
+        "epe": 8.184621810913086,
+        "p3": 0.021484375,
+        "ideal_epe": 7.9054999351501465,
+        "ideal_p3": 0.046875
+      },
+      "rank1": {
+        "points": 436,
+        "epe": 6.463285446166992,
+        "p3": 0.05045871559633028,
+        "ideal_epe": 8.513955116271973,
+        "ideal_p3": 0.052752293577981654
+      },
+      "rank_above1": {
+        "points": 588,
+        "epe": 9.460986137390137,
+        "p3": 0.0,
+        "ideal_epe": 7.45433235168457,
+        "ideal_p3": 0.04251700680272109
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_8_16": {
+        "points": 124,
+        "epe": 6.506967067718506,
+        "p3": 0.0967741935483871,
+        "ideal_epe": 12.048457145690918,
+        "ideal_p3": 0.0
+      },
+      "border_16_32": {
+        "points": 116,
+        "epe": 7.802331924438477,
+        "p3": 0.0603448275862069,
+        "ideal_epe": 10.491647720336914,
+        "ideal_p3": 0.0
+      },
+      "border_32_inf": {
+        "points": 784,
+        "epe": 8.5065279006958,
+        "p3": 0.003826530612244898,
+        "ideal_epe": 6.8675923347473145,
+        "ideal_p3": 0.061224489795918366
+      },
+      "error_0_3": {
+        "points": 22,
+        "epe": 2.255824089050293,
+        "p3": 1.0,
+        "ideal_epe": 14.10802936553955,
+        "ideal_p3": 0.0
+      },
+      "error_3_8": {
+        "points": 372,
+        "epe": 6.102854251861572,
+        "p3": 0.0,
+        "ideal_epe": 8.1265869140625,
+        "ideal_p3": 0.0456989247311828
+      },
+      "error_8_32": {
+        "points": 630,
+        "epe": 9.620892524719238,
+        "p3": 0.0,
+        "ideal_epe": 7.558356761932373,
+        "ideal_p3": 0.049206349206349205
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G0_bee59811bf5760ea73e0af74",
+      "group": "G0",
+      "all": {
+        "points": 1024,
+        "epe": 1.2292672395706177,
+        "p3": 0.9951171875,
+        "ideal_epe": 7.9054999351501465,
+        "ideal_p3": 0.046875
+      },
+      "rank1": {
+        "points": 1024,
+        "epe": 1.2292672395706177,
+        "p3": 0.9951171875,
+        "ideal_epe": 7.9054999351501465,
+        "ideal_p3": 0.046875
+      },
+      "rank_above1": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_8_16": {
+        "points": 124,
+        "epe": 1.371822714805603,
+        "p3": 0.9838709677419355,
+        "ideal_epe": 12.048457145690918,
+        "ideal_p3": 0.0
+      },
+      "border_16_32": {
+        "points": 116,
+        "epe": 1.3151084184646606,
+        "p3": 1.0,
+        "ideal_epe": 10.491647720336914,
+        "ideal_p3": 0.0
+      },
+      "border_32_inf": {
+        "points": 784,
+        "epe": 1.194019079208374,
+        "p3": 0.9961734693877551,
+        "ideal_epe": 6.8675923347473145,
+        "ideal_p3": 0.061224489795918366
+      },
+      "error_0_3": {
+        "points": 1019,
+        "epe": 1.21958327293396,
+        "p3": 1.0,
+        "ideal_epe": 7.88486909866333,
+        "ideal_p3": 0.047105004906771344
+      },
+      "error_3_8": {
+        "points": 5,
+        "epe": 3.2028117179870605,
+        "p3": 0.0,
+        "ideal_epe": 12.110095024108887,
+        "ideal_p3": 0.0
+      },
+      "error_8_32": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G0_6435eb6c9c792c6b75e3bf88",
+      "group": "G0",
+      "all": {
+        "points": 1024,
+        "epe": 0.9128762483596802,
+        "p3": 1.0,
+        "ideal_epe": 7.9054999351501465,
+        "ideal_p3": 0.046875
+      },
+      "rank1": {
+        "points": 1024,
+        "epe": 0.9128762483596802,
+        "p3": 1.0,
+        "ideal_epe": 7.9054999351501465,
+        "ideal_p3": 0.046875
+      },
+      "rank_above1": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_8_16": {
+        "points": 124,
+        "epe": 1.086843729019165,
+        "p3": 1.0,
+        "ideal_epe": 12.048457145690918,
+        "ideal_p3": 0.0
+      },
+      "border_16_32": {
+        "points": 116,
+        "epe": 0.7866466045379639,
+        "p3": 1.0,
+        "ideal_epe": 10.491647720336914,
+        "ideal_p3": 0.0
+      },
+      "border_32_inf": {
+        "points": 784,
+        "epe": 0.9040377736091614,
+        "p3": 1.0,
+        "ideal_epe": 6.8675923347473145,
+        "ideal_p3": 0.061224489795918366
+      },
+      "error_0_3": {
+        "points": 1024,
+        "epe": 0.9128762483596802,
+        "p3": 1.0,
+        "ideal_epe": 7.9054999351501465,
+        "ideal_p3": 0.046875
+      },
+      "error_3_8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "error_8_32": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G0_0d0910667a7e75bbf489ef34",
+      "group": "G0",
+      "all": {
+        "points": 1024,
+        "epe": 0.772933840751648,
+        "p3": 0.9990234375,
+        "ideal_epe": 7.9054999351501465,
+        "ideal_p3": 0.046875
+      },
+      "rank1": {
+        "points": 1024,
+        "epe": 0.772933840751648,
+        "p3": 0.9990234375,
+        "ideal_epe": 7.9054999351501465,
+        "ideal_p3": 0.046875
+      },
+      "rank_above1": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_8_16": {
+        "points": 124,
+        "epe": 0.880446195602417,
+        "p3": 0.9919354838709677,
+        "ideal_epe": 12.048457145690918,
+        "ideal_p3": 0.0
+      },
+      "border_16_32": {
+        "points": 116,
+        "epe": 0.820304811000824,
+        "p3": 1.0,
+        "ideal_epe": 10.491647720336914,
+        "ideal_p3": 0.0
+      },
+      "border_32_inf": {
+        "points": 784,
+        "epe": 0.7489203810691833,
+        "p3": 1.0,
+        "ideal_epe": 6.8675923347473145,
+        "ideal_p3": 0.061224489795918366
+      },
+      "error_0_3": {
+        "points": 1023,
+        "epe": 0.7705303430557251,
+        "p3": 1.0,
+        "ideal_epe": 7.8897809982299805,
+        "ideal_p3": 0.0469208211143695
+      },
+      "error_3_8": {
+        "points": 1,
+        "epe": 3.2316908836364746,
+        "p3": 0.0,
+        "ideal_epe": 23.985855102539062,
+        "ideal_p3": 0.0
+      },
+      "error_8_32": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G0_f5dbf3bf4f91d444994db1f3",
+      "group": "G0",
+      "all": {
+        "points": 1024,
+        "epe": 1.8793470859527588,
+        "p3": 0.8544921875,
+        "ideal_epe": 7.9054999351501465,
+        "ideal_p3": 0.046875
+      },
+      "rank1": {
+        "points": 1024,
+        "epe": 1.8793470859527588,
+        "p3": 0.8544921875,
+        "ideal_epe": 7.9054999351501465,
+        "ideal_p3": 0.046875
+      },
+      "rank_above1": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_8_16": {
+        "points": 124,
+        "epe": 1.7323369979858398,
+        "p3": 0.8870967741935484,
+        "ideal_epe": 12.048457145690918,
+        "ideal_p3": 0.0
+      },
+      "border_16_32": {
+        "points": 116,
+        "epe": 1.7977416515350342,
+        "p3": 0.8706896551724138,
+        "ideal_epe": 10.491647720336914,
+        "ideal_p3": 0.0
+      },
+      "border_32_inf": {
+        "points": 784,
+        "epe": 1.9146732091903687,
+        "p3": 0.8469387755102041,
+        "ideal_epe": 6.8675923347473145,
+        "ideal_p3": 0.061224489795918366
+      },
+      "error_0_3": {
+        "points": 875,
+        "epe": 1.5885612964630127,
+        "p3": 1.0,
+        "ideal_epe": 7.858956336975098,
+        "ideal_p3": 0.054857142857142854
+      },
+      "error_3_8": {
+        "points": 149,
+        "epe": 3.586982488632202,
+        "p3": 0.0,
+        "ideal_epe": 8.178827285766602,
+        "ideal_p3": 0.0
+      },
+      "error_8_32": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G0_9bdc9861816ef910aaf12dc6",
+      "group": "G0",
+      "all": {
+        "points": 1024,
+        "epe": 4.023613929748535,
+        "p3": 0.2568359375,
+        "ideal_epe": 7.9054999351501465,
+        "ideal_p3": 0.046875
+      },
+      "rank1": {
+        "points": 1006,
+        "epe": 3.9973556995391846,
+        "p3": 0.2614314115308151,
+        "ideal_epe": 7.897553443908691,
+        "ideal_p3": 0.04771371769383698
+      },
+      "rank_above1": {
+        "points": 18,
+        "epe": 5.491137504577637,
+        "p3": 0.0,
+        "ideal_epe": 8.349602699279785,
+        "ideal_p3": 0.0
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_8_16": {
+        "points": 124,
+        "epe": 3.4171972274780273,
+        "p3": 0.3951612903225806,
+        "ideal_epe": 12.048457145690918,
+        "ideal_p3": 0.0
+      },
+      "border_16_32": {
+        "points": 116,
+        "epe": 3.983060598373413,
+        "p3": 0.2413793103448276,
+        "ideal_epe": 10.491647720336914,
+        "ideal_p3": 0.0
+      },
+      "border_32_inf": {
+        "points": 784,
+        "epe": 4.125526428222656,
+        "p3": 0.2372448979591837,
+        "ideal_epe": 6.8675923347473145,
+        "ideal_p3": 0.061224489795918366
+      },
+      "error_0_3": {
+        "points": 263,
+        "epe": 1.903145432472229,
+        "p3": 1.0,
+        "ideal_epe": 8.710935592651367,
+        "ideal_p3": 0.0
+      },
+      "error_3_8": {
+        "points": 761,
+        "epe": 4.756443023681641,
+        "p3": 0.0,
+        "ideal_epe": 7.627142906188965,
+        "ideal_p3": 0.06307490144546649
+      },
+      "error_8_32": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G0_20667b4b801250604b27bbcf",
+      "group": "G0",
+      "all": {
+        "points": 1024,
+        "epe": 0.6784150004386902,
+        "p3": 1.0,
+        "ideal_epe": 7.9054999351501465,
+        "ideal_p3": 0.046875
+      },
+      "rank1": {
+        "points": 1024,
+        "epe": 0.6784150004386902,
+        "p3": 1.0,
+        "ideal_epe": 7.9054999351501465,
+        "ideal_p3": 0.046875
+      },
+      "rank_above1": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_8_16": {
+        "points": 124,
+        "epe": 0.8405284285545349,
+        "p3": 1.0,
+        "ideal_epe": 12.048457145690918,
+        "ideal_p3": 0.0
+      },
+      "border_16_32": {
+        "points": 116,
+        "epe": 0.8587062358856201,
+        "p3": 1.0,
+        "ideal_epe": 10.491647720336914,
+        "ideal_p3": 0.0
+      },
+      "border_32_inf": {
+        "points": 784,
+        "epe": 0.6260989308357239,
+        "p3": 1.0,
+        "ideal_epe": 6.8675923347473145,
+        "ideal_p3": 0.061224489795918366
+      },
+      "error_0_3": {
+        "points": 1024,
+        "epe": 0.6784150004386902,
+        "p3": 1.0,
+        "ideal_epe": 7.9054999351501465,
+        "ideal_p3": 0.046875
+      },
+      "error_3_8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "error_8_32": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G0_b99cdaabc4d890e77ed1a14c",
+      "group": "G0",
+      "all": {
+        "points": 1024,
+        "epe": 0.6948853135108948,
+        "p3": 1.0,
+        "ideal_epe": 7.9054999351501465,
+        "ideal_p3": 0.046875
+      },
+      "rank1": {
+        "points": 1024,
+        "epe": 0.6948853135108948,
+        "p3": 1.0,
+        "ideal_epe": 7.9054999351501465,
+        "ideal_p3": 0.046875
+      },
+      "rank_above1": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_8_16": {
+        "points": 124,
+        "epe": 0.8643319010734558,
+        "p3": 1.0,
+        "ideal_epe": 12.048457145690918,
+        "ideal_p3": 0.0
+      },
+      "border_16_32": {
+        "points": 116,
+        "epe": 0.7628007531166077,
+        "p3": 1.0,
+        "ideal_epe": 10.491647720336914,
+        "ideal_p3": 0.0
+      },
+      "border_32_inf": {
+        "points": 784,
+        "epe": 0.6580363512039185,
+        "p3": 1.0,
+        "ideal_epe": 6.8675923347473145,
+        "ideal_p3": 0.061224489795918366
+      },
+      "error_0_3": {
+        "points": 1024,
+        "epe": 0.6948853135108948,
+        "p3": 1.0,
+        "ideal_epe": 7.9054999351501465,
+        "ideal_p3": 0.046875
+      },
+      "error_3_8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "error_8_32": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G0_a352be5979b31a4c2132f43f",
+      "group": "G0",
+      "all": {
+        "points": 1024,
+        "epe": 2.2385151386260986,
+        "p3": 0.71875,
+        "ideal_epe": 7.9054999351501465,
+        "ideal_p3": 0.046875
+      },
+      "rank1": {
+        "points": 1024,
+        "epe": 2.2385151386260986,
+        "p3": 0.71875,
+        "ideal_epe": 7.9054999351501465,
+        "ideal_p3": 0.046875
+      },
+      "rank_above1": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_8_16": {
+        "points": 124,
+        "epe": 2.321859121322632,
+        "p3": 0.7661290322580645,
+        "ideal_epe": 12.048457145690918,
+        "ideal_p3": 0.0
+      },
+      "border_16_32": {
+        "points": 116,
+        "epe": 2.6175005435943604,
+        "p3": 0.6551724137931034,
+        "ideal_epe": 10.491647720336914,
+        "ideal_p3": 0.0
+      },
+      "border_32_inf": {
+        "points": 784,
+        "epe": 2.1692588329315186,
+        "p3": 0.7206632653061225,
+        "ideal_epe": 6.8675923347473145,
+        "ideal_p3": 0.061224489795918366
+      },
+      "error_0_3": {
+        "points": 736,
+        "epe": 1.6421140432357788,
+        "p3": 1.0,
+        "ideal_epe": 7.541266918182373,
+        "ideal_p3": 0.06521739130434782
+      },
+      "error_3_8": {
+        "points": 288,
+        "epe": 3.762651205062866,
+        "p3": 0.0,
+        "ideal_epe": 8.83631706237793,
+        "ideal_p3": 0.0
+      },
+      "error_8_32": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G0_36b9fe381ccf13dfffcaa917",
+      "group": "G0",
+      "all": {
+        "points": 1024,
+        "epe": 3.6827392578125,
+        "p3": 0.412109375,
+        "ideal_epe": 7.9054999351501465,
+        "ideal_p3": 0.046875
+      },
+      "rank1": {
+        "points": 1024,
+        "epe": 3.6827392578125,
+        "p3": 0.412109375,
+        "ideal_epe": 7.9054999351501465,
+        "ideal_p3": 0.046875
+      },
+      "rank_above1": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_8_16": {
+        "points": 124,
+        "epe": 4.069558143615723,
+        "p3": 0.31451612903225806,
+        "ideal_epe": 12.048457145690918,
+        "ideal_p3": 0.0
+      },
+      "border_16_32": {
+        "points": 116,
+        "epe": 4.393609523773193,
+        "p3": 0.1810344827586207,
+        "ideal_epe": 10.491647720336914,
+        "ideal_p3": 0.0
+      },
+      "border_32_inf": {
+        "points": 784,
+        "epe": 3.5163791179656982,
+        "p3": 0.461734693877551,
+        "ideal_epe": 6.8675923347473145,
+        "ideal_p3": 0.061224489795918366
+      },
+      "error_0_3": {
+        "points": 422,
+        "epe": 2.245741128921509,
+        "p3": 1.0,
+        "ideal_epe": 7.061122417449951,
+        "ideal_p3": 0.0971563981042654
+      },
+      "error_3_8": {
+        "points": 589,
+        "epe": 4.608242511749268,
+        "p3": 0.0,
+        "ideal_epe": 8.454872131347656,
+        "ideal_p3": 0.011884550084889643
+      },
+      "error_8_32": {
+        "points": 13,
+        "epe": 8.397506713867188,
+        "p3": 0.0,
+        "ideal_epe": 10.424541473388672,
+        "ideal_p3": 0.0
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G0_2a5741b762f0b9247f8ff46d",
+      "group": "G0",
+      "all": {
+        "points": 1024,
+        "epe": 1.0347647666931152,
+        "p3": 0.9912109375,
+        "ideal_epe": 7.9054999351501465,
+        "ideal_p3": 0.046875
+      },
+      "rank1": {
+        "points": 1024,
+        "epe": 1.0347647666931152,
+        "p3": 0.9912109375,
+        "ideal_epe": 7.9054999351501465,
+        "ideal_p3": 0.046875
+      },
+      "rank_above1": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_8_16": {
+        "points": 124,
+        "epe": 1.289778232574463,
+        "p3": 0.9838709677419355,
+        "ideal_epe": 12.048457145690918,
+        "ideal_p3": 0.0
+      },
+      "border_16_32": {
+        "points": 116,
+        "epe": 1.2452418804168701,
+        "p3": 1.0,
+        "ideal_epe": 10.491647720336914,
+        "ideal_p3": 0.0
+      },
+      "border_32_inf": {
+        "points": 784,
+        "epe": 0.9632889628410339,
+        "p3": 0.9910714285714286,
+        "ideal_epe": 6.8675923347473145,
+        "ideal_p3": 0.061224489795918366
+      },
+      "error_0_3": {
+        "points": 1015,
+        "epe": 1.016127109527588,
+        "p3": 1.0,
+        "ideal_epe": 7.896742343902588,
+        "ideal_p3": 0.04729064039408867
+      },
+      "error_3_8": {
+        "points": 9,
+        "epe": 3.1366851329803467,
+        "p3": 0.0,
+        "ideal_epe": 8.89315414428711,
+        "ideal_p3": 0.0
+      },
+      "error_8_32": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G0_08d3a6569601fc6986885ceb",
+      "group": "G0",
+      "all": {
+        "points": 1024,
+        "epe": 0.9705896973609924,
+        "p3": 0.982421875,
+        "ideal_epe": 7.9054999351501465,
+        "ideal_p3": 0.046875
+      },
+      "rank1": {
+        "points": 1024,
+        "epe": 0.9705896973609924,
+        "p3": 0.982421875,
+        "ideal_epe": 7.9054999351501465,
+        "ideal_p3": 0.046875
+      },
+      "rank_above1": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_8_16": {
+        "points": 124,
+        "epe": 1.3725405931472778,
+        "p3": 0.9516129032258065,
+        "ideal_epe": 12.048457145690918,
+        "ideal_p3": 0.0
+      },
+      "border_16_32": {
+        "points": 116,
+        "epe": 1.1844149827957153,
+        "p3": 0.9482758620689655,
+        "ideal_epe": 10.491647720336914,
+        "ideal_p3": 0.0
+      },
+      "border_32_inf": {
+        "points": 784,
+        "epe": 0.875378429889679,
+        "p3": 0.9923469387755102,
+        "ideal_epe": 6.8675923347473145,
+        "ideal_p3": 0.061224489795918366
+      },
+      "error_0_3": {
+        "points": 1006,
+        "epe": 0.9273499846458435,
+        "p3": 1.0,
+        "ideal_epe": 7.848781585693359,
+        "ideal_p3": 0.04771371769383698
+      },
+      "error_3_8": {
+        "points": 18,
+        "epe": 3.387211561203003,
+        "p3": 0.0,
+        "ideal_epe": 11.075421333312988,
+        "ideal_p3": 0.0
+      },
+      "error_8_32": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G0_5c1bc4507c4f1345227f3b03",
+      "group": "G0",
+      "all": {
+        "points": 1024,
+        "epe": 5.1386494636535645,
+        "p3": 0.0283203125,
+        "ideal_epe": 7.9054999351501465,
+        "ideal_p3": 0.046875
+      },
+      "rank1": {
+        "points": 1024,
+        "epe": 5.1386494636535645,
+        "p3": 0.0283203125,
+        "ideal_epe": 7.9054999351501465,
+        "ideal_p3": 0.046875
+      },
+      "rank_above1": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_8_16": {
+        "points": 124,
+        "epe": 4.6087541580200195,
+        "p3": 0.1693548387096774,
+        "ideal_epe": 12.048457145690918,
+        "ideal_p3": 0.0
+      },
+      "border_16_32": {
+        "points": 116,
+        "epe": 5.220056056976318,
+        "p3": 0.034482758620689655,
+        "ideal_epe": 10.491647720336914,
+        "ideal_p3": 0.0
+      },
+      "border_32_inf": {
+        "points": 784,
+        "epe": 5.210413932800293,
+        "p3": 0.00510204081632653,
+        "ideal_epe": 6.8675923347473145,
+        "ideal_p3": 0.061224489795918366
+      },
+      "error_0_3": {
+        "points": 29,
+        "epe": 2.3008649349212646,
+        "p3": 1.0,
+        "ideal_epe": 12.16154956817627,
+        "ideal_p3": 0.0
+      },
+      "error_3_8": {
+        "points": 995,
+        "epe": 5.221358776092529,
+        "p3": 0.0,
+        "ideal_epe": 7.781454086303711,
+        "ideal_p3": 0.04824120603015075
+      },
+      "error_8_32": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G0_1c58d07938957da0ba56fefe",
+      "group": "G0",
+      "all": {
+        "points": 1024,
+        "epe": 0.9161502122879028,
+        "p3": 1.0,
+        "ideal_epe": 7.9054999351501465,
+        "ideal_p3": 0.046875
+      },
+      "rank1": {
+        "points": 1024,
+        "epe": 0.9161502122879028,
+        "p3": 1.0,
+        "ideal_epe": 7.9054999351501465,
+        "ideal_p3": 0.046875
+      },
+      "rank_above1": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_8_16": {
+        "points": 124,
+        "epe": 1.1426477432250977,
+        "p3": 1.0,
+        "ideal_epe": 12.048457145690918,
+        "ideal_p3": 0.0
+      },
+      "border_16_32": {
+        "points": 116,
+        "epe": 1.1017249822616577,
+        "p3": 1.0,
+        "ideal_epe": 10.491647720336914,
+        "ideal_p3": 0.0
+      },
+      "border_32_inf": {
+        "points": 784,
+        "epe": 0.8528691530227661,
+        "p3": 1.0,
+        "ideal_epe": 6.8675923347473145,
+        "ideal_p3": 0.061224489795918366
+      },
+      "error_0_3": {
+        "points": 1024,
+        "epe": 0.9161502122879028,
+        "p3": 1.0,
+        "ideal_epe": 7.9054999351501465,
+        "ideal_p3": 0.046875
+      },
+      "error_3_8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "error_8_32": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G0_7cd743e5bc9fe5ab32dba38e",
+      "group": "G0",
+      "all": {
+        "points": 1024,
+        "epe": 0.8457961678504944,
+        "p3": 1.0,
+        "ideal_epe": 7.9054999351501465,
+        "ideal_p3": 0.046875
+      },
+      "rank1": {
+        "points": 1024,
+        "epe": 0.8457961678504944,
+        "p3": 1.0,
+        "ideal_epe": 7.9054999351501465,
+        "ideal_p3": 0.046875
+      },
+      "rank_above1": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_8_16": {
+        "points": 124,
+        "epe": 1.1219040155410767,
+        "p3": 1.0,
+        "ideal_epe": 12.048457145690918,
+        "ideal_p3": 0.0
+      },
+      "border_16_32": {
+        "points": 116,
+        "epe": 1.05129075050354,
+        "p3": 1.0,
+        "ideal_epe": 10.491647720336914,
+        "ideal_p3": 0.0
+      },
+      "border_32_inf": {
+        "points": 784,
+        "epe": 0.7717213034629822,
+        "p3": 1.0,
+        "ideal_epe": 6.8675923347473145,
+        "ideal_p3": 0.061224489795918366
+      },
+      "error_0_3": {
+        "points": 1024,
+        "epe": 0.8457961678504944,
+        "p3": 1.0,
+        "ideal_epe": 7.9054999351501465,
+        "ideal_p3": 0.046875
+      },
+      "error_3_8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "error_8_32": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G0_a20d3cd892730ce830bb6a14",
+      "group": "G0",
+      "all": {
+        "points": 1024,
+        "epe": 2.622136116027832,
+        "p3": 0.6630859375,
+        "ideal_epe": 7.9054999351501465,
+        "ideal_p3": 0.046875
+      },
+      "rank1": {
+        "points": 1024,
+        "epe": 2.622136116027832,
+        "p3": 0.6630859375,
+        "ideal_epe": 7.9054999351501465,
+        "ideal_p3": 0.046875
+      },
+      "rank_above1": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_8_16": {
+        "points": 124,
+        "epe": 2.5920724868774414,
+        "p3": 0.6290322580645161,
+        "ideal_epe": 12.048457145690918,
+        "ideal_p3": 0.0
+      },
+      "border_16_32": {
+        "points": 116,
+        "epe": 2.8632984161376953,
+        "p3": 0.5948275862068966,
+        "ideal_epe": 10.491647720336914,
+        "ideal_p3": 0.0
+      },
+      "border_32_inf": {
+        "points": 784,
+        "epe": 2.5912089347839355,
+        "p3": 0.6785714285714286,
+        "ideal_epe": 6.8675923347473145,
+        "ideal_p3": 0.061224489795918366
+      },
+      "error_0_3": {
+        "points": 679,
+        "epe": 1.8789684772491455,
+        "p3": 1.0,
+        "ideal_epe": 7.268304347991943,
+        "ideal_p3": 0.07069219440353461
+      },
+      "error_3_8": {
+        "points": 345,
+        "epe": 4.084776401519775,
+        "p3": 0.0,
+        "ideal_epe": 9.159576416015625,
+        "ideal_p3": 0.0
+      },
+      "error_8_32": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G1_59f4a5c20fca6f19576e658c",
+      "group": "G1",
+      "all": {
+        "points": 775,
+        "epe": 1.5756008625030518,
+        "p3": 0.895483870967742,
+        "ideal_epe": 6.523460388183594,
+        "ideal_p3": 0.08516129032258064
+      },
+      "rank1": {
+        "points": 775,
+        "epe": 1.5756008625030518,
+        "p3": 0.895483870967742,
+        "ideal_epe": 6.523460388183594,
+        "ideal_p3": 0.08516129032258064
+      },
+      "rank_above1": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 35,
+        "epe": 6.460928440093994,
+        "p3": 0.0,
+        "ideal_epe": 9.133455276489258,
+        "ideal_p3": 0.08571428571428572
+      },
+      "border_8_16": {
+        "points": 20,
+        "epe": 2.6983675956726074,
+        "p3": 0.55,
+        "ideal_epe": 11.696547508239746,
+        "ideal_p3": 0.0
+      },
+      "border_16_32": {
+        "points": 76,
+        "epe": 2.5674355030059814,
+        "p3": 0.7368421052631579,
+        "ideal_epe": 9.208174705505371,
+        "ideal_p3": 0.013157894736842105
+      },
+      "border_32_inf": {
+        "points": 644,
+        "epe": 1.1581765413284302,
+        "p3": 0.9736024844720497,
+        "ideal_epe": 5.904127597808838,
+        "ideal_p3": 0.09627329192546584
+      },
+      "error_0_3": {
+        "points": 694,
+        "epe": 1.1264539957046509,
+        "p3": 1.0,
+        "ideal_epe": 6.2470526695251465,
+        "ideal_p3": 0.08213256484149856
+      },
+      "error_3_8": {
+        "points": 75,
+        "epe": 4.997551441192627,
+        "p3": 0.0,
+        "ideal_epe": 8.730205535888672,
+        "ideal_p3": 0.12
+      },
+      "error_8_32": {
+        "points": 6,
+        "epe": 10.752549171447754,
+        "p3": 0.0,
+        "ideal_epe": 10.910199165344238,
+        "ideal_p3": 0.0
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G1_72217f153bce13c46a5b04d2",
+      "group": "G1",
+      "all": {
+        "points": 424,
+        "epe": 3.199007987976074,
+        "p3": 0.5778301886792453,
+        "ideal_epe": 7.738096237182617,
+        "ideal_p3": 0.0660377358490566
+      },
+      "rank1": {
+        "points": 390,
+        "epe": 3.083928346633911,
+        "p3": 0.5897435897435898,
+        "ideal_epe": 7.7524614334106445,
+        "ideal_p3": 0.0641025641025641
+      },
+      "rank_above1": {
+        "points": 34,
+        "epe": 4.51903772354126,
+        "p3": 0.4411764705882353,
+        "ideal_epe": 7.5733184814453125,
+        "ideal_p3": 0.08823529411764706
+      },
+      "positive_mass_ge_0.9": {
+        "points": 2,
+        "epe": 1.9729175567626953,
+        "p3": 1.0,
+        "ideal_epe": 6.866816520690918,
+        "ideal_p3": 0.0
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 20,
+        "epe": 8.300840377807617,
+        "p3": 0.2,
+        "ideal_epe": 39.786468505859375,
+        "ideal_p3": 0.0
+      },
+      "border_8_16": {
+        "points": 21,
+        "epe": 2.688016653060913,
+        "p3": 0.7142857142857143,
+        "ideal_epe": 12.329087257385254,
+        "ideal_p3": 0.0
+      },
+      "border_16_32": {
+        "points": 41,
+        "epe": 1.890483021736145,
+        "p3": 0.926829268292683,
+        "ideal_epe": 7.7798895835876465,
+        "ideal_p3": 0.0
+      },
+      "border_32_inf": {
+        "points": 342,
+        "epe": 3.088902235031128,
+        "p3": 0.5497076023391813,
+        "ideal_epe": 5.577010154724121,
+        "ideal_p3": 0.08187134502923976
+      },
+      "error_0_3": {
+        "points": 245,
+        "epe": 2.0534799098968506,
+        "p3": 1.0,
+        "ideal_epe": 6.501039505004883,
+        "ideal_p3": 0.07755102040816327
+      },
+      "error_3_8": {
+        "points": 164,
+        "epe": 3.9455342292785645,
+        "p3": 0.0,
+        "ideal_epe": 6.932833671569824,
+        "ideal_p3": 0.054878048780487805
+      },
+      "error_8_32": {
+        "points": 14,
+        "epe": 11.865431785583496,
+        "p3": 0.0,
+        "ideal_epe": 36.496315002441406,
+        "ideal_p3": 0.0
+      },
+      "error_32_inf": {
+        "points": 1,
+        "epe": 40.09310531616211,
+        "p3": 0.0,
+        "ideal_epe": 40.26510238647461,
+        "ideal_p3": 0.0
+      }
+    },
+    {
+      "pair_id": "val_G1_218b864f648a2f863b6224d7",
+      "group": "G1",
+      "all": {
+        "points": 845,
+        "epe": 1.7383242845535278,
+        "p3": 0.9136094674556213,
+        "ideal_epe": 6.733088493347168,
+        "ideal_p3": 0.09467455621301775
+      },
+      "rank1": {
+        "points": 803,
+        "epe": 1.7231101989746094,
+        "p3": 0.9153175591531756,
+        "ideal_epe": 6.780388832092285,
+        "ideal_p3": 0.0958904109589041
+      },
+      "rank_above1": {
+        "points": 42,
+        "epe": 2.0292038917541504,
+        "p3": 0.8809523809523809,
+        "ideal_epe": 5.828755855560303,
+        "ideal_p3": 0.07142857142857142
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 26,
+        "epe": 4.665180683135986,
+        "p3": 0.38461538461538464,
+        "ideal_epe": 24.77619171142578,
+        "ideal_p3": 0.038461538461538464
+      },
+      "border_8_16": {
+        "points": 32,
+        "epe": 2.355198383331299,
+        "p3": 0.71875,
+        "ideal_epe": 9.346269607543945,
+        "ideal_p3": 0.09375
+      },
+      "border_16_32": {
+        "points": 68,
+        "epe": 2.0383992195129395,
+        "p3": 0.8088235294117647,
+        "ideal_epe": 11.059560775756836,
+        "ideal_p3": 0.014705882352941176
+      },
+      "border_32_inf": {
+        "points": 719,
+        "epe": 1.576650619506836,
+        "p3": 0.9513212795549374,
+        "ideal_epe": 5.555143356323242,
+        "ideal_p3": 0.1043115438108484
+      },
+      "error_0_3": {
+        "points": 772,
+        "epe": 1.4972838163375854,
+        "p3": 1.0,
+        "ideal_epe": 6.045516490936279,
+        "ideal_p3": 0.10362694300518134
+      },
+      "error_3_8": {
+        "points": 69,
+        "epe": 4.03265380859375,
+        "p3": 0.0,
+        "ideal_epe": 13.282842636108398,
+        "ideal_p3": 0.0
+      },
+      "error_8_32": {
+        "points": 4,
+        "epe": 8.681963920593262,
+        "p3": 0.0,
+        "ideal_epe": 26.451313018798828,
+        "ideal_p3": 0.0
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G1_a494fd0920b58a4b65b13b4f",
+      "group": "G1",
+      "all": {
+        "points": 567,
+        "epe": 1.4057403802871704,
+        "p3": 0.9347442680776014,
+        "ideal_epe": 6.831023693084717,
+        "ideal_p3": 0.1746031746031746
+      },
+      "rank1": {
+        "points": 559,
+        "epe": 1.3717148303985596,
+        "p3": 0.9391771019677997,
+        "ideal_epe": 6.8743157386779785,
+        "ideal_p3": 0.16457960644007155
+      },
+      "rank_above1": {
+        "points": 8,
+        "epe": 3.7832789421081543,
+        "p3": 0.625,
+        "ideal_epe": 3.8060154914855957,
+        "ideal_p3": 0.875
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 23,
+        "epe": 6.638474941253662,
+        "p3": 0.34782608695652173,
+        "ideal_epe": 25.428869247436523,
+        "ideal_p3": 0.0
+      },
+      "border_8_16": {
+        "points": 24,
+        "epe": 2.578634262084961,
+        "p3": 0.875,
+        "ideal_epe": 11.538552284240723,
+        "ideal_p3": 0.041666666666666664
+      },
+      "border_16_32": {
+        "points": 55,
+        "epe": 1.74521803855896,
+        "p3": 0.9454545454545454,
+        "ideal_epe": 12.195062637329102,
+        "ideal_p3": 0.01818181818181818
+      },
+      "border_32_inf": {
+        "points": 465,
+        "epe": 1.046227216720581,
+        "p3": 0.9655913978494624,
+        "ideal_epe": 5.033705234527588,
+        "ideal_p3": 0.2086021505376344
+      },
+      "error_0_3": {
+        "points": 530,
+        "epe": 1.031614899635315,
+        "p3": 1.0,
+        "ideal_epe": 6.319445610046387,
+        "ideal_p3": 0.17547169811320754
+      },
+      "error_3_8": {
+        "points": 27,
+        "epe": 3.7608931064605713,
+        "p3": 0.0,
+        "ideal_epe": 9.612786293029785,
+        "ideal_p3": 0.2222222222222222
+      },
+      "error_8_32": {
+        "points": 10,
+        "epe": 14.875475883483887,
+        "p3": 0.0,
+        "ideal_epe": 26.433910369873047,
+        "ideal_p3": 0.0
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G1_411c9f87b5d122329322571a",
+      "group": "G1",
+      "all": {
+        "points": 675,
+        "epe": 8.352709770202637,
+        "p3": 0.008888888888888889,
+        "ideal_epe": 6.067127227783203,
+        "ideal_p3": 0.1362962962962963
+      },
+      "rank1": {
+        "points": 383,
+        "epe": 7.547656536102295,
+        "p3": 0.015665796344647518,
+        "ideal_epe": 6.136449813842773,
+        "ideal_p3": 0.05483028720626632
+      },
+      "rank_above1": {
+        "points": 292,
+        "epe": 9.408653259277344,
+        "p3": 0.0,
+        "ideal_epe": 5.97620153427124,
+        "ideal_p3": 0.24315068493150685
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 22,
+        "epe": 10.501099586486816,
+        "p3": 0.22727272727272727,
+        "ideal_epe": 17.9909725189209,
+        "ideal_p3": 0.0
+      },
+      "border_8_16": {
+        "points": 27,
+        "epe": 8.325977325439453,
+        "p3": 0.037037037037037035,
+        "ideal_epe": 10.706121444702148,
+        "ideal_p3": 0.037037037037037035
+      },
+      "border_16_32": {
+        "points": 50,
+        "epe": 8.652093887329102,
+        "p3": 0.0,
+        "ideal_epe": 7.799932479858398,
+        "ideal_p3": 0.04
+      },
+      "border_32_inf": {
+        "points": 576,
+        "epe": 8.245917320251465,
+        "p3": 0.0,
+        "ideal_epe": 5.243833065032959,
+        "ideal_p3": 0.1545138888888889
+      },
+      "error_0_3": {
+        "points": 6,
+        "epe": 1.9943337440490723,
+        "p3": 1.0,
+        "ideal_epe": 8.585558891296387,
+        "ideal_p3": 0.0
+      },
+      "error_3_8": {
+        "points": 323,
+        "epe": 6.687544822692871,
+        "p3": 0.0,
+        "ideal_epe": 5.503328800201416,
+        "ideal_p3": 0.10835913312693499
+      },
+      "error_8_32": {
+        "points": 346,
+        "epe": 10.01744556427002,
+        "p3": 0.0,
+        "ideal_epe": 6.549776554107666,
+        "ideal_p3": 0.16473988439306358
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G1_4a3dd3d780dc3b623ea3b057",
+      "group": "G1",
+      "all": {
+        "points": 627,
+        "epe": 2.660182237625122,
+        "p3": 0.6698564593301436,
+        "ideal_epe": 6.946857452392578,
+        "ideal_p3": 0.19298245614035087
+      },
+      "rank1": {
+        "points": 566,
+        "epe": 2.5842151641845703,
+        "p3": 0.6908127208480566,
+        "ideal_epe": 7.044651985168457,
+        "ideal_p3": 0.196113074204947
+      },
+      "rank_above1": {
+        "points": 61,
+        "epe": 3.3650550842285156,
+        "p3": 0.47540983606557374,
+        "ideal_epe": 6.0394511222839355,
+        "ideal_p3": 0.16393442622950818
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 26,
+        "epe": 6.48850679397583,
+        "p3": 0.19230769230769232,
+        "ideal_epe": 37.329524993896484,
+        "ideal_p3": 0.0
+      },
+      "border_8_16": {
+        "points": 23,
+        "epe": 2.213097333908081,
+        "p3": 0.6956521739130435,
+        "ideal_epe": 10.076090812683105,
+        "ideal_p3": 0.13043478260869565
+      },
+      "border_16_32": {
+        "points": 50,
+        "epe": 2.5204689502716064,
+        "p3": 0.7,
+        "ideal_epe": 10.089517593383789,
+        "ideal_p3": 0.06
+      },
+      "border_32_inf": {
+        "points": 528,
+        "epe": 2.5043718814849854,
+        "p3": 0.6893939393939394,
+        "ideal_epe": 5.016829013824463,
+        "ideal_p3": 0.2178030303030303
+      },
+      "error_0_3": {
+        "points": 420,
+        "epe": 1.809670329093933,
+        "p3": 1.0,
+        "ideal_epe": 5.424161434173584,
+        "ideal_p3": 0.24523809523809523
+      },
+      "error_3_8": {
+        "points": 197,
+        "epe": 3.965339422225952,
+        "p3": 0.0,
+        "ideal_epe": 8.662778854370117,
+        "ideal_p3": 0.09137055837563451
+      },
+      "error_8_32": {
+        "points": 10,
+        "epe": 12.670082092285156,
+        "p3": 0.0,
+        "ideal_epe": 37.096431732177734,
+        "ideal_p3": 0.0
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G1_e6b492ea8816fe3012d8817f",
+      "group": "G1",
+      "all": {
+        "points": 807,
+        "epe": 2.2085084915161133,
+        "p3": 0.8327137546468402,
+        "ideal_epe": 6.66688346862793,
+        "ideal_p3": 0.14002478314745972
+      },
+      "rank1": {
+        "points": 781,
+        "epe": 2.1951262950897217,
+        "p3": 0.8335467349551856,
+        "ideal_epe": 6.681946754455566,
+        "ideal_p3": 0.14212548015364918
+      },
+      "rank_above1": {
+        "points": 26,
+        "epe": 2.61049222946167,
+        "p3": 0.8076923076923077,
+        "ideal_epe": 6.214371681213379,
+        "ideal_p3": 0.07692307692307693
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 26,
+        "epe": 6.084041118621826,
+        "p3": 0.2692307692307692,
+        "ideal_epe": 40.36152648925781,
+        "ideal_p3": 0.0
+      },
+      "border_8_16": {
+        "points": 28,
+        "epe": 2.493077039718628,
+        "p3": 0.6071428571428571,
+        "ideal_epe": 10.429997444152832,
+        "ideal_p3": 0.03571428571428571
+      },
+      "border_16_32": {
+        "points": 67,
+        "epe": 2.5850813388824463,
+        "p3": 0.746268656716418,
+        "ideal_epe": 10.03414249420166,
+        "ideal_p3": 0.014925373134328358
+      },
+      "border_32_inf": {
+        "points": 686,
+        "epe": 2.013228416442871,
+        "p3": 0.8717201166180758,
+        "ideal_epe": 4.907357692718506,
+        "ideal_p3": 0.1618075801749271
+      },
+      "error_0_3": {
+        "points": 672,
+        "epe": 1.716252326965332,
+        "p3": 1.0,
+        "ideal_epe": 5.8222222328186035,
+        "ideal_p3": 0.13095238095238096
+      },
+      "error_3_8": {
+        "points": 125,
+        "epe": 4.113701820373535,
+        "p3": 0.0,
+        "ideal_epe": 9.101746559143066,
+        "ideal_p3": 0.192
+      },
+      "error_8_32": {
+        "points": 10,
+        "epe": 11.47321891784668,
+        "p3": 0.0,
+        "ideal_epe": 32.9922981262207,
+        "ideal_p3": 0.1
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G1_1c4739f6044a189e596f8e53",
+      "group": "G1",
+      "all": {
+        "points": 836,
+        "epe": 1.590750813484192,
+        "p3": 0.9401913875598086,
+        "ideal_epe": 6.476013660430908,
+        "ideal_p3": 0.10406698564593302
+      },
+      "rank1": {
+        "points": 813,
+        "epe": 1.5848071575164795,
+        "p3": 0.942189421894219,
+        "ideal_epe": 6.501844882965088,
+        "ideal_p3": 0.1070110701107011
+      },
+      "rank_above1": {
+        "points": 23,
+        "epe": 1.8008404970169067,
+        "p3": 0.8695652173913043,
+        "ideal_epe": 5.5629472732543945,
+        "ideal_p3": 0.0
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 28,
+        "epe": 6.704991817474365,
+        "p3": 0.2857142857142857,
+        "ideal_epe": 17.08273696899414,
+        "ideal_p3": 0.03571428571428571
+      },
+      "border_8_16": {
+        "points": 27,
+        "epe": 2.184084177017212,
+        "p3": 0.7777777777777778,
+        "ideal_epe": 9.752463340759277,
+        "ideal_p3": 0.037037037037037035
+      },
+      "border_16_32": {
+        "points": 65,
+        "epe": 1.5739185810089111,
+        "p3": 0.9538461538461539,
+        "ideal_epe": 9.25389575958252,
+        "ideal_p3": 0.046153846153846156
+      },
+      "border_32_inf": {
+        "points": 716,
+        "epe": 1.3699060678482056,
+        "p3": 0.9706703910614525,
+        "ideal_epe": 5.685490608215332,
+        "ideal_p3": 0.11452513966480447
+      },
+      "error_0_3": {
+        "points": 786,
+        "epe": 1.340208888053894,
+        "p3": 1.0,
+        "ideal_epe": 6.213997840881348,
+        "ideal_p3": 0.10941475826972011
+      },
+      "error_3_8": {
+        "points": 40,
+        "epe": 4.0083208084106445,
+        "p3": 0.0,
+        "ideal_epe": 8.834939956665039,
+        "ideal_p3": 0.025
+      },
+      "error_8_32": {
+        "points": 10,
+        "epe": 11.613058090209961,
+        "p3": 0.0,
+        "ideal_epe": 17.634746551513672,
+        "ideal_p3": 0.0
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G1_3958fb5340a73f8ea30f68fd",
+      "group": "G1",
+      "all": {
+        "points": 579,
+        "epe": 1.6516695022583008,
+        "p3": 0.927461139896373,
+        "ideal_epe": 6.8685526847839355,
+        "ideal_p3": 0.22452504317789293
+      },
+      "rank1": {
+        "points": 562,
+        "epe": 1.591151475906372,
+        "p3": 0.9323843416370107,
+        "ideal_epe": 6.7950119972229,
+        "ideal_p3": 0.22597864768683273
+      },
+      "rank_above1": {
+        "points": 17,
+        "epe": 3.6523244380950928,
+        "p3": 0.7647058823529411,
+        "ideal_epe": 9.299710273742676,
+        "ideal_p3": 0.17647058823529413
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 24,
+        "epe": 9.499245643615723,
+        "p3": 0.20833333333333334,
+        "ideal_epe": 33.254058837890625,
+        "ideal_p3": 0.041666666666666664
+      },
+      "border_8_16": {
+        "points": 24,
+        "epe": 2.1432392597198486,
+        "p3": 0.8333333333333334,
+        "ideal_epe": 10.983383178710938,
+        "ideal_p3": 0.041666666666666664
+      },
+      "border_16_32": {
+        "points": 48,
+        "epe": 1.2086290121078491,
+        "p3": 1.0,
+        "ideal_epe": 12.098015785217285,
+        "ideal_p3": 0.020833333333333332
+      },
+      "border_32_inf": {
+        "points": 483,
+        "epe": 1.2813307046890259,
+        "p3": 0.9606625258799172,
+        "ideal_epe": 4.833309173583984,
+        "ideal_p3": 0.2629399585921325
+      },
+      "error_0_3": {
+        "points": 537,
+        "epe": 1.198910117149353,
+        "p3": 1.0,
+        "ideal_epe": 6.023223876953125,
+        "ideal_p3": 0.22346368715083798
+      },
+      "error_3_8": {
+        "points": 29,
+        "epe": 4.133135795593262,
+        "p3": 0.0,
+        "ideal_epe": 10.92045783996582,
+        "ideal_p3": 0.3103448275862069
+      },
+      "error_8_32": {
+        "points": 13,
+        "epe": 14.81852912902832,
+        "p3": 0.0,
+        "ideal_epe": 32.74826431274414,
+        "ideal_p3": 0.07692307692307693
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G1_bdabc2a14b3bf911cb442ff8",
+      "group": "G1",
+      "all": {
+        "points": 589,
+        "epe": 3.394680976867676,
+        "p3": 0.4770797962648557,
+        "ideal_epe": 7.200387001037598,
+        "ideal_p3": 0.12054329371816638
+      },
+      "rank1": {
+        "points": 514,
+        "epe": 3.2513163089752197,
+        "p3": 0.4961089494163424,
+        "ideal_epe": 7.190940856933594,
+        "ideal_p3": 0.11089494163424124
+      },
+      "rank_above1": {
+        "points": 75,
+        "epe": 4.377206802368164,
+        "p3": 0.3466666666666667,
+        "ideal_epe": 7.2651238441467285,
+        "ideal_p3": 0.18666666666666668
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 25,
+        "epe": 7.930475234985352,
+        "p3": 0.04,
+        "ideal_epe": 28.810529708862305,
+        "ideal_p3": 0.04
+      },
+      "border_8_16": {
+        "points": 26,
+        "epe": 4.980801582336426,
+        "p3": 0.0,
+        "ideal_epe": 10.919111251831055,
+        "ideal_p3": 0.038461538461538464
+      },
+      "border_16_32": {
+        "points": 56,
+        "epe": 3.707390546798706,
+        "p3": 0.25,
+        "ideal_epe": 8.895410537719727,
+        "ideal_p3": 0.03571428571428571
+      },
+      "border_32_inf": {
+        "points": 482,
+        "epe": 3.037532329559326,
+        "p3": 0.5518672199170125,
+        "ideal_epe": 5.682001113891602,
+        "ideal_p3": 0.13900414937759337
+      },
+      "error_0_3": {
+        "points": 281,
+        "epe": 2.3136720657348633,
+        "p3": 1.0,
+        "ideal_epe": 5.807385444641113,
+        "ideal_p3": 0.13523131672597866
+      },
+      "error_3_8": {
+        "points": 295,
+        "epe": 4.0476202964782715,
+        "p3": 0.0,
+        "ideal_epe": 7.628983020782471,
+        "ideal_p3": 0.11186440677966102
+      },
+      "error_8_32": {
+        "points": 13,
+        "epe": 11.944411277770996,
+        "p3": 0.0,
+        "ideal_epe": 27.58480453491211,
+        "ideal_p3": 0.0
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G1_c693eaa651caebd2c052d380",
+      "group": "G1",
+      "all": {
+        "points": 889,
+        "epe": 1.8809796571731567,
+        "p3": 0.9021372328458943,
+        "ideal_epe": 6.637115478515625,
+        "ideal_p3": 0.10123734533183353
+      },
+      "rank1": {
+        "points": 867,
+        "epe": 1.8655204772949219,
+        "p3": 0.9065743944636678,
+        "ideal_epe": 6.5264787673950195,
+        "ideal_p3": 0.10380622837370242
+      },
+      "rank_above1": {
+        "points": 22,
+        "epe": 2.4902148246765137,
+        "p3": 0.7272727272727273,
+        "ideal_epe": 10.997199058532715,
+        "ideal_p3": 0.0
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 30,
+        "epe": 5.2505621910095215,
+        "p3": 0.3333333333333333,
+        "ideal_epe": 16.537160873413086,
+        "ideal_p3": 0.1
+      },
+      "border_8_16": {
+        "points": 32,
+        "epe": 2.307853937149048,
+        "p3": 0.78125,
+        "ideal_epe": 7.915426254272461,
+        "ideal_p3": 0.0625
+      },
+      "border_16_32": {
+        "points": 82,
+        "epe": 2.1556315422058105,
+        "p3": 0.8048780487804879,
+        "ideal_epe": 10.70201301574707,
+        "ideal_p3": 0.012195121951219513
+      },
+      "border_32_inf": {
+        "points": 745,
+        "epe": 1.6967260837554932,
+        "p3": 0.9409395973154362,
+        "ideal_epe": 5.7361369132995605,
+        "ideal_p3": 0.11275167785234899
+      },
+      "error_0_3": {
+        "points": 802,
+        "epe": 1.5853580236434937,
+        "p3": 1.0,
+        "ideal_epe": 6.4074273109436035,
+        "ideal_p3": 0.10349127182044887
+      },
+      "error_3_8": {
+        "points": 82,
+        "epe": 4.1322150230407715,
+        "p3": 0.0,
+        "ideal_epe": 8.333585739135742,
+        "ideal_p3": 0.08536585365853659
+      },
+      "error_8_32": {
+        "points": 5,
+        "epe": 12.378435134887695,
+        "p3": 0.0,
+        "ideal_epe": 15.657028198242188,
+        "ideal_p3": 0.0
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G1_6722b9717639ee7c8466ff56",
+      "group": "G1",
+      "all": {
+        "points": 515,
+        "epe": 2.9073243141174316,
+        "p3": 0.7029126213592233,
+        "ideal_epe": 8.067710876464844,
+        "ideal_p3": 0.13592233009708737
+      },
+      "rank1": {
+        "points": 414,
+        "epe": 2.593438148498535,
+        "p3": 0.751207729468599,
+        "ideal_epe": 7.695199489593506,
+        "ideal_p3": 0.13768115942028986
+      },
+      "rank_above1": {
+        "points": 101,
+        "epe": 4.193945407867432,
+        "p3": 0.504950495049505,
+        "ideal_epe": 9.594637870788574,
+        "ideal_p3": 0.12871287128712872
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 23,
+        "epe": 7.741207122802734,
+        "p3": 0.17391304347826086,
+        "ideal_epe": 35.41851043701172,
+        "ideal_p3": 0.0
+      },
+      "border_8_16": {
+        "points": 22,
+        "epe": 6.364044189453125,
+        "p3": 0.22727272727272727,
+        "ideal_epe": 11.16958999633789,
+        "ideal_p3": 0.09090909090909091
+      },
+      "border_16_32": {
+        "points": 48,
+        "epe": 4.51303243637085,
+        "p3": 0.3333333333333333,
+        "ideal_epe": 15.366096496582031,
+        "ideal_p3": 0.020833333333333332
+      },
+      "border_32_inf": {
+        "points": 422,
+        "epe": 2.281018018722534,
+        "p3": 0.7985781990521327,
+        "ideal_epe": 5.585170269012451,
+        "ideal_p3": 0.15876777251184834
+      },
+      "error_0_3": {
+        "points": 362,
+        "epe": 1.825417160987854,
+        "p3": 1.0,
+        "ideal_epe": 6.383805274963379,
+        "ideal_p3": 0.143646408839779
+      },
+      "error_3_8": {
+        "points": 132,
+        "epe": 4.4804463386535645,
+        "p3": 0.0,
+        "ideal_epe": 10.583788871765137,
+        "ideal_p3": 0.12878787878787878
+      },
+      "error_8_32": {
+        "points": 21,
+        "epe": 11.669136047363281,
+        "p3": 0.0,
+        "ideal_epe": 21.27970314025879,
+        "ideal_p3": 0.047619047619047616
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G1_769728d293f17d1e5289c9cf",
+      "group": "G1",
+      "all": {
+        "points": 558,
+        "epe": 3.0571134090423584,
+        "p3": 0.5967741935483871,
+        "ideal_epe": 6.899618148803711,
+        "ideal_p3": 0.10215053763440861
+      },
+      "rank1": {
+        "points": 547,
+        "epe": 3.05263090133667,
+        "p3": 0.6014625228519196,
+        "ideal_epe": 6.897138595581055,
+        "ideal_p3": 0.09689213893967093
+      },
+      "rank_above1": {
+        "points": 11,
+        "epe": 3.280022621154785,
+        "p3": 0.36363636363636365,
+        "ideal_epe": 7.022928237915039,
+        "ideal_p3": 0.36363636363636365
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 33,
+        "epe": 9.071951866149902,
+        "p3": 0.36363636363636365,
+        "ideal_epe": 14.669373512268066,
+        "ideal_p3": 0.0
+      },
+      "border_8_16": {
+        "points": 14,
+        "epe": 2.890547037124634,
+        "p3": 0.42857142857142855,
+        "ideal_epe": 11.14806079864502,
+        "ideal_p3": 0.0
+      },
+      "border_16_32": {
+        "points": 64,
+        "epe": 3.194370746612549,
+        "p3": 0.640625,
+        "ideal_epe": 9.017563819885254,
+        "ideal_p3": 0.046875
+      },
+      "border_32_inf": {
+        "points": 447,
+        "epe": 2.5986294746398926,
+        "p3": 0.6129753914988815,
+        "ideal_epe": 5.889711380004883,
+        "ideal_p3": 0.12080536912751678
+      },
+      "error_0_3": {
+        "points": 333,
+        "epe": 1.741324543952942,
+        "p3": 1.0,
+        "ideal_epe": 6.849642276763916,
+        "ideal_p3": 0.03003003003003003
+      },
+      "error_3_8": {
+        "points": 205,
+        "epe": 3.894469976425171,
+        "p3": 0.0,
+        "ideal_epe": 5.7760725021362305,
+        "ideal_p3": 0.22926829268292684
+      },
+      "error_8_32": {
+        "points": 19,
+        "epe": 15.316391944885254,
+        "p3": 0.0,
+        "ideal_epe": 17.078035354614258,
+        "ideal_p3": 0.0
+      },
+      "error_32_inf": {
+        "points": 1,
+        "epe": 36.63036346435547,
+        "p3": 0.0,
+        "ideal_epe": 60.47854995727539,
+        "ideal_p3": 0.0
+      }
+    },
+    {
+      "pair_id": "val_G1_d4d07bf179ba833ac87d4237",
+      "group": "G1",
+      "all": {
+        "points": 714,
+        "epe": 2.3655097484588623,
+        "p3": 0.726890756302521,
+        "ideal_epe": 6.65030574798584,
+        "ideal_p3": 0.11904761904761904
+      },
+      "rank1": {
+        "points": 663,
+        "epe": 2.32375168800354,
+        "p3": 0.7390648567119156,
+        "ideal_epe": 6.74614953994751,
+        "ideal_p3": 0.11010558069381599
+      },
+      "rank_above1": {
+        "points": 51,
+        "epe": 2.9083685874938965,
+        "p3": 0.5686274509803921,
+        "ideal_epe": 5.404315948486328,
+        "ideal_p3": 0.23529411764705882
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 23,
+        "epe": 5.734827518463135,
+        "p3": 0.2608695652173913,
+        "ideal_epe": 25.84852409362793,
+        "ideal_p3": 0.043478260869565216
+      },
+      "border_8_16": {
+        "points": 28,
+        "epe": 2.564394474029541,
+        "p3": 0.6428571428571429,
+        "ideal_epe": 10.962615966796875,
+        "ideal_p3": 0.07142857142857142
+      },
+      "border_16_32": {
+        "points": 51,
+        "epe": 1.757834792137146,
+        "p3": 0.9215686274509803,
+        "ideal_epe": 12.749215126037598,
+        "ideal_p3": 0.0
+      },
+      "border_32_inf": {
+        "points": 612,
+        "epe": 2.2804253101348877,
+        "p3": 0.7320261437908496,
+        "ideal_epe": 5.223265647888184,
+        "ideal_p3": 0.13398692810457516
+      },
+      "error_0_3": {
+        "points": 519,
+        "epe": 1.7048755884170532,
+        "p3": 1.0,
+        "ideal_epe": 6.507668495178223,
+        "ideal_p3": 0.08863198458574181
+      },
+      "error_3_8": {
+        "points": 189,
+        "epe": 3.8727991580963135,
+        "p3": 0.0,
+        "ideal_epe": 6.282485008239746,
+        "ideal_p3": 0.20634920634920634
+      },
+      "error_8_32": {
+        "points": 6,
+        "epe": 12.030750274658203,
+        "p3": 0.0,
+        "ideal_epe": 30.5747127532959,
+        "ideal_p3": 0.0
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G1_ffee1883be8d3719576fc74f",
+      "group": "G1",
+      "all": {
+        "points": 347,
+        "epe": 4.279869556427002,
+        "p3": 0.6080691642651297,
+        "ideal_epe": 9.464200973510742,
+        "ideal_p3": 0.06340057636887608
+      },
+      "rank1": {
+        "points": 339,
+        "epe": 4.10991907119751,
+        "p3": 0.616519174041298,
+        "ideal_epe": 9.31054401397705,
+        "ideal_p3": 0.061946902654867256
+      },
+      "rank_above1": {
+        "points": 8,
+        "epe": 11.48151969909668,
+        "p3": 0.25,
+        "ideal_epe": 15.975391387939453,
+        "ideal_p3": 0.125
+      },
+      "positive_mass_ge_0.9": {
+        "points": 2,
+        "epe": 2.222851276397705,
+        "p3": 0.5,
+        "ideal_epe": 5.081778526306152,
+        "ideal_p3": 0.5
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 16,
+        "epe": 10.11874008178711,
+        "p3": 0.0625,
+        "ideal_epe": 27.117033004760742,
+        "ideal_p3": 0.0
+      },
+      "border_8_16": {
+        "points": 20,
+        "epe": 8.409382820129395,
+        "p3": 0.15,
+        "ideal_epe": 14.560606002807617,
+        "ideal_p3": 0.05
+      },
+      "border_16_32": {
+        "points": 36,
+        "epe": 4.656836986541748,
+        "p3": 0.5,
+        "ideal_epe": 16.35051727294922,
+        "ideal_p3": 0.027777777777777776
+      },
+      "border_32_inf": {
+        "points": 275,
+        "epe": 3.5904769897460938,
+        "p3": 0.6872727272727273,
+        "ideal_epe": 7.164997577667236,
+        "ideal_p3": 0.07272727272727272
+      },
+      "error_0_3": {
+        "points": 211,
+        "epe": 1.8155783414840698,
+        "p3": 1.0,
+        "ideal_epe": 7.023432731628418,
+        "ideal_p3": 0.08056872037914692
+      },
+      "error_3_8": {
+        "points": 108,
+        "epe": 3.981999635696411,
+        "p3": 0.0,
+        "ideal_epe": 9.419997215270996,
+        "ideal_p3": 0.037037037037037035
+      },
+      "error_8_32": {
+        "points": 21,
+        "epe": 15.338079452514648,
+        "p3": 0.0,
+        "ideal_epe": 19.863924026489258,
+        "ideal_p3": 0.047619047619047616
+      },
+      "error_32_inf": {
+        "points": 7,
+        "epe": 49.981727600097656,
+        "p3": 0.0,
+        "ideal_epe": 52.51873779296875,
+        "ideal_p3": 0.0
+      }
+    },
+    {
+      "pair_id": "val_G1_c5b52330e77a8619e31894de",
+      "group": "G1",
+      "all": {
+        "points": 324,
+        "epe": 4.2401580810546875,
+        "p3": 0.5216049382716049,
+        "ideal_epe": 9.255817413330078,
+        "ideal_p3": 0.09567901234567901
+      },
+      "rank1": {
+        "points": 270,
+        "epe": 3.675778388977051,
+        "p3": 0.5740740740740741,
+        "ideal_epe": 8.658663749694824,
+        "ideal_p3": 0.07777777777777778
+      },
+      "rank_above1": {
+        "points": 54,
+        "epe": 7.0620574951171875,
+        "p3": 0.25925925925925924,
+        "ideal_epe": 12.241584777832031,
+        "ideal_p3": 0.18518518518518517
+      },
+      "positive_mass_ge_0.9": {
+        "points": 1,
+        "epe": 2.6437344551086426,
+        "p3": 1.0,
+        "ideal_epe": 6.084134101867676,
+        "ideal_p3": 0.0
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 18,
+        "epe": 7.014912128448486,
+        "p3": 0.1111111111111111,
+        "ideal_epe": 42.72296142578125,
+        "ideal_p3": 0.0
+      },
+      "border_8_16": {
+        "points": 18,
+        "epe": 5.807212829589844,
+        "p3": 0.16666666666666666,
+        "ideal_epe": 13.065773010253906,
+        "ideal_p3": 0.05555555555555555
+      },
+      "border_16_32": {
+        "points": 37,
+        "epe": 4.317058086395264,
+        "p3": 0.32432432432432434,
+        "ideal_epe": 11.646642684936523,
+        "ideal_p3": 0.08108108108108109
+      },
+      "border_32_inf": {
+        "points": 251,
+        "epe": 3.917457342147827,
+        "p3": 0.6055776892430279,
+        "ideal_epe": 6.23012638092041,
+        "ideal_p3": 0.10756972111553785
+      },
+      "error_0_3": {
+        "points": 169,
+        "epe": 1.678708791732788,
+        "p3": 1.0,
+        "ideal_epe": 6.206762313842773,
+        "ideal_p3": 0.0650887573964497
+      },
+      "error_3_8": {
+        "points": 129,
+        "epe": 5.104880332946777,
+        "p3": 0.0,
+        "ideal_epe": 10.067532539367676,
+        "ideal_p3": 0.12403100775193798
+      },
+      "error_8_32": {
+        "points": 23,
+        "epe": 12.06729507446289,
+        "p3": 0.0,
+        "ideal_epe": 21.740087509155273,
+        "ideal_p3": 0.17391304347826086
+      },
+      "error_32_inf": {
+        "points": 3,
+        "epe": 51.344051361083984,
+        "p3": 0.0,
+        "ideal_epe": 50.40268325805664,
+        "ideal_p3": 0.0
+      }
+    },
+    {
+      "pair_id": "val_G2_9971335a127868ebf95ebed8",
+      "group": "G2",
+      "all": {
+        "points": 484,
+        "epe": 1.6613848209381104,
+        "p3": 0.9008264462809917,
+        "ideal_epe": 7.7072978019714355,
+        "ideal_p3": 0.06611570247933884
+      },
+      "rank1": {
+        "points": 484,
+        "epe": 1.6613848209381104,
+        "p3": 0.9008264462809917,
+        "ideal_epe": 7.7072978019714355,
+        "ideal_p3": 0.06611570247933884
+      },
+      "rank_above1": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 84,
+        "epe": 3.9288792610168457,
+        "p3": 0.44047619047619047,
+        "ideal_epe": 13.197291374206543,
+        "ideal_p3": 0.0
+      },
+      "border_8_16": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_16_32": {
+        "points": 76,
+        "epe": 1.2876147031784058,
+        "p3": 0.9868421052631579,
+        "ideal_epe": 10.018758773803711,
+        "ideal_p3": 0.0
+      },
+      "border_32_inf": {
+        "points": 324,
+        "epe": 1.1611906290054321,
+        "p3": 1.0,
+        "ideal_epe": 5.741771697998047,
+        "ideal_p3": 0.09876543209876543
+      },
+      "error_0_3": {
+        "points": 436,
+        "epe": 1.26183021068573,
+        "p3": 1.0,
+        "ideal_epe": 7.008399486541748,
+        "ideal_p3": 0.07339449541284404
+      },
+      "error_3_8": {
+        "points": 42,
+        "epe": 4.642560005187988,
+        "p3": 0.0,
+        "ideal_epe": 12.838279724121094,
+        "ideal_p3": 0.0
+      },
+      "error_8_32": {
+        "points": 6,
+        "epe": 9.827479362487793,
+        "p3": 0.0,
+        "ideal_epe": 22.576995849609375,
+        "ideal_p3": 0.0
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G2_c373aa80e67062e7256ca641",
+      "group": "G2",
+      "all": {
+        "points": 484,
+        "epe": 4.325811862945557,
+        "p3": 0.3677685950413223,
+        "ideal_epe": 7.7072978019714355,
+        "ideal_p3": 0.06611570247933884
+      },
+      "rank1": {
+        "points": 373,
+        "epe": 3.867178440093994,
+        "p3": 0.4584450402144772,
+        "ideal_epe": 8.02880859375,
+        "ideal_p3": 0.040214477211796246
+      },
+      "rank_above1": {
+        "points": 111,
+        "epe": 5.8669867515563965,
+        "p3": 0.06306306306306306,
+        "ideal_epe": 6.6269025802612305,
+        "ideal_p3": 0.15315315315315314
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 84,
+        "epe": 5.462394714355469,
+        "p3": 0.35714285714285715,
+        "ideal_epe": 13.197291374206543,
+        "ideal_p3": 0.0
+      },
+      "border_8_16": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_16_32": {
+        "points": 76,
+        "epe": 3.3724172115325928,
+        "p3": 0.5,
+        "ideal_epe": 10.018758773803711,
+        "ideal_p3": 0.0
+      },
+      "border_32_inf": {
+        "points": 324,
+        "epe": 4.254777908325195,
+        "p3": 0.3395061728395062,
+        "ideal_epe": 5.741771697998047,
+        "ideal_p3": 0.09876543209876543
+      },
+      "error_0_3": {
+        "points": 178,
+        "epe": 2.1198325157165527,
+        "p3": 1.0,
+        "ideal_epe": 8.204599380493164,
+        "ideal_p3": 0.0
+      },
+      "error_3_8": {
+        "points": 281,
+        "epe": 5.097911357879639,
+        "p3": 0.0,
+        "ideal_epe": 7.014262676239014,
+        "ideal_p3": 0.11387900355871886
+      },
+      "error_8_32": {
+        "points": 25,
+        "epe": 11.353986740112305,
+        "p3": 0.0,
+        "ideal_epe": 11.956220626831055,
+        "ideal_p3": 0.0
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G2_009154351b268c2c8543eb7f",
+      "group": "G2",
+      "all": {
+        "points": 1024,
+        "epe": 1.0846538543701172,
+        "p3": 0.9873046875,
+        "ideal_epe": 5.123845100402832,
+        "ideal_p3": 0.111328125
+      },
+      "rank1": {
+        "points": 964,
+        "epe": 1.049622654914856,
+        "p3": 0.9948132780082988,
+        "ideal_epe": 5.091276168823242,
+        "ideal_p3": 0.11410788381742738
+      },
+      "rank_above1": {
+        "points": 60,
+        "epe": 1.647489070892334,
+        "p3": 0.8666666666666667,
+        "ideal_epe": 5.647121906280518,
+        "ideal_p3": 0.06666666666666667
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_8_16": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_16_32": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_32_inf": {
+        "points": 1024,
+        "epe": 1.0846538543701172,
+        "p3": 0.9873046875,
+        "ideal_epe": 5.123845100402832,
+        "ideal_p3": 0.111328125
+      },
+      "error_0_3": {
+        "points": 1011,
+        "epe": 1.0534577369689941,
+        "p3": 1.0,
+        "ideal_epe": 5.106289386749268,
+        "ideal_p3": 0.11275964391691394
+      },
+      "error_3_8": {
+        "points": 13,
+        "epe": 3.510751962661743,
+        "p3": 0.0,
+        "ideal_epe": 6.489171028137207,
+        "ideal_p3": 0.0
+      },
+      "error_8_32": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G2_00a2faf7c8d071e61c44ff4c",
+      "group": "G2",
+      "all": {
+        "points": 1024,
+        "epe": 1.5585623979568481,
+        "p3": 0.9130859375,
+        "ideal_epe": 2.836707830429077,
+        "ideal_p3": 0.537109375
+      },
+      "rank1": {
+        "points": 1007,
+        "epe": 1.5260363817214966,
+        "p3": 0.9175769612711023,
+        "ideal_epe": 2.8279566764831543,
+        "ideal_p3": 0.5402184707050646
+      },
+      "rank_above1": {
+        "points": 17,
+        "epe": 3.4852516651153564,
+        "p3": 0.6470588235294118,
+        "ideal_epe": 3.355079174041748,
+        "ideal_p3": 0.35294117647058826
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_8_16": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_16_32": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_32_inf": {
+        "points": 1024,
+        "epe": 1.5585623979568481,
+        "p3": 0.9130859375,
+        "ideal_epe": 2.836707830429077,
+        "ideal_p3": 0.537109375
+      },
+      "error_0_3": {
+        "points": 935,
+        "epe": 1.3114310503005981,
+        "p3": 1.0,
+        "ideal_epe": 2.785078287124634,
+        "ideal_p3": 0.5497326203208556
+      },
+      "error_3_8": {
+        "points": 89,
+        "epe": 4.154829502105713,
+        "p3": 0.0,
+        "ideal_epe": 3.3791120052337646,
+        "ideal_p3": 0.4044943820224719
+      },
+      "error_8_32": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G2_00af91637a79efd4ed7960eb",
+      "group": "G2",
+      "all": {
+        "points": 1024,
+        "epe": 55.842071533203125,
+        "p3": 0.001953125,
+        "ideal_epe": 2.499699831008911,
+        "ideal_p3": 0.7392578125
+      },
+      "rank1": {
+        "points": 103,
+        "epe": 23.71255874633789,
+        "p3": 0.009708737864077669,
+        "ideal_epe": 2.6161274909973145,
+        "ideal_p3": 0.6893203883495146
+      },
+      "rank_above1": {
+        "points": 921,
+        "epe": 59.435272216796875,
+        "p3": 0.0010857763300760044,
+        "ideal_epe": 2.4866793155670166,
+        "ideal_p3": 0.744842562432139
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_8_16": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_16_32": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_32_inf": {
+        "points": 1024,
+        "epe": 55.842071533203125,
+        "p3": 0.001953125,
+        "ideal_epe": 2.499699831008911,
+        "ideal_p3": 0.7392578125
+      },
+      "error_0_3": {
+        "points": 2,
+        "epe": 2.0028185844421387,
+        "p3": 1.0,
+        "ideal_epe": 5.971936225891113,
+        "ideal_p3": 0.0
+      },
+      "error_3_8": {
+        "points": 14,
+        "epe": 5.514915943145752,
+        "p3": 0.0,
+        "ideal_epe": 4.479720115661621,
+        "ideal_p3": 0.35714285714285715
+      },
+      "error_8_32": {
+        "points": 321,
+        "epe": 21.00943946838379,
+        "p3": 0.0,
+        "ideal_epe": 3.3724589347839355,
+        "ideal_p3": 0.6043613707165109
+      },
+      "error_32_inf": {
+        "points": 687,
+        "epe": 73.29991149902344,
+        "p3": 0.0,
+        "ideal_epe": 2.0414459705352783,
+        "ideal_p3": 0.8122270742358079
+      }
+    },
+    {
+      "pair_id": "val_G2_7438504dd7fd46920f118043",
+      "group": "G2",
+      "all": {
+        "points": 1024,
+        "epe": 2.1102116107940674,
+        "p3": 0.8388671875,
+        "ideal_epe": 4.14573860168457,
+        "ideal_p3": 0.24609375
+      },
+      "rank1": {
+        "points": 939,
+        "epe": 2.083935499191284,
+        "p3": 0.8413205537806177,
+        "ideal_epe": 4.177035331726074,
+        "ideal_p3": 0.24281150159744408
+      },
+      "rank_above1": {
+        "points": 85,
+        "epe": 2.400486707687378,
+        "p3": 0.8117647058823529,
+        "ideal_epe": 3.8000004291534424,
+        "ideal_p3": 0.2823529411764706
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_8_16": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_16_32": {
+        "points": 2,
+        "epe": 18.815038681030273,
+        "p3": 0.0,
+        "ideal_epe": 16.285354614257812,
+        "ideal_p3": 0.0
+      },
+      "border_32_inf": {
+        "points": 1022,
+        "epe": 2.0775210857391357,
+        "p3": 0.8405088062622309,
+        "ideal_epe": 4.121982574462891,
+        "ideal_p3": 0.2465753424657534
+      },
+      "error_0_3": {
+        "points": 859,
+        "epe": 1.714987874031067,
+        "p3": 1.0,
+        "ideal_epe": 3.9131786823272705,
+        "ideal_p3": 0.2572759022118743
+      },
+      "error_3_8": {
+        "points": 160,
+        "epe": 3.8203721046447754,
+        "p3": 0.0,
+        "ideal_epe": 5.054102897644043,
+        "ideal_p3": 0.19375
+      },
+      "error_8_32": {
+        "points": 5,
+        "epe": 15.284528732299805,
+        "p3": 0.0,
+        "ideal_epe": 15.031906127929688,
+        "ideal_p3": 0.0
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G2_7239da5ea9ccb38fa2a8b009",
+      "group": "G2",
+      "all": {
+        "points": 1024,
+        "epe": 1.2461588382720947,
+        "p3": 0.9619140625,
+        "ideal_epe": 3.0100674629211426,
+        "ideal_p3": 0.515625
+      },
+      "rank1": {
+        "points": 1014,
+        "epe": 1.2328863143920898,
+        "p3": 0.9625246548323472,
+        "ideal_epe": 3.0040695667266846,
+        "ideal_p3": 0.5167652859960552
+      },
+      "rank_above1": {
+        "points": 10,
+        "epe": 2.591996669769287,
+        "p3": 0.9,
+        "ideal_epe": 3.6182734966278076,
+        "ideal_p3": 0.4
+      },
+      "positive_mass_ge_0.9": {
+        "points": 1,
+        "epe": 1.455996036529541,
+        "p3": 1.0,
+        "ideal_epe": 3.6460912227630615,
+        "ideal_p3": 0.0
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_8_16": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_16_32": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_32_inf": {
+        "points": 1024,
+        "epe": 1.2461588382720947,
+        "p3": 0.9619140625,
+        "ideal_epe": 3.0100674629211426,
+        "ideal_p3": 0.515625
+      },
+      "error_0_3": {
+        "points": 985,
+        "epe": 1.1334991455078125,
+        "p3": 1.0,
+        "ideal_epe": 2.9358906745910645,
+        "ideal_p3": 0.5279187817258884
+      },
+      "error_3_8": {
+        "points": 37,
+        "epe": 3.726998805999756,
+        "p3": 0.0,
+        "ideal_epe": 4.677576065063477,
+        "ideal_p3": 0.21621621621621623
+      },
+      "error_8_32": {
+        "points": 2,
+        "epe": 10.835497856140137,
+        "p3": 0.0,
+        "ideal_epe": 8.693231582641602,
+        "ideal_p3": 0.0
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G2_e25b553fe9d57108ec9a58be",
+      "group": "G2",
+      "all": {
+        "points": 1024,
+        "epe": 1.1900464296340942,
+        "p3": 0.9931640625,
+        "ideal_epe": 2.7630834579467773,
+        "ideal_p3": 0.57421875
+      },
+      "rank1": {
+        "points": 1024,
+        "epe": 1.1900464296340942,
+        "p3": 0.9931640625,
+        "ideal_epe": 2.7630834579467773,
+        "ideal_p3": 0.57421875
+      },
+      "rank_above1": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_8_16": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_16_32": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_32_inf": {
+        "points": 1024,
+        "epe": 1.1900464296340942,
+        "p3": 0.9931640625,
+        "ideal_epe": 2.7630834579467773,
+        "ideal_p3": 0.57421875
+      },
+      "error_0_3": {
+        "points": 1017,
+        "epe": 1.1715598106384277,
+        "p3": 1.0,
+        "ideal_epe": 2.770270586013794,
+        "ideal_p3": 0.5722713864306784
+      },
+      "error_3_8": {
+        "points": 7,
+        "epe": 3.875905990600586,
+        "p3": 0.0,
+        "ideal_epe": 1.7188977003097534,
+        "ideal_p3": 0.8571428571428571
+      },
+      "error_8_32": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G2_5adeeee1da5e5266f2caafa6",
+      "group": "G2",
+      "all": {
+        "points": 256,
+        "epe": 1.7423677444458008,
+        "p3": 0.9296875,
+        "ideal_epe": 7.247830390930176,
+        "ideal_p3": 0.0859375
+      },
+      "rank1": {
+        "points": 256,
+        "epe": 1.7423677444458008,
+        "p3": 0.9296875,
+        "ideal_epe": 7.247830390930176,
+        "ideal_p3": 0.0859375
+      },
+      "rank_above1": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_8_16": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_16_32": {
+        "points": 60,
+        "epe": 2.157654285430908,
+        "p3": 0.8,
+        "ideal_epe": 12.457996368408203,
+        "ideal_p3": 0.06666666666666667
+      },
+      "border_32_inf": {
+        "points": 196,
+        "epe": 1.6152390241622925,
+        "p3": 0.9693877551020408,
+        "ideal_epe": 5.652881145477295,
+        "ideal_p3": 0.09183673469387756
+      },
+      "error_0_3": {
+        "points": 238,
+        "epe": 1.5948117971420288,
+        "p3": 1.0,
+        "ideal_epe": 6.903536796569824,
+        "ideal_p3": 0.07563025210084033
+      },
+      "error_3_8": {
+        "points": 18,
+        "epe": 3.693384885787964,
+        "p3": 0.0,
+        "ideal_epe": 11.800156593322754,
+        "ideal_p3": 0.2222222222222222
+      },
+      "error_8_32": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G2_924b26ebf488f01652ae69a6",
+      "group": "G2",
+      "all": {
+        "points": 1024,
+        "epe": 1.8903361558914185,
+        "p3": 0.8935546875,
+        "ideal_epe": 2.564871311187744,
+        "ideal_p3": 0.6591796875
+      },
+      "rank1": {
+        "points": 993,
+        "epe": 1.8484952449798584,
+        "p3": 0.9063444108761329,
+        "ideal_epe": 2.5814011096954346,
+        "ideal_p3": 0.6525679758308157
+      },
+      "rank_above1": {
+        "points": 31,
+        "epe": 3.2305943965911865,
+        "p3": 0.4838709677419355,
+        "ideal_epe": 2.035383462905884,
+        "ideal_p3": 0.8709677419354839
+      },
+      "positive_mass_ge_0.9": {
+        "points": 148,
+        "epe": 1.8607845306396484,
+        "p3": 0.9054054054054054,
+        "ideal_epe": 2.0890846252441406,
+        "ideal_p3": 0.8108108108108109
+      },
+      "positive_top1_ge_0.9": {
+        "points": 148,
+        "epe": 1.8607845306396484,
+        "p3": 0.9054054054054054,
+        "ideal_epe": 2.0890846252441406,
+        "ideal_p3": 0.8108108108108109
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_8_16": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_16_32": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_32_inf": {
+        "points": 1024,
+        "epe": 1.8903361558914185,
+        "p3": 0.8935546875,
+        "ideal_epe": 2.564871311187744,
+        "ideal_p3": 0.6591796875
+      },
+      "error_0_3": {
+        "points": 915,
+        "epe": 1.6545497179031372,
+        "p3": 1.0,
+        "ideal_epe": 2.443206310272217,
+        "ideal_p3": 0.6896174863387978
+      },
+      "error_3_8": {
+        "points": 109,
+        "epe": 3.8696448802948,
+        "p3": 0.0,
+        "ideal_epe": 3.5861849784851074,
+        "ideal_p3": 0.4036697247706422
+      },
+      "error_8_32": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G2_78cac3733efe164eaf65ead6",
+      "group": "G2",
+      "all": {
+        "points": 452,
+        "epe": 2.7001850605010986,
+        "p3": 0.6946902654867256,
+        "ideal_epe": 9.055307388305664,
+        "ideal_p3": 0.14823008849557523
+      },
+      "rank1": {
+        "points": 446,
+        "epe": 2.680368423461914,
+        "p3": 0.6973094170403588,
+        "ideal_epe": 9.073890686035156,
+        "ideal_p3": 0.15022421524663676
+      },
+      "rank_above1": {
+        "points": 6,
+        "epe": 4.173228740692139,
+        "p3": 0.5,
+        "ideal_epe": 7.673946380615234,
+        "ideal_p3": 0.0
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 26,
+        "epe": 5.558899879455566,
+        "p3": 0.23076923076923078,
+        "ideal_epe": 39.19786834716797,
+        "ideal_p3": 0.0
+      },
+      "border_8_16": {
+        "points": 24,
+        "epe": 3.9262752532958984,
+        "p3": 0.4583333333333333,
+        "ideal_epe": 20.64796257019043,
+        "ideal_p3": 0.041666666666666664
+      },
+      "border_16_32": {
+        "points": 56,
+        "epe": 3.291832208633423,
+        "p3": 0.5892857142857143,
+        "ideal_epe": 11.952796936035156,
+        "ideal_p3": 0.03571428571428571
+      },
+      "border_32_inf": {
+        "points": 346,
+        "epe": 2.3045639991760254,
+        "p3": 0.7630057803468208,
+        "ideal_epe": 5.517186164855957,
+        "ideal_p3": 0.18497109826589594
+      },
+      "error_0_3": {
+        "points": 314,
+        "epe": 1.6706039905548096,
+        "p3": 1.0,
+        "ideal_epe": 6.429772853851318,
+        "ideal_p3": 0.19745222929936307
+      },
+      "error_3_8": {
+        "points": 130,
+        "epe": 4.769936561584473,
+        "p3": 0.0,
+        "ideal_epe": 12.430475234985352,
+        "ideal_p3": 0.038461538461538464
+      },
+      "error_8_32": {
+        "points": 8,
+        "epe": 9.477787971496582,
+        "p3": 0.0,
+        "ideal_epe": 57.26104736328125,
+        "ideal_p3": 0.0
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G2_0c9786cba78c67ee7cde2214",
+      "group": "G2",
+      "all": {
+        "points": 484,
+        "epe": 1.417112946510315,
+        "p3": 0.890495867768595,
+        "ideal_epe": 7.7072978019714355,
+        "ideal_p3": 0.06611570247933884
+      },
+      "rank1": {
+        "points": 484,
+        "epe": 1.417112946510315,
+        "p3": 0.890495867768595,
+        "ideal_epe": 7.7072978019714355,
+        "ideal_p3": 0.06611570247933884
+      },
+      "rank_above1": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 84,
+        "epe": 3.9132254123687744,
+        "p3": 0.36904761904761907,
+        "ideal_epe": 13.197291374206543,
+        "ideal_p3": 0.0
+      },
+      "border_8_16": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_16_32": {
+        "points": 76,
+        "epe": 1.174749732017517,
+        "p3": 1.0,
+        "ideal_epe": 10.018758773803711,
+        "ideal_p3": 0.0
+      },
+      "border_32_inf": {
+        "points": 324,
+        "epe": 0.8268234729766846,
+        "p3": 1.0,
+        "ideal_epe": 5.741771697998047,
+        "ideal_p3": 0.09876543209876543
+      },
+      "error_0_3": {
+        "points": 431,
+        "epe": 0.9742590188980103,
+        "p3": 1.0,
+        "ideal_epe": 7.017550468444824,
+        "ideal_p3": 0.07424593967517401
+      },
+      "error_3_8": {
+        "points": 49,
+        "epe": 4.577761173248291,
+        "p3": 0.0,
+        "ideal_epe": 12.736989974975586,
+        "ideal_p3": 0.0
+      },
+      "error_8_32": {
+        "points": 4,
+        "epe": 10.416679382324219,
+        "p3": 0.0,
+        "ideal_epe": 20.413827896118164,
+        "ideal_p3": 0.0
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G2_2fca6d0ad54b4ac4e990f3b3",
+      "group": "G2",
+      "all": {
+        "points": 244,
+        "epe": 16.569141387939453,
+        "p3": 0.0,
+        "ideal_epe": 8.435070037841797,
+        "ideal_p3": 0.09836065573770492
+      },
+      "rank1": {
+        "points": 24,
+        "epe": 16.560274124145508,
+        "p3": 0.0,
+        "ideal_epe": 15.596922874450684,
+        "ideal_p3": 0.125
+      },
+      "rank_above1": {
+        "points": 220,
+        "epe": 16.57010841369629,
+        "p3": 0.0,
+        "ideal_epe": 7.6537766456604,
+        "ideal_p3": 0.09545454545454546
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 14,
+        "epe": 15.925641059875488,
+        "p3": 0.0,
+        "ideal_epe": 25.43596839904785,
+        "ideal_p3": 0.0
+      },
+      "border_8_16": {
+        "points": 6,
+        "epe": 16.72827911376953,
+        "p3": 0.0,
+        "ideal_epe": 20.174747467041016,
+        "ideal_p3": 0.0
+      },
+      "border_16_32": {
+        "points": 26,
+        "epe": 17.015193939208984,
+        "p3": 0.0,
+        "ideal_epe": 13.782698631286621,
+        "ideal_p3": 0.0
+      },
+      "border_32_inf": {
+        "points": 198,
+        "epe": 16.551246643066406,
+        "p3": 0.0,
+        "ideal_epe": 6.175024032592773,
+        "ideal_p3": 0.12121212121212122
+      },
+      "error_0_3": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "error_3_8": {
+        "points": 1,
+        "epe": 7.42527961730957,
+        "p3": 0.0,
+        "ideal_epe": 77.767578125,
+        "ideal_p3": 0.0
+      },
+      "error_8_32": {
+        "points": 243,
+        "epe": 16.606769561767578,
+        "p3": 0.0,
+        "ideal_epe": 8.149750709533691,
+        "ideal_p3": 0.09876543209876543
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G2_39cec9c422fc98c30f8d9c9c",
+      "group": "G2",
+      "all": {
+        "points": 256,
+        "epe": 28.340328216552734,
+        "p3": 0.02734375,
+        "ideal_epe": 7.247830390930176,
+        "ideal_p3": 0.0859375
+      },
+      "rank1": {
+        "points": 96,
+        "epe": 14.32686996459961,
+        "p3": 0.07291666666666667,
+        "ideal_epe": 6.65320348739624,
+        "ideal_p3": 0.15625
+      },
+      "rank_above1": {
+        "points": 160,
+        "epe": 36.74840545654297,
+        "p3": 0.0,
+        "ideal_epe": 7.604605674743652,
+        "ideal_p3": 0.04375
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_8_16": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_16_32": {
+        "points": 60,
+        "epe": 38.08257293701172,
+        "p3": 0.03333333333333333,
+        "ideal_epe": 12.457996368408203,
+        "ideal_p3": 0.06666666666666667
+      },
+      "border_32_inf": {
+        "points": 196,
+        "epe": 25.358013153076172,
+        "p3": 0.025510204081632654,
+        "ideal_epe": 5.652881145477295,
+        "ideal_p3": 0.09183673469387756
+      },
+      "error_0_3": {
+        "points": 7,
+        "epe": 1.7764314413070679,
+        "p3": 1.0,
+        "ideal_epe": 8.829843521118164,
+        "ideal_p3": 0.14285714285714285
+      },
+      "error_3_8": {
+        "points": 30,
+        "epe": 5.2768659591674805,
+        "p3": 0.0,
+        "ideal_epe": 6.129965782165527,
+        "ideal_p3": 0.2
+      },
+      "error_8_32": {
+        "points": 129,
+        "epe": 20.33586311340332,
+        "p3": 0.0,
+        "ideal_epe": 6.2197957038879395,
+        "ideal_p3": 0.10077519379844961
+      },
+      "error_32_inf": {
+        "points": 90,
+        "epe": 49.56730270385742,
+        "p3": 0.0,
+        "ideal_epe": 8.970922470092773,
+        "ideal_p3": 0.022222222222222223
+      }
+    },
+    {
+      "pair_id": "val_G2_f822d278bfdbf6e04b37281a",
+      "group": "G2",
+      "all": {
+        "points": 1024,
+        "epe": 1.2931289672851562,
+        "p3": 0.9580078125,
+        "ideal_epe": 5.06803560256958,
+        "ideal_p3": 0.1181640625
+      },
+      "rank1": {
+        "points": 1024,
+        "epe": 1.2931289672851562,
+        "p3": 0.9580078125,
+        "ideal_epe": 5.06803560256958,
+        "ideal_p3": 0.1181640625
+      },
+      "rank_above1": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_8_16": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_16_32": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_32_inf": {
+        "points": 1024,
+        "epe": 1.2931289672851562,
+        "p3": 0.9580078125,
+        "ideal_epe": 5.06803560256958,
+        "ideal_p3": 0.1181640625
+      },
+      "error_0_3": {
+        "points": 981,
+        "epe": 1.1929792165756226,
+        "p3": 1.0,
+        "ideal_epe": 5.077966213226318,
+        "ideal_p3": 0.12334352701325178
+      },
+      "error_3_8": {
+        "points": 43,
+        "epe": 3.577939510345459,
+        "p3": 0.0,
+        "ideal_epe": 4.841472625732422,
+        "ideal_p3": 0.0
+      },
+      "error_8_32": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G2_65b74789f513b5ce7954b9e5",
+      "group": "G2",
+      "all": {
+        "points": 450,
+        "epe": 9.25428581237793,
+        "p3": 0.03777777777777778,
+        "ideal_epe": 8.474823951721191,
+        "ideal_p3": 0.08888888888888889
+      },
+      "rank1": {
+        "points": 255,
+        "epe": 7.931201934814453,
+        "p3": 0.058823529411764705,
+        "ideal_epe": 9.566136360168457,
+        "ideal_p3": 0.07058823529411765
+      },
+      "rank_above1": {
+        "points": 195,
+        "epe": 10.984475135803223,
+        "p3": 0.010256410256410256,
+        "ideal_epe": 7.04772424697876,
+        "ideal_p3": 0.11282051282051282
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 24,
+        "epe": 9.654955863952637,
+        "p3": 0.041666666666666664,
+        "ideal_epe": 40.268211364746094,
+        "ideal_p3": 0.0
+      },
+      "border_8_16": {
+        "points": 28,
+        "epe": 9.85307502746582,
+        "p3": 0.10714285714285714,
+        "ideal_epe": 14.522677421569824,
+        "ideal_p3": 0.0
+      },
+      "border_16_32": {
+        "points": 50,
+        "epe": 10.24884033203125,
+        "p3": 0.1,
+        "ideal_epe": 9.54759407043457,
+        "ideal_p3": 0.04
+      },
+      "border_32_inf": {
+        "points": 348,
+        "epe": 9.035579681396484,
+        "p3": 0.022988505747126436,
+        "ideal_epe": 5.641435146331787,
+        "ideal_p3": 0.10919540229885058
+      },
+      "error_0_3": {
+        "points": 17,
+        "epe": 2.169006824493408,
+        "p3": 1.0,
+        "ideal_epe": 12.933188438415527,
+        "ideal_p3": 0.058823529411764705
+      },
+      "error_3_8": {
+        "points": 163,
+        "epe": 5.385239601135254,
+        "p3": 0.0,
+        "ideal_epe": 8.32867431640625,
+        "ideal_p3": 0.018404907975460124
+      },
+      "error_8_32": {
+        "points": 270,
+        "epe": 12.036154747009277,
+        "p3": 0.0,
+        "ideal_epe": 8.282343864440918,
+        "ideal_p3": 0.13333333333333333
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G3_8c445598942db6a3ba815231",
+      "group": "G3",
+      "all": {
+        "points": 725,
+        "epe": 4.31955623626709,
+        "p3": 0.463448275862069,
+        "ideal_epe": 6.744511127471924,
+        "ideal_p3": 0.14482758620689656
+      },
+      "rank1": {
+        "points": 618,
+        "epe": 3.9121575355529785,
+        "p3": 0.5032362459546925,
+        "ideal_epe": 6.682682037353516,
+        "ideal_p3": 0.1262135922330097
+      },
+      "rank_above1": {
+        "points": 107,
+        "epe": 6.672565937042236,
+        "p3": 0.2336448598130841,
+        "ideal_epe": 7.101614952087402,
+        "ideal_p3": 0.2523364485981308
+      },
+      "positive_mass_ge_0.9": {
+        "points": 24,
+        "epe": 2.3001515865325928,
+        "p3": 0.75,
+        "ideal_epe": 5.35031270980835,
+        "ideal_p3": 0.041666666666666664
+      },
+      "positive_top1_ge_0.9": {
+        "points": 13,
+        "epe": 1.7965151071548462,
+        "p3": 0.7692307692307693,
+        "ideal_epe": 5.051515579223633,
+        "ideal_p3": 0.07692307692307693
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 38,
+        "epe": 6.508660316467285,
+        "p3": 0.07894736842105263,
+        "ideal_epe": 14.530451774597168,
+        "ideal_p3": 0.05263157894736842
+      },
+      "border_8_16": {
+        "points": 45,
+        "epe": 5.114845275878906,
+        "p3": 0.17777777777777778,
+        "ideal_epe": 13.4133939743042,
+        "ideal_p3": 0.0
+      },
+      "border_16_32": {
+        "points": 96,
+        "epe": 3.9515979290008545,
+        "p3": 0.375,
+        "ideal_epe": 8.794659614562988,
+        "ideal_p3": 0.010416666666666666
+      },
+      "border_32_inf": {
+        "points": 546,
+        "epe": 4.166350841522217,
+        "p3": 0.5293040293040293,
+        "ideal_epe": 5.292534351348877,
+        "ideal_p3": 0.18681318681318682
+      },
+      "error_0_3": {
+        "points": 336,
+        "epe": 1.8608061075210571,
+        "p3": 1.0,
+        "ideal_epe": 5.466458320617676,
+        "ideal_p3": 0.13095238095238096
+      },
+      "error_3_8": {
+        "points": 300,
+        "epe": 4.6320319175720215,
+        "p3": 0.0,
+        "ideal_epe": 7.865476131439209,
+        "ideal_p3": 0.07
+      },
+      "error_8_32": {
+        "points": 89,
+        "epe": 12.548739433288574,
+        "p3": 0.0,
+        "ideal_epe": 7.790987491607666,
+        "ideal_p3": 0.449438202247191
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G3_525ccb8108102770ec06444d",
+      "group": "G3",
+      "all": {
+        "points": 770,
+        "epe": 1.6056029796600342,
+        "p3": 0.887012987012987,
+        "ideal_epe": 6.128988742828369,
+        "ideal_p3": 0.18441558441558442
+      },
+      "rank1": {
+        "points": 754,
+        "epe": 1.5862716436386108,
+        "p3": 0.8925729442970822,
+        "ideal_epe": 6.109070777893066,
+        "ideal_p3": 0.1856763925729443
+      },
+      "rank_above1": {
+        "points": 16,
+        "epe": 2.5166008472442627,
+        "p3": 0.625,
+        "ideal_epe": 7.067614555358887,
+        "ideal_p3": 0.125
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 21,
+        "epe": 5.287883758544922,
+        "p3": 0.3333333333333333,
+        "ideal_epe": 40.856746673583984,
+        "ideal_p3": 0.0
+      },
+      "border_8_16": {
+        "points": 26,
+        "epe": 2.3780930042266846,
+        "p3": 0.7307692307692307,
+        "ideal_epe": 12.567529678344727,
+        "ideal_p3": 0.038461538461538464
+      },
+      "border_16_32": {
+        "points": 51,
+        "epe": 2.9832401275634766,
+        "p3": 0.6862745098039216,
+        "ideal_epe": 10.06946086883545,
+        "ideal_p3": 0.0
+      },
+      "border_32_inf": {
+        "points": 672,
+        "epe": 1.356091022491455,
+        "p3": 0.9255952380952381,
+        "ideal_epe": 4.495582103729248,
+        "ideal_p3": 0.20982142857142858
+      },
+      "error_0_3": {
+        "points": 683,
+        "epe": 1.2112042903900146,
+        "p3": 1.0,
+        "ideal_epe": 5.204117774963379,
+        "ideal_p3": 0.191800878477306
+      },
+      "error_3_8": {
+        "points": 83,
+        "epe": 4.058287143707275,
+        "p3": 0.0,
+        "ideal_epe": 11.040118217468262,
+        "ideal_p3": 0.13253012048192772
+      },
+      "error_8_32": {
+        "points": 4,
+        "epe": 18.055994033813477,
+        "p3": 0.0,
+        "ideal_epe": 62.14468002319336,
+        "ideal_p3": 0.0
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G3_0e9e6c4d6ea4746bf78deeb9",
+      "group": "G3",
+      "all": {
+        "points": 521,
+        "epe": 5.475274562835693,
+        "p3": 0.2783109404990403,
+        "ideal_epe": 6.8356170654296875,
+        "ideal_p3": 0.15355086372360843
+      },
+      "rank1": {
+        "points": 403,
+        "epe": 5.179606914520264,
+        "p3": 0.3200992555831266,
+        "ideal_epe": 6.8621134757995605,
+        "ideal_p3": 0.1588089330024814
+      },
+      "rank_above1": {
+        "points": 118,
+        "epe": 6.485056400299072,
+        "p3": 0.13559322033898305,
+        "ideal_epe": 6.745123386383057,
+        "ideal_p3": 0.13559322033898305
+      },
+      "positive_mass_ge_0.9": {
+        "points": 1,
+        "epe": 12.942070960998535,
+        "p3": 0.0,
+        "ideal_epe": 12.894453048706055,
+        "ideal_p3": 0.0
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 1,
+        "epe": 12.942070960998535,
+        "p3": 0.0,
+        "ideal_epe": 12.894453048706055,
+        "ideal_p3": 0.0
+      },
+      "border_0_8": {
+        "points": 29,
+        "epe": 14.092794418334961,
+        "p3": 0.2413793103448276,
+        "ideal_epe": 23.14103126525879,
+        "ideal_p3": 0.06896551724137931
+      },
+      "border_8_16": {
+        "points": 26,
+        "epe": 5.991789817810059,
+        "p3": 0.15384615384615385,
+        "ideal_epe": 11.62105655670166,
+        "ideal_p3": 0.15384615384615385
+      },
+      "border_16_32": {
+        "points": 51,
+        "epe": 5.674237251281738,
+        "p3": 0.21568627450980393,
+        "ideal_epe": 9.351167678833008,
+        "ideal_p3": 0.0196078431372549
+      },
+      "border_32_inf": {
+        "points": 415,
+        "epe": 4.8162760734558105,
+        "p3": 0.2963855421686747,
+        "ideal_epe": 5.08725118637085,
+        "ideal_p3": 0.17590361445783131
+      },
+      "error_0_3": {
+        "points": 145,
+        "epe": 2.092684507369995,
+        "p3": 1.0,
+        "ideal_epe": 4.980015277862549,
+        "ideal_p3": 0.33793103448275863
+      },
+      "error_3_8": {
+        "points": 271,
+        "epe": 4.784557342529297,
+        "p3": 0.0,
+        "ideal_epe": 6.809333801269531,
+        "ideal_p3": 0.08856088560885608
+      },
+      "error_8_32": {
+        "points": 101,
+        "epe": 10.119233131408691,
+        "p3": 0.0,
+        "ideal_epe": 7.941370010375977,
+        "ideal_p3": 0.06930693069306931
+      },
+      "error_32_inf": {
+        "points": 4,
+        "epe": 57.6303596496582,
+        "p3": 0.0,
+        "ideal_epe": 47.961490631103516,
+        "ideal_p3": 0.0
+      }
+    },
+    {
+      "pair_id": "val_G3_fce9e06b9ca408b41069a0f2",
+      "group": "G3",
+      "all": {
+        "points": 226,
+        "epe": 9.072014808654785,
+        "p3": 0.24336283185840707,
+        "ideal_epe": 6.94966459274292,
+        "ideal_p3": 0.168141592920354
+      },
+      "rank1": {
+        "points": 121,
+        "epe": 5.186624050140381,
+        "p3": 0.35537190082644626,
+        "ideal_epe": 6.175356388092041,
+        "ideal_p3": 0.11570247933884298
+      },
+      "rank_above1": {
+        "points": 105,
+        "epe": 13.54946517944336,
+        "p3": 0.11428571428571428,
+        "ideal_epe": 7.841961860656738,
+        "ideal_p3": 0.22857142857142856
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 8,
+        "epe": 11.49878978729248,
+        "p3": 0.125,
+        "ideal_epe": 43.405548095703125,
+        "ideal_p3": 0.0
+      },
+      "border_8_16": {
+        "points": 9,
+        "epe": 11.351983070373535,
+        "p3": 0.1111111111111111,
+        "ideal_epe": 17.469406127929688,
+        "ideal_p3": 0.0
+      },
+      "border_16_32": {
+        "points": 18,
+        "epe": 8.134533882141113,
+        "p3": 0.2777777777777778,
+        "ideal_epe": 7.657405376434326,
+        "ideal_p3": 0.1111111111111111
+      },
+      "border_32_inf": {
+        "points": 191,
+        "epe": 8.951287269592285,
+        "p3": 0.2513089005235602,
+        "ideal_epe": 4.860324382781982,
+        "ideal_p3": 0.18848167539267016
+      },
+      "error_0_3": {
+        "points": 55,
+        "epe": 2.1022167205810547,
+        "p3": 1.0,
+        "ideal_epe": 6.397838592529297,
+        "ideal_p3": 0.03636363636363636
+      },
+      "error_3_8": {
+        "points": 80,
+        "epe": 5.002679347991943,
+        "p3": 0.0,
+        "ideal_epe": 6.1160478591918945,
+        "ideal_p3": 0.0625
+      },
+      "error_8_32": {
+        "points": 83,
+        "epe": 15.139802932739258,
+        "p3": 0.0,
+        "ideal_epe": 8.258796691894531,
+        "ideal_p3": 0.3614457831325301
+      },
+      "error_32_inf": {
+        "points": 8,
+        "epe": 34.72943115234375,
+        "p3": 0.0,
+        "ideal_epe": 5.4973859786987305,
+        "ideal_p3": 0.125
+      }
+    },
+    {
+      "pair_id": "val_G3_92c979db1d458321017de5ed",
+      "group": "G3",
+      "all": {
+        "points": 493,
+        "epe": 2.83971905708313,
+        "p3": 0.7484787018255578,
+        "ideal_epe": 7.539822578430176,
+        "ideal_p3": 0.02434077079107505
+      },
+      "rank1": {
+        "points": 465,
+        "epe": 2.6255061626434326,
+        "p3": 0.7591397849462366,
+        "ideal_epe": 7.448045253753662,
+        "ideal_p3": 0.023655913978494623
+      },
+      "rank_above1": {
+        "points": 28,
+        "epe": 6.397179126739502,
+        "p3": 0.5714285714285714,
+        "ideal_epe": 9.063972473144531,
+        "ideal_p3": 0.03571428571428571
+      },
+      "positive_mass_ge_0.9": {
+        "points": 5,
+        "epe": 4.051853179931641,
+        "p3": 0.8,
+        "ideal_epe": 15.93707275390625,
+        "ideal_p3": 0.0
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 1,
+        "epe": 16.397186279296875,
+        "p3": 0.0,
+        "ideal_epe": 50.21480178833008,
+        "ideal_p3": 0.0
+      },
+      "border_0_8": {
+        "points": 19,
+        "epe": 15.237771987915039,
+        "p3": 0.10526315789473684,
+        "ideal_epe": 24.590351104736328,
+        "ideal_p3": 0.0
+      },
+      "border_8_16": {
+        "points": 30,
+        "epe": 3.7410333156585693,
+        "p3": 0.5333333333333333,
+        "ideal_epe": 11.322139739990234,
+        "ideal_p3": 0.0
+      },
+      "border_16_32": {
+        "points": 54,
+        "epe": 3.1214311122894287,
+        "p3": 0.7407407407407407,
+        "ideal_epe": 9.657243728637695,
+        "ideal_p3": 0.018518518518518517
+      },
+      "border_32_inf": {
+        "points": 390,
+        "epe": 2.1273727416992188,
+        "p3": 0.7974358974358975,
+        "ideal_epe": 6.125026702880859,
+        "ideal_p3": 0.028205128205128206
+      },
+      "error_0_3": {
+        "points": 369,
+        "epe": 1.5348793268203735,
+        "p3": 1.0,
+        "ideal_epe": 6.644951820373535,
+        "ideal_p3": 0.013550135501355014
+      },
+      "error_3_8": {
+        "points": 102,
+        "epe": 4.210796356201172,
+        "p3": 0.0,
+        "ideal_epe": 7.889354228973389,
+        "ideal_p3": 0.0392156862745098
+      },
+      "error_8_32": {
+        "points": 20,
+        "epe": 14.776021957397461,
+        "p3": 0.0,
+        "ideal_epe": 18.13271713256836,
+        "ideal_p3": 0.15
+      },
+      "error_32_inf": {
+        "points": 2,
+        "epe": 54.29463195800781,
+        "p3": 0.0,
+        "ideal_epe": 48.888267517089844,
+        "ideal_p3": 0.0
+      }
+    },
+    {
+      "pair_id": "val_G3_7a75fed0e4ae0400f8ec095b",
+      "group": "G3",
+      "all": {
+        "points": 311,
+        "epe": 12.088571548461914,
+        "p3": 0.0932475884244373,
+        "ideal_epe": 7.093326091766357,
+        "ideal_p3": 0.12218649517684887
+      },
+      "rank1": {
+        "points": 121,
+        "epe": 8.17707347869873,
+        "p3": 0.19008264462809918,
+        "ideal_epe": 6.5537543296813965,
+        "ideal_p3": 0.09917355371900827
+      },
+      "rank_above1": {
+        "points": 190,
+        "epe": 14.57957935333252,
+        "p3": 0.031578947368421054,
+        "ideal_epe": 7.436948776245117,
+        "ideal_p3": 0.1368421052631579
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 16,
+        "epe": 19.405277252197266,
+        "p3": 0.0,
+        "ideal_epe": 26.957515716552734,
+        "ideal_p3": 0.0
+      },
+      "border_8_16": {
+        "points": 14,
+        "epe": 17.87590217590332,
+        "p3": 0.0,
+        "ideal_epe": 9.801538467407227,
+        "ideal_p3": 0.0
+      },
+      "border_16_32": {
+        "points": 30,
+        "epe": 15.456574440002441,
+        "p3": 0.1,
+        "ideal_epe": 8.971528053283691,
+        "ideal_p3": 0.03333333333333333
+      },
+      "border_32_inf": {
+        "points": 251,
+        "epe": 10.896819114685059,
+        "p3": 0.10358565737051793,
+        "ideal_epe": 5.451541423797607,
+        "ideal_p3": 0.14741035856573706
+      },
+      "error_0_3": {
+        "points": 29,
+        "epe": 1.972297191619873,
+        "p3": 1.0,
+        "ideal_epe": 4.284074306488037,
+        "ideal_p3": 0.13793103448275862
+      },
+      "error_3_8": {
+        "points": 87,
+        "epe": 5.2737717628479,
+        "p3": 0.0,
+        "ideal_epe": 5.697945594787598,
+        "ideal_p3": 0.21839080459770116
+      },
+      "error_8_32": {
+        "points": 190,
+        "epe": 16.138452529907227,
+        "p3": 0.0,
+        "ideal_epe": 8.047151565551758,
+        "ideal_p3": 0.07894736842105263
+      },
+      "error_32_inf": {
+        "points": 5,
+        "epe": 35.44502258300781,
+        "p3": 0.0,
+        "ideal_epe": 11.421283721923828,
+        "ideal_p3": 0.0
+      }
+    },
+    {
+      "pair_id": "val_G3_8f2258607f065f89b71b7804",
+      "group": "G3",
+      "all": {
+        "points": 718,
+        "epe": 7.972949981689453,
+        "p3": 0.1796657381615599,
+        "ideal_epe": 9.17208480834961,
+        "ideal_p3": 0.06267409470752089
+      },
+      "rank1": {
+        "points": 697,
+        "epe": 8.058048248291016,
+        "p3": 0.1793400286944046,
+        "ideal_epe": 9.269522666931152,
+        "ideal_p3": 0.06169296987087518
+      },
+      "rank_above1": {
+        "points": 21,
+        "epe": 5.148539066314697,
+        "p3": 0.19047619047619047,
+        "ideal_epe": 5.938043594360352,
+        "ideal_p3": 0.09523809523809523
+      },
+      "positive_mass_ge_0.9": {
+        "points": 188,
+        "epe": 7.337782859802246,
+        "p3": 0.1702127659574468,
+        "ideal_epe": 8.291994094848633,
+        "ideal_p3": 0.05319148936170213
+      },
+      "positive_top1_ge_0.9": {
+        "points": 127,
+        "epe": 7.1042375564575195,
+        "p3": 0.1732283464566929,
+        "ideal_epe": 7.810032367706299,
+        "ideal_p3": 0.07086614173228346
+      },
+      "high_confidence_epe_gt8": {
+        "points": 46,
+        "epe": 16.760574340820312,
+        "p3": 0.0,
+        "ideal_epe": 17.596174240112305,
+        "ideal_p3": 0.0
+      },
+      "border_0_8": {
+        "points": 45,
+        "epe": 10.037585258483887,
+        "p3": 0.08888888888888889,
+        "ideal_epe": 13.968981742858887,
+        "ideal_p3": 0.0
+      },
+      "border_8_16": {
+        "points": 48,
+        "epe": 5.949714183807373,
+        "p3": 0.0625,
+        "ideal_epe": 10.563651084899902,
+        "ideal_p3": 0.0
+      },
+      "border_16_32": {
+        "points": 96,
+        "epe": 6.589469909667969,
+        "p3": 0.041666666666666664,
+        "ideal_epe": 8.616068840026855,
+        "ideal_p3": 0.0
+      },
+      "border_32_inf": {
+        "points": 529,
+        "epe": 8.231969833374023,
+        "p3": 0.22306238185255198,
+        "ideal_epe": 8.738665580749512,
+        "ideal_p3": 0.08506616257088846
+      },
+      "error_0_3": {
+        "points": 129,
+        "epe": 2.300264358520508,
+        "p3": 1.0,
+        "ideal_epe": 3.9731814861297607,
+        "ideal_p3": 0.2713178294573643
+      },
+      "error_3_8": {
+        "points": 444,
+        "epe": 4.772436618804932,
+        "p3": 0.0,
+        "ideal_epe": 5.962164878845215,
+        "ideal_p3": 0.02252252252252252
+      },
+      "error_8_32": {
+        "points": 113,
+        "epe": 10.934389114379883,
+        "p3": 0.0,
+        "ideal_epe": 12.00031852722168,
+        "ideal_p3": 0.0
+      },
+      "error_32_inf": {
+        "points": 32,
+        "epe": 64.79051208496094,
+        "p3": 0.0,
+        "ideal_epe": 64.68058776855469,
+        "ideal_p3": 0.0
+      }
+    },
+    {
+      "pair_id": "val_G3_12add035b2b2190ad8b131b2",
+      "group": "G3",
+      "all": {
+        "points": 33,
+        "epe": 321.3301696777344,
+        "p3": 0.0,
+        "ideal_epe": 22.479028701782227,
+        "ideal_p3": 0.030303030303030304
+      },
+      "rank1": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "rank_above1": {
+        "points": 33,
+        "epe": 321.3301696777344,
+        "p3": 0.0,
+        "ideal_epe": 22.479028701782227,
+        "ideal_p3": 0.030303030303030304
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 1,
+        "epe": 407.16259765625,
+        "p3": 0.0,
+        "ideal_epe": 35.20307159423828,
+        "ideal_p3": 0.0
+      },
+      "border_8_16": {
+        "points": 3,
+        "epe": 378.8379821777344,
+        "p3": 0.0,
+        "ideal_epe": 50.969913482666016,
+        "ideal_p3": 0.0
+      },
+      "border_16_32": {
+        "points": 4,
+        "epe": 377.4395751953125,
+        "p3": 0.0,
+        "ideal_epe": 26.85903549194336,
+        "ideal_p3": 0.0
+      },
+      "border_32_inf": {
+        "points": 25,
+        "epe": 302.0184326171875,
+        "p3": 0.0,
+        "ideal_epe": 17.85035514831543,
+        "ideal_p3": 0.04
+      },
+      "error_0_3": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "error_3_8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "error_8_32": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "error_32_inf": {
+        "points": 33,
+        "epe": 321.3301696777344,
+        "p3": 0.0,
+        "ideal_epe": 22.479028701782227,
+        "ideal_p3": 0.030303030303030304
+      }
+    },
+    {
+      "pair_id": "val_G3_69ae20dcb56077a018937393",
+      "group": "G3",
+      "all": {
+        "points": 534,
+        "epe": 6.301544189453125,
+        "p3": 0.02247191011235955,
+        "ideal_epe": 7.684811592102051,
+        "ideal_p3": 0.1441947565543071
+      },
+      "rank1": {
+        "points": 348,
+        "epe": 6.207483768463135,
+        "p3": 0.02586206896551724,
+        "ideal_epe": 8.260918617248535,
+        "ideal_p3": 0.14367816091954022
+      },
+      "rank_above1": {
+        "points": 186,
+        "epe": 6.477528095245361,
+        "p3": 0.016129032258064516,
+        "ideal_epe": 6.606935024261475,
+        "ideal_p3": 0.14516129032258066
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 29,
+        "epe": 6.7399582862854,
+        "p3": 0.2413793103448276,
+        "ideal_epe": 38.848873138427734,
+        "ideal_p3": 0.0
+      },
+      "border_8_16": {
+        "points": 28,
+        "epe": 6.422428131103516,
+        "p3": 0.07142857142857142,
+        "ideal_epe": 9.939675331115723,
+        "ideal_p3": 0.07142857142857142
+      },
+      "border_16_32": {
+        "points": 41,
+        "epe": 6.726134300231934,
+        "p3": 0.04878048780487805,
+        "ideal_epe": 9.951184272766113,
+        "ideal_p3": 0.04878048780487805
+      },
+      "border_32_inf": {
+        "points": 436,
+        "epe": 6.224693298339844,
+        "p3": 0.0022935779816513763,
+        "ideal_epe": 5.2540435791015625,
+        "ideal_p3": 0.16743119266055045
+      },
+      "error_0_3": {
+        "points": 12,
+        "epe": 2.062311887741089,
+        "p3": 1.0,
+        "ideal_epe": 24.734283447265625,
+        "ideal_p3": 0.0
+      },
+      "error_3_8": {
+        "points": 468,
+        "epe": 6.030872821807861,
+        "p3": 0.0,
+        "ideal_epe": 6.251437664031982,
+        "ideal_p3": 0.16025641025641027
+      },
+      "error_8_32": {
+        "points": 54,
+        "epe": 9.58941650390625,
+        "p3": 0.0,
+        "ideal_epe": 16.318622589111328,
+        "ideal_p3": 0.037037037037037035
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G3_5f57f611d59872d7fbb15de6",
+      "group": "G3",
+      "all": {
+        "points": 494,
+        "epe": 1.4251676797866821,
+        "p3": 0.8846153846153846,
+        "ideal_epe": 6.674285888671875,
+        "ideal_p3": 0.145748987854251
+      },
+      "rank1": {
+        "points": 488,
+        "epe": 1.3889697790145874,
+        "p3": 0.8872950819672131,
+        "ideal_epe": 6.621641159057617,
+        "ideal_p3": 0.14754098360655737
+      },
+      "rank_above1": {
+        "points": 6,
+        "epe": 4.369260311126709,
+        "p3": 0.6666666666666666,
+        "ideal_epe": 10.956108093261719,
+        "ideal_p3": 0.0
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 19,
+        "epe": 5.569121360778809,
+        "p3": 0.21052631578947367,
+        "ideal_epe": 14.684893608093262,
+        "ideal_p3": 0.0
+      },
+      "border_8_16": {
+        "points": 26,
+        "epe": 3.184434413909912,
+        "p3": 0.5384615384615384,
+        "ideal_epe": 10.763371467590332,
+        "ideal_p3": 0.0
+      },
+      "border_16_32": {
+        "points": 53,
+        "epe": 1.6685075759887695,
+        "p3": 0.8490566037735849,
+        "ideal_epe": 8.267884254455566,
+        "ideal_p3": 0.07547169811320754
+      },
+      "border_32_inf": {
+        "points": 396,
+        "epe": 1.078265905380249,
+        "p3": 0.9444444444444444,
+        "ideal_epe": 5.8081793785095215,
+        "ideal_p3": 0.1717171717171717
+      },
+      "error_0_3": {
+        "points": 437,
+        "epe": 0.9793213605880737,
+        "p3": 1.0,
+        "ideal_epe": 6.4273576736450195,
+        "ideal_p3": 0.14645308924485126
+      },
+      "error_3_8": {
+        "points": 52,
+        "epe": 4.348617076873779,
+        "p3": 0.0,
+        "ideal_epe": 8.288115501403809,
+        "ideal_p3": 0.15384615384615385
+      },
+      "error_8_32": {
+        "points": 5,
+        "epe": 9.988253593444824,
+        "p3": 0.0,
+        "ideal_epe": 11.472015380859375,
+        "ideal_p3": 0.0
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G3_1ba49f671a97d305562f5787",
+      "group": "G3",
+      "all": {
+        "points": 582,
+        "epe": 1.5180412530899048,
+        "p3": 0.9123711340206185,
+        "ideal_epe": 7.160894393920898,
+        "ideal_p3": 0.12027491408934708
+      },
+      "rank1": {
+        "points": 569,
+        "epe": 1.4911895990371704,
+        "p3": 0.9173989455184535,
+        "ideal_epe": 7.093132495880127,
+        "ideal_p3": 0.11599297012302284
+      },
+      "rank_above1": {
+        "points": 13,
+        "epe": 2.6933164596557617,
+        "p3": 0.6923076923076923,
+        "ideal_epe": 10.126748085021973,
+        "ideal_p3": 0.3076923076923077
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 22,
+        "epe": 4.318729877471924,
+        "p3": 0.4090909090909091,
+        "ideal_epe": 31.87677764892578,
+        "ideal_p3": 0.0
+      },
+      "border_8_16": {
+        "points": 26,
+        "epe": 2.223151683807373,
+        "p3": 0.7307692307692307,
+        "ideal_epe": 11.195344924926758,
+        "ideal_p3": 0.0
+      },
+      "border_16_32": {
+        "points": 51,
+        "epe": 1.629449725151062,
+        "p3": 0.9215686274509803,
+        "ideal_epe": 10.037134170532227,
+        "ideal_p3": 0.0196078431372549
+      },
+      "border_32_inf": {
+        "points": 483,
+        "epe": 1.3407536745071411,
+        "p3": 0.9440993788819876,
+        "ideal_epe": 5.5142412185668945,
+        "ideal_p3": 0.14285714285714285
+      },
+      "error_0_3": {
+        "points": 531,
+        "epe": 1.216916799545288,
+        "p3": 1.0,
+        "ideal_epe": 6.474076271057129,
+        "ideal_p3": 0.10546139359698682
+      },
+      "error_3_8": {
+        "points": 49,
+        "epe": 4.4375128746032715,
+        "p3": 0.0,
+        "ideal_epe": 12.157487869262695,
+        "ideal_p3": 0.2857142857142857
+      },
+      "error_8_32": {
+        "points": 2,
+        "epe": 9.93954849243164,
+        "p3": 0.0,
+        "ideal_epe": 67.09425354003906,
+        "ideal_p3": 0.0
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G3_a4e0a479df8364b40227e2c5",
+      "group": "G3",
+      "all": {
+        "points": 476,
+        "epe": 298.90460205078125,
+        "p3": 0.0,
+        "ideal_epe": 8.920586585998535,
+        "ideal_p3": 0.04201680672268908
+      },
+      "rank1": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "rank_above1": {
+        "points": 476,
+        "epe": 298.90460205078125,
+        "p3": 0.0,
+        "ideal_epe": 8.920586585998535,
+        "ideal_p3": 0.04201680672268908
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 39,
+        "epe": 304.65802001953125,
+        "p3": 0.0,
+        "ideal_epe": 16.657499313354492,
+        "ideal_p3": 0.0
+      },
+      "border_8_16": {
+        "points": 40,
+        "epe": 302.99456787109375,
+        "p3": 0.0,
+        "ideal_epe": 11.70976448059082,
+        "ideal_p3": 0.025
+      },
+      "border_16_32": {
+        "points": 76,
+        "epe": 299.7828369140625,
+        "p3": 0.0,
+        "ideal_epe": 9.682488441467285,
+        "ideal_p3": 0.02631578947368421
+      },
+      "border_32_inf": {
+        "points": 321,
+        "epe": 297.488037109375,
+        "p3": 0.0,
+        "ideal_epe": 7.452639102935791,
+        "ideal_p3": 0.0529595015576324
+      },
+      "error_0_3": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "error_3_8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "error_8_32": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "error_32_inf": {
+        "points": 476,
+        "epe": 298.90460205078125,
+        "p3": 0.0,
+        "ideal_epe": 8.920586585998535,
+        "ideal_p3": 0.04201680672268908
+      }
+    },
+    {
+      "pair_id": "val_G3_7aaef7938188368f6474a5e1",
+      "group": "G3",
+      "all": {
+        "points": 495,
+        "epe": 3.3616080284118652,
+        "p3": 0.6181818181818182,
+        "ideal_epe": 6.836528301239014,
+        "ideal_p3": 0.12121212121212122
+      },
+      "rank1": {
+        "points": 432,
+        "epe": 3.2581136226654053,
+        "p3": 0.6412037037037037,
+        "ideal_epe": 6.910447120666504,
+        "ideal_p3": 0.11574074074074074
+      },
+      "rank_above1": {
+        "points": 63,
+        "epe": 4.07128381729126,
+        "p3": 0.4603174603174603,
+        "ideal_epe": 6.329656600952148,
+        "ideal_p3": 0.15873015873015872
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 26,
+        "epe": 14.475327491760254,
+        "p3": 0.19230769230769232,
+        "ideal_epe": 17.514833450317383,
+        "ideal_p3": 0.11538461538461539
+      },
+      "border_8_16": {
+        "points": 28,
+        "epe": 4.492527008056641,
+        "p3": 0.21428571428571427,
+        "ideal_epe": 12.40019416809082,
+        "ideal_p3": 0.0
+      },
+      "border_16_32": {
+        "points": 49,
+        "epe": 3.794722318649292,
+        "p3": 0.46938775510204084,
+        "ideal_epe": 9.682486534118652,
+        "ideal_p3": 0.0
+      },
+      "border_32_inf": {
+        "points": 392,
+        "epe": 2.4895544052124023,
+        "p3": 0.6938775510204082,
+        "ideal_epe": 5.375123500823975,
+        "ideal_p3": 0.14540816326530612
+      },
+      "error_0_3": {
+        "points": 306,
+        "epe": 1.629467248916626,
+        "p3": 1.0,
+        "ideal_epe": 5.946414470672607,
+        "ideal_p3": 0.10457516339869281
+      },
+      "error_3_8": {
+        "points": 177,
+        "epe": 4.709961414337158,
+        "p3": 0.0,
+        "ideal_epe": 7.726318836212158,
+        "ideal_p3": 0.14689265536723164
+      },
+      "error_8_32": {
+        "points": 8,
+        "epe": 20.78728485107422,
+        "p3": 0.0,
+        "ideal_epe": 16.4567813873291,
+        "ideal_p3": 0.25
+      },
+      "error_32_inf": {
+        "points": 4,
+        "epe": 41.3543701171875,
+        "p3": 0.0,
+        "ideal_epe": 16.31652069091797,
+        "ideal_p3": 0.0
+      }
+    },
+    {
+      "pair_id": "val_G3_d425b727ce88d1e7132cb3b9",
+      "group": "G3",
+      "all": {
+        "points": 194,
+        "epe": 4.455502033233643,
+        "p3": 0.31958762886597936,
+        "ideal_epe": 6.012973308563232,
+        "ideal_p3": 0.16494845360824742
+      },
+      "rank1": {
+        "points": 159,
+        "epe": 4.063227653503418,
+        "p3": 0.3584905660377358,
+        "ideal_epe": 5.894260406494141,
+        "ideal_p3": 0.1761006289308176
+      },
+      "rank_above1": {
+        "points": 35,
+        "epe": 6.237551212310791,
+        "p3": 0.14285714285714285,
+        "ideal_epe": 6.552270889282227,
+        "ideal_p3": 0.11428571428571428
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 5,
+        "epe": 7.0883636474609375,
+        "p3": 0.0,
+        "ideal_epe": 12.485891342163086,
+        "ideal_p3": 0.2
+      },
+      "border_8_16": {
+        "points": 11,
+        "epe": 4.498810291290283,
+        "p3": 0.18181818181818182,
+        "ideal_epe": 9.804080963134766,
+        "ideal_p3": 0.09090909090909091
+      },
+      "border_16_32": {
+        "points": 22,
+        "epe": 6.421745300292969,
+        "p3": 0.13636363636363635,
+        "ideal_epe": 11.896636962890625,
+        "ideal_p3": 0.0
+      },
+      "border_32_inf": {
+        "points": 156,
+        "epe": 4.090771675109863,
+        "p3": 0.36538461538461536,
+        "ideal_epe": 4.708438873291016,
+        "ideal_p3": 0.19230769230769232
+      },
+      "error_0_3": {
+        "points": 62,
+        "epe": 2.04830002784729,
+        "p3": 1.0,
+        "ideal_epe": 4.13617467880249,
+        "ideal_p3": 0.3064516129032258
+      },
+      "error_3_8": {
+        "points": 111,
+        "epe": 4.879286766052246,
+        "p3": 0.0,
+        "ideal_epe": 6.235710620880127,
+        "ideal_p3": 0.11711711711711711
+      },
+      "error_8_32": {
+        "points": 21,
+        "epe": 9.322481155395508,
+        "p3": 0.0,
+        "ideal_epe": 10.37667465209961,
+        "ideal_p3": 0.0
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    },
+    {
+      "pair_id": "val_G3_d675c8471dc323c373c41661",
+      "group": "G3",
+      "all": {
+        "points": 749,
+        "epe": 243.8734130859375,
+        "p3": 0.0,
+        "ideal_epe": 8.00635051727295,
+        "ideal_p3": 0.07209612817089453
+      },
+      "rank1": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "rank_above1": {
+        "points": 749,
+        "epe": 243.8734130859375,
+        "p3": 0.0,
+        "ideal_epe": 8.00635051727295,
+        "ideal_p3": 0.07209612817089453
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 50,
+        "epe": 227.6778106689453,
+        "p3": 0.0,
+        "ideal_epe": 18.720426559448242,
+        "ideal_p3": 0.04
+      },
+      "border_8_16": {
+        "points": 51,
+        "epe": 228.67489624023438,
+        "p3": 0.0,
+        "ideal_epe": 12.344985008239746,
+        "ideal_p3": 0.0196078431372549
+      },
+      "border_16_32": {
+        "points": 100,
+        "epe": 230.8135223388672,
+        "p3": 0.0,
+        "ideal_epe": 10.071647644042969,
+        "ideal_p3": 0.0
+      },
+      "border_32_inf": {
+        "points": 548,
+        "epe": 249.1487579345703,
+        "p3": 0.0,
+        "ideal_epe": 6.248132228851318,
+        "ideal_p3": 0.09306569343065693
+      },
+      "error_0_3": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "error_3_8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "error_8_32": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "error_32_inf": {
+        "points": 749,
+        "epe": 243.8734130859375,
+        "p3": 0.0,
+        "ideal_epe": 8.00635051727295,
+        "ideal_p3": 0.07209612817089453
+      }
+    },
+    {
+      "pair_id": "val_G3_dd511106f1775a1ee1ddc654",
+      "group": "G3",
+      "all": {
+        "points": 283,
+        "epe": 1.9694310426712036,
+        "p3": 0.8692579505300353,
+        "ideal_epe": 7.1796674728393555,
+        "ideal_p3": 0.2226148409893993
+      },
+      "rank1": {
+        "points": 273,
+        "epe": 1.9038913249969482,
+        "p3": 0.8901098901098901,
+        "ideal_epe": 7.158908843994141,
+        "ideal_p3": 0.23076923076923078
+      },
+      "rank_above1": {
+        "points": 10,
+        "epe": 3.7586655616760254,
+        "p3": 0.3,
+        "ideal_epe": 7.7463812828063965,
+        "ideal_p3": 0.0
+      },
+      "positive_mass_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "positive_top1_ge_0.9": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "high_confidence_epe_gt8": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      },
+      "border_0_8": {
+        "points": 7,
+        "epe": 3.667158603668213,
+        "p3": 0.5714285714285714,
+        "ideal_epe": 17.834928512573242,
+        "ideal_p3": 0.0
+      },
+      "border_8_16": {
+        "points": 21,
+        "epe": 2.167854070663452,
+        "p3": 0.7142857142857143,
+        "ideal_epe": 17.598182678222656,
+        "ideal_p3": 0.0
+      },
+      "border_16_32": {
+        "points": 30,
+        "epe": 2.480126142501831,
+        "p3": 0.8,
+        "ideal_epe": 13.505102157592773,
+        "ideal_p3": 0.0
+      },
+      "border_32_inf": {
+        "points": 225,
+        "epe": 1.8300005197525024,
+        "p3": 0.9022222222222223,
+        "ideal_epe": 5.032384872436523,
+        "ideal_p3": 0.28
+      },
+      "error_0_3": {
+        "points": 246,
+        "epe": 1.5585384368896484,
+        "p3": 1.0,
+        "ideal_epe": 6.6056318283081055,
+        "ideal_p3": 0.24796747967479674
+      },
+      "error_3_8": {
+        "points": 35,
+        "epe": 4.470317363739014,
+        "p3": 0.0,
+        "ideal_epe": 10.844728469848633,
+        "ideal_p3": 0.05714285714285714
+      },
+      "error_8_32": {
+        "points": 2,
+        "epe": 8.743677139282227,
+        "p3": 0.0,
+        "ideal_epe": 13.647468566894531,
+        "ideal_p3": 0.0
+      },
+      "error_32_inf": {
+        "points": 0,
+        "epe": null,
+        "p3": null,
+        "ideal_epe": null,
+        "ideal_p3": null
+      }
+    }
+  ],
+  "quoted_cases_nearest": {
+    "G1_positive_mass": {
+      "pair_id": "val_G1_a494fd0920b58a4b65b13b4f",
+      "query": 588,
+      "distance": 5.0145463943481445,
+      "epe": 21.93397331237793,
+      "positive_mass": 0.8576148152351379,
+      "positive_top1_probability": 0.4598766565322876,
+      "rank": 1,
+      "delta": [
+        21.328903198242188,
+        5.1163482666015625
+      ],
+      "ideal_epe": 25.639652252197266
+    },
+    "G1_positive_top1_probability": {
+      "pair_id": "val_G1_ffee1883be8d3719576fc74f",
+      "query": 563,
+      "distance": 11.556501388549805,
+      "epe": 20.51618194580078,
+      "positive_mass": 0.8063731789588928,
+      "positive_top1_probability": 0.8063731789588928,
+      "rank": 1,
+      "delta": [
+        20.4111328125,
+        2.073486328125
+      ],
+      "ideal_epe": 34.988243103027344
+    },
+    "G3_positive_mass": {
+      "pair_id": "val_G3_8f2258607f065f89b71b7804",
+      "query": 30,
+      "distance": 15.470913887023926,
+      "epe": 26.738719940185547,
+      "positive_mass": 0.8661036491394043,
+      "positive_top1_probability": 0.6892809271812439,
+      "rank": 1,
+      "delta": [
+        22.743438720703125,
+        14.060409545898438
+      ],
+      "ideal_epe": 26.74639892578125
+    },
+    "G3_positive_top1_probability": {
+      "pair_id": "val_G3_8f2258607f065f89b71b7804",
+      "query": 361,
+      "distance": 19.75383949279785,
+      "epe": 14.873695373535156,
+      "positive_mass": 0.9460753798484802,
+      "positive_top1_probability": 0.9460753798484802,
+      "rank": 1,
+      "delta": [
+        -11.6209716796875,
+        -9.283309936523438
+      ],
+      "ideal_epe": 16.61494255065918
+    }
+  },
+  "high_confidence_pair_visualizations": 3,
+  "ideal_distribution": "H bilinear oracle; invalid queries dustbin. Diagnostic reference, not true geometry or inference."
+}

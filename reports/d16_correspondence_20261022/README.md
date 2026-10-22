@@ -77,44 +77,44 @@ EPE及比例按有效查询点加权；legacy_epe使用旧中心边界并对影�
 **G1**
 
 第0轮：[候选详情](U/G1_epoch_000.json)
-![U G1 epoch 0](U/G1_epoch_000.png)
+![U G1 epoch 0](U/G1_epoch_000.jpg)
 
 第1轮：[候选详情](U/G1_epoch_001.json)
-![U G1 epoch 1](U/G1_epoch_001.png)
+![U G1 epoch 1](U/G1_epoch_001.jpg)
 
 第15轮：[候选详情](U/G1_epoch_015.json)
-![U G1 epoch 15](U/G1_epoch_015.png)
+![U G1 epoch 15](U/G1_epoch_015.jpg)
 
 第30轮：[候选详情](U/G1_epoch_030.json)
-![U G1 epoch 30](U/G1_epoch_030.png)
+![U G1 epoch 30](U/G1_epoch_030.jpg)
 
 **G2**
 
 第0轮：[候选详情](U/G2_epoch_000.json)
-![U G2 epoch 0](U/G2_epoch_000.png)
+![U G2 epoch 0](U/G2_epoch_000.jpg)
 
 第1轮：[候选详情](U/G2_epoch_001.json)
-![U G2 epoch 1](U/G2_epoch_001.png)
+![U G2 epoch 1](U/G2_epoch_001.jpg)
 
 第15轮：[候选详情](U/G2_epoch_015.json)
-![U G2 epoch 15](U/G2_epoch_015.png)
+![U G2 epoch 15](U/G2_epoch_015.jpg)
 
 第30轮：[候选详情](U/G2_epoch_030.json)
-![U G2 epoch 30](U/G2_epoch_030.png)
+![U G2 epoch 30](U/G2_epoch_030.jpg)
 
 **G3**
 
 第0轮：[候选详情](U/G3_epoch_000.json)
-![U G3 epoch 0](U/G3_epoch_000.png)
+![U G3 epoch 0](U/G3_epoch_000.jpg)
 
 第1轮：[候选详情](U/G3_epoch_001.json)
-![U G3 epoch 1](U/G3_epoch_001.png)
+![U G3 epoch 1](U/G3_epoch_001.jpg)
 
 第15轮：[候选详情](U/G3_epoch_015.json)
-![U G3 epoch 15](U/G3_epoch_015.png)
+![U G3 epoch 15](U/G3_epoch_015.jpg)
 
 第30轮：[候选详情](U/G3_epoch_030.json)
-![U G3 epoch 30](U/G3_epoch_030.png)
+![U G3 epoch 30](U/G3_epoch_030.jpg)
 
 
 ### B
@@ -122,44 +122,44 @@ EPE及比例按有效查询点加权；legacy_epe使用旧中心边界并对影�
 **G1**
 
 第0轮：[候选详情](B/G1_epoch_000.json)
-![B G1 epoch 0](B/G1_epoch_000.png)
+![B G1 epoch 0](B/G1_epoch_000.jpg)
 
 第1轮：[候选详情](B/G1_epoch_001.json)
-![B G1 epoch 1](B/G1_epoch_001.png)
+![B G1 epoch 1](B/G1_epoch_001.jpg)
 
 第15轮：[候选详情](B/G1_epoch_015.json)
-![B G1 epoch 15](B/G1_epoch_015.png)
+![B G1 epoch 15](B/G1_epoch_015.jpg)
 
 第30轮：[候选详情](B/G1_epoch_030.json)
-![B G1 epoch 30](B/G1_epoch_030.png)
+![B G1 epoch 30](B/G1_epoch_030.jpg)
 
 **G2**
 
 第0轮：[候选详情](B/G2_epoch_000.json)
-![B G2 epoch 0](B/G2_epoch_000.png)
+![B G2 epoch 0](B/G2_epoch_000.jpg)
 
 第1轮：[候选详情](B/G2_epoch_001.json)
-![B G2 epoch 1](B/G2_epoch_001.png)
+![B G2 epoch 1](B/G2_epoch_001.jpg)
 
 第15轮：[候选详情](B/G2_epoch_015.json)
-![B G2 epoch 15](B/G2_epoch_015.png)
+![B G2 epoch 15](B/G2_epoch_015.jpg)
 
 第30轮：[候选详情](B/G2_epoch_030.json)
-![B G2 epoch 30](B/G2_epoch_030.png)
+![B G2 epoch 30](B/G2_epoch_030.jpg)
 
 **G3**
 
 第0轮：[候选详情](B/G3_epoch_000.json)
-![B G3 epoch 0](B/G3_epoch_000.png)
+![B G3 epoch 0](B/G3_epoch_000.jpg)
 
 第1轮：[候选详情](B/G3_epoch_001.json)
-![B G3 epoch 1](B/G3_epoch_001.png)
+![B G3 epoch 1](B/G3_epoch_001.jpg)
 
 第15轮：[候选详情](B/G3_epoch_015.json)
-![B G3 epoch 15](B/G3_epoch_015.png)
+![B G3 epoch 15](B/G3_epoch_015.jpg)
 
 第30轮：[候选详情](B/G3_epoch_030.json)
-![B G3 epoch 30](B/G3_epoch_030.png)
+![B G3 epoch 30](B/G3_epoch_030.jpg)
 
 
 ### C
@@ -167,42 +167,44 @@ EPE及比例按有效查询点加权；legacy_epe使用旧中心边界并对影�
 **G1**
 
 第0轮：[候选详情](C/G1_epoch_000.json)
-![C G1 epoch 0](C/G1_epoch_000.png)
+![C G1 epoch 0](C/G1_epoch_000.jpg)
 
 第1轮：[候选详情](C/G1_epoch_001.json)
-![C G1 epoch 1](C/G1_epoch_001.png)
+![C G1 epoch 1](C/G1_epoch_001.jpg)
 
 第15轮：[候选详情](C/G1_epoch_015.json)
-![C G1 epoch 15](C/G1_epoch_015.png)
+![C G1 epoch 15](C/G1_epoch_015.jpg)
 
 第30轮：[候选详情](C/G1_epoch_030.json)
-![C G1 epoch 30](C/G1_epoch_030.png)
+![C G1 epoch 30](C/G1_epoch_030.jpg)
 
 **G2**
 
 第0轮：[候选详情](C/G2_epoch_000.json)
-![C G2 epoch 0](C/G2_epoch_000.png)
+![C G2 epoch 0](C/G2_epoch_000.jpg)
 
 第1轮：[候选详情](C/G2_epoch_001.json)
-![C G2 epoch 1](C/G2_epoch_001.png)
+![C G2 epoch 1](C/G2_epoch_001.jpg)
 
 第15轮：[候选详情](C/G2_epoch_015.json)
-![C G2 epoch 15](C/G2_epoch_015.png)
+![C G2 epoch 15](C/G2_epoch_015.jpg)
 
 第30轮：[候选详情](C/G2_epoch_030.json)
-![C G2 epoch 30](C/G2_epoch_030.png)
+![C G2 epoch 30](C/G2_epoch_030.jpg)
 
 **G3**
 
 第0轮：[候选详情](C/G3_epoch_000.json)
-![C G3 epoch 0](C/G3_epoch_000.png)
+![C G3 epoch 0](C/G3_epoch_000.jpg)
 
 第1轮：[候选详情](C/G3_epoch_001.json)
-![C G3 epoch 1](C/G3_epoch_001.png)
+![C G3 epoch 1](C/G3_epoch_001.jpg)
 
 第15轮：[候选详情](C/G3_epoch_015.json)
-![C G3 epoch 15](C/G3_epoch_015.png)
+![C G3 epoch 15](C/G3_epoch_015.jpg)
 
 第30轮：[候选详情](C/G3_epoch_030.json)
-![C G3 epoch 30](C/G3_epoch_030.png)
+![C G3 epoch 30](C/G3_epoch_030.jpg)
 
+
+网页图使用质量88的JPEG；原始PNG保留在服务器实验输出目录。

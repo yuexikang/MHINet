@@ -1,0 +1,885 @@
+{
+  "pair_id": "val_G3_8c445598942db6a3ba815231",
+  "worst_reference_queries": [
+    {
+      "query_index": 1021,
+      "source_xy": [
+        471.5,
+        503.5
+      ],
+      "reference_xy": [
+        508.0272216796875,
+        116.30484008789062
+      ],
+      "predicted_xy": [
+        485.16253662109375,
+        145.1573486328125
+      ],
+      "epe": 36.81386947631836,
+      "reference_region_rank": 1,
+      "dustbin_probability": 0.0002720152260735631,
+      "top10": [
+        {
+          "index": 255,
+          "xy": [
+            503.5,
+            119.5
+          ],
+          "probability": 0.9111917614936829,
+          "in_positive_region": true
+        },
+        {
+          "index": 223,
+          "xy": [
+            503.5,
+            103.5
+          ],
+          "probability": 0.038711704313755035,
+          "in_positive_region": false
+        },
+        {
+          "index": 254,
+          "xy": [
+            487.5,
+            119.5
+          ],
+          "probability": 0.00511298468336463,
+          "in_positive_region": false
+        },
+        {
+          "index": 287,
+          "xy": [
+            503.5,
+            135.5
+          ],
+          "probability": 0.0034243008121848106,
+          "in_positive_region": false
+        },
+        {
+          "index": 222,
+          "xy": [
+            487.5,
+            103.5
+          ],
+          "probability": 0.0011477548396214843,
+          "in_positive_region": false
+        },
+        {
+          "index": 191,
+          "xy": [
+            503.5,
+            87.5
+          ],
+          "probability": 0.0008565071620978415,
+          "in_positive_region": false
+        },
+        {
+          "index": 127,
+          "xy": [
+            503.5,
+            55.5
+          ],
+          "probability": 0.0006041175220161676,
+          "in_positive_region": false
+        },
+        {
+          "index": 159,
+          "xy": [
+            503.5,
+            71.5
+          ],
+          "probability": 0.000576272199396044,
+          "in_positive_region": false
+        },
+        {
+          "index": 180,
+          "xy": [
+            327.5,
+            87.5
+          ],
+          "probability": 0.0005234964773990214,
+          "in_positive_region": false
+        },
+        {
+          "index": 30,
+          "xy": [
+            487.5,
+            7.5
+          ],
+          "probability": 0.00037525640800595284,
+          "in_positive_region": false
+        }
+      ]
+    },
+    {
+      "query_index": 1020,
+      "source_xy": [
+        455.5,
+        503.5
+      ],
+      "reference_xy": [
+        500.77783203125,
+        119.68812561035156
+      ],
+      "predicted_xy": [
+        484.81695556640625,
+        147.02767944335938
+      ],
+      "epe": 31.657554626464844,
+      "reference_region_rank": 1,
+      "dustbin_probability": 0.00055335508659482,
+      "top10": [
+        {
+          "index": 255,
+          "xy": [
+            503.5,
+            119.5
+          ],
+          "probability": 0.6957640647888184,
+          "in_positive_region": true
+        },
+        {
+          "index": 254,
+          "xy": [
+            487.5,
+            119.5
+          ],
+          "probability": 0.18360666930675507,
+          "in_positive_region": false
+        },
+        {
+          "index": 287,
+          "xy": [
+            503.5,
+            135.5
+          ],
+          "probability": 0.019647153094410896,
+          "in_positive_region": false
+        },
+        {
+          "index": 223,
+          "xy": [
+            503.5,
+            103.5
+          ],
+          "probability": 0.016841771081089973,
+          "in_positive_region": false
+        },
+        {
+          "index": 222,
+          "xy": [
+            487.5,
+            103.5
+          ],
+          "probability": 0.00678696483373642,
+          "in_positive_region": false
+        },
+        {
+          "index": 286,
+          "xy": [
+            487.5,
+            135.5
+          ],
+          "probability": 0.0033012721687555313,
+          "in_positive_region": false
+        },
+        {
+          "index": 158,
+          "xy": [
+            487.5,
+            71.5
+          ],
+          "probability": 0.001494736410677433,
+          "in_positive_region": false
+        },
+        {
+          "index": 126,
+          "xy": [
+            487.5,
+            55.5
+          ],
+          "probability": 0.0012661321088671684,
+          "in_positive_region": false
+        },
+        {
+          "index": 319,
+          "xy": [
+            503.5,
+            151.5
+          ],
+          "probability": 0.0010228556348010898,
+          "in_positive_region": false
+        },
+        {
+          "index": 180,
+          "xy": [
+            327.5,
+            87.5
+          ],
+          "probability": 0.00085171137470752,
+          "in_positive_region": false
+        }
+      ]
+    },
+    {
+      "query_index": 1019,
+      "source_xy": [
+        439.5,
+        503.5
+      ],
+      "reference_xy": [
+        493.5284729003906,
+        123.07142639160156
+      ],
+      "predicted_xy": [
+        483.9400634765625,
+        149.28504943847656
+      ],
+      "epe": 27.912214279174805,
+      "reference_region_rank": 1,
+      "dustbin_probability": 0.00047912090667523444,
+      "top10": [
+        {
+          "index": 254,
+          "xy": [
+            487.5,
+            119.5
+          ],
+          "probability": 0.801699697971344,
+          "in_positive_region": true
+        },
+        {
+          "index": 255,
+          "xy": [
+            503.5,
+            119.5
+          ],
+          "probability": 0.052309952676296234,
+          "in_positive_region": false
+        },
+        {
+          "index": 286,
+          "xy": [
+            487.5,
+            135.5
+          ],
+          "probability": 0.036044709384441376,
+          "in_positive_region": false
+        },
+        {
+          "index": 287,
+          "xy": [
+            503.5,
+            135.5
+          ],
+          "probability": 0.028233962133526802,
+          "in_positive_region": false
+        },
+        {
+          "index": 222,
+          "xy": [
+            487.5,
+            103.5
+          ],
+          "probability": 0.0054765669628977776,
+          "in_positive_region": false
+        },
+        {
+          "index": 223,
+          "xy": [
+            503.5,
+            103.5
+          ],
+          "probability": 0.002185232937335968,
+          "in_positive_region": false
+        },
+        {
+          "index": 319,
+          "xy": [
+            503.5,
+            151.5
+          ],
+          "probability": 0.0019042397616431117,
+          "in_positive_region": false
+        },
+        {
+          "index": 158,
+          "xy": [
+            487.5,
+            71.5
+          ],
+          "probability": 0.001706104027107358,
+          "in_positive_region": false
+        },
+        {
+          "index": 126,
+          "xy": [
+            487.5,
+            55.5
+          ],
+          "probability": 0.0011423473479226232,
+          "in_positive_region": false
+        },
+        {
+          "index": 190,
+          "xy": [
+            487.5,
+            87.5
+          ],
+          "probability": 0.0008233049884438515,
+          "in_positive_region": false
+        }
+      ]
+    },
+    {
+      "query_index": 1018,
+      "source_xy": [
+        423.5,
+        503.5
+      ],
+      "reference_xy": [
+        486.27911376953125,
+        126.45472717285156
+      ],
+      "predicted_xy": [
+        478.25579833984375,
+        150.9853057861328
+      ],
+      "epe": 25.809356689453125,
+      "reference_region_rank": 1,
+      "dustbin_probability": 0.0007423085626214743,
+      "top10": [
+        {
+          "index": 254,
+          "xy": [
+            487.5,
+            119.5
+          ],
+          "probability": 0.5206442475318909,
+          "in_positive_region": true
+        },
+        {
+          "index": 286,
+          "xy": [
+            487.5,
+            135.5
+          ],
+          "probability": 0.36337918043136597,
+          "in_positive_region": false
+        },
+        {
+          "index": 285,
+          "xy": [
+            471.5,
+            135.5
+          ],
+          "probability": 0.01312248408794403,
+          "in_positive_region": false
+        },
+        {
+          "index": 287,
+          "xy": [
+            503.5,
+            135.5
+          ],
+          "probability": 0.010867582634091377,
+          "in_positive_region": false
+        },
+        {
+          "index": 253,
+          "xy": [
+            471.5,
+            119.5
+          ],
+          "probability": 0.00985442940145731,
+          "in_positive_region": false
+        },
+        {
+          "index": 255,
+          "xy": [
+            503.5,
+            119.5
+          ],
+          "probability": 0.0055270008742809296,
+          "in_positive_region": false
+        },
+        {
+          "index": 222,
+          "xy": [
+            487.5,
+            103.5
+          ],
+          "probability": 0.004769582767039537,
+          "in_positive_region": false
+        },
+        {
+          "index": 318,
+          "xy": [
+            487.5,
+            151.5
+          ],
+          "probability": 0.001957973465323448,
+          "in_positive_region": false
+        },
+        {
+          "index": 158,
+          "xy": [
+            487.5,
+            71.5
+          ],
+          "probability": 0.0016196611104533076,
+          "in_positive_region": false
+        },
+        {
+          "index": 190,
+          "xy": [
+            487.5,
+            87.5
+          ],
+          "probability": 0.001561256474815309,
+          "in_positive_region": false
+        }
+      ]
+    },
+    {
+      "query_index": 1015,
+      "source_xy": [
+        375.5,
+        503.5
+      ],
+      "reference_xy": [
+        464.531005859375,
+        136.6046142578125
+      ],
+      "predicted_xy": [
+        451.034912109375,
+        158.0424346923828
+      ],
+      "epe": 25.332284927368164,
+      "reference_region_rank": 1,
+      "dustbin_probability": 0.0011640326119959354,
+      "top10": [
+        {
+          "index": 285,
+          "xy": [
+            471.5,
+            135.5
+          ],
+          "probability": 0.564764142036438,
+          "in_positive_region": true
+        },
+        {
+          "index": 284,
+          "xy": [
+            455.5,
+            135.5
+          ],
+          "probability": 0.2201521098613739,
+          "in_positive_region": false
+        },
+        {
+          "index": 317,
+          "xy": [
+            471.5,
+            151.5
+          ],
+          "probability": 0.06307829916477203,
+          "in_positive_region": false
+        },
+        {
+          "index": 316,
+          "xy": [
+            455.5,
+            151.5
+          ],
+          "probability": 0.018272044137120247,
+          "in_positive_region": false
+        },
+        {
+          "index": 252,
+          "xy": [
+            455.5,
+            119.5
+          ],
+          "probability": 0.008070257492363453,
+          "in_positive_region": false
+        },
+        {
+          "index": 253,
+          "xy": [
+            471.5,
+            119.5
+          ],
+          "probability": 0.006799919065088034,
+          "in_positive_region": false
+        },
+        {
+          "index": 286,
+          "xy": [
+            487.5,
+            135.5
+          ],
+          "probability": 0.0032206212636083364,
+          "in_positive_region": false
+        },
+        {
+          "index": 188,
+          "xy": [
+            455.5,
+            87.5
+          ],
+          "probability": 0.002316296799108386,
+          "in_positive_region": false
+        },
+        {
+          "index": 25,
+          "xy": [
+            407.5,
+            7.5
+          ],
+          "probability": 0.001965475268661976,
+          "in_positive_region": false
+        },
+        {
+          "index": 220,
+          "xy": [
+            455.5,
+            103.5
+          ],
+          "probability": 0.0018756520003080368,
+          "in_positive_region": false
+        }
+      ]
+    },
+    {
+      "query_index": 1017,
+      "source_xy": [
+        407.5,
+        503.5
+      ],
+      "reference_xy": [
+        479.02972412109375,
+        129.8380126953125
+      ],
+      "predicted_xy": [
+        469.227783203125,
+        152.96185302734375
+      ],
+      "epe": 25.11553382873535,
+      "reference_region_rank": 1,
+      "dustbin_probability": 0.0007534776232205331,
+      "top10": [
+        {
+          "index": 285,
+          "xy": [
+            471.5,
+            135.5
+          ],
+          "probability": 0.612494707107544,
+          "in_positive_region": true
+        },
+        {
+          "index": 286,
+          "xy": [
+            487.5,
+            135.5
+          ],
+          "probability": 0.16431933641433716,
+          "in_positive_region": true
+        },
+        {
+          "index": 253,
+          "xy": [
+            471.5,
+            119.5
+          ],
+          "probability": 0.10054361820220947,
+          "in_positive_region": false
+        },
+        {
+          "index": 254,
+          "xy": [
+            487.5,
+            119.5
+          ],
+          "probability": 0.034961190074682236,
+          "in_positive_region": false
+        },
+        {
+          "index": 318,
+          "xy": [
+            487.5,
+            151.5
+          ],
+          "probability": 0.004455559886991978,
+          "in_positive_region": false
+        },
+        {
+          "index": 317,
+          "xy": [
+            471.5,
+            151.5
+          ],
+          "probability": 0.00373129197396338,
+          "in_positive_region": false
+        },
+        {
+          "index": 157,
+          "xy": [
+            471.5,
+            71.5
+          ],
+          "probability": 0.0015416796086356044,
+          "in_positive_region": false
+        },
+        {
+          "index": 221,
+          "xy": [
+            471.5,
+            103.5
+          ],
+          "probability": 0.0013813202967867255,
+          "in_positive_region": false
+        },
+        {
+          "index": 189,
+          "xy": [
+            471.5,
+            87.5
+          ],
+          "probability": 0.001372919650748372,
+          "in_positive_region": false
+        },
+        {
+          "index": 255,
+          "xy": [
+            503.5,
+            119.5
+          ],
+          "probability": 0.0013563210377469659,
+          "in_positive_region": false
+        }
+      ]
+    },
+    {
+      "query_index": 1014,
+      "source_xy": [
+        359.5,
+        503.5
+      ],
+      "reference_xy": [
+        457.2816467285156,
+        139.9879150390625
+      ],
+      "predicted_xy": [
+        445.17315673828125,
+        161.96835327148438
+      ],
+      "epe": 25.09492301940918,
+      "reference_region_rank": 1,
+      "dustbin_probability": 0.0007089804275892675,
+      "top10": [
+        {
+          "index": 284,
+          "xy": [
+            455.5,
+            135.5
+          ],
+          "probability": 0.6688504219055176,
+          "in_positive_region": true
+        },
+        {
+          "index": 316,
+          "xy": [
+            455.5,
+            151.5
+          ],
+          "probability": 0.19708380103111267,
+          "in_positive_region": false
+        },
+        {
+          "index": 285,
+          "xy": [
+            471.5,
+            135.5
+          ],
+          "probability": 0.02051183022558689,
+          "in_positive_region": false
+        },
+        {
+          "index": 317,
+          "xy": [
+            471.5,
+            151.5
+          ],
+          "probability": 0.015022613108158112,
+          "in_positive_region": false
+        },
+        {
+          "index": 252,
+          "xy": [
+            455.5,
+            119.5
+          ],
+          "probability": 0.006125400774180889,
+          "in_positive_region": false
+        },
+        {
+          "index": 59,
+          "xy": [
+            439.5,
+            23.5
+          ],
+          "probability": 0.002336349105462432,
+          "in_positive_region": false
+        },
+        {
+          "index": 91,
+          "xy": [
+            439.5,
+            39.5
+          ],
+          "probability": 0.0019600880332291126,
+          "in_positive_region": false
+        },
+        {
+          "index": 220,
+          "xy": [
+            455.5,
+            103.5
+          ],
+          "probability": 0.001479815924540162,
+          "in_positive_region": false
+        },
+        {
+          "index": 24,
+          "xy": [
+            391.5,
+            7.5
+          ],
+          "probability": 0.0014060705434530973,
+          "in_positive_region": false
+        },
+        {
+          "index": 188,
+          "xy": [
+            455.5,
+            87.5
+          ],
+          "probability": 0.0014040443347766995,
+          "in_positive_region": false
+        }
+      ]
+    },
+    {
+      "query_index": 1016,
+      "source_xy": [
+        391.5,
+        503.5
+      ],
+      "reference_xy": [
+        471.7803955078125,
+        133.2213134765625
+      ],
+      "predicted_xy": [
+        460.78179931640625,
+        154.7954864501953
+      ],
+      "epe": 24.215988159179688,
+      "reference_region_rank": 1,
+      "dustbin_probability": 0.00029406326939351857,
+      "top10": [
+        {
+          "index": 285,
+          "xy": [
+            471.5,
+            135.5
+          ],
+          "probability": 0.9306841492652893,
+          "in_positive_region": true
+        },
+        {
+          "index": 253,
+          "xy": [
+            471.5,
+            119.5
+          ],
+          "probability": 0.02025807835161686,
+          "in_positive_region": false
+        },
+        {
+          "index": 286,
+          "xy": [
+            487.5,
+            135.5
+          ],
+          "probability": 0.010590403340756893,
+          "in_positive_region": false
+        },
+        {
+          "index": 317,
+          "xy": [
+            471.5,
+            151.5
+          ],
+          "probability": 0.005458373110741377,
+          "in_positive_region": false
+        },
+        {
+          "index": 284,
+          "xy": [
+            455.5,
+            135.5
+          ],
+          "probability": 0.0020379689522087574,
+          "in_positive_region": false
+        },
+        {
+          "index": 254,
+          "xy": [
+            487.5,
+            119.5
+          ],
+          "probability": 0.0012941439636051655,
+          "in_positive_region": false
+        },
+        {
+          "index": 318,
+          "xy": [
+            487.5,
+            151.5
+          ],
+          "probability": 0.000767543155234307,
+          "in_positive_region": false
+        },
+        {
+          "index": 189,
+          "xy": [
+            471.5,
+            87.5
+          ],
+          "probability": 0.0007580058299936354,
+          "in_positive_region": false
+        },
+        {
+          "index": 252,
+          "xy": [
+            455.5,
+            119.5
+          ],
+          "probability": 0.0006443906459026039,
+          "in_positive_region": false
+        },
+        {
+          "index": 221,
+          "xy": [
+            471.5,
+            103.5
+          ],
+          "probability": 0.00047005005762912333,
+          "in_positive_region": false
+        }
+      ]
+    }
+  ]
+}

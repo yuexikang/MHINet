@@ -1,5 +1,7 @@
 # MHI v2 配置目录
 
+当前主线使用 [hangzhou_u0.json](hangzhou_u0.json)：加载U0第30轮MVT/Flow头。`python -m mhinet.v2.u0 A.png B.png` 直接输出Flow0；`python -m mhinet.v2.train_hangzhou --config configs/mhi_v2/hangzhou_u0.json` 冻结U0并训练后续模块。以下为保留的历史配置说明。
+
 独立 v2 运行配置已实现，使用 `mhi.v2-run.v1` schema 和 `mhi_semidense_v2` task，由 `python -m mhinet.v2.train` 读取。研究登记 [experiment_plan.json](../../versions/v2/experiment_plan.json) 仍是非可执行的计划，不能作为运行配置。
 
 默认 `input_size=512`，只允许512×512模型输入；`max_output_matches=2048` 允许显式正整数覆盖。该字段只限制 QRRU 与有效性过滤后的最终输出；`max_matches=12000` 作为 QRRU 前候选预算单独保留，不从旧 checkpoint 把12000误继承成最终输出默认值。

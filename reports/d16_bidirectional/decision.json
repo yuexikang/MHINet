@@ -1,8 +1,0 @@
-{
-  "A_gate": false,
-  "B_gate": false,
-  "start_C": false,
-  "sigma_px": 16.0,
-  "threshold_source": "rgb_calibration128 only",
-  "reason": "No clear gain under fixed gates; retain U0 and original downstream, no C training or further experiments."
-}

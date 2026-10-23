@@ -7,7 +7,7 @@
 - `report.py`：仅使用RGB开发校准子集选择阈值，输出配对指标与C条件裁决。
 - `test_cycle.py`：恒等/逆平移、无效映射/边界两项CPU数值测试。
 
-运行环境为loma-repro，实验输出在`outputs/d16_bidirectional`，已有结果目录不会覆盖。执行前固定的范围、阈值规则和C启动条件见PLAN.md；最终报告见`reports/d16_bidirectional/REPORT.md`。
+运行环境为loma-repro，实验输出在`outputs/d16_bidirectional`，已有结果目录不会覆盖。执行前固定的范围、阈值规则和C启动条件见PLAN.md；本轮输出和报告已按用户要求删除；实验代码保留。
 
 ```bash
 python -m pytest mhinet/v2/bidirectional/test_cycle.py -q

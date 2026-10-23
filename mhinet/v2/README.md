@@ -1,17 +1,44 @@
-# MHI v2 算法
+# MHI v2：U0 主线
 
-当前主线是 `train_hangzhou.py`：仅 DINO 预训练，其余活跃模块从头联合训练。`geometry_gt.py` 统一四类监督，`GeometryPairDataset` 加载标签，`observe_qrru.py` 记录逐轮修正。详见 [几何监督与杭州训练](../../versions/v2/GEOMETRY_TRAINING.md)。
+D16 Flow0 固定采用 **U0 第30轮**：冻结的原 DINOv3 + 已训练 MVT + 原 MatchEmbeddingDecoder。输入512×512，输出32×32逐位置坐标；不预测H0。分类增强、局部遮挡、局部残差头及其评测脚本不并入本分支，实验记录保留在 `codex/d16-local-occlusion`。
 
-以下为此前 QRRU 推理优化入口：
+## 直接运行 Flow0
 
-当前优先优化基础 QRRU 推理，并用杭州数据进行小规模训练。见 [当前结论与计划](../../versions/v2/QRRU_RESTART.md)。
+配置：`configs/mhi_v2/hangzhou_u0.json`。本机权重已独立保存为 `weight/mhi_v2_u0.pt`，包含MVT和完整Flow头；DINO路径由runtime配置提供。模型权重不提交Git，换机器时需复制该权重并修改配置路径。
 
-- `qrru.py`：递归细化；训练保留轨迹，普通推理只返回末轮。
-- `coarse_matcher.py`：D8 全局匹配，可选整矩阵或分块。
-- `semidense.py`：D8 → D2 → QRRU；按置信度分批细化，满足最终有效输出预算后可提前停止。
-- `pilot.py`：杭州数据抽样、基础权重加载、近似地理参考弱监督、小试前后评价。
-- `benchmark.py`：512 实际推理速度和精度对照。
+```bash
+python -m mhinet.v2.u0 A.png B.png --device cuda:0 --output outputs/mhi_v2/flow0.pt
+```
 
-运行配置：`configs/mhi_v2/hangzhou_pilot.json`。输入仅 512，最终输出默认最多 2048。推理的 `inference_iterations` 与训练 `iterations` 独立；`max_matches` 是 QRRU 前候选上限。`qrru_early_stop` 在凑满有效输出后停止，诊断模式仍处理完整候选。
+两张图必须为512×512。Python调用：
 
-`train.py`、`evaluate.py`、`flow_loss/` 保留上一轮 RGB_512 实验的恢复与追溯用途。当前小试不依赖这些入口的逐文件哈希和注册流程。v1 文件及基线工作区保持独立。
+```python
+import torch
+from mhinet.v2.u0 import load_u0
+
+model = load_u0(device='cuda:0')
+# images: [B, 2, 3, 512, 512]，RGB float，范围[0, 1]
+with torch.inference_mode():
+    result = model(images, pyramid_scales=())
+```
+
+输出字段：
+
+- `flow16_target_norm`：目标xy，形状[B,2,32,32]。
+- `flow16_norm`：目标坐标减源网格坐标。
+- `flow16_matchability`：形状[B,1,32,32]，保留为分数。
+- `flow16_valid`：数值有限、坐标在界内；不是可靠的遮挡判定。
+
+坐标遵循 `align_corners=False`，`pixel=(norm+1)*256-0.5`；Flow像素位移为`flow16_norm*256`。U0未通过人工遮挡拒配门槛，不添加未经验证的拒配阈值。
+
+## 继续训练后续模块
+
+现有训练入口直接支持U0权重：
+
+```bash
+python -m mhinet.v2.train_hangzhou --config configs/mhi_v2/hangzhou_u0.json --device cuda:0
+```
+
+该配置冻结DINO/MVT/Flow头，训练VGG、特征解码器、D8/D2温度与QRRU；保留原小样本清单、30轮上限、余弦退火与早停。这里只提供可运行入口，不自动启动新训练。U0权重仅覆盖D16模块，不是已经训练好的完整下游匹配器。
+
+D8→D2→QRRU沿用本分支的 `semidense.py`，输入仍仅512，最终输出默认最多2048。训练监督继续使用 `geometry_gt.py`、`data.py`、`losses.py` 与 `training.py`，保留精确合成H及杭州近似H行为。原有完整checkpoint初始化仍受支持。

@@ -93,10 +93,18 @@ def main():
         '原拟选85张GoogleEarth源图的文件名全部出现在早期共享描述子训练/验证清单中，MVT/定位头当时可训练。因此原selection.json保留，最终test_selection.json改为128 FLAIR＋128 WHU，来自原RGB test且与原train/val源身份不交叉。此修改在任何测试推理之前，仅基于来源，不基于测试表现。测试结论不覆盖GE域；外部基础预训练与地理邻近独立性未认证。',
         '杭州测试256对，按历史使用、空间块/base_pair与footprint隔离；校准/工作点各128对因val容量不足使用未参与历史训练的保留原train区域。详细偏差见README、data_audit与test_provenance。']
     tests={v:read(ROOT/'sealed_test'/v/'summary.json') for v in [*e,*d] if (ROOT/'sealed_test'/v/'summary.json').exists()}
+    if len(tests)==10:
+        test_selection=read(ROOT/'test_selection.json')
+        test_blocks={r['pair_id']:r.get('anchor_block_id',r.get('source_relative_path')) for role in ('hz_test','rgb_test') for r in test_selection[role]}
+        for v,b in [('B0','U0'),('E1','B0'),('E2','B0'),('N2','B0'),('D01','D00'),('D11','D10'),('D10','D00'),('D11','D01')]:
+            for domain in ('hangzhou','rgb'):
+                label='test_'+v+'-'+b+'_'+domain
+                pairs[label]=paired(label,tests[v][domain]['pairs'],tests[b][domain]['pairs'],test_blocks,output)
+        write(output/'paired_intervals.json',pairs)
     lines+=['','|模型|测试杭州P@3|测试杭州EPE|测试RGB P@3|测试RGB EPE|','|---|---:|---:|---:|---:|']
     for v,r in tests.items():
         h=r['hangzhou']['overall'];s=r['rgb']['overall'];lines.append(f'|{v}|{100*h["flow_p3"]:.2f}%|{h["epe"]:.3f}|{100*s["flow_p3"]:.2f}%|{s["epe"]:.3f}|')
-    lines+=['',f'已完成封存测试：{len(tests)}/10。未全部完成前本报告为阶段稿。',
+    lines+=['',f'已完成封存测试：{len(tests)}/10。'+('所有配置保持锁定，未依据测试回头调参。' if len(tests)==10 else '未全部完成前本报告为阶段稿。'),
         '','完整G组、边界、高置信错误、阈值前后精度/覆盖率及逐查询材料在sealed_test各模型目录。推理时延采用同一卡、batch=1、10次预热、30次测量；参数统计包含模型注册但D16路径未执行的金字塔参数，额外坐标头另计，不能混作执行参数量。']
     (output/'FINAL_REPORT.md').write_text('\n'.join(lines)+'\n')
     write(output/'final_model.json',dict(variant='U0',epoch=30,checkpoint=str(OLD/'U0/latest.pt'),runtime=read(Path('mhinet/v2/local_occlusion/config.json'))['runtime'],

@@ -1,0 +1,25 @@
+{
+  "best_epoch": 1,
+  "trained_epochs": 4,
+  "steps_each": 224,
+  "trainable_parameters": 132225,
+  "initialization_identical": true,
+  "examples_per_epoch_each": 448,
+  "head_forward_examples_each": 1792,
+  "u0_updates": 0,
+  "shared_cache": "common frozen U0 FP32 forward cache, no U0 recomputation during head training",
+  "early_stop": "joint calibration mean with common best epoch",
+  "last": {
+    "epoch": 4,
+    "steps_each": 224,
+    "train": {
+      "T1": 0.0015485817379417963,
+      "T2": 0.027104031236376613
+    },
+    "calibration": {
+      "T1": 0.5516464114189148,
+      "T2": 0.029748812317848206
+    },
+    "joint_calibration": 0.2906976118683815
+  }
+}

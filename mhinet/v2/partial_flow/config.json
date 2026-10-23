@@ -1,0 +1,42 @@
+{
+  "seed": 42,
+  "source_root": "/home/disk1/Data/datasets/kewei/HangZhou_cloud0_rgb",
+  "hangzhou_root": "/home/disk1/Data/datasets/kewei/HangZhou_cloud0_rgb_RGBMatch_v4",
+  "output": "/home/disk1/MHINet/outputs/pcf01",
+  "mother_count": 70,
+  "split_counts": [
+    56,
+    7,
+    7
+  ],
+  "overlaps": [
+    0.2,
+    0.4,
+    0.6,
+    0.8
+  ],
+  "rotation_degrees": [
+    0,
+    15
+  ],
+  "scale_range": [
+    0.9,
+    1.1
+  ],
+  "texture_area": [
+    0.05,
+    0.2
+  ],
+  "batch_size": 8,
+  "epochs": 15,
+  "patience": 3,
+  "lr": 0.001,
+  "weight_decay": 0.01,
+  "calibration_positive_reject": 0.01,
+  "calibration_positive_no_match": 0.005,
+  "max_uncertain_fraction": 0.05,
+  "a2_formula": "1 - matchability * (1 - p_dustbin)",
+  "early_stop": "joint mean calibration loss; same epoch and steps for T1/T2",
+  "feature_cache_dtype": "float32",
+  "source_feature": "L2 normalized MVT query; all inputs detached"
+}

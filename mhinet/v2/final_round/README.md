@@ -56,7 +56,7 @@ python -m mhinet.v2.final_round.report_a
 
 追溯原预训练链发现，初拟RGB测试中的85个GoogleEarth源文件名全部出现在历史GoogleEarth共享描述子train/val中，且当时MVT/头可训练。`seal_test.py`在任何封存推理之前保留原selection不改，另写test_selection（128 FLAIR＋128 WHU）。这是来源驱动的计划修正，不是根据测试表现抽样；限制最终RGB结论的域。完整证据见test_provenance.json。
 
-`final_test.py`只读固定第30轮权重、读取已固定校准阈值，保存所有查询、逐对/G组/边界错误、阈值前后精度、图例和同卡时延。U0及所有对照在GPU0顺序执行，10次预热、30次计时，输入一对512图。`report_final.py`生成配对差值/空间块bootstrap、完整曲线、报告和最终模型接口配置。全部测试完成后还需汇总独立测试配对区间和一页结论；当前不是完成声明。
+`final_test.py`只读固定第30轮权重、读取已固定校准阈值，保存所有查询、逐对/G组/边界错误、阈值前后精度、图例和同卡时延。U0及所有对照在GPU0顺序执行，10次预热、30次计时，输入一对512图。`report_final.py`生成配对差值/空间块bootstrap、完整曲线、报告和最终模型接口配置。全部十组封存测试已完成，配对区间、一页结论、参数/时延及固定接口已归档至 `reports/d16_final_round/`。最终保留U0，不再追加训练。
 
 ```bash
 python -m mhinet.v2.final_round.seal_test  # 一次性；已有清单不得重抽

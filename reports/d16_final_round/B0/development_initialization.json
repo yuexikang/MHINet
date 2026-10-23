@@ -1,0 +1,23 @@
+{
+  "pretrained_modules": [
+    "DINOv3",
+    "MVT",
+    "MatchEmbedding locator"
+  ],
+  "fresh_modules": [
+    "VGG / CGMDP (unused)"
+  ],
+  "frozen_modules": [
+    "DINOv3",
+    "VGG",
+    "decoder"
+  ],
+  "locator_checkpoint": "/home/disk1/MHINet/weight/semidense_rgb512_h0joint_from_e_lr8e5_seed42_5ep.pt",
+  "locator_scope": "Decoder, positional buffers, no-match embedding and logit; identical source for v1/v2",
+  "trainable_modules": [
+    "MVT",
+    "MatchEmbedding/Flow Head"
+  ],
+  "seed": 42,
+  "scope": "Only original DINO plus pretrained MVT/head; not U/B/C trained weights"
+}

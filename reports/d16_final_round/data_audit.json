@@ -1,0 +1,51 @@
+{
+  "seed": 20261023,
+  "counts": {
+    "hz_train": 254,
+    "hz_dev": 64,
+    "hz_calibration": 128,
+    "hz_operating": 128,
+    "hz_test": 256,
+    "rgb_train": 1024,
+    "rgb_dev": 256,
+    "rgb_test": 256
+  },
+  "rgb_geometry": {
+    "train": {
+      "manifest_rows": 40849,
+      "unique_sources": 40849,
+      "selected": 1024,
+      "max_H_composition_difference": 0.0,
+      "max_inverse_difference": 1.0470314120153043e-13
+    },
+    "val": {
+      "manifest_rows": 5106,
+      "unique_sources": 5106,
+      "selected": 256,
+      "max_H_composition_difference": 0.0,
+      "max_inverse_difference": 9.979705709755634e-14
+    },
+    "test": {
+      "manifest_rows": 5106,
+      "unique_sources": 5106,
+      "selected": 256,
+      "max_H_composition_difference": 0.0,
+      "max_inverse_difference": 1.328778543704047e-13
+    }
+  },
+  "calibration_original_splits": {
+    "train": 113,
+    "val": 15
+  },
+  "operating_original_splits": {
+    "train": 121,
+    "val": 7
+  },
+  "calibration_blocks": 29,
+  "operating_blocks": 29,
+  "test_blocks": 52,
+  "change_from_plan": "Old experiments touched 415 HZ pairs in 168 blocks. Only75 val pairs remained spatially separate; calibration/operating reserve previously unused original train regions as well. They are excluded from all new training.",
+  "exposure": "RGB original test split has 5106 source-disjoint rows. Existing v2 configs documented train/val-only use. DINO external pretraining exposure cannot be certified; RGB source-disjoint does not imply geographic-neighbour independence.",
+  "spatial_rule": "Different anchor blocks and base_pair_id; no >1m2 convex footprint intersection (A or B) across historic use/calibration/operating/test. Within-split spatial dependence retained and block-bootstrap used.",
+  "exposure_followup": "Subsequent checkpoint-chain audit found all 85 proposed GoogleEarth test sources in historical local shared-descriptor train/val. Original selection preserved; final test_selection excludes GE and uses128 FLAIR+128 WHU before test inference. See test_provenance.json."
+}

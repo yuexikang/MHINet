@@ -1,0 +1,10 @@
+{
+  "status": "completed",
+  "epoch": 30,
+  "best_clean_p3": 0.6564449646486018,
+  "train_forwards": 15240,
+  "validation_forwards": 5312,
+  "optimizer_updates": 1920,
+  "wall_seconds": 1043.2267682552338,
+  "compute_note": "2 full D16 forwards per training pair in all controls/treatments; one extra per pair vs original 1.252 forward/pair. Time includes per-term gradient probes."
+}

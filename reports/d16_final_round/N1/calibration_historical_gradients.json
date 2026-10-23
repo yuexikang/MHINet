@@ -1,0 +1,1532 @@
+[
+  {
+    "epoch": 1,
+    "index": 0,
+    "pair_id": "train_G0_6f5dcd54c015e558cd15663f",
+    "clean_loss": 0.0453096367418766,
+    "clean_gradient_norms": {
+      "mvt": 0.02813187800347805,
+      "head": 4.645002365112305
+    },
+    "weighted_augmented_gradient_norms": {
+      "occ": {
+        "mvt": 0.019410088658332825,
+        "head": 0.12104525417089462
+      },
+      "keep": {
+        "mvt": 0.028482113033533096,
+        "head": 1.143472445619409e-06
+      },
+      "keep_geo": {
+        "mvt": 0.027754489332437515,
+        "head": 5.375054359436035
+      },
+      "keep_match": {
+        "mvt": 2.035783381870715e-06,
+        "head": 8.557447290513664e-05
+      }
+    },
+    "gradient_measurement": "unclipped, before accumulation scaling; once per epoch, same for controls",
+    "rect": [
+      231,
+      0,
+      425,
+      227
+    ],
+    "requested_area": 0.16765174776855374,
+    "actual_area": 0.16799163818359375,
+    "fill_rgb": 255,
+    "attempts": 1,
+    "skipped": false,
+    "reason": null,
+    "positive": 718,
+    "negative": 143,
+    "ignore": 163,
+    "augmented_terms": {
+      "occ": 0.09764283150434494,
+      "keep": 0.00613707909360528,
+      "keep_geo": 0.0015215836465358734,
+      "keep_match": 8.274805054497847e-07
+    },
+    "augmentation_enabled": true
+  },
+  {
+    "epoch": 2,
+    "index": 0,
+    "pair_id": "train_G3_f7b95f0a603a3d45da91799c",
+    "clean_loss": 0.09724560379981995,
+    "clean_gradient_norms": {
+      "mvt": 2.6784920692443848,
+      "head": 26.53281021118164
+    },
+    "weighted_augmented_gradient_norms": {
+      "occ": {
+        "mvt": 0.11440273374319077,
+        "head": 0.2340954840183258
+      },
+      "keep": {
+        "mvt": 0.04470479115843773,
+        "head": 7.959268373269879e-07
+      },
+      "keep_geo": {
+        "mvt": 1.431050419807434,
+        "head": 23.170072555541992
+      },
+      "keep_match": {
+        "mvt": 0.012261426076292992,
+        "head": 0.03243562951683998
+      }
+    },
+    "gradient_measurement": "unclipped, before accumulation scaling; once per epoch, same for controls",
+    "rect": [
+      396,
+      193,
+      512,
+      420
+    ],
+    "requested_area": 0.1003996203954062,
+    "actual_area": 0.1004486083984375,
+    "fill_rgb": 255,
+    "attempts": 1,
+    "skipped": false,
+    "reason": null,
+    "positive": 332,
+    "negative": 30,
+    "ignore": 662,
+    "augmented_terms": {
+      "occ": 0.11041249334812164,
+      "keep": 0.018179651349782944,
+      "keep_geo": 0.06468482315540314,
+      "keep_match": 0.0007069865241646767
+    },
+    "augmentation_enabled": true
+  },
+  {
+    "epoch": 3,
+    "index": 0,
+    "pair_id": "train_G2_49ec66e363d076044050ab24",
+    "clean_loss": 0.0052460902370512486,
+    "clean_gradient_norms": {
+      "mvt": 0.028020670637488365,
+      "head": 5.539929389953613
+    },
+    "weighted_augmented_gradient_norms": {
+      "occ": {
+        "mvt": 0.02766134962439537,
+        "head": 0.0936899185180664
+      },
+      "keep": {
+        "mvt": 0.029378920793533325,
+        "head": 9.495666972725303e-07
+      },
+      "keep_geo": {
+        "mvt": 0.029342932626605034,
+        "head": 6.023927688598633
+      },
+      "keep_match": {
+        "mvt": 3.59145924448967e-05,
+        "head": 0.0022056084126234055
+      }
+    },
+    "gradient_measurement": "unclipped, before accumulation scaling; once per epoch, same for controls",
+    "rect": [
+      149,
+      49,
+      330,
+      277
+    ],
+    "requested_area": 0.15778295095833564,
+    "actual_area": 0.1574249267578125,
+    "fill_rgb": 0,
+    "attempts": 1,
+    "skipped": false,
+    "reason": null,
+    "positive": 310,
+    "negative": 56,
+    "ignore": 658,
+    "augmented_terms": {
+      "occ": 0.09459748864173889,
+      "keep": 0.010269032791256905,
+      "keep_geo": 0.004450615029782057,
+      "keep_match": 2.1702548110624775e-05
+    },
+    "augmentation_enabled": true
+  },
+  {
+    "epoch": 4,
+    "index": 0,
+    "pair_id": "train_G1_5e102fce9957b510a3035708",
+    "clean_loss": 0.4580177962779999,
+    "clean_gradient_norms": {
+      "mvt": 26.026647567749023,
+      "head": 65.72447967529297
+    },
+    "weighted_augmented_gradient_norms": {
+      "occ": {
+        "mvt": 0.24045951664447784,
+        "head": 0.0511423796415329
+      },
+      "keep": {
+        "mvt": 2.6583662033081055,
+        "head": 6.340252980407968e-07
+      },
+      "keep_geo": {
+        "mvt": 82.262939453125,
+        "head": 36.002193450927734
+      },
+      "keep_match": {
+        "mvt": 0.3804314434528351,
+        "head": 0.5482499599456787
+      }
+    },
+    "gradient_measurement": "unclipped, before accumulation scaling; once per epoch, same for controls",
+    "rect": [
+      33,
+      125,
+      195,
+      447
+    ],
+    "requested_area": 0.1993541866170441,
+    "actual_area": 0.1989898681640625,
+    "fill_rgb": 0,
+    "attempts": 1,
+    "skipped": false,
+    "reason": null,
+    "positive": 282,
+    "negative": 32,
+    "ignore": 710,
+    "augmented_terms": {
+      "occ": 0.10059861838817596,
+      "keep": 0.08052623271942139,
+      "keep_geo": 4.040765285491943,
+      "keep_match": 0.017333170399069786
+    },
+    "augmentation_enabled": true
+  },
+  {
+    "epoch": 5,
+    "index": 0,
+    "pair_id": "train_G1_d7489f8b21aa959fec3f2772",
+    "clean_loss": 0.014645282179117203,
+    "clean_gradient_norms": {
+      "mvt": 0.04839659854769707,
+      "head": 9.981712341308594
+    },
+    "weighted_augmented_gradient_norms": {
+      "occ": {
+        "mvt": 0.043407853692770004,
+        "head": 0.14412926137447357
+      },
+      "keep": {
+        "mvt": 0.014887797646224499,
+        "head": 1.955772404471645e-06
+      },
+      "keep_geo": {
+        "mvt": 0.04957384616136551,
+        "head": 7.546669960021973
+      },
+      "keep_match": {
+        "mvt": 0.0010983215179294348,
+        "head": 0.03897934406995773
+      }
+    },
+    "gradient_measurement": "unclipped, before accumulation scaling; once per epoch, same for controls",
+    "rect": [
+      286,
+      150,
+      488,
+      311
+    ],
+    "requested_area": 0.12472566097943805,
+    "actual_area": 0.12406158447265625,
+    "fill_rgb": 0,
+    "attempts": 1,
+    "skipped": false,
+    "reason": null,
+    "positive": 596,
+    "negative": 100,
+    "ignore": 328,
+    "augmented_terms": {
+      "occ": 0.08764475584030151,
+      "keep": 0.005634451285004616,
+      "keep_geo": 0.01204893458634615,
+      "keep_match": 0.0006728414446115494
+    },
+    "augmentation_enabled": true
+  },
+  {
+    "epoch": 6,
+    "index": 0,
+    "pair_id": "train_G3_316d3ed201e59588e637465e",
+    "clean_loss": 0.05636356398463249,
+    "clean_gradient_norms": {
+      "mvt": 0.6068284511566162,
+      "head": 20.11580467224121
+    },
+    "weighted_augmented_gradient_norms": {
+      "occ": {
+        "mvt": 0.11429261416196823,
+        "head": 0.11638104170560837
+      },
+      "keep": {
+        "mvt": 0.13745015859603882,
+        "head": 1.2294876796659082e-06
+      },
+      "keep_geo": {
+        "mvt": 6.5970258712768555,
+        "head": 28.480701446533203
+      },
+      "keep_match": {
+        "mvt": 0.02471058815717697,
+        "head": 0.052300408482551575
+      }
+    },
+    "gradient_measurement": "unclipped, before accumulation scaling; once per epoch, same for controls",
+    "rect": [
+      161,
+      265,
+      326,
+      489
+    ],
+    "requested_area": 0.14139675975565547,
+    "actual_area": 0.1409912109375,
+    "fill_rgb": 0,
+    "attempts": 1,
+    "skipped": false,
+    "reason": null,
+    "positive": 60,
+    "negative": 12,
+    "ignore": 952,
+    "augmented_terms": {
+      "occ": 0.09925392270088196,
+      "keep": 0.02540389448404312,
+      "keep_geo": 0.1652151495218277,
+      "keep_match": 0.0005218311562202871
+    },
+    "augmentation_enabled": true
+  },
+  {
+    "epoch": 7,
+    "index": 0,
+    "pair_id": "train_G2_c403a779dfc31b003035259c",
+    "clean_loss": 0.009500622749328613,
+    "clean_gradient_norms": {
+      "mvt": 0.05065610632300377,
+      "head": 6.109380722045898
+    },
+    "weighted_augmented_gradient_norms": {
+      "occ": {
+        "mvt": 0.09702787548303604,
+        "head": 0.08145250380039215
+      },
+      "keep": {
+        "mvt": 0.015233599580824375,
+        "head": 4.847402124141809e-06
+      },
+      "keep_geo": {
+        "mvt": 0.09913161396980286,
+        "head": 7.977000713348389
+      },
+      "keep_match": {
+        "mvt": 0.001283567282371223,
+        "head": 0.08773946762084961
+      }
+    },
+    "gradient_measurement": "unclipped, before accumulation scaling; once per epoch, same for controls",
+    "rect": [
+      112,
+      7,
+      319,
+      249
+    ],
+    "requested_area": 0.19109997233044193,
+    "actual_area": 0.19109344482421875,
+    "fill_rgb": 0,
+    "attempts": 1,
+    "skipped": false,
+    "reason": null,
+    "positive": 576,
+    "negative": 317,
+    "ignore": 131,
+    "augmented_terms": {
+      "occ": 0.0838933140039444,
+      "keep": 0.004781221505254507,
+      "keep_geo": 0.009688585065305233,
+      "keep_match": 0.0012170408153906465
+    },
+    "augmentation_enabled": true
+  },
+  {
+    "epoch": 8,
+    "index": 0,
+    "pair_id": "train_G1_cc57e5e0a6a9023e8c03f0c2",
+    "clean_loss": 0.020642586052417755,
+    "clean_gradient_norms": {
+      "mvt": 0.18869735300540924,
+      "head": 16.46961212158203
+    },
+    "weighted_augmented_gradient_norms": {
+      "occ": {
+        "mvt": 0.05888069421052933,
+        "head": 0.1762361377477646
+      },
+      "keep": {
+        "mvt": 0.011162455193698406,
+        "head": 2.2644696855422808e-06
+      },
+      "keep_geo": {
+        "mvt": 0.44160541892051697,
+        "head": 23.12635040283203
+      },
+      "keep_match": {
+        "mvt": 0.001481623388826847,
+        "head": 0.033979397267103195
+      }
+    },
+    "gradient_measurement": "unclipped, before accumulation scaling; once per epoch, same for controls",
+    "rect": [
+      285,
+      356,
+      512,
+      512
+    ],
+    "requested_area": 0.13505803758522714,
+    "actual_area": 0.1350860595703125,
+    "fill_rgb": 0,
+    "attempts": 1,
+    "skipped": false,
+    "reason": null,
+    "positive": 692,
+    "negative": 106,
+    "ignore": 226,
+    "augmented_terms": {
+      "occ": 0.09475261718034744,
+      "keep": 0.005252577364444733,
+      "keep_geo": 0.03463144972920418,
+      "keep_match": 0.0006816446548327804
+    },
+    "augmentation_enabled": true
+  },
+  {
+    "epoch": 9,
+    "index": 0,
+    "pair_id": "train_G2_f511e273b8f8ce2ae6f152f1",
+    "clean_loss": 0.011224965564906597,
+    "clean_gradient_norms": {
+      "mvt": 0.0528198704123497,
+      "head": 10.827729225158691
+    },
+    "weighted_augmented_gradient_norms": {
+      "occ": {
+        "mvt": 0.04046887159347534,
+        "head": 0.1619773954153061
+      },
+      "keep": {
+        "mvt": 0.020389925688505173,
+        "head": 1.6944445633271243e-06
+      },
+      "keep_geo": {
+        "mvt": 0.05169851705431938,
+        "head": 8.877695083618164
+      },
+      "keep_match": {
+        "mvt": 0.0007976853521540761,
+        "head": 0.027094734832644463
+      }
+    },
+    "gradient_measurement": "unclipped, before accumulation scaling; once per epoch, same for controls",
+    "rect": [
+      71,
+      359,
+      221,
+      512
+    ],
+    "requested_area": 0.08775671907009128,
+    "actual_area": 0.08754730224609375,
+    "fill_rgb": 0,
+    "attempts": 1,
+    "skipped": false,
+    "reason": null,
+    "positive": 513,
+    "negative": 42,
+    "ignore": 469,
+    "augmented_terms": {
+      "occ": 0.08780595660209656,
+      "keep": 0.007687524426728487,
+      "keep_geo": 0.008891679346561432,
+      "keep_match": 0.0003552202833816409
+    },
+    "augmentation_enabled": true
+  },
+  {
+    "epoch": 10,
+    "index": 0,
+    "pair_id": "train_G1_6f5d07603b24c9c41c8246f1",
+    "clean_loss": 0.01582910306751728,
+    "clean_gradient_norms": {
+      "mvt": 0.14829567074775696,
+      "head": 12.863343238830566
+    },
+    "weighted_augmented_gradient_norms": {
+      "occ": {
+        "mvt": 0.17173506319522858,
+        "head": 0.12191783636808395
+      },
+      "keep": {
+        "mvt": 0.03704320639371872,
+        "head": 2.244284587504808e-06
+      },
+      "keep_geo": {
+        "mvt": 0.18149828910827637,
+        "head": 14.12596321105957
+      },
+      "keep_match": {
+        "mvt": 0.001085217110812664,
+        "head": 0.033036284148693085
+      }
+    },
+    "gradient_measurement": "unclipped, before accumulation scaling; once per epoch, same for controls",
+    "rect": [
+      25,
+      247,
+      151,
+      430
+    ],
+    "requested_area": 0.0881747730448382,
+    "actual_area": 0.08795928955078125,
+    "fill_rgb": 0,
+    "attempts": 1,
+    "skipped": false,
+    "reason": null,
+    "positive": 536,
+    "negative": 45,
+    "ignore": 443,
+    "augmented_terms": {
+      "occ": 0.08811236917972565,
+      "keep": 0.0074033234268426895,
+      "keep_geo": 0.015532433055341244,
+      "keep_match": 0.0005749787669628859
+    },
+    "augmentation_enabled": true
+  },
+  {
+    "epoch": 11,
+    "index": 0,
+    "pair_id": "train_G2_e90063fa84a06ca1d93bf249",
+    "clean_loss": 0.007099422626197338,
+    "clean_gradient_norms": {
+      "mvt": 0.039401471614837646,
+      "head": 4.813569068908691
+    },
+    "weighted_augmented_gradient_norms": {
+      "occ": {
+        "mvt": 0.12840242683887482,
+        "head": 0.11514417827129364
+      },
+      "keep": {
+        "mvt": 0.009579726494848728,
+        "head": 3.380565431143623e-06
+      },
+      "keep_geo": {
+        "mvt": 0.05011428892612457,
+        "head": 4.37790060043335
+      },
+      "keep_match": {
+        "mvt": 0.0010359451407566667,
+        "head": 0.04119829833507538
+      }
+    },
+    "gradient_measurement": "unclipped, before accumulation scaling; once per epoch, same for controls",
+    "rect": [
+      312,
+      84,
+      469,
+      313
+    ],
+    "requested_area": 0.13665489081830104,
+    "actual_area": 0.13714981079101562,
+    "fill_rgb": 0,
+    "attempts": 1,
+    "skipped": false,
+    "reason": null,
+    "positive": 760,
+    "negative": 190,
+    "ignore": 74,
+    "augmented_terms": {
+      "occ": 0.08491991460323334,
+      "keep": 0.002054092474281788,
+      "keep_geo": 0.005393568892031908,
+      "keep_match": 0.0007955431938171387
+    },
+    "augmentation_enabled": true
+  },
+  {
+    "epoch": 12,
+    "index": 0,
+    "pair_id": "train_G3_6e2b0f5b198b915db51067d0",
+    "clean_loss": 0.08175123482942581,
+    "clean_gradient_norms": {
+      "mvt": 0.10782286524772644,
+      "head": 26.18846321105957
+    },
+    "weighted_augmented_gradient_norms": {
+      "occ": {
+        "mvt": 0.12713804841041565,
+        "head": 0.13424518704414368
+      },
+      "keep": {
+        "mvt": 0.033250369131565094,
+        "head": 1.3328162822290324e-05
+      },
+      "keep_geo": {
+        "mvt": 0.19173157215118408,
+        "head": 29.612241744995117
+      },
+      "keep_match": {
+        "mvt": 0.0002857935323845595,
+        "head": 0.0369490310549736
+      }
+    },
+    "gradient_measurement": "unclipped, before accumulation scaling; once per epoch, same for controls",
+    "rect": [
+      228,
+      295,
+      330,
+      424
+    ],
+    "requested_area": 0.050070482732193416,
+    "actual_area": 0.05019378662109375,
+    "fill_rgb": 0,
+    "attempts": 4,
+    "skipped": false,
+    "reason": null,
+    "positive": 485,
+    "negative": 53,
+    "ignore": 486,
+    "augmented_terms": {
+      "occ": 0.07420017570257187,
+      "keep": 0.004342259373515844,
+      "keep_geo": 0.05448761209845543,
+      "keep_match": 0.00020805497479159385
+    },
+    "augmentation_enabled": true
+  },
+  {
+    "epoch": 13,
+    "index": 0,
+    "pair_id": "train_G3_3717294a63a3979ed0571eae",
+    "clean_loss": 0.006040200591087341,
+    "clean_gradient_norms": {
+      "mvt": 0.08581226319074631,
+      "head": 10.092466354370117
+    },
+    "weighted_augmented_gradient_norms": {
+      "occ": {
+        "mvt": 0.07424166053533554,
+        "head": 0.18196874856948853
+      },
+      "keep": {
+        "mvt": 0.014622124843299389,
+        "head": 2.070768232442788e-06
+      },
+      "keep_geo": {
+        "mvt": 0.037606704980134964,
+        "head": 10.031695365905762
+      },
+      "keep_match": {
+        "mvt": 0.0011743943905457854,
+        "head": 0.02989095449447632
+      }
+    },
+    "gradient_measurement": "unclipped, before accumulation scaling; once per epoch, same for controls",
+    "rect": [
+      303,
+      3,
+      500,
+      106
+    ],
+    "requested_area": 0.07725071050057508,
+    "actual_area": 0.07740402221679688,
+    "fill_rgb": 0,
+    "attempts": 1,
+    "skipped": false,
+    "reason": null,
+    "positive": 293,
+    "negative": 13,
+    "ignore": 718,
+    "augmented_terms": {
+      "occ": 0.09013360738754272,
+      "keep": 0.004729683976620436,
+      "keep_geo": 0.005021642427891493,
+      "keep_match": 0.0005082755233161151
+    },
+    "augmentation_enabled": true
+  },
+  {
+    "epoch": 14,
+    "index": 0,
+    "pair_id": "train_G2_fdc4d3b7e702609abd7f07bf",
+    "clean_loss": 0.00488492613658309,
+    "clean_gradient_norms": {
+      "mvt": 0.027466261759400368,
+      "head": 3.0169308185577393
+    },
+    "weighted_augmented_gradient_norms": {
+      "occ": {
+        "mvt": 0.08906539529561996,
+        "head": 0.09771471470594406
+      },
+      "keep": {
+        "mvt": 0.009281022474169731,
+        "head": 5.260434591036756e-06
+      },
+      "keep_geo": {
+        "mvt": 0.02586529776453972,
+        "head": 2.505756139755249
+      },
+      "keep_match": {
+        "mvt": 0.0007451363489963114,
+        "head": 0.029927130788564682
+      }
+    },
+    "gradient_measurement": "unclipped, before accumulation scaling; once per epoch, same for controls",
+    "rect": [
+      119,
+      354,
+      229,
+      509
+    ],
+    "requested_area": 0.06542951168869038,
+    "actual_area": 0.06504058837890625,
+    "fill_rgb": 255,
+    "attempts": 2,
+    "skipped": false,
+    "reason": null,
+    "positive": 968,
+    "negative": 9,
+    "ignore": 47,
+    "augmented_terms": {
+      "occ": 0.0830666795372963,
+      "keep": 0.0030538239516317844,
+      "keep_geo": 0.0035613044165074825,
+      "keep_match": 0.000558007275685668
+    },
+    "augmentation_enabled": true
+  },
+  {
+    "epoch": 15,
+    "index": 0,
+    "pair_id": "train_G3_1ab536ae0877f552b0b623f7",
+    "clean_loss": 0.022250939160585403,
+    "clean_gradient_norms": {
+      "mvt": 0.16886426508426666,
+      "head": 20.565296173095703
+    },
+    "weighted_augmented_gradient_norms": {
+      "occ": {
+        "mvt": 0.10803332179784775,
+        "head": 0.10346656292676926
+      },
+      "keep": {
+        "mvt": 0.01731495000422001,
+        "head": 3.400175046408549e-06
+      },
+      "keep_geo": {
+        "mvt": 0.23864759504795074,
+        "head": 26.45411491394043
+      },
+      "keep_match": {
+        "mvt": 0.0006921243038959801,
+        "head": 0.04494576156139374
+      }
+    },
+    "gradient_measurement": "unclipped, before accumulation scaling; once per epoch, same for controls",
+    "rect": [
+      104,
+      260,
+      241,
+      429
+    ],
+    "requested_area": 0.08822337883118865,
+    "actual_area": 0.08832168579101562,
+    "fill_rgb": 255,
+    "attempts": 1,
+    "skipped": false,
+    "reason": null,
+    "positive": 447,
+    "negative": 154,
+    "ignore": 423,
+    "augmented_terms": {
+      "occ": 0.08349993824958801,
+      "keep": 0.004779135342687368,
+      "keep_geo": 0.026301352307200432,
+      "keep_match": 0.000527300639078021
+    },
+    "augmentation_enabled": true
+  },
+  {
+    "epoch": 16,
+    "index": 0,
+    "pair_id": "train_G0_fc030bd91317dabfdf42a441",
+    "clean_loss": 0.013304405845701694,
+    "clean_gradient_norms": {
+      "mvt": 0.047946322709321976,
+      "head": 14.973841667175293
+    },
+    "weighted_augmented_gradient_norms": {
+      "occ": {
+        "mvt": 0.044361770153045654,
+        "head": 0.09663056582212448
+      },
+      "keep": {
+        "mvt": 0.02219347655773163,
+        "head": 1.71991871411592e-06
+      },
+      "keep_geo": {
+        "mvt": 0.04238732159137726,
+        "head": 17.506160736083984
+      },
+      "keep_match": {
+        "mvt": 0.00030695044551976025,
+        "head": 0.023772070184350014
+      }
+    },
+    "gradient_measurement": "unclipped, before accumulation scaling; once per epoch, same for controls",
+    "rect": [
+      209,
+      207,
+      447,
+      385
+    ],
+    "requested_area": 0.16168035057425026,
+    "actual_area": 0.1616058349609375,
+    "fill_rgb": 0,
+    "attempts": 1,
+    "skipped": false,
+    "reason": null,
+    "positive": 679,
+    "negative": 117,
+    "ignore": 228,
+    "augmented_terms": {
+      "occ": 0.08232633769512177,
+      "keep": 0.003217434510588646,
+      "keep_geo": 0.013272511772811413,
+      "keep_match": 0.0003526054206304252
+    },
+    "augmentation_enabled": true
+  },
+  {
+    "epoch": 17,
+    "index": 0,
+    "pair_id": "train_G0_ad2b969013770ff4a8a18be2",
+    "clean_loss": 0.009272349067032337,
+    "clean_gradient_norms": {
+      "mvt": 0.025474727153778076,
+      "head": 10.22617244720459
+    },
+    "weighted_augmented_gradient_norms": {
+      "occ": {
+        "mvt": 0.021158605813980103,
+        "head": 0.09661504626274109
+      },
+      "keep": {
+        "mvt": 0.03149428218603134,
+        "head": 1.5415464531542966e-06
+      },
+      "keep_geo": {
+        "mvt": 0.015007246285676956,
+        "head": 9.659875869750977
+      },
+      "keep_match": {
+        "mvt": 0.0002656625583767891,
+        "head": 0.021922441199421883
+      }
+    },
+    "gradient_measurement": "unclipped, before accumulation scaling; once per epoch, same for controls",
+    "rect": [
+      191,
+      261,
+      342,
+      454
+    ],
+    "requested_area": 0.1113731920520792,
+    "actual_area": 0.11117172241210938,
+    "fill_rgb": 0,
+    "attempts": 1,
+    "skipped": false,
+    "reason": null,
+    "positive": 757,
+    "negative": 88,
+    "ignore": 179,
+    "augmented_terms": {
+      "occ": 0.08528242260217667,
+      "keep": 0.0036006930749863386,
+      "keep_geo": 0.006831229664385319,
+      "keep_match": 0.000342639337759465
+    },
+    "augmentation_enabled": true
+  },
+  {
+    "epoch": 18,
+    "index": 0,
+    "pair_id": "train_G2_2ca94f336d55fd47fbdf2c32",
+    "clean_loss": 0.006389872170984745,
+    "clean_gradient_norms": {
+      "mvt": 0.07171344757080078,
+      "head": 7.656691551208496
+    },
+    "weighted_augmented_gradient_norms": {
+      "occ": {
+        "mvt": 0.057088833302259445,
+        "head": 0.1565994918346405
+      },
+      "keep": {
+        "mvt": 0.013438194990158081,
+        "head": 1.9279332263977267e-06
+      },
+      "keep_geo": {
+        "mvt": 0.08021795749664307,
+        "head": 7.584636688232422
+      },
+      "keep_match": {
+        "mvt": 0.0010650861077010632,
+        "head": 0.029317723587155342
+      }
+    },
+    "gradient_measurement": "unclipped, before accumulation scaling; once per epoch, same for controls",
+    "rect": [
+      252,
+      22,
+      456,
+      165
+    ],
+    "requested_area": 0.11162407545504438,
+    "actual_area": 0.1112823486328125,
+    "fill_rgb": 0,
+    "attempts": 1,
+    "skipped": false,
+    "reason": null,
+    "positive": 507,
+    "negative": 55,
+    "ignore": 462,
+    "augmented_terms": {
+      "occ": 0.08722293376922607,
+      "keep": 0.005489467177540064,
+      "keep_geo": 0.004325258079916239,
+      "keep_match": 0.00047435870510526
+    },
+    "augmentation_enabled": true
+  },
+  {
+    "epoch": 19,
+    "index": 0,
+    "pair_id": "train_G2_39618021edf76569f3677900",
+    "clean_loss": 0.003086416982114315,
+    "clean_gradient_norms": {
+      "mvt": 0.027052534744143486,
+      "head": 3.609484910964966
+    },
+    "weighted_augmented_gradient_norms": {
+      "occ": {
+        "mvt": 0.06334361433982849,
+        "head": 0.09108766913414001
+      },
+      "keep": {
+        "mvt": 0.0120247732847929,
+        "head": 2.478603619238129e-06
+      },
+      "keep_geo": {
+        "mvt": 0.025119448080658913,
+        "head": 2.967846632003784
+      },
+      "keep_match": {
+        "mvt": 0.0006856551044620574,
+        "head": 0.02914293110370636
+      }
+    },
+    "gradient_measurement": "unclipped, before accumulation scaling; once per epoch, same for controls",
+    "rect": [
+      273,
+      186,
+      498,
+      414
+    ],
+    "requested_area": 0.19487608651522934,
+    "actual_area": 0.1956939697265625,
+    "fill_rgb": 255,
+    "attempts": 1,
+    "skipped": false,
+    "reason": null,
+    "positive": 720,
+    "negative": 224,
+    "ignore": 80,
+    "augmented_terms": {
+      "occ": 0.08284442126750946,
+      "keep": 0.00381277222186327,
+      "keep_geo": 0.002828354947268963,
+      "keep_match": 0.0005084170261397958
+    },
+    "augmentation_enabled": true
+  },
+  {
+    "epoch": 20,
+    "index": 0,
+    "pair_id": "train_G1_e8ba24f485eb506acf286a0d",
+    "clean_loss": 0.004055526107549667,
+    "clean_gradient_norms": {
+      "mvt": 0.025599921122193336,
+      "head": 6.459839344024658
+    },
+    "weighted_augmented_gradient_norms": {
+      "occ": {
+        "mvt": 0.03769613429903984,
+        "head": 0.08321630209684372
+      },
+      "keep": {
+        "mvt": 0.017549671232700348,
+        "head": 1.966456920854398e-06
+      },
+      "keep_geo": {
+        "mvt": 0.049107108265161514,
+        "head": 12.544402122497559
+      },
+      "keep_match": {
+        "mvt": 0.0003161474596709013,
+        "head": 0.030808210372924805
+      }
+    },
+    "gradient_measurement": "unclipped, before accumulation scaling; once per epoch, same for controls",
+    "rect": [
+      23,
+      211,
+      220,
+      471
+    ],
+    "requested_area": 0.19498901559299675,
+    "actual_area": 0.1953887939453125,
+    "fill_rgb": 255,
+    "attempts": 1,
+    "skipped": false,
+    "reason": null,
+    "positive": 255,
+    "negative": 140,
+    "ignore": 629,
+    "augmented_terms": {
+      "occ": 0.08000151813030243,
+      "keep": 0.005206616595387459,
+      "keep_geo": 0.004990826826542616,
+      "keep_match": 0.00042011059122160077
+    },
+    "augmentation_enabled": true
+  },
+  {
+    "epoch": 21,
+    "index": 0,
+    "pair_id": "train_G2_def63855f62742689aa3e61e",
+    "clean_loss": 0.002059072256088257,
+    "clean_gradient_norms": {
+      "mvt": 0.01669207215309143,
+      "head": 2.8826653957366943
+    },
+    "weighted_augmented_gradient_norms": {
+      "occ": {
+        "mvt": 0.086348757147789,
+        "head": 0.08301014453172684
+      },
+      "keep": {
+        "mvt": 0.006406942382454872,
+        "head": 3.290929726063041e-06
+      },
+      "keep_geo": {
+        "mvt": 0.01126441452652216,
+        "head": 2.1209230422973633
+      },
+      "keep_match": {
+        "mvt": 0.0011564572341740131,
+        "head": 0.032336700707674026
+      }
+    },
+    "gradient_measurement": "unclipped, before accumulation scaling; once per epoch, same for controls",
+    "rect": [
+      61,
+      281,
+      291,
+      476
+    ],
+    "requested_area": 0.17102838284219066,
+    "actual_area": 0.17108917236328125,
+    "fill_rgb": 0,
+    "attempts": 1,
+    "skipped": false,
+    "reason": null,
+    "positive": 724,
+    "negative": 234,
+    "ignore": 66,
+    "augmented_terms": {
+      "occ": 0.07843225449323654,
+      "keep": 0.0020201923325657845,
+      "keep_geo": 0.0008907394367270172,
+      "keep_match": 0.0005238045123405755
+    },
+    "augmentation_enabled": true
+  },
+  {
+    "epoch": 22,
+    "index": 0,
+    "pair_id": "train_G1_aac6ebd7438fe91733c81aa1",
+    "clean_loss": 0.002074602758511901,
+    "clean_gradient_norms": {
+      "mvt": 0.00876177940517664,
+      "head": 1.2867496013641357
+    },
+    "weighted_augmented_gradient_norms": {
+      "occ": {
+        "mvt": 0.06723453849554062,
+        "head": 0.09689033776521683
+      },
+      "keep": {
+        "mvt": 0.02046450972557068,
+        "head": 1.960455847438425e-06
+      },
+      "keep_geo": {
+        "mvt": 0.02080361172556877,
+        "head": 2.6074838638305664
+      },
+      "keep_match": {
+        "mvt": 0.0010019635083153844,
+        "head": 0.03657831996679306
+      }
+    },
+    "gradient_measurement": "unclipped, before accumulation scaling; once per epoch, same for controls",
+    "rect": [
+      274,
+      33,
+      453,
+      231
+    ],
+    "requested_area": 0.1356003122775144,
+    "actual_area": 0.13520050048828125,
+    "fill_rgb": 0,
+    "attempts": 1,
+    "skipped": false,
+    "reason": null,
+    "positive": 540,
+    "negative": 107,
+    "ignore": 377,
+    "augmented_terms": {
+      "occ": 0.07626846432685852,
+      "keep": 0.005809579975903034,
+      "keep_geo": 0.0017518842360004783,
+      "keep_match": 0.0005619997391477227
+    },
+    "augmentation_enabled": true
+  },
+  {
+    "epoch": 23,
+    "index": 0,
+    "pair_id": "train_G2_fdc4d3b7e702609abd7f07bf",
+    "clean_loss": 0.0028342825826257467,
+    "clean_gradient_norms": {
+      "mvt": 0.027892280369997025,
+      "head": 2.277808666229248
+    },
+    "weighted_augmented_gradient_norms": {
+      "occ": {
+        "mvt": 0.11613039672374725,
+        "head": 0.07903609424829483
+      },
+      "keep": {
+        "mvt": 0.024745281785726547,
+        "head": 5.3310850489651784e-06
+      },
+      "keep_geo": {
+        "mvt": 0.13044454157352448,
+        "head": 8.84960651397705
+      },
+      "keep_match": {
+        "mvt": 0.0005796511541120708,
+        "head": 0.025685535743832588
+      }
+    },
+    "gradient_measurement": "unclipped, before accumulation scaling; once per epoch, same for controls",
+    "rect": [
+      212,
+      128,
+      437,
+      320
+    ],
+    "requested_area": 0.16529319001301368,
+    "actual_area": 0.164794921875,
+    "fill_rgb": 255,
+    "attempts": 1,
+    "skipped": false,
+    "reason": null,
+    "positive": 448,
+    "negative": 443,
+    "ignore": 133,
+    "augmented_terms": {
+      "occ": 0.07889632880687714,
+      "keep": 0.00468661542981863,
+      "keep_geo": 0.008088970556855202,
+      "keep_match": 0.00041291589150205255
+    },
+    "augmentation_enabled": true
+  },
+  {
+    "epoch": 24,
+    "index": 0,
+    "pair_id": "train_G2_706fd254d70dc5b90cf8fc19",
+    "clean_loss": 0.0021998288575559855,
+    "clean_gradient_norms": {
+      "mvt": 0.020353587344288826,
+      "head": 1.862338900566101
+    },
+    "weighted_augmented_gradient_norms": {
+      "occ": {
+        "mvt": 0.12709049880504608,
+        "head": 0.05334513634443283
+      },
+      "keep": {
+        "mvt": 0.009133564308285713,
+        "head": 4.063022970512975e-06
+      },
+      "keep_geo": {
+        "mvt": 0.07311148941516876,
+        "head": 4.422146797180176
+      },
+      "keep_match": {
+        "mvt": 0.0009634817251935601,
+        "head": 0.02461538277566433
+      }
+    },
+    "gradient_measurement": "unclipped, before accumulation scaling; once per epoch, same for controls",
+    "rect": [
+      260,
+      141,
+      406,
+      317
+    ],
+    "requested_area": 0.09809054099116331,
+    "actual_area": 0.0980224609375,
+    "fill_rgb": 0,
+    "attempts": 1,
+    "skipped": false,
+    "reason": null,
+    "positive": 731,
+    "negative": 168,
+    "ignore": 125,
+    "augmented_terms": {
+      "occ": 0.0666748583316803,
+      "keep": 0.003729724558070302,
+      "keep_geo": 0.003986479714512825,
+      "keep_match": 0.000457726011518389
+    },
+    "augmentation_enabled": true
+  },
+  {
+    "epoch": 25,
+    "index": 0,
+    "pair_id": "train_G0_0867abcbb9926834d1e0ecbf",
+    "clean_loss": 0.000919073005206883,
+    "clean_gradient_norms": {
+      "mvt": 0.005826827138662338,
+      "head": 1.2532789707183838
+    },
+    "weighted_augmented_gradient_norms": {
+      "occ": {
+        "mvt": 0.044613271951675415,
+        "head": 0.10585962235927582
+      },
+      "keep": {
+        "mvt": 0.023259643465280533,
+        "head": 1.7046276070686872e-06
+      },
+      "keep_geo": {
+        "mvt": 0.007361994590610266,
+        "head": 1.1324998140335083
+      },
+      "keep_match": {
+        "mvt": 0.0004164217389188707,
+        "head": 0.024651706218719482
+      }
+    },
+    "gradient_measurement": "unclipped, before accumulation scaling; once per epoch, same for controls",
+    "rect": [
+      15,
+      123,
+      148,
+      350
+    ],
+    "requested_area": 0.11543236378155382,
+    "actual_area": 0.11516952514648438,
+    "fill_rgb": 0,
+    "attempts": 1,
+    "skipped": false,
+    "reason": null,
+    "positive": 756,
+    "negative": 91,
+    "ignore": 177,
+    "augmented_terms": {
+      "occ": 0.08209310472011566,
+      "keep": 0.0031411873642355204,
+      "keep_geo": 0.0003327905433252454,
+      "keep_match": 0.0003628223203122616
+    },
+    "augmentation_enabled": true
+  },
+  {
+    "epoch": 26,
+    "index": 0,
+    "pair_id": "train_G3_8994689ba9d36bc854671eea",
+    "clean_loss": 0.00266149896197021,
+    "clean_gradient_norms": {
+      "mvt": 0.032344721257686615,
+      "head": 3.2535135746002197
+    },
+    "weighted_augmented_gradient_norms": {
+      "occ": {
+        "mvt": 0.17023682594299316,
+        "head": 0.09536169469356537
+      },
+      "keep": {
+        "mvt": 0.042063407599925995,
+        "head": 3.987576292274753e-06
+      },
+      "keep_geo": {
+        "mvt": 0.11931566894054413,
+        "head": 2.8349826335906982
+      },
+      "keep_match": {
+        "mvt": 0.0018702911911532283,
+        "head": 0.02864711545407772
+      }
+    },
+    "gradient_measurement": "unclipped, before accumulation scaling; once per epoch, same for controls",
+    "rect": [
+      402,
+      202,
+      512,
+      351
+    ],
+    "requested_area": 0.06260571351807155,
+    "actual_area": 0.06252288818359375,
+    "fill_rgb": 255,
+    "attempts": 1,
+    "skipped": false,
+    "reason": null,
+    "positive": 274,
+    "negative": 69,
+    "ignore": 681,
+    "augmented_terms": {
+      "occ": 0.07724063843488693,
+      "keep": 0.004995557013899088,
+      "keep_geo": 0.004071102477610111,
+      "keep_match": 0.0002688563836272806
+    },
+    "augmentation_enabled": true
+  },
+  {
+    "epoch": 27,
+    "index": 0,
+    "pair_id": "train_G3_9d99a8127b3c290c19699d76",
+    "clean_loss": 0.0077640642412006855,
+    "clean_gradient_norms": {
+      "mvt": 0.03788376227021217,
+      "head": 12.540971755981445
+    },
+    "weighted_augmented_gradient_norms": {
+      "occ": {
+        "mvt": 0.048516884446144104,
+        "head": 0.09682251513004303
+      },
+      "keep": {
+        "mvt": 0.018244557082653046,
+        "head": 1.6609795920885517e-06
+      },
+      "keep_geo": {
+        "mvt": 0.034001048654317856,
+        "head": 13.723021507263184
+      },
+      "keep_match": {
+        "mvt": 0.001216448494233191,
+        "head": 0.029736647382378578
+      }
+    },
+    "gradient_measurement": "unclipped, before accumulation scaling; once per epoch, same for controls",
+    "rect": [
+      273,
+      112,
+      453,
+      324
+    ],
+    "requested_area": 0.14576017197298802,
+    "actual_area": 0.14556884765625,
+    "fill_rgb": 0,
+    "attempts": 1,
+    "skipped": false,
+    "reason": null,
+    "positive": 366,
+    "negative": 44,
+    "ignore": 614,
+    "augmented_terms": {
+      "occ": 0.0802287757396698,
+      "keep": 0.007784613873809576,
+      "keep_geo": 0.006199514959007502,
+      "keep_match": 0.00045480424887500703
+    },
+    "augmentation_enabled": true
+  },
+  {
+    "epoch": 28,
+    "index": 0,
+    "pair_id": "train_G2_57e2415bc87652455d579a0d",
+    "clean_loss": 0.0012974303681403399,
+    "clean_gradient_norms": {
+      "mvt": 0.024594217538833618,
+      "head": 1.7095582485198975
+    },
+    "weighted_augmented_gradient_norms": {
+      "occ": {
+        "mvt": 0.07011524587869644,
+        "head": 0.06649401783943176
+      },
+      "keep": {
+        "mvt": 0.012810805812478065,
+        "head": 2.5775557332963217e-06
+      },
+      "keep_geo": {
+        "mvt": 0.023506062105298042,
+        "head": 1.3746830224990845
+      },
+      "keep_match": {
+        "mvt": 0.0012068363139405847,
+        "head": 0.028509845957159996
+      }
+    },
+    "gradient_measurement": "unclipped, before accumulation scaling; once per epoch, same for controls",
+    "rect": [
+      189,
+      282,
+      439,
+      447
+    ],
+    "requested_area": 0.157228800850718,
+    "actual_area": 0.15735626220703125,
+    "fill_rgb": 255,
+    "attempts": 1,
+    "skipped": false,
+    "reason": null,
+    "positive": 709,
+    "negative": 187,
+    "ignore": 128,
+    "augmented_terms": {
+      "occ": 0.07339628040790558,
+      "keep": 0.003664106596261263,
+      "keep_geo": 0.0007432966958731413,
+      "keep_match": 0.0004360181628726423
+    },
+    "augmentation_enabled": true
+  },
+  {
+    "epoch": 29,
+    "index": 0,
+    "pair_id": "train_G1_b93e1fc73f8cf08e812de71d",
+    "clean_loss": 0.02459084242582321,
+    "clean_gradient_norms": {
+      "mvt": 0.143239825963974,
+      "head": 32.87218475341797
+    },
+    "weighted_augmented_gradient_norms": {
+      "occ": {
+        "mvt": 0.2058611512184143,
+        "head": 0.04396694526076317
+      },
+      "keep": {
+        "mvt": 0.02859705127775669,
+        "head": 2.953737293864833e-06
+      },
+      "keep_geo": {
+        "mvt": 0.4782322347164154,
+        "head": 30.16029930114746
+      },
+      "keep_match": {
+        "mvt": 0.004286675248295069,
+        "head": 0.0412769615650177
+      }
+    },
+    "gradient_measurement": "unclipped, before accumulation scaling; once per epoch, same for controls",
+    "rect": [
+      70,
+      391,
+      292,
+      512
+    ],
+    "requested_area": 0.10271063776249781,
+    "actual_area": 0.10247039794921875,
+    "fill_rgb": 0,
+    "attempts": 2,
+    "skipped": false,
+    "reason": null,
+    "positive": 208,
+    "negative": 62,
+    "ignore": 754,
+    "augmented_terms": {
+      "occ": 0.08914948254823685,
+      "keep": 0.004156941547989845,
+      "keep_geo": 0.021162336692214012,
+      "keep_match": 0.00035310530802235007
+    },
+    "augmentation_enabled": true
+  },
+  {
+    "epoch": 30,
+    "index": 0,
+    "pair_id": "train_G2_63a429ad385c6dcda88c2917",
+    "clean_loss": 0.004346803296357393,
+    "clean_gradient_norms": {
+      "mvt": 0.054773926734924316,
+      "head": 2.9969520568847656
+    },
+    "weighted_augmented_gradient_norms": {
+      "occ": {
+        "mvt": 0.13338017463684082,
+        "head": 0.07823048532009125
+      },
+      "keep": {
+        "mvt": 0.018711645156145096,
+        "head": 1.2691585652646609e-05
+      },
+      "keep_geo": {
+        "mvt": 0.00607293238863349,
+        "head": 0.507836639881134
+      },
+      "keep_match": {
+        "mvt": 0.00041233422234654427,
+        "head": 0.03224073722958565
+      }
+    },
+    "gradient_measurement": "unclipped, before accumulation scaling; once per epoch, same for controls",
+    "rect": [
+      174,
+      216,
+      398,
+      343
+    ],
+    "requested_area": 0.10891700907380812,
+    "actual_area": 0.1085205078125,
+    "fill_rgb": 255,
+    "attempts": 1,
+    "skipped": false,
+    "reason": null,
+    "positive": 192,
+    "negative": 551,
+    "ignore": 281,
+    "augmented_terms": {
+      "occ": 0.05714327096939087,
+      "keep": 0.0027367123402655125,
+      "keep_geo": 0.0003614367451518774,
+      "keep_match": 0.00038644150481559336
+    },
+    "augmentation_enabled": true
+  }
+]

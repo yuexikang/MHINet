@@ -104,11 +104,38 @@ def main():
     lines+=['','|模型|测试杭州P@3|测试杭州EPE|测试RGB P@3|测试RGB EPE|','|---|---:|---:|---:|---:|']
     for v,r in tests.items():
         h=r['hangzhou']['overall'];s=r['rgb']['overall'];lines.append(f'|{v}|{100*h["flow_p3"]:.2f}%|{h["epe"]:.3f}|{100*s["flow_p3"]:.2f}%|{s["epe"]:.3f}|')
+    if len(tests)==10:
+        lines+=['','独立测试复核：D01−D00在RGB P@3上提升23.51pp（配对源图bootstrap 95%区间21.91～25.16pp），杭州仅+0.12pp（52空间块bootstrap −0.36～+0.58pp）；没有证明杭州稳定收益。D11−D01杭州P@3下降15.49pp（−18.89～−11.80pp）。因此封存数据支持保留旧头并拒绝本轮新局部残差方案，不能把合成域提升推广为真实域提升。']
     lines+=['',f'已完成封存测试：{len(tests)}/10。'+('所有配置保持锁定，未依据测试回头调参。' if len(tests)==10 else '未全部完成前本报告为阶段稿。'),
         '','完整G组、边界、高置信错误、阈值前后精度/覆盖率及逐查询材料在sealed_test各模型目录。推理时延采用同一卡、batch=1、10次预热、30次测量；参数统计包含模型注册但D16路径未执行的金字塔参数，额外坐标头另计，不能混作执行参数量。']
+    lines+=['','## 推理开销与训练成本','','|模型|同卡中位数(ms)|P95(ms)|注册参数(M)|额外坐标头(M)|','|---|---:|---:|---:|---:|']
+    for v in tests:
+        cost=read(ROOT/'sealed_test'/v/'latency.json')
+        lines.append(f'|{v}|{cost["median_ms"]:.2f}|{cost["p95_ms"]:.2f}|{cost["registered_parameters"]/1e6:.3f}|{cost["extra_coordinate_parameters"]/1e6:.3f}|')
+    lines+=['','B0/N2/E1/E2逐步样本顺序与增强元数据7620步全部一致。每组150次额外autograd.grad梯度探针计入实际时间，未单独计时，不能把全部时间差归因于损失计算。详见budget_comparison.json。',
+        '','|新训练组|实际总时间(s)|训练前向|更新|','|---|---:|---:|---:|']
+    for v in ('E1','E2','D00','D01','D10','D11'):
+        folder=ROOT/'ablation'/v if v.startswith('E') else ROOT/'decoder'/f'{v}_seed42'
+        status=read(folder/'status.json')
+        lines.append(f'|{v}|{status["wall_seconds"]:.1f}|{status["train_forwards"]}|{status["optimizer_updates"]}|')
     (output/'FINAL_REPORT.md').write_text('\n'.join(lines)+'\n')
+    if len(tests)==10:
+        u=tests['U0'];h=u['hangzhou']['overall'];rgb=u['rgb']['overall']
+        one=['# D16 Flow0：最终技术选择（一页）','',
+            '**固定U0第30轮，继续使用原MatchEmbeddingDecoder；本轮不采用局部3×3＋残差头，不加入黑白遮挡Occ训练。进入后续模块任务。**','',
+            '1. **定位方案**：六组新训练、固定30轮的预登记消融没有产生合格新候选。新残差头在杭州P@3约47%，旧头约68%；不因局部EPE或合成域收益而替换工程基线。',
+            '2. **精确监督**：旧头混入RGB512后，开发RGB P@3从72.64%升至95.13%，EPE从2.55降至1.11px；杭州P@3从68.83%降至68.40%。证明本配置的合成域收益，未证明杭州迁移收益。',
+            '3. **增强正负归因**：E1只Keep即可取得N2的101%平均EPE改善，不能把该收益归给Occ。E1与N2 P@3相差0.94pp，不满足预登记追加分解条件，Geo与分类/Mat各自贡献未证实。',
+            '4. **拒配能力**：E2单独Occ在独立工作点召回81.77%，清洁/增强正点误拒绝0.54%/0.72%；说明共享Dustbin并非必然无效。但清洁P@3比B0下降2.60pp，拒配与定位没有同时达标，因此不部署、不拼头。U0的Matchability只保留分数，无合格遮挡阈值。',
+            f'5. **封存测试**：U0杭州P@3={100*h["flow_p3"]:.2f}%，EPE={h["epe"]:.2f}px；独立FLAIR/WHU合成P@3={100*rgb["flow_p3"]:.2f}%，EPE={rgb["epe"]:.2f}px。测试未参与选择。十组测试全量、G组及配对区间均公开；不据测试重新选模。',
+            '6. **结论边界**：只有AB间H。杭州是近似H参考一致性，RGB是精确合成定位，黑白矩形是人工负例。不能声称自然遮挡检测、独立人工点像素精度或普适最优。无合格开发候选，按计划跳过多seed确认；单seed结果不冒充三seed结论。','',
+            '**后续接口**：输入[B,2,3,512,512]，输出32×32的flow16_target_norm、flow16_norm、flow16_matchability、flow16_valid；align_corners=False，像素坐标=(norm+1)×256−0.5。valid是数值/边界检查，不是遮挡判定。D8/D2/QRRU保持原状。','',
+            '**权重**：`outputs/d16_local_occlusion/U0/latest.pt`（epoch30）＋配置指定的冻结DINO；加载入口与坐标协议见final_model.json。运行成本见完整报告。','',
+            '**停止条件已触发**：不增加Dustbin网络、遮挡形状或更细特征来挽救本轮负结果。完整对照与来源修正见FINAL_REPORT.md。']
+        (output/'ONE_PAGE.md').write_text('\n'.join(one)+'\n')
     write(output/'final_model.json',dict(variant='U0',epoch=30,checkpoint=str(OLD/'U0/latest.pt'),runtime=read(Path('mhinet/v2/local_occlusion/config.json'))['runtime'],
         loader='mhinet.v2.final_round.final_test.load_model("U0")',input_shape=[1,2,3,512,512],query_resolution=[32,32],align_corners=False,
+        output_fields={'flow16_target_norm':'B x 2 x 32 x 32 normalized target xy','flow16_norm':'normalized target minus source grid','flow16_matchability':'B x 1 x 32 x 32 score','flow16_valid':'finite in-bounds target and finite probability in [0,1]; NOT a learned occlusion rejection'},
         coordinate_units='normalized xy, pixel=(normalized+1)*256-0.5',error_units='original 512 image pixels',
         validity='Uncalibrated reliability score only; artificial-occlusion deployment gate FAILED',
         diagnostic_threshold=read(ROOT/'calibration/U0/threshold.json')['threshold'],deployment_rejection_threshold=None,

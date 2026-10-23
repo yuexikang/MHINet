@@ -1,0 +1,38 @@
+{
+  "B0": {
+    "steps": 7620,
+    "order_and_augmentation_metadata_mismatches": {},
+    "train_forwards": 15240,
+    "updates": 1920,
+    "wall_seconds": 1009.252848148346,
+    "gradient_probe_calls": 150,
+    "gradient_overhead_note": "150 additional autograd.grad calls per run; wall time includes them. Probe-only wall seconds were not separately instrumented."
+  },
+  "N2": {
+    "steps": 7620,
+    "order_and_augmentation_metadata_mismatches": {},
+    "train_forwards": 15240,
+    "updates": 1920,
+    "wall_seconds": 1043.2267682552338,
+    "gradient_probe_calls": 150,
+    "gradient_overhead_note": "150 additional autograd.grad calls per run; wall time includes them. Probe-only wall seconds were not separately instrumented."
+  },
+  "E1": {
+    "steps": 7620,
+    "order_and_augmentation_metadata_mismatches": {},
+    "train_forwards": 15240,
+    "updates": 1920,
+    "wall_seconds": 1041.6677861213684,
+    "gradient_probe_calls": 150,
+    "gradient_overhead_note": "150 additional autograd.grad calls per run; wall time includes them. Probe-only wall seconds were not separately instrumented."
+  },
+  "E2": {
+    "steps": 7620,
+    "order_and_augmentation_metadata_mismatches": {},
+    "train_forwards": 15240,
+    "updates": 1920,
+    "wall_seconds": 1046.3066618442535,
+    "gradient_probe_calls": 150,
+    "gradient_overhead_note": "150 additional autograd.grad calls per run; wall time includes them. Probe-only wall seconds were not separately instrumented."
+  }
+}

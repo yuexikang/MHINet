@@ -1,0 +1,17 @@
+{
+  "variant": "D00",
+  "seed": 42,
+  "epochs": 30,
+  "learning_rate": 5e-05,
+  "min_lr": 1e-06,
+  "accumulation": 4,
+  "weight_decay": 0.01,
+  "baseline": "outputs/d16_local_occlusion/B0/latest.pt",
+  "baseline_epoch": 30,
+  "selection": "outputs/d16_final_round/selection.json",
+  "synthetic": false,
+  "coordinate": "legacy_decoder",
+  "trainable_parameters": 2954242,
+  "matchability": "fixed B0 original decoder",
+  "geo": "existing robust Geo, weak H dead-zone retained; mat/cls weights zero"
+}

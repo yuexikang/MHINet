@@ -1,0 +1,32 @@
+{
+  "variant": "U0",
+  "epoch": 30,
+  "checkpoint": "outputs/d16_local_occlusion/U0/latest.pt",
+  "runtime": "/home/disk1/MHINet/configs/mhi_v2/runtime.rgb512.nvme.server.json",
+  "loader": "mhinet.v2.final_round.final_test.load_model(\"U0\")",
+  "input_shape": [
+    1,
+    2,
+    3,
+    512,
+    512
+  ],
+  "query_resolution": [
+    32,
+    32
+  ],
+  "align_corners": false,
+  "output_fields": {
+    "flow16_target_norm": "B x 2 x 32 x 32 normalized target xy",
+    "flow16_norm": "normalized target minus source grid",
+    "flow16_matchability": "B x 1 x 32 x 32 score",
+    "flow16_valid": "finite in-bounds target and finite probability in [0,1]; NOT a learned occlusion rejection"
+  },
+  "coordinate_units": "normalized xy, pixel=(normalized+1)*256-0.5",
+  "error_units": "original 512 image pixels",
+  "validity": "Uncalibrated reliability score only; artificial-occlusion deployment gate FAILED",
+  "diagnostic_threshold": 0.0002735852322075516,
+  "deployment_rejection_threshold": null,
+  "scope": "DINO -> MVT -> D16 Flow0; D8/D2/QRRU unchanged",
+  "decision": "outputs/d16_final_round/decision.json"
+}

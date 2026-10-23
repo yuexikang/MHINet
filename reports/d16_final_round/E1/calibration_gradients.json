@@ -1,0 +1,1605 @@
+{
+  "mode": "replayed at epoch30 eval-mode, weighted terms, no optimizer step; hypothetical disabled terms also shown",
+  "pairs": [
+    {
+      "pair_id": "train_G0_062a3c3e735b885281860c8e",
+      "gradient_norms": {
+        "clean": {
+          "mvt": 0.031038768589496613,
+          "coordinate_decoder": 0.4919447898864746,
+          "no_match_logit": 1.6133095414261334e-05,
+          "no_match_logit_signed": 1.6133095414261334e-05
+        },
+        "occ": {
+          "mvt": 0.01932654157280922,
+          "coordinate_decoder": 0.01603606343269348,
+          "no_match_logit": 0.00999818742275238,
+          "no_match_logit_signed": -0.00999818742275238
+        },
+        "keep": {
+          "mvt": 0.0019541545771062374,
+          "coordinate_decoder": 0.0,
+          "no_match_logit": 1.8776943306875182e-06,
+          "no_match_logit_signed": 1.8776943306875182e-06
+        },
+        "keep_geo": {
+          "mvt": 0.001715156133286655,
+          "coordinate_decoder": 0.5217833518981934,
+          "no_match_logit": 3.2790649129310623e-07,
+          "no_match_logit_signed": 3.2790649129310623e-07
+        },
+        "keep_match": {
+          "mvt": 5.135703418090998e-07,
+          "coordinate_decoder": 3.6390440072864294e-05,
+          "no_match_logit": 8.491768399565558e-10,
+          "no_match_logit_signed": 8.491768399565558e-10
+        }
+      },
+      "rect": [
+        283,
+        13,
+        454,
+        109
+      ],
+      "requested_area": 0.06273136307697753,
+      "actual_area": 0.0626220703125,
+      "fill_rgb": 0,
+      "attempts": 1,
+      "skipped": false,
+      "reason": null,
+      "positive": 828,
+      "negative": 50,
+      "ignore": 146
+    },
+    {
+      "pair_id": "train_G0_0caa92c45d107da8c39284d0",
+      "gradient_norms": {
+        "clean": {
+          "mvt": 0.10561085492372513,
+          "coordinate_decoder": 5.694441318511963,
+          "no_match_logit": 7.130984158720821e-05,
+          "no_match_logit_signed": 7.130984158720821e-05
+        },
+        "occ": {
+          "mvt": 0.030984019860625267,
+          "coordinate_decoder": 0.06255967170000076,
+          "no_match_logit": 0.009999046102166176,
+          "no_match_logit_signed": -0.009999046102166176
+        },
+        "keep": {
+          "mvt": 0.00898425281047821,
+          "coordinate_decoder": 0.0,
+          "no_match_logit": 2.3655240966036217e-06,
+          "no_match_logit_signed": 2.3655240966036217e-06
+        },
+        "keep_geo": {
+          "mvt": 0.08136053383350372,
+          "coordinate_decoder": 7.422924041748047,
+          "no_match_logit": 6.917405698914081e-05,
+          "no_match_logit_signed": 6.917405698914081e-05
+        },
+        "keep_match": {
+          "mvt": 1.4525872984449961e-06,
+          "coordinate_decoder": 4.416025331011042e-05,
+          "no_match_logit": 1.2771911306330708e-09,
+          "no_match_logit_signed": 1.2771911306330708e-09
+        }
+      },
+      "rect": [
+        254,
+        50,
+        466,
+        157
+      ],
+      "requested_area": 0.08686658320311882,
+      "actual_area": 0.0865325927734375,
+      "fill_rgb": 0,
+      "attempts": 1,
+      "skipped": false,
+      "reason": null,
+      "positive": 780,
+      "negative": 55,
+      "ignore": 189
+    },
+    {
+      "pair_id": "train_G0_7fe4ad9493ccdfff8e234c9e",
+      "gradient_norms": {
+        "clean": {
+          "mvt": 0.18927332758903503,
+          "coordinate_decoder": 1.3832449913024902,
+          "no_match_logit": 1.011364656733349e-05,
+          "no_match_logit_signed": 1.011364656733349e-05
+        },
+        "occ": {
+          "mvt": 0.056181661784648895,
+          "coordinate_decoder": 0.08648426085710526,
+          "no_match_logit": 0.009999975562095642,
+          "no_match_logit_signed": -0.009999975562095642
+        },
+        "keep": {
+          "mvt": 0.015150214545428753,
+          "coordinate_decoder": 0.0,
+          "no_match_logit": 1.9733624867512845e-06,
+          "no_match_logit_signed": 1.9733624867512845e-06
+        },
+        "keep_geo": {
+          "mvt": 0.013475230894982815,
+          "coordinate_decoder": 1.3772945404052734,
+          "no_match_logit": 8.855811756802723e-06,
+          "no_match_logit_signed": -8.855811756802723e-06
+        },
+        "keep_match": {
+          "mvt": 5.86207818287221e-07,
+          "coordinate_decoder": 3.1344905437435955e-05,
+          "no_match_logit": 8.190200739832676e-10,
+          "no_match_logit_signed": 8.190200739832676e-10
+        }
+      },
+      "rect": [
+        81,
+        287,
+        274,
+        409
+      ],
+      "requested_area": 0.09037584986239873,
+      "actual_area": 0.08982086181640625,
+      "fill_rgb": 0,
+      "attempts": 1,
+      "skipped": false,
+      "reason": null,
+      "positive": 774,
+      "negative": 60,
+      "ignore": 190
+    },
+    {
+      "pair_id": "train_G0_e7a3ff9306a8673c7891453e",
+      "gradient_norms": {
+        "clean": {
+          "mvt": 0.053388580679893494,
+          "coordinate_decoder": 0.5769238471984863,
+          "no_match_logit": 1.3148242942406796e-05,
+          "no_match_logit_signed": 1.3148242942406796e-05
+        },
+        "occ": {
+          "mvt": 0.01466344017535448,
+          "coordinate_decoder": 0.07010838389396667,
+          "no_match_logit": 0.009999429807066917,
+          "no_match_logit_signed": -0.009999429807066917
+        },
+        "keep": {
+          "mvt": 0.0036701380740851164,
+          "coordinate_decoder": 0.0,
+          "no_match_logit": 1.8003190689341864e-06,
+          "no_match_logit_signed": 1.8003190689341864e-06
+        },
+        "keep_geo": {
+          "mvt": 0.002594828139990568,
+          "coordinate_decoder": 0.6658777594566345,
+          "no_match_logit": 4.91355785925407e-06,
+          "no_match_logit_signed": -4.91355785925407e-06
+        },
+        "keep_match": {
+          "mvt": 5.178454784982023e-07,
+          "coordinate_decoder": 4.0964281652122736e-05,
+          "no_match_logit": 8.673640694567553e-10,
+          "no_match_logit_signed": 8.673640694567553e-10
+        }
+      },
+      "rect": [
+        39,
+        0,
+        201,
+        303
+      ],
+      "requested_area": 0.18664237211677132,
+      "actual_area": 0.18724822998046875,
+      "fill_rgb": 255,
+      "attempts": 1,
+      "skipped": false,
+      "reason": null,
+      "positive": 691,
+      "negative": 153,
+      "ignore": 180
+    },
+    {
+      "pair_id": "train_G0_f9978e28cf2d4309cedb397b",
+      "gradient_norms": {
+        "clean": {
+          "mvt": 0.4818052351474762,
+          "coordinate_decoder": 13.182662963867188,
+          "no_match_logit": 9.555820724926889e-06,
+          "no_match_logit_signed": -9.555820724926889e-06
+        },
+        "occ": {
+          "mvt": 0.07458988577127457,
+          "coordinate_decoder": 0.047999680042266846,
+          "no_match_logit": 0.009999291971325874,
+          "no_match_logit_signed": -0.009999291971325874
+        },
+        "keep": {
+          "mvt": 0.04206738993525505,
+          "coordinate_decoder": 0.0,
+          "no_match_logit": 2.445574864395894e-06,
+          "no_match_logit_signed": 2.445574864395894e-06
+        },
+        "keep_geo": {
+          "mvt": 0.19616751372814178,
+          "coordinate_decoder": 17.006141662597656,
+          "no_match_logit": 4.853455538977869e-05,
+          "no_match_logit_signed": -4.853455538977869e-05
+        },
+        "keep_match": {
+          "mvt": 1.3383915984377381e-06,
+          "coordinate_decoder": 3.2140953408088535e-05,
+          "no_match_logit": 1.0650897941388848e-09,
+          "no_match_logit_signed": 1.0650897941388848e-09
+        }
+      },
+      "rect": [
+        200,
+        0,
+        327,
+        253
+      ],
+      "requested_area": 0.12291732280559368,
+      "actual_area": 0.12257003784179688,
+      "fill_rgb": 255,
+      "attempts": 1,
+      "skipped": false,
+      "reason": null,
+      "positive": 765,
+      "negative": 98,
+      "ignore": 161
+    },
+    {
+      "pair_id": "train_G0_1117fcc2fdee083977c285b6",
+      "gradient_norms": {
+        "clean": {
+          "mvt": 0.040144700556993484,
+          "coordinate_decoder": 0.579593300819397,
+          "no_match_logit": 1.4315253793029115e-05,
+          "no_match_logit_signed": 1.4315253793029115e-05
+        },
+        "occ": {
+          "mvt": 0.012466208077967167,
+          "coordinate_decoder": 0.044909700751304626,
+          "no_match_logit": 0.009999050758779049,
+          "no_match_logit_signed": -0.009999050758779049
+        },
+        "keep": {
+          "mvt": 0.001914464170113206,
+          "coordinate_decoder": 0.0,
+          "no_match_logit": 1.8583650671644136e-06,
+          "no_match_logit_signed": 1.8583650671644136e-06
+        },
+        "keep_geo": {
+          "mvt": 0.0011681562755256891,
+          "coordinate_decoder": 0.3771924376487732,
+          "no_match_logit": 3.197040427949105e-07,
+          "no_match_logit_signed": 3.197040427949105e-07
+        },
+        "keep_match": {
+          "mvt": 6.987527854107611e-07,
+          "coordinate_decoder": 4.1205319575965405e-05,
+          "no_match_logit": 9.295691438815368e-10,
+          "no_match_logit_signed": 9.295691438815368e-10
+        }
+      },
+      "rect": [
+        339,
+        241,
+        472,
+        496
+      ],
+      "requested_area": 0.1293348574498913,
+      "actual_area": 0.12937545776367188,
+      "fill_rgb": 255,
+      "attempts": 1,
+      "skipped": false,
+      "reason": null,
+      "positive": 747,
+      "negative": 98,
+      "ignore": 179
+    },
+    {
+      "pair_id": "train_G0_3de79d38e9317d7f248d7def",
+      "gradient_norms": {
+        "clean": {
+          "mvt": 0.058533184230327606,
+          "coordinate_decoder": 0.7065768837928772,
+          "no_match_logit": 1.8177601305069402e-05,
+          "no_match_logit_signed": 1.8177601305069402e-05
+        },
+        "occ": {
+          "mvt": 0.04370039701461792,
+          "coordinate_decoder": 0.036595385521650314,
+          "no_match_logit": 0.009999455884099007,
+          "no_match_logit_signed": -0.009999455884099007
+        },
+        "keep": {
+          "mvt": 0.004086919128894806,
+          "coordinate_decoder": 0.0,
+          "no_match_logit": 1.9751960280700587e-06,
+          "no_match_logit_signed": 1.9751960280700587e-06
+        },
+        "keep_geo": {
+          "mvt": 0.0017915054922923446,
+          "coordinate_decoder": 0.5743817687034607,
+          "no_match_logit": 2.6632517347024987e-06,
+          "no_match_logit_signed": -2.6632517347024987e-06
+        },
+        "keep_match": {
+          "mvt": 6.562774501617241e-07,
+          "coordinate_decoder": 3.9752423617755994e-05,
+          "no_match_logit": 9.38500388514285e-10,
+          "no_match_logit_signed": 9.38500388514285e-10
+        }
+      },
+      "rect": [
+        283,
+        340,
+        512,
+        512
+      ],
+      "requested_area": 0.1502169012638089,
+      "actual_area": 0.1502532958984375,
+      "fill_rgb": 0,
+      "attempts": 1,
+      "skipped": false,
+      "reason": null,
+      "positive": 760,
+      "negative": 117,
+      "ignore": 147
+    },
+    {
+      "pair_id": "train_G0_47ae7e742e54e0bf98097f52",
+      "gradient_norms": {
+        "clean": {
+          "mvt": 0.026616334915161133,
+          "coordinate_decoder": 0.5873192548751831,
+          "no_match_logit": 2.3747443265165202e-05,
+          "no_match_logit_signed": 2.3747443265165202e-05
+        },
+        "occ": {
+          "mvt": 0.017378689721226692,
+          "coordinate_decoder": 0.04504906386137009,
+          "no_match_logit": 0.009999037720263004,
+          "no_match_logit_signed": -0.009999037720263004
+        },
+        "keep": {
+          "mvt": 0.0021259787026792765,
+          "coordinate_decoder": 0.0,
+          "no_match_logit": 1.941520395121188e-06,
+          "no_match_logit_signed": 1.941520395121188e-06
+        },
+        "keep_geo": {
+          "mvt": 0.007089436519891024,
+          "coordinate_decoder": 1.0255153179168701,
+          "no_match_logit": 9.164667062577792e-06,
+          "no_match_logit_signed": 9.164667062577792e-06
+        },
+        "keep_match": {
+          "mvt": 8.582823625147284e-07,
+          "coordinate_decoder": 4.037624967168085e-05,
+          "no_match_logit": 9.541611944996475e-10,
+          "no_match_logit_signed": 9.541611944996475e-10
+        }
+      },
+      "rect": [
+        27,
+        272,
+        136,
+        447
+      ],
+      "requested_area": 0.07244596136834212,
+      "actual_area": 0.07276535034179688,
+      "fill_rgb": 0,
+      "attempts": 1,
+      "skipped": false,
+      "reason": null,
+      "positive": 796,
+      "negative": 54,
+      "ignore": 174
+    },
+    {
+      "pair_id": "train_G1_38567e3df3800495d9bff219",
+      "gradient_norms": {
+        "clean": {
+          "mvt": 0.270393043756485,
+          "coordinate_decoder": 9.099875450134277,
+          "no_match_logit": 2.4166738512576558e-05,
+          "no_match_logit_signed": 2.4166738512576558e-05
+        },
+        "occ": {
+          "mvt": 0.049724187701940536,
+          "coordinate_decoder": 0.0849057137966156,
+          "no_match_logit": 0.010000091977417469,
+          "no_match_logit_signed": -0.010000091977417469
+        },
+        "keep": {
+          "mvt": 0.027341123670339584,
+          "coordinate_decoder": 0.0,
+          "no_match_logit": 2.551304078224348e-06,
+          "no_match_logit_signed": 2.551304078224348e-06
+        },
+        "keep_geo": {
+          "mvt": 0.1646452695131302,
+          "coordinate_decoder": 12.878214836120605,
+          "no_match_logit": 2.7682126528816298e-06,
+          "no_match_logit_signed": -2.7682126528816298e-06
+        },
+        "keep_match": {
+          "mvt": 5.2657219384855125e-06,
+          "coordinate_decoder": 6.625788955716416e-05,
+          "no_match_logit": 2.795056186499778e-09,
+          "no_match_logit_signed": 2.795056186499778e-09
+        }
+      },
+      "rect": [
+        54,
+        273,
+        267,
+        392
+      ],
+      "requested_area": 0.09643285131739979,
+      "actual_area": 0.09669113159179688,
+      "fill_rgb": 0,
+      "attempts": 1,
+      "skipped": false,
+      "reason": null,
+      "positive": 709,
+      "negative": 73,
+      "ignore": 242
+    },
+    {
+      "pair_id": "train_G1_53c0a3b707135960e9fad1ba",
+      "gradient_norms": {
+        "clean": {
+          "mvt": 0.14375658333301544,
+          "coordinate_decoder": 9.427159309387207,
+          "no_match_logit": 0.00014638935681432486,
+          "no_match_logit_signed": 0.00014638935681432486
+        },
+        "occ": {
+          "mvt": 0.02434314228594303,
+          "coordinate_decoder": 0.07025430351495743,
+          "no_match_logit": 0.00999918021261692,
+          "no_match_logit_signed": -0.00999918021261692
+        },
+        "keep": {
+          "mvt": 0.005045787896960974,
+          "coordinate_decoder": 0.0,
+          "no_match_logit": 2.910968078140286e-06,
+          "no_match_logit_signed": 2.910968078140286e-06
+        },
+        "keep_geo": {
+          "mvt": 0.24761439859867096,
+          "coordinate_decoder": 11.969998359680176,
+          "no_match_logit": 0.00018847000319510698,
+          "no_match_logit_signed": 0.00018847000319510698
+        },
+        "keep_match": {
+          "mvt": 5.158165095053846e-06,
+          "coordinate_decoder": 9.856186079559848e-05,
+          "no_match_logit": 4.843020207090376e-09,
+          "no_match_logit_signed": 4.843020207090376e-09
+        }
+      },
+      "rect": [
+        94,
+        4,
+        234,
+        235
+      ],
+      "requested_area": 0.12372912226681533,
+      "actual_area": 0.1233673095703125,
+      "fill_rgb": 0,
+      "attempts": 1,
+      "skipped": false,
+      "reason": null,
+      "positive": 658,
+      "negative": 98,
+      "ignore": 268
+    },
+    {
+      "pair_id": "train_G1_5d93f123e8add02da20d4d50",
+      "gradient_norms": {
+        "clean": {
+          "mvt": 0.10086342692375183,
+          "coordinate_decoder": 3.164435863494873,
+          "no_match_logit": 5.8105010793951806e-06,
+          "no_match_logit_signed": 5.8105010793951806e-06
+        },
+        "occ": {
+          "mvt": 0.07121878117322922,
+          "coordinate_decoder": 0.07903462648391724,
+          "no_match_logit": 0.009999876841902733,
+          "no_match_logit_signed": -0.009999876841902733
+        },
+        "keep": {
+          "mvt": 0.008249462582170963,
+          "coordinate_decoder": 0.0,
+          "no_match_logit": 3.2384782571170945e-06,
+          "no_match_logit_signed": 3.2384782571170945e-06
+        },
+        "keep_geo": {
+          "mvt": 0.020353596657514572,
+          "coordinate_decoder": 3.219928741455078,
+          "no_match_logit": 2.517000393709168e-05,
+          "no_match_logit_signed": -2.517000393709168e-05
+        },
+        "keep_match": {
+          "mvt": 3.0540577427018434e-06,
+          "coordinate_decoder": 0.00016592330939602107,
+          "no_match_logit": 3.7360878835102085e-09,
+          "no_match_logit_signed": 3.7360878835102085e-09
+        }
+      },
+      "rect": [
+        250,
+        55,
+        412,
+        327
+      ],
+      "requested_area": 0.16815061620010674,
+      "actual_area": 0.1680908203125,
+      "fill_rgb": 0,
+      "attempts": 2,
+      "skipped": false,
+      "reason": null,
+      "positive": 315,
+      "negative": 16,
+      "ignore": 693
+    },
+    {
+      "pair_id": "train_G1_b2bab1f31d15fbe72c5f2a65",
+      "gradient_norms": {
+        "clean": {
+          "mvt": 0.05800223723053932,
+          "coordinate_decoder": 3.410562753677368,
+          "no_match_logit": 6.115132418926805e-05,
+          "no_match_logit_signed": 6.115132418926805e-05
+        },
+        "occ": {
+          "mvt": 0.05922955274581909,
+          "coordinate_decoder": 0.05033927410840988,
+          "no_match_logit": 0.009999336674809456,
+          "no_match_logit_signed": -0.009999336674809456
+        },
+        "keep": {
+          "mvt": 0.005858587101101875,
+          "coordinate_decoder": 0.0,
+          "no_match_logit": 3.2532816476305015e-06,
+          "no_match_logit_signed": 3.2532816476305015e-06
+        },
+        "keep_geo": {
+          "mvt": 0.04263197258114815,
+          "coordinate_decoder": 5.2614593505859375,
+          "no_match_logit": 4.877301398664713e-05,
+          "no_match_logit_signed": 4.877301398664713e-05
+        },
+        "keep_match": {
+          "mvt": 9.991650586016476e-06,
+          "coordinate_decoder": 0.0005046989535912871,
+          "no_match_logit": 1.120247627994786e-08,
+          "no_match_logit_signed": 1.120247627994786e-08
+        }
+      },
+      "rect": [
+        204,
+        33,
+        361,
+        334
+      ],
+      "requested_area": 0.1804550673216182,
+      "actual_area": 0.18027114868164062,
+      "fill_rgb": 0,
+      "attempts": 1,
+      "skipped": false,
+      "reason": null,
+      "positive": 266,
+      "negative": 140,
+      "ignore": 618
+    },
+    {
+      "pair_id": "train_G1_ea7656d25278827b3140e131",
+      "gradient_norms": {
+        "clean": {
+          "mvt": 0.486966609954834,
+          "coordinate_decoder": 10.555276870727539,
+          "no_match_logit": 2.282374771311879e-05,
+          "no_match_logit_signed": -2.282374771311879e-05
+        },
+        "occ": {
+          "mvt": 0.1225418820977211,
+          "coordinate_decoder": 0.01973091810941696,
+          "no_match_logit": 0.009999185800552368,
+          "no_match_logit_signed": -0.009999185800552368
+        },
+        "keep": {
+          "mvt": 0.02161453664302826,
+          "coordinate_decoder": 0.0,
+          "no_match_logit": 2.754297383944504e-06,
+          "no_match_logit_signed": 2.754297383944504e-06
+        },
+        "keep_geo": {
+          "mvt": 0.05528590455651283,
+          "coordinate_decoder": 5.625067710876465,
+          "no_match_logit": 1.2742451872327365e-05,
+          "no_match_logit_signed": -1.2742451872327365e-05
+        },
+        "keep_match": {
+          "mvt": 5.72592944081407e-06,
+          "coordinate_decoder": 0.00010450473928358406,
+          "no_match_logit": 4.07897449150596e-09,
+          "no_match_logit_signed": 4.07897449150596e-09
+        }
+      },
+      "rect": [
+        371,
+        397,
+        509,
+        512
+      ],
+      "requested_area": 0.06088683285789319,
+      "actual_area": 0.06053924560546875,
+      "fill_rgb": 0,
+      "attempts": 1,
+      "skipped": false,
+      "reason": null,
+      "positive": 717,
+      "negative": 42,
+      "ignore": 265
+    },
+    {
+      "pair_id": "train_G1_6985eef1c360fe8f8959b20e",
+      "gradient_norms": {
+        "clean": {
+          "mvt": 0.10935769975185394,
+          "coordinate_decoder": 7.966520309448242,
+          "no_match_logit": 0.00012457530829124153,
+          "no_match_logit_signed": 0.00012457530829124153
+        },
+        "occ": {
+          "mvt": 0.044207051396369934,
+          "coordinate_decoder": 0.06377265602350235,
+          "no_match_logit": 0.009999279864132404,
+          "no_match_logit_signed": -0.009999279864132404
+        },
+        "keep": {
+          "mvt": 0.0065287151373922825,
+          "coordinate_decoder": 0.0,
+          "no_match_logit": 2.6045552203868283e-06,
+          "no_match_logit_signed": 2.6045552203868283e-06
+        },
+        "keep_geo": {
+          "mvt": 0.18219013512134552,
+          "coordinate_decoder": 11.141109466552734,
+          "no_match_logit": 0.0001470202550990507,
+          "no_match_logit_signed": 0.0001470202550990507
+        },
+        "keep_match": {
+          "mvt": 5.4714068937755655e-06,
+          "coordinate_decoder": 0.00013671672786585987,
+          "no_match_logit": 4.099270256574528e-09,
+          "no_match_logit_signed": 4.099270256574528e-09
+        }
+      },
+      "rect": [
+        162,
+        283,
+        289,
+        472
+      ],
+      "requested_area": 0.0919844184987706,
+      "actual_area": 0.09156417846679688,
+      "fill_rgb": 255,
+      "attempts": 1,
+      "skipped": false,
+      "reason": null,
+      "positive": 743,
+      "negative": 66,
+      "ignore": 215
+    },
+    {
+      "pair_id": "train_G1_f07373847a21959f4467841a",
+      "gradient_norms": {
+        "clean": {
+          "mvt": 0.05373632535338402,
+          "coordinate_decoder": 5.059226989746094,
+          "no_match_logit": 7.195753278210759e-05,
+          "no_match_logit_signed": 7.195753278210759e-05
+        },
+        "occ": {
+          "mvt": 0.023596903309226036,
+          "coordinate_decoder": 0.08869598060846329,
+          "no_match_logit": 0.010000895708799362,
+          "no_match_logit_signed": -0.010000895708799362
+        },
+        "keep": {
+          "mvt": 0.004326103255152702,
+          "coordinate_decoder": 0.0,
+          "no_match_logit": 2.8043978090863675e-06,
+          "no_match_logit_signed": 2.8043978090863675e-06
+        },
+        "keep_geo": {
+          "mvt": 0.13317283987998962,
+          "coordinate_decoder": 9.485886573791504,
+          "no_match_logit": 0.00012602205970324576,
+          "no_match_logit_signed": 0.00012602205970324576
+        },
+        "keep_match": {
+          "mvt": 4.456136593944393e-06,
+          "coordinate_decoder": 0.00011239237937843427,
+          "no_match_logit": 4.197541425554618e-09,
+          "no_match_logit_signed": 4.197541425554618e-09
+        }
+      },
+      "rect": [
+        274,
+        102,
+        430,
+        411
+      ],
+      "requested_area": 0.18442353930069816,
+      "actual_area": 0.1838836669921875,
+      "fill_rgb": 0,
+      "attempts": 1,
+      "skipped": false,
+      "reason": null,
+      "positive": 586,
+      "negative": 150,
+      "ignore": 288
+    },
+    {
+      "pair_id": "train_G1_e8ba24f485eb506acf286a0d",
+      "gradient_norms": {
+        "clean": {
+          "mvt": 0.07371992617845535,
+          "coordinate_decoder": 3.899458169937134,
+          "no_match_logit": 8.569523743062746e-06,
+          "no_match_logit_signed": 8.569523743062746e-06
+        },
+        "occ": {
+          "mvt": 0.036458298563957214,
+          "coordinate_decoder": 0.056118082255125046,
+          "no_match_logit": 0.009999260306358337,
+          "no_match_logit_signed": -0.009999260306358337
+        },
+        "keep": {
+          "mvt": 0.0063886153511703014,
+          "coordinate_decoder": 0.0,
+          "no_match_logit": 2.9046632334939204e-06,
+          "no_match_logit_signed": 2.9046632334939204e-06
+        },
+        "keep_geo": {
+          "mvt": 0.01566215232014656,
+          "coordinate_decoder": 3.371868133544922,
+          "no_match_logit": 1.0436737284180708e-05,
+          "no_match_logit_signed": -1.0436737284180708e-05
+        },
+        "keep_match": {
+          "mvt": 4.701772468251875e-06,
+          "coordinate_decoder": 0.0002052409981843084,
+          "no_match_logit": 7.375943855691958e-09,
+          "no_match_logit_signed": 7.375943855691958e-09
+        }
+      },
+      "rect": [
+        0,
+        0,
+        174,
+        263
+      ],
+      "requested_area": 0.17480191613775886,
+      "actual_area": 0.17456817626953125,
+      "fill_rgb": 0,
+      "attempts": 1,
+      "skipped": false,
+      "reason": null,
+      "positive": 269,
+      "negative": 143,
+      "ignore": 612
+    },
+    {
+      "pair_id": "train_G2_aea5b44a89c11d19754272de",
+      "gradient_norms": {
+        "clean": {
+          "mvt": 0.05313245952129364,
+          "coordinate_decoder": 0.9146449565887451,
+          "no_match_logit": 9.034582762978971e-05,
+          "no_match_logit_signed": 9.034582762978971e-05
+        },
+        "occ": {
+          "mvt": 0.08585221320390701,
+          "coordinate_decoder": 0.08197935670614243,
+          "no_match_logit": 0.01000015065073967,
+          "no_match_logit_signed": -0.01000015065073967
+        },
+        "keep": {
+          "mvt": 0.013292963616549969,
+          "coordinate_decoder": 0.0,
+          "no_match_logit": 6.773633685952518e-06,
+          "no_match_logit_signed": 6.773633685952518e-06
+        },
+        "keep_geo": {
+          "mvt": 0.04284703731536865,
+          "coordinate_decoder": 2.5244429111480713,
+          "no_match_logit": 4.442536737769842e-05,
+          "no_match_logit_signed": -4.442536737769842e-05
+        },
+        "keep_match": {
+          "mvt": 3.409411874599755e-05,
+          "coordinate_decoder": 0.0007596705690957606,
+          "no_match_logit": 5.828353977221923e-08,
+          "no_match_logit_signed": 5.828353977221923e-08
+        }
+      },
+      "rect": [
+        140,
+        130,
+        348,
+        280
+      ],
+      "requested_area": 0.11884129435759785,
+      "actual_area": 0.1190185546875,
+      "fill_rgb": 255,
+      "attempts": 1,
+      "skipped": false,
+      "reason": null,
+      "positive": 439,
+      "negative": 370,
+      "ignore": 215
+    },
+    {
+      "pair_id": "train_G2_e7ed7df9176e82bb75fcdf03",
+      "gradient_norms": {
+        "clean": {
+          "mvt": 0.11313097923994064,
+          "coordinate_decoder": 4.430689334869385,
+          "no_match_logit": 2.339438651688397e-05,
+          "no_match_logit_signed": 2.339438651688397e-05
+        },
+        "occ": {
+          "mvt": 0.025059806182980537,
+          "coordinate_decoder": 0.023137055337429047,
+          "no_match_logit": 0.00999867171049118,
+          "no_match_logit_signed": -0.00999867171049118
+        },
+        "keep": {
+          "mvt": 0.010355434380471706,
+          "coordinate_decoder": 0.0,
+          "no_match_logit": 2.1476068923220737e-06,
+          "no_match_logit_signed": 2.1476068923220737e-06
+        },
+        "keep_geo": {
+          "mvt": 0.04184746369719505,
+          "coordinate_decoder": 5.290006160736084,
+          "no_match_logit": 2.6397343390272e-05,
+          "no_match_logit_signed": 2.6397343390272e-05
+        },
+        "keep_match": {
+          "mvt": 8.078548603407398e-07,
+          "coordinate_decoder": 2.9579639885923825e-05,
+          "no_match_logit": 8.412458507578435e-10,
+          "no_match_logit_signed": 8.412458507578435e-10
+        }
+      },
+      "rect": [
+        139,
+        14,
+        393,
+        159
+      ],
+      "requested_area": 0.14035956003922476,
+      "actual_area": 0.14049530029296875,
+      "fill_rgb": 0,
+      "attempts": 1,
+      "skipped": false,
+      "reason": null,
+      "positive": 472,
+      "negative": 77,
+      "ignore": 475
+    },
+    {
+      "pair_id": "train_G2_fadc7287bd58bf7025e1fb96",
+      "gradient_norms": {
+        "clean": {
+          "mvt": 0.03916557505726814,
+          "coordinate_decoder": 2.2965877056121826,
+          "no_match_logit": 5.373242311179638e-05,
+          "no_match_logit_signed": 5.373242311179638e-05
+        },
+        "occ": {
+          "mvt": 0.03620848432183266,
+          "coordinate_decoder": 0.09250541776418686,
+          "no_match_logit": 0.01000026986002922,
+          "no_match_logit_signed": -0.01000026986002922
+        },
+        "keep": {
+          "mvt": 0.005051381420344114,
+          "coordinate_decoder": 0.0,
+          "no_match_logit": 3.862424819089938e-06,
+          "no_match_logit_signed": 3.862424819089938e-06
+        },
+        "keep_geo": {
+          "mvt": 0.025399435311555862,
+          "coordinate_decoder": 1.9181987047195435,
+          "no_match_logit": 6.356021003739443e-06,
+          "no_match_logit_signed": -6.356021003739443e-06
+        },
+        "keep_match": {
+          "mvt": 1.1647614883258939e-05,
+          "coordinate_decoder": 0.0004176145885139704,
+          "no_match_logit": 1.7548035913250715e-08,
+          "no_match_logit_signed": 1.7548035913250715e-08
+        }
+      },
+      "rect": [
+        244,
+        239,
+        364,
+        433
+      ],
+      "requested_area": 0.08918692169820577,
+      "actual_area": 0.08880615234375,
+      "fill_rgb": 255,
+      "attempts": 1,
+      "skipped": false,
+      "reason": null,
+      "positive": 777,
+      "negative": 153,
+      "ignore": 94
+    },
+    {
+      "pair_id": "train_G2_f511e273b8f8ce2ae6f152f1",
+      "gradient_norms": {
+        "clean": {
+          "mvt": 0.09902861714363098,
+          "coordinate_decoder": 3.135715961456299,
+          "no_match_logit": 2.176284215238411e-05,
+          "no_match_logit_signed": 2.176284215238411e-05
+        },
+        "occ": {
+          "mvt": 0.045931607484817505,
+          "coordinate_decoder": 0.0574725940823555,
+          "no_match_logit": 0.009999770671129227,
+          "no_match_logit_signed": -0.009999770671129227
+        },
+        "keep": {
+          "mvt": 0.011302758008241653,
+          "coordinate_decoder": 0.0,
+          "no_match_logit": 2.1887512957619037e-06,
+          "no_match_logit_signed": 2.1887512957619037e-06
+        },
+        "keep_geo": {
+          "mvt": 0.02343774028122425,
+          "coordinate_decoder": 4.2193498611450195,
+          "no_match_logit": 1.3134556866134517e-05,
+          "no_match_logit_signed": 1.3134556866134517e-05
+        },
+        "keep_match": {
+          "mvt": 1.5395583830013493e-07,
+          "coordinate_decoder": 5.034205969423056e-06,
+          "no_match_logit": 1.363422569289341e-10,
+          "no_match_logit_signed": 1.363422569289341e-10
+        }
+      },
+      "rect": [
+        207,
+        204,
+        365,
+        512
+      ],
+      "requested_area": 0.1857564248521149,
+      "actual_area": 0.185638427734375,
+      "fill_rgb": 255,
+      "attempts": 1,
+      "skipped": false,
+      "reason": null,
+      "positive": 441,
+      "negative": 98,
+      "ignore": 485
+    },
+    {
+      "pair_id": "train_G2_0c89e2c83c69b8facdf8ac01",
+      "gradient_norms": {
+        "clean": {
+          "mvt": 0.5363082885742188,
+          "coordinate_decoder": 1.272181749343872,
+          "no_match_logit": 6.0964375734329224e-05,
+          "no_match_logit_signed": 6.0964375734329224e-05
+        },
+        "occ": {
+          "mvt": 0.19296662509441376,
+          "coordinate_decoder": 0.14787657558918,
+          "no_match_logit": 0.010001697577536106,
+          "no_match_logit_signed": -0.010001697577536106
+        },
+        "keep": {
+          "mvt": 0.07403874397277832,
+          "coordinate_decoder": 0.0,
+          "no_match_logit": 4.898372026218567e-06,
+          "no_match_logit_signed": 4.898372026218567e-06
+        },
+        "keep_geo": {
+          "mvt": 0.09728016704320908,
+          "coordinate_decoder": 2.6843483448028564,
+          "no_match_logit": 3.3886273740790784e-05,
+          "no_match_logit_signed": -3.3886273740790784e-05
+        },
+        "keep_match": {
+          "mvt": 3.31165392708499e-05,
+          "coordinate_decoder": 0.0005468990420922637,
+          "no_match_logit": 3.9394844719709e-08,
+          "no_match_logit_signed": 3.9394844719709e-08
+        }
+      },
+      "rect": [
+        354,
+        119,
+        455,
+        280
+      ],
+      "requested_area": 0.061628542003548274,
+      "actual_area": 0.062030792236328125,
+      "fill_rgb": 0,
+      "attempts": 2,
+      "skipped": false,
+      "reason": null,
+      "positive": 909,
+      "negative": 61,
+      "ignore": 54
+    },
+    {
+      "pair_id": "train_G2_b410d1d92fd4cdd322355772",
+      "gradient_norms": {
+        "clean": {
+          "mvt": 0.08985202014446259,
+          "coordinate_decoder": 3.7844226360321045,
+          "no_match_logit": 3.2196392567129806e-05,
+          "no_match_logit_signed": 3.2196392567129806e-05
+        },
+        "occ": {
+          "mvt": 0.03073522076010704,
+          "coordinate_decoder": 0.06342270225286484,
+          "no_match_logit": 0.009999033063650131,
+          "no_match_logit_signed": -0.009999033063650131
+        },
+        "keep": {
+          "mvt": 0.007630150765180588,
+          "coordinate_decoder": 0.0,
+          "no_match_logit": 2.151544322259724e-06,
+          "no_match_logit_signed": 2.151544322259724e-06
+        },
+        "keep_geo": {
+          "mvt": 0.025822047144174576,
+          "coordinate_decoder": 4.509354591369629,
+          "no_match_logit": 2.1957899662083946e-05,
+          "no_match_logit_signed": 2.1957899662083946e-05
+        },
+        "keep_match": {
+          "mvt": 1.0169532060899655e-06,
+          "coordinate_decoder": 3.17885096592363e-05,
+          "no_match_logit": 9.718366111854948e-10,
+          "no_match_logit_signed": 9.718366111854948e-10
+        }
+      },
+      "rect": [
+        57,
+        42,
+        201,
+        138
+      ],
+      "requested_area": 0.05268838662088393,
+      "actual_area": 0.052734375,
+      "fill_rgb": 0,
+      "attempts": 1,
+      "skipped": false,
+      "reason": null,
+      "positive": 522,
+      "negative": 24,
+      "ignore": 478
+    },
+    {
+      "pair_id": "train_G2_63a429ad385c6dcda88c2917",
+      "gradient_norms": {
+        "clean": {
+          "mvt": 0.35226890444755554,
+          "coordinate_decoder": 2.313143730163574,
+          "no_match_logit": 0.0002463108394294977,
+          "no_match_logit_signed": 0.0002463108394294977
+        },
+        "occ": {
+          "mvt": 0.07021540403366089,
+          "coordinate_decoder": 0.07422000914812088,
+          "no_match_logit": 0.009998871013522148,
+          "no_match_logit_signed": -0.009998871013522148
+        },
+        "keep": {
+          "mvt": 0.010642881505191326,
+          "coordinate_decoder": 0.0,
+          "no_match_logit": 1.3222486813901924e-05,
+          "no_match_logit_signed": 1.3222486813901924e-05
+        },
+        "keep_geo": {
+          "mvt": 0.0046365815214812756,
+          "coordinate_decoder": 0.5062416195869446,
+          "no_match_logit": 1.171334497485077e-05,
+          "no_match_logit_signed": -1.171334497485077e-05
+        },
+        "keep_match": {
+          "mvt": 8.945230365497991e-05,
+          "coordinate_decoder": 0.003661166876554489,
+          "no_match_logit": 3.4744593335744867e-07,
+          "no_match_logit_signed": 3.4744593335744867e-07
+        }
+      },
+      "rect": [
+        174,
+        216,
+        398,
+        343
+      ],
+      "requested_area": 0.10891700907380812,
+      "actual_area": 0.1085205078125,
+      "fill_rgb": 255,
+      "attempts": 1,
+      "skipped": false,
+      "reason": null,
+      "positive": 192,
+      "negative": 551,
+      "ignore": 281
+    },
+    {
+      "pair_id": "train_G2_5f0d550d7933a29b696932e3",
+      "gradient_norms": {
+        "clean": {
+          "mvt": 0.04040159285068512,
+          "coordinate_decoder": 0.4899885058403015,
+          "no_match_logit": 7.200450636446476e-05,
+          "no_match_logit_signed": 7.200450636446476e-05
+        },
+        "occ": {
+          "mvt": 0.057615697383880615,
+          "coordinate_decoder": 0.10510960221290588,
+          "no_match_logit": 0.0099997753277421,
+          "no_match_logit_signed": -0.0099997753277421
+        },
+        "keep": {
+          "mvt": 0.0050048911944031715,
+          "coordinate_decoder": 0.0,
+          "no_match_logit": 7.117958375602029e-06,
+          "no_match_logit_signed": 7.117958375602029e-06
+        },
+        "keep_geo": {
+          "mvt": 0.0068082367070019245,
+          "coordinate_decoder": 0.7205609679222107,
+          "no_match_logit": 8.043509296840057e-06,
+          "no_match_logit_signed": 8.043509296840057e-06
+        },
+        "keep_match": {
+          "mvt": 2.6818497644853778e-05,
+          "coordinate_decoder": 0.0006576331215910614,
+          "no_match_logit": 6.501007021597616e-08,
+          "no_match_logit_signed": 6.501007021597616e-08
+        }
+      },
+      "rect": [
+        144,
+        39,
+        268,
+        249
+      ],
+      "requested_area": 0.09898905257918517,
+      "actual_area": 0.099334716796875,
+      "fill_rgb": 0,
+      "attempts": 1,
+      "skipped": false,
+      "reason": null,
+      "positive": 731,
+      "negative": 169,
+      "ignore": 124
+    },
+    {
+      "pair_id": "train_G3_61e2cb11ea8011bf863bd92d",
+      "gradient_norms": {
+        "clean": {
+          "mvt": 0.054810404777526855,
+          "coordinate_decoder": 3.4813218116760254,
+          "no_match_logit": 5.312707071425393e-05,
+          "no_match_logit_signed": 5.312707071425393e-05
+        },
+        "occ": {
+          "mvt": 0.025617143139243126,
+          "coordinate_decoder": 0.053775958716869354,
+          "no_match_logit": 0.009998883120715618,
+          "no_match_logit_signed": -0.009998883120715618
+        },
+        "keep": {
+          "mvt": 0.0045522358268499374,
+          "coordinate_decoder": 0.0,
+          "no_match_logit": 3.2844636734807864e-06,
+          "no_match_logit_signed": 3.2844636734807864e-06
+        },
+        "keep_geo": {
+          "mvt": 0.046963535249233246,
+          "coordinate_decoder": 4.55952262878418,
+          "no_match_logit": 4.3394295062171295e-05,
+          "no_match_logit_signed": 4.3394295062171295e-05
+        },
+        "keep_match": {
+          "mvt": 8.396404155064374e-06,
+          "coordinate_decoder": 0.00034030620008707047,
+          "no_match_logit": 1.2971982599196963e-08,
+          "no_match_logit_signed": 1.2971982599196963e-08
+        }
+      },
+      "rect": [
+        0,
+        299,
+        127,
+        491
+      ],
+      "requested_area": 0.09344726990032526,
+      "actual_area": 0.093017578125,
+      "fill_rgb": 255,
+      "attempts": 1,
+      "skipped": false,
+      "reason": null,
+      "positive": 672,
+      "negative": 109,
+      "ignore": 243
+    },
+    {
+      "pair_id": "train_G3_9225db493195fe83a085ca12",
+      "gradient_norms": {
+        "clean": {
+          "mvt": 0.09038472175598145,
+          "coordinate_decoder": 4.5804123878479,
+          "no_match_logit": 1.3737165318161715e-05,
+          "no_match_logit_signed": -1.3737165318161715e-05
+        },
+        "occ": {
+          "mvt": 0.0255351010710001,
+          "coordinate_decoder": 0.08917371928691864,
+          "no_match_logit": 0.009999861940741539,
+          "no_match_logit_signed": -0.009999861940741539
+        },
+        "keep": {
+          "mvt": 0.007678196299821138,
+          "coordinate_decoder": 0.0,
+          "no_match_logit": 2.1133992049726658e-06,
+          "no_match_logit_signed": 2.1133992049726658e-06
+        },
+        "keep_geo": {
+          "mvt": 0.03094622679054737,
+          "coordinate_decoder": 7.044865131378174,
+          "no_match_logit": 5.366791083361022e-05,
+          "no_match_logit_signed": -5.366791083361022e-05
+        },
+        "keep_match": {
+          "mvt": 5.197697191761108e-06,
+          "coordinate_decoder": 0.00027647559181787074,
+          "no_match_logit": 6.163769494804683e-09,
+          "no_match_logit_signed": 6.163769494804683e-09
+        }
+      },
+      "rect": [
+        113,
+        87,
+        278,
+        267
+      ],
+      "requested_area": 0.11280090461330959,
+      "actual_area": 0.1132965087890625,
+      "fill_rgb": 0,
+      "attempts": 1,
+      "skipped": false,
+      "reason": null,
+      "positive": 266,
+      "negative": 49,
+      "ignore": 709
+    },
+    {
+      "pair_id": "train_G3_bbd36ad30cd1d60a93814999",
+      "gradient_norms": {
+        "clean": {
+          "mvt": 0.3222659230232239,
+          "coordinate_decoder": 8.065589904785156,
+          "no_match_logit": 0.00020404980750754476,
+          "no_match_logit_signed": 0.00020404980750754476
+        },
+        "occ": {
+          "mvt": 0.062564916908741,
+          "coordinate_decoder": 0.07982241362333298,
+          "no_match_logit": 0.00999966450035572,
+          "no_match_logit_signed": -0.00999966450035572
+        },
+        "keep": {
+          "mvt": 0.024165423586964607,
+          "coordinate_decoder": 0.0,
+          "no_match_logit": 5.2709892770508304e-06,
+          "no_match_logit_signed": 5.2709892770508304e-06
+        },
+        "keep_geo": {
+          "mvt": 0.08411481231451035,
+          "coordinate_decoder": 4.632857799530029,
+          "no_match_logit": 3.882861346937716e-05,
+          "no_match_logit_signed": 3.882861346937716e-05
+        },
+        "keep_match": {
+          "mvt": 2.0790928374481155e-06,
+          "coordinate_decoder": 6.262123497435823e-05,
+          "no_match_logit": 2.820320421648148e-09,
+          "no_match_logit_signed": 2.820320421648148e-09
+        }
+      },
+      "rect": [
+        260,
+        371,
+        397,
+        512
+      ],
+      "requested_area": 0.07366087569550644,
+      "actual_area": 0.07368850708007812,
+      "fill_rgb": 255,
+      "attempts": 1,
+      "skipped": false,
+      "reason": null,
+      "positive": 399,
+      "negative": 71,
+      "ignore": 554
+    },
+    {
+      "pair_id": "train_G3_4a1af345572f4e6ec1324f1d",
+      "gradient_norms": {
+        "clean": {
+          "mvt": 0.15650731325149536,
+          "coordinate_decoder": 1.851682424545288,
+          "no_match_logit": 1.7946711523109116e-05,
+          "no_match_logit_signed": 1.7946711523109116e-05
+        },
+        "occ": {
+          "mvt": 0.045412737876176834,
+          "coordinate_decoder": 0.06678205728530884,
+          "no_match_logit": 0.009999563917517662,
+          "no_match_logit_signed": -0.009999563917517662
+        },
+        "keep": {
+          "mvt": 0.014665975235402584,
+          "coordinate_decoder": 0.0,
+          "no_match_logit": 1.359745510853827e-06,
+          "no_match_logit_signed": 1.359745510853827e-06
+        },
+        "keep_geo": {
+          "mvt": 0.02130286395549774,
+          "coordinate_decoder": 2.271094799041748,
+          "no_match_logit": 8.096199053397868e-06,
+          "no_match_logit_signed": 8.096199053397868e-06
+        },
+        "keep_match": {
+          "mvt": 1.536133595436695e-06,
+          "coordinate_decoder": 9.688965656096116e-05,
+          "no_match_logit": 1.233356750063308e-09,
+          "no_match_logit_signed": 1.233356750063308e-09
+        }
+      },
+      "rect": [
+        170,
+        236,
+        282,
+        449
+      ],
+      "requested_area": 0.0909033936180858,
+      "actual_area": 0.09100341796875,
+      "fill_rgb": 255,
+      "attempts": 1,
+      "skipped": false,
+      "reason": null,
+      "positive": 174,
+      "negative": 17,
+      "ignore": 833
+    },
+    {
+      "pair_id": "train_G3_a8337e04ad5affa37e0babf3",
+      "gradient_norms": {
+        "clean": {
+          "mvt": 0.1507992446422577,
+          "coordinate_decoder": 6.160634994506836,
+          "no_match_logit": 2.789847712847404e-06,
+          "no_match_logit_signed": -2.789847712847404e-06
+        },
+        "occ": {
+          "mvt": 0.15456168353557587,
+          "coordinate_decoder": 0.09428977221250534,
+          "no_match_logit": 0.010000050067901611,
+          "no_match_logit_signed": -0.010000050067901611
+        },
+        "keep": {
+          "mvt": 0.037668149918317795,
+          "coordinate_decoder": 0.0,
+          "no_match_logit": 3.7125087146705482e-06,
+          "no_match_logit_signed": 3.7125087146705482e-06
+        },
+        "keep_geo": {
+          "mvt": 0.2383115142583847,
+          "coordinate_decoder": 21.83120346069336,
+          "no_match_logit": 0.00019726750906556845,
+          "no_match_logit_signed": -0.00019726750906556845
+        },
+        "keep_match": {
+          "mvt": 9.186563687535454e-08,
+          "coordinate_decoder": 2.188988901252742e-06,
+          "no_match_logit": 8.293963432715046e-11,
+          "no_match_logit_signed": 8.293963432715046e-11
+        }
+      },
+      "rect": [
+        92,
+        151,
+        259,
+        439
+      ],
+      "requested_area": 0.18354850809422582,
+      "actual_area": 0.1834716796875,
+      "fill_rgb": 255,
+      "attempts": 1,
+      "skipped": false,
+      "reason": null,
+      "positive": 254,
+      "negative": 95,
+      "ignore": 675
+    },
+    {
+      "pair_id": "train_G3_2f587ae19d496875413ba42d",
+      "gradient_norms": {
+        "clean": {
+          "mvt": 0.14042578637599945,
+          "coordinate_decoder": 8.850455284118652,
+          "no_match_logit": 4.0568560507381335e-05,
+          "no_match_logit_signed": 4.0568560507381335e-05
+        },
+        "occ": {
+          "mvt": 0.03572995588183403,
+          "coordinate_decoder": 0.031099073588848114,
+          "no_match_logit": 0.009999161586165428,
+          "no_match_logit_signed": -0.009999161586165428
+        },
+        "keep": {
+          "mvt": 0.011320152319967747,
+          "coordinate_decoder": 0.0,
+          "no_match_logit": 1.7188129959322396e-06,
+          "no_match_logit_signed": 1.7188129959322396e-06
+        },
+        "keep_geo": {
+          "mvt": 0.044739414006471634,
+          "coordinate_decoder": 9.149338722229004,
+          "no_match_logit": 2.655674961715704e-06,
+          "no_match_logit_signed": 2.655674961715704e-06
+        },
+        "keep_match": {
+          "mvt": 1.81914890617918e-06,
+          "coordinate_decoder": 0.00011759573681047186,
+          "no_match_logit": 2.0654642440831594e-09,
+          "no_match_logit_signed": 2.0654642440831594e-09
+        }
+      },
+      "rect": [
+        270,
+        33,
+        500,
+        228
+      ],
+      "requested_area": 0.17126823284151343,
+      "actual_area": 0.17108917236328125,
+      "fill_rgb": 0,
+      "attempts": 1,
+      "skipped": false,
+      "reason": null,
+      "positive": 288,
+      "negative": 63,
+      "ignore": 673
+    },
+    {
+      "pair_id": "train_G3_9d99a8127b3c290c19699d76",
+      "gradient_norms": {
+        "clean": {
+          "mvt": 0.14145393669605255,
+          "coordinate_decoder": 11.762161254882812,
+          "no_match_logit": 2.2681339032715186e-05,
+          "no_match_logit_signed": 2.2681339032715186e-05
+        },
+        "occ": {
+          "mvt": 0.026699872687458992,
+          "coordinate_decoder": 0.058051273226737976,
+          "no_match_logit": 0.009999362751841545,
+          "no_match_logit_signed": -0.009999362751841545
+        },
+        "keep": {
+          "mvt": 0.009674198925495148,
+          "coordinate_decoder": 0.0,
+          "no_match_logit": 1.9942992821597727e-06,
+          "no_match_logit_signed": 1.9942992821597727e-06
+        },
+        "keep_geo": {
+          "mvt": 0.04575803875923157,
+          "coordinate_decoder": 13.964401245117188,
+          "no_match_logit": 2.7371293981559575e-05,
+          "no_match_logit_signed": -2.7371293981559575e-05
+        },
+        "keep_match": {
+          "mvt": 2.6392769996164134e-06,
+          "coordinate_decoder": 0.00017986289458349347,
+          "no_match_logit": 3.980266782832587e-09,
+          "no_match_logit_signed": 3.980266782832587e-09
+        }
+      },
+      "rect": [
+        32,
+        231,
+        259,
+        453
+      ],
+      "requested_area": 0.1928060081890359,
+      "actual_area": 0.19223785400390625,
+      "fill_rgb": 255,
+      "attempts": 1,
+      "skipped": false,
+      "reason": null,
+      "positive": 279,
+      "negative": 102,
+      "ignore": 643
+    },
+    {
+      "pair_id": "train_G3_6092c064a2dda4cbb2fa9283",
+      "gradient_norms": {
+        "clean": {
+          "mvt": 0.9207838177680969,
+          "coordinate_decoder": 7.375794410705566,
+          "no_match_logit": 9.70117162069073e-06,
+          "no_match_logit_signed": -9.70117162069073e-06
+        },
+        "occ": {
+          "mvt": 0.143610879778862,
+          "coordinate_decoder": 0.05940283089876175,
+          "no_match_logit": 0.009999455884099007,
+          "no_match_logit_signed": -0.009999455884099007
+        },
+        "keep": {
+          "mvt": 0.17917270958423615,
+          "coordinate_decoder": 0.0,
+          "no_match_logit": 1.1886248785231146e-06,
+          "no_match_logit_signed": 1.1886248785231146e-06
+        },
+        "keep_geo": {
+          "mvt": 1.1243189573287964,
+          "coordinate_decoder": 10.108823776245117,
+          "no_match_logit": 1.1120517228846438e-05,
+          "no_match_logit_signed": -1.1120517228846438e-05
+        },
+        "keep_match": {
+          "mvt": 4.2106079490622506e-05,
+          "coordinate_decoder": 0.0001614035718375817,
+          "no_match_logit": 2.1188562016050128e-09,
+          "no_match_logit_signed": 2.1188562016050128e-09
+        }
+      },
+      "rect": [
+        78,
+        2,
+        218,
+        260
+      ],
+      "requested_area": 0.13796446419475764,
+      "actual_area": 0.137786865234375,
+      "fill_rgb": 255,
+      "attempts": 1,
+      "skipped": false,
+      "reason": null,
+      "positive": 118,
+      "negative": 25,
+      "ignore": 881
+    }
+  ]
+}

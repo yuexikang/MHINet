@@ -1,0 +1,6 @@
+{
+  "threshold": 0.0019979807548224926,
+  "rule": "reject iff matchability < threshold",
+  "source": "hz_calibration",
+  "max_empirical_positive_fpr": 0.01
+}

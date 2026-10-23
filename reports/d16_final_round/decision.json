@@ -1,0 +1,50 @@
+{
+  "configuration_locked": true,
+  "candidate": null,
+  "control": null,
+  "checks": {
+    "D01": {
+      "control": "D00",
+      "checks": {
+        "hangzhou_gain": false,
+        "rgb_gain": true,
+        "epe": true,
+        "tail_vs_control": true,
+        "groups": false,
+        "reaches_u0": false,
+        "tail_vs_u0": true
+      },
+      "passed": false
+    },
+    "D10": {
+      "control": "D00",
+      "checks": {
+        "hangzhou_gain": false,
+        "rgb_gain": true,
+        "epe": true,
+        "tail_vs_control": true,
+        "groups": false,
+        "reaches_u0": false,
+        "tail_vs_u0": true
+      },
+      "passed": false
+    },
+    "D11": {
+      "control": "D01",
+      "checks": {
+        "hangzhou_gain": false,
+        "rgb_gain": false,
+        "epe": true,
+        "tail_vs_control": true,
+        "groups": false,
+        "reaches_u0": false,
+        "tail_vs_u0": true
+      },
+      "passed": false
+    }
+  },
+  "fallback": "U0_epoch30",
+  "confirmation_seeds": [],
+  "reason": "No candidate passes registered gates; keep U0, no additional seed training, stop architecture expansion.",
+  "interpretation": "For D01 vs D00, data-substitution benefit must pass the same conservative two-domain +1pp gate. Fixed B0 features in all D runs; confirmation seeds concern coordinate training only."
+}

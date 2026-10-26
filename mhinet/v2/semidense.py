@@ -95,7 +95,7 @@ class SemidenseMatcherV2(SemidenseMatcher):
             if len(i):
                 take=subset(len(i),c.fine_windows,i.device)
                 with torch.no_grad():
-                    ga,gb=direct_d8_fine_grids(i[take],j[take],hc,hf)
+                    ga,gb=direct_d8_fine_grids(i[take],j[take],hc,hf,c.fine_target_side)
                     mi,si,ti,va,vb=fine_labels(ga,gb,H,ma,mb,hf,c.fine_gt_tolerance)
                 fine_count=len(mi);fine_tokens=ga.shape[0]*ga.shape[1]
                 # Per-window rematerialization retains features without every correlation activation.
@@ -192,7 +192,7 @@ class SemidenseMatcherV2(SemidenseMatcher):
             for start in range(0, len(coarse.source_flat), c.inference_window_chunk):
                 end = start + c.inference_window_chunk
                 ga, gb = direct_d8_fine_grids(coarse.source_flat[start:end],
-                    coarse.target_flat[start:end], hc, hf)
+                    coarse.target_flat[start:end], hc, hf, c.fine_target_side)
                 va, vb = valid_points(support, ga), valid_points(support, gb)
                 lp = self.fine_scores(d2[0], d2[1], ga, gb, va, vb)
                 if diagnostics and len(fine_trace) < 4:

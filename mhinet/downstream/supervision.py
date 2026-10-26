@@ -99,7 +99,7 @@ def fine_labels(a, b, H, mask_a, mask_b, fine_hw, tolerance=1.5):
     source = to_uv(a,fine_hw)
     inverse_dist = torch.cdist(source,back).masked_fill(~(va[:,:,None] & vb[:,None,:]),float('inf'))
     good &= inverse_dist.argmin(-2).gather(-1,nearest)==ids
-    good &= ok_back.reshape(shape).gather(-1,nearest)
+    good &= ok_back.reshape(b.shape[:-1]).gather(-1,nearest)
     m,k = good.nonzero(as_tuple=True)
     return m,k,nearest[m,k],va,vb
 

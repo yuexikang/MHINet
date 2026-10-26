@@ -96,7 +96,7 @@ def supervised_matching_loss(matcher, shared, geometry):
         lc = positive_focal(coarse_positive_logp(a, b, matcher.tau_c, i[take], j[take], c.chunk))
         lf = d2.sum()*0
         take = torch.randperm(len(i), device=d8.device)[:c.fine_windows]
-        ga, gb = direct_d8_fine_grids(i[take], j[take], d8.shape[-2:], d2.shape[-2:])
+        ga, gb = direct_d8_fine_grids(i[take], j[take], d8.shape[-2:], d2.shape[-2:], c.fine_target_side)
         if gt.exact:
             mi, si, ti, va, vb = fine_labels(ga, gb, gt, ma, mb, d2.shape[-2:], c.fine_gt_tolerance)
             count = len(mi)

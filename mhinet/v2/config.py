@@ -10,6 +10,7 @@ class SemidenseConfigV2(SemidenseConfig):
     input_size: int = 512
     geometry_mode: str = "flow_d16"
     fine_prior: str = "direct_d8"
+    fine_target_side: int = 8
     flow_guidance_enabled: bool = True
     flow_lambda: float = 3.0
     flow_sigma_d8: float = 4.0
@@ -25,6 +26,8 @@ class SemidenseConfigV2(SemidenseConfig):
     qrru_early_stop: bool = True
 
     def __post_init__(self):
+        if type(self.fine_target_side) is not int or self.fine_target_side not in (4, 8):
+            raise ValueError("fine_target_side must be 4 or 8")
         if self.coarse_mode not in ("chunked", "full"):
             raise ValueError("coarse_mode must be chunked or full")
         if self.fine_precision not in ("fp32", "bf16", "fp16"):

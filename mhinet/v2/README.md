@@ -42,3 +42,9 @@ python -m mhinet.v2.train_hangzhou --config configs/mhi_v2/hangzhou_u0.json --de
 该配置冻结DINO/MVT/Flow头，训练VGG、特征解码器、D8/D2温度与QRRU；保留原小样本清单、30轮上限、余弦退火与早停。这里只提供可运行入口，不自动启动新训练。U0权重仅覆盖D16模块，不是已经训练好的完整下游匹配器。
 
 D8→D2→QRRU沿用本分支的 `semidense.py`，输入仍仅512，最终输出默认最多2048。训练监督继续使用 `geometry_gt.py`、`data.py`、`losses.py` 与 `training.py`，保留精确合成H及杭州近似H行为。原有完整checkpoint初始化仍受支持。
+
+### D2 目标扩窗
+
+`SemidenseConfigV2.fine_target_side` 默认 8：direct_d8 路径保留 A 侧 4×4 D2 子点，B 侧围绕原窗口中心搜索 8×8 D2 候选（16×64 相关矩阵）。训练与推理共用该设置，越界候选屏蔽；设为 4 可复现原窗口。旧权重可直接加载，旧配置缺省时采用新默认值 8。H0 兼容路径和 QRRU 的局部窗口不变。
+
+本次仅扩大候选范围，不包含联合训练或连续坐标解码改动；扩窗诊断不能完整解释 RGB_512 精度下降，也不代表主线已恢复原精度。

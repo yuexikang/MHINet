@@ -55,12 +55,13 @@ def fine_labels(a, b, geometry, mask_a, mask_b, fine_hw, tolerance=1.5):
     return m, k, nearest[m, k], va, vb
 
 
-def direct_d8_fine_grids(source_flat, target_flat, coarse_hw, fine_hw):
-    """Expand each matched D8 parent pair into its exact 4x4 D2 children.
+def direct_d8_fine_grids(source_flat, target_flat, coarse_hw, fine_hw, target_side=8):
+    """Keep A's 4x4 children; search a centered 4x4 or 8x8 D2 lattice in B.
 
-    ``b = grid[j] + a - grid[i]``. Both lattices remain cell-centered and are
-    independent of a predicted H, Flow, GT, or an inferred target overlap mask.
+    Out-of-image candidates remain outside and must be masked by valid_points.
     """
+    if target_side not in (4, 8):
+        raise ValueError("target_side must be 4 or 8")
     hc, wc = coarse_hw
     hf, wf = fine_hw
     if (hf, wf) != (4 * hc, 4 * wc):
@@ -69,10 +70,10 @@ def direct_d8_fine_grids(source_flat, target_flat, coarse_hw, fine_hw):
         raise ValueError('Matched parent indices must be equal-length vectors')
     if bool(((source_flat < 0) | (source_flat >= hc * wc) | (target_flat < 0) | (target_flat >= hc * wc)).any()):
         raise ValueError('D8 parent index out of bounds')
-    axis = torch.arange(4, device=source_flat.device)
-    y, x = torch.meshgrid(axis, axis, indexing='ij')
-    children = torch.stack((x.flatten(), y.flatten()), -1)
-    def expand(indices):
+    def expand(indices, side):
+        axis = torch.arange(side, device=indices.device) - (side - 4) // 2
+        y, x = torch.meshgrid(axis, axis, indexing='ij')
+        children = torch.stack((x.flatten(), y.flatten()), -1)
         parent = torch.stack((indices % wc, indices // wc), -1)
         return to_norm((parent[:, None] * 4 + children[None]).float(), fine_hw)
-    return expand(source_flat), expand(target_flat)
+    return expand(source_flat, 4), expand(target_flat, target_side)

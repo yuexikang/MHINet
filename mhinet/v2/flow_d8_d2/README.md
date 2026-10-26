@@ -17,3 +17,17 @@
 分别报告 Flow0、D8、D2 的 P@1/3/5/10、有效区域EPE、匹配数和每对正确点数；另外在同一批最终D2源点上比较插值Flow初值与D2，避免不同采样密度造成虚假提升。统计 D8 搜索窗真值覆盖、D8选对父单元的比例（即D2父窗口覆盖）、特征和匹配耗时。所有误差单位为512原图像素，杭州结果不是人工真值精度。
 
 运行：`python -m mhinet.v2.flow_d8_d2.run --domain hangzhou --device cuda:0`，另一个任务用 `--domain synthetic --device cuda:1`。报告：`python -m mhinet.v2.flow_d8_d2.report`。
+
+## D8/D2 适配训练
+
+`python -m mhinet.v2.flow_d8_d2.train --device cuda:0`
+
+沿用清理后杭州254训练/64验证对，从上述下游第7轮权重继续训练。冻结DINO、MVT和完整原Flow/Matchability；只训练VGG、D8/D2解码器及匹配温度。QRRU不执行、无损失、无梯度、无优化器参数。沿用现有D8正对应损失与D2近似H不确定区域损失，不增加新的置信度标签。训练监督窗口由参考H提供，验证使用实际Flow局部搜索，二者的窗口来源明确区分。
+
+学习率8e-5，AdamW，累积4对，最多30轮，余弦退火至1e-6；验证局部D2 P@3连续6轮未提高0.1个百分点时早停（至少5轮）。初始未训练权重也可被选为best。验证指标依然只是杭州近似H的一致性。
+
+训练结果：`outputs/flow_d8_d2/training/`。最佳权重复评示例：
+
+```bash
+python -m mhinet.v2.flow_d8_d2.run --domain hangzhou --device cuda:1 --checkpoint outputs/flow_d8_d2/training/best.pt --output outputs/flow_d8_d2/trained
+```

@@ -51,10 +51,14 @@ def sample(field, points):
 
 @torch.inference_mode()
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--domain',choices=['hangzhou','synthetic'],required=True);p.add_argument('--device',default='cuda:0');p.add_argument('--limit',type=int)
+    p=argparse.ArgumentParser();p.add_argument('--domain',choices=['hangzhou','synthetic'],required=True);p.add_argument('--device',default='cuda:0');p.add_argument('--limit',type=int);p.add_argument('--checkpoint',type=Path);p.add_argument('--output',type=Path,default=Path('outputs/flow_d8_d2'))
     args=p.parse_args();torch.set_num_threads(2)
     ds=dataset(args.domain);model,matcher=load(args.device)
-    out=Path('outputs/flow_d8_d2')/args.domain;out.mkdir(parents=True,exist_ok=True)
+    if args.checkpoint:
+        state=torch.load(args.checkpoint,map_location='cpu',weights_only=False,mmap=True)
+        model.vgg.load_state_dict(state['vgg']);model.dedode.load_state_dict(state['dedode'])
+        matcher.load_state_dict({**matcher.state_dict(),**state['temperatures']})
+    out=args.output/args.domain;out.mkdir(parents=True,exist_ok=True)
     rows=[]
     def tick():
         torch.cuda.synchronize(args.device);return time.perf_counter()

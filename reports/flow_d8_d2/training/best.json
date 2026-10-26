@@ -1,0 +1,1417 @@
+{
+  "p3": 0.6702846153846154,
+  "p1": 0.30567692307692307,
+  "epe": 7.885960693651456,
+  "matches": 2031.25,
+  "correct3": 1361.515625,
+  "pairs": [
+    {
+      "pair_id": "val_G0_763d789ca7b5ae6ec96d4423",
+      "group": "G0",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 16715.9921875,
+        "correct1": 9,
+        "correct3": 17,
+        "correct5": 17,
+        "correct10": 1940
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 17781.0,
+        "correct1": 2,
+        "correct3": 14,
+        "correct5": 111,
+        "correct10": 1754
+      }
+    },
+    {
+      "pair_id": "val_G0_bee59811bf5760ea73e0af74",
+      "group": "G0",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 126.0,
+        "correct1": 1985,
+        "correct3": 2048,
+        "correct5": 2048,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 2624.67041015625,
+        "correct1": 592,
+        "correct3": 2039,
+        "correct5": 2048,
+        "correct10": 2048
+      }
+    },
+    {
+      "pair_id": "val_G0_6435eb6c9c792c6b75e3bf88",
+      "group": "G0",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 94.82843017578125,
+        "correct1": 2001,
+        "correct3": 2048,
+        "correct5": 2048,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 1735.130859375,
+        "correct1": 1347,
+        "correct3": 2048,
+        "correct5": 2048,
+        "correct10": 2048
+      }
+    },
+    {
+      "pair_id": "val_G0_0d0910667a7e75bbf489ef34",
+      "group": "G0",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 16.0,
+        "correct1": 2040,
+        "correct3": 2048,
+        "correct5": 2048,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 1598.993408203125,
+        "correct1": 1523,
+        "correct3": 2048,
+        "correct5": 2048,
+        "correct10": 2048
+      }
+    },
+    {
+      "pair_id": "val_G0_f5dbf3bf4f91d444994db1f3",
+      "group": "G0",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 1902.0,
+        "correct1": 1097,
+        "correct3": 2048,
+        "correct5": 2048,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 4398.82421875,
+        "correct1": 382,
+        "correct3": 1458,
+        "correct5": 2048,
+        "correct10": 2048
+      }
+    },
+    {
+      "pair_id": "val_G0_9bdc9861816ef910aaf12dc6",
+      "group": "G0",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 5304.35546875,
+        "correct1": 634,
+        "correct3": 1492,
+        "correct5": 1501,
+        "correct10": 2042
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 5567.44677734375,
+        "correct1": 329,
+        "correct3": 1195,
+        "correct5": 1832,
+        "correct10": 2048
+      }
+    },
+    {
+      "pair_id": "val_G0_20667b4b801250604b27bbcf",
+      "group": "G0",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 2.0,
+        "correct1": 2047,
+        "correct3": 2048,
+        "correct5": 2048,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 1165.5721435546875,
+        "correct1": 1696,
+        "correct3": 2048,
+        "correct5": 2048,
+        "correct10": 2048
+      }
+    },
+    {
+      "pair_id": "val_G0_b99cdaabc4d890e77ed1a14c",
+      "group": "G0",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 38.0,
+        "correct1": 2029,
+        "correct3": 2048,
+        "correct5": 2048,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 1092.635009765625,
+        "correct1": 1844,
+        "correct3": 2048,
+        "correct5": 2048,
+        "correct10": 2048
+      }
+    },
+    {
+      "pair_id": "val_G0_a352be5979b31a4c2132f43f",
+      "group": "G0",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 1984.0,
+        "correct1": 1140,
+        "correct3": 2006,
+        "correct5": 2006,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 2955.427001953125,
+        "correct1": 695,
+        "correct3": 1963,
+        "correct5": 2048,
+        "correct10": 2048
+      }
+    },
+    {
+      "pair_id": "val_G0_36b9fe381ccf13dfffcaa917",
+      "group": "G0",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 6732.29638671875,
+        "correct1": 16,
+        "correct3": 1630,
+        "correct5": 1645,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 5549.84765625,
+        "correct1": 188,
+        "correct3": 1511,
+        "correct5": 1702,
+        "correct10": 2048
+      }
+    },
+    {
+      "pair_id": "val_G0_2a5741b762f0b9247f8ff46d",
+      "group": "G0",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 120.0,
+        "correct1": 1988,
+        "correct3": 2048,
+        "correct5": 2048,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 1556.0780029296875,
+        "correct1": 1534,
+        "correct3": 2047,
+        "correct5": 2048,
+        "correct10": 2048
+      }
+    },
+    {
+      "pair_id": "val_G0_08d3a6569601fc6986885ceb",
+      "group": "G0",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 6.0,
+        "correct1": 2045,
+        "correct3": 2048,
+        "correct5": 2048,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 1843.053955078125,
+        "correct1": 1224,
+        "correct3": 2047,
+        "correct5": 2048,
+        "correct10": 2048
+      }
+    },
+    {
+      "pair_id": "val_G0_5c1bc4507c4f1345227f3b03",
+      "group": "G0",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 12424.1806640625,
+        "correct1": 44,
+        "correct3": 107,
+        "correct5": 107,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 12007.59765625,
+        "correct1": 0,
+        "correct3": 75,
+        "correct5": 464,
+        "correct10": 2048
+      }
+    },
+    {
+      "pair_id": "val_G0_1c58d07938957da0ba56fefe",
+      "group": "G0",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 200.0,
+        "correct1": 1948,
+        "correct3": 2048,
+        "correct5": 2048,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 1884.03515625,
+        "correct1": 1253,
+        "correct3": 2048,
+        "correct5": 2048,
+        "correct10": 2048
+      }
+    },
+    {
+      "pair_id": "val_G0_7cd743e5bc9fe5ab32dba38e",
+      "group": "G0",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 34.0,
+        "correct1": 2031,
+        "correct3": 2048,
+        "correct5": 2048,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 1723.25244140625,
+        "correct1": 1314,
+        "correct3": 2047,
+        "correct5": 2048,
+        "correct10": 2048
+      }
+    },
+    {
+      "pair_id": "val_G0_a20d3cd892730ce830bb6a14",
+      "group": "G0",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 2158.14794921875,
+        "correct1": 1083,
+        "correct3": 2000,
+        "correct5": 2000,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 2884.298583984375,
+        "correct1": 719,
+        "correct3": 1983,
+        "correct5": 2033,
+        "correct10": 2048
+      }
+    },
+    {
+      "pair_id": "val_G1_59f4a5c20fca6f19576e658c",
+      "group": "G1",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 2190.778564453125,
+        "correct1": 891,
+        "correct3": 2048,
+        "correct5": 2048,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 2358.69287109375,
+        "correct1": 952,
+        "correct3": 2033,
+        "correct5": 2046,
+        "correct10": 2048
+      }
+    },
+    {
+      "pair_id": "val_G1_72217f153bce13c46a5b04d2",
+      "group": "G1",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 5059.7587890625,
+        "correct1": 142,
+        "correct3": 1430,
+        "correct5": 2031,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 5280.14990234375,
+        "correct1": 174,
+        "correct3": 1349,
+        "correct5": 1977,
+        "correct10": 2045
+      }
+    },
+    {
+      "pair_id": "val_G1_218b864f648a2f863b6224d7",
+      "group": "G1",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 3944.831298828125,
+        "correct1": 298,
+        "correct3": 1822,
+        "correct5": 2045,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 3367.83154296875,
+        "correct1": 559,
+        "correct3": 1911,
+        "correct5": 2039,
+        "correct10": 2048
+      }
+    },
+    {
+      "pair_id": "val_G1_a494fd0920b58a4b65b13b4f",
+      "group": "G1",
+      "d2": {
+        "n": 2048,
+        "visible": 2047,
+        "error_sum": 3039.3330078125,
+        "correct1": 614,
+        "correct3": 1968,
+        "correct5": 2044,
+        "correct10": 2047
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2047,
+        "error_sum": 2227.50048828125,
+        "correct1": 1079,
+        "correct3": 2002,
+        "correct5": 2030,
+        "correct10": 2043
+      }
+    },
+    {
+      "pair_id": "val_G1_411c9f87b5d122329322571a",
+      "group": "G1",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 14640.486328125,
+        "correct1": 0,
+        "correct3": 0,
+        "correct5": 76,
+        "correct10": 2015
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 13516.0556640625,
+        "correct1": 0,
+        "correct3": 14,
+        "correct5": 202,
+        "correct10": 2041
+      }
+    },
+    {
+      "pair_id": "val_G1_4a3dd3d780dc3b623ea3b057",
+      "group": "G1",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 4298.927734375,
+        "correct1": 342,
+        "correct3": 1598,
+        "correct5": 2035,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 4281.83837890625,
+        "correct1": 368,
+        "correct3": 1636,
+        "correct5": 2019,
+        "correct10": 2047
+      }
+    },
+    {
+      "pair_id": "val_G1_e6b492ea8816fe3012d8817f",
+      "group": "G1",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 3396.522705078125,
+        "correct1": 484,
+        "correct3": 1887,
+        "correct5": 2044,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 3945.341796875,
+        "correct1": 267,
+        "correct3": 1753,
+        "correct5": 2021,
+        "correct10": 2048
+      }
+    },
+    {
+      "pair_id": "val_G1_1c4739f6044a189e596f8e53",
+      "group": "G1",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 3008.45751953125,
+        "correct1": 681,
+        "correct3": 1927,
+        "correct5": 2047,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 2477.5439453125,
+        "correct1": 909,
+        "correct3": 2008,
+        "correct5": 2046,
+        "correct10": 2048
+      }
+    },
+    {
+      "pair_id": "val_G1_3958fb5340a73f8ea30f68fd",
+      "group": "G1",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 3254.3955078125,
+        "correct1": 559,
+        "correct3": 1911,
+        "correct5": 2044,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 2426.205078125,
+        "correct1": 941,
+        "correct3": 2024,
+        "correct5": 2042,
+        "correct10": 2046
+      }
+    },
+    {
+      "pair_id": "val_G1_bdabc2a14b3bf911cb442ff8",
+      "group": "G1",
+      "d2": {
+        "n": 2048,
+        "visible": 2046,
+        "error_sum": 6388.365234375,
+        "correct1": 88,
+        "correct3": 991,
+        "correct5": 1873,
+        "correct10": 2046
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2046,
+        "error_sum": 6331.01806640625,
+        "correct1": 0,
+        "correct3": 1146,
+        "correct5": 1928,
+        "correct10": 2045
+      }
+    },
+    {
+      "pair_id": "val_G1_c693eaa651caebd2c052d380",
+      "group": "G1",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 3392.486328125,
+        "correct1": 534,
+        "correct3": 1873,
+        "correct5": 2045,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 3450.16650390625,
+        "correct1": 391,
+        "correct3": 1978,
+        "correct5": 2044,
+        "correct10": 2048
+      }
+    },
+    {
+      "pair_id": "val_G1_6722b9717639ee7c8466ff56",
+      "group": "G1",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 4787.986328125,
+        "correct1": 210,
+        "correct3": 1546,
+        "correct5": 1975,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 4616.3076171875,
+        "correct1": 130,
+        "correct3": 1737,
+        "correct5": 1997,
+        "correct10": 2048
+      }
+    },
+    {
+      "pair_id": "val_G1_769728d293f17d1e5289c9cf",
+      "group": "G1",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 4617.2216796875,
+        "correct1": 67,
+        "correct3": 1653,
+        "correct5": 2041,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 5498.0556640625,
+        "correct1": 100,
+        "correct3": 1206,
+        "correct5": 2002,
+        "correct10": 2042
+      }
+    },
+    {
+      "pair_id": "val_G1_d4d07bf179ba833ac87d4237",
+      "group": "G1",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 4238.4755859375,
+        "correct1": 358,
+        "correct3": 1659,
+        "correct5": 2004,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 3984.05419921875,
+        "correct1": 501,
+        "correct3": 1646,
+        "correct5": 2036,
+        "correct10": 2048
+      }
+    },
+    {
+      "pair_id": "val_G1_ffee1883be8d3719576fc74f",
+      "group": "G1",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 2753.62060546875,
+        "correct1": 755,
+        "correct3": 2003,
+        "correct5": 2047,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 5074.34423828125,
+        "correct1": 266,
+        "correct3": 1606,
+        "correct5": 1970,
+        "correct10": 2026
+      }
+    },
+    {
+      "pair_id": "val_G1_c5b52330e77a8619e31894de",
+      "group": "G1",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 5325.6845703125,
+        "correct1": 281,
+        "correct3": 1364,
+        "correct5": 1881,
+        "correct10": 2047
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 4973.3828125,
+        "correct1": 313,
+        "correct3": 1542,
+        "correct5": 1797,
+        "correct10": 2048
+      }
+    },
+    {
+      "pair_id": "val_G2_9971335a127868ebf95ebed8",
+      "group": "G2",
+      "d2": {
+        "n": 2048,
+        "visible": 2045,
+        "error_sum": 2779.95458984375,
+        "correct1": 1258,
+        "correct3": 1806,
+        "correct5": 2045,
+        "correct10": 2045
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2045,
+        "error_sum": 3120.64501953125,
+        "correct1": 558,
+        "correct3": 1918,
+        "correct5": 2018,
+        "correct10": 2044
+      }
+    },
+    {
+      "pair_id": "val_G2_c373aa80e67062e7256ca641",
+      "group": "G2",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 10764.41015625,
+        "correct1": 82,
+        "correct3": 228,
+        "correct5": 1027,
+        "correct10": 2022
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 7603.0380859375,
+        "correct1": 19,
+        "correct3": 731,
+        "correct5": 1583,
+        "correct10": 2048
+      }
+    },
+    {
+      "pair_id": "val_G2_009154351b268c2c8543eb7f",
+      "group": "G2",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 2330.48681640625,
+        "correct1": 950,
+        "correct3": 2037,
+        "correct5": 2048,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 2138.1298828125,
+        "correct1": 1166,
+        "correct3": 2003,
+        "correct5": 2048,
+        "correct10": 2048
+      }
+    },
+    {
+      "pair_id": "val_G2_00a2faf7c8d071e61c44ff4c",
+      "group": "G2",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 3043.37255859375,
+        "correct1": 694,
+        "correct3": 1925,
+        "correct5": 2032,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 2440.1708984375,
+        "correct1": 984,
+        "correct3": 2007,
+        "correct5": 2044,
+        "correct10": 2048
+      }
+    },
+    {
+      "pair_id": "val_G2_00af91637a79efd4ed7960eb",
+      "group": "G2",
+      "d2": {
+        "n": 1649,
+        "visible": 1649,
+        "error_sum": 83148.609375,
+        "correct1": 1,
+        "correct3": 17,
+        "correct5": 48,
+        "correct10": 168
+      },
+      "flow_same_points": {
+        "n": 1649,
+        "visible": 1649,
+        "error_sum": 83751.9609375,
+        "correct1": 1,
+        "correct3": 4,
+        "correct5": 22,
+        "correct10": 68
+      }
+    },
+    {
+      "pair_id": "val_G2_7438504dd7fd46920f118043",
+      "group": "G2",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 4657.2783203125,
+        "correct1": 292,
+        "correct3": 1507,
+        "correct5": 2003,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 3588.7275390625,
+        "correct1": 473,
+        "correct3": 1852,
+        "correct5": 2033,
+        "correct10": 2048
+      }
+    },
+    {
+      "pair_id": "val_G2_7239da5ea9ccb38fa2a8b009",
+      "group": "G2",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 2524.45947265625,
+        "correct1": 901,
+        "correct3": 1981,
+        "correct5": 2043,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 2026.458984375,
+        "correct1": 1166,
+        "correct3": 2025,
+        "correct5": 2047,
+        "correct10": 2048
+      }
+    },
+    {
+      "pair_id": "val_G2_e25b553fe9d57108ec9a58be",
+      "group": "G2",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 3902.0361328125,
+        "correct1": 373,
+        "correct3": 1863,
+        "correct5": 2042,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 2091.04638671875,
+        "correct1": 1054,
+        "correct3": 2047,
+        "correct5": 2048,
+        "correct10": 2048
+      }
+    },
+    {
+      "pair_id": "val_G2_5adeeee1da5e5266f2caafa6",
+      "group": "G2",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 6635.7890625,
+        "correct1": 0,
+        "correct3": 438,
+        "correct5": 1916,
+        "correct10": 2047
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 3863.49365234375,
+        "correct1": 373,
+        "correct3": 1867,
+        "correct5": 2008,
+        "correct10": 2042
+      }
+    },
+    {
+      "pair_id": "val_G2_924b26ebf488f01652ae69a6",
+      "group": "G2",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 5722.75048828125,
+        "correct1": 465,
+        "correct3": 1304,
+        "correct5": 1754,
+        "correct10": 2045
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 4362.85791015625,
+        "correct1": 343,
+        "correct3": 1682,
+        "correct5": 1957,
+        "correct10": 2048
+      }
+    },
+    {
+      "pair_id": "val_G2_78cac3733efe164eaf65ead6",
+      "group": "G2",
+      "d2": {
+        "n": 2048,
+        "visible": 2046,
+        "error_sum": 3791.00390625,
+        "correct1": 443,
+        "correct3": 1783,
+        "correct5": 2014,
+        "correct10": 2046
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2046,
+        "error_sum": 4481.6796875,
+        "correct1": 411,
+        "correct3": 1696,
+        "correct5": 1836,
+        "correct10": 2041
+      }
+    },
+    {
+      "pair_id": "val_G2_0c9786cba78c67ee7cde2214",
+      "group": "G2",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 2890.87841796875,
+        "correct1": 1219,
+        "correct3": 1799,
+        "correct5": 2044,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 2350.28369140625,
+        "correct1": 978,
+        "correct3": 1984,
+        "correct5": 2036,
+        "correct10": 2048
+      }
+    },
+    {
+      "pair_id": "val_G2_2fca6d0ad54b4ac4e990f3b3",
+      "group": "G2",
+      "d2": {
+        "n": 2048,
+        "visible": 2046,
+        "error_sum": 33058.2109375,
+        "correct1": 0,
+        "correct3": 0,
+        "correct5": 0,
+        "correct10": 20
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2046,
+        "error_sum": 34166.6171875,
+        "correct1": 0,
+        "correct3": 0,
+        "correct5": 0,
+        "correct10": 0
+      }
+    },
+    {
+      "pair_id": "val_G2_39cec9c422fc98c30f8d9c9c",
+      "group": "G2",
+      "d2": {
+        "n": 2048,
+        "visible": 1666,
+        "error_sum": 29396.02734375,
+        "correct1": 0,
+        "correct3": 66,
+        "correct5": 180,
+        "correct10": 579
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 1666,
+        "error_sum": 37657.88671875,
+        "correct1": 3,
+        "correct3": 31,
+        "correct5": 88,
+        "correct10": 520
+      }
+    },
+    {
+      "pair_id": "val_G2_f822d278bfdbf6e04b37281a",
+      "group": "G2",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 2054.41064453125,
+        "correct1": 926,
+        "correct3": 2044,
+        "correct5": 2048,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 2496.65966796875,
+        "correct1": 855,
+        "correct3": 2024,
+        "correct5": 2048,
+        "correct10": 2048
+      }
+    },
+    {
+      "pair_id": "val_G2_65b74789f513b5ce7954b9e5",
+      "group": "G2",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 10800.818359375,
+        "correct1": 45,
+        "correct3": 492,
+        "correct5": 1096,
+        "correct10": 1903
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 13565.177734375,
+        "correct1": 5,
+        "correct3": 104,
+        "correct5": 908,
+        "correct10": 1646
+      }
+    },
+    {
+      "pair_id": "val_G3_8c445598942db6a3ba815231",
+      "group": "G3",
+      "d2": {
+        "n": 2048,
+        "visible": 2046,
+        "error_sum": 5282.76220703125,
+        "correct1": 292,
+        "correct3": 1358,
+        "correct5": 1908,
+        "correct10": 2042
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2046,
+        "error_sum": 7432.994140625,
+        "correct1": 161,
+        "correct3": 1070,
+        "correct5": 1687,
+        "correct10": 1963
+      }
+    },
+    {
+      "pair_id": "val_G3_525ccb8108102770ec06444d",
+      "group": "G3",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 2759.447998046875,
+        "correct1": 766,
+        "correct3": 1977,
+        "correct5": 2046,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 2830.0732421875,
+        "correct1": 873,
+        "correct3": 1892,
+        "correct5": 2033,
+        "correct10": 2048
+      }
+    },
+    {
+      "pair_id": "val_G3_0e9e6c4d6ea4746bf78deeb9",
+      "group": "G3",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 9754.810546875,
+        "correct1": 28,
+        "correct3": 522,
+        "correct5": 1320,
+        "correct10": 1972
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 9767.458984375,
+        "correct1": 56,
+        "correct3": 727,
+        "correct5": 1229,
+        "correct10": 1941
+      }
+    },
+    {
+      "pair_id": "val_G3_fce9e06b9ca408b41069a0f2",
+      "group": "G3",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 10673.8984375,
+        "correct1": 71,
+        "correct3": 591,
+        "correct5": 1147,
+        "correct10": 1858
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 8580.607421875,
+        "correct1": 33,
+        "correct3": 791,
+        "correct5": 1562,
+        "correct10": 1944
+      }
+    },
+    {
+      "pair_id": "val_G3_92c979db1d458321017de5ed",
+      "group": "G3",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 3496.884765625,
+        "correct1": 472,
+        "correct3": 1891,
+        "correct5": 2046,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 4020.938232421875,
+        "correct1": 412,
+        "correct3": 1745,
+        "correct5": 2006,
+        "correct10": 2044
+      }
+    },
+    {
+      "pair_id": "val_G3_7a75fed0e4ae0400f8ec095b",
+      "group": "G3",
+      "d2": {
+        "n": 2048,
+        "visible": 1941,
+        "error_sum": 21065.990234375,
+        "correct1": 12,
+        "correct3": 82,
+        "correct5": 214,
+        "correct10": 933
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 1941,
+        "error_sum": 21223.93359375,
+        "correct1": 12,
+        "correct3": 166,
+        "correct5": 406,
+        "correct10": 1010
+      }
+    },
+    {
+      "pair_id": "val_G3_8f2258607f065f89b71b7804",
+      "group": "G3",
+      "d2": {
+        "n": 1523,
+        "visible": 1486,
+        "error_sum": 10728.9423828125,
+        "correct1": 88,
+        "correct3": 627,
+        "correct5": 1043,
+        "correct10": 1362
+      },
+      "flow_same_points": {
+        "n": 1523,
+        "visible": 1486,
+        "error_sum": 15205.646484375,
+        "correct1": 1,
+        "correct3": 180,
+        "correct5": 779,
+        "correct10": 1248
+      }
+    },
+    {
+      "pair_id": "val_G3_12add035b2b2190ad8b131b2",
+      "group": "G3",
+      "d2": {
+        "n": 2048,
+        "visible": 58,
+        "error_sum": 22572.3984375,
+        "correct1": 0,
+        "correct3": 0,
+        "correct5": 0,
+        "correct10": 0
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 58,
+        "error_sum": 21316.1171875,
+        "correct1": 0,
+        "correct3": 0,
+        "correct5": 0,
+        "correct10": 0
+      }
+    },
+    {
+      "pair_id": "val_G3_69ae20dcb56077a018937393",
+      "group": "G3",
+      "d2": {
+        "n": 2048,
+        "visible": 2023,
+        "error_sum": 14742.30859375,
+        "correct1": 2,
+        "correct3": 32,
+        "correct5": 248,
+        "correct10": 1973
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2023,
+        "error_sum": 12703.9892578125,
+        "correct1": 1,
+        "correct3": 19,
+        "correct5": 294,
+        "correct10": 2016
+      }
+    },
+    {
+      "pair_id": "val_G3_5f57f611d59872d7fbb15de6",
+      "group": "G3",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 3211.607666015625,
+        "correct1": 577,
+        "correct3": 1919,
+        "correct5": 2048,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 2802.386962890625,
+        "correct1": 1192,
+        "correct3": 1889,
+        "correct5": 1976,
+        "correct10": 2010
+      }
+    },
+    {
+      "pair_id": "val_G3_1ba49f671a97d305562f5787",
+      "group": "G3",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 2974.621337890625,
+        "correct1": 693,
+        "correct3": 1957,
+        "correct5": 2039,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 2864.6845703125,
+        "correct1": 866,
+        "correct3": 1958,
+        "correct5": 2027,
+        "correct10": 2045
+      }
+    },
+    {
+      "pair_id": "val_G3_a4e0a479df8364b40227e2c5",
+      "group": "G3",
+      "d2": {
+        "n": 1900,
+        "visible": 720,
+        "error_sum": 224158.203125,
+        "correct1": 0,
+        "correct3": 0,
+        "correct5": 0,
+        "correct10": 0
+      },
+      "flow_same_points": {
+        "n": 1900,
+        "visible": 720,
+        "error_sum": 219684.765625,
+        "correct1": 0,
+        "correct3": 0,
+        "correct5": 0,
+        "correct10": 0
+      }
+    },
+    {
+      "pair_id": "val_G3_7aaef7938188368f6474a5e1",
+      "group": "G3",
+      "d2": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 5771.8232421875,
+        "correct1": 126,
+        "correct3": 1131,
+        "correct5": 1994,
+        "correct10": 2048
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 4972.453125,
+        "correct1": 377,
+        "correct3": 1513,
+        "correct5": 1825,
+        "correct10": 2048
+      }
+    },
+    {
+      "pair_id": "val_G3_d425b727ce88d1e7132cb3b9",
+      "group": "G3",
+      "d2": {
+        "n": 2048,
+        "visible": 2037,
+        "error_sum": 8837.0166015625,
+        "correct1": 86,
+        "correct3": 615,
+        "correct5": 1274,
+        "correct10": 2031
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2037,
+        "error_sum": 9512.6328125,
+        "correct1": 7,
+        "correct3": 535,
+        "correct5": 1312,
+        "correct10": 2002
+      }
+    },
+    {
+      "pair_id": "val_G3_d675c8471dc323c373c41661",
+      "group": "G3",
+      "d2": {
+        "n": 2048,
+        "visible": 1175,
+        "error_sum": 309132.875,
+        "correct1": 0,
+        "correct3": 0,
+        "correct5": 0,
+        "correct10": 0
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 1175,
+        "error_sum": 300410.4375,
+        "correct1": 0,
+        "correct3": 0,
+        "correct5": 0,
+        "correct10": 0
+      }
+    },
+    {
+      "pair_id": "val_G3_dd511106f1775a1ee1ddc654",
+      "group": "G3",
+      "d2": {
+        "n": 2048,
+        "visible": 2045,
+        "error_sum": 3882.53173828125,
+        "correct1": 435,
+        "correct3": 1733,
+        "correct5": 2034,
+        "correct10": 2045
+      },
+      "flow_same_points": {
+        "n": 2048,
+        "visible": 2045,
+        "error_sum": 3968.939453125,
+        "correct1": 507,
+        "correct3": 1874,
+        "correct5": 1986,
+        "correct10": 2012
+      }
+    }
+  ]
+}

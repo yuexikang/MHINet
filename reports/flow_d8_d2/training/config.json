@@ -1,0 +1,18 @@
+{
+  "seed": 42,
+  "epochs": 30,
+  "learning_rate": 8e-05,
+  "min_lr": 1e-06,
+  "patience": 6,
+  "min_epochs": 5,
+  "min_delta": 0.001,
+  "accumulation": 4,
+  "selection": "outputs/hangzhou_cleaned_restart/selection.json",
+  "initial_downstream": "outputs/hangzhou_cleaned_restart/v2_20261022/best.pt",
+  "flow": "weight/mhi_v2_u0.pt",
+  "variant": "local",
+  "qrru": false,
+  "supervision": "existing D8 positive focal + D2 uncertainty-region focal; approximate H",
+  "monitor": "validation D2 P@3; initial checkpoint is eligible",
+  "trainable_parameters": 18788898
+}

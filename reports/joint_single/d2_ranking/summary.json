@@ -1,0 +1,172 @@
+{
+  "synthetic": {
+    "metrics": {
+      "flow": {
+        "p3": 87.2039794921875,
+        "points": 2048.0,
+        "correct3": 1785.9375,
+        "epe": 1.7876453436183455
+      },
+      "nearest_candidate_oracle": {
+        "p3": 97.79510498046875,
+        "points": 2048.0,
+        "correct3": 2002.84375,
+        "epe": 0.8837919396378902
+      },
+      "raw_hard": {
+        "p3": 78.57742309570312,
+        "points": 2048.0,
+        "correct3": 1609.265625,
+        "epe": 2.1678993845150325
+      },
+      "raw_soft": {
+        "p3": 81.4208984375,
+        "points": 2048.0,
+        "correct3": 1667.5,
+        "epe": 2.0294740419888213
+      },
+      "raw_oracle_peak_soft": {
+        "p3": 96.20819091796875,
+        "points": 2048.0,
+        "correct3": 1970.34375,
+        "epe": 1.2410701606484584
+      },
+      "dual_hard": {
+        "p3": 78.9459228515625,
+        "points": 2048.0,
+        "correct3": 1616.8125,
+        "epe": 2.1574132501316545
+      },
+      "dual_soft": {
+        "p3": 82.37533569335938,
+        "points": 2048.0,
+        "correct3": 1687.046875,
+        "epe": 2.0037800168607576
+      },
+      "dual_oracle_peak_soft": {
+        "p3": 96.06170654296875,
+        "points": 2048.0,
+        "correct3": 1967.34375,
+        "epe": 1.419436769167704
+      }
+    },
+    "counts": {
+      "n": 131072,
+      "visible": 130550,
+      "covered3": 128182,
+      "raw_nearest_rank1": 32932,
+      "raw_positive_rank1": 102993,
+      "raw_nearest_rank5": 94947,
+      "raw_positive_rank5": 123472,
+      "raw_nearest_rank10": 116984,
+      "raw_positive_rank10": 126668,
+      "raw_flow_good": 114300,
+      "raw_damaged": 19267,
+      "raw_rescued": 11687,
+      "raw_damage_no_candidate": 1726,
+      "raw_damage_wrong_peak": 15707,
+      "raw_damage_soft_only": 1834,
+      "raw_hard_good_soft_bad": 2245,
+      "raw_hard_bad_soft_good": 5972,
+      "dual_nearest_rank1": 32900,
+      "dual_positive_rank1": 103476,
+      "dual_nearest_rank5": 95274,
+      "dual_positive_rank5": 123736,
+      "dual_nearest_rank10": 117242,
+      "dual_positive_rank10": 126743,
+      "dual_flow_good": 114300,
+      "dual_damaged": 18157,
+      "dual_rescued": 11828,
+      "dual_damage_no_candidate": 1726,
+      "dual_damage_wrong_peak": 14316,
+      "dual_damage_soft_only": 2115,
+      "dual_hard_good_soft_bad": 2541,
+      "dual_hard_bad_soft_good": 7036
+    }
+  },
+  "hangzhou": {
+    "metrics": {
+      "flow": {
+        "p3": 69.23980712890625,
+        "points": 2048.0,
+        "correct3": 1418.03125,
+        "epe": 8.572223413505053
+      },
+      "nearest_candidate_oracle": {
+        "p3": 89.19448852539062,
+        "points": 2048.0,
+        "correct3": 1826.703125,
+        "epe": 6.755163240292485
+      },
+      "raw_hard": {
+        "p3": 67.41409301757812,
+        "points": 2048.0,
+        "correct3": 1380.640625,
+        "epe": 8.757301937426133
+      },
+      "raw_soft": {
+        "p3": 69.17266845703125,
+        "points": 2048.0,
+        "correct3": 1416.65625,
+        "epe": 8.657802444285583
+      },
+      "raw_oracle_peak_soft": {
+        "p3": 85.16616821289062,
+        "points": 2048.0,
+        "correct3": 1744.203125,
+        "epe": 7.359700924163126
+      },
+      "dual_hard": {
+        "p3": 66.60232543945312,
+        "points": 2048.0,
+        "correct3": 1364.015625,
+        "epe": 8.802035667260183
+      },
+      "dual_soft": {
+        "p3": 68.4814453125,
+        "points": 2048.0,
+        "correct3": 1402.5,
+        "epe": 8.71301875199759
+      },
+      "dual_oracle_peak_soft": {
+        "p3": 84.01947021484375,
+        "points": 2048.0,
+        "correct3": 1720.71875,
+        "epe": 7.502468671921513
+      }
+    },
+    "counts": {
+      "n": 131072,
+      "visible": 126813,
+      "covered3": 116909,
+      "raw_nearest_rank1": 38828,
+      "raw_positive_rank1": 88361,
+      "raw_nearest_rank5": 79708,
+      "raw_positive_rank5": 101932,
+      "raw_nearest_rank10": 95345,
+      "raw_positive_rank10": 105829,
+      "raw_flow_good": 90754,
+      "raw_damaged": 7924,
+      "raw_rescued": 7836,
+      "raw_damage_no_candidate": 103,
+      "raw_damage_wrong_peak": 6682,
+      "raw_damage_soft_only": 1139,
+      "raw_hard_good_soft_bad": 1729,
+      "raw_hard_bad_soft_good": 4034,
+      "dual_nearest_rank1": 36950,
+      "dual_positive_rank1": 87297,
+      "dual_nearest_rank5": 77835,
+      "dual_positive_rank5": 101698,
+      "dual_nearest_rank10": 93966,
+      "dual_positive_rank10": 105912,
+      "dual_flow_good": 90754,
+      "dual_damaged": 8781,
+      "dual_rescued": 7787,
+      "dual_damage_no_candidate": 103,
+      "dual_damage_wrong_peak": 7352,
+      "dual_damage_soft_only": 1326,
+      "dual_hard_good_soft_bad": 1944,
+      "dual_hard_bad_soft_good": 4407
+    }
+  }
+}

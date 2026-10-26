@@ -22,3 +22,5 @@ python -m mhinet.v2.joint_single.train --domain hangzhou --device cuda:1
 ```
 
 输出目录outputs/joint_single/{synthetic,hangzhou}：配置、epoch_000及逐轮验证、历史、best/last权重、训练前和最佳模型在两域测试结果、完成状态。测试指标中old_discrete_d2指**同一次评估的当前特征权重**下的旧离散解码；原冻结基线见initial_test_*.json。报告必须区分同点比较、不同选点集合比较和完整Flow网格比较。
+
+逐项同点归因入口：`diagnose_attribution.py`。固定权重对比旧/新父中心、硬/软解码、互选和 4/8 目标窗口；完整 64 对验证结果见 `reports/joint_single/attribution/results.md`。

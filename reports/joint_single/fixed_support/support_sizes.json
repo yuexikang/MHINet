@@ -1,0 +1,2376 @@
+{
+  "hangzhou": {
+    "summary": {
+      "4": {
+        "coverage": 0.3944824623316046,
+        "all": {
+          "p3": 0.54296875,
+          "points": 2048.0,
+          "correct3": 1112.0,
+          "epe": 5.880433750916417
+        },
+        "mutual": {
+          "p3": 0.6007001373687243,
+          "points": 1410.4375,
+          "correct3": 847.25,
+          "epe": 4.671018681094235
+        }
+      },
+      "8": {
+        "coverage": 0.7816920858010863,
+        "all": {
+          "p3": 0.575714111328125,
+          "points": 2048.0,
+          "correct3": 1179.0625,
+          "epe": 5.822676873878003
+        },
+        "mutual": {
+          "p3": 0.5819885120350109,
+          "points": 1828.0,
+          "correct3": 1063.875,
+          "epe": 5.093663270569423
+        }
+      },
+      "12": {
+        "coverage": 0.9018627059870501,
+        "all": {
+          "p3": 0.572357177734375,
+          "points": 2048.0,
+          "correct3": 1172.1875,
+          "epe": 5.834475106122169
+        },
+        "mutual": {
+          "p3": 0.5778043366911388,
+          "points": 1830.3125,
+          "correct3": 1057.5625,
+          "epe": 5.107004151068538
+        }
+      }
+    },
+    "pairs": [
+      {
+        "pair_id": "val_G0_763d789ca7b5ae6ec96d4423",
+        "variants": {
+          "4": {
+            "coverage": 30,
+            "visible": 2048,
+            "all": {
+              "n": 2048,
+              "visible": 2048,
+              "error_sum": 16907.51171875,
+              "correct1": 0,
+              "correct3": 0,
+              "correct5": 0,
+              "correct10": 1956
+            },
+            "mutual": {
+              "n": 1699,
+              "visible": 1699,
+              "error_sum": 13968.443359375,
+              "correct1": 0,
+              "correct3": 0,
+              "correct5": 0,
+              "correct10": 1668
+            }
+          },
+          "8": {
+            "coverage": 980,
+            "visible": 2048,
+            "all": {
+              "n": 2048,
+              "visible": 2048,
+              "error_sum": 17005.91796875,
+              "correct1": 0,
+              "correct3": 0,
+              "correct5": 0,
+              "correct10": 2020
+            },
+            "mutual": {
+              "n": 1953,
+              "visible": 1953,
+              "error_sum": 16234.583984375,
+              "correct1": 0,
+              "correct3": 0,
+              "correct5": 0,
+              "correct10": 1925
+            }
+          },
+          "12": {
+            "coverage": 1968,
+            "visible": 2048,
+            "all": {
+              "n": 2048,
+              "visible": 2048,
+              "error_sum": 17006.095703125,
+              "correct1": 0,
+              "correct3": 0,
+              "correct5": 0,
+              "correct10": 2020
+            },
+            "mutual": {
+              "n": 1953,
+              "visible": 1953,
+              "error_sum": 16234.7607421875,
+              "correct1": 0,
+              "correct3": 0,
+              "correct5": 0,
+              "correct10": 1925
+            }
+          }
+        }
+      },
+      {
+        "pair_id": "val_G0_f5dbf3bf4f91d444994db1f3",
+        "variants": {
+          "4": {
+            "coverage": 1816,
+            "visible": 2048,
+            "all": {
+              "n": 2048,
+              "visible": 2048,
+              "error_sum": 2330.80810546875,
+              "correct1": 907,
+              "correct3": 2048,
+              "correct5": 2048,
+              "correct10": 2048
+            },
+            "mutual": {
+              "n": 1528,
+              "visible": 1528,
+              "error_sum": 1752.6751708984375,
+              "correct1": 689,
+              "correct3": 1528,
+              "correct5": 1528,
+              "correct10": 1528
+            }
+          },
+          "8": {
+            "coverage": 2048,
+            "visible": 2048,
+            "all": {
+              "n": 2048,
+              "visible": 2048,
+              "error_sum": 2955.1865234375,
+              "correct1": 537,
+              "correct3": 2041,
+              "correct5": 2048,
+              "correct10": 2048
+            },
+            "mutual": {
+              "n": 1787,
+              "visible": 1787,
+              "error_sum": 2638.4013671875,
+              "correct1": 433,
+              "correct3": 1780,
+              "correct5": 1787,
+              "correct10": 1787
+            }
+          },
+          "12": {
+            "coverage": 2048,
+            "visible": 2048,
+            "all": {
+              "n": 2048,
+              "visible": 2048,
+              "error_sum": 2955.18701171875,
+              "correct1": 537,
+              "correct3": 2041,
+              "correct5": 2048,
+              "correct10": 2048
+            },
+            "mutual": {
+              "n": 1787,
+              "visible": 1787,
+              "error_sum": 2638.4013671875,
+              "correct1": 433,
+              "correct3": 1780,
+              "correct5": 1787,
+              "correct10": 1787
+            }
+          }
+        }
+      },
+      {
+        "pair_id": "val_G0_a352be5979b31a4c2132f43f",
+        "variants": {
+          "4": {
+            "coverage": 1976,
+            "visible": 2048,
+            "all": {
+              "n": 2048,
+              "visible": 2048,
+              "error_sum": 877.6908569335938,
+              "correct1": 1806,
+              "correct3": 2048,
+              "correct5": 2048,
+              "correct10": 2048
+            },
+            "mutual": {
+              "n": 1936,
+              "visible": 1936,
+              "error_sum": 798.4798583984375,
+              "correct1": 1723,
+              "correct3": 1936,
+              "correct5": 1936,
+              "correct10": 1936
+            }
+          },
+          "8": {
+            "coverage": 2048,
+            "visible": 2048,
+            "all": {
+              "n": 2048,
+              "visible": 2048,
+              "error_sum": 1373.8748779296875,
+              "correct1": 1609,
+              "correct3": 2047,
+              "correct5": 2048,
+              "correct10": 2048
+            },
+            "mutual": {
+              "n": 2004,
+              "visible": 2004,
+              "error_sum": 1343.44189453125,
+              "correct1": 1573,
+              "correct3": 2003,
+              "correct5": 2004,
+              "correct10": 2004
+            }
+          },
+          "12": {
+            "coverage": 2048,
+            "visible": 2048,
+            "all": {
+              "n": 2048,
+              "visible": 2048,
+              "error_sum": 1373.8751220703125,
+              "correct1": 1609,
+              "correct3": 2047,
+              "correct5": 2048,
+              "correct10": 2048
+            },
+            "mutual": {
+              "n": 2004,
+              "visible": 2004,
+              "error_sum": 1343.4420166015625,
+              "correct1": 1573,
+              "correct3": 2003,
+              "correct5": 2004,
+              "correct10": 2004
+            }
+          }
+        }
+      },
+      {
+        "pair_id": "val_G0_5c1bc4507c4f1345227f3b03",
+        "variants": {
+          "4": {
+            "coverage": 579,
+            "visible": 2048,
+            "all": {
+              "n": 2048,
+              "visible": 2048,
+              "error_sum": 11706.251953125,
+              "correct1": 0,
+              "correct3": 0,
+              "correct5": 543,
+              "correct10": 2048
+            },
+            "mutual": {
+              "n": 1617,
+              "visible": 1617,
+              "error_sum": 9332.203125,
+              "correct1": 0,
+              "correct3": 0,
+              "correct5": 389,
+              "correct10": 1617
+            }
+          },
+          "8": {
+            "coverage": 1844,
+            "visible": 2048,
+            "all": {
+              "n": 2048,
+              "visible": 2048,
+              "error_sum": 12070.9326171875,
+              "correct1": 0,
+              "correct3": 0,
+              "correct5": 341,
+              "correct10": 2048
+            },
+            "mutual": {
+              "n": 2001,
+              "visible": 2001,
+              "error_sum": 11778.337890625,
+              "correct1": 0,
+              "correct3": 0,
+              "correct5": 335,
+              "correct10": 2001
+            }
+          },
+          "12": {
+            "coverage": 2048,
+            "visible": 2048,
+            "all": {
+              "n": 2048,
+              "visible": 2048,
+              "error_sum": 12070.95703125,
+              "correct1": 0,
+              "correct3": 0,
+              "correct5": 341,
+              "correct10": 2048
+            },
+            "mutual": {
+              "n": 2001,
+              "visible": 2001,
+              "error_sum": 11778.361328125,
+              "correct1": 0,
+              "correct3": 0,
+              "correct5": 335,
+              "correct10": 2001
+            }
+          }
+        }
+      },
+      {
+        "pair_id": "val_G1_59f4a5c20fca6f19576e658c",
+        "variants": {
+          "4": {
+            "coverage": 1143,
+            "visible": 2048,
+            "all": {
+              "n": 2048,
+              "visible": 2048,
+              "error_sum": 1923.5958251953125,
+              "correct1": 1197,
+              "correct3": 2046,
+              "correct5": 2048,
+              "correct10": 2048
+            },
+            "mutual": {
+              "n": 1751,
+              "visible": 1751,
+              "error_sum": 1566.9415283203125,
+              "correct1": 1069,
+              "correct3": 1751,
+              "correct5": 1751,
+              "correct10": 1751
+            }
+          },
+          "8": {
+            "coverage": 2048,
+            "visible": 2048,
+            "all": {
+              "n": 2048,
+              "visible": 2048,
+              "error_sum": 1929.0760498046875,
+              "correct1": 1145,
+              "correct3": 2048,
+              "correct5": 2048,
+              "correct10": 2048
+            },
+            "mutual": {
+              "n": 1943,
+              "visible": 1943,
+              "error_sum": 1832.78369140625,
+              "correct1": 1080,
+              "correct3": 1943,
+              "correct5": 1943,
+              "correct10": 1943
+            }
+          },
+          "12": {
+            "coverage": 2048,
+            "visible": 2048,
+            "all": {
+              "n": 2048,
+              "visible": 2048,
+              "error_sum": 1929.1092529296875,
+              "correct1": 1145,
+              "correct3": 2048,
+              "correct5": 2048,
+              "correct10": 2048
+            },
+            "mutual": {
+              "n": 1943,
+              "visible": 1943,
+              "error_sum": 1832.81689453125,
+              "correct1": 1080,
+              "correct3": 1943,
+              "correct5": 1943,
+              "correct10": 1943
+            }
+          }
+        }
+      },
+      {
+        "pair_id": "val_G1_411c9f87b5d122329322571a",
+        "variants": {
+          "4": {
+            "coverage": 118,
+            "visible": 2048,
+            "all": {
+              "n": 2048,
+              "visible": 2048,
+              "error_sum": 13995.0234375,
+              "correct1": 0,
+              "correct3": 4,
+              "correct5": 83,
+              "correct10": 2046
+            },
+            "mutual": {
+              "n": 1637,
+              "visible": 1637,
+              "error_sum": 11214.919921875,
+              "correct1": 0,
+              "correct3": 0,
+              "correct5": 56,
+              "correct10": 1636
+            }
+          },
+          "8": {
+            "coverage": 1144,
+            "visible": 2048,
+            "all": {
+              "n": 2048,
+              "visible": 2048,
+              "error_sum": 14076.767578125,
+              "correct1": 0,
+              "correct3": 0,
+              "correct5": 45,
+              "correct10": 2044
+            },
+            "mutual": {
+              "n": 1940,
+              "visible": 1940,
+              "error_sum": 13349.533203125,
+              "correct1": 0,
+              "correct3": 0,
+              "correct5": 42,
+              "correct10": 1937
+            }
+          },
+          "12": {
+            "coverage": 2011,
+            "visible": 2048,
+            "all": {
+              "n": 2048,
+              "visible": 2048,
+              "error_sum": 14076.751953125,
+              "correct1": 0,
+              "correct3": 0,
+              "correct5": 45,
+              "correct10": 2044
+            },
+            "mutual": {
+              "n": 1940,
+              "visible": 1940,
+              "error_sum": 13349.533203125,
+              "correct1": 0,
+              "correct3": 0,
+              "correct5": 42,
+              "correct10": 1937
+            }
+          }
+        }
+      },
+      {
+        "pair_id": "val_G1_3958fb5340a73f8ea30f68fd",
+        "variants": {
+          "4": {
+            "coverage": 1111,
+            "visible": 2036,
+            "all": {
+              "n": 2048,
+              "visible": 2036,
+              "error_sum": 2206.62646484375,
+              "correct1": 1005,
+              "correct3": 2025,
+              "correct5": 2032,
+              "correct10": 2036
+            },
+            "mutual": {
+              "n": 1535,
+              "visible": 1530,
+              "error_sum": 1481.67626953125,
+              "correct1": 850,
+              "correct3": 1529,
+              "correct5": 1529,
+              "correct10": 1530
+            }
+          },
+          "8": {
+            "coverage": 2034,
+            "visible": 2036,
+            "all": {
+              "n": 2048,
+              "visible": 2036,
+              "error_sum": 2300.47216796875,
+              "correct1": 932,
+              "correct3": 2031,
+              "correct5": 2032,
+              "correct10": 2036
+            },
+            "mutual": {
+              "n": 1945,
+              "visible": 1937,
+              "error_sum": 2159.98876953125,
+              "correct1": 897,
+              "correct3": 1935,
+              "correct5": 1936,
+              "correct10": 1937
+            }
+          },
+          "12": {
+            "coverage": 2035,
+            "visible": 2036,
+            "all": {
+              "n": 2048,
+              "visible": 2036,
+              "error_sum": 2356.234375,
+              "correct1": 931,
+              "correct3": 2031,
+              "correct5": 2032,
+              "correct10": 2032
+            },
+            "mutual": {
+              "n": 1947,
+              "visible": 1938,
+              "error_sum": 2179.118896484375,
+              "correct1": 896,
+              "correct3": 1936,
+              "correct5": 1937,
+              "correct10": 1937
+            }
+          }
+        }
+      },
+      {
+        "pair_id": "val_G1_769728d293f17d1e5289c9cf",
+        "variants": {
+          "4": {
+            "coverage": 950,
+            "visible": 2048,
+            "all": {
+              "n": 2048,
+              "visible": 2048,
+              "error_sum": 4618.1171875,
+              "correct1": 19,
+              "correct3": 1826,
+              "correct5": 2048,
+              "correct10": 2048
+            },
+            "mutual": {
+              "n": 1701,
+              "visible": 1701,
+              "error_sum": 3754.068115234375,
+              "correct1": 15,
+              "correct3": 1564,
+              "correct5": 1701,
+              "correct10": 1701
+            }
+          },
+          "8": {
+            "coverage": 2043,
+            "visible": 2048,
+            "all": {
+              "n": 2048,
+              "visible": 2048,
+              "error_sum": 4293.30322265625,
+              "correct1": 82,
+              "correct3": 1888,
+              "correct5": 2048,
+              "correct10": 2048
+            },
+            "mutual": {
+              "n": 1939,
+              "visible": 1939,
+              "error_sum": 4037.79931640625,
+              "correct1": 81,
+              "correct3": 1794,
+              "correct5": 1939,
+              "correct10": 1939
+            }
+          },
+          "12": {
+            "coverage": 2048,
+            "visible": 2048,
+            "all": {
+              "n": 2048,
+              "visible": 2048,
+              "error_sum": 4293.255859375,
+              "correct1": 82,
+              "correct3": 1888,
+              "correct5": 2048,
+              "correct10": 2048
+            },
+            "mutual": {
+              "n": 1940,
+              "visible": 1940,
+              "error_sum": 4041.012939453125,
+              "correct1": 81,
+              "correct3": 1794,
+              "correct5": 1940,
+              "correct10": 1940
+            }
+          }
+        }
+      },
+      {
+        "pair_id": "val_G2_9971335a127868ebf95ebed8",
+        "variants": {
+          "4": {
+            "coverage": 512,
+            "visible": 2048,
+            "all": {
+              "n": 2048,
+              "visible": 2048,
+              "error_sum": 4115.93310546875,
+              "correct1": 233,
+              "correct3": 1717,
+              "correct5": 2048,
+              "correct10": 2048
+            },
+            "mutual": {
+              "n": 1208,
+              "visible": 1208,
+              "error_sum": 2075.50634765625,
+              "correct1": 203,
+              "correct3": 1138,
+              "correct5": 1208,
+              "correct10": 1208
+            }
+          },
+          "8": {
+            "coverage": 2048,
+            "visible": 2048,
+            "all": {
+              "n": 2048,
+              "visible": 2048,
+              "error_sum": 3098.32421875,
+              "correct1": 491,
+              "correct3": 1993,
+              "correct5": 2048,
+              "correct10": 2048
+            },
+            "mutual": {
+              "n": 2047,
+              "visible": 2047,
+              "error_sum": 3097.672119140625,
+              "correct1": 490,
+              "correct3": 1992,
+              "correct5": 2047,
+              "correct10": 2047
+            }
+          },
+          "12": {
+            "coverage": 2048,
+            "visible": 2048,
+            "all": {
+              "n": 2048,
+              "visible": 2048,
+              "error_sum": 3151.0146484375,
+              "correct1": 493,
+              "correct3": 1984,
+              "correct5": 2048,
+              "correct10": 2048
+            },
+            "mutual": {
+              "n": 2047,
+              "visible": 2047,
+              "error_sum": 3150.3623046875,
+              "correct1": 492,
+              "correct3": 1983,
+              "correct5": 2047,
+              "correct10": 2047
+            }
+          }
+        }
+      },
+      {
+        "pair_id": "val_G2_00af91637a79efd4ed7960eb",
+        "variants": {
+          "4": {
+            "coverage": 64,
+            "visible": 2048,
+            "all": {
+              "n": 2048,
+              "visible": 2048,
+              "error_sum": 69645.9375,
+              "correct1": 14,
+              "correct3": 74,
+              "correct5": 134,
+              "correct10": 451
+            },
+            "mutual": {
+              "n": 796,
+              "visible": 796,
+              "error_sum": 27139.26171875,
+              "correct1": 6,
+              "correct3": 31,
+              "correct5": 57,
+              "correct10": 175
+            }
+          },
+          "8": {
+            "coverage": 304,
+            "visible": 2048,
+            "all": {
+              "n": 2048,
+              "visible": 2048,
+              "error_sum": 69898.5390625,
+              "correct1": 5,
+              "correct3": 52,
+              "correct5": 128,
+              "correct10": 419
+            },
+            "mutual": {
+              "n": 1006,
+              "visible": 1006,
+              "error_sum": 34397.73828125,
+              "correct1": 1,
+              "correct3": 26,
+              "correct5": 67,
+              "correct10": 212
+            }
+          },
+          "12": {
+            "coverage": 552,
+            "visible": 2048,
+            "all": {
+              "n": 2048,
+              "visible": 2048,
+              "error_sum": 70049.5078125,
+              "correct1": 5,
+              "correct3": 50,
+              "correct5": 125,
+              "correct10": 428
+            },
+            "mutual": {
+              "n": 1016,
+              "visible": 1016,
+              "error_sum": 34628.5234375,
+              "correct1": 1,
+              "correct3": 26,
+              "correct5": 67,
+              "correct10": 221
+            }
+          }
+        }
+      },
+      {
+        "pair_id": "val_G2_5adeeee1da5e5266f2caafa6",
+        "variants": {
+          "4": {
+            "coverage": 314,
+            "visible": 1984,
+            "all": {
+              "n": 2048,
+              "visible": 1984,
+              "error_sum": 6367.36181640625,
+              "correct1": 153,
+              "correct3": 714,
+              "correct5": 1594,
+              "correct10": 1984
+            },
+            "mutual": {
+              "n": 890,
+              "visible": 875,
+              "error_sum": 1963.8843994140625,
+              "correct1": 152,
+              "correct3": 608,
+              "correct5": 831,
+              "correct10": 875
+            }
+          },
+          "8": {
+            "coverage": 1594,
+            "visible": 1984,
+            "all": {
+              "n": 2048,
+              "visible": 1984,
+              "error_sum": 3283.02783203125,
+              "correct1": 539,
+              "correct3": 1815,
+              "correct5": 1983,
+              "correct10": 1984
+            },
+            "mutual": {
+              "n": 2005,
+              "visible": 1979,
+              "error_sum": 3273.720947265625,
+              "correct1": 539,
+              "correct3": 1810,
+              "correct5": 1978,
+              "correct10": 1979
+            }
+          },
+          "12": {
+            "coverage": 1984,
+            "visible": 1984,
+            "all": {
+              "n": 2048,
+              "visible": 1984,
+              "error_sum": 3619.441650390625,
+              "correct1": 371,
+              "correct3": 1717,
+              "correct5": 1975,
+              "correct10": 1984
+            },
+            "mutual": {
+              "n": 2018,
+              "visible": 1984,
+              "error_sum": 3619.441650390625,
+              "correct1": 371,
+              "correct3": 1717,
+              "correct5": 1975,
+              "correct10": 1984
+            }
+          }
+        }
+      },
+      {
+        "pair_id": "val_G2_2fca6d0ad54b4ac4e990f3b3",
+        "variants": {
+          "4": {
+            "coverage": 0,
+            "visible": 1963,
+            "all": {
+              "n": 2048,
+              "visible": 1963,
+              "error_sum": 31952.65625,
+              "correct1": 0,
+              "correct3": 0,
+              "correct5": 0,
+              "correct10": 0
+            },
+            "mutual": {
+              "n": 875,
+              "visible": 851,
+              "error_sum": 13367.9091796875,
+              "correct1": 0,
+              "correct3": 0,
+              "correct5": 0,
+              "correct10": 0
+            }
+          },
+          "8": {
+            "coverage": 0,
+            "visible": 1963,
+            "all": {
+              "n": 2048,
+              "visible": 1963,
+              "error_sum": 31296.046875,
+              "correct1": 0,
+              "correct3": 0,
+              "correct5": 0,
+              "correct10": 0
+            },
+            "mutual": {
+              "n": 2018,
+              "visible": 1960,
+              "error_sum": 31250.9375,
+              "correct1": 0,
+              "correct3": 0,
+              "correct5": 0,
+              "correct10": 0
+            }
+          },
+          "12": {
+            "coverage": 412,
+            "visible": 1963,
+            "all": {
+              "n": 2048,
+              "visible": 1963,
+              "error_sum": 31036.107421875,
+              "correct1": 0,
+              "correct3": 0,
+              "correct5": 0,
+              "correct10": 0
+            },
+            "mutual": {
+              "n": 2027,
+              "visible": 1963,
+              "error_sum": 31036.107421875,
+              "correct1": 0,
+              "correct3": 0,
+              "correct5": 0,
+              "correct10": 0
+            }
+          }
+        }
+      },
+      {
+        "pair_id": "val_G3_8c445598942db6a3ba815231",
+        "variants": {
+          "4": {
+            "coverage": 1378,
+            "visible": 2028,
+            "all": {
+              "n": 2048,
+              "visible": 2028,
+              "error_sum": 4050.68701171875,
+              "correct1": 427,
+              "correct3": 1659,
+              "correct5": 1998,
+              "correct10": 2028
+            },
+            "mutual": {
+              "n": 1087,
+              "visible": 1084,
+              "error_sum": 2154.5634765625,
+              "correct1": 230,
+              "correct3": 889,
+              "correct5": 1073,
+              "correct10": 1084
+            }
+          },
+          "8": {
+            "coverage": 2017,
+            "visible": 2028,
+            "all": {
+              "n": 2048,
+              "visible": 2028,
+              "error_sum": 4102.978515625,
+              "correct1": 413,
+              "correct3": 1635,
+              "correct5": 1998,
+              "correct10": 2028
+            },
+            "mutual": {
+              "n": 1182,
+              "visible": 1175,
+              "error_sum": 2385.711669921875,
+              "correct1": 241,
+              "correct3": 947,
+              "correct5": 1162,
+              "correct10": 1175
+            }
+          },
+          "12": {
+            "coverage": 2026,
+            "visible": 2028,
+            "all": {
+              "n": 2048,
+              "visible": 2028,
+              "error_sum": 4103.0029296875,
+              "correct1": 413,
+              "correct3": 1635,
+              "correct5": 1998,
+              "correct10": 2028
+            },
+            "mutual": {
+              "n": 1182,
+              "visible": 1175,
+              "error_sum": 2385.4931640625,
+              "correct1": 241,
+              "correct3": 947,
+              "correct5": 1162,
+              "correct10": 1175
+            }
+          }
+        }
+      },
+      {
+        "pair_id": "val_G3_92c979db1d458321017de5ed",
+        "variants": {
+          "4": {
+            "coverage": 1329,
+            "visible": 2048,
+            "all": {
+              "n": 2048,
+              "visible": 2048,
+              "error_sum": 2686.656005859375,
+              "correct1": 673,
+              "correct3": 2038,
+              "correct5": 2048,
+              "correct10": 2048
+            },
+            "mutual": {
+              "n": 1510,
+              "visible": 1510,
+              "error_sum": 1948.3712158203125,
+              "correct1": 510,
+              "correct3": 1510,
+              "correct5": 1510,
+              "correct10": 1510
+            }
+          },
+          "8": {
+            "coverage": 2048,
+            "visible": 2048,
+            "all": {
+              "n": 2048,
+              "visible": 2048,
+              "error_sum": 2771.494873046875,
+              "correct1": 669,
+              "correct3": 2027,
+              "correct5": 2048,
+              "correct10": 2048
+            },
+            "mutual": {
+              "n": 1727,
+              "visible": 1727,
+              "error_sum": 2362.541015625,
+              "correct1": 546,
+              "correct3": 1706,
+              "correct5": 1727,
+              "correct10": 1727
+            }
+          },
+          "12": {
+            "coverage": 2048,
+            "visible": 2048,
+            "all": {
+              "n": 2048,
+              "visible": 2048,
+              "error_sum": 2771.49462890625,
+              "correct1": 669,
+              "correct3": 2027,
+              "correct5": 2048,
+              "correct10": 2048
+            },
+            "mutual": {
+              "n": 1727,
+              "visible": 1727,
+              "error_sum": 2362.540771484375,
+              "correct1": 546,
+              "correct3": 1706,
+              "correct5": 1727,
+              "correct10": 1727
+            }
+          }
+        }
+      },
+      {
+        "pair_id": "val_G3_69ae20dcb56077a018937393",
+        "variants": {
+          "4": {
+            "coverage": 232,
+            "visible": 2048,
+            "all": {
+              "n": 2048,
+              "visible": 2048,
+              "error_sum": 13747.703125,
+              "correct1": 0,
+              "correct3": 9,
+              "correct5": 367,
+              "correct10": 2018
+            },
+            "mutual": {
+              "n": 1409,
+              "visible": 1409,
+              "error_sum": 9609.498046875,
+              "correct1": 0,
+              "correct3": 1,
+              "correct5": 212,
+              "correct10": 1401
+            }
+          },
+          "8": {
+            "coverage": 1225,
+            "visible": 2048,
+            "all": {
+              "n": 2048,
+              "visible": 2048,
+              "error_sum": 14147.978515625,
+              "correct1": 0,
+              "correct3": 0,
+              "correct5": 315,
+              "correct10": 2045
+            },
+            "mutual": {
+              "n": 2028,
+              "visible": 2028,
+              "error_sum": 14007.166015625,
+              "correct1": 0,
+              "correct3": 0,
+              "correct5": 314,
+              "correct10": 2025
+            }
+          },
+          "12": {
+            "coverage": 2017,
+            "visible": 2048,
+            "all": {
+              "n": 2048,
+              "visible": 2048,
+              "error_sum": 14194.9921875,
+              "correct1": 0,
+              "correct3": 1,
+              "correct5": 315,
+              "correct10": 2042
+            },
+            "mutual": {
+              "n": 2030,
+              "visible": 2030,
+              "error_sum": 14070.51953125,
+              "correct1": 0,
+              "correct3": 1,
+              "correct5": 314,
+              "correct10": 2024
+            }
+          }
+        }
+      },
+      {
+        "pair_id": "val_G3_7aaef7938188368f6474a5e1",
+        "variants": {
+          "4": {
+            "coverage": 1303,
+            "visible": 2048,
+            "all": {
+              "n": 2048,
+              "visible": 2048,
+              "error_sum": 4493.13427734375,
+              "correct1": 331,
+              "correct3": 1584,
+              "correct5": 2048,
+              "correct10": 2048
+            },
+            "mutual": {
+              "n": 1388,
+              "visible": 1388,
+              "error_sum": 3062.93896484375,
+              "correct1": 223,
+              "correct3": 1071,
+              "correct5": 1388,
+              "correct10": 1388
+            }
+          },
+          "8": {
+            "coverage": 2048,
+            "visible": 2048,
+            "all": {
+              "n": 2048,
+              "visible": 2048,
+              "error_sum": 5139.650390625,
+              "correct1": 221,
+              "correct3": 1288,
+              "correct5": 2048,
+              "correct10": 2048
+            },
+            "mutual": {
+              "n": 1723,
+              "visible": 1723,
+              "error_sum": 4324.8330078125,
+              "correct1": 182,
+              "correct3": 1086,
+              "correct5": 1723,
+              "correct10": 1723
+            }
+          },
+          "12": {
+            "coverage": 2048,
+            "visible": 2048,
+            "all": {
+              "n": 2048,
+              "visible": 2048,
+              "error_sum": 5141.0126953125,
+              "correct1": 221,
+              "correct3": 1286,
+              "correct5": 2048,
+              "correct10": 2048
+            },
+            "mutual": {
+              "n": 1723,
+              "visible": 1723,
+              "error_sum": 4325.982421875,
+              "correct1": 182,
+              "correct3": 1085,
+              "correct5": 1723,
+              "correct10": 1723
+            }
+          }
+        }
+      }
+    ]
+  },
+  "synthetic": {
+    "summary": {
+      "4": {
+        "coverage": 0.2661012987880204,
+        "all": {
+          "p3": 0.6878662109375,
+          "points": 2048.0,
+          "correct3": 1408.75,
+          "epe": 2.2612314958181696
+        },
+        "mutual": {
+          "p3": 0.8499444238606891,
+          "points": 1180.8125,
+          "correct3": 1003.625,
+          "epe": 1.708516835822725
+        }
+      },
+      "8": {
+        "coverage": 0.926613468665487,
+        "all": {
+          "p3": 0.84088134765625,
+          "points": 2048.0,
+          "correct3": 1722.125,
+          "epe": 1.58820913840262
+        },
+        "mutual": {
+          "p3": 0.8789757499434919,
+          "points": 1935.5625,
+          "correct3": 1701.3125,
+          "epe": 1.565206265782359
+        }
+      },
+      "12": {
+        "coverage": 0.9923875663583853,
+        "all": {
+          "p3": 0.83587646484375,
+          "points": 2048.0,
+          "correct3": 1711.875,
+          "epe": 1.62267009178142
+        },
+        "mutual": {
+          "p3": 0.8678991811668373,
+          "points": 1954.0,
+          "correct3": 1695.875,
+          "epe": 1.6063474952781593
+        }
+      }
+    },
+    "pairs": [
+      {
+        "pair_id": "flair_rgb__68766cecd1222664",
+        "variants": {
+          "4": {
+            "coverage": 651,
+            "visible": 1932,
+            "all": {
+              "n": 2048,
+              "visible": 1932,
+              "error_sum": 3020.1845703125,
+              "correct1": 768,
+              "correct3": 1675,
+              "correct5": 1932,
+              "correct10": 1932
+            },
+            "mutual": {
+              "n": 1289,
+              "visible": 1254,
+              "error_sum": 1311.782470703125,
+              "correct1": 713,
+              "correct3": 1235,
+              "correct5": 1254,
+              "correct10": 1254
+            }
+          },
+          "8": {
+            "coverage": 1926,
+            "visible": 1932,
+            "all": {
+              "n": 2048,
+              "visible": 1932,
+              "error_sum": 1884.420654296875,
+              "correct1": 1148,
+              "correct3": 1930,
+              "correct5": 1932,
+              "correct10": 1932
+            },
+            "mutual": {
+              "n": 1972,
+              "visible": 1912,
+              "error_sum": 1864.7110595703125,
+              "correct1": 1140,
+              "correct3": 1910,
+              "correct5": 1912,
+              "correct10": 1912
+            }
+          },
+          "12": {
+            "coverage": 1932,
+            "visible": 1932,
+            "all": {
+              "n": 2048,
+              "visible": 1932,
+              "error_sum": 1951.8594970703125,
+              "correct1": 1098,
+              "correct3": 1930,
+              "correct5": 1932,
+              "correct10": 1932
+            },
+            "mutual": {
+              "n": 1976,
+              "visible": 1913,
+              "error_sum": 1931.8131103515625,
+              "correct1": 1090,
+              "correct3": 1911,
+              "correct5": 1913,
+              "correct10": 1913
+            }
+          }
+        }
+      },
+      {
+        "pair_id": "googleearth_current__3b039afa7d933006",
+        "variants": {
+          "4": {
+            "coverage": 470,
+            "visible": 1807,
+            "all": {
+              "n": 2048,
+              "visible": 1807,
+              "error_sum": 4107.85888671875,
+              "correct1": 255,
+              "correct3": 1383,
+              "correct5": 1738,
+              "correct10": 1806
+            },
+            "mutual": {
+              "n": 1113,
+              "visible": 1058,
+              "error_sum": 1918.089111328125,
+              "correct1": 215,
+              "correct3": 951,
+              "correct5": 1041,
+              "correct10": 1058
+            }
+          },
+          "8": {
+            "coverage": 1731,
+            "visible": 1807,
+            "all": {
+              "n": 2048,
+              "visible": 1807,
+              "error_sum": 3101.12353515625,
+              "correct1": 397,
+              "correct3": 1697,
+              "correct5": 1777,
+              "correct10": 1807
+            },
+            "mutual": {
+              "n": 1873,
+              "visible": 1755,
+              "error_sum": 2962.4130859375,
+              "correct1": 391,
+              "correct3": 1662,
+              "correct5": 1729,
+              "correct10": 1755
+            }
+          },
+          "12": {
+            "coverage": 1802,
+            "visible": 1807,
+            "all": {
+              "n": 2048,
+              "visible": 1807,
+              "error_sum": 3272.16259765625,
+              "correct1": 367,
+              "correct3": 1656,
+              "correct5": 1775,
+              "correct10": 1804
+            },
+            "mutual": {
+              "n": 1896,
+              "visible": 1759,
+              "error_sum": 3136.97802734375,
+              "correct1": 363,
+              "correct3": 1625,
+              "correct5": 1731,
+              "correct10": 1756
+            }
+          }
+        }
+      },
+      {
+        "pair_id": "whu__b388476e4b8eef76",
+        "variants": {
+          "4": {
+            "coverage": 505,
+            "visible": 1930,
+            "all": {
+              "n": 2048,
+              "visible": 1930,
+              "error_sum": 4628.830078125,
+              "correct1": 378,
+              "correct3": 1347,
+              "correct5": 1793,
+              "correct10": 1930
+            },
+            "mutual": {
+              "n": 1164,
+              "visible": 1136,
+              "error_sum": 2136.529296875,
+              "correct1": 320,
+              "correct3": 956,
+              "correct5": 1099,
+              "correct10": 1136
+            }
+          },
+          "8": {
+            "coverage": 1706,
+            "visible": 1930,
+            "all": {
+              "n": 2048,
+              "visible": 1930,
+              "error_sum": 3222.87890625,
+              "correct1": 642,
+              "correct3": 1706,
+              "correct5": 1872,
+              "correct10": 1930
+            },
+            "mutual": {
+              "n": 1946,
+              "visible": 1885,
+              "error_sum": 3131.5458984375,
+              "correct1": 625,
+              "correct3": 1672,
+              "correct5": 1833,
+              "correct10": 1885
+            }
+          },
+          "12": {
+            "coverage": 1926,
+            "visible": 1930,
+            "all": {
+              "n": 2048,
+              "visible": 1930,
+              "error_sum": 3284.4833984375,
+              "correct1": 647,
+              "correct3": 1699,
+              "correct5": 1861,
+              "correct10": 1930
+            },
+            "mutual": {
+              "n": 1962,
+              "visible": 1890,
+              "error_sum": 3199.370849609375,
+              "correct1": 631,
+              "correct3": 1669,
+              "correct5": 1827,
+              "correct10": 1890
+            }
+          }
+        }
+      },
+      {
+        "pair_id": "flair_rgb__20c5b83c6cc5d320",
+        "variants": {
+          "4": {
+            "coverage": 571,
+            "visible": 1970,
+            "all": {
+              "n": 2048,
+              "visible": 1970,
+              "error_sum": 3321.9541015625,
+              "correct1": 609,
+              "correct3": 1726,
+              "correct5": 1956,
+              "correct10": 1970
+            },
+            "mutual": {
+              "n": 1255,
+              "visible": 1230,
+              "error_sum": 1567.63232421875,
+              "correct1": 534,
+              "correct3": 1182,
+              "correct5": 1229,
+              "correct10": 1230
+            }
+          },
+          "8": {
+            "coverage": 1929,
+            "visible": 1970,
+            "all": {
+              "n": 2048,
+              "visible": 1970,
+              "error_sum": 2356.40234375,
+              "correct1": 853,
+              "correct3": 1936,
+              "correct5": 1966,
+              "correct10": 1970
+            },
+            "mutual": {
+              "n": 2007,
+              "visible": 1959,
+              "error_sum": 2328.4541015625,
+              "correct1": 851,
+              "correct3": 1929,
+              "correct5": 1955,
+              "correct10": 1959
+            }
+          },
+          "12": {
+            "coverage": 1965,
+            "visible": 1970,
+            "all": {
+              "n": 2048,
+              "visible": 1970,
+              "error_sum": 2382.502197265625,
+              "correct1": 861,
+              "correct3": 1932,
+              "correct5": 1966,
+              "correct10": 1970
+            },
+            "mutual": {
+              "n": 2010,
+              "visible": 1959,
+              "error_sum": 2354.55419921875,
+              "correct1": 859,
+              "correct3": 1925,
+              "correct5": 1955,
+              "correct10": 1959
+            }
+          }
+        }
+      },
+      {
+        "pair_id": "googleearth_current__6cdac62ed307cea5",
+        "variants": {
+          "4": {
+            "coverage": 604,
+            "visible": 2028,
+            "all": {
+              "n": 2048,
+              "visible": 2028,
+              "error_sum": 3411.484130859375,
+              "correct1": 538,
+              "correct3": 1815,
+              "correct5": 2025,
+              "correct10": 2028
+            },
+            "mutual": {
+              "n": 1284,
+              "visible": 1275,
+              "error_sum": 1528.3665771484375,
+              "correct1": 510,
+              "correct3": 1264,
+              "correct5": 1275,
+              "correct10": 1275
+            }
+          },
+          "8": {
+            "coverage": 2015,
+            "visible": 2028,
+            "all": {
+              "n": 2048,
+              "visible": 2028,
+              "error_sum": 2133.513671875,
+              "correct1": 1010,
+              "correct3": 2022,
+              "correct5": 2027,
+              "correct10": 2027
+            },
+            "mutual": {
+              "n": 2024,
+              "visible": 2007,
+              "error_sum": 2092.49853515625,
+              "correct1": 1004,
+              "correct3": 2004,
+              "correct5": 2007,
+              "correct10": 2007
+            }
+          },
+          "12": {
+            "coverage": 2026,
+            "visible": 2028,
+            "all": {
+              "n": 2048,
+              "visible": 2028,
+              "error_sum": 2248.570556640625,
+              "correct1": 979,
+              "correct3": 2015,
+              "correct5": 2024,
+              "correct10": 2024
+            },
+            "mutual": {
+              "n": 2024,
+              "visible": 2007,
+              "error_sum": 2152.7900390625,
+              "correct1": 975,
+              "correct3": 2000,
+              "correct5": 2007,
+              "correct10": 2007
+            }
+          }
+        }
+      },
+      {
+        "pair_id": "whu__ba29af0d12697b7a",
+        "variants": {
+          "4": {
+            "coverage": 434,
+            "visible": 1902,
+            "all": {
+              "n": 2048,
+              "visible": 1902,
+              "error_sum": 4676.8779296875,
+              "correct1": 289,
+              "correct3": 1300,
+              "correct5": 1760,
+              "correct10": 1902
+            },
+            "mutual": {
+              "n": 1131,
+              "visible": 1091,
+              "error_sum": 1833.189208984375,
+              "correct1": 264,
+              "correct3": 987,
+              "correct5": 1086,
+              "correct10": 1091
+            }
+          },
+          "8": {
+            "coverage": 1669,
+            "visible": 1902,
+            "all": {
+              "n": 2048,
+              "visible": 1902,
+              "error_sum": 2837.13623046875,
+              "correct1": 507,
+              "correct3": 1830,
+              "correct5": 1900,
+              "correct10": 1902
+            },
+            "mutual": {
+              "n": 1960,
+              "visible": 1886,
+              "error_sum": 2800.6845703125,
+              "correct1": 504,
+              "correct3": 1817,
+              "correct5": 1884,
+              "correct10": 1886
+            }
+          },
+          "12": {
+            "coverage": 1900,
+            "visible": 1902,
+            "all": {
+              "n": 2048,
+              "visible": 1902,
+              "error_sum": 2881.02978515625,
+              "correct1": 511,
+              "correct3": 1822,
+              "correct5": 1899,
+              "correct10": 1902
+            },
+            "mutual": {
+              "n": 1977,
+              "visible": 1892,
+              "error_sum": 2858.25048828125,
+              "correct1": 509,
+              "correct3": 1813,
+              "correct5": 1889,
+              "correct10": 1892
+            }
+          }
+        }
+      },
+      {
+        "pair_id": "flair_rgb__95f13ddea934ed8f",
+        "variants": {
+          "4": {
+            "coverage": 573,
+            "visible": 2022,
+            "all": {
+              "n": 2048,
+              "visible": 2022,
+              "error_sum": 4048.3720703125,
+              "correct1": 421,
+              "correct3": 1617,
+              "correct5": 1998,
+              "correct10": 2022
+            },
+            "mutual": {
+              "n": 1261,
+              "visible": 1254,
+              "error_sum": 1891.3841552734375,
+              "correct1": 377,
+              "correct3": 1186,
+              "correct5": 1253,
+              "correct10": 1254
+            }
+          },
+          "8": {
+            "coverage": 1938,
+            "visible": 2022,
+            "all": {
+              "n": 2048,
+              "visible": 2022,
+              "error_sum": 2750.91015625,
+              "correct1": 708,
+              "correct3": 1973,
+              "correct5": 2019,
+              "correct10": 2022
+            },
+            "mutual": {
+              "n": 2006,
+              "visible": 1996,
+              "error_sum": 2694.87841796875,
+              "correct1": 702,
+              "correct3": 1952,
+              "correct5": 1996,
+              "correct10": 1996
+            }
+          },
+          "12": {
+            "coverage": 2019,
+            "visible": 2022,
+            "all": {
+              "n": 2048,
+              "visible": 2022,
+              "error_sum": 2807.011474609375,
+              "correct1": 669,
+              "correct3": 1969,
+              "correct5": 2019,
+              "correct10": 2022
+            },
+            "mutual": {
+              "n": 2011,
+              "visible": 2000,
+              "error_sum": 2755.560546875,
+              "correct1": 665,
+              "correct3": 1952,
+              "correct5": 2000,
+              "correct10": 2000
+            }
+          }
+        }
+      },
+      {
+        "pair_id": "googleearth_current__a22154cf374c6fb1",
+        "variants": {
+          "4": {
+            "coverage": 189,
+            "visible": 1076,
+            "all": {
+              "n": 2048,
+              "visible": 1076,
+              "error_sum": 5919.529296875,
+              "correct1": 30,
+              "correct3": 265,
+              "correct5": 569,
+              "correct10": 964
+            },
+            "mutual": {
+              "n": 853,
+              "visible": 578,
+              "error_sum": 2664.78271484375,
+              "correct1": 22,
+              "correct3": 181,
+              "correct5": 352,
+              "correct10": 561
+            }
+          },
+          "8": {
+            "coverage": 668,
+            "visible": 1076,
+            "all": {
+              "n": 2048,
+              "visible": 1076,
+              "error_sum": 5050.98046875,
+              "correct1": 33,
+              "correct3": 331,
+              "correct5": 633,
+              "correct10": 1041
+            },
+            "mutual": {
+              "n": 1464,
+              "visible": 997,
+              "error_sum": 4574.935546875,
+              "correct1": 31,
+              "correct3": 314,
+              "correct5": 599,
+              "correct10": 974
+            }
+          },
+          "12": {
+            "coverage": 913,
+            "visible": 1076,
+            "all": {
+              "n": 2048,
+              "visible": 1076,
+              "error_sum": 4869.4912109375,
+              "correct1": 37,
+              "correct3": 341,
+              "correct5": 647,
+              "correct10": 1064
+            },
+            "mutual": {
+              "n": 1548,
+              "visible": 1039,
+              "error_sum": 4677.6904296875,
+              "correct1": 37,
+              "correct3": 333,
+              "correct5": 630,
+              "correct10": 1028
+            }
+          }
+        }
+      },
+      {
+        "pair_id": "whu__ba07967b47ce721b",
+        "variants": {
+          "4": {
+            "coverage": 468,
+            "visible": 2032,
+            "all": {
+              "n": 2048,
+              "visible": 2032,
+              "error_sum": 4651.15087890625,
+              "correct1": 327,
+              "correct3": 1469,
+              "correct5": 1973,
+              "correct10": 2032
+            },
+            "mutual": {
+              "n": 1160,
+              "visible": 1152,
+              "error_sum": 2086.334228515625,
+              "correct1": 289,
+              "correct3": 987,
+              "correct5": 1144,
+              "correct10": 1152
+            }
+          },
+          "8": {
+            "coverage": 1958,
+            "visible": 2032,
+            "all": {
+              "n": 2048,
+              "visible": 2032,
+              "error_sum": 3025.93212890625,
+              "correct1": 628,
+              "correct3": 1934,
+              "correct5": 2024,
+              "correct10": 2032
+            },
+            "mutual": {
+              "n": 2034,
+              "visible": 2023,
+              "error_sum": 2994.49462890625,
+              "correct1": 628,
+              "correct3": 1930,
+              "correct5": 2016,
+              "correct10": 2023
+            }
+          },
+          "12": {
+            "coverage": 2032,
+            "visible": 2032,
+            "all": {
+              "n": 2048,
+              "visible": 2032,
+              "error_sum": 3181.224609375,
+              "correct1": 579,
+              "correct3": 1896,
+              "correct5": 2020,
+              "correct10": 2032
+            },
+            "mutual": {
+              "n": 2040,
+              "visible": 2028,
+              "error_sum": 3169.788330078125,
+              "correct1": 579,
+              "correct3": 1894,
+              "correct5": 2016,
+              "correct10": 2028
+            }
+          }
+        }
+      },
+      {
+        "pair_id": "flair_rgb__69fda9120a25806f",
+        "variants": {
+          "4": {
+            "coverage": 635,
+            "visible": 2032,
+            "all": {
+              "n": 2048,
+              "visible": 2032,
+              "error_sum": 3736.0283203125,
+              "correct1": 400,
+              "correct3": 1785,
+              "correct5": 2025,
+              "correct10": 2032
+            },
+            "mutual": {
+              "n": 1325,
+              "visible": 1321,
+              "error_sum": 2055.799560546875,
+              "correct1": 325,
+              "correct3": 1266,
+              "correct5": 1321,
+              "correct10": 1321
+            }
+          },
+          "8": {
+            "coverage": 1983,
+            "visible": 2032,
+            "all": {
+              "n": 2048,
+              "visible": 2032,
+              "error_sum": 3020.78662109375,
+              "correct1": 529,
+              "correct3": 2007,
+              "correct5": 2032,
+              "correct10": 2032
+            },
+            "mutual": {
+              "n": 2036,
+              "visible": 2026,
+              "error_sum": 3011.63134765625,
+              "correct1": 528,
+              "correct3": 2001,
+              "correct5": 2026,
+              "correct10": 2026
+            }
+          },
+          "12": {
+            "coverage": 2032,
+            "visible": 2032,
+            "all": {
+              "n": 2048,
+              "visible": 2032,
+              "error_sum": 3031.610595703125,
+              "correct1": 541,
+              "correct3": 1992,
+              "correct5": 2032,
+              "correct10": 2032
+            },
+            "mutual": {
+              "n": 2037,
+              "visible": 2026,
+              "error_sum": 3022.45556640625,
+              "correct1": 540,
+              "correct3": 1986,
+              "correct5": 2026,
+              "correct10": 2026
+            }
+          }
+        }
+      },
+      {
+        "pair_id": "googleearth_current__f7a82dc56027e473",
+        "variants": {
+          "4": {
+            "coverage": 608,
+            "visible": 2016,
+            "all": {
+              "n": 2048,
+              "visible": 2016,
+              "error_sum": 3944.36279296875,
+              "correct1": 414,
+              "correct3": 1640,
+              "correct5": 2005,
+              "correct10": 2016
+            },
+            "mutual": {
+              "n": 1259,
+              "visible": 1246,
+              "error_sum": 1879.325927734375,
+              "correct1": 357,
+              "correct3": 1183,
+              "correct5": 1246,
+              "correct10": 1246
+            }
+          },
+          "8": {
+            "coverage": 1923,
+            "visible": 2016,
+            "all": {
+              "n": 2048,
+              "visible": 2016,
+              "error_sum": 2785.440673828125,
+              "correct1": 664,
+              "correct3": 1962,
+              "correct5": 2016,
+              "correct10": 2016
+            },
+            "mutual": {
+              "n": 2006,
+              "visible": 1985,
+              "error_sum": 2750.970947265625,
+              "correct1": 649,
+              "correct3": 1931,
+              "correct5": 1985,
+              "correct10": 1985
+            }
+          },
+          "12": {
+            "coverage": 2016,
+            "visible": 2016,
+            "all": {
+              "n": 2048,
+              "visible": 2016,
+              "error_sum": 2863.38037109375,
+              "correct1": 639,
+              "correct3": 1953,
+              "correct5": 2016,
+              "correct10": 2016
+            },
+            "mutual": {
+              "n": 2006,
+              "visible": 1985,
+              "error_sum": 2826.369140625,
+              "correct1": 625,
+              "correct3": 1923,
+              "correct5": 1985,
+              "correct10": 1985
+            }
+          }
+        }
+      },
+      {
+        "pair_id": "whu__5963574bb57a9f52",
+        "variants": {
+          "4": {
+            "coverage": 577,
+            "visible": 1780,
+            "all": {
+              "n": 2048,
+              "visible": 1780,
+              "error_sum": 3401.8515625,
+              "correct1": 430,
+              "correct3": 1479,
+              "correct5": 1751,
+              "correct10": 1780
+            },
+            "mutual": {
+              "n": 1224,
+              "visible": 1143,
+              "error_sum": 1816.7490234375,
+              "correct1": 365,
+              "correct3": 1038,
+              "correct5": 1135,
+              "correct10": 1143
+            }
+          },
+          "8": {
+            "coverage": 1721,
+            "visible": 1780,
+            "all": {
+              "n": 2048,
+              "visible": 1780,
+              "error_sum": 2599.858154296875,
+              "correct1": 632,
+              "correct3": 1691,
+              "correct5": 1759,
+              "correct10": 1773
+            },
+            "mutual": {
+              "n": 1878,
+              "visible": 1712,
+              "error_sum": 2461.294677734375,
+              "correct1": 616,
+              "correct3": 1631,
+              "correct5": 1696,
+              "correct10": 1705
+            }
+          },
+          "12": {
+            "coverage": 1778,
+            "visible": 1780,
+            "all": {
+              "n": 2048,
+              "visible": 1780,
+              "error_sum": 2797.7421875,
+              "correct1": 611,
+              "correct3": 1669,
+              "correct5": 1753,
+              "correct10": 1765
+            },
+            "mutual": {
+              "n": 1887,
+              "visible": 1714,
+              "error_sum": 2612.053955078125,
+              "correct1": 596,
+              "correct3": 1614,
+              "correct5": 1694,
+              "correct10": 1703
+            }
+          }
+        }
+      },
+      {
+        "pair_id": "flair_rgb__b2ae2350d0945827",
+        "variants": {
+          "4": {
+            "coverage": 429,
+            "visible": 2000,
+            "all": {
+              "n": 2048,
+              "visible": 2000,
+              "error_sum": 4587.6513671875,
+              "correct1": 329,
+              "correct3": 1436,
+              "correct5": 1957,
+              "correct10": 2000
+            },
+            "mutual": {
+              "n": 1122,
+              "visible": 1106,
+              "error_sum": 1763.889892578125,
+              "correct1": 314,
+              "correct3": 1025,
+              "correct5": 1106,
+              "correct10": 1106
+            }
+          },
+          "8": {
+            "coverage": 1857,
+            "visible": 2000,
+            "all": {
+              "n": 2048,
+              "visible": 2000,
+              "error_sum": 2646.58251953125,
+              "correct1": 687,
+              "correct3": 1976,
+              "correct5": 2000,
+              "correct10": 2000
+            },
+            "mutual": {
+              "n": 2018,
+              "visible": 1997,
+              "error_sum": 2644.39453125,
+              "correct1": 684,
+              "correct3": 1973,
+              "correct5": 1997,
+              "correct10": 1997
+            }
+          },
+          "12": {
+            "coverage": 2000,
+            "visible": 2000,
+            "all": {
+              "n": 2048,
+              "visible": 2000,
+              "error_sum": 2787.29345703125,
+              "correct1": 644,
+              "correct3": 1952,
+              "correct5": 2000,
+              "correct10": 2000
+            },
+            "mutual": {
+              "n": 2024,
+              "visible": 1999,
+              "error_sum": 2786.4931640625,
+              "correct1": 643,
+              "correct3": 1951,
+              "correct5": 1999,
+              "correct10": 1999
+            }
+          }
+        }
+      },
+      {
+        "pair_id": "googleearth_current__108544e9b904dc9a",
+        "variants": {
+          "4": {
+            "coverage": 373,
+            "visible": 1802,
+            "all": {
+              "n": 2048,
+              "visible": 1802,
+              "error_sum": 5600.306640625,
+              "correct1": 200,
+              "correct3": 981,
+              "correct5": 1520,
+              "correct10": 1797
+            },
+            "mutual": {
+              "n": 1061,
+              "visible": 984,
+              "error_sum": 2248.7763671875,
+              "correct1": 175,
+              "correct3": 744,
+              "correct5": 932,
+              "correct10": 983
+            }
+          },
+          "8": {
+            "coverage": 1456,
+            "visible": 1802,
+            "all": {
+              "n": 2048,
+              "visible": 1802,
+              "error_sum": 3960.864501953125,
+              "correct1": 338,
+              "correct3": 1407,
+              "correct5": 1710,
+              "correct10": 1801
+            },
+            "mutual": {
+              "n": 1874,
+              "visible": 1746,
+              "error_sum": 3771.04541015625,
+              "correct1": 337,
+              "correct3": 1384,
+              "correct5": 1662,
+              "correct10": 1745
+            }
+          },
+          "12": {
+            "coverage": 1779,
+            "visible": 1802,
+            "all": {
+              "n": 2048,
+              "visible": 1802,
+              "error_sum": 3963.17431640625,
+              "correct1": 341,
+              "correct3": 1416,
+              "correct5": 1707,
+              "correct10": 1801
+            },
+            "mutual": {
+              "n": 1937,
+              "visible": 1783,
+              "error_sum": 3878.69140625,
+              "correct1": 341,
+              "correct3": 1412,
+              "correct5": 1695,
+              "correct10": 1782
+            }
+          }
+        }
+      },
+      {
+        "pair_id": "whu__9a5b4bd60dd4ec9f",
+        "variants": {
+          "4": {
+            "coverage": 565,
+            "visible": 1898,
+            "all": {
+              "n": 2048,
+              "visible": 1898,
+              "error_sum": 3064.807373046875,
+              "correct1": 582,
+              "correct3": 1728,
+              "correct5": 1877,
+              "correct10": 1898
+            },
+            "mutual": {
+              "n": 1328,
+              "visible": 1274,
+              "error_sum": 1649.2354736328125,
+              "correct1": 518,
+              "correct3": 1234,
+              "correct5": 1265,
+              "correct10": 1274
+            }
+          },
+          "8": {
+            "coverage": 1886,
+            "visible": 1898,
+            "all": {
+              "n": 2048,
+              "visible": 1898,
+              "error_sum": 2044.713623046875,
+              "correct1": 1097,
+              "correct3": 1840,
+              "correct5": 1876,
+              "correct10": 1898
+            },
+            "mutual": {
+              "n": 1949,
+              "visible": 1864,
+              "error_sum": 1958.025146484375,
+              "correct1": 1084,
+              "correct3": 1818,
+              "correct5": 1848,
+              "correct10": 1864
+            }
+          },
+          "12": {
+            "coverage": 1898,
+            "visible": 1898,
+            "all": {
+              "n": 2048,
+              "visible": 1898,
+              "error_sum": 2075.67041015625,
+              "correct1": 1084,
+              "correct3": 1839,
+              "correct5": 1876,
+              "correct10": 1898
+            },
+            "mutual": {
+              "n": 1953,
+              "visible": 1864,
+              "error_sum": 1988.982177734375,
+              "correct1": 1071,
+              "correct3": 1817,
+              "correct5": 1848,
+              "correct10": 1864
+            }
+          }
+        }
+      },
+      {
+        "pair_id": "flair_rgb__2f7754dd238a81f4",
+        "variants": {
+          "4": {
+            "coverage": 318,
+            "visible": 1724,
+            "all": {
+              "n": 2048,
+              "visible": 1724,
+              "error_sum": 5604.89453125,
+              "correct1": 118,
+              "correct3": 894,
+              "correct5": 1423,
+              "correct10": 1720
+            },
+            "mutual": {
+              "n": 1064,
+              "visible": 936,
+              "error_sum": 2466.3603515625,
+              "correct1": 86,
+              "correct3": 639,
+              "correct5": 858,
+              "correct10": 935
+            }
+          },
+          "8": {
+            "coverage": 1387,
+            "visible": 1724,
+            "all": {
+              "n": 2048,
+              "visible": 1724,
+              "error_sum": 4146.90771484375,
+              "correct1": 196,
+              "correct3": 1312,
+              "correct5": 1611,
+              "correct10": 1724
+            },
+            "mutual": {
+              "n": 1922,
+              "visible": 1691,
+              "error_sum": 4039.259765625,
+              "correct1": 195,
+              "correct3": 1293,
+              "correct5": 1586,
+              "correct10": 1691
+            }
+          },
+          "12": {
+            "coverage": 1705,
+            "visible": 1724,
+            "all": {
+              "n": 2048,
+              "visible": 1724,
+              "error_sum": 4203.38525390625,
+              "correct1": 191,
+              "correct3": 1309,
+              "correct5": 1608,
+              "correct10": 1722
+            },
+            "mutual": {
+              "n": 1976,
+              "visible": 1717,
+              "error_sum": 4155.8857421875,
+              "correct1": 191,
+              "correct3": 1309,
+              "correct5": 1608,
+              "correct10": 1716
+            }
+          }
+        }
+      }
+    ]
+  }
+}

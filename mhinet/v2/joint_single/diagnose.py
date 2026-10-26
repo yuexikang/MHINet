@@ -44,7 +44,7 @@ def dense_eval(model,dataset,device):
 
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--domain',required=True);p.add_argument('--device',required=True);p.add_argument('--routed-only',action='store_true');args=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--domain',required=True);p.add_argument('--device',required=True);p.add_argument('--routed-only',action='store_true');p.add_argument('--fixed-only',action='store_true');p.add_argument('--fixed-routed-only',action='store_true');args=p.parse_args()
     torch.set_num_threads(2)
     root=Path('outputs/joint_diagnosis')/args.domain;root.mkdir(parents=True,exist_ok=True)
     selection=selections()[args.domain]
@@ -58,7 +58,7 @@ def main():
     ramp_error=float((sample(coords,source_grid(args.device))-source_grid(args.device)).abs().max())
     audit=[]
     configure(model,matcher,True)
-    for index in range(0 if args.routed_only else 8):
+    for index in range(0 if (args.routed_only or args.fixed_only or args.fixed_routed_only) else 8):
         torch.manual_seed(700+index)
         batch=train[index];gt=batch['geometry'].to(args.device);shared=model(batch['images'].to(args.device))
         grid=source_grid(args.device);src=grid[torch.randperm(len(grid),device=args.device)[:64]]
@@ -82,7 +82,9 @@ def main():
         (root/'gradient_audit.json').write_text(json.dumps(dict(coordinate_ramp_max_error=ramp_error,pairs=audit),indent=2))
     print('GRADIENT AUDIT COMPLETE',flush=True)
     variants=['routed'] if args.routed_only else ['full','no_coordinate','no_class_coordinate','freeze_mvt','flow_only']
-    results=json.loads((root/'counterfactuals.json').read_text()) if args.routed_only else {}
+    if args.fixed_only:variants=['fixed_coarse','fixed_both']
+    if args.fixed_routed_only:variants=['fixed_noclass','fixed_routed']
+    results=json.loads((root/'counterfactuals.json').read_text()) if (args.routed_only or args.fixed_only or args.fixed_routed_only) else {}
     for variant in variants:
         model.load_state_dict(initial,strict=False);matcher.load_state_dict(initial_matcher)
         configure(model,matcher,True)
@@ -102,9 +104,24 @@ def main():
             if variant=='flow_only':terms={'flow':flow_loss(shared,gt)}
             else:
                 working={**shared,'flow16_norm':shared['flow16_norm'].detach()} if variant=='no_coordinate' else shared
-                if variant=='routed':
+                if variant in ('routed','fixed_routed'):
                     f=shared['flow16_norm'];working={**shared,'flow16_norm':f.detach()+.01*(f-f.detach())}
-                r=forward(working,matcher,src);terms=components(shared,matcher,r,gt)
+                if variant.startswith('fixed_'):
+                    from .fixed_support import forward as fixed_forward
+                    r=fixed_forward(working,matcher,src,coarse_only=variant=='fixed_coarse')
+                else:r=forward(working,matcher,src)
+                terms=components(shared,matcher,r,gt)
+                if variant.startswith('fixed_') and step==0:
+                    g=torch.autograd.grad(terms['final'],shared['flow16_target_norm'],retain_graph=True)[0]
+                    assert torch.isfinite(g).all() and g.norm()>0
+                    report['final_to_flow_gradient_norm']=float(g.norm())
+                if variant in ('fixed_noclass','fixed_routed'):
+                    from .fixed_support import coarse as fixed_coarse, fine as fixed_fine
+                    detached={**shared,'flow16_norm':shared['flow16_norm'].detach()}
+                    c=fixed_coarse(detached,matcher,src)
+                    stopped=fixed_fine(detached,matcher,{**c,'p8':c['p8'].detach()})
+                    separated=components(shared,matcher,stopped,gt)
+                    terms['cls8']=separated['cls8'];terms['cls2']=separated['cls2']
                 if variant in ('no_class_coordinate','routed'):
                     stopped=detached_coordinates(shared,matcher,src)
                     separated=components(shared,matcher,stopped,gt)

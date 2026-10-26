@@ -1,0 +1,2254 @@
+{
+  "hangzhou": {
+    "summary": {
+      "normal": {
+        "coverage": 0.34596618283364533,
+        "nearest_p3": 0.6942138671875,
+        "soft_p3": 0.552703857421875,
+        "hard_p3": 0.539154052734375,
+        "mutual_p3": 0.6204889911842619,
+        "mutual_points_per_pair": 1439.1875
+      },
+      "oracle_parent": {
+        "coverage": 0.6968422990763188,
+        "nearest_p3": 0.919189453125,
+        "soft_p3": 0.6998291015625,
+        "hard_p3": 0.677032470703125,
+        "mutual_p3": 0.7829746872962239,
+        "mutual_points_per_pair": 1054.3125
+      }
+    },
+    "pairs": [
+      {
+        "pair_id": "val_G0_763d789ca7b5ae6ec96d4423",
+        "normal": {
+          "soft": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 16933.103515625,
+            "correct1": 0,
+            "correct3": 0,
+            "correct5": 0,
+            "correct10": 2033
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 16880.95703125,
+            "correct1": 0,
+            "correct3": 0,
+            "correct5": 0,
+            "correct10": 2029
+          },
+          "mutual": {
+            "n": 1647,
+            "visible": 1647,
+            "error_sum": 13633.298828125,
+            "correct1": 0,
+            "correct3": 0,
+            "correct5": 0,
+            "correct10": 1632
+          },
+          "n": 2048,
+          "visible": 2048,
+          "covered": 0,
+          "nearest_p3": 420
+        },
+        "oracle_parent": {
+          "soft": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 8353.736328125,
+            "correct1": 137,
+            "correct3": 695,
+            "correct5": 1260,
+            "correct10": 2048
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 8537.6630859375,
+            "correct1": 137,
+            "correct3": 713,
+            "correct5": 1259,
+            "correct10": 2048
+          },
+          "mutual": {
+            "n": 572,
+            "visible": 572,
+            "error_sum": 3470.87353515625,
+            "correct1": 0,
+            "correct3": 0,
+            "correct5": 0,
+            "correct10": 572
+          },
+          "n": 2048,
+          "visible": 2048,
+          "covered": 2048,
+          "nearest_p3": 2048
+        }
+      },
+      {
+        "pair_id": "val_G0_f5dbf3bf4f91d444994db1f3",
+        "normal": {
+          "soft": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 2636.69189453125,
+            "correct1": 427,
+            "correct3": 2048,
+            "correct5": 2048,
+            "correct10": 2048
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 2387.971435546875,
+            "correct1": 486,
+            "correct3": 2046,
+            "correct5": 2048,
+            "correct10": 2048
+          },
+          "mutual": {
+            "n": 2035,
+            "visible": 2035,
+            "error_sum": 2619.92724609375,
+            "correct1": 423,
+            "correct3": 2035,
+            "correct5": 2035,
+            "correct10": 2035
+          },
+          "n": 2048,
+          "visible": 2048,
+          "covered": 1137,
+          "nearest_p3": 2048
+        },
+        "oracle_parent": {
+          "soft": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 1839.402587890625,
+            "correct1": 1135,
+            "correct3": 2048,
+            "correct5": 2048,
+            "correct10": 2048
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 1535.185791015625,
+            "correct1": 1321,
+            "correct3": 2048,
+            "correct5": 2048,
+            "correct10": 2048
+          },
+          "mutual": {
+            "n": 1376,
+            "visible": 1376,
+            "error_sum": 1251.6239013671875,
+            "correct1": 765,
+            "correct3": 1376,
+            "correct5": 1376,
+            "correct10": 1376
+          },
+          "n": 2048,
+          "visible": 2048,
+          "covered": 2048,
+          "nearest_p3": 2048
+        }
+      },
+      {
+        "pair_id": "val_G0_a352be5979b31a4c2132f43f",
+        "normal": {
+          "soft": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 1322.744140625,
+            "correct1": 1711,
+            "correct3": 2048,
+            "correct5": 2048,
+            "correct10": 2048
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 1295.704833984375,
+            "correct1": 1744,
+            "correct3": 2048,
+            "correct5": 2048,
+            "correct10": 2048
+          },
+          "mutual": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 1322.744140625,
+            "correct1": 1711,
+            "correct3": 2048,
+            "correct5": 2048,
+            "correct10": 2048
+          },
+          "n": 2048,
+          "visible": 2048,
+          "covered": 1152,
+          "nearest_p3": 2048
+        },
+        "oracle_parent": {
+          "soft": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 758.8248291015625,
+            "correct1": 1927,
+            "correct3": 2048,
+            "correct5": 2048,
+            "correct10": 2048
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 234.0,
+            "correct1": 1931,
+            "correct3": 2048,
+            "correct5": 2048,
+            "correct10": 2048
+          },
+          "mutual": {
+            "n": 1929,
+            "visible": 1929,
+            "error_sum": 694.7529296875,
+            "correct1": 1833,
+            "correct3": 1929,
+            "correct5": 1929,
+            "correct10": 1929
+          },
+          "n": 2048,
+          "visible": 2048,
+          "covered": 2048,
+          "nearest_p3": 2048
+        }
+      },
+      {
+        "pair_id": "val_G0_5c1bc4507c4f1345227f3b03",
+        "normal": {
+          "soft": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 11790.171875,
+            "correct1": 0,
+            "correct3": 0,
+            "correct5": 363,
+            "correct10": 2048
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 11694.3955078125,
+            "correct1": 0,
+            "correct3": 1,
+            "correct5": 389,
+            "correct10": 2048
+          },
+          "mutual": {
+            "n": 1715,
+            "visible": 1715,
+            "error_sum": 9775.5224609375,
+            "correct1": 0,
+            "correct3": 0,
+            "correct5": 308,
+            "correct10": 1715
+          },
+          "n": 2048,
+          "visible": 2048,
+          "covered": 312,
+          "nearest_p3": 1192
+        },
+        "oracle_parent": {
+          "soft": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 6561.7919921875,
+            "correct1": 213,
+            "correct3": 935,
+            "correct5": 1805,
+            "correct10": 2048
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 6760.52978515625,
+            "correct1": 213,
+            "correct3": 971,
+            "correct5": 1876,
+            "correct10": 2048
+          },
+          "mutual": {
+            "n": 637,
+            "visible": 637,
+            "error_sum": 2968.908447265625,
+            "correct1": 0,
+            "correct3": 1,
+            "correct5": 447,
+            "correct10": 637
+          },
+          "n": 2048,
+          "visible": 2048,
+          "covered": 2048,
+          "nearest_p3": 2048
+        }
+      },
+      {
+        "pair_id": "val_G1_59f4a5c20fca6f19576e658c",
+        "normal": {
+          "soft": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 1574.7288818359375,
+            "correct1": 1572,
+            "correct3": 2048,
+            "correct5": 2048,
+            "correct10": 2048
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 1644.39794921875,
+            "correct1": 1603,
+            "correct3": 2047,
+            "correct5": 2048,
+            "correct10": 2048
+          },
+          "mutual": {
+            "n": 1968,
+            "visible": 1968,
+            "error_sum": 1497.1138916015625,
+            "correct1": 1529,
+            "correct3": 1968,
+            "correct5": 1968,
+            "correct10": 1968
+          },
+          "n": 2048,
+          "visible": 2048,
+          "covered": 1152,
+          "nearest_p3": 2048
+        },
+        "oracle_parent": {
+          "soft": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 1048.431640625,
+            "correct1": 1836,
+            "correct3": 2048,
+            "correct5": 2048,
+            "correct10": 2048
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 435.0139465332031,
+            "correct1": 1857,
+            "correct3": 2048,
+            "correct5": 2048,
+            "correct10": 2048
+          },
+          "mutual": {
+            "n": 1856,
+            "visible": 1856,
+            "error_sum": 852.583984375,
+            "correct1": 1768,
+            "correct3": 1856,
+            "correct5": 1856,
+            "correct10": 1856
+          },
+          "n": 2048,
+          "visible": 2048,
+          "covered": 1024,
+          "nearest_p3": 2048
+        }
+      },
+      {
+        "pair_id": "val_G1_411c9f87b5d122329322571a",
+        "normal": {
+          "soft": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 13994.4248046875,
+            "correct1": 0,
+            "correct3": 4,
+            "correct5": 76,
+            "correct10": 2048
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 13974.7109375,
+            "correct1": 0,
+            "correct3": 4,
+            "correct5": 106,
+            "correct10": 2048
+          },
+          "mutual": {
+            "n": 1705,
+            "visible": 1705,
+            "error_sum": 11706.6640625,
+            "correct1": 0,
+            "correct3": 0,
+            "correct5": 53,
+            "correct10": 1705
+          },
+          "n": 2048,
+          "visible": 2048,
+          "covered": 92,
+          "nearest_p3": 870
+        },
+        "oracle_parent": {
+          "soft": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 7557.115234375,
+            "correct1": 229,
+            "correct3": 807,
+            "correct5": 1362,
+            "correct10": 2048
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 7814.0771484375,
+            "correct1": 218,
+            "correct3": 807,
+            "correct5": 1364,
+            "correct10": 2048
+          },
+          "mutual": {
+            "n": 566,
+            "visible": 566,
+            "error_sum": 3255.393798828125,
+            "correct1": 0,
+            "correct3": 0,
+            "correct5": 29,
+            "correct10": 566
+          },
+          "n": 2048,
+          "visible": 2048,
+          "covered": 1024,
+          "nearest_p3": 2048
+        }
+      },
+      {
+        "pair_id": "val_G1_3958fb5340a73f8ea30f68fd",
+        "normal": {
+          "soft": {
+            "n": 2048,
+            "visible": 2036,
+            "error_sum": 2146.28564453125,
+            "correct1": 1034,
+            "correct3": 2027,
+            "correct5": 2032,
+            "correct10": 2036
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2036,
+            "error_sum": 2552.212646484375,
+            "correct1": 781,
+            "correct3": 2024,
+            "correct5": 2032,
+            "correct10": 2036
+          },
+          "mutual": {
+            "n": 1551,
+            "visible": 1546,
+            "error_sum": 1518.8890380859375,
+            "correct1": 838,
+            "correct3": 1545,
+            "correct5": 1545,
+            "correct10": 1546
+          },
+          "n": 2048,
+          "visible": 2036,
+          "covered": 1155,
+          "nearest_p3": 2030
+        },
+        "oracle_parent": {
+          "soft": {
+            "n": 2048,
+            "visible": 2036,
+            "error_sum": 1936.831787109375,
+            "correct1": 1093,
+            "correct3": 2036,
+            "correct5": 2036,
+            "correct10": 2036
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2036,
+            "error_sum": 2472.07666015625,
+            "correct1": 539,
+            "correct3": 2032,
+            "correct5": 2036,
+            "correct10": 2036
+          },
+          "mutual": {
+            "n": 1552,
+            "visible": 1551,
+            "error_sum": 1389.398681640625,
+            "correct1": 931,
+            "correct3": 1551,
+            "correct5": 1551,
+            "correct10": 1551
+          },
+          "n": 2048,
+          "visible": 2036,
+          "covered": 1016,
+          "nearest_p3": 2036
+        }
+      },
+      {
+        "pair_id": "val_G1_769728d293f17d1e5289c9cf",
+        "normal": {
+          "soft": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 4384.115234375,
+            "correct1": 55,
+            "correct3": 1842,
+            "correct5": 2048,
+            "correct10": 2048
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 4418.2333984375,
+            "correct1": 128,
+            "correct3": 1757,
+            "correct5": 2048,
+            "correct10": 2048
+          },
+          "mutual": {
+            "n": 1746,
+            "visible": 1746,
+            "error_sum": 3655.19921875,
+            "correct1": 43,
+            "correct3": 1628,
+            "correct5": 1746,
+            "correct10": 1746
+          },
+          "n": 2048,
+          "visible": 2048,
+          "covered": 975,
+          "nearest_p3": 1960
+        },
+        "oracle_parent": {
+          "soft": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 3010.183837890625,
+            "correct1": 500,
+            "correct3": 2046,
+            "correct5": 2048,
+            "correct10": 2048
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 3350.50244140625,
+            "correct1": 594,
+            "correct3": 2022,
+            "correct5": 2048,
+            "correct10": 2048
+          },
+          "mutual": {
+            "n": 1232,
+            "visible": 1232,
+            "error_sum": 1981.9071044921875,
+            "correct1": 212,
+            "correct3": 1230,
+            "correct5": 1232,
+            "correct10": 1232
+          },
+          "n": 2048,
+          "visible": 2048,
+          "covered": 768,
+          "nearest_p3": 2048
+        }
+      },
+      {
+        "pair_id": "val_G2_9971335a127868ebf95ebed8",
+        "normal": {
+          "soft": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 3940.88427734375,
+            "correct1": 340,
+            "correct3": 1828,
+            "correct5": 2048,
+            "correct10": 2048
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 4167.578125,
+            "correct1": 276,
+            "correct3": 1772,
+            "correct5": 2048,
+            "correct10": 2048
+          },
+          "mutual": {
+            "n": 1146,
+            "visible": 1146,
+            "error_sum": 2014.1651611328125,
+            "correct1": 232,
+            "correct3": 1062,
+            "correct5": 1146,
+            "correct10": 1146
+          },
+          "n": 2048,
+          "visible": 2048,
+          "covered": 512,
+          "nearest_p3": 1908
+        },
+        "oracle_parent": {
+          "soft": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 3711.1787109375,
+            "correct1": 159,
+            "correct3": 2034,
+            "correct5": 2048,
+            "correct10": 2048
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 3890.1669921875,
+            "correct1": 116,
+            "correct3": 2035,
+            "correct5": 2048,
+            "correct10": 2048
+          },
+          "mutual": {
+            "n": 1142,
+            "visible": 1142,
+            "error_sum": 1932.5953369140625,
+            "correct1": 152,
+            "correct3": 1134,
+            "correct5": 1142,
+            "correct10": 1142
+          },
+          "n": 2048,
+          "visible": 2048,
+          "covered": 512,
+          "nearest_p3": 2048
+        }
+      },
+      {
+        "pair_id": "val_G2_00af91637a79efd4ed7960eb",
+        "normal": {
+          "soft": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 69567.7890625,
+            "correct1": 9,
+            "correct3": 73,
+            "correct5": 136,
+            "correct10": 460
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 69597.828125,
+            "correct1": 5,
+            "correct3": 67,
+            "correct5": 130,
+            "correct10": 453
+          },
+          "mutual": {
+            "n": 641,
+            "visible": 641,
+            "error_sum": 22372.9140625,
+            "correct1": 3,
+            "correct3": 19,
+            "correct5": 41,
+            "correct10": 136
+          },
+          "n": 2048,
+          "visible": 2048,
+          "covered": 56,
+          "nearest_p3": 220
+        },
+        "oracle_parent": {
+          "soft": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 6067.9609375,
+            "correct1": 30,
+            "correct3": 1014,
+            "correct5": 2048,
+            "correct10": 2048
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 7331.55517578125,
+            "correct1": 27,
+            "correct3": 491,
+            "correct5": 2003,
+            "correct10": 2048
+          },
+          "mutual": {
+            "n": 432,
+            "visible": 432,
+            "error_sum": 1336.0125732421875,
+            "correct1": 9,
+            "correct3": 178,
+            "correct5": 432,
+            "correct10": 432
+          },
+          "n": 2048,
+          "visible": 2048,
+          "covered": 2048,
+          "nearest_p3": 2048
+        }
+      },
+      {
+        "pair_id": "val_G2_5adeeee1da5e5266f2caafa6",
+        "normal": {
+          "soft": {
+            "n": 2048,
+            "visible": 1984,
+            "error_sum": 6286.685546875,
+            "correct1": 137,
+            "correct3": 931,
+            "correct5": 1768,
+            "correct10": 1984
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 1984,
+            "error_sum": 6357.10546875,
+            "correct1": 118,
+            "correct3": 909,
+            "correct5": 1783,
+            "correct10": 1984
+          },
+          "mutual": {
+            "n": 802,
+            "visible": 789,
+            "error_sum": 1761.4810791015625,
+            "correct1": 132,
+            "correct3": 604,
+            "correct5": 756,
+            "correct10": 789
+          },
+          "n": 2048,
+          "visible": 1984,
+          "covered": 314,
+          "nearest_p3": 1036
+        },
+        "oracle_parent": {
+          "soft": {
+            "n": 2048,
+            "visible": 1984,
+            "error_sum": 5908.4111328125,
+            "correct1": 295,
+            "correct3": 484,
+            "correct5": 1980,
+            "correct10": 1984
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 1984,
+            "error_sum": 6087.34423828125,
+            "correct1": 0,
+            "correct3": 451,
+            "correct5": 1984,
+            "correct10": 1984
+          },
+          "mutual": {
+            "n": 833,
+            "visible": 833,
+            "error_sum": 1746.484619140625,
+            "correct1": 291,
+            "correct3": 480,
+            "correct5": 829,
+            "correct10": 833
+          },
+          "n": 2048,
+          "visible": 1984,
+          "covered": 496,
+          "nearest_p3": 496
+        }
+      },
+      {
+        "pair_id": "val_G2_2fca6d0ad54b4ac4e990f3b3",
+        "normal": {
+          "soft": {
+            "n": 2048,
+            "visible": 1963,
+            "error_sum": 31955.765625,
+            "correct1": 0,
+            "correct3": 0,
+            "correct5": 0,
+            "correct10": 0
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 1963,
+            "error_sum": 31940.640625,
+            "correct1": 0,
+            "correct3": 0,
+            "correct5": 0,
+            "correct10": 0
+          },
+          "mutual": {
+            "n": 756,
+            "visible": 735,
+            "error_sum": 11455.5810546875,
+            "correct1": 0,
+            "correct3": 0,
+            "correct5": 0,
+            "correct10": 0
+          },
+          "n": 2048,
+          "visible": 1963,
+          "covered": 0,
+          "nearest_p3": 0
+        },
+        "oracle_parent": {
+          "soft": {
+            "n": 2048,
+            "visible": 1963,
+            "error_sum": 14080.029296875,
+            "correct1": 44,
+            "correct3": 142,
+            "correct5": 241,
+            "correct10": 1940
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 1963,
+            "error_sum": 14348.0732421875,
+            "correct1": 0,
+            "correct3": 143,
+            "correct5": 160,
+            "correct10": 1949
+          },
+          "mutual": {
+            "n": 570,
+            "visible": 569,
+            "error_sum": 5415.01806640625,
+            "correct1": 0,
+            "correct3": 0,
+            "correct5": 0,
+            "correct10": 550
+          },
+          "n": 2048,
+          "visible": 1963,
+          "covered": 492,
+          "nearest_p3": 984
+        }
+      },
+      {
+        "pair_id": "val_G3_8c445598942db6a3ba815231",
+        "normal": {
+          "soft": {
+            "n": 2048,
+            "visible": 2028,
+            "error_sum": 3945.79150390625,
+            "correct1": 426,
+            "correct3": 1701,
+            "correct5": 2000,
+            "correct10": 2028
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2028,
+            "error_sum": 4244.599609375,
+            "correct1": 355,
+            "correct3": 1616,
+            "correct5": 1995,
+            "correct10": 2028
+          },
+          "mutual": {
+            "n": 1015,
+            "visible": 1012,
+            "error_sum": 1928.0673828125,
+            "correct1": 218,
+            "correct3": 868,
+            "correct5": 1000,
+            "correct10": 1012
+          },
+          "n": 2048,
+          "visible": 2028,
+          "covered": 1427,
+          "nearest_p3": 2005
+        },
+        "oracle_parent": {
+          "soft": {
+            "n": 2048,
+            "visible": 2028,
+            "error_sum": 3282.934814453125,
+            "correct1": 477,
+            "correct3": 1938,
+            "correct5": 2027,
+            "correct10": 2028
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2028,
+            "error_sum": 3836.6630859375,
+            "correct1": 323,
+            "correct3": 1819,
+            "correct5": 2024,
+            "correct10": 2028
+          },
+          "mutual": {
+            "n": 958,
+            "visible": 957,
+            "error_sum": 1415.7650146484375,
+            "correct1": 275,
+            "correct3": 935,
+            "correct5": 956,
+            "correct10": 957
+          },
+          "n": 2048,
+          "visible": 2028,
+          "covered": 2016,
+          "nearest_p3": 2028
+        }
+      },
+      {
+        "pair_id": "val_G3_92c979db1d458321017de5ed",
+        "normal": {
+          "soft": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 2592.01220703125,
+            "correct1": 757,
+            "correct3": 2046,
+            "correct5": 2048,
+            "correct10": 2048
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 2912.8486328125,
+            "correct1": 645,
+            "correct3": 1999,
+            "correct5": 2048,
+            "correct10": 2048
+          },
+          "mutual": {
+            "n": 1542,
+            "visible": 1542,
+            "error_sum": 1922.796142578125,
+            "correct1": 582,
+            "correct3": 1540,
+            "correct5": 1542,
+            "correct10": 1542
+          },
+          "n": 2048,
+          "visible": 2048,
+          "covered": 1401,
+          "nearest_p3": 2048
+        },
+        "oracle_parent": {
+          "soft": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 1973.88525390625,
+            "correct1": 1278,
+            "correct3": 2048,
+            "correct5": 2048,
+            "correct10": 2048
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 2495.4091796875,
+            "correct1": 1177,
+            "correct3": 2028,
+            "correct5": 2048,
+            "correct10": 2048
+          },
+          "mutual": {
+            "n": 1481,
+            "visible": 1481,
+            "error_sum": 1265.110107421875,
+            "correct1": 1057,
+            "correct3": 1481,
+            "correct5": 1481,
+            "correct10": 1481
+          },
+          "n": 2048,
+          "visible": 2048,
+          "covered": 2048,
+          "nearest_p3": 2048
+        }
+      },
+      {
+        "pair_id": "val_G3_69ae20dcb56077a018937393",
+        "normal": {
+          "soft": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 13810.3330078125,
+            "correct1": 0,
+            "correct3": 2,
+            "correct5": 358,
+            "correct10": 2027
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 13820.171875,
+            "correct1": 0,
+            "correct3": 16,
+            "correct5": 342,
+            "correct10": 2012
+          },
+          "mutual": {
+            "n": 1398,
+            "visible": 1398,
+            "error_sum": 9542.7958984375,
+            "correct1": 0,
+            "correct3": 1,
+            "correct5": 212,
+            "correct10": 1394
+          },
+          "n": 2048,
+          "visible": 2048,
+          "covered": 217,
+          "nearest_p3": 875
+        },
+        "oracle_parent": {
+          "soft": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 7649.8779296875,
+            "correct1": 140,
+            "correct3": 727,
+            "correct5": 1568,
+            "correct10": 2048
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 7935.6279296875,
+            "correct1": 137,
+            "correct3": 724,
+            "correct5": 1429,
+            "correct10": 2048
+          },
+          "mutual": {
+            "n": 591,
+            "visible": 591,
+            "error_sum": 2915.740478515625,
+            "correct1": 0,
+            "correct3": 22,
+            "correct5": 344,
+            "correct10": 591
+          },
+          "n": 2048,
+          "visible": 2048,
+          "covered": 1024,
+          "nearest_p3": 2048
+        }
+      },
+      {
+        "pair_id": "val_G3_7aaef7938188368f6474a5e1",
+        "normal": {
+          "soft": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 4614.52880859375,
+            "correct1": 316,
+            "correct3": 1513,
+            "correct5": 2048,
+            "correct10": 2048
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 5038.6064453125,
+            "correct1": 231,
+            "correct3": 1361,
+            "correct5": 2044,
+            "correct10": 2048
+          },
+          "mutual": {
+            "n": 1312,
+            "visible": 1312,
+            "error_sum": 2944.87255859375,
+            "correct1": 202,
+            "correct3": 970,
+            "correct5": 1312,
+            "correct10": 1312
+          },
+          "n": 2048,
+          "visible": 2048,
+          "covered": 1372,
+          "nearest_p3": 2040
+        },
+        "oracle_parent": {
+          "soft": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 3779.138916015625,
+            "correct1": 485,
+            "correct3": 1882,
+            "correct5": 2048,
+            "correct10": 2048
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 4111.7861328125,
+            "correct1": 452,
+            "correct3": 1805,
+            "correct5": 2047,
+            "correct10": 2048
+          },
+          "mutual": {
+            "n": 1142,
+            "visible": 1142,
+            "error_sum": 2133.5361328125,
+            "correct1": 296,
+            "correct3": 1035,
+            "correct5": 1142,
+            "correct10": 1142
+          },
+          "n": 2048,
+          "visible": 2048,
+          "covered": 2048,
+          "nearest_p3": 2048
+        }
+      }
+    ]
+  },
+  "synthetic": {
+    "summary": {
+      "normal": {
+        "coverage": 0.26630162598911555,
+        "nearest_p3": 0.752410888671875,
+        "soft_p3": 0.701202392578125,
+        "hard_p3": 0.693817138671875,
+        "mutual_p3": 0.8523667659715326,
+        "mutual_points_per_pair": 1132.875
+      },
+      "oracle_parent": {
+        "coverage": 0.2672364862608928,
+        "nearest_p3": 0.816864013671875,
+        "soft_p3": 0.770538330078125,
+        "hard_p3": 0.769134521484375,
+        "mutual_p3": 0.9217826796466153,
+        "mutual_points_per_pair": 1110.6875
+      }
+    },
+    "pairs": [
+      {
+        "pair_id": "flair_rgb__68766cecd1222664",
+        "normal": {
+          "soft": {
+            "n": 2048,
+            "visible": 1932,
+            "error_sum": 2951.663818359375,
+            "correct1": 799,
+            "correct3": 1710,
+            "correct5": 1932,
+            "correct10": 1932
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 1932,
+            "error_sum": 3160.5849609375,
+            "correct1": 699,
+            "correct3": 1712,
+            "correct5": 1932,
+            "correct10": 1932
+          },
+          "mutual": {
+            "n": 1227,
+            "visible": 1194,
+            "error_sum": 1174.1004638671875,
+            "correct1": 735,
+            "correct3": 1171,
+            "correct5": 1194,
+            "correct10": 1194
+          },
+          "n": 2048,
+          "visible": 1932,
+          "covered": 634,
+          "nearest_p3": 1748
+        },
+        "oracle_parent": {
+          "soft": {
+            "n": 2048,
+            "visible": 1932,
+            "error_sum": 2579.91455078125,
+            "correct1": 752,
+            "correct3": 1896,
+            "correct5": 1932,
+            "correct10": 1932
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 1932,
+            "error_sum": 2923.65625,
+            "correct1": 427,
+            "correct3": 1912,
+            "correct5": 1932,
+            "correct10": 1932
+          },
+          "mutual": {
+            "n": 1266,
+            "visible": 1264,
+            "error_sum": 1359.4931640625,
+            "correct1": 674,
+            "correct3": 1244,
+            "correct5": 1264,
+            "correct10": 1264
+          },
+          "n": 2048,
+          "visible": 1932,
+          "covered": 627,
+          "nearest_p3": 1931
+        }
+      },
+      {
+        "pair_id": "googleearth_current__3b039afa7d933006",
+        "normal": {
+          "soft": {
+            "n": 2048,
+            "visible": 1807,
+            "error_sum": 4051.5498046875,
+            "correct1": 234,
+            "correct3": 1406,
+            "correct5": 1748,
+            "correct10": 1806
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 1807,
+            "error_sum": 4109.5439453125,
+            "correct1": 241,
+            "correct3": 1390,
+            "correct5": 1752,
+            "correct10": 1806
+          },
+          "mutual": {
+            "n": 1071,
+            "visible": 1021,
+            "error_sum": 1898.18603515625,
+            "correct1": 179,
+            "correct3": 921,
+            "correct5": 1004,
+            "correct10": 1021
+          },
+          "n": 2048,
+          "visible": 1807,
+          "covered": 460,
+          "nearest_p3": 1515
+        },
+        "oracle_parent": {
+          "soft": {
+            "n": 2048,
+            "visible": 1807,
+            "error_sum": 3723.27294921875,
+            "correct1": 223,
+            "correct3": 1524,
+            "correct5": 1787,
+            "correct10": 1806
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 1807,
+            "error_sum": 3782.85205078125,
+            "correct1": 188,
+            "correct3": 1498,
+            "correct5": 1792,
+            "correct10": 1806
+          },
+          "mutual": {
+            "n": 1037,
+            "visible": 1019,
+            "error_sum": 1781.1949462890625,
+            "correct1": 173,
+            "correct3": 956,
+            "correct5": 1014,
+            "correct10": 1019
+          },
+          "n": 2048,
+          "visible": 1807,
+          "covered": 452,
+          "nearest_p3": 1603
+        }
+      },
+      {
+        "pair_id": "whu__b388476e4b8eef76",
+        "normal": {
+          "soft": {
+            "n": 2048,
+            "visible": 1930,
+            "error_sum": 4553.05029296875,
+            "correct1": 350,
+            "correct3": 1367,
+            "correct5": 1809,
+            "correct10": 1930
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 1930,
+            "error_sum": 4693.572265625,
+            "correct1": 301,
+            "correct3": 1343,
+            "correct5": 1814,
+            "correct10": 1930
+          },
+          "mutual": {
+            "n": 1139,
+            "visible": 1115,
+            "error_sum": 2103.13427734375,
+            "correct1": 296,
+            "correct3": 929,
+            "correct5": 1084,
+            "correct10": 1115
+          },
+          "n": 2048,
+          "visible": 1930,
+          "covered": 517,
+          "nearest_p3": 1493
+        },
+        "oracle_parent": {
+          "soft": {
+            "n": 2048,
+            "visible": 1930,
+            "error_sum": 4078.609375,
+            "correct1": 484,
+            "correct3": 1389,
+            "correct5": 1910,
+            "correct10": 1928
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 1930,
+            "error_sum": 4102.8798828125,
+            "correct1": 486,
+            "correct3": 1400,
+            "correct5": 1905,
+            "correct10": 1928
+          },
+          "mutual": {
+            "n": 1174,
+            "visible": 1170,
+            "error_sum": 1885.18505859375,
+            "correct1": 440,
+            "correct3": 1006,
+            "correct5": 1160,
+            "correct10": 1170
+          },
+          "n": 2048,
+          "visible": 1930,
+          "covered": 567,
+          "nearest_p3": 1525
+        }
+      },
+      {
+        "pair_id": "flair_rgb__20c5b83c6cc5d320",
+        "normal": {
+          "soft": {
+            "n": 2048,
+            "visible": 1970,
+            "error_sum": 3229.21240234375,
+            "correct1": 592,
+            "correct3": 1759,
+            "correct5": 1959,
+            "correct10": 1970
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 1970,
+            "error_sum": 3435.7978515625,
+            "correct1": 503,
+            "correct3": 1738,
+            "correct5": 1958,
+            "correct10": 1970
+          },
+          "mutual": {
+            "n": 1230,
+            "visible": 1205,
+            "error_sum": 1561.5361328125,
+            "correct1": 498,
+            "correct3": 1156,
+            "correct5": 1203,
+            "correct10": 1205
+          },
+          "n": 2048,
+          "visible": 1970,
+          "covered": 525,
+          "nearest_p3": 1806
+        },
+        "oracle_parent": {
+          "soft": {
+            "n": 2048,
+            "visible": 1970,
+            "error_sum": 2890.7509765625,
+            "correct1": 560,
+            "correct3": 1905,
+            "correct5": 1970,
+            "correct10": 1970
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 1970,
+            "error_sum": 3057.2802734375,
+            "correct1": 518,
+            "correct3": 1909,
+            "correct5": 1970,
+            "correct10": 1970
+          },
+          "mutual": {
+            "n": 1259,
+            "visible": 1257,
+            "error_sum": 1574.9676513671875,
+            "correct1": 490,
+            "correct3": 1242,
+            "correct5": 1257,
+            "correct10": 1257
+          },
+          "n": 2048,
+          "visible": 1970,
+          "covered": 492,
+          "nearest_p3": 1931
+        }
+      },
+      {
+        "pair_id": "googleearth_current__6cdac62ed307cea5",
+        "normal": {
+          "soft": {
+            "n": 2048,
+            "visible": 2028,
+            "error_sum": 3402.78125,
+            "correct1": 504,
+            "correct3": 1876,
+            "correct5": 2025,
+            "correct10": 2028
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2028,
+            "error_sum": 3645.156982421875,
+            "correct1": 369,
+            "correct3": 1853,
+            "correct5": 2025,
+            "correct10": 2028
+          },
+          "mutual": {
+            "n": 1216,
+            "visible": 1209,
+            "error_sum": 1509.22119140625,
+            "correct1": 452,
+            "correct3": 1199,
+            "correct5": 1209,
+            "correct10": 1209
+          },
+          "n": 2048,
+          "visible": 2028,
+          "covered": 594,
+          "nearest_p3": 1895
+        },
+        "oracle_parent": {
+          "soft": {
+            "n": 2048,
+            "visible": 2028,
+            "error_sum": 2829.176513671875,
+            "correct1": 567,
+            "correct3": 1986,
+            "correct5": 2028,
+            "correct10": 2028
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2028,
+            "error_sum": 3068.115478515625,
+            "correct1": 477,
+            "correct3": 1986,
+            "correct5": 2028,
+            "correct10": 2028
+          },
+          "mutual": {
+            "n": 1309,
+            "visible": 1309,
+            "error_sum": 1605.4937744140625,
+            "correct1": 474,
+            "correct3": 1302,
+            "correct5": 1309,
+            "correct10": 1309
+          },
+          "n": 2048,
+          "visible": 2028,
+          "covered": 508,
+          "nearest_p3": 1995
+        }
+      },
+      {
+        "pair_id": "whu__ba29af0d12697b7a",
+        "normal": {
+          "soft": {
+            "n": 2048,
+            "visible": 1902,
+            "error_sum": 4578.8447265625,
+            "correct1": 259,
+            "correct3": 1330,
+            "correct5": 1798,
+            "correct10": 1902
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 1902,
+            "error_sum": 4614.9892578125,
+            "correct1": 289,
+            "correct3": 1328,
+            "correct5": 1792,
+            "correct10": 1902
+          },
+          "mutual": {
+            "n": 1101,
+            "visible": 1064,
+            "error_sum": 1801.38623046875,
+            "correct1": 229,
+            "correct3": 964,
+            "correct5": 1062,
+            "correct10": 1064
+          },
+          "n": 2048,
+          "visible": 1902,
+          "covered": 423,
+          "nearest_p3": 1431
+        },
+        "oracle_parent": {
+          "soft": {
+            "n": 2048,
+            "visible": 1902,
+            "error_sum": 4000.8046875,
+            "correct1": 443,
+            "correct3": 1433,
+            "correct5": 1899,
+            "correct10": 1902
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 1902,
+            "error_sum": 4184.5400390625,
+            "correct1": 302,
+            "correct3": 1439,
+            "correct5": 1895,
+            "correct10": 1902
+          },
+          "mutual": {
+            "n": 1058,
+            "visible": 1049,
+            "error_sum": 1638.8271484375,
+            "correct1": 397,
+            "correct3": 945,
+            "correct5": 1049,
+            "correct10": 1049
+          },
+          "n": 2048,
+          "visible": 1902,
+          "covered": 571,
+          "nearest_p3": 1558
+        }
+      },
+      {
+        "pair_id": "flair_rgb__95f13ddea934ed8f",
+        "normal": {
+          "soft": {
+            "n": 2048,
+            "visible": 2022,
+            "error_sum": 3954.4765625,
+            "correct1": 444,
+            "correct3": 1657,
+            "correct5": 2007,
+            "correct10": 2022
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2022,
+            "error_sum": 4108.16064453125,
+            "correct1": 380,
+            "correct3": 1641,
+            "correct5": 2008,
+            "correct10": 2022
+          },
+          "mutual": {
+            "n": 1242,
+            "visible": 1236,
+            "error_sum": 1855.1690673828125,
+            "correct1": 388,
+            "correct3": 1173,
+            "correct5": 1235,
+            "correct10": 1236
+          },
+          "n": 2048,
+          "visible": 2022,
+          "covered": 579,
+          "nearest_p3": 1731
+        },
+        "oracle_parent": {
+          "soft": {
+            "n": 2048,
+            "visible": 2022,
+            "error_sum": 3437.5380859375,
+            "correct1": 410,
+            "correct3": 1876,
+            "correct5": 2022,
+            "correct10": 2022
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2022,
+            "error_sum": 3591.7783203125,
+            "correct1": 371,
+            "correct3": 1864,
+            "correct5": 2022,
+            "correct10": 2022
+          },
+          "mutual": {
+            "n": 1265,
+            "visible": 1262,
+            "error_sum": 1813.858642578125,
+            "correct1": 337,
+            "correct3": 1234,
+            "correct5": 1262,
+            "correct10": 1262
+          },
+          "n": 2048,
+          "visible": 2022,
+          "covered": 602,
+          "nearest_p3": 1934
+        }
+      },
+      {
+        "pair_id": "googleearth_current__a22154cf374c6fb1",
+        "normal": {
+          "soft": {
+            "n": 2048,
+            "visible": 1076,
+            "error_sum": 5791.67333984375,
+            "correct1": 36,
+            "correct3": 294,
+            "correct5": 580,
+            "correct10": 967
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 1076,
+            "error_sum": 5788.6875,
+            "correct1": 41,
+            "correct3": 288,
+            "correct5": 584,
+            "correct10": 968
+          },
+          "mutual": {
+            "n": 771,
+            "visible": 529,
+            "error_sum": 2369.53466796875,
+            "correct1": 22,
+            "correct3": 174,
+            "correct5": 327,
+            "correct10": 520
+          },
+          "n": 2048,
+          "visible": 1076,
+          "covered": 196,
+          "nearest_p3": 571
+        },
+        "oracle_parent": {
+          "soft": {
+            "n": 2048,
+            "visible": 1076,
+            "error_sum": 4493.36083984375,
+            "correct1": 49,
+            "correct3": 425,
+            "correct5": 739,
+            "correct10": 1048
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 1076,
+            "error_sum": 4523.359375,
+            "correct1": 44,
+            "correct3": 415,
+            "correct5": 740,
+            "correct10": 1048
+          },
+          "mutual": {
+            "n": 487,
+            "visible": 455,
+            "error_sum": 1689.3760986328125,
+            "correct1": 21,
+            "correct3": 195,
+            "correct5": 343,
+            "correct10": 454
+          },
+          "n": 2048,
+          "visible": 1076,
+          "covered": 134,
+          "nearest_p3": 655
+        }
+      },
+      {
+        "pair_id": "whu__ba07967b47ce721b",
+        "normal": {
+          "soft": {
+            "n": 2048,
+            "visible": 2032,
+            "error_sum": 4621.525390625,
+            "correct1": 282,
+            "correct3": 1526,
+            "correct5": 1994,
+            "correct10": 2032
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2032,
+            "error_sum": 4804.73046875,
+            "correct1": 205,
+            "correct3": 1511,
+            "correct5": 1999,
+            "correct10": 2032
+          },
+          "mutual": {
+            "n": 1102,
+            "visible": 1093,
+            "error_sum": 2074.4638671875,
+            "correct1": 241,
+            "correct3": 917,
+            "correct5": 1085,
+            "correct10": 1093
+          },
+          "n": 2048,
+          "visible": 2032,
+          "covered": 488,
+          "nearest_p3": 1673
+        },
+        "oracle_parent": {
+          "soft": {
+            "n": 2048,
+            "visible": 2032,
+            "error_sum": 4418.6318359375,
+            "correct1": 210,
+            "correct3": 1633,
+            "correct5": 2022,
+            "correct10": 2032
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2032,
+            "error_sum": 4618.626953125,
+            "correct1": 51,
+            "correct3": 1598,
+            "correct5": 2019,
+            "correct10": 2032
+          },
+          "mutual": {
+            "n": 1078,
+            "visible": 1078,
+            "error_sum": 1972.27783203125,
+            "correct1": 203,
+            "correct3": 964,
+            "correct5": 1075,
+            "correct10": 1078
+          },
+          "n": 2048,
+          "visible": 2032,
+          "covered": 508,
+          "nearest_p3": 1746
+        }
+      },
+      {
+        "pair_id": "flair_rgb__69fda9120a25806f",
+        "normal": {
+          "soft": {
+            "n": 2048,
+            "visible": 2032,
+            "error_sum": 3695.126953125,
+            "correct1": 425,
+            "correct3": 1784,
+            "correct5": 2030,
+            "correct10": 2032
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2032,
+            "error_sum": 3864.140380859375,
+            "correct1": 388,
+            "correct3": 1729,
+            "correct5": 2030,
+            "correct10": 2032
+          },
+          "mutual": {
+            "n": 1271,
+            "visible": 1265,
+            "error_sum": 1998.039794921875,
+            "correct1": 312,
+            "correct3": 1200,
+            "correct5": 1265,
+            "correct10": 1265
+          },
+          "n": 2048,
+          "visible": 2032,
+          "covered": 634,
+          "nearest_p3": 1828
+        },
+        "oracle_parent": {
+          "soft": {
+            "n": 2048,
+            "visible": 2032,
+            "error_sum": 3002.494140625,
+            "correct1": 390,
+            "correct3": 2030,
+            "correct5": 2032,
+            "correct10": 2032
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2032,
+            "error_sum": 3183.67529296875,
+            "correct1": 303,
+            "correct3": 2014,
+            "correct5": 2032,
+            "correct10": 2032
+          },
+          "mutual": {
+            "n": 1300,
+            "visible": 1300,
+            "error_sum": 1817.457275390625,
+            "correct1": 318,
+            "correct3": 1300,
+            "correct5": 1300,
+            "correct10": 1300
+          },
+          "n": 2048,
+          "visible": 2032,
+          "covered": 508,
+          "nearest_p3": 2030
+        }
+      },
+      {
+        "pair_id": "googleearth_current__f7a82dc56027e473",
+        "normal": {
+          "soft": {
+            "n": 2048,
+            "visible": 2016,
+            "error_sum": 3904.115234375,
+            "correct1": 433,
+            "correct3": 1672,
+            "correct5": 2006,
+            "correct10": 2016
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2016,
+            "error_sum": 4102.07666015625,
+            "correct1": 330,
+            "correct3": 1641,
+            "correct5": 2006,
+            "correct10": 2016
+          },
+          "mutual": {
+            "n": 1190,
+            "visible": 1179,
+            "error_sum": 1778.78759765625,
+            "correct1": 358,
+            "correct3": 1130,
+            "correct5": 1179,
+            "correct10": 1179
+          },
+          "n": 2048,
+          "visible": 2016,
+          "covered": 620,
+          "nearest_p3": 1702
+        },
+        "oracle_parent": {
+          "soft": {
+            "n": 2048,
+            "visible": 2016,
+            "error_sum": 3341.88720703125,
+            "correct1": 514,
+            "correct3": 1932,
+            "correct5": 2016,
+            "correct10": 2016
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2016,
+            "error_sum": 3558.5888671875,
+            "correct1": 345,
+            "correct3": 1936,
+            "correct5": 2016,
+            "correct10": 2016
+          },
+          "mutual": {
+            "n": 1277,
+            "visible": 1277,
+            "error_sum": 1730.0103759765625,
+            "correct1": 470,
+            "correct3": 1262,
+            "correct5": 1277,
+            "correct10": 1277
+          },
+          "n": 2048,
+          "visible": 2016,
+          "covered": 667,
+          "nearest_p3": 1995
+        }
+      },
+      {
+        "pair_id": "whu__5963574bb57a9f52",
+        "normal": {
+          "soft": {
+            "n": 2048,
+            "visible": 1780,
+            "error_sum": 3393.37158203125,
+            "correct1": 396,
+            "correct3": 1493,
+            "correct5": 1755,
+            "correct10": 1780
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 1780,
+            "error_sum": 3553.05029296875,
+            "correct1": 306,
+            "correct3": 1487,
+            "correct5": 1752,
+            "correct10": 1780
+          },
+          "mutual": {
+            "n": 1164,
+            "visible": 1086,
+            "error_sum": 1770.069580078125,
+            "correct1": 313,
+            "correct3": 997,
+            "correct5": 1078,
+            "correct10": 1086
+          },
+          "n": 2048,
+          "visible": 1780,
+          "covered": 590,
+          "nearest_p3": 1574
+        },
+        "oracle_parent": {
+          "soft": {
+            "n": 2048,
+            "visible": 1780,
+            "error_sum": 3030.323486328125,
+            "correct1": 468,
+            "correct3": 1598,
+            "correct5": 1779,
+            "correct10": 1780
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 1780,
+            "error_sum": 3149.65185546875,
+            "correct1": 428,
+            "correct3": 1594,
+            "correct5": 1778,
+            "correct10": 1780
+          },
+          "mutual": {
+            "n": 1134,
+            "visible": 1117,
+            "error_sum": 1569.427490234375,
+            "correct1": 404,
+            "correct3": 1062,
+            "correct5": 1117,
+            "correct10": 1117
+          },
+          "n": 2048,
+          "visible": 1780,
+          "covered": 581,
+          "nearest_p3": 1654
+        }
+      },
+      {
+        "pair_id": "flair_rgb__b2ae2350d0945827",
+        "normal": {
+          "soft": {
+            "n": 2048,
+            "visible": 2000,
+            "error_sum": 4526.05712890625,
+            "correct1": 311,
+            "correct3": 1460,
+            "correct5": 1988,
+            "correct10": 2000
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2000,
+            "error_sum": 4604.2705078125,
+            "correct1": 247,
+            "correct3": 1455,
+            "correct5": 1990,
+            "correct10": 2000
+          },
+          "mutual": {
+            "n": 1063,
+            "visible": 1051,
+            "error_sum": 1687.1322021484375,
+            "correct1": 293,
+            "correct3": 963,
+            "correct5": 1051,
+            "correct10": 1051
+          },
+          "n": 2048,
+          "visible": 2000,
+          "covered": 466,
+          "nearest_p3": 1544
+        },
+        "oracle_parent": {
+          "soft": {
+            "n": 2048,
+            "visible": 2000,
+            "error_sum": 4281.0888671875,
+            "correct1": 255,
+            "correct3": 1581,
+            "correct5": 1999,
+            "correct10": 2000
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 2000,
+            "error_sum": 4422.6005859375,
+            "correct1": 140,
+            "correct3": 1567,
+            "correct5": 1990,
+            "correct10": 2000
+          },
+          "mutual": {
+            "n": 1069,
+            "visible": 1069,
+            "error_sum": 1758.97802734375,
+            "correct1": 245,
+            "correct3": 1008,
+            "correct5": 1069,
+            "correct10": 1069
+          },
+          "n": 2048,
+          "visible": 2000,
+          "covered": 500,
+          "nearest_p3": 1698
+        }
+      },
+      {
+        "pair_id": "googleearth_current__108544e9b904dc9a",
+        "normal": {
+          "soft": {
+            "n": 2048,
+            "visible": 1802,
+            "error_sum": 5571.3662109375,
+            "correct1": 191,
+            "correct3": 984,
+            "correct5": 1526,
+            "correct10": 1799
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 1802,
+            "error_sum": 5627.4482421875,
+            "correct1": 191,
+            "correct3": 974,
+            "correct5": 1523,
+            "correct10": 1799
+          },
+          "mutual": {
+            "n": 1020,
+            "visible": 955,
+            "error_sum": 2179.69970703125,
+            "correct1": 166,
+            "correct3": 717,
+            "correct5": 906,
+            "correct10": 955
+          },
+          "n": 2048,
+          "visible": 1802,
+          "covered": 381,
+          "nearest_p3": 1199
+        },
+        "oracle_parent": {
+          "soft": {
+            "n": 2048,
+            "visible": 1802,
+            "error_sum": 5044.0517578125,
+            "correct1": 205,
+            "correct3": 1133,
+            "correct5": 1606,
+            "correct10": 1801
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 1802,
+            "error_sum": 5089.48291015625,
+            "correct1": 222,
+            "correct3": 1163,
+            "correct5": 1594,
+            "correct10": 1801
+          },
+          "mutual": {
+            "n": 931,
+            "visible": 922,
+            "error_sum": 1914.6361083984375,
+            "correct1": 171,
+            "correct3": 757,
+            "correct5": 897,
+            "correct10": 922
+          },
+          "n": 2048,
+          "visible": 1802,
+          "covered": 395,
+          "nearest_p3": 1346
+        }
+      },
+      {
+        "pair_id": "whu__9a5b4bd60dd4ec9f",
+        "normal": {
+          "soft": {
+            "n": 2048,
+            "visible": 1898,
+            "error_sum": 3045.21337890625,
+            "correct1": 497,
+            "correct3": 1765,
+            "correct5": 1879,
+            "correct10": 1898
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 1898,
+            "error_sum": 3267.996337890625,
+            "correct1": 398,
+            "correct3": 1765,
+            "correct5": 1878,
+            "correct10": 1898
+          },
+          "mutual": {
+            "n": 1318,
+            "visible": 1268,
+            "error_sum": 1747.98779296875,
+            "correct1": 438,
+            "correct3": 1221,
+            "correct5": 1261,
+            "correct10": 1268
+          },
+          "n": 2048,
+          "visible": 1898,
+          "covered": 551,
+          "nearest_p3": 1816
+        },
+        "oracle_parent": {
+          "soft": {
+            "n": 2048,
+            "visible": 1898,
+            "error_sum": 2787.4267578125,
+            "correct1": 473,
+            "correct3": 1854,
+            "correct5": 1898,
+            "correct10": 1898
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 1898,
+            "error_sum": 3026.7978515625,
+            "correct1": 331,
+            "correct3": 1845,
+            "correct5": 1897,
+            "correct10": 1898
+          },
+          "mutual": {
+            "n": 1253,
+            "visible": 1245,
+            "error_sum": 1589.7476806640625,
+            "correct1": 403,
+            "correct3": 1236,
+            "correct5": 1245,
+            "correct10": 1245
+          },
+          "n": 2048,
+          "visible": 1898,
+          "covered": 503,
+          "nearest_p3": 1876
+        }
+      },
+      {
+        "pair_id": "flair_rgb__2f7754dd238a81f4",
+        "normal": {
+          "soft": {
+            "n": 2048,
+            "visible": 1724,
+            "error_sum": 5575.99560546875,
+            "correct1": 119,
+            "correct3": 894,
+            "correct5": 1451,
+            "correct10": 1721
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 1724,
+            "error_sum": 5598.8486328125,
+            "correct1": 139,
+            "correct3": 880,
+            "correct5": 1453,
+            "correct10": 1720
+          },
+          "mutual": {
+            "n": 1001,
+            "visible": 892,
+            "error_sum": 2344.2392578125,
+            "correct1": 81,
+            "correct3": 618,
+            "correct5": 820,
+            "correct10": 892
+          },
+          "n": 2048,
+          "visible": 1724,
+          "covered": 318,
+          "nearest_p3": 1129
+        },
+        "oracle_parent": {
+          "soft": {
+            "n": 2048,
+            "visible": 1724,
+            "error_sum": 4964.177734375,
+            "correct1": 105,
+            "correct3": 1054,
+            "correct5": 1547,
+            "correct10": 1723
+          },
+          "hard": {
+            "n": 2048,
+            "visible": 1724,
+            "error_sum": 5009.0263671875,
+            "correct1": 102,
+            "correct3": 1063,
+            "correct5": 1545,
+            "correct10": 1723
+          },
+          "mutual": {
+            "n": 874,
+            "visible": 862,
+            "error_sum": 2007.999755859375,
+            "correct1": 98,
+            "correct3": 668,
+            "correct5": 827,
+            "correct10": 862
+          },
+          "n": 2048,
+          "visible": 1724,
+          "covered": 389,
+          "nearest_p3": 1290
+        }
+      }
+    ]
+  }
+}

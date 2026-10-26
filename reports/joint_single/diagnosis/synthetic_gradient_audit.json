@@ -1,0 +1,741 @@
+{
+  "coordinate_ramp_max_error": 0.0,
+  "pairs": [
+    {
+      "pair_id": "flair_rgb__021b469a9a637b4c",
+      "terms": {
+        "flow": {
+          "loss": 0.006574967410415411,
+          "flow_coordinates": {
+            "norm": 0.06643304228782654,
+            "cos_to_flow_epe": 0.8088172078132629
+          },
+          "shared_features": {
+            "norm": 7.486343383789062e-05,
+            "cos_to_flow_epe": 0.9140625
+          }
+        },
+        "global8": {
+          "loss": 1.3864192962646484,
+          "flow_coordinates": {
+            "norm": 0.0,
+            "cos_to_flow_epe": 0.0
+          },
+          "shared_features": {
+            "norm": 0.0654296875,
+            "cos_to_flow_epe": 0.015380859375
+          }
+        },
+        "cls8": {
+          "loss": 1.6620097160339355,
+          "flow_coordinates": {
+            "norm": 9.30349349975586,
+            "cos_to_flow_epe": -0.13117119669914246
+          },
+          "shared_features": {
+            "norm": 0.07470703125,
+            "cos_to_flow_epe": -0.00506591796875
+          }
+        },
+        "geo8": {
+          "loss": 0.28865474462509155,
+          "flow_coordinates": {
+            "norm": 2.274773359298706,
+            "cos_to_flow_epe": 0.12136068195104599
+          },
+          "shared_features": {
+            "norm": 0.0289306640625,
+            "cos_to_flow_epe": 0.0234375
+          }
+        },
+        "cls2": {
+          "loss": 3.522934675216675,
+          "flow_coordinates": {
+            "norm": 24.63602638244629,
+            "cos_to_flow_epe": -0.109991654753685
+          },
+          "shared_features": {
+            "norm": 0.31640625,
+            "cos_to_flow_epe": -0.01275634765625
+          }
+        },
+        "geo2": {
+          "loss": 0.07323653995990753,
+          "flow_coordinates": {
+            "norm": 0.7293558716773987,
+            "cos_to_flow_epe": 0.0637841522693634
+          },
+          "shared_features": {
+            "norm": 0.019287109375,
+            "cos_to_flow_epe": 0.015869140625
+          }
+        },
+        "final": {
+          "loss": 0.07323653995990753,
+          "flow_coordinates": {
+            "norm": 0.7293558716773987,
+            "cos_to_flow_epe": 0.0637841522693634
+          },
+          "shared_features": {
+            "norm": 0.019287109375,
+            "cos_to_flow_epe": 0.015869140625
+          }
+        }
+      },
+      "total": {
+        "flow_coordinates": {
+          "norm": 24.304637908935547,
+          "cos_to_flow_epe": -0.1443043351173401
+        },
+        "shared_features": {
+          "norm": 0.33203125,
+          "cos_to_flow_epe": -0.0062255859375
+        }
+      }
+    },
+    {
+      "pair_id": "googleearth_current__de87345011ab05a2",
+      "terms": {
+        "flow": {
+          "loss": 0.002628796035423875,
+          "flow_coordinates": {
+            "norm": 0.03036099299788475,
+            "cos_to_flow_epe": 0.8157749772071838
+          },
+          "shared_features": {
+            "norm": 4.2438507080078125e-05,
+            "cos_to_flow_epe": 0.91015625
+          }
+        },
+        "global8": {
+          "loss": 0.5663397312164307,
+          "flow_coordinates": {
+            "norm": 0.0,
+            "cos_to_flow_epe": 0.0
+          },
+          "shared_features": {
+            "norm": 0.04345703125,
+            "cos_to_flow_epe": 0.0018157958984375
+          }
+        },
+        "cls8": {
+          "loss": 0.8706895112991333,
+          "flow_coordinates": {
+            "norm": 6.632062911987305,
+            "cos_to_flow_epe": -0.2320740669965744
+          },
+          "shared_features": {
+            "norm": 0.0286865234375,
+            "cos_to_flow_epe": -0.05712890625
+          }
+        },
+        "geo8": {
+          "loss": 0.032152801752090454,
+          "flow_coordinates": {
+            "norm": 0.8840991854667664,
+            "cos_to_flow_epe": 0.24813313782215118
+          },
+          "shared_features": {
+            "norm": 0.0035552978515625,
+            "cos_to_flow_epe": 0.111328125
+          }
+        },
+        "cls2": {
+          "loss": 2.368420124053955,
+          "flow_coordinates": {
+            "norm": 26.417705535888672,
+            "cos_to_flow_epe": -0.12997810542583466
+          },
+          "shared_features": {
+            "norm": 0.12890625,
+            "cos_to_flow_epe": -0.0301513671875
+          }
+        },
+        "geo2": {
+          "loss": 0.034813329577445984,
+          "flow_coordinates": {
+            "norm": 0.3410157859325409,
+            "cos_to_flow_epe": 0.08018182218074799
+          },
+          "shared_features": {
+            "norm": 0.005584716796875,
+            "cos_to_flow_epe": 0.0228271484375
+          }
+        },
+        "final": {
+          "loss": 0.034813329577445984,
+          "flow_coordinates": {
+            "norm": 0.3410157859325409,
+            "cos_to_flow_epe": 0.08018182218074799
+          },
+          "shared_features": {
+            "norm": 0.005584716796875,
+            "cos_to_flow_epe": 0.0228271484375
+          }
+        }
+      },
+      "total": {
+        "flow_coordinates": {
+          "norm": 28.173795700073242,
+          "cos_to_flow_epe": -0.16589970886707306
+        },
+        "shared_features": {
+          "norm": 0.1650390625,
+          "cos_to_flow_epe": -0.0289306640625
+        }
+      }
+    },
+    {
+      "pair_id": "whu__0870411039c676dd",
+      "terms": {
+        "flow": {
+          "loss": 0.0036230068653821945,
+          "flow_coordinates": {
+            "norm": 0.0345909520983696,
+            "cos_to_flow_epe": 0.7472458481788635
+          },
+          "shared_features": {
+            "norm": 4.1961669921875e-05,
+            "cos_to_flow_epe": 0.84765625
+          }
+        },
+        "global8": {
+          "loss": 0.6457363963127136,
+          "flow_coordinates": {
+            "norm": 0.0,
+            "cos_to_flow_epe": 0.0
+          },
+          "shared_features": {
+            "norm": 0.0341796875,
+            "cos_to_flow_epe": 0.0062255859375
+          }
+        },
+        "cls8": {
+          "loss": 1.1279726028442383,
+          "flow_coordinates": {
+            "norm": 10.446220397949219,
+            "cos_to_flow_epe": -0.12096578627824783
+          },
+          "shared_features": {
+            "norm": 0.041015625,
+            "cos_to_flow_epe": -0.02978515625
+          }
+        },
+        "geo8": {
+          "loss": 0.08966560661792755,
+          "flow_coordinates": {
+            "norm": 1.52671480178833,
+            "cos_to_flow_epe": 0.12093359231948853
+          },
+          "shared_features": {
+            "norm": 0.01220703125,
+            "cos_to_flow_epe": 0.03125
+          }
+        },
+        "cls2": {
+          "loss": 2.7702348232269287,
+          "flow_coordinates": {
+            "norm": 30.046411514282227,
+            "cos_to_flow_epe": -0.11296931654214859
+          },
+          "shared_features": {
+            "norm": 0.1064453125,
+            "cos_to_flow_epe": -0.024169921875
+          }
+        },
+        "geo2": {
+          "loss": 0.055747948586940765,
+          "flow_coordinates": {
+            "norm": 0.629002571105957,
+            "cos_to_flow_epe": 0.06358001381158829
+          },
+          "shared_features": {
+            "norm": 0.007293701171875,
+            "cos_to_flow_epe": 0.00640869140625
+          }
+        },
+        "final": {
+          "loss": 0.055747948586940765,
+          "flow_coordinates": {
+            "norm": 0.629002571105957,
+            "cos_to_flow_epe": 0.06358001381158829
+          },
+          "shared_features": {
+            "norm": 0.007293701171875,
+            "cos_to_flow_epe": 0.00640869140625
+          }
+        }
+      },
+      "total": {
+        "flow_coordinates": {
+          "norm": 29.764183044433594,
+          "cos_to_flow_epe": -0.14673659205436707
+        },
+        "shared_features": {
+          "norm": 0.1376953125,
+          "cos_to_flow_epe": -0.0224609375
+        }
+      }
+    },
+    {
+      "pair_id": "flair_rgb__123035b7ffcd3223",
+      "terms": {
+        "flow": {
+          "loss": 0.0028613703325390816,
+          "flow_coordinates": {
+            "norm": 0.03860154002904892,
+            "cos_to_flow_epe": 0.8059191703796387
+          },
+          "shared_features": {
+            "norm": 4.57763671875e-05,
+            "cos_to_flow_epe": 0.91015625
+          }
+        },
+        "global8": {
+          "loss": 0.6632022261619568,
+          "flow_coordinates": {
+            "norm": 0.0,
+            "cos_to_flow_epe": 0.0
+          },
+          "shared_features": {
+            "norm": 0.040283203125,
+            "cos_to_flow_epe": 0.005767822265625
+          }
+        },
+        "cls8": {
+          "loss": 0.9875755310058594,
+          "flow_coordinates": {
+            "norm": 6.133661270141602,
+            "cos_to_flow_epe": -0.07210151106119156
+          },
+          "shared_features": {
+            "norm": 0.03369140625,
+            "cos_to_flow_epe": -0.01202392578125
+          }
+        },
+        "geo8": {
+          "loss": 0.050352200865745544,
+          "flow_coordinates": {
+            "norm": 0.8706515431404114,
+            "cos_to_flow_epe": 0.13945911824703217
+          },
+          "shared_features": {
+            "norm": 0.011474609375,
+            "cos_to_flow_epe": 0.018310546875
+          }
+        },
+        "cls2": {
+          "loss": 2.8502488136291504,
+          "flow_coordinates": {
+            "norm": 52.43232345581055,
+            "cos_to_flow_epe": -0.09333211928606033
+          },
+          "shared_features": {
+            "norm": 0.1982421875,
+            "cos_to_flow_epe": -0.028076171875
+          }
+        },
+        "geo2": {
+          "loss": 0.0663101077079773,
+          "flow_coordinates": {
+            "norm": 1.037707805633545,
+            "cos_to_flow_epe": 0.07523000240325928
+          },
+          "shared_features": {
+            "norm": 0.011474609375,
+            "cos_to_flow_epe": 0.02294921875
+          }
+        },
+        "final": {
+          "loss": 0.0663101077079773,
+          "flow_coordinates": {
+            "norm": 1.037707805633545,
+            "cos_to_flow_epe": 0.07523000240325928
+          },
+          "shared_features": {
+            "norm": 0.011474609375,
+            "cos_to_flow_epe": 0.02294921875
+          }
+        }
+      },
+      "total": {
+        "flow_coordinates": {
+          "norm": 53.13607406616211,
+          "cos_to_flow_epe": -0.09460998326539993
+        },
+        "shared_features": {
+          "norm": 0.2275390625,
+          "cos_to_flow_epe": -0.02197265625
+        }
+      }
+    },
+    {
+      "pair_id": "googleearth_current__87ef87f4f7d3dc87",
+      "terms": {
+        "flow": {
+          "loss": 0.01003116276115179,
+          "flow_coordinates": {
+            "norm": 0.08380965143442154,
+            "cos_to_flow_epe": 0.8127475380897522
+          },
+          "shared_features": {
+            "norm": 0.00011157989501953125,
+            "cos_to_flow_epe": 0.89453125
+          }
+        },
+        "global8": {
+          "loss": 1.5492238998413086,
+          "flow_coordinates": {
+            "norm": 0.0,
+            "cos_to_flow_epe": 0.0
+          },
+          "shared_features": {
+            "norm": 0.07275390625,
+            "cos_to_flow_epe": -0.0040283203125
+          }
+        },
+        "cls8": {
+          "loss": 1.5247148275375366,
+          "flow_coordinates": {
+            "norm": 8.442795753479004,
+            "cos_to_flow_epe": 0.024103745818138123
+          },
+          "shared_features": {
+            "norm": 0.06591796875,
+            "cos_to_flow_epe": 0.0059814453125
+          }
+        },
+        "geo8": {
+          "loss": 0.2100209891796112,
+          "flow_coordinates": {
+            "norm": 1.5295766592025757,
+            "cos_to_flow_epe": 0.11770940572023392
+          },
+          "shared_features": {
+            "norm": 0.029296875,
+            "cos_to_flow_epe": -0.0084228515625
+          }
+        },
+        "cls2": {
+          "loss": 4.782639026641846,
+          "flow_coordinates": {
+            "norm": 17.428674697875977,
+            "cos_to_flow_epe": -0.09193527698516846
+          },
+          "shared_features": {
+            "norm": 0.259765625,
+            "cos_to_flow_epe": -0.0045166015625
+          }
+        },
+        "geo2": {
+          "loss": 0.1354115903377533,
+          "flow_coordinates": {
+            "norm": 0.8393546938896179,
+            "cos_to_flow_epe": 0.04700475186109543
+          },
+          "shared_features": {
+            "norm": 0.017822265625,
+            "cos_to_flow_epe": -0.005126953125
+          }
+        },
+        "final": {
+          "loss": 0.1354115903377533,
+          "flow_coordinates": {
+            "norm": 0.8393546938896179,
+            "cos_to_flow_epe": 0.04700475186109543
+          },
+          "shared_features": {
+            "norm": 0.017822265625,
+            "cos_to_flow_epe": -0.005096435546875
+          }
+        }
+      },
+      "total": {
+        "flow_coordinates": {
+          "norm": 19.69208335876465,
+          "cos_to_flow_epe": -0.054424822330474854
+        },
+        "shared_features": {
+          "norm": 0.302734375,
+          "cos_to_flow_epe": -0.004669189453125
+        }
+      }
+    },
+    {
+      "pair_id": "whu__f1bd48b1188a2839",
+      "terms": {
+        "flow": {
+          "loss": 0.007815194316208363,
+          "flow_coordinates": {
+            "norm": 0.07311109453439713,
+            "cos_to_flow_epe": 0.7926435470581055
+          },
+          "shared_features": {
+            "norm": 9.5367431640625e-05,
+            "cos_to_flow_epe": 0.89453125
+          }
+        },
+        "global8": {
+          "loss": 1.4815735816955566,
+          "flow_coordinates": {
+            "norm": 0.0,
+            "cos_to_flow_epe": 0.0
+          },
+          "shared_features": {
+            "norm": 0.0703125,
+            "cos_to_flow_epe": 0.006866455078125
+          }
+        },
+        "cls8": {
+          "loss": 1.6841567754745483,
+          "flow_coordinates": {
+            "norm": 9.848102569580078,
+            "cos_to_flow_epe": -0.06272193044424057
+          },
+          "shared_features": {
+            "norm": 0.08154296875,
+            "cos_to_flow_epe": -0.0081787109375
+          }
+        },
+        "geo8": {
+          "loss": 0.3346322476863861,
+          "flow_coordinates": {
+            "norm": 1.6907168626785278,
+            "cos_to_flow_epe": 0.013568034395575523
+          },
+          "shared_features": {
+            "norm": 0.02685546875,
+            "cos_to_flow_epe": 0.010986328125
+          }
+        },
+        "cls2": {
+          "loss": 3.7101998329162598,
+          "flow_coordinates": {
+            "norm": 16.607990264892578,
+            "cos_to_flow_epe": -0.1345200389623642
+          },
+          "shared_features": {
+            "norm": 0.234375,
+            "cos_to_flow_epe": -0.006683349609375
+          }
+        },
+        "geo2": {
+          "loss": 0.10700919479131699,
+          "flow_coordinates": {
+            "norm": 0.8672164082527161,
+            "cos_to_flow_epe": 0.04437648877501488
+          },
+          "shared_features": {
+            "norm": 0.0185546875,
+            "cos_to_flow_epe": 0.0101318359375
+          }
+        },
+        "final": {
+          "loss": 0.10700919479131699,
+          "flow_coordinates": {
+            "norm": 0.8672164082527161,
+            "cos_to_flow_epe": 0.04437648877501488
+          },
+          "shared_features": {
+            "norm": 0.0185546875,
+            "cos_to_flow_epe": 0.0101318359375
+          }
+        }
+      },
+      "total": {
+        "flow_coordinates": {
+          "norm": 19.24518585205078,
+          "cos_to_flow_epe": -0.13997997343540192
+        },
+        "shared_features": {
+          "norm": 0.2890625,
+          "cos_to_flow_epe": -0.00347900390625
+        }
+      }
+    },
+    {
+      "pair_id": "flair_rgb__c3875420c22627a8",
+      "terms": {
+        "flow": {
+          "loss": 0.003004322526976466,
+          "flow_coordinates": {
+            "norm": 0.036308031529188156,
+            "cos_to_flow_epe": 0.8536819219589233
+          },
+          "shared_features": {
+            "norm": 5.125999450683594e-05,
+            "cos_to_flow_epe": 0.94140625
+          }
+        },
+        "global8": {
+          "loss": 0.6427595615386963,
+          "flow_coordinates": {
+            "norm": 0.0,
+            "cos_to_flow_epe": 0.0
+          },
+          "shared_features": {
+            "norm": 0.0556640625,
+            "cos_to_flow_epe": -0.01043701171875
+          }
+        },
+        "cls8": {
+          "loss": 0.8560044169425964,
+          "flow_coordinates": {
+            "norm": 5.999816417694092,
+            "cos_to_flow_epe": -0.14893203973770142
+          },
+          "shared_features": {
+            "norm": 0.03271484375,
+            "cos_to_flow_epe": -0.0279541015625
+          }
+        },
+        "geo8": {
+          "loss": 0.04553785175085068,
+          "flow_coordinates": {
+            "norm": 0.9325816035270691,
+            "cos_to_flow_epe": 0.13293124735355377
+          },
+          "shared_features": {
+            "norm": 0.01171875,
+            "cos_to_flow_epe": 0.0201416015625
+          }
+        },
+        "cls2": {
+          "loss": 2.472428560256958,
+          "flow_coordinates": {
+            "norm": 20.524803161621094,
+            "cos_to_flow_epe": -0.07945332676172256
+          },
+          "shared_features": {
+            "norm": 0.15625,
+            "cos_to_flow_epe": -0.015380859375
+          }
+        },
+        "geo2": {
+          "loss": 0.046854689717292786,
+          "flow_coordinates": {
+            "norm": 0.5447137355804443,
+            "cos_to_flow_epe": 0.0003179029154125601
+          },
+          "shared_features": {
+            "norm": 0.009521484375,
+            "cos_to_flow_epe": 0.001434326171875
+          }
+        },
+        "final": {
+          "loss": 0.046854689717292786,
+          "flow_coordinates": {
+            "norm": 0.5447137355804443,
+            "cos_to_flow_epe": 0.0003179029154125601
+          },
+          "shared_features": {
+            "norm": 0.009521484375,
+            "cos_to_flow_epe": 0.0014190673828125
+          }
+        }
+      },
+      "total": {
+        "flow_coordinates": {
+          "norm": 20.567049026489258,
+          "cos_to_flow_epe": -0.11518511176109314
+        },
+        "shared_features": {
+          "norm": 0.1865234375,
+          "cos_to_flow_epe": -0.0194091796875
+        }
+      }
+    },
+    {
+      "pair_id": "googleearth_current__5e2d2329bc5b7ad7",
+      "terms": {
+        "flow": {
+          "loss": 0.005725804716348648,
+          "flow_coordinates": {
+            "norm": 0.05711079761385918,
+            "cos_to_flow_epe": 0.8295765519142151
+          },
+          "shared_features": {
+            "norm": 7.104873657226562e-05,
+            "cos_to_flow_epe": 0.921875
+          }
+        },
+        "global8": {
+          "loss": 0.7058901786804199,
+          "flow_coordinates": {
+            "norm": 0.0,
+            "cos_to_flow_epe": 0.0
+          },
+          "shared_features": {
+            "norm": 0.0400390625,
+            "cos_to_flow_epe": 0.00469970703125
+          }
+        },
+        "cls8": {
+          "loss": 1.2989720106124878,
+          "flow_coordinates": {
+            "norm": 6.78602933883667,
+            "cos_to_flow_epe": -0.016668614000082016
+          },
+          "shared_features": {
+            "norm": 0.036865234375,
+            "cos_to_flow_epe": -0.00128936767578125
+          }
+        },
+        "geo8": {
+          "loss": 0.10820531845092773,
+          "flow_coordinates": {
+            "norm": 0.9608553647994995,
+            "cos_to_flow_epe": 0.15761958062648773
+          },
+          "shared_features": {
+            "norm": 0.01373291015625,
+            "cos_to_flow_epe": 0.01300048828125
+          }
+        },
+        "cls2": {
+          "loss": 2.8483998775482178,
+          "flow_coordinates": {
+            "norm": 17.598939895629883,
+            "cos_to_flow_epe": -0.09272690117359161
+          },
+          "shared_features": {
+            "norm": 0.154296875,
+            "cos_to_flow_epe": -0.006500244140625
+          }
+        },
+        "geo2": {
+          "loss": 0.07589010149240494,
+          "flow_coordinates": {
+            "norm": 0.4542675316333771,
+            "cos_to_flow_epe": 0.12182904779911041
+          },
+          "shared_features": {
+            "norm": 0.01104736328125,
+            "cos_to_flow_epe": 0.006988525390625
+          }
+        },
+        "final": {
+          "loss": 0.07589010149240494,
+          "flow_coordinates": {
+            "norm": 0.4542675316333771,
+            "cos_to_flow_epe": 0.12182904779911041
+          },
+          "shared_features": {
+            "norm": 0.01104736328125,
+            "cos_to_flow_epe": 0.00701904296875
+          }
+        }
+      },
+      "total": {
+        "flow_coordinates": {
+          "norm": 16.33066749572754,
+          "cos_to_flow_epe": -0.08790182322263718
+        },
+        "shared_features": {
+          "norm": 0.1728515625,
+          "cos_to_flow_epe": -0.0027618408203125
+        }
+      }
+    }
+  ]
+}

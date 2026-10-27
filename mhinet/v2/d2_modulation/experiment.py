@@ -2,6 +2,8 @@
 import argparse
 import json
 import random
+import os
+import time
 from pathlib import Path
 import torch
 from mhinet.v2.data import GeometryPairDataset
@@ -34,22 +36,37 @@ def prepare(args):
     model, matcher = load_models(args.device)
     matcher.requires_grad_(False).eval()
     model.requires_grad_(False).eval()
-    selection = splits()
+    selection = splits() if args.selection is None else {
+        k: (v['root'], v['rows']) for k,v in json.loads(args.selection.read_text()).items()}
+    reuse = {}
+    if args.reuse_cache is not None:
+        old = json.loads((args.reuse_cache/'data.json').read_text())
+        for split, spec in old['splits'].items():
+            for i, pair in enumerate(spec['pairs']):
+                reuse[pair] = args.reuse_cache/'cache'/split/f'{i:04d}.pt'
     ids = [{r['pair_id'] for r in selection[k][1]} for k in ('train', 'val', 'test')]
     assert not (ids[0]&ids[1] or ids[0]&ids[2] or ids[1]&ids[2]), 'RGB split overlap'
     args.output.mkdir(parents=True, exist_ok=True)
     metadata = dict(temperature=float(matcher.tau_f),
         flow_checkpoint='weight/mhi_v2_u0.pt', downstream_checkpoint='outputs/flow_d8_d2/training/best.pt',
         context_side=8, query_side=4, target_side=8, max_parents=128,
-        feature_dtype='float32', selection='qrru_corners.selections(seed42)',
+        feature_dtype='float32', selection=str(args.selection) if args.selection else 'qrru_corners.selections(seed42)',
         splits={k:dict(root=root, pairs=[r['pair_id'] for r in rows]) for k,(root,rows) in selection.items()})
     write_json(args.output/'data.json', metadata)
     # All geometry enters only cached labels, after the inference-only extraction.
-    for name in args.splits:
+    for name in (args.splits or list(selection)):
         root, rows = selection[name]
         out = args.output/'cache'/name
         out.mkdir(parents=True, exist_ok=True)
-        for i, item in enumerate(GeometryPairDataset(root, rows)):
+        dataset = GeometryPairDataset(root, rows)
+        for i, row in enumerate(rows):
+            destination = out/f'{i:04d}.pt'
+            source = reuse.get(row['pair_id'])
+            if source is not None and source.exists():
+                if not destination.exists():
+                    os.link(source, destination)
+                continue
+            item = dataset[i]
             shared = model(item['images'].to(args.device))
             windows = extract_windows(shared, matcher)
             gt = item['geometry'].to(args.device)
@@ -125,19 +142,22 @@ def evaluate(adapter, files, temperature, device):
 
 
 def train(args):
-    torch.set_num_threads(2);torch.manual_seed(42)
+    torch.set_num_threads(2);torch.manual_seed(args.seed)
+    started = time.perf_counter()
     data=json.loads((args.output/'data.json').read_text())
     temperature=data['temperature']
     files={k:sorted((args.output/'cache'/k).glob('*.pt')) for k in data['splits']}
     for name in files:
         if len(files[name])!=len(data['splits'][name]['pairs']):
             raise RuntimeError(f'Incomplete cache: {name}')
-    out=args.output/args.mode
+    out=args.output/(args.run_name or args.mode)
     out.mkdir(parents=True,exist_ok=False)
     adapter=LocalPairModulation(args.mode).to(args.device)
-    config=dict(mode=args.mode,seed=42,epochs=args.epochs,patience=args.patience,
+    training_cache={f:load_record(f,args.device) for f in files['train']} if args.preload_train else None
+    config=dict(mode=args.mode,seed=args.seed,epochs=args.epochs,patience=args.patience,
         learning_rate=1e-3,min_learning_rate=1e-5,weight_decay=1e-4,gradient_clip=1.,
-        windows_per_update=64,updates_per_epoch=len(files['train']),
+        windows_per_update=64,updates_per_epoch=min(args.samples_per_epoch or len(files['train']),len(files['train'])),
+        training_pairs=len(files['train']),preload_train=args.preload_train,
         loss='exact-H four-neighbour soft-label dual classification only',
         min_delta=.001,selection='RGB validation all-query P@3; initial weights eligible',
         frozen='DINO/MVT/Flow/VGG/DeDoDe/temperature; QRRU unused',
@@ -154,11 +174,12 @@ def train(args):
     print(json.dumps(dict(mode=args.mode,epoch=0,**baseline['summary'])),flush=True)
     if args.mode!='none':
         for epoch in range(1,args.epochs+1):
-            adapter.train();order=list(files['train']);random.Random(42+epoch).shuffle(order)
-            generator=torch.Generator(device=args.device).manual_seed(42000+epoch)
+            adapter.train();order=list(files['train']);random.Random(args.seed+epoch).shuffle(order)
+            order=order[:config['updates_per_epoch']]
+            generator=torch.Generator(device=args.device).manual_seed(args.seed*1000+epoch)
             losses=[];usable_queries=0;updates=0
             for file in order:
-                record=load_record(file,args.device)
+                record=training_cache[file] if training_cache is not None else load_record(file,args.device)
                 n=len(record['a']);take=torch.randperm(n,device=args.device,generator=generator)[:64]
                 record={k:v[take] if isinstance(v,torch.Tensor) else v for k,v in record.items()}
                 result=match_windows(adapter,record,temperature);loss,usable=loss_fn(result,record)
@@ -176,15 +197,18 @@ def train(args):
             save('last.pt',epoch);scheduler.step();print(json.dumps(dict(mode=args.mode,**row)),flush=True)
             if stale>=args.patience:break
     adapter.load_state_dict(torch.load(out/'best.pt',map_location=args.device,weights_only=False)['adapter'])
-    for split in ('val','test','hangzhou_test'):
+    for split in (name for name in files if name != 'train'):
         write_json(out/f'best_{split}.json',evaluate(adapter,files[split],temperature,args.device))
-    write_json(out/'done.json',dict(best_epoch=best_epoch,best_val_p3=best,epochs_run=len(history)))
+    write_json(out/'done.json',dict(best_epoch=best_epoch,best_val_p3=best,epochs_run=len(history),updates_run=sum(row['updates'] for row in history),
+        elapsed_seconds=time.perf_counter()-started,peak_cuda_mb=torch.cuda.max_memory_allocated(args.device)/2**20))
     print('TRAIN DONE '+args.mode,flush=True)
 
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('action',choices=['prepare','train']);p.add_argument('--device',default='cuda:0')
-    p.add_argument('--output',type=Path,default=ROOT);p.add_argument('--splits',nargs='+',default=['train','val','test','hangzhou_test'])
+    p.add_argument('--output',type=Path,default=ROOT);p.add_argument('--splits',nargs='+')
+    p.add_argument('--selection',type=Path);p.add_argument('--reuse-cache',type=Path)
+    p.add_argument('--seed',type=int,default=42);p.add_argument('--run-name');p.add_argument('--samples-per-epoch',type=int);p.add_argument('--preload-train',action='store_true')
     p.add_argument('--mode',choices=['none','self','pair'],default='pair');p.add_argument('--epochs',type=int,default=30);p.add_argument('--patience',type=int,default=5)
     args=p.parse_args();prepare(args) if args.action=='prepare' else train(args)
 

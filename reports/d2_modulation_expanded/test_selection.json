@@ -1,0 +1,2572 @@
+{
+  "test": {
+    "root": "/home/disk1/Data/datasets/MHINet_RGB_512",
+    "rows": [
+      {
+        "pair_id": "flair_rgb__69f2b570cf898147",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D012-2019_AERIAL_RGBI/UA-S1-23/D012-2019_AERIAL_RGBI_UA-S1-23_10-4.tif",
+        "overlap_fractions": [
+          0.2868232727050781,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.86737169207972
+      },
+      {
+        "pair_id": "googleearth_current__96fe097437129238",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.176340129.179100.jpg",
+        "overlap_fractions": [
+          0.26732635498046875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.934147075891187
+      },
+      {
+        "pair_id": "whu__dcf10865f22aeb85",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/4556.tif",
+        "overlap_fractions": [
+          0.3070220947265625,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.8048129844042418
+      },
+      {
+        "pair_id": "flair_rgb__8c1c03e87fd88107",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D010-2019_AERIAL_RGBI/AA-S1-6/D010-2019_AERIAL_RGBI_AA-S1-6_4-15.tif",
+        "overlap_fractions": [
+          0.405059814453125,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.571240241361882
+      },
+      {
+        "pair_id": "googleearth_current__3bf960f63254e995",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/37.498000126.9465.jpg",
+        "overlap_fractions": [
+          0.3130760192871094,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7873528225189923
+      },
+      {
+        "pair_id": "whu__cea9b208ef19c8b3",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/4476.tif",
+        "overlap_fractions": [
+          0.3934364318847656,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.5943384311413997
+      },
+      {
+        "pair_id": "flair_rgb__35293e85e57173f6",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D007-2020_AERIAL_RGBI/UU-S1-1/D007-2020_AERIAL_RGBI_UU-S1-1_3-3.tif",
+        "overlap_fractions": [
+          0.43944549560546875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.5086655793855708
+      },
+      {
+        "pair_id": "googleearth_current__0c942eb5c8d020b6",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/37.486000126.817000.jpg",
+        "overlap_fractions": [
+          0.3704185485839844,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6432656759376378
+      },
+      {
+        "pair_id": "whu__b8fd78e1d82bee35",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/4593.tif",
+        "overlap_fractions": [
+          0.36872100830078125,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6469448521630345
+      },
+      {
+        "pair_id": "flair_rgb__aa3f9533b941884a",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D017-2018_AERIAL_RGBI/NN-S1-19/D017-2018_AERIAL_RGBI_NN-S1-19_8-3.tif",
+        "overlap_fractions": [
+          0.31601715087890625,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7790293476016308
+      },
+      {
+        "pair_id": "googleearth_current__b67b71a506eb1df4",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/36.065100129.238723.jpg",
+        "overlap_fractions": [
+          0.2825126647949219,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.881495747930478
+      },
+      {
+        "pair_id": "whu__8e02111db80029e0",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/4337.tif",
+        "overlap_fractions": [
+          0.3131980895996094,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7869190463040612
+      },
+      {
+        "pair_id": "flair_rgb__1f6c2340fcf557cc",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D009-2019_AERIAL_RGBI/FU-S1-17/D009-2019_AERIAL_RGBI_FU-S1-17_8-9.tif",
+        "overlap_fractions": [
+          0.34999847412109375,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6908059495265104
+      },
+      {
+        "pair_id": "googleearth_current__a658b0d3f56e552c",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.981100129.245723.jpg",
+        "overlap_fractions": [
+          0.3055992126464844,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.8090693982067338
+      },
+      {
+        "pair_id": "whu__d0c19862d43a875a",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/934.tif",
+        "overlap_fractions": [
+          0.37555694580078125,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6317801074124594
+      },
+      {
+        "pair_id": "flair_rgb__54c970e43e560543",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D008-2019_AERIAL_RGBI/FN-S1-13/D008-2019_AERIAL_RGBI_FN-S1-13_3-5.tif",
+        "overlap_fractions": [
+          0.2519035339355469,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.9926835743991345
+      },
+      {
+        "pair_id": "googleearth_current__6b5976381c43e68b",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.495100129.301723.jpg",
+        "overlap_fractions": [
+          0.3995399475097656,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.5821865842821845
+      },
+      {
+        "pair_id": "whu__30e5705a7070d288",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/3554.tif",
+        "overlap_fractions": [
+          0.3339080810546875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7304917371312978
+      },
+      {
+        "pair_id": "flair_rgb__20f0e431b7222229",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D010-2019_AERIAL_RGBI/AA-S1-5/D010-2019_AERIAL_RGBI_AA-S1-5_3-1.tif",
+        "overlap_fractions": [
+          0.31723785400390625,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7758382670611716
+      },
+      {
+        "pair_id": "googleearth_current__a7696748c0f81613",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/37.420900126.614065.jpg",
+        "overlap_fractions": [
+          0.4907264709472656,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.4276576945579336
+      },
+      {
+        "pair_id": "whu__bf836176c91a1714",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/2419.tif",
+        "overlap_fractions": [
+          0.36264801025390625,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6606693084474013
+      },
+      {
+        "pair_id": "flair_rgb__32a9fffeb5799427",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D011-2021_AERIAL_RGBI/UN-S1-18/D011-2021_AERIAL_RGBI_UN-S1-18_1-4.tif",
+        "overlap_fractions": [
+          0.3014717102050781,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.8213256129014177
+      },
+      {
+        "pair_id": "googleearth_current__a50d859bdb5e2eaf",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.872643128.527689.jpg",
+        "overlap_fractions": [
+          0.3501853942871094,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6898241808413448
+      },
+      {
+        "pair_id": "whu__6d80f4ca16e957d7",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/1241.tif",
+        "overlap_fractions": [
+          0.3708038330078125,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6424710264217466
+      },
+      {
+        "pair_id": "flair_rgb__96291fd40245ae31",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D008-2019_AERIAL_RGBI/UN-S1-8/D008-2019_AERIAL_RGBI_UN-S1-8_10-5.tif",
+        "overlap_fractions": [
+          0.4827308654785156,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.4393329991047947
+      },
+      {
+        "pair_id": "googleearth_current__f68acfd84b8fb8ae",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.579100129.340223.jpg",
+        "overlap_fractions": [
+          0.41330718994140625,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.555599134832996
+      },
+      {
+        "pair_id": "whu__e50fc0e81066cf8d",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/1216.tif",
+        "overlap_fractions": [
+          0.2894744873046875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.8586571938898024
+      },
+      {
+        "pair_id": "flair_rgb__e48206215cd4ddf5",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D017-2018_AERIAL_RGBI/UA-S1-17/D017-2018_AERIAL_RGBI_UA-S1-17_3-10.tif",
+        "overlap_fractions": [
+          0.3733062744140625,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6369483782823233
+      },
+      {
+        "pair_id": "googleearth_current__a3cc2e23b38664be",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.124400126.813922.jpg",
+        "overlap_fractions": [
+          0.3899955749511719,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.60130509903981
+      },
+      {
+        "pair_id": "whu__e78555792cc167b7",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/2181.tif",
+        "overlap_fractions": [
+          0.48581695556640625,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.435105973108571
+      },
+      {
+        "pair_id": "flair_rgb__dc4fd82164d5e7a1",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D016-2020_AERIAL_RGBI/UU-S1-10/D016-2020_AERIAL_RGBI_UU-S1-10_13-8.tif",
+        "overlap_fractions": [
+          0.4666595458984375,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.4639295985280842
+      },
+      {
+        "pair_id": "googleearth_current__48ac4581753acd7c",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/37.510900126.680565.jpg",
+        "overlap_fractions": [
+          0.3592338562011719,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6685540689116514
+      },
+      {
+        "pair_id": "whu__be586fbbf36ff96c",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/3492.tif",
+        "overlap_fractions": [
+          0.3117713928222656,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.790974701309149
+      },
+      {
+        "pair_id": "flair_rgb__8859706ad3c46a50",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D009-2019_AERIAL_RGBI/NN-S1-21/D009-2019_AERIAL_RGBI_NN-S1-21_3-7.tif",
+        "overlap_fractions": [
+          0.39888763427734375,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.5835549838455347
+      },
+      {
+        "pair_id": "googleearth_current__b23a020ffb385aed",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Val/37.552000126.824000.jpg",
+        "overlap_fractions": [
+          0.289764404296875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.857753522422284
+      },
+      {
+        "pair_id": "whu__9503437d9e142149",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/1824.tif",
+        "overlap_fractions": [
+          0.4399833679199219,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.5077223316741986
+      },
+      {
+        "pair_id": "flair_rgb__6b99d55f7562fdd6",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D006-2020_AERIAL_RGBI/NA-S2-3/D006-2020_AERIAL_RGBI_NA-S2-3_4-5.tif",
+        "overlap_fractions": [
+          0.4292564392089844,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.5265817898713199
+      },
+      {
+        "pair_id": "googleearth_current__b31829c9499ffa99",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.495100129.361223.jpg",
+        "overlap_fractions": [
+          0.26422882080078125,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.9453958918756178
+      },
+      {
+        "pair_id": "whu__c7d4303e4fc9c3e7",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/4084.tif",
+        "overlap_fractions": [
+          0.352142333984375,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6853624324026182
+      },
+      {
+        "pair_id": "flair_rgb__702b801785d2b1de",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D009-2019_AERIAL_RGBI/NN-S1-23/D009-2019_AERIAL_RGBI_NN-S1-23_4-2.tif",
+        "overlap_fractions": [
+          0.4046440124511719,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.5720950788534307
+      },
+      {
+        "pair_id": "googleearth_current__f7b55287ed31d654",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.531100129.448723.jpg",
+        "overlap_fractions": [
+          0.28050994873046875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.8883393414117373
+      },
+      {
+        "pair_id": "whu__4b5239e2193d375f",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/598.tif",
+        "overlap_fractions": [
+          0.3582954406738281,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6706791610974654
+      },
+      {
+        "pair_id": "flair_rgb__5060c533417ee9be",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D010-2019_AERIAL_RGBI/AA-S1-6/D010-2019_AERIAL_RGBI_AA-S1-6_5-5.tif",
+        "overlap_fractions": [
+          0.484344482421875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.4369944913622665
+      },
+      {
+        "pair_id": "googleearth_current__59d90838ccbbccdb",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.158340129.158100.jpg",
+        "overlap_fractions": [
+          0.3837852478027344,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6145014313282804
+      },
+      {
+        "pair_id": "whu__637ea033a528d48f",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/374.tif",
+        "overlap_fractions": [
+          0.3773040771484375,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6283241275449551
+      },
+      {
+        "pair_id": "flair_rgb__2f7a76ba7898a01a",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D014-2020_AERIAL_RGBI/UU-S2-5/D014-2020_AERIAL_RGBI_UU-S2-5_5-5.tif",
+        "overlap_fractions": [
+          0.3041114807128906,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.813429976856848
+      },
+      {
+        "pair_id": "googleearth_current__514a5b519e6929db",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.824643128.541689.jpg",
+        "overlap_fractions": [
+          0.3119049072265625,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7912268884820404
+      },
+      {
+        "pair_id": "whu__605a9edb73f3506a",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/2682.tif",
+        "overlap_fractions": [
+          0.49259185791015625,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.4248280829946383
+      },
+      {
+        "pair_id": "flair_rgb__afb3ec777bc47079",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D004-2021_AERIAL_RGBI/UU-S1-36/D004-2021_AERIAL_RGBI_UU-S1-36_2-5.tif",
+        "overlap_fractions": [
+          0.4568328857421875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.4799963846549855
+      },
+      {
+        "pair_id": "googleearth_current__4bcb5aa8ad3add65",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/36.137100129.256223.jpg",
+        "overlap_fractions": [
+          0.418548583984375,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.5457650827788956
+      },
+      {
+        "pair_id": "whu__4574c3b184529ff5",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/3722.tif",
+        "overlap_fractions": [
+          0.28508758544921875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.8732023971348895
+      },
+      {
+        "pair_id": "flair_rgb__caf7fc2dcc48716a",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D005-2018_AERIAL_RGBI/NN-S1-10/D005-2018_AERIAL_RGBI_NN-S1-10_9-7.tif",
+        "overlap_fractions": [
+          0.37310791015625,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6372288504977073
+      },
+      {
+        "pair_id": "googleearth_current__0cadc188e9aae78e",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Val/37.582000126.894000.jpg",
+        "overlap_fractions": [
+          0.3655815124511719,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6540266274367
+      },
+      {
+        "pair_id": "whu__5213e41d753ace7a",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/276.tif",
+        "overlap_fractions": [
+          0.3824119567871094,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6174715994498017
+      },
+      {
+        "pair_id": "flair_rgb__cec1988cf34207f1",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D008-2019_AERIAL_RGBI/UN-S1-6/D008-2019_AERIAL_RGBI_UN-S1-6_1-8.tif",
+        "overlap_fractions": [
+          0.3364372253417969,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7242164675693588
+      },
+      {
+        "pair_id": "googleearth_current__853f2eed3aa0f08a",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.513100129.329723.jpg",
+        "overlap_fractions": [
+          0.37172698974609375,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6404557759317908
+      },
+      {
+        "pair_id": "whu__a20392ec4caf3dbb",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/2986.tif",
+        "overlap_fractions": [
+          0.31292724609375,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7880630677614044
+      },
+      {
+        "pair_id": "flair_rgb__6e57c203f09e615e",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D016-2020_AERIAL_RGBI/UF-S1-4/D016-2020_AERIAL_RGBI_UF-S1-4_1-6.tif",
+        "overlap_fractions": [
+          0.3918304443359375,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.5975932573522413
+      },
+      {
+        "pair_id": "googleearth_current__3d7931e5c8f51a8e",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Val/37.678000126.782000.jpg",
+        "overlap_fractions": [
+          0.3047523498535156,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.8117060583395665
+      },
+      {
+        "pair_id": "whu__3cb425da66f47b53",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/853.tif",
+        "overlap_fractions": [
+          0.3367271423339844,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7233543090517471
+      },
+      {
+        "pair_id": "flair_rgb__2e5392ac2bb6cd3b",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D012-2019_AERIAL_RGBI/FF-S1-13/D012-2019_AERIAL_RGBI_FF-S1-13_1-4.tif",
+        "overlap_fractions": [
+          0.39414215087890625,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.59295169040257
+      },
+      {
+        "pair_id": "googleearth_current__874aea4f72bc406b",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.489100129.315723.jpg",
+        "overlap_fractions": [
+          0.3208580017089844,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7658026229907906
+      },
+      {
+        "pair_id": "whu__84f867ccc6069671",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/1007.tif",
+        "overlap_fractions": [
+          0.30870819091796875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7999807696127978
+      },
+      {
+        "pair_id": "flair_rgb__f1f43708d514e1ef",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D011-2021_AERIAL_RGBI/AF-S1-27/D011-2021_AERIAL_RGBI_AF-S1-27_3-9.tif",
+        "overlap_fractions": [
+          0.40081024169921875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.58002818978459
+      }
+    ]
+  },
+  "extra_test": {
+    "root": "/home/disk1/Data/datasets/MHINet_RGB_512/test",
+    "rows": [
+      {
+        "pair_id": "flair_rgb__b8c753970f5984e0",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D007-2020_AERIAL_RGBI/FU-S1-38/D007-2020_AERIAL_RGBI_FU-S1-38_4-2.tif",
+        "overlap_fractions": [
+          0.3264198303222656,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7505781740779565
+      },
+      {
+        "pair_id": "googleearth_current__142cd4a58b742622",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/37.486000126.77850000000001.jpg",
+        "overlap_fractions": [
+          0.3870658874511719,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6074469485764489
+      },
+      {
+        "pair_id": "whu__9ccfb8a08722a8b6",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/3734.tif",
+        "overlap_fractions": [
+          0.3759727478027344,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.630986221222988
+      },
+      {
+        "pair_id": "flair_rgb__1f0e306c304fdd99",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D005-2018_AERIAL_RGBI/NN-S1-10/D005-2018_AERIAL_RGBI_NN-S1-10_6-6.tif",
+        "overlap_fractions": [
+          0.417327880859375,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.5479571938462313
+      },
+      {
+        "pair_id": "googleearth_current__a01e0d885a770e25",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.513100129.403223.jpg",
+        "overlap_fractions": [
+          0.47686004638671875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.4481091503274757
+      },
+      {
+        "pair_id": "whu__5eb120c75f9d6022",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/1551.tif",
+        "overlap_fractions": [
+          0.36257171630859375,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6608953911101483
+      },
+      {
+        "pair_id": "flair_rgb__06bcc8d4af4405a8",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D007-2020_AERIAL_RGBI/UU-S1-56/D007-2020_AERIAL_RGBI_UU-S1-56_1-5.tif",
+        "overlap_fractions": [
+          0.3175697326660156,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7745972796378369
+      },
+      {
+        "pair_id": "googleearth_current__ab5ef4a16657cf27",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.621100129.445223.jpg",
+        "overlap_fractions": [
+          0.30536651611328125,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.8098909586419833
+      },
+      {
+        "pair_id": "whu__52935cdb9d18d33f",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/2895.tif",
+        "overlap_fractions": [
+          0.25093841552734375,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.9965111667463666
+      },
+      {
+        "pair_id": "flair_rgb__d74745c0c8898608",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D004-2021_AERIAL_RGBI/AU-S1-33/D004-2021_AERIAL_RGBI_AU-S1-33_5-1.tif",
+        "overlap_fractions": [
+          0.4088630676269531,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.5643134071037952
+      },
+      {
+        "pair_id": "googleearth_current__01fc14b4cbd2a0d1",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/36.479100129.396223.jpg",
+        "overlap_fractions": [
+          0.2743682861328125,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.9091664988092683
+      },
+      {
+        "pair_id": "whu__9f25858686830d78",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/1149.tif",
+        "overlap_fractions": [
+          0.3409156799316406,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7126942140461514
+      },
+      {
+        "pair_id": "flair_rgb__4c5b8ef7af80c2ab",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D004-2021_AERIAL_RGBI/UU-S1-19/D004-2021_AERIAL_RGBI_UU-S1-19_10-1.tif",
+        "overlap_fractions": [
+          0.32335662841796875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7586947905321253
+      },
+      {
+        "pair_id": "googleearth_current__b644bbc95af25abf",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/36.363700127.318681.jpg",
+        "overlap_fractions": [
+          0.3594551086425781,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6681753458641841
+      },
+      {
+        "pair_id": "whu__70dc23fbba5a1970",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/2019.tif",
+        "overlap_fractions": [
+          0.28739166259765625,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.865633493230654
+      },
+      {
+        "pair_id": "flair_rgb__4422d7f05412b0bd",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D017-2018_AERIAL_RGBI/AU-S1-16/D017-2018_AERIAL_RGBI_AU-S1-16_3-5.tif",
+        "overlap_fractions": [
+          0.2721900939941406,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.9173836826314727
+      },
+      {
+        "pair_id": "googleearth_current__c04e4d6845478e2b",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/36.011100129.417223.jpg",
+        "overlap_fractions": [
+          0.46308135986328125,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.4695921510262588
+      },
+      {
+        "pair_id": "whu__e4b3d6c2ce9b264c",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/578.tif",
+        "overlap_fractions": [
+          0.32607269287109375,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.751330674477879
+      },
+      {
+        "pair_id": "flair_rgb__3e5bbe78353e5b9c",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D012-2019_AERIAL_RGBI/AF-S1-20/D012-2019_AERIAL_RGBI_AF-S1-20_3-3.tif",
+        "overlap_fractions": [
+          0.28936767578125,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.8591197358661
+      },
+      {
+        "pair_id": "googleearth_current__3303df8497fb9e08",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.741100129.312223.jpg",
+        "overlap_fractions": [
+          0.2997627258300781,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.826500096019467
+      },
+      {
+        "pair_id": "whu__ae5af81606c577f6",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/1664.tif",
+        "overlap_fractions": [
+          0.335205078125,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7271553340495547
+      },
+      {
+        "pair_id": "flair_rgb__275f1f166b241075",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D017-2021_AERIAL_RGBI/NN-S2-5/D017-2021_AERIAL_RGBI_NN-S2-5_5-10.tif",
+        "overlap_fractions": [
+          0.417022705078125,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.548715666981396
+      },
+      {
+        "pair_id": "googleearth_current__8554d8584e0350f3",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.190400126.813922.jpg",
+        "overlap_fractions": [
+          0.4606895446777344,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.4736778606991712
+      },
+      {
+        "pair_id": "whu__d4eb7649fe9c4795",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/1476.tif",
+        "overlap_fractions": [
+          0.3285713195800781,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7447056859968917
+      },
+      {
+        "pair_id": "flair_rgb__d51dacfd35b680ed",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D012-2019_AERIAL_RGBI/FN-S1-17/D012-2019_AERIAL_RGBI_FN-S1-17_9-3.tif",
+        "overlap_fractions": [
+          0.49365234375,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.4232624198500965
+      },
+      {
+        "pair_id": "googleearth_current__67bbc5f7e081c7c2",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.441100129.319223.jpg",
+        "overlap_fractions": [
+          0.4296379089355469,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.5258239970322893
+      },
+      {
+        "pair_id": "whu__84ff5ca17d53a352",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/1816.tif",
+        "overlap_fractions": [
+          0.2520751953125,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.9918242264109953
+      },
+      {
+        "pair_id": "flair_rgb__1c96b24373f8ded4",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D006-2020_AERIAL_RGBI/UU-S1-1/D006-2020_AERIAL_RGBI_UU-S1-1_10-5.tif",
+        "overlap_fractions": [
+          0.25560760498046875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.97814553710416
+      },
+      {
+        "pair_id": "googleearth_current__d2230e54f302ca1d",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.573100129.375223.jpg",
+        "overlap_fractions": [
+          0.27353668212890625,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.911934167994134
+      },
+      {
+        "pair_id": "whu__c3299cf800144893",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/2861.tif",
+        "overlap_fractions": [
+          0.3477210998535156,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6959771551407923
+      },
+      {
+        "pair_id": "flair_rgb__c2950801f55aac71",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D016-2020_AERIAL_RGBI/UF-S1-14/D016-2020_AERIAL_RGBI_UF-S1-14_8-9.tif",
+        "overlap_fractions": [
+          0.4010734558105469,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.5790544391486443
+      },
+      {
+        "pair_id": "googleearth_current__432828e6ef5c9f88",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Val/37.678000126.803000.jpg",
+        "overlap_fractions": [
+          0.3690757751464844,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6465561425641337
+      },
+      {
+        "pair_id": "whu__2b34c4e8c15b0854",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/3688.tif",
+        "overlap_fractions": [
+          0.3812522888183594,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6197970813454377
+      },
+      {
+        "pair_id": "flair_rgb__d6d428dd995a3991",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D018-2020_AERIAL_RGBI/AU-S1-1/D018-2020_AERIAL_RGBI_AU-S1-1_5-4.tif",
+        "overlap_fractions": [
+          0.27384185791015625,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.9111831388773175
+      },
+      {
+        "pair_id": "googleearth_current__bbaf5f00052f7781",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Val/37.534900126.617565.jpg",
+        "overlap_fractions": [
+          0.3247108459472656,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.755102779421745
+      },
+      {
+        "pair_id": "whu__00b78a95dd7ee2cc",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/757.tif",
+        "overlap_fractions": [
+          0.2918434143066406,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.8511282436706542
+      },
+      {
+        "pair_id": "flair_rgb__9eb9206f547ac571",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D014-2020_AERIAL_RGBI/UA-S2-6/D014-2020_AERIAL_RGBI_UA-S2-6_7-3.tif",
+        "overlap_fractions": [
+          0.3212394714355469,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7643943283966093
+      },
+      {
+        "pair_id": "googleearth_current__d9ae2ec4166b64f3",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.122340129.074100.jpg",
+        "overlap_fractions": [
+          0.26709747314453125,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.9350759361380574
+      },
+      {
+        "pair_id": "whu__aace5769139ed82d",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/4547.tif",
+        "overlap_fractions": [
+          0.3152580261230469,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7810606671904392
+      },
+      {
+        "pair_id": "flair_rgb__18ff3543635a8421",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D006-2020_AERIAL_RGBI/UF-S2-9/D006-2020_AERIAL_RGBI_UF-S2-9_10-4.tif",
+        "overlap_fractions": [
+          0.317108154296875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7754154515239757
+      },
+      {
+        "pair_id": "googleearth_current__2eb70c917b5473ee",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.188340129.130100.jpg",
+        "overlap_fractions": [
+          0.4434814453125,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.5021730300714138
+      },
+      {
+        "pair_id": "whu__e2df339fedf95662",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/1134.tif",
+        "overlap_fractions": [
+          0.31099700927734375,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.793229954769893
+      },
+      {
+        "pair_id": "flair_rgb__aa794f6593e5a75c",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D014-2020_AERIAL_RGBI/UA-S2-6/D014-2020_AERIAL_RGBI_UA-S2-6_6-1.tif",
+        "overlap_fractions": [
+          0.31023406982421875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7955274557312304
+      },
+      {
+        "pair_id": "googleearth_current__7ec3d7d329745ed1",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/36.247838129.363963.jpg",
+        "overlap_fractions": [
+          0.294342041015625,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.8432711182459576
+      },
+      {
+        "pair_id": "whu__7d3c182e92e31548",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/4490.tif",
+        "overlap_fractions": [
+          0.49669647216796875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.4189432781446523
+      },
+      {
+        "pair_id": "flair_rgb__7b3d58e3f7a9ca31",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D006-2020_AERIAL_RGBI/NA-S1-6/D006-2020_AERIAL_RGBI_NA-S1-6_2-3.tif",
+        "overlap_fractions": [
+          0.2878150939941406,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.8640268427553806
+      },
+      {
+        "pair_id": "googleearth_current__b83eead0f61b6563",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/36.029100129.354223.jpg",
+        "overlap_fractions": [
+          0.2611541748046875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.9567071447895312
+      },
+      {
+        "pair_id": "whu__bb931f628b3ea09a",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/2966.tif",
+        "overlap_fractions": [
+          0.39212799072265625,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.5971153285662596
+      },
+      {
+        "pair_id": "flair_rgb__086aec1664a1ec47",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D014-2020_AERIAL_RGBI/NF-S2-17/D014-2020_AERIAL_RGBI_NF-S2-17_4-9.tif",
+        "overlap_fractions": [
+          0.3147315979003906,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7826027052114926
+      },
+      {
+        "pair_id": "googleearth_current__c8b0bfb62f2a860d",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.128340128.962100.jpg",
+        "overlap_fractions": [
+          0.3414039611816406,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7116343860749774
+      },
+      {
+        "pair_id": "whu__dbea2fe2dd6532b3",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/2784.tif",
+        "overlap_fractions": [
+          0.2744255065917969,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.9090546331014995
+      },
+      {
+        "pair_id": "flair_rgb__07e3c9cbbf062a88",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D006-2020_AERIAL_RGBI/UF-S2-16/D006-2020_AERIAL_RGBI_UF-S2-16_3-8.tif",
+        "overlap_fractions": [
+          0.2550697326660156,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.9802537085017158
+      },
+      {
+        "pair_id": "googleearth_current__859b7d4e69cfbecd",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/36.641100129.305223.jpg",
+        "overlap_fractions": [
+          0.3884315490722656,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6047535943621507
+      },
+      {
+        "pair_id": "whu__c6e1778817bd9db2",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/3419.tif",
+        "overlap_fractions": [
+          0.3437385559082031,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.705610065310203
+      },
+      {
+        "pair_id": "flair_rgb__1a96a90b987d2597",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D004-2021_AERIAL_RGBI/UA-S1-28/D004-2021_AERIAL_RGBI_UA-S1-28_4-4.tif",
+        "overlap_fractions": [
+          0.44476318359375,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.4995867243817775
+      },
+      {
+        "pair_id": "googleearth_current__43b9aafcfad3dd4c",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.148400126.911922.jpg",
+        "overlap_fractions": [
+          0.2517127990722656,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.993202513163011
+      },
+      {
+        "pair_id": "whu__cea6d10d1c38be5d",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/1929.tif",
+        "overlap_fractions": [
+          0.3654975891113281,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6542670894968794
+      },
+      {
+        "pair_id": "flair_rgb__3d9c5db96d4fdcaf",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D017-2018_AERIAL_RGBI/UA-S1-8/D017-2018_AERIAL_RGBI_UA-S1-8_10-4.tif",
+        "overlap_fractions": [
+          0.2504119873046875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.9984252980518529
+      },
+      {
+        "pair_id": "googleearth_current__1b1b4b5eba116ce1",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/36.503100129.38572299999998.jpg",
+        "overlap_fractions": [
+          0.3585395812988281,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6701171598281905
+      },
+      {
+        "pair_id": "whu__665087d1c7c30661",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/3752.tif",
+        "overlap_fractions": [
+          0.3199310302734375,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.767979455846443
+      },
+      {
+        "pair_id": "flair_rgb__40eb08ede77ab605",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D014-2020_AERIAL_RGBI/UA-S2-6/D014-2020_AERIAL_RGBI_UA-S2-6_3-8.tif",
+        "overlap_fractions": [
+          0.2776679992675781,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.8979847590968968
+      },
+      {
+        "pair_id": "googleearth_current__1ee5f0043a9292e4",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Val/37.576900126.642065.jpg",
+        "overlap_fractions": [
+          0.37395477294921875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6353573743403504
+      },
+      {
+        "pair_id": "whu__6eb0149b33666501",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/3755.tif",
+        "overlap_fractions": [
+          0.2923126220703125,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.8495175261461017
+      },
+      {
+        "pair_id": "flair_rgb__93559227676204d6",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D017-2021_AERIAL_RGBI/AA-S2-14/D017-2021_AERIAL_RGBI_AA-S2-14_9-2.tif",
+        "overlap_fractions": [
+          0.3402900695800781,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7142586879134365
+      },
+      {
+        "pair_id": "googleearth_current__2cf9174f05ea0ce2",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.214400126.911922.jpg",
+        "overlap_fractions": [
+          0.358428955078125,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.670407177961753
+      },
+      {
+        "pair_id": "whu__e7766d7fdf2b2df1",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/2405.tif",
+        "overlap_fractions": [
+          0.37479400634765625,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6331749840814085
+      },
+      {
+        "pair_id": "flair_rgb__ad1eed7265802bc2",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D016-2020_AERIAL_RGBI/UU-S1-1/D016-2020_AERIAL_RGBI_UU-S1-1_5-8.tif",
+        "overlap_fractions": [
+          0.3582878112792969,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6706674323718687
+      },
+      {
+        "pair_id": "googleearth_current__db3a9a0f5b54bae4",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.202400126.852422.jpg",
+        "overlap_fractions": [
+          0.4139251708984375,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.5543224346846847
+      },
+      {
+        "pair_id": "whu__2df38fa243d62466",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/797.tif",
+        "overlap_fractions": [
+          0.4115104675292969,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.559215818017878
+      },
+      {
+        "pair_id": "flair_rgb__070a7b36c48934fe",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D014-2020_AERIAL_RGBI/UU-S1-12/D014-2020_AERIAL_RGBI_UU-S1-12_5-2.tif",
+        "overlap_fractions": [
+          0.4084739685058594,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.5647249173790274
+      },
+      {
+        "pair_id": "googleearth_current__27e93f68ab7b976c",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.717100129.333223.jpg",
+        "overlap_fractions": [
+          0.3610191345214844,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.664357095541581
+      },
+      {
+        "pair_id": "whu__a5048e2a08ba9892",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/969.tif",
+        "overlap_fractions": [
+          0.38523101806640625,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6115698101397535
+      },
+      {
+        "pair_id": "flair_rgb__a274793086fc3ea2",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D014-2020_AERIAL_RGBI/UA-S1-39/D014-2020_AERIAL_RGBI_UA-S1-39_5-4.tif",
+        "overlap_fractions": [
+          0.2671051025390625,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.935143954254841
+      },
+      {
+        "pair_id": "googleearth_current__b185f3e419689940",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Val/37.540000126.79599999999999.jpg",
+        "overlap_fractions": [
+          0.365020751953125,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6552251413967316
+      },
+      {
+        "pair_id": "whu__1aae3834666d6bfd",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/148.tif",
+        "overlap_fractions": [
+          0.4228935241699219,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.538040954520147
+      },
+      {
+        "pair_id": "flair_rgb__3743d5aef1fdefba",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D009-2019_AERIAL_RGBI/FU-S1-17/D009-2019_AERIAL_RGBI_FU-S1-17_7-4.tif",
+        "overlap_fractions": [
+          0.4102020263671875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.5613352341788975
+      },
+      {
+        "pair_id": "googleearth_current__d47100d2f66f99ec",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/37.486000126.852000.jpg",
+        "overlap_fractions": [
+          0.25322723388671875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.9874590677453556
+      },
+      {
+        "pair_id": "whu__774c664aad648d51",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/140.tif",
+        "overlap_fractions": [
+          0.4913825988769531,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.4270242123964958
+      },
+      {
+        "pair_id": "flair_rgb__cfdb1b5b50f338dd",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D006-2020_AERIAL_RGBI/FN-S2-11/D006-2020_AERIAL_RGBI_FN-S2-11_9-3.tif",
+        "overlap_fractions": [
+          0.2947273254394531,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.8420830534504609
+      },
+      {
+        "pair_id": "googleearth_current__72d2f3078d7bdb2c",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/36.339700127.367681.jpg",
+        "overlap_fractions": [
+          0.32271575927734375,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7604345041262655
+      },
+      {
+        "pair_id": "whu__6438b08d045067d4",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/1741.tif",
+        "overlap_fractions": [
+          0.4023323059082031,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.5769755158918235
+      },
+      {
+        "pair_id": "flair_rgb__bb58f7318750e929",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D011-2021_AERIAL_RGBI/FA-S1-14/D011-2021_AERIAL_RGBI_FA-S1-14_2-5.tif",
+        "overlap_fractions": [
+          0.41219329833984375,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.5577141717511034
+      },
+      {
+        "pair_id": "googleearth_current__fdb3d2fef19a9c6a",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.208400126.929422.jpg",
+        "overlap_fractions": [
+          0.3211822509765625,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7645288227411597
+      },
+      {
+        "pair_id": "whu__d93a5eb66f0efb6f",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/1494.tif",
+        "overlap_fractions": [
+          0.3151397705078125,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7813524597730817
+      },
+      {
+        "pair_id": "flair_rgb__cb8fe307636223cd",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D006-2020_AERIAL_RGBI/NV-S1-8/D006-2020_AERIAL_RGBI_NV-S1-8_15-11.tif",
+        "overlap_fractions": [
+          0.2643165588378906,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.9450494479491711
+      },
+      {
+        "pair_id": "googleearth_current__8295e794816374b7",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/36.005100129.38572299999998.jpg",
+        "overlap_fractions": [
+          0.40485382080078125,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.571408889082472
+      },
+      {
+        "pair_id": "whu__755432a4c95bca9e",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/4698.tif",
+        "overlap_fractions": [
+          0.3616485595703125,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6630103936180674
+      },
+      {
+        "pair_id": "flair_rgb__9e57cf3a394c2535",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D017-2021_AERIAL_RGBI/AA-S2-9/D017-2021_AERIAL_RGBI_AA-S2-9_10-8.tif",
+        "overlap_fractions": [
+          0.355621337890625,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.677021652972662
+      },
+      {
+        "pair_id": "googleearth_current__5caba7c21af94e72",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.951100129.252723.jpg",
+        "overlap_fractions": [
+          0.38674163818359375,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6081033287624027
+      },
+      {
+        "pair_id": "whu__ec4306b86e29415e",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/278.tif",
+        "overlap_fractions": [
+          0.25572967529296875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.9775247022214748
+      },
+      {
+        "pair_id": "flair_rgb__7a99d234343f45c8",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D012-2019_AERIAL_RGBI/UN-S1-12/D012-2019_AERIAL_RGBI_UN-S1-12_2-2.tif",
+        "overlap_fractions": [
+          0.2655448913574219,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.940500479854427
+      },
+      {
+        "pair_id": "googleearth_current__ec60553b746d4f6b",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.531100129.434723.jpg",
+        "overlap_fractions": [
+          0.33959197998046875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7160250254446308
+      },
+      {
+        "pair_id": "whu__60b50ce5317caa6e",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/301.tif",
+        "overlap_fractions": [
+          0.3376045227050781,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7211066165684994
+      },
+      {
+        "pair_id": "flair_rgb__3dcaeed808c8b3f8",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D012-2019_AERIAL_RGBI/UU-S1-21/D012-2019_AERIAL_RGBI_UU-S1-21_5-10.tif",
+        "overlap_fractions": [
+          0.2601051330566406,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.9607908245877457
+      },
+      {
+        "pair_id": "googleearth_current__f975981ff6fe9683",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/37.462000126.9325.jpg",
+        "overlap_fractions": [
+          0.3983573913574219,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.584427695411684
+      },
+      {
+        "pair_id": "whu__de63e0aa22532bae",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/3238.tif",
+        "overlap_fractions": [
+          0.2997322082519531,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.8266778907362171
+      },
+      {
+        "pair_id": "flair_rgb__8357e2116019e842",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D007-2020_AERIAL_RGBI/FN-S1-59/D007-2020_AERIAL_RGBI_FN-S1-59_2-2.tif",
+        "overlap_fractions": [
+          0.26305389404296875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.9498029207266656
+      },
+      {
+        "pair_id": "googleearth_current__4b4da3d12a320a7e",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.044340128.969100.jpg",
+        "overlap_fractions": [
+          0.27678680419921875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.900913693093082
+      },
+      {
+        "pair_id": "whu__dd1a83911cddd21a",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/3159.tif",
+        "overlap_fractions": [
+          0.45929718017578125,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.4758240700533414
+      },
+      {
+        "pair_id": "flair_rgb__aa39833fa0c3a9d2",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D004-2021_AERIAL_RGBI/UN-S1-20/D004-2021_AERIAL_RGBI_UN-S1-20_9-5.tif",
+        "overlap_fractions": [
+          0.3892860412597656,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6031525463186378
+      },
+      {
+        "pair_id": "googleearth_current__539f2d0d7e177c95",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.062340129.0776.jpg",
+        "overlap_fractions": [
+          0.2588996887207031,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.965749061012429
+      },
+      {
+        "pair_id": "whu__f163d2181ddf148f",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/705.tif",
+        "overlap_fractions": [
+          0.3218727111816406,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7626918256004191
+      },
+      {
+        "pair_id": "flair_rgb__4d6a16d6dfb1432d",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D016-2020_AERIAL_RGBI/AU-S1-23/D016-2020_AERIAL_RGBI_AU-S1-23_4-10.tif",
+        "overlap_fractions": [
+          0.26288604736328125,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.9504129001407686
+      },
+      {
+        "pair_id": "googleearth_current__beeda912776782f9",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.609100129.368223.jpg",
+        "overlap_fractions": [
+          0.2916908264160156,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.8516071991174972
+      },
+      {
+        "pair_id": "whu__4aef1091cc9ccb54",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/834.tif",
+        "overlap_fractions": [
+          0.4138336181640625,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.5546703323799
+      },
+      {
+        "pair_id": "flair_rgb__eb6291f65a638b29",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D010-2019_AERIAL_RGBI/AA-S1-11/D010-2019_AERIAL_RGBI_AA-S1-11_1-11.tif",
+        "overlap_fractions": [
+          0.305389404296875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.8095315682699873
+      },
+      {
+        "pair_id": "googleearth_current__1a5dd244a3d776bb",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.675100129.403223.jpg",
+        "overlap_fractions": [
+          0.3127288818359375,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7883677854630464
+      },
+      {
+        "pair_id": "whu__3a825c2e209e08b0",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/235.tif",
+        "overlap_fractions": [
+          0.46283721923828125,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.4699382681498427
+      },
+      {
+        "pair_id": "flair_rgb__0182e8e5e6eed7a4",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D009-2019_AERIAL_RGBI/AU-S1-12/D009-2019_AERIAL_RGBI_AU-S1-12_2-10.tif",
+        "overlap_fractions": [
+          0.35579681396484375,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6767436186932454
+      },
+      {
+        "pair_id": "googleearth_current__4b640b498dd1bebb",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Val/37.576900126.673565.jpg",
+        "overlap_fractions": [
+          0.2889213562011719,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.86044263627698
+      },
+      {
+        "pair_id": "whu__abaacea534dcf309",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/4178.tif",
+        "overlap_fractions": [
+          0.26851654052734375,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.9299661690060892
+      },
+      {
+        "pair_id": "flair_rgb__dce8161fc7dd0862",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D014-2020_AERIAL_RGBI/FA-S1-14/D014-2020_AERIAL_RGBI_FA-S1-14_2-1.tif",
+        "overlap_fractions": [
+          0.3687858581542969,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6470592365741779
+      },
+      {
+        "pair_id": "googleearth_current__a7ec1d1579dac8e3",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.939100129.270223.jpg",
+        "overlap_fractions": [
+          0.3056602478027344,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.808863802439023
+      },
+      {
+        "pair_id": "whu__5bb997dce9ac9696",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/2829.tif",
+        "overlap_fractions": [
+          0.3053932189941406,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.8095805476357394
+      },
+      {
+        "pair_id": "flair_rgb__ea4417ee8adc18db",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D014-2020_AERIAL_RGBI/AA-S2-2/D014-2020_AERIAL_RGBI_AA-S2-2_1-5.tif",
+        "overlap_fractions": [
+          0.26808929443359375,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.9315616774037971
+      },
+      {
+        "pair_id": "googleearth_current__b510c79605174116",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/36.443100129.431223.jpg",
+        "overlap_fractions": [
+          0.4135398864746094,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.555059770861142
+      },
+      {
+        "pair_id": "whu__18be2b0327489ce8",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/841.tif",
+        "overlap_fractions": [
+          0.3439979553222656,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7050371037323047
+      },
+      {
+        "pair_id": "flair_rgb__2c646b0cb7d2398e",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D006-2020_AERIAL_RGBI/UF-S2-16/D006-2020_AERIAL_RGBI_UF-S2-16_5-5.tif",
+        "overlap_fractions": [
+          0.27472686767578125,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.9079764707797275
+      },
+      {
+        "pair_id": "googleearth_current__b4e5341c8ba0ce01",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.092340129.018100.jpg",
+        "overlap_fractions": [
+          0.3737945556640625,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.635878479991881
+      },
+      {
+        "pair_id": "whu__ca271e48580c0da2",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/2473.tif",
+        "overlap_fractions": [
+          0.4786224365234375,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.4456090774508177
+      },
+      {
+        "pair_id": "flair_rgb__caeb94b4146a3420",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D014-2020_AERIAL_RGBI/AA-S2-2/D014-2020_AERIAL_RGBI_AA-S2-2_1-4.tif",
+        "overlap_fractions": [
+          0.2923851013183594,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.849431915378121
+      },
+      {
+        "pair_id": "googleearth_current__d1fc57eccff99607",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/36.407100129.361223.jpg",
+        "overlap_fractions": [
+          0.3827171325683594,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6164970612922007
+      },
+      {
+        "pair_id": "whu__87edbc71c15631d1",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/2445.tif",
+        "overlap_fractions": [
+          0.4096221923828125,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.5628239105261184
+      },
+      {
+        "pair_id": "flair_rgb__7b835ca515cd3b51",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D007-2020_AERIAL_RGBI/UU-S1-1/D007-2020_AERIAL_RGBI_UU-S1-1_5-2.tif",
+        "overlap_fractions": [
+          0.42767333984375,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.5291949798071627
+      },
+      {
+        "pair_id": "googleearth_current__b627d0f121760a94",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/36.551100129.326223.jpg",
+        "overlap_fractions": [
+          0.3593902587890625,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.668073388740721
+      },
+      {
+        "pair_id": "whu__e11e678338f5bc79",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/2830.tif",
+        "overlap_fractions": [
+          0.31529998779296875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7809077144122383
+      },
+      {
+        "pair_id": "flair_rgb__638a0d845ca92b8c",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D016-2020_AERIAL_RGBI/AN-S1-19/D016-2020_AERIAL_RGBI_AN-S1-19_6-12.tif",
+        "overlap_fractions": [
+          0.32772064208984375,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7470178674101555
+      },
+      {
+        "pair_id": "googleearth_current__55ce2a6f99be82c4",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/37.450900126.614065.jpg",
+        "overlap_fractions": [
+          0.3262901306152344,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7509191727420141
+      },
+      {
+        "pair_id": "whu__73d3cdd92cdd8a34",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/349.tif",
+        "overlap_fractions": [
+          0.2560310363769531,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.9763996829348554
+      },
+      {
+        "pair_id": "flair_rgb__4d5c1ee74435e7f3",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D014-2020_AERIAL_RGBI/NF-S2-17/D014-2020_AERIAL_RGBI_NF-S2-17_5-5.tif",
+        "overlap_fractions": [
+          0.29836273193359375,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.8310049951462664
+      },
+      {
+        "pair_id": "googleearth_current__e5d40b3850ff2a65",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.543100129.347223.jpg",
+        "overlap_fractions": [
+          0.3128318786621094,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7881689584598073
+      },
+      {
+        "pair_id": "whu__384bbb348947b171",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/2615.tif",
+        "overlap_fractions": [
+          0.4121360778808594,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.5576254631283661
+      },
+      {
+        "pair_id": "flair_rgb__2ae13148b85397e0",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D006-2020_AERIAL_RGBI/NV-S1-11/D006-2020_AERIAL_RGBI_NV-S1-11_8-10.tif",
+        "overlap_fractions": [
+          0.2789154052734375,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.8936340574301604
+      },
+      {
+        "pair_id": "googleearth_current__c9734cd2524271fc",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.200340129.0776.jpg",
+        "overlap_fractions": [
+          0.2647285461425781,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.9436506449275879
+      },
+      {
+        "pair_id": "whu__0e55623ac361d340",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/616.tif",
+        "overlap_fractions": [
+          0.430328369140625,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.5244050877480915
+      },
+      {
+        "pair_id": "flair_rgb__3bd3c2f20ba55a34",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D005-2018_AERIAL_RGBI/AU-S1-26/D005-2018_AERIAL_RGBI_AU-S1-26_5-5.tif",
+        "overlap_fractions": [
+          0.3839073181152344,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6140291204041068
+      },
+      {
+        "pair_id": "googleearth_current__060637f86c82a755",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.837100129.403223.jpg",
+        "overlap_fractions": [
+          0.4616279602050781,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.4720663759507058
+      },
+      {
+        "pair_id": "whu__e966662415183f0c",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/3340.tif",
+        "overlap_fractions": [
+          0.46157073974609375,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.4719394036097628
+      },
+      {
+        "pair_id": "flair_rgb__de32c4c74e81ca55",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D018-2020_AERIAL_RGBI/AA-S1-8/D018-2020_AERIAL_RGBI_AA-S1-8_9-8.tif",
+        "overlap_fractions": [
+          0.45433807373046875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.4836160328137102
+      },
+      {
+        "pair_id": "googleearth_current__c30a9bd4ccff040b",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/36.253838129.223963.jpg",
+        "overlap_fractions": [
+          0.32991790771484375,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7410982906072026
+      },
+      {
+        "pair_id": "whu__a7eece4d04b4648e",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/1836.tif",
+        "overlap_fractions": [
+          0.2958335876464844,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.8387270578213937
+      },
+      {
+        "pair_id": "flair_rgb__62b4861dd7d5660f",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D012-2019_AERIAL_RGBI/UA-S1-23/D012-2019_AERIAL_RGBI_UA-S1-23_19-3.tif",
+        "overlap_fractions": [
+          0.345428466796875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7014505459043239
+      },
+      {
+        "pair_id": "googleearth_current__597f961e417e80aa",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.573100129.326223.jpg",
+        "overlap_fractions": [
+          0.28266143798828125,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.8810036263532377
+      },
+      {
+        "pair_id": "whu__6ce50b939c84a1ac",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/2869.tif",
+        "overlap_fractions": [
+          0.45583343505859375,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.4816550814597358
+      },
+      {
+        "pair_id": "flair_rgb__1c7c9f5d36f05bba",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D017-2018_AERIAL_RGBI/NN-S1-11/D017-2018_AERIAL_RGBI_NN-S1-11_5-6.tif",
+        "overlap_fractions": [
+          0.42722320556640625,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.5304368459655808
+      },
+      {
+        "pair_id": "googleearth_current__419251e1a743c6f1",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/37.510900126.652565.jpg",
+        "overlap_fractions": [
+          0.3788032531738281,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6248387042293264
+      },
+      {
+        "pair_id": "whu__60771bbc6af7a1b7",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/309.tif",
+        "overlap_fractions": [
+          0.40924835205078125,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.5634918446988468
+      },
+      {
+        "pair_id": "flair_rgb__1a62a068b31925fe",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D007-2020_AERIAL_RGBI/UF-S1-7/D007-2020_AERIAL_RGBI_UF-S1-7_6-5.tif",
+        "overlap_fractions": [
+          0.2840309143066406,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.876476248079857
+      },
+      {
+        "pair_id": "googleearth_current__9bf10d81f4b024ff",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/36.005100129.413723.jpg",
+        "overlap_fractions": [
+          0.3789482116699219,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6246013576658582
+      },
+      {
+        "pair_id": "whu__8ded6e7eda79b9f3",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/885.tif",
+        "overlap_fractions": [
+          0.2642402648925781,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.9453779433016576
+      },
+      {
+        "pair_id": "flair_rgb__6f382f59597a06fa",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D012-2019_AERIAL_RGBI/FF-S1-30/D012-2019_AERIAL_RGBI_FF-S1-30_6-6.tif",
+        "overlap_fractions": [
+          0.35282135009765625,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.683576557550611
+      },
+      {
+        "pair_id": "googleearth_current__b60a5240e720e7ab",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.086340129.011100.jpg",
+        "overlap_fractions": [
+          0.30258941650390625,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.8180128043760082
+      },
+      {
+        "pair_id": "whu__883c24bbb5f78be1",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/1076.tif",
+        "overlap_fractions": [
+          0.2933311462402344,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.8465481417683025
+      },
+      {
+        "pair_id": "flair_rgb__1b54725b0029ea24",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D005-2018_AERIAL_RGBI/NN-S1-6/D005-2018_AERIAL_RGBI_NN-S1-6_6-10.tif",
+        "overlap_fractions": [
+          0.3663787841796875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6524998833310338
+      },
+      {
+        "pair_id": "googleearth_current__9956c42622cfff94",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.735100129.438223.jpg",
+        "overlap_fractions": [
+          0.4004631042480469,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.580508731468888
+      },
+      {
+        "pair_id": "whu__8364f84f9afca65c",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/1063.tif",
+        "overlap_fractions": [
+          0.3477745056152344,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6958605459361282
+      },
+      {
+        "pair_id": "flair_rgb__6936b687417ff90c",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D004-2021_AERIAL_RGBI/FN-S1-11/D004-2021_AERIAL_RGBI_FN-S1-11_8-5.tif",
+        "overlap_fractions": [
+          0.4608802795410156,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.4731636175273333
+      },
+      {
+        "pair_id": "googleearth_current__3d5c698e4e2ab634",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/36.365100129.375223.jpg",
+        "overlap_fractions": [
+          0.4145965576171875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.553193506090772
+      },
+      {
+        "pair_id": "whu__116911a4da150c99",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/1628.tif",
+        "overlap_fractions": [
+          0.36257171630859375,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6610148761668122
+      },
+      {
+        "pair_id": "flair_rgb__f7719f814b0b8633",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D009-2019_AERIAL_RGBI/FN-S1-9/D009-2019_AERIAL_RGBI_FN-S1-9_8-10.tif",
+        "overlap_fractions": [
+          0.43198394775390625,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.521497204114477
+      },
+      {
+        "pair_id": "googleearth_current__d922d4f6c9680614",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.124400126.820922.jpg",
+        "overlap_fractions": [
+          0.2935638427734375,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.8457599218098375
+      },
+      {
+        "pair_id": "whu__c2c3f8c4f8a625c1",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/3486.tif",
+        "overlap_fractions": [
+          0.30145263671875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.8216454782576441
+      },
+      {
+        "pair_id": "flair_rgb__647bf409d9e665d2",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D008-2019_AERIAL_RGBI/UA-S1-18/D008-2019_AERIAL_RGBI_UA-S1-18_9-5.tif",
+        "overlap_fractions": [
+          0.39043426513671875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6004602552439313
+      },
+      {
+        "pair_id": "googleearth_current__758204b9c1b767e7",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.830643128.517189.jpg",
+        "overlap_fractions": [
+          0.4265594482421875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.531274242409256
+      },
+      {
+        "pair_id": "whu__bf8f1f906849b935",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/3676.tif",
+        "overlap_fractions": [
+          0.29851531982421875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.8299338090128454
+      },
+      {
+        "pair_id": "flair_rgb__ad7c66e76750dcb1",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D017-2018_AERIAL_RGBI/UF-S1-5/D017-2018_AERIAL_RGBI_UF-S1-5_5-2.tif",
+        "overlap_fractions": [
+          0.48480987548828125,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.4365603140093879
+      },
+      {
+        "pair_id": "googleearth_current__588e8f8565c1a60a",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/36.047100129.354223.jpg",
+        "overlap_fractions": [
+          0.43766021728515625,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.511636149204998
+      },
+      {
+        "pair_id": "whu__4af69a2a4b69a04c",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/1396.tif",
+        "overlap_fractions": [
+          0.3310813903808594,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7380834643412497
+      },
+      {
+        "pair_id": "flair_rgb__49a4ce211664a00b",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D017-2018_AERIAL_RGBI/FF-S1-21/D017-2018_AERIAL_RGBI_FF-S1-21_3-3.tif",
+        "overlap_fractions": [
+          0.2807807922363281,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.8873941172971966
+      },
+      {
+        "pair_id": "googleearth_current__bfaac313364c311f",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.124400126.83842200000001.jpg",
+        "overlap_fractions": [
+          0.36289215087890625,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6604631800240746
+      },
+      {
+        "pair_id": "whu__7906e9b04aa9fc16",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/2607.tif",
+        "overlap_fractions": [
+          0.4053192138671875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.5709607608742857
+      },
+      {
+        "pair_id": "flair_rgb__ead1764e1855a7d7",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D014-2020_AERIAL_RGBI/AF-S1-6/D014-2020_AERIAL_RGBI_AF-S1-6_1-1.tif",
+        "overlap_fractions": [
+          0.3416175842285156,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7111708971731352
+      },
+      {
+        "pair_id": "googleearth_current__0f1d3407e4cfa3b9",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/36.102737129.256151.jpg",
+        "overlap_fractions": [
+          0.2790679931640625,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.8929358109447143
+      },
+      {
+        "pair_id": "whu__5444749dcdfeba4a",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/1769.tif",
+        "overlap_fractions": [
+          0.29236602783203125,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.8494609204479646
+      },
+      {
+        "pair_id": "flair_rgb__0ba95c437ba936d7",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D004-2021_AERIAL_RGBI/FN-S1-4/D004-2021_AERIAL_RGBI_FN-S1-4_10-2.tif",
+        "overlap_fractions": [
+          0.2724418640136719,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.9159166037201605
+      },
+      {
+        "pair_id": "googleearth_current__e8461b4019e66029",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.118400126.862922.jpg",
+        "overlap_fractions": [
+          0.33898162841796875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7176269575562626
+      },
+      {
+        "pair_id": "whu__b56629b0b2e61c44",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/4193.tif",
+        "overlap_fractions": [
+          0.4807586669921875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.4423822279923066
+      },
+      {
+        "pair_id": "flair_rgb__d324880960882fed",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D005-2018_AERIAL_RGBI/AA-S1-18/D005-2018_AERIAL_RGBI_AA-S1-18_4-1.tif",
+        "overlap_fractions": [
+          0.4912757873535156,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.4267420180860004
+      },
+      {
+        "pair_id": "googleearth_current__ec93286b07137c8e",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.146340129.039100.jpg",
+        "overlap_fractions": [
+          0.3827056884765625,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.616530692119928
+      },
+      {
+        "pair_id": "whu__d8b785d0a0252e7f",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/1532.tif",
+        "overlap_fractions": [
+          0.46540069580078125,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.4661614933860585
+      },
+      {
+        "pair_id": "flair_rgb__865a938f70013ef3",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D011-2021_AERIAL_RGBI/UA-S1-21/D011-2021_AERIAL_RGBI_UA-S1-21_9-3.tif",
+        "overlap_fractions": [
+          0.4597129821777344,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.475521962401997
+      },
+      {
+        "pair_id": "googleearth_current__4a082a0170887c59",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.447100129.284223.jpg",
+        "overlap_fractions": [
+          0.4385566711425781,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.510318906771332
+      },
+      {
+        "pair_id": "whu__a2623e9108e058af",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/471.tif",
+        "overlap_fractions": [
+          0.4048309326171875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.5718562708198907
+      },
+      {
+        "pair_id": "flair_rgb__9c690de1f611d0a8",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D017-2018_AERIAL_RGBI/NA-S1-31/D017-2018_AERIAL_RGBI_NA-S1-31_4-2.tif",
+        "overlap_fractions": [
+          0.4320106506347656,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.5215310535384592
+      },
+      {
+        "pair_id": "googleearth_current__941929d1fa364948",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/36.245100129.361223.jpg",
+        "overlap_fractions": [
+          0.3079071044921875,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.8025430079044698
+      },
+      {
+        "pair_id": "whu__7b1923b545970e87",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/1774.tif",
+        "overlap_fractions": [
+          0.4898567199707031,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.4291519520113254
+      },
+      {
+        "pair_id": "flair_rgb__23754d0dc5d3996d",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D007-2020_AERIAL_RGBI/UF-S1-46/D007-2020_AERIAL_RGBI_UF-S1-46_1-2.tif",
+        "overlap_fractions": [
+          0.3180999755859375,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.7734104393325714
+      },
+      {
+        "pair_id": "googleearth_current__7390c6e44d305322",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/35.842643128.534689.jpg",
+        "overlap_fractions": [
+          0.4825325012207031,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.4399977203059389
+      },
+      {
+        "pair_id": "whu__aa5a2765d2e4fdbb",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/125.tif",
+        "overlap_fractions": [
+          0.37393951416015625,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6358054898067969
+      },
+      {
+        "pair_id": "flair_rgb__6efd9c7b56764b8b",
+        "source_dataset": "flair_rgb",
+        "source_path": "/home/disk1/Data/datasets/FLAIR-HUB/extracted/D010-2019_AERIAL_RGBI/AA-S1-15/D010-2019_AERIAL_RGBI_AA-S1-15_1-10.tif",
+        "overlap_fractions": [
+          0.3653831481933594,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.6550234790524798
+      },
+      {
+        "pair_id": "googleearth_current__21c28d97cfb80d3d",
+        "source_dataset": "googleearth_current",
+        "source_path": "/home/disk1/Data/datasets/GoogleEarth/training_data/current/Train/37.408900126.62806499999999.jpg",
+        "overlap_fractions": [
+          0.4517555236816406,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.487928436262996
+      },
+      {
+        "pair_id": "whu__6f753d7395b3ddb9",
+        "source_dataset": "whu",
+        "source_path": "/home/disk1/Data/datasets/WHU-Building/train/image/2958.tif",
+        "overlap_fractions": [
+          0.3982048034667969,
+          1.0
+        ],
+        "equivalent_side_ratio": 1.5848546513691917
+      }
+    ]
+  }
+}

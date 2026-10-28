@@ -1,0 +1,20 @@
+{
+  "output": "outputs/cgmdp_residual_research",
+  "selection": "outputs/d2_modulation_expanded/selection.json",
+  "pair_checkpoint": "outputs/d2_modulation_expanded/full_pair/best.pt",
+  "seed": 42,
+  "epochs": 10,
+  "early_stopping": false,
+  "learning_rate": 0.0001,
+  "min_lr": 0.000001,
+  "weight_decay": 0.0001,
+  "train_windows": 64,
+  "calibration_pairs": 32,
+  "gamma_bound": 0.1,
+  "beta_rms_fraction": 0.1,
+  "residual_strength": 1.0,
+  "d8_weight": 1.0,
+  "drift_weight": 0.1,
+  "groups": {"A0": [], "A1": [], "A2": [8], "A3": [8], "A4": [8, 4]},
+  "local_pair_groups": ["A1", "A3", "A4"]
+}

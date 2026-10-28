@@ -1,0 +1,201 @@
+{
+  "training_pairs": 254,
+  "note": "Historical structural references only; unequal budget to the new 1024-pair experiment.",
+  "groups": {
+    "none": {
+      "done": {
+        "best_epoch": 0,
+        "last_epoch": 0,
+        "best": 0.823760986328125
+      },
+      "test": {
+        "n": 131072,
+        "visible": 130648,
+        "error_sum": 262695.60498046875,
+        "flow_error_sum": 242656.2353515625,
+        "flow_correct3": 112541,
+        "damaged": 17823,
+        "rescued": 12313,
+        "covered3": 128187,
+        "correct1": 29919,
+        "correct3": 107031,
+        "correct5": 125806,
+        "correct10": 130486,
+        "rank1": 102658,
+        "rank5": 123643,
+        "rank10": 126811,
+        "p3": 0.8165817260742188,
+        "epe": 2.010712793004629,
+        "flow_p3": 0.8586196899414062,
+        "flow_epe": 1.8573283582723232,
+        "positive_rank1": 0.8008456395734357,
+        "positive_rank5": 0.9645517876227698
+      },
+      "hangzhou_test": {
+        "n": 131072,
+        "visible": 124509,
+        "error_sum": 1494506.5169677734,
+        "flow_error_sum": 1502716.1470947266,
+        "flow_correct3": 77213,
+        "damaged": 9193,
+        "rescued": 8088,
+        "covered3": 112923,
+        "correct1": 27357,
+        "correct3": 76108,
+        "correct5": 94586,
+        "correct10": 113968,
+        "rank1": 74132,
+        "rank5": 91461,
+        "rank10": 98272,
+        "p3": 0.580657958984375,
+        "epe": 12.003200708123698,
+        "flow_p3": 0.5890884399414062,
+        "flow_epe": 12.06913674589569,
+        "positive_rank1": 0.6564827360236621,
+        "positive_rank5": 0.8099412874259451
+      }
+    },
+    "cumulative": {
+      "done": {
+        "best_epoch": 6,
+        "last_epoch": 9,
+        "best": 0.8723907470703125
+      },
+      "test": {
+        "n": 131072,
+        "visible": 130766,
+        "error_sum": 225134.83959960938,
+        "flow_error_sum": 238592.46020507812,
+        "flow_correct3": 113667,
+        "damaged": 12828,
+        "rescued": 12943,
+        "covered3": 128268,
+        "correct1": 44602,
+        "correct3": 113782,
+        "correct5": 126427,
+        "correct10": 130508,
+        "rank1": 109562,
+        "rank5": 126071,
+        "rank10": 127761,
+        "p3": 0.8680877685546875,
+        "epe": 1.721661896820346,
+        "flow_p3": 0.8672103881835938,
+        "flow_epe": 1.8245756557903288,
+        "positive_rank1": 0.8541647176224779,
+        "positive_rank5": 0.9828717996694422
+      },
+      "hangzhou_test": {
+        "n": 131072,
+        "visible": 124500,
+        "error_sum": 1500054.8388671875,
+        "flow_error_sum": 1495168.6923828125,
+        "flow_correct3": 77111,
+        "damaged": 9858,
+        "rescued": 8570,
+        "covered3": 113056,
+        "correct1": 27484,
+        "correct3": 75823,
+        "correct5": 94129,
+        "correct10": 113812,
+        "rank1": 73699,
+        "rank5": 92378,
+        "rank10": 99259,
+        "p3": 0.5784835815429688,
+        "epe": 12.048633243913153,
+        "flow_p3": 0.5883102416992188,
+        "flow_epe": 12.009387087412149,
+        "positive_rank1": 0.6518804840079253,
+        "positive_rank5": 0.8170994905179734
+      }
+    },
+    "delta": {
+      "done": {
+        "best_epoch": 5,
+        "last_epoch": 7,
+        "best": 0.8710479736328125
+      },
+      "test": {
+        "n": 131072,
+        "visible": 130675,
+        "error_sum": 226063.5625,
+        "flow_error_sum": 241489.97509765625,
+        "flow_correct3": 112613,
+        "damaged": 12767,
+        "rescued": 13537,
+        "covered3": 127968,
+        "correct1": 44897,
+        "correct3": 113383,
+        "correct5": 126126,
+        "correct10": 130415,
+        "rank1": 109381,
+        "rank5": 125628,
+        "rank10": 127399,
+        "p3": 0.8650436401367188,
+        "epe": 1.7299679548498184,
+        "flow_p3": 0.8591690063476562,
+        "flow_epe": 1.8480197061232542,
+        "positive_rank1": 0.8547527506876719,
+        "positive_rank5": 0.9817141785446362
+      },
+      "hangzhou_test": {
+        "n": 131072,
+        "visible": 124581,
+        "error_sum": 1517372.2139892578,
+        "flow_error_sum": 1510806.9311523438,
+        "flow_correct3": 77018,
+        "damaged": 10634,
+        "rescued": 8828,
+        "covered3": 112867,
+        "correct1": 25971,
+        "correct3": 75212,
+        "correct5": 93901,
+        "correct10": 113522,
+        "rank1": 72775,
+        "rank5": 92680,
+        "rank10": 99564,
+        "p3": 0.573822021484375,
+        "epe": 12.179804416317559,
+        "flow_p3": 0.5876007080078125,
+        "flow_epe": 12.127105506877804,
+        "positive_rank1": 0.6447854554475622,
+        "positive_rank5": 0.821143469747579
+      }
+    }
+  },
+  "train32_modulation_stats": {
+    "cumulative": {
+      "8": {
+        "gamma_abs": 0.5456631565466523,
+        "gamma_max": 1.816390585154295,
+        "beta_ratio": 0.35905454959720373
+      },
+      "4": {
+        "gamma_abs": 0.7277892809361219,
+        "gamma_max": 1.963481642305851,
+        "beta_ratio": 0.2517778081819415
+      },
+      "2": {
+        "gamma_abs": 0.6121122501790524,
+        "gamma_max": 2.8573559895157814,
+        "beta_ratio": 0.34934955183416605
+      }
+    },
+    "delta": {
+      "8": {
+        "gamma_abs": 0.41775652626529336,
+        "gamma_max": 1.8205052837729454,
+        "beta_ratio": 0.26419941475614905
+      },
+      "4": {
+        "gamma_abs": 0.6137554831802845,
+        "gamma_max": 1.4172852709889412,
+        "beta_ratio": 0.11681348434649408
+      },
+      "2": {
+        "gamma_abs": 0.6854578778147697,
+        "gamma_max": 2.917795941233635,
+        "beta_ratio": 0.4488053135573864
+      }
+    }
+  }
+}

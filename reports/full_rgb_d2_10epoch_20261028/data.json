@@ -1,0 +1,22 @@
+{
+  "train": {
+    "manifest": "/home/disk1/Data/datasets/MHINet_RGB_512/train/pairs.jsonl",
+    "root": "/home/disk1/Data/datasets/MHINet_RGB_512/train",
+    "pairs": 40849
+  },
+  "val": {
+    "manifest": "/home/disk1/Data/datasets/MHINet_RGB_512/val/pairs.jsonl",
+    "root": "/home/disk1/Data/datasets/MHINet_RGB_512/val",
+    "pairs": 5106
+  },
+  "test": {
+    "manifest": "/home/disk1/Data/datasets/MHINet_RGB_512/test/pairs.jsonl",
+    "root": "/home/disk1/Data/datasets/MHINet_RGB_512/test",
+    "pairs": 5106
+  },
+  "hangzhou_test_real": {
+    "manifest": "/home/disk1/Data/datasets/kewei/HangZhou_cloud0_rgb_RGBMatch_v4/manifests/test_real.jsonl",
+    "root": "/home/disk1/Data/datasets/kewei/HangZhou_cloud0_rgb_RGBMatch_v4",
+    "pairs": 235
+  }
+}

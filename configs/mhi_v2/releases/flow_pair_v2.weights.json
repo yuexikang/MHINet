@@ -1,0 +1,144 @@
+{
+  "version": "mhi-v2-flow-pair-20261028",
+  "flow": {
+    "path": "outputs/full_rgb_d2_20261027/flow/best.pt",
+    "sha256": "9c998b75abdc5cbb2c4fcf30a07784cfc789d13115d9d1ae39a26964f0218928",
+    "stage": "flow",
+    "epoch": 4,
+    "checkpoint_fields": [
+      "mvt",
+      "head",
+      "config",
+      "matcher_config",
+      "stage",
+      "epoch",
+      "score",
+      "best",
+      "optimizer",
+      "early_best",
+      "bad_epochs",
+      "locator_checkpoint",
+      "scheduler",
+      "rng",
+      "cuda_rng",
+      "python_rng"
+    ],
+    "recorded_locator_checkpoint": "weight/mhi_v2_u0.pt",
+    "validation_score": 0.9884202640103832
+  },
+  "d2": {
+    "best": {
+      "path": "outputs/full_rgb_d2_10epoch_20261028/d2/best.pt",
+      "sha256": "62e6bd2f56b18bb416bd8d078b2208825161244b9a4079e624ea05faca18a300",
+      "stage": "d2",
+      "epoch": 1,
+      "checkpoint_fields": [
+        "vgg",
+        "dedode",
+        "adapter",
+        "temperatures",
+        "config",
+        "matcher_config",
+        "stage",
+        "epoch",
+        "score",
+        "best",
+        "optimizer",
+        "early_best",
+        "bad_epochs",
+        "locator_checkpoint",
+        "scheduler",
+        "rng",
+        "cuda_rng",
+        "python_rng"
+      ],
+      "recorded_locator_checkpoint": "outputs/full_rgb_d2_20261027/flow/best.pt",
+      "validation_score": 0.9837733028544849,
+      "flow_sha256": "9c998b75abdc5cbb2c4fcf30a07784cfc789d13115d9d1ae39a26964f0218928",
+      "temperatures": {
+        "log_tau_c": -3.590601921081543,
+        "log_tau_f": -3.6748623847961426,
+        "tau_c": 0.027581723406910896,
+        "tau_f": 0.02535289339721203
+      }
+    },
+    "latest": {
+      "path": "outputs/full_rgb_d2_10epoch_20261028/d2/latest.pt",
+      "sha256": "2f5c89bd090277ecba4ff87fee9a93e63df3a8032647fc1f344864c9d985fe17",
+      "stage": "d2",
+      "epoch": 10,
+      "checkpoint_fields": [
+        "vgg",
+        "dedode",
+        "adapter",
+        "temperatures",
+        "config",
+        "matcher_config",
+        "stage",
+        "epoch",
+        "score",
+        "best",
+        "optimizer",
+        "early_best",
+        "bad_epochs",
+        "locator_checkpoint",
+        "scheduler",
+        "rng",
+        "cuda_rng",
+        "python_rng"
+      ],
+      "recorded_locator_checkpoint": "/home/disk1/MHINet/outputs/full_rgb_d2_20261027/flow/best.pt",
+      "validation_score": 0.9737434551569232,
+      "flow_sha256": "9c998b75abdc5cbb2c4fcf30a07784cfc789d13115d9d1ae39a26964f0218928",
+      "temperatures": {
+        "log_tau_c": -4.330442428588867,
+        "log_tau_f": -4.582918643951416,
+        "tau_c": 0.013161723501980305,
+        "tau_f": 0.010225009173154831
+      }
+    }
+  },
+  "source": {
+    "branch": "codex/flow-d8-d2",
+    "snapshot_commit": "c6d6ec4ff3095eb56998cb38484730c3aac31dcc",
+    "training_entry_commit": "224fbd0e7abae8387d1d98269bd0545ff97975f3",
+    "parent_selection_commit": "afa1f525af00186d707859f7d9d7bce0b88d7658",
+    "checkpoint_embedded_git_sha": null,
+    "provenance_note": "Original checkpoints contain no git SHA. These commits identify the archived implementation, not a fabricated embedded training SHA."
+  },
+  "datasets": {
+    "rgb_train": 40849,
+    "rgb_val": 5106,
+    "rgb_test": 5106,
+    "hangzhou_test_real": 235
+  },
+  "selection": "RGB validation P@3 strictly improved; Flow visible D16 denominator, D2 all output points. Test sets never select model.",
+  "flow_alias": {
+    "path": "outputs/full_rgb_d2_10epoch_20261028/flow/best.pt",
+    "sha256": "9c998b75abdc5cbb2c4fcf30a07784cfc789d13115d9d1ae39a26964f0218928"
+  },
+  "model": {
+    "input_size": 512,
+    "align_corners": false,
+    "coordinate": "native xy pixels; normalized (xy+.5)/256-1",
+    "feature_precision": "BF16 VGG/DINO internal, FP32 matching",
+    "d8_radius": 4,
+    "continuous_radius": 4,
+    "d2_context": 8,
+    "d2_queries": 4,
+    "max_parents": 128,
+    "max_matches": 2048,
+    "pair": "pair",
+    "temperature": "exp(log_tau_c/f).clamp_min(1e-4), restored from D2 checkpoint"
+  },
+  "backbone": {
+    "runtime_key": "dino_checkpoint",
+    "sha256": "09a502056b671d4e07819f454f96eb385ebe605a186ee1b059ce2447d8fb602e",
+    "frozen": true
+  },
+  "legacy_u0": {
+    "path": "weight/mhi_v2_u0.pt",
+    "sha256": "a8e8fcfe93260e89a674867c739e423348e895e615a2496b7120b38a752cc37c",
+    "retained": true
+  }
+}

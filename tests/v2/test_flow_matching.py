@@ -118,7 +118,12 @@ class FlowMatchingTests(unittest.TestCase):
 
     def test_direct_grid_identity_and_exact_child_indices(self):
         i, j = torch.tensor([0, 11, 63]), torch.tensor([63, 29, 0])
-        a, b = direct_d8_fine_grids(i, j, (8, 8), (32, 32))
+        a, b = direct_d8_fine_grids(i, j, (8, 8), (32, 32), target_side=4)
+        expanded_a, expanded_b = direct_d8_fine_grids(i, j, (8, 8), (32, 32))
+        self.assertEqual(expanded_b.shape, (3, 64, 2))
+        center = torch.tensor([y*8+x for y in range(2, 6) for x in range(2, 6)])
+        torch.testing.assert_close(expanded_a, a, atol=0, rtol=0)
+        torch.testing.assert_close(expanded_b[:, center], b, atol=0, rtol=0)
         old_a, old_b = fine_grids(i, j, torch.eye(3), (8, 8), (32, 32))
         torch.testing.assert_close(a, old_a, atol=0, rtol=0)
         torch.testing.assert_close(b, old_b, atol=1e-7, rtol=1e-6)

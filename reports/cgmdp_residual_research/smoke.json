@@ -1,0 +1,61 @@
+{
+  "A0": {
+    "group": "A0",
+    "best_epoch": 0,
+    "epochs": 0,
+    "frozen_reference": true,
+    "early_stopping": false
+  },
+  "A1": {
+    "group": "A1",
+    "best_epoch": 0,
+    "epochs": 0,
+    "frozen_reference": true,
+    "early_stopping": false
+  },
+  "A2": {
+    "group": "A2",
+    "best_epoch": 0,
+    "epochs": 1,
+    "frozen_reference": false,
+    "early_stopping": false,
+    "loss": 4.488295555114746,
+    "terms": {
+      "d2": 3.733140707015991,
+      "d8": 0.7551547884941101,
+      "drift": 1.9756473124132867e-09,
+      "labels": 951.0
+    },
+    "peak_gib": 1.9439630508422852
+  },
+  "A3": {
+    "group": "A3",
+    "best_epoch": 0,
+    "epochs": 1,
+    "frozen_reference": false,
+    "early_stopping": false,
+    "loss": 3.6975587606430054,
+    "terms": {
+      "d2": 2.942404568195343,
+      "d8": 0.7551542371511459,
+      "drift": 1.9501509296304675e-09,
+      "labels": 951.5
+    },
+    "peak_gib": 1.9439630508422852
+  },
+  "A4": {
+    "group": "A4",
+    "best_epoch": 0,
+    "epochs": 1,
+    "frozen_reference": false,
+    "early_stopping": false,
+    "loss": 3.6975555419921875,
+    "terms": {
+      "d2": 2.942401349544525,
+      "d8": 0.7551542371511459,
+      "drift": 3.6195509922620772e-09,
+      "labels": 951.5
+    },
+    "peak_gib": 1.9448966979980469
+  }
+}

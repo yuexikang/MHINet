@@ -1,4 +1,10 @@
-# MHI v2：U0 主线
+# MHI v2：Flow0 → D8 → Pair-D2 正式路径
+
+当前正式入口为 `from mhinet.v2 import load_mhi_v2`，配置 `configs/mhi_v2/releases/flow_pair_v2.json`。默认组装完整 RGB 的 Flow best（第4轮）与 D2 best（第1轮），冻结 DINO，使用局部 Pair；不启用 H0/QRRU/DGFO/全图 Delta/拒配头。
+
+[加载、推理、继续训练、权重来源和验收说明](../../docs/mhi_v2/flow_pair_release.md)。原 U0 与历史接口保留如下，其训练配置不会自动改用新权重。
+
+# 历史 U0 路径
 
 D16 Flow0 固定采用 **U0 第30轮**：冻结的原 DINOv3 + 已训练 MVT + 原 MatchEmbeddingDecoder。输入512×512，输出32×32逐位置坐标；不预测H0。分类增强、局部遮挡、局部残差头及其评测脚本不并入本分支，实验记录保留在 `codex/d16-local-occlusion`。
 

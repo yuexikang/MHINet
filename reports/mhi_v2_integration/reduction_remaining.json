@@ -1,0 +1,19 @@
+[
+  {
+    "paths": "alternating formal output and original infer kernel",
+    "split": "test",
+    "pair_id": "flair_rgb__bc6a11d75b960fd3",
+    "index": 2738,
+    "runs": 32,
+    "coordinates_equal_after_alignment": true,
+    "reorders": 0,
+    "fp32_error_sums": [
+      1060.91845703125
+    ],
+    "canonical_fp64_sums": [
+      1060.9183525955305
+    ],
+    "original_error_sum": 1060.9183349609375,
+    "original_sum_observed": false
+  }
+]

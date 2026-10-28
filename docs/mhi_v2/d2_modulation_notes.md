@@ -156,3 +156,27 @@ RGB合并256对：无Flow P@3 82.47%，全局＋Flow 84.63%，现有局部Flow 8
 - 杭州64对：评估循环 14.81s，进程峰值 allocated 显存 1.737GiB。
 
 上述耗时不含模型加载，显存包含同进程的三组对照，不能当作单独无Flow部署开销。运行命令及文件说明见 `docs/mhi_v2/d2_modulation_notes.md`。未重新训练、未合并主线，本轮请求已完成。
+
+## 2026-10-28：合入父点选择优化并统一调用
+
+从 `codex/cgmdp-global-modulation` 单独摘取有效修改 `89888d6`，本分支对应提交 `8a4cf0f`；不合入CGMDP实验模型、测速脚本或报告。
+
+统一入口为 `flow_d8_d2.matching.select_local_parents()`：使用原 `local_coarse` 规则，返回最多128个源D8父点的512原图坐标，不执行Fine。以下三处共用它：
+
+- `d2_modulation/model.py::extract_windows`：删去只为取父点而执行的整段旧D2。
+- `joint_single/diagnose_d2_ranking.py`：同样删去无用的旧D2；后续诊断算法不变。
+- `d2_modulation/full_rgb.py::matching_loss`：收掉重复的父点选择代码，保持先取前128再随机抽训练窗口的规则与随机数调用不变。
+
+保留旧Fine的具体原因及调用者：
+
+|调用者|实际用途|
+|---|---|
+|`flow_d8_d2/run.py`、`train.py`|早期局部/全局/Matchability对照和训练评估，使用最终D2对应点|
+|`qrru_corners/experiment.py`|四角监督对照，使用D2对应点初始化QRRU训练和评估|
+|`joint_single/train.py`|仅baseline评估分支，明确记录`old_discrete_d2`指标|
+|`joint_single/diagnose_attribution.py`|使用旧D2最终点作为归因对照，并复用已有D8结果|
+|`v2/semidense.py::infer`|现有半稠密推理内部调用`fine_scores`计算局部候选分数|
+
+这些入口真正需要D2输出；只取D8父点不能替代，直接换成Pair-D2则改变对应点、候选范围和历史对照定义。共享 `fine_scores` 是特征采样/相关性评分函数，不是本次多算整段旧D2的根因。当前D2调制推理、完整RGB训练与D2排序诊断均已脱离该冗余调用，不增加兼容层或新开关。
+
+验证：两对固定RGB输入（每对128父点）对照合并前实现，确定性前向的推理坐标/置信度及训练loss完全一致；默认CUDA反传梯度最大绝对差分别为2.98e-8和0（grid_sample反传不支持确定性CUDA，按atol=1e-6、rtol=1e-5核对）。没有更新权重或重新启动训练。局部验证日志：`outputs/parent_merge_check.log`。

@@ -15,10 +15,10 @@ from mhinet.v2.data import GeometryPairDataset
 from mhinet.v2.frozen_locator import load_locator_weights
 from mhinet.v2.losses import flow_head_loss
 from mhinet.v2.coarse_matcher import flow_prior_from_shared
-from mhinet.v2.flow_d8_d2.matching import local_coarse
+from mhinet.v2.flow_d8_d2.matching import select_local_parents
 from mhinet.v2.flow_d8_d2.run import measure
 from mhinet.v2.qrru_corners.experiment import load_models, singleton
-from mhinet.v2.joint_single.path import coarse, sample, source_grid
+from mhinet.v2.joint_single.path import coarse, sample
 from mhinet.v2.joint_single.loss import global_d8, local_loss
 from .model import load_adapter, center_indices, match_windows, infer
 from .experiment import loss_fn
@@ -74,11 +74,8 @@ def advance_early_stop(anchor, bad_epochs, score, min_delta):
 def matching_loss(shared, matcher, adapter, gt, config):
     # Discrete parent selection is detached; D8 logits and sampled D2 features remain live.
     with torch.no_grad():
-        prior = flow_prior_from_shared(shared, 0, (64, 64))
-        si, _, _, _ = local_coarse(shared['pyramid'][8][0].float(), prior, matcher)
-        si = si[:128]
-        si = si[torch.randperm(len(si), device=si.device)[:config['train_windows']]]
-        source = source_grid(si.device)[si]
+        source = select_local_parents(shared, matcher)
+        source = source[torch.randperm(len(source), device=source.device)[:config['train_windows']]]
     l8 = global_d8(shared, matcher, gt)
     if not len(source):
         return l8, dict(d8_global=float(l8.detach()), d8_local=0., d2=0., labels=0)

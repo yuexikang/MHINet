@@ -7,7 +7,7 @@ import torch.nn.functional as F
 from mhinet.downstream.supervision import offsets
 from mhinet.v2.qrru_corners.experiment import selections, load_models
 from mhinet.v2.data import GeometryPairDataset
-from mhinet.v2.flow_d8_d2.matching import infer as discrete
+from mhinet.v2.flow_d8_d2.matching import select_local_parents
 from mhinet.v2.flow_d8_d2.run import measure
 from . import path
 from .diagnose_attribution import summarize
@@ -35,7 +35,7 @@ def main():
     output=Path('outputs/joint_diagnosis/d2_ranking');output.mkdir(parents=True,exist_ok=True);rows=[]
     for batch in ds:
         gt=batch['geometry'].to(args.device);shared=model(batch['images'].to(args.device))
-        old=discrete(shared,matcher,'local');r=path.coarse(shared,matcher,old['coarse_a'][:128])
+        source=select_local_parents(shared,matcher);r=path.coarse(shared,matcher,source)
         a=(r['source'][:,None]+offsets(args.device).reshape(1,16,2)*2).reshape(-1,2)
         axis=(torch.arange(8,device=args.device)-3.5)*2;y,x=torch.meshgrid(axis,axis,indexing='ij')
         c=r['p8'][:,None]+torch.stack((x,y),-1).reshape(1,64,2)

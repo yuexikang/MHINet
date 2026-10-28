@@ -3,6 +3,7 @@ import torch
 import torch.nn.functional as F
 from mhinet.v2.coarse_matcher import flow_prior_from_shared,match_d8
 from mhinet.v2.supervision import direct_d8_fine_grids,valid_points
+from mhinet.v2.joint_single.path import source_grid
 
 
 def local_coarse(d8,prior,matcher,radius=4):
@@ -41,7 +42,19 @@ def local_coarse(d8,prior,matcher,radius=4):
 
 
 @torch.no_grad()
+def select_local_parents(shared, matcher, max_parents=128):
+    """Select source D8 parents without running D2 matching; native pixel coordinates."""
+    prior = flow_prior_from_shared(shared, 0, (64, 64))
+    si, _, _, _ = local_coarse(shared['pyramid'][8][0].float(), prior, matcher)
+    return source_grid(si.device)[si[:max_parents]]
+
+
+@torch.no_grad()
 def infer(shared,matcher,variant):
+    """Discrete D2 baseline used by earlier Flow/D2 and QRRU comparisons.
+
+    Call select_local_parents when only D8 parents are needed.
+    """
     d8=shared['pyramid'][8][0].float();d2=shared['pyramid'][2][0].float();c=matcher.config
     threshold=.1 if variant=='local_mat01' else 0.
     prior=flow_prior_from_shared(shared,0,(64,64),min_matchability=threshold)

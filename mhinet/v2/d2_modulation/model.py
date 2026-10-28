@@ -2,9 +2,8 @@
 import torch
 from torch import nn
 import torch.nn.functional as F
-from mhinet.v2.coarse_matcher import flow_prior_from_shared
-from mhinet.v2.flow_d8_d2.matching import local_coarse
-from mhinet.v2.joint_single.path import coarse, sample, decode, source_grid
+from mhinet.v2.flow_d8_d2.matching import select_local_parents
+from mhinet.v2.joint_single.path import coarse, sample, decode
 
 
 def center_indices(device):
@@ -48,9 +47,7 @@ def extract_windows(shared, matcher, max_parents=128):
 
     No geometry labels enter selection, feature sampling, or context masks.
     """
-    prior = flow_prior_from_shared(shared, 0, (64, 64))
-    si, _, _, _ = local_coarse(shared['pyramid'][8][0].float(), prior, matcher)
-    selected = source_grid(si.device)[si[:max_parents]]
+    selected = select_local_parents(shared, matcher, max_parents)
     r = coarse(shared, matcher, selected)
     axis = (torch.arange(8, device=selected.device)-3.5)*2
     y, x = torch.meshgrid(axis, axis, indexing='ij')

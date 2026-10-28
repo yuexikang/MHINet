@@ -1,5 +1,7 @@
 # D2 调制实验执行 notes（2026-10-26）
 
+后续完整RGB两阶段训练及三路径速度实测见 [full_rgb_d2_notes.md](full_rgb_d2_notes.md)（2026-10-27）。
+
 分支：`codex/flow-d8-d2`。独立模块和训练入口，未修改既有主线默认模型、匹配配置或损失。按 stop-that-shit 范围约束实现当前需求，未增加通用实验框架、哈希清单、额外网络模块或新数据标注。
 
 ## 新增文件清单
@@ -76,3 +78,81 @@ FP32局部特征缓存约5.6GB；单模块权重约0.33MB。训练进程只加�
 ## 尚未做
 
 未做多seed重复、扩大训练集、其他真实数据独立人工真值验证、D8调制、原网络联合解冻或部署性能评测；未将本模块和新权重合入上一主线。这些不属于本次独立模块落地及最小验证的必需项。跨图条件比自调制仅小幅提高，需要后续重复才能判断稳定性。
+
+## 后续训练必须注意：早停与最优权重分离（2026-10-27）
+
+用户明确要求：本次只记录，不执行截图中的再训练任务，不修改当前训练代码。
+
+现有训练把早停的 min_delta=0.001 同时用于 best.pt 保存，导致已保存 best 不一定对应训练历史中最高的验证 P@3；早停也未证明已经充分收敛。之前报告中的 best 应理解为“现行阈值规则选中的权重”，不能称作历史最高或最终最优结果。
+
+下次训练应将两项逻辑分开：验证 P@3 严格超过历史最大值就保存 best；早停另用自己的 min_delta/patience。优先安排相同固定预算（例如先完整30轮）的对照，再根据验证曲线判断是否延长；不能用测试集调整早停。仅以RGB验证选权重，确定后再统一测试。旧检查点没有优化器和调度器状态，不能把从旧last出发的新训练称为严格无缝恢复。保留原结果，不覆盖旧实验。以上为后续执行约束，本次未实施或启动训练。
+
+## 取消 Flow 的推理对照（2026-10-27）
+
+此次仅评估，不训练、不修改早停或主线默认行为。上文“尚未做”指原254对实验完成时的状态；1024对扩量结果已在 `reports/d2_modulation_expanded/results.md`。本次统一使用扩量 full_pair 的已保存 epoch21 权重，不将其称为历史最高验证权重。
+
+核对结果：`mhinet/v2/coarse_matcher.py` 已支持 `flow_prior=None`，其无先验全局 dual-softmax 与 LoMA 参考实现兼容，因此两份 coarse_matcher 均无需改动。独立入口直接复用现有实现，且在每个评估划分首对图像上比对 LoMA 的源/目标索引和置信度。
+
+三组保持同一套 DINO/MVT/VGG/DeDoDe、温度、双图 D2 调制权重，QRRU 禁用：
+
+- `local_flow`：原有 Flow 局部 D8 搜索和连续坐标解码，原 D2 调制推理。
+- `global_flow`：完整4096×4096 D8候选，互选后最多128父窗口；加入既有 Flow Gaussian 奖励。
+- `global_no_flow`：同样的全局 D8 搜索，不计算 Flow、不使用 Matchability 或几何先验。保留 MVT 特征。
+
+两种 global 使用相同的峰值周围3×3连续坐标解码，再进入原8×8上下文、A中心4×4/B全部8×8 D2匹配，最多2048点。未使用H选择窗口或筛选输出；H只用于最后计分。全局与局部组的搜索范围、父点选择和候选网格不同；不能把两者全部差额仅归因于取消Flow。global两组的差异才直接反映该全局路径下Flow先验的作用；即便点数相同，源点集合仍可能不同。
+
+指标使用512原图像素。P@1/3/5/10以全部输出点为分母，无可见对应的点不计正确；EPE仅统计真值有效且可见的点。杭州仅为近似H参考一致性。该结果是对既有权重做推理消融，不代表无Flow模型重新训练后的上限。
+
+### 文件和执行命令
+
+- 新增 `mhinet/v2/d2_modulation/no_flow.py`：独立冻结评估、LoMA对照、无Flow执行检查、聚合及逐对计数。
+- 修改 `docs/mhi_v2/d2_modulation_notes.md`：本记录及前述用户要求的早停提醒。
+- 结果 `reports/d2_modulation_no_flow/`：结果表和三个划分的完整JSON计数。
+- 本地日志/单对smoke：`outputs/d2_modulation_no_flow/`；smoke日志为 `outputs/d2_modulation_no_flow_smoke.log`。
+
+仓库根目录运行；三条完整评估命令可分别在三个终端执行：
+
+```bash
+export TMPDIR=/home/disk1/MHINet/outputs/d2_modulation/tmp
+PY=/root/miniconda3/envs/loma-repro/bin/python
+$PY -m mhinet.v2.d2_modulation.no_flow --split test --device cuda:0 --limit 1 --output outputs/d2_modulation_no_flow/smoke
+$PY -m mhinet.v2.d2_modulation.no_flow --split test --device cuda:0
+$PY -m mhinet.v2.d2_modulation.no_flow --split extra_test --device cuda:1
+$PY -m mhinet.v2.d2_modulation.no_flow --split hangzhou_test --device cuda:2
+```
+
+默认 selection 为 `outputs/d2_modulation_expanded/selection.json`，adapter 为 `outputs/d2_modulation_expanded/full_pair/best.pt`。上游初始化沿用 `qrru_corners.experiment.load_models()`：原清理杭州检查点、`weight/mhi_v2_u0.pt`定位器和 `outputs/flow_d8_d2/training/best.pt` 的VGG/DeDoDe/温度。复现需本地权重及对应数据。重跑可用 `--output` 指定新目录。
+
+### 本次结果与验收
+
+P@k 的阈值和 EPE 均为512原图像素；P@k分母为全部输出，EPE只统计有效可见真值。每组每对均2048点，源点集合不一定相同。杭州指标只反映近似H的一致性。
+
+|数据|推理路径|P@1|P@3|P@5|P@10|EPE(px)|
+|---|---|---:|---:|---:|---:|---:|
+|RGB 原测试64对|现有 Flow 局部 D8|39.29%|89.35%|97.21%|99.61%|1.550|
+|RGB 原测试64对|全局 D8＋Flow 先验|27.35%|85.02%|96.60%|99.49%|1.839|
+|RGB 原测试64对|全局 D8，不预测 Flow|26.37%|82.83%|94.99%|98.52%|1.906|
+|RGB 扩展测试192对|现有 Flow 局部 D8|37.77%|88.10%|96.57%|99.30%|1.608|
+|RGB 扩展测试192对|全局 D8＋Flow 先验|26.83%|84.50%|96.20%|99.34%|1.872|
+|RGB 扩展测试192对|全局 D8，不预测 Flow|25.92%|82.36%|94.60%|98.35%|1.936|
+|杭州64对|现有 Flow 局部 D8|22.71%|59.85%|73.10%|87.40%|11.874|
+|杭州64对|全局 D8＋Flow 先验|25.35%|58.08%|72.14%|86.74%|11.905|
+|杭州64对|全局 D8，不预测 Flow|25.38%|58.01%|72.22%|86.54%|12.144|
+
+## 结论
+
+RGB合并256对：无Flow P@3 82.47%，全局＋Flow 84.63%，现有局部Flow 88.41%。在相同全局路径下，Flow先验增加约 2.15 个百分点。
+
+杭州取消Flow仍能匹配，但P@3从现有局部方案59.85%降到58.01%。全局路径加Flow仅提高约0.07个百分点。杭州无Flow的P@1反而高于局部方案，因此不能声称局部Flow在每个精度阈值都更好。
+
+现有局部方案与全局方案还改变了搜索范围、父点选择和候选采样网格；它们的全部差额不能归因于是否预测Flow。适配器原本在Flow局部窗口上训练，本轮是固定权重的推理消融，不能据此断言无Flow重新训练后的上限。
+
+## 验证与资源
+
+单对smoke通过；三个完整进程均退出0，输出坐标有限，无OOM。每个划分首对与LoMA无先验D8实现的源/目标索引及置信度一致。每对无Flow前向均禁止调用Flow decoder，并检查flow_head=0；QRRU调用被禁止。现有local_flow复算的三个划分P@3正确点数与原缓存全部一致，EPE差异小于3e-8px。
+
+- RGB 原测试64对：评估循环 13.07s，进程峰值 allocated 显存 1.720GiB。
+- RGB 扩展测试192对：评估循环 33.38s，进程峰值 allocated 显存 1.724GiB。
+- 杭州64对：评估循环 14.81s，进程峰值 allocated 显存 1.737GiB。
+
+上述耗时不含模型加载，显存包含同进程的三组对照，不能当作单独无Flow部署开销。运行命令及文件说明见 `docs/mhi_v2/d2_modulation_notes.md`。未重新训练、未合并主线，本轮请求已完成。

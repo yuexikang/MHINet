@@ -1,0 +1,31 @@
+{
+  "flow": {
+    "epoch": 10,
+    "scheduler_epoch": 102130,
+    "optimizer_groups": {
+      "mvt": 150,
+      "head": 10
+    },
+    "optimizer_tensor_states": 160,
+    "cpu_rng_restored": true,
+    "python_rng_restored": true,
+    "cuda_rng_checkpoint_bytes": 16,
+    "optimizer_steps_executed": 0
+  },
+  "d2": {
+    "epoch": 10,
+    "scheduler_epoch": 102130,
+    "optimizer_groups": {
+      "vgg": 48,
+      "dedode": 152,
+      "matcher": 2,
+      "adapter": 4
+    },
+    "optimizer_tensor_states": 206,
+    "cpu_rng_restored": true,
+    "python_rng_restored": true,
+    "cuda_rng_checkpoint_bytes": 16,
+    "optimizer_steps_executed": 0
+  },
+  "legacy_u0": "strict MVT/head load passed; original file untouched"
+}

@@ -1,0 +1,53 @@
+{
+  "release": {
+    "version": "mhi-v2-flow-pair-20261028",
+    "variant": "latest",
+    "flow_epoch": 4,
+    "d2_epoch": 10
+  },
+  "frozen": true,
+  "pairs": [
+    {
+      "split": "test",
+      "counts": {
+        "n": 2048,
+        "visible": 2022,
+        "error_sum": 911.2606201171875,
+        "correct1": 1829,
+        "correct3": 2021,
+        "correct5": 2022,
+        "correct10": 2022
+      },
+      "expected_counts": {
+        "n": 2048,
+        "visible": 2022,
+        "error_sum": 911.2606201171875,
+        "correct1": 1829,
+        "correct3": 2021,
+        "correct5": 2022,
+        "correct10": 2022
+      }
+    },
+    {
+      "split": "hangzhou_test_real",
+      "counts": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 1664.97119140625,
+        "correct1": 1471,
+        "correct3": 2045,
+        "correct5": 2048,
+        "correct10": 2048
+      },
+      "expected_counts": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 1664.97119140625,
+        "correct1": 1471,
+        "correct3": 2045,
+        "correct5": 2048,
+        "correct10": 2048
+      }
+    }
+  ]
+}

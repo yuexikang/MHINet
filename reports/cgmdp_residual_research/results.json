@@ -1,0 +1,1373 @@
+{
+  "A0": {
+    "selection": {
+      "group": "A0",
+      "best_epoch": 0,
+      "epochs": 0,
+      "frozen_reference": true,
+      "early_stopping": false
+    },
+    "rgb_test": {
+      "summary": {
+        "fixed": {
+          "d2": {
+            "n": 524288,
+            "visible": 521703,
+            "error_sum": 1068920.2282714844,
+            "flow_error_sum": 972395.5308837891,
+            "flow_correct3": 444838,
+            "damaged": 73717,
+            "rescued": 52684,
+            "covered3": 509636,
+            "correct1": 117647,
+            "correct3": 423805,
+            "correct5": 499280,
+            "correct10": 520675,
+            "rank1": 406848,
+            "rank5": 490522,
+            "rank10": 503567,
+            "p1": 0.2243938446044922,
+            "p3": 0.8083438873291016,
+            "p5": 0.952301025390625,
+            "p10": 0.9931087493896484,
+            "epe": 2.048905657570465,
+            "coverage": 0.9768699815795577,
+            "rank1_rate": 0.7983109513456663,
+            "rank5_rate": 0.9624948002103462
+          },
+          "d8": {
+            "n": 32768,
+            "visible": 32610,
+            "covered": 32605,
+            "correct3": 27947,
+            "correct5": 31525,
+            "correct10": 32592,
+            "p3": 0.852874755859375,
+            "p5": 0.962066650390625,
+            "p10": 0.99462890625,
+            "coverage": 0.9998466727997547
+          },
+          "changes": {
+            "common": 524288,
+            "added": 0,
+            "lost": 0,
+            "before_good": 423805,
+            "before_bad": 97898,
+            "damaged": 0,
+            "rescued": 0,
+            "damaged_rate": 0.0,
+            "rescued_rate": 0.0
+          },
+          "quality_pair_mean": {
+            "similarity_margin": 0.027039348524539264,
+            "margin_queries": 1990.765625,
+            "spatial_cos_before": 0.31970840865687933,
+            "spatial_cos_after": 0.31970840865687933
+          }
+        },
+        "rematched": {
+          "d2": {
+            "n": 524288,
+            "visible": 521703,
+            "error_sum": 1068920.2282714844,
+            "flow_error_sum": 972395.5308837891,
+            "flow_correct3": 444838,
+            "damaged": 73717,
+            "rescued": 52684,
+            "covered3": 509636,
+            "correct1": 117647,
+            "correct3": 423805,
+            "correct5": 499280,
+            "correct10": 520675,
+            "rank1": 406848,
+            "rank5": 490522,
+            "rank10": 503567,
+            "p1": 0.2243938446044922,
+            "p3": 0.8083438873291016,
+            "p5": 0.952301025390625,
+            "p10": 0.9931087493896484,
+            "epe": 2.048905657570465,
+            "coverage": 0.9768699815795577,
+            "rank1_rate": 0.7983109513456663,
+            "rank5_rate": 0.9624948002103462
+          },
+          "d8": {
+            "n": 32768,
+            "visible": 32610,
+            "covered": 32605,
+            "correct3": 27947,
+            "correct5": 31525,
+            "correct10": 32592,
+            "p3": 0.852874755859375,
+            "p5": 0.962066650390625,
+            "p10": 0.99462890625,
+            "coverage": 0.9998466727997547
+          },
+          "changes": {
+            "common": 524288,
+            "added": 0,
+            "lost": 0,
+            "before_good": 423805,
+            "before_bad": 97898,
+            "damaged": 0,
+            "rescued": 0,
+            "damaged_rate": 0.0,
+            "rescued_rate": 0.0
+          },
+          "quality_pair_mean": {
+            "similarity_margin": 0.027039348524539264,
+            "margin_queries": 1990.765625,
+            "spatial_cos_before": 0.31970840868598316,
+            "spatial_cos_after": 0.31970840868598316
+          }
+        }
+      },
+      "modulation": {
+        "8": {
+          "drift": 0.0
+        },
+        "4": {
+          "drift": 0.0
+        },
+        "2": {
+          "drift": 0.0
+        }
+      }
+    },
+    "hangzhou_test": {
+      "summary": {
+        "fixed": {
+          "d2": {
+            "n": 131072,
+            "visible": 124509,
+            "error_sum": 1494510.6953125,
+            "flow_error_sum": 1502735.505493164,
+            "flow_correct3": 77213,
+            "damaged": 9193,
+            "rescued": 8088,
+            "covered3": 112923,
+            "correct1": 27353,
+            "correct3": 76108,
+            "correct5": 94586,
+            "correct10": 113968,
+            "rank1": 74132,
+            "rank5": 91461,
+            "rank10": 98272,
+            "p1": 0.20868682861328125,
+            "p3": 0.580657958984375,
+            "p5": 0.7216339111328125,
+            "p10": 0.8695068359375,
+            "epe": 12.003234266699597,
+            "coverage": 0.9069464857962075,
+            "rank1_rate": 0.6564827360236621,
+            "rank5_rate": 0.8099412874259451
+          },
+          "d8": {
+            "n": 8192,
+            "visible": 7781,
+            "covered": 7503,
+            "correct3": 4891,
+            "correct5": 6037,
+            "correct10": 7227,
+            "p3": 0.5970458984375,
+            "p5": 0.7369384765625,
+            "p10": 0.8822021484375,
+            "coverage": 0.964271944480144
+          },
+          "changes": {
+            "common": 131072,
+            "added": 0,
+            "lost": 0,
+            "before_good": 76108,
+            "before_bad": 48401,
+            "damaged": 0,
+            "rescued": 0,
+            "damaged_rate": 0.0,
+            "rescued_rate": 0.0
+          },
+          "quality_pair_mean": {
+            "similarity_margin": -0.004731071996502578,
+            "margin_queries": 1764.421875,
+            "spatial_cos_before": 0.36240081395953894,
+            "spatial_cos_after": 0.36240081395953894
+          }
+        },
+        "rematched": {
+          "d2": {
+            "n": 131072,
+            "visible": 124509,
+            "error_sum": 1494510.6953125,
+            "flow_error_sum": 1502735.505493164,
+            "flow_correct3": 77213,
+            "damaged": 9193,
+            "rescued": 8088,
+            "covered3": 112923,
+            "correct1": 27353,
+            "correct3": 76108,
+            "correct5": 94586,
+            "correct10": 113968,
+            "rank1": 74132,
+            "rank5": 91461,
+            "rank10": 98272,
+            "p1": 0.20868682861328125,
+            "p3": 0.580657958984375,
+            "p5": 0.7216339111328125,
+            "p10": 0.8695068359375,
+            "epe": 12.003234266699597,
+            "coverage": 0.9069464857962075,
+            "rank1_rate": 0.6564827360236621,
+            "rank5_rate": 0.8099412874259451
+          },
+          "d8": {
+            "n": 8192,
+            "visible": 7781,
+            "covered": 7503,
+            "correct3": 4891,
+            "correct5": 6037,
+            "correct10": 7227,
+            "p3": 0.5970458984375,
+            "p5": 0.7369384765625,
+            "p10": 0.8822021484375,
+            "coverage": 0.964271944480144
+          },
+          "changes": {
+            "common": 131072,
+            "added": 0,
+            "lost": 0,
+            "before_good": 76108,
+            "before_bad": 48401,
+            "damaged": 0,
+            "rescued": 0,
+            "damaged_rate": 0.0,
+            "rescued_rate": 0.0
+          },
+          "quality_pair_mean": {
+            "similarity_margin": -0.004731071880087256,
+            "margin_queries": 1764.421875,
+            "spatial_cos_before": 0.36240081349387765,
+            "spatial_cos_after": 0.36240081349387765
+          }
+        }
+      },
+      "modulation": {
+        "8": {
+          "drift": 0.0
+        },
+        "4": {
+          "drift": 0.0
+        },
+        "2": {
+          "drift": 0.0
+        }
+      }
+    }
+  },
+  "A1": {
+    "selection": {
+      "group": "A1",
+      "best_epoch": 0,
+      "epochs": 0,
+      "frozen_reference": true,
+      "early_stopping": false
+    },
+    "rgb_test": {
+      "summary": {
+        "fixed": {
+          "d2": {
+            "n": 524288,
+            "visible": 521703,
+            "error_sum": 831402.85546875,
+            "flow_error_sum": 972395.5308837891,
+            "flow_correct3": 444838,
+            "damaged": 40125,
+            "rescued": 58833,
+            "covered3": 509636,
+            "correct1": 200022,
+            "correct3": 463546,
+            "correct5": 507156,
+            "correct10": 521032,
+            "rank1": 453623,
+            "rank5": 501593,
+            "rank10": 507507,
+            "p1": 0.3815116882324219,
+            "p3": 0.8841438293457031,
+            "p5": 0.9673233032226562,
+            "p10": 0.9937896728515625,
+            "epe": 1.5936324986989725,
+            "coverage": 0.9768699815795577,
+            "rank1_rate": 0.8900921441970348,
+            "rank5_rate": 0.9842181478545472
+          },
+          "d8": {
+            "n": 32768,
+            "visible": 32610,
+            "covered": 32605,
+            "correct3": 27947,
+            "correct5": 31525,
+            "correct10": 32592,
+            "p3": 0.852874755859375,
+            "p5": 0.962066650390625,
+            "p10": 0.99462890625,
+            "coverage": 0.9998466727997547
+          },
+          "changes": {
+            "common": 524288,
+            "added": 0,
+            "lost": 0,
+            "before_good": 463546,
+            "before_bad": 58157,
+            "damaged": 0,
+            "rescued": 0,
+            "damaged_rate": 0.0,
+            "rescued_rate": 0.0
+          },
+          "quality_pair_mean": {
+            "similarity_margin": 0.0512853350687692,
+            "margin_queries": 1990.765625,
+            "spatial_cos_before": 0.3197084086277755,
+            "spatial_cos_after": 0.28925129008712247,
+            "pair_gamma_abs": 1.97722371481359,
+            "pair_beta_ratio": 1.2336940574459732
+          }
+        },
+        "rematched": {
+          "d2": {
+            "n": 524288,
+            "visible": 521703,
+            "error_sum": 831402.8552246094,
+            "flow_error_sum": 972395.5308837891,
+            "flow_correct3": 444838,
+            "damaged": 40125,
+            "rescued": 58833,
+            "covered3": 509636,
+            "correct1": 200022,
+            "correct3": 463546,
+            "correct5": 507156,
+            "correct10": 521032,
+            "rank1": 453623,
+            "rank5": 501593,
+            "rank10": 507507,
+            "p1": 0.3815116882324219,
+            "p3": 0.8841438293457031,
+            "p5": 0.9673233032226562,
+            "p10": 0.9937896728515625,
+            "epe": 1.5936324982310037,
+            "coverage": 0.9768699815795577,
+            "rank1_rate": 0.8900921441970348,
+            "rank5_rate": 0.9842181478545472
+          },
+          "d8": {
+            "n": 32768,
+            "visible": 32610,
+            "covered": 32605,
+            "correct3": 27947,
+            "correct5": 31525,
+            "correct10": 32592,
+            "p3": 0.852874755859375,
+            "p5": 0.962066650390625,
+            "p10": 0.99462890625,
+            "coverage": 0.9998466727997547
+          },
+          "changes": {
+            "common": 524288,
+            "added": 0,
+            "lost": 0,
+            "before_good": 463546,
+            "before_bad": 58157,
+            "damaged": 0,
+            "rescued": 0,
+            "damaged_rate": 0.0,
+            "rescued_rate": 0.0
+          },
+          "quality_pair_mean": {
+            "similarity_margin": 0.051285335054217285,
+            "margin_queries": 1990.765625,
+            "spatial_cos_before": 0.31970840865687933,
+            "spatial_cos_after": 0.2892512901162263,
+            "pair_gamma_abs": 1.97722371481359,
+            "pair_beta_ratio": 1.2336940574459732
+          }
+        }
+      },
+      "modulation": {
+        "8": {
+          "drift": 0.0
+        },
+        "4": {
+          "drift": 0.0
+        },
+        "2": {
+          "drift": 0.0
+        }
+      }
+    },
+    "hangzhou_test": {
+      "summary": {
+        "fixed": {
+          "d2": {
+            "n": 131072,
+            "visible": 124509,
+            "error_sum": 1478387.372253418,
+            "flow_error_sum": 1502716.1470947266,
+            "flow_correct3": 77213,
+            "damaged": 6133,
+            "rescued": 7368,
+            "covered3": 112923,
+            "correct1": 29765,
+            "correct3": 78448,
+            "correct5": 95814,
+            "correct10": 114560,
+            "rank1": 76860,
+            "rank5": 93421,
+            "rank10": 99774,
+            "p1": 0.22708892822265625,
+            "p3": 0.5985107421875,
+            "p5": 0.7310028076171875,
+            "p10": 0.8740234375,
+            "epe": 11.873739024917219,
+            "coverage": 0.9069464857962075,
+            "rank1_rate": 0.6806407906272416,
+            "rank5_rate": 0.8272982474783702
+          },
+          "d8": {
+            "n": 8192,
+            "visible": 7781,
+            "covered": 7503,
+            "correct3": 4891,
+            "correct5": 6037,
+            "correct10": 7227,
+            "p3": 0.5970458984375,
+            "p5": 0.7369384765625,
+            "p10": 0.8822021484375,
+            "coverage": 0.964271944480144
+          },
+          "changes": {
+            "common": 131072,
+            "added": 0,
+            "lost": 0,
+            "before_good": 78448,
+            "before_bad": 46061,
+            "damaged": 0,
+            "rescued": 0,
+            "damaged_rate": 0.0,
+            "rescued_rate": 0.0
+          },
+          "quality_pair_mean": {
+            "similarity_margin": 0.010880163200454263,
+            "margin_queries": 1764.421875,
+            "spatial_cos_before": 0.3624039152637124,
+            "spatial_cos_after": 0.32191307784523815,
+            "pair_gamma_abs": 2.0103373918682337,
+            "pair_beta_ratio": 1.3982779700309038
+          }
+        },
+        "rematched": {
+          "d2": {
+            "n": 131072,
+            "visible": 124509,
+            "error_sum": 1478395.8588256836,
+            "flow_error_sum": 1502735.505493164,
+            "flow_correct3": 77213,
+            "damaged": 6133,
+            "rescued": 7368,
+            "covered3": 112923,
+            "correct1": 29754,
+            "correct3": 78448,
+            "correct5": 95814,
+            "correct10": 114560,
+            "rank1": 76860,
+            "rank5": 93421,
+            "rank10": 99774,
+            "p1": 0.2270050048828125,
+            "p3": 0.5985107421875,
+            "p5": 0.7310028076171875,
+            "p10": 0.8740234375,
+            "epe": 11.87380718522905,
+            "coverage": 0.9069464857962075,
+            "rank1_rate": 0.6806407906272416,
+            "rank5_rate": 0.8272982474783702
+          },
+          "d8": {
+            "n": 8192,
+            "visible": 7781,
+            "covered": 7503,
+            "correct3": 4891,
+            "correct5": 6037,
+            "correct10": 7227,
+            "p3": 0.5970458984375,
+            "p5": 0.7369384765625,
+            "p10": 0.8822021484375,
+            "coverage": 0.964271944480144
+          },
+          "changes": {
+            "common": 131056,
+            "added": 16,
+            "lost": 16,
+            "before_good": 78432,
+            "before_bad": 46061,
+            "damaged": 0,
+            "rescued": 0,
+            "damaged_rate": 0.0,
+            "rescued_rate": 0.0
+          },
+          "quality_pair_mean": {
+            "similarity_margin": 0.010876519721023215,
+            "margin_queries": 1764.421875,
+            "spatial_cos_before": 0.36240081395953894,
+            "spatial_cos_after": 0.32190507207997143,
+            "pair_gamma_abs": 2.0102836415171623,
+            "pair_beta_ratio": 1.3982569444924593
+          }
+        }
+      },
+      "modulation": {
+        "8": {
+          "drift": 0.0
+        },
+        "4": {
+          "drift": 0.0
+        },
+        "2": {
+          "drift": 0.0
+        }
+      }
+    }
+  },
+  "A2": {
+    "selection": {
+      "group": "A2",
+      "best_epoch": 1,
+      "epochs": 10,
+      "frozen_reference": false,
+      "early_stopping": false
+    },
+    "rgb_test": {
+      "summary": {
+        "fixed": {
+          "d2": {
+            "n": 524288,
+            "visible": 521703,
+            "error_sum": 1069738.9978027344,
+            "flow_error_sum": 972395.5308837891,
+            "flow_correct3": 444838,
+            "damaged": 73771,
+            "rescued": 52676,
+            "covered3": 509636,
+            "correct1": 117399,
+            "correct3": 423743,
+            "correct5": 499241,
+            "correct10": 520666,
+            "rank1": 406582,
+            "rank5": 490496,
+            "rank10": 503548,
+            "p1": 0.2239208221435547,
+            "p3": 0.8082256317138672,
+            "p5": 0.9522266387939453,
+            "p10": 0.9930915832519531,
+            "epe": 2.050475074520818,
+            "coverage": 0.9768699815795577,
+            "rank1_rate": 0.7977890101955121,
+            "rank5_rate": 0.9624437834061957
+          },
+          "d8": {
+            "n": 32768,
+            "visible": 32610,
+            "covered": 32605,
+            "correct3": 27947,
+            "correct5": 31525,
+            "correct10": 32592,
+            "p3": 0.852874755859375,
+            "p5": 0.962066650390625,
+            "p10": 0.99462890625,
+            "coverage": 0.9998466727997547
+          },
+          "changes": {
+            "common": 524288,
+            "added": 0,
+            "lost": 0,
+            "before_good": 423805,
+            "before_bad": 97898,
+            "damaged": 984,
+            "rescued": 922,
+            "damaged_rate": 0.002321822536307972,
+            "rescued_rate": 0.00941796563770455
+          },
+          "quality_pair_mean": {
+            "similarity_margin": 0.02706759547299953,
+            "margin_queries": 1990.765625,
+            "spatial_cos_before": 0.3185303575155558,
+            "spatial_cos_after": 0.3185303575155558
+          }
+        },
+        "rematched": {
+          "d2": {
+            "n": 524288,
+            "visible": 522152,
+            "error_sum": 1064689.3698730469,
+            "flow_error_sum": 968992.8972167969,
+            "flow_correct3": 446082,
+            "damaged": 73414,
+            "rescued": 52526,
+            "covered3": 510541,
+            "correct1": 117868,
+            "correct3": 425194,
+            "correct5": 500461,
+            "correct10": 521251,
+            "rank1": 407839,
+            "rank5": 491857,
+            "rank10": 504736,
+            "p1": 0.22481536865234375,
+            "p3": 0.8109931945800781,
+            "p5": 0.9545536041259766,
+            "p10": 0.9942073822021484,
+            "epe": 2.0390410644276895,
+            "coverage": 0.9777631800701712,
+            "rank1_rate": 0.7988369200514748,
+            "rank5_rate": 0.9634035268470114
+          },
+          "d8": {
+            "n": 32768,
+            "visible": 32641,
+            "covered": 32635,
+            "correct3": 28197,
+            "correct5": 31689,
+            "correct10": 32631,
+            "p3": 0.860504150390625,
+            "p5": 0.967071533203125,
+            "p10": 0.995819091796875,
+            "coverage": 0.999816182102264
+          },
+          "changes": {
+            "common": 496288,
+            "added": 28000,
+            "lost": 28000,
+            "before_good": 403448,
+            "before_bad": 90787,
+            "damaged": 2561,
+            "rescued": 2705,
+            "damaged_rate": 0.0063477821181416195,
+            "rescued_rate": 0.029795014704748476
+          },
+          "quality_pair_mean": {
+            "similarity_margin": 0.027226051925651973,
+            "margin_queries": 1994.30078125,
+            "spatial_cos_before": 0.31839489316917025,
+            "spatial_cos_after": 0.31839489316917025
+          }
+        }
+      },
+      "modulation": {
+        "8": {
+          "gamma_abs": 0.09849643337656744,
+          "gamma_max": 0.0996850294759497,
+          "beta_ratio": 0.06454907334409654,
+          "lambda": 1.0,
+          "drift": 0.008298409509734483
+        },
+        "4": {
+          "drift": 0.001708392132059089
+        },
+        "2": {
+          "drift": 0.0018999996964339516
+        }
+      }
+    },
+    "hangzhou_test": {
+      "summary": {
+        "fixed": {
+          "d2": {
+            "n": 131072,
+            "visible": 124509,
+            "error_sum": 1494785.2211914062,
+            "flow_error_sum": 1502735.5053710938,
+            "flow_correct3": 77213,
+            "damaged": 9211,
+            "rescued": 8100,
+            "covered3": 112923,
+            "correct1": 27293,
+            "correct3": 76102,
+            "correct5": 94594,
+            "correct10": 113958,
+            "rank1": 74120,
+            "rank5": 91462,
+            "rank10": 98285,
+            "p1": 0.20822906494140625,
+            "p3": 0.5806121826171875,
+            "p5": 0.7216949462890625,
+            "p10": 0.8694305419921875,
+            "epe": 12.005439134451375,
+            "coverage": 0.9069464857962075,
+            "rank1_rate": 0.6563764689213003,
+            "rank5_rate": 0.8099501430178085
+          },
+          "d8": {
+            "n": 8192,
+            "visible": 7781,
+            "covered": 7503,
+            "correct3": 4891,
+            "correct5": 6037,
+            "correct10": 7227,
+            "p3": 0.5970458984375,
+            "p5": 0.7369384765625,
+            "p10": 0.8822021484375,
+            "coverage": 0.964271944480144
+          },
+          "changes": {
+            "common": 131072,
+            "added": 0,
+            "lost": 0,
+            "before_good": 76108,
+            "before_bad": 48401,
+            "damaged": 98,
+            "rescued": 92,
+            "damaged_rate": 0.0012876438744941399,
+            "rescued_rate": 0.0019007871738187228
+          },
+          "quality_pair_mean": {
+            "similarity_margin": -0.004900106006971328,
+            "margin_queries": 1764.421875,
+            "spatial_cos_before": 0.36208636430092156,
+            "spatial_cos_after": 0.36208636430092156
+          }
+        },
+        "rematched": {
+          "d2": {
+            "n": 131072,
+            "visible": 124504,
+            "error_sum": 1490758.6639404297,
+            "flow_error_sum": 1498007.8645019531,
+            "flow_correct3": 77197,
+            "damaged": 9322,
+            "rescued": 8035,
+            "covered3": 113047,
+            "correct1": 27181,
+            "correct3": 75910,
+            "correct5": 94600,
+            "correct10": 114068,
+            "rank1": 73911,
+            "rank5": 91410,
+            "rank10": 98315,
+            "p1": 0.20737457275390625,
+            "p3": 0.5791473388671875,
+            "p5": 0.72174072265625,
+            "p10": 0.870269775390625,
+            "epe": 11.973580478863568,
+            "coverage": 0.9079788601169441,
+            "rank1_rate": 0.6538077082983184,
+            "rank5_rate": 0.8086017320229639
+          },
+          "d8": {
+            "n": 8192,
+            "visible": 7781,
+            "covered": 7504,
+            "correct3": 4902,
+            "correct5": 6051,
+            "correct10": 7240,
+            "p3": 0.598388671875,
+            "p5": 0.7386474609375,
+            "p10": 0.8837890625,
+            "coverage": 0.9644004626654672
+          },
+          "changes": {
+            "common": 125936,
+            "added": 5136,
+            "lost": 5136,
+            "before_good": 73356,
+            "before_bad": 46540,
+            "damaged": 191,
+            "rescued": 180,
+            "damaged_rate": 0.002603740661977207,
+            "rescued_rate": 0.003867640739149119
+          },
+          "quality_pair_mean": {
+            "similarity_margin": -0.0050923703511216445,
+            "margin_queries": 1766.359375,
+            "spatial_cos_before": 0.3622689548647031,
+            "spatial_cos_after": 0.3622689548647031
+          }
+        }
+      },
+      "modulation": {
+        "8": {
+          "gamma_abs": 0.07940477377269417,
+          "gamma_max": 0.08622447296511382,
+          "beta_ratio": 0.04573625640477985,
+          "lambda": 1.0,
+          "drift": 0.004754238103487296
+        },
+        "4": {
+          "drift": 0.0011250077491240518
+        },
+        "2": {
+          "drift": 0.0012143178721544245
+        }
+      }
+    }
+  },
+  "A3": {
+    "selection": {
+      "group": "A3",
+      "best_epoch": 1,
+      "epochs": 10,
+      "frozen_reference": false,
+      "early_stopping": false
+    },
+    "rgb_test": {
+      "summary": {
+        "fixed": {
+          "d2": {
+            "n": 524288,
+            "visible": 521703,
+            "error_sum": 831337.9956054688,
+            "flow_error_sum": 972395.5308837891,
+            "flow_correct3": 444838,
+            "damaged": 40082,
+            "rescued": 58886,
+            "covered3": 509636,
+            "correct1": 200160,
+            "correct3": 463642,
+            "correct5": 507110,
+            "correct10": 521027,
+            "rank1": 453596,
+            "rank5": 501635,
+            "rank10": 507533,
+            "p1": 0.38177490234375,
+            "p3": 0.8843269348144531,
+            "p5": 0.9672355651855469,
+            "p10": 0.9937801361083984,
+            "epe": 1.593508175351625,
+            "coverage": 0.9768699815795577,
+            "rank1_rate": 0.8900391652081093,
+            "rank5_rate": 0.9843005596150979
+          },
+          "d8": {
+            "n": 32768,
+            "visible": 32610,
+            "covered": 32605,
+            "correct3": 27947,
+            "correct5": 31525,
+            "correct10": 32592,
+            "p3": 0.852874755859375,
+            "p5": 0.962066650390625,
+            "p10": 0.99462890625,
+            "coverage": 0.9998466727997547
+          },
+          "changes": {
+            "common": 524288,
+            "added": 0,
+            "lost": 0,
+            "before_good": 463546,
+            "before_bad": 58157,
+            "damaged": 1278,
+            "rescued": 1374,
+            "damaged_rate": 0.0027570079344876237,
+            "rescued_rate": 0.023625702838867203
+          },
+          "quality_pair_mean": {
+            "similarity_margin": 0.05144871287757269,
+            "margin_queries": 1990.765625,
+            "spatial_cos_before": 0.3183860376593657,
+            "spatial_cos_after": 0.2903930245083757,
+            "pair_gamma_abs": 1.947054225485772,
+            "pair_beta_ratio": 1.2268845629878342
+          }
+        },
+        "rematched": {
+          "d2": {
+            "n": 524288,
+            "visible": 522166,
+            "error_sum": 822903.5340576172,
+            "flow_error_sum": 968215.0590820312,
+            "flow_correct3": 446201,
+            "damaged": 38859,
+            "rescued": 58810,
+            "covered3": 510669,
+            "correct1": 201229,
+            "correct3": 466152,
+            "correct5": 508550,
+            "correct10": 521606,
+            "rank1": 455879,
+            "rank5": 503240,
+            "rank10": 508754,
+            "p1": 0.38381385803222656,
+            "p3": 0.8891143798828125,
+            "p5": 0.9699821472167969,
+            "p10": 0.9948844909667969,
+            "epe": 1.5759423900782839,
+            "coverage": 0.9779820976471084,
+            "rank1_rate": 0.8927093675159448,
+            "rank5_rate": 0.9854524163401343
+          },
+          "d8": {
+            "n": 32768,
+            "visible": 32642,
+            "covered": 32636,
+            "correct3": 28238,
+            "correct5": 31691,
+            "correct10": 32631,
+            "p3": 0.86175537109375,
+            "p5": 0.967132568359375,
+            "p10": 0.995819091796875,
+            "coverage": 0.9998161877335947
+          },
+          "changes": {
+            "common": 501744,
+            "added": 22544,
+            "lost": 22544,
+            "before_good": 445555,
+            "before_bad": 54163,
+            "damaged": 1782,
+            "rescued": 2923,
+            "damaged_rate": 0.003999506233798297,
+            "rescued_rate": 0.053966730055572995
+          },
+          "quality_pair_mean": {
+            "similarity_margin": 0.0518393954421299,
+            "margin_queries": 1994.80078125,
+            "spatial_cos_before": 0.31827093099127524,
+            "spatial_cos_after": 0.28873973540612496,
+            "pair_gamma_abs": 1.9515720792114735,
+            "pair_beta_ratio": 1.225472749210894
+          }
+        }
+      },
+      "modulation": {
+        "8": {
+          "gamma_abs": 0.09781027081771754,
+          "gamma_max": 0.09973561143851839,
+          "beta_ratio": 0.056035083427559584,
+          "lambda": 1.0,
+          "drift": 0.007625038588230382
+        },
+        "4": {
+          "drift": 0.0015494522799599508
+        },
+        "2": {
+          "drift": 0.0017182240658257797
+        }
+      }
+    },
+    "hangzhou_test": {
+      "summary": {
+        "fixed": {
+          "d2": {
+            "n": 131072,
+            "visible": 124509,
+            "error_sum": 1478468.3658447266,
+            "flow_error_sum": 1502735.1225585938,
+            "flow_correct3": 77213,
+            "damaged": 6194,
+            "rescued": 7359,
+            "covered3": 112923,
+            "correct1": 29703,
+            "correct3": 78378,
+            "correct5": 95772,
+            "correct10": 114558,
+            "rank1": 76810,
+            "rank5": 93401,
+            "rank10": 99789,
+            "p1": 0.22661590576171875,
+            "p3": 0.5979766845703125,
+            "p5": 0.730682373046875,
+            "p10": 0.8740081787109375,
+            "epe": 11.874389528827045,
+            "coverage": 0.9069464857962075,
+            "rank1_rate": 0.6801980110340674,
+            "rank5_rate": 0.8271211356411006
+          },
+          "d8": {
+            "n": 8192,
+            "visible": 7781,
+            "covered": 7503,
+            "correct3": 4891,
+            "correct5": 6037,
+            "correct10": 7227,
+            "p3": 0.5970458984375,
+            "p5": 0.7369384765625,
+            "p10": 0.8822021484375,
+            "coverage": 0.964271944480144
+          },
+          "changes": {
+            "common": 131072,
+            "added": 0,
+            "lost": 0,
+            "before_good": 78448,
+            "before_bad": 46061,
+            "damaged": 241,
+            "rescued": 171,
+            "damaged_rate": 0.0030720987150724046,
+            "rescued_rate": 0.003712468248626821
+          },
+          "quality_pair_mean": {
+            "similarity_margin": 0.010760637384009897,
+            "margin_queries": 1764.421875,
+            "spatial_cos_before": 0.36197521502617747,
+            "spatial_cos_after": 0.3229546286165714,
+            "pair_gamma_abs": 1.9901265688240528,
+            "pair_beta_ratio": 1.3967993594706059
+          }
+        },
+        "rematched": {
+          "d2": {
+            "n": 131072,
+            "visible": 124509,
+            "error_sum": 1470876.9907226562,
+            "flow_error_sum": 1494543.7806396484,
+            "flow_correct3": 77370,
+            "damaged": 6296,
+            "rescued": 7314,
+            "covered3": 113052,
+            "correct1": 29707,
+            "correct3": 78388,
+            "correct5": 95940,
+            "correct10": 114676,
+            "rank1": 76836,
+            "rank5": 93457,
+            "rank10": 99951,
+            "p1": 0.22664642333984375,
+            "p3": 0.598052978515625,
+            "p5": 0.731964111328125,
+            "p10": 0.874908447265625,
+            "epe": 11.813419035753691,
+            "coverage": 0.9079825554779173,
+            "rank1_rate": 0.6796518416304002,
+            "rank5_rate": 0.8266726815978488
+          },
+          "d8": {
+            "n": 8192,
+            "visible": 7781,
+            "covered": 7504,
+            "correct3": 4913,
+            "correct5": 6056,
+            "correct10": 7239,
+            "p3": 0.5997314453125,
+            "p5": 0.7392578125,
+            "p10": 0.8836669921875,
+            "coverage": 0.9644004626654672
+          },
+          "changes": {
+            "common": 126512,
+            "added": 4560,
+            "lost": 4560,
+            "before_good": 76112,
+            "before_bad": 44317,
+            "damaged": 342,
+            "rescued": 284,
+            "damaged_rate": 0.004493378179524911,
+            "rescued_rate": 0.0064083760182322815
+          },
+          "quality_pair_mean": {
+            "similarity_margin": 0.010899138186687196,
+            "margin_queries": 1766.4375,
+            "spatial_cos_before": 0.36213745013810694,
+            "spatial_cos_after": 0.32239097775891423,
+            "pair_gamma_abs": 1.9928172808140516,
+            "pair_beta_ratio": 1.3969787331297994
+          }
+        }
+      },
+      "modulation": {
+        "8": {
+          "gamma_abs": 0.07752094452735037,
+          "gamma_max": 0.08661244699032977,
+          "beta_ratio": 0.037587191589409485,
+          "lambda": 1.0,
+          "drift": 0.0042955690951203
+        },
+        "4": {
+          "drift": 0.0010003638274156401
+        },
+        "2": {
+          "drift": 0.0010774085205866868
+        }
+      }
+    }
+  },
+  "A4": {
+    "selection": {
+      "group": "A4",
+      "best_epoch": 3,
+      "epochs": 10,
+      "frozen_reference": false,
+      "early_stopping": false
+    },
+    "rgb_test": {
+      "summary": {
+        "fixed": {
+          "d2": {
+            "n": 524288,
+            "visible": 521703,
+            "error_sum": 824347.4371337891,
+            "flow_error_sum": 972395.5308837891,
+            "flow_correct3": 444838,
+            "damaged": 39252,
+            "rescued": 59166,
+            "covered3": 509636,
+            "correct1": 203053,
+            "correct3": 464752,
+            "correct5": 507276,
+            "correct10": 521029,
+            "rank1": 454679,
+            "rank5": 502123,
+            "rank10": 507675,
+            "p1": 0.38729286193847656,
+            "p3": 0.886444091796875,
+            "p5": 0.9675521850585938,
+            "p10": 0.9937839508056641,
+            "epe": 1.5801086770323136,
+            "coverage": 0.9768699815795577,
+            "rank1_rate": 0.8921642113194516,
+            "rank5_rate": 0.9852581057853056
+          },
+          "d8": {
+            "n": 32768,
+            "visible": 32610,
+            "covered": 32605,
+            "correct3": 27947,
+            "correct5": 31525,
+            "correct10": 32592,
+            "p3": 0.852874755859375,
+            "p5": 0.962066650390625,
+            "p10": 0.99462890625,
+            "coverage": 0.9998466727997547
+          },
+          "changes": {
+            "common": 524288,
+            "added": 0,
+            "lost": 0,
+            "before_good": 463546,
+            "before_bad": 58157,
+            "damaged": 2012,
+            "rescued": 3218,
+            "damaged_rate": 0.004340453806094756,
+            "rescued_rate": 0.05533297797341678
+          },
+          "quality_pair_mean": {
+            "similarity_margin": 0.05161475179829722,
+            "margin_queries": 1990.765625,
+            "spatial_cos_before": 0.32348636772076134,
+            "spatial_cos_after": 0.30341139374650083,
+            "pair_gamma_abs": 1.940580994822085,
+            "pair_beta_ratio": 1.2172701209783554
+          }
+        },
+        "rematched": {
+          "d2": {
+            "n": 524288,
+            "visible": 522159,
+            "error_sum": 816650.8029785156,
+            "flow_error_sum": 969496.3974609375,
+            "flow_correct3": 445890,
+            "damaged": 38178,
+            "rescued": 59226,
+            "covered3": 510611,
+            "correct1": 203932,
+            "correct3": 466938,
+            "correct5": 508684,
+            "correct10": 521628,
+            "rank1": 456619,
+            "rank5": 503549,
+            "rank10": 508834,
+            "p1": 0.38896942138671875,
+            "p3": 0.8906135559082031,
+            "p5": 0.9702377319335938,
+            "p10": 0.9949264526367188,
+            "epe": 1.5639887524269727,
+            "coverage": 0.9778841310788476,
+            "rank1_rate": 0.8942600139832475,
+            "rank5_rate": 0.98616951064509
+          },
+          "d8": {
+            "n": 32768,
+            "visible": 32641,
+            "covered": 32635,
+            "correct3": 28209,
+            "correct5": 31690,
+            "correct10": 32630,
+            "p3": 0.860870361328125,
+            "p5": 0.96710205078125,
+            "p10": 0.99578857421875,
+            "coverage": 0.999816182102264
+          },
+          "changes": {
+            "common": 498592,
+            "added": 25696,
+            "lost": 25696,
+            "before_good": 442570,
+            "before_bad": 53968,
+            "damaged": 2280,
+            "rescued": 4450,
+            "damaged_rate": 0.005151727410353165,
+            "rescued_rate": 0.08245627038244886
+          },
+          "quality_pair_mean": {
+            "similarity_margin": 0.051904373363186096,
+            "margin_queries": 1994.57421875,
+            "spatial_cos_before": 0.32330212625674903,
+            "spatial_cos_after": 0.30176633517839946,
+            "pair_gamma_abs": 1.9457941930741072,
+            "pair_beta_ratio": 1.216109368018806
+          }
+        }
+      },
+      "modulation": {
+        "8": {
+          "gamma_abs": 0.09975688142003492,
+          "gamma_max": 0.09998040556092747,
+          "beta_ratio": 0.06722444570914377,
+          "lambda": 1.0,
+          "drift": 0.008573987712225062
+        },
+        "4": {
+          "gamma_abs": 0.07035542652010918,
+          "gamma_max": 0.09996354577015154,
+          "beta_ratio": 0.04223772280965932,
+          "lambda": 1.0,
+          "drift": 0.006655258062892244
+        },
+        "2": {
+          "drift": 0.006792295265768189
+        }
+      }
+    },
+    "hangzhou_test": {
+      "summary": {
+        "fixed": {
+          "d2": {
+            "n": 131072,
+            "visible": 124509,
+            "error_sum": 1478946.6870117188,
+            "flow_error_sum": 1502716.1469726562,
+            "flow_correct3": 77213,
+            "damaged": 6280,
+            "rescued": 7384,
+            "covered3": 112923,
+            "correct1": 29445,
+            "correct3": 78317,
+            "correct5": 95714,
+            "correct10": 114557,
+            "rank1": 76731,
+            "rank5": 93472,
+            "rank10": 99872,
+            "p1": 0.22464752197265625,
+            "p3": 0.5975112915039062,
+            "p5": 0.7302398681640625,
+            "p10": 0.8740005493164062,
+            "epe": 11.878231188201003,
+            "coverage": 0.9069464857962075,
+            "rank1_rate": 0.6794984192768524,
+            "rank5_rate": 0.8277498826634078
+          },
+          "d8": {
+            "n": 8192,
+            "visible": 7781,
+            "covered": 7503,
+            "correct3": 4891,
+            "correct5": 6037,
+            "correct10": 7227,
+            "p3": 0.5970458984375,
+            "p5": 0.7369384765625,
+            "p10": 0.8822021484375,
+            "coverage": 0.964271944480144
+          },
+          "changes": {
+            "common": 131072,
+            "added": 0,
+            "lost": 0,
+            "before_good": 78448,
+            "before_bad": 46061,
+            "damaged": 567,
+            "rescued": 436,
+            "damaged_rate": 0.007227717723842546,
+            "rescued_rate": 0.00946570851696663
+          },
+          "quality_pair_mean": {
+            "similarity_margin": 0.011285077713182545,
+            "margin_queries": 1764.421875,
+            "spatial_cos_before": 0.3656221943674609,
+            "spatial_cos_after": 0.3314370724838227,
+            "pair_gamma_abs": 1.967518514022231,
+            "pair_beta_ratio": 1.3778335824608803
+          }
+        },
+        "rematched": {
+          "d2": {
+            "n": 131072,
+            "visible": 124509,
+            "error_sum": 1476562.3192749023,
+            "flow_error_sum": 1498748.8645019531,
+            "flow_correct3": 77183,
+            "damaged": 6420,
+            "rescued": 7421,
+            "covered3": 113039,
+            "correct1": 29389,
+            "correct3": 78184,
+            "correct5": 95816,
+            "correct10": 114639,
+            "rank1": 76618,
+            "rank5": 93463,
+            "rank10": 99990,
+            "p1": 0.22422027587890625,
+            "p3": 0.59649658203125,
+            "p5": 0.73101806640625,
+            "p10": 0.8746261596679688,
+            "epe": 11.859081024463311,
+            "coverage": 0.9078781453549543,
+            "rank1_rate": 0.6778014667504135,
+            "rank5_rate": 0.8268208317483347
+          },
+          "d8": {
+            "n": 8192,
+            "visible": 7781,
+            "covered": 7504,
+            "correct3": 4898,
+            "correct5": 6052,
+            "correct10": 7240,
+            "p3": 0.597900390625,
+            "p5": 0.73876953125,
+            "p10": 0.8837890625,
+            "coverage": 0.9644004626654672
+          },
+          "changes": {
+            "common": 125392,
+            "added": 5680,
+            "lost": 5680,
+            "before_good": 75326,
+            "before_bad": 44111,
+            "damaged": 615,
+            "rescued": 510,
+            "damaged_rate": 0.00816451158962377,
+            "rescued_rate": 0.011561741969123348
+          },
+          "quality_pair_mean": {
+            "similarity_margin": 0.01107322519783338,
+            "margin_queries": 1766.234375,
+            "spatial_cos_before": 0.3658345021540299,
+            "spatial_cos_after": 0.3307943441905081,
+            "pair_gamma_abs": 1.9706383738666773,
+            "pair_beta_ratio": 1.3779715653508902
+          }
+        }
+      },
+      "modulation": {
+        "8": {
+          "gamma_abs": 0.08876451710239053,
+          "gamma_max": 0.09348822268657386,
+          "beta_ratio": 0.04882879534852691,
+          "lambda": 1.0,
+          "drift": 0.0056003136924118735
+        },
+        "4": {
+          "gamma_abs": 0.06675297685433179,
+          "gamma_max": 0.09980286483187228,
+          "beta_ratio": 0.04169828988960944,
+          "lambda": 1.0,
+          "drift": 0.005599639254796784
+        },
+        "2": {
+          "drift": 0.005588664065726334
+        }
+      }
+    }
+  }
+}

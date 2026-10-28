@@ -80,3 +80,7 @@ $PY -u -m mhinet.v2.cgmdp_modulation.research --device cuda:0
 Smoke：训练4对、验证/测试各2对；A0/A1评估和A2–A4各1轮均通过。新增模块梯度非零、冻结模块无梯度，峰值allocated显存1.94GiB。最初发现BF16增量被FP32调制输出提升dtype，已修正并通过零残差逐位核对。随后完整基线评估发现两个RGB测试清单根路径不同，已改为分别加载后拼接，并核对索引0/63/64/255可读取。
 
 正式训练正在进行，预计约1–2小时，实际受GPU0已有并发任务影响；尚不能给出A2–A4最终结论。原全量RGB训练进程未中断。
+
+## 完成状态与分析
+
+A0/A1评估、A2–A4各10轮训练及全部RGB/HZ测试均正常完成，日志以`RESEARCH RUN COMPLETE`结束。按RGB验证P@3选择的轮次为1/1/3。完整分析见 [analysis.md](../../reports/cgmdp_residual_research/analysis.md)：RGB小幅增益主要涉及粗候选与窗口变化，杭州未见对应的P@3收益，暂保留A1为跨域基准。本轮没有追加训练或更改幅度预算。

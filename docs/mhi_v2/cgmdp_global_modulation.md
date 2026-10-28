@@ -61,3 +61,6 @@ $PY -u -m mhinet.v2.cgmdp_modulation.experiment --device cuda:0
 ```
 
 日志：`outputs/cgmdp_global_modulation/run.log`。分组产物：`{none,cumulative,delta}/{epoch_*.json,best.pt,history.jsonl,test.json,hangzhou_test.json,done.json}`；none没有训练history。最小验证通过只说明接线及梯度正确；训练和测试完成前不判断哪个插入点更准确。
+
+
+推理父点选择优化与32对验收见 [cgmdp_selection_optimization.md](cgmdp_selection_optimization.md)（2026-10-28）。

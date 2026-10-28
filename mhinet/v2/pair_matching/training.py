@@ -23,7 +23,7 @@ from mhinet.config import sha256_file
 
 from .continuous import coarse, sample
 from .losses import global_d8, local_loss
-from .local import load_adapter, center_indices, match_windows, infer
+from .local import LocalPairModulation, load_adapter, center_indices, match_windows, infer
 from .losses import loss_fn
 from .global_control import global_infer
 
@@ -278,6 +278,24 @@ def train_stage(stage, model, matcher, adapter, ds, config, device, out, smoke, 
     torch.cuda.empty_cache()
 
 
+def initialize(config, device, assets_root, resume_checkpoint=None):
+    """Single-stage resume needs its checkpoint and Flow, not obsolete initializers."""
+    model = build_shared(config['runtime'], device, assets_root)
+    if resume_checkpoint is not None:
+        state = torch.load(resume_checkpoint, map_location='cpu', weights_only=False, mmap=True)
+        matcher = MatchingTemperatures(SemidenseConfigV2(**state['matcher_config'])).to(device)
+        adapter = LocalPairModulation('pair').to(device)
+        restore(state, model, matcher, adapter, state['stage'])
+    else:
+        state = torch.load(config['initial_downstream'], map_location='cpu', weights_only=False, mmap=True)
+        matcher = MatchingTemperatures(SemidenseConfigV2(**state['matcher'])).to(device)
+        model.vgg.load_state_dict(state['vgg']); model.dedode.load_state_dict(state['dedode'])
+        matcher.load_state_dict(state['temperatures'], strict=True)
+        load_locator_weights(model, config['initial_locator'])
+        adapter = load_adapter(config['initial_adapter'], device)
+    return model, matcher, adapter
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--config', type=Path, default=ROOT/'configs/mhi_v2/releases/full_rgb_training.json')
@@ -302,24 +320,14 @@ def main():
     (out/'pid.txt').write_text(str(os.getpid())+'\n')
     ds, inventory = datasets(config, args.smoke)
     write(out/'data.json', inventory); write(out/'config.json', config)
-    model = build_shared(config['runtime'], args.device, args.assets_root)
-    initial = torch.load(config['initial_downstream'], map_location='cpu', weights_only=False, mmap=True)
-    matcher = MatchingTemperatures(SemidenseConfigV2(**initial['matcher'])).to(args.device)
-    del initial
-    load_locator_weights(model, config['initial_locator'])
-    downstream = torch.load(config['initial_downstream'], map_location='cpu', weights_only=False)
-    model.vgg.load_state_dict(downstream['vgg']); model.dedode.load_state_dict(downstream['dedode'])
-    matcher.load_state_dict(downstream['temperatures'], strict=True)
-    del downstream
-    adapter = load_adapter(config['initial_adapter'], args.device)
-    if args.stage == 'd2':
-        # Independent continuation preserves the locator used by the original D2 run.
-        load_locator_weights(model, config.get('frozen_flow_checkpoint') or out/'flow'/'best.pt')
+    model, matcher, adapter = initialize(config, args.device, args.assets_root,
+                                         out/args.stage/'latest.pt' if args.resume and args.stage != 'all' else None)
     stages = ('flow', 'd2') if args.stage == 'all' else (args.stage,)
     for stage in stages:
         if stage == 'd2':
             load_locator_weights(model, config.get('frozen_flow_checkpoint') or out/'flow'/'best.pt')
-        train_stage(stage, model, matcher, adapter, ds, config, args.device, out/stage, args.smoke, args.resume)
+        stage_resume = args.resume and (args.stage != 'all' or (out/stage/'latest.pt').exists())
+        train_stage(stage, model, matcher, adapter, ds, config, args.device, out/stage, args.smoke, stage_resume)
     final_stage = stages[-1]
     for checkpoint in (('best', 'latest') if config.get('test_last_epoch') else ('best',)):
         if checkpoint == 'latest':

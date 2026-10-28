@@ -114,3 +114,11 @@ $PY -m mhinet.v2.d2_modulation.live_curves --root outputs/full_rgb_d2_10epoch_20
 ```
 
 启动验证：GPU2已从optimizer_step=71491恢复，Flow第8轮前300对正常完成，累计loss=0.0005494，峰值allocated显存2.867GiB；D2排队自动接续。按照原运行速度，剩余Flow约2小时、D2约6小时，另加两阶段best/latest完整测试时间。验收为两阶段done记录均epochs=10且early_stopped=false，历史完整、best与latest测试文件齐全；目前尚未完成续训，不能据此判断最终精度变化。
+
+### 2026-10-28：D2第10轮中断后的恢复
+
+检查时Flow已完成10轮及测试；D2日志停在第10轮6900对、进程已退出，没有尾部Python异常堆栈，不能据此确定退出原因。latest保留完整第9轮。本次按用户要求在空闲GPU2以同一10轮配置运行`--stage d2 --resume`，恢复优化器/调度器/RNG并从第10轮开头重跑；未保存的轮中6900对进度不能恢复。已确认前600对正常、loss约1.8884、峰值allocated显存3.453GiB。训练后自动进行best和latest的完整RGB/HZ test_real测试；Flow不重训，冻结定位器仍是原Flow第4轮best。
+
+### 全部完成与Git报告
+
+恢复后D2已完整完成第10轮，两阶段best/latest均已完成RGB测试5106对及杭州test_real235对测试，顶层done.json为complete。训练及测试汇总见 [报告](../../reports/full_rgb_d2_10epoch_20261028/README.md)，包含两阶段逐轮训练历史和8套测试的完整聚合计数。Flow best为第4轮，D2 best为第1轮；latest为第10轮，D2冻结的Flow来源保持不变。

@@ -44,5 +44,3 @@ def coarse(shared, matcher, source):
     logits = logits + 3*m[:, None]*torch.exp(-delta.square().sum(-1)[None]/(2*32**2))
     p8, score, logits, valid = decode(logits, candidates, 9)
     return dict(source=source, p0=p0, p8=p8, score8=score, candidates8=candidates, logits8=logits, valid8=valid)
-
-

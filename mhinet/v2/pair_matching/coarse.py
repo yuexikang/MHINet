@@ -45,5 +45,3 @@ def select_local_parents(shared, matcher, max_parents=128):
     prior = flow_prior_from_shared(shared, 0, (64, 64))
     si, _, _, _ = local_coarse(shared['pyramid'][8][0].float(), prior, matcher)
     return source_grid(si.device)[si[:max_parents]]
-
-

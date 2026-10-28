@@ -73,5 +73,3 @@ def loss_fn(result, record):
     # All 64 candidates compete. Dual normalization also learns competition across queries.
     loss = -(weights[usable]*result['logp'][usable]).sum(-1).mean()
     return loss, int(usable.sum())
-
-

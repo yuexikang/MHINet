@@ -48,7 +48,8 @@ with torch.inference_mode():
     torch.testing.assert_close(parents,old,rtol=0,atol=0)
    else:
     # Compare sets: separate sparse reductions can reorder near-tied parents.
-    torch.testing.assert_close(parents.sort(dim=0).values,old.sort(dim=0).values,rtol=0,atol=0)
+    torch.testing.assert_close((parents[:,1]*512+parents[:,0]).sort().values,
+                               (old[:,1]*512+old[:,0]).sort().values,rtol=0,atol=0)
    centers=coarse(shared,matcher,parents)['p8']
    ids=((parents+.5)/8-.5).round().long();ids=ids[:,1]*64+ids[:,0]
    result=dict(points_a=w['source'].reshape(-1,2),points_b=r['points_b'].reshape(-1,2),confidence=(r['confidence']*w['score8'][:,None]).sqrt().flatten())

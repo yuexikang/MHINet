@@ -17,5 +17,3 @@ def totals(records):
                   p3_visible=result['correct3']/max(1, result['visible']))
     result.update({f'p{t}': result[f'correct{t}']/max(1, result['n']) for t in (1, 3, 5, 10)})
     return result
-
-

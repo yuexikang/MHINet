@@ -47,5 +47,3 @@ def global_infer(shared, matcher, adapter, prior=None, check_reference=False):
                 points_b=fine['points_b'].reshape(-1, 2),
                 confidence=(fine['confidence']*score[:, None]).sqrt().flatten(),
                 coarse_a=source, coarse_b=target)
-
-

@@ -1,0 +1,50 @@
+{
+  "rgb_root": "../Data/datasets/MHINet_RGB_512",
+  "hangzhou_root": "../Data/datasets/kewei/HangZhou_cloud0_rgb_RGBMatch_v4",
+  "hangzhou_tests": [
+    "test_real"
+  ],
+  "initial_locator": "weight/mhi_v2_u0.pt",
+  "initial_downstream": "outputs/flow_d8_d2/training/best.pt",
+  "initial_adapter": "outputs/d2_modulation_expanded/full_pair/best.pt",
+  "output": "outputs/mhi_v2_flow_pair_training",
+  "seed": 42,
+  "epochs": 10,
+  "accumulation": 4,
+  "workers": 4,
+  "weight_decay": 0.01,
+  "cosine_min_ratio": 0.01,
+  "warmup_steps": 500,
+  "flow_lr": {
+    "mvt": 1e-06,
+    "head": 1e-05
+  },
+  "d2_lr": {
+    "vgg": 2e-05,
+    "dedode": 2e-05,
+    "matcher": 8e-05,
+    "adapter": 0.0001
+  },
+  "flow_loss": {
+    "mat_weight": 0.01,
+    "cls_weight": 0.0001,
+    "robust_scale": 0.1
+  },
+  "d8_global_weight": 1.0,
+  "d8_local_weight": 1.0,
+  "d2_weight": 1.0,
+  "train_windows": 64,
+  "early_stopping": false,
+  "early_stop_min_epochs": 5,
+  "early_stop_patience": 3,
+  "early_stop_min_delta": 0.001,
+  "selection": "strictly greater RGB validation P@3; epoch zero eligible",
+  "qrru": false,
+  "frozen_flow_checkpoint": "outputs/full_rgb_d2_20261027/flow/best.pt",
+  "test_last_epoch": true,
+  "runtime": {
+    "loma_root": "../LoMa",
+    "loretta_source_root": "../LoMa/third_party/LoRetta",
+    "dino_checkpoint": "weight/dinov3.pt"
+  }
+}

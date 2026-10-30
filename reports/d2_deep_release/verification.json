@@ -1,0 +1,429 @@
+{
+  "release": {
+    "version": "mhi-v2-flow-pair-deep-20261030",
+    "variant": "best",
+    "flow_epoch": 4,
+    "d2_epoch": 10,
+    "d2_refinement": "residual_deep"
+  },
+  "exact_weight_match": true,
+  "exact_output_match": true,
+  "pairs": [
+    {
+      "split": "test",
+      "pair_id": "flair_rgb__00220b6d54c8828d",
+      "counts": {
+        "n": 2048,
+        "visible": 2029,
+        "error_sum": 1070.171875,
+        "correct1": 1803,
+        "correct3": 2028,
+        "correct5": 2029,
+        "correct10": 2029
+      }
+    },
+    {
+      "split": "test",
+      "pair_id": "flair_rgb__003bde028175b95d",
+      "counts": {
+        "n": 2048,
+        "visible": 2042,
+        "error_sum": 1083.104248046875,
+        "correct1": 1873,
+        "correct3": 2040,
+        "correct5": 2042,
+        "correct10": 2042
+      }
+    },
+    {
+      "split": "test",
+      "pair_id": "flair_rgb__0055f2b198cfad55",
+      "counts": {
+        "n": 2048,
+        "visible": 1984,
+        "error_sum": 1113.74755859375,
+        "correct1": 1824,
+        "correct3": 1984,
+        "correct5": 1984,
+        "correct10": 1984
+      }
+    },
+    {
+      "split": "test",
+      "pair_id": "flair_rgb__0082ff73931e4dbb",
+      "counts": {
+        "n": 2048,
+        "visible": 2037,
+        "error_sum": 938.2721557617188,
+        "correct1": 1953,
+        "correct3": 2037,
+        "correct5": 2037,
+        "correct10": 2037
+      }
+    },
+    {
+      "split": "test",
+      "pair_id": "flair_rgb__009d8364411a4011",
+      "counts": {
+        "n": 2048,
+        "visible": 2044,
+        "error_sum": 729.3065185546875,
+        "correct1": 2034,
+        "correct3": 2044,
+        "correct5": 2044,
+        "correct10": 2044
+      }
+    },
+    {
+      "split": "test",
+      "pair_id": "flair_rgb__009f6ec8c220b813",
+      "counts": {
+        "n": 2048,
+        "visible": 2033,
+        "error_sum": 742.304443359375,
+        "correct1": 2022,
+        "correct3": 2033,
+        "correct5": 2033,
+        "correct10": 2033
+      }
+    },
+    {
+      "split": "test",
+      "pair_id": "flair_rgb__00ad1389b81c59bc",
+      "counts": {
+        "n": 2048,
+        "visible": 2036,
+        "error_sum": 759.9172973632812,
+        "correct1": 2023,
+        "correct3": 2036,
+        "correct5": 2036,
+        "correct10": 2036
+      }
+    },
+    {
+      "split": "test",
+      "pair_id": "flair_rgb__00b0faafe68e271f",
+      "counts": {
+        "n": 2048,
+        "visible": 2043,
+        "error_sum": 838.595947265625,
+        "correct1": 2024,
+        "correct3": 2043,
+        "correct5": 2043,
+        "correct10": 2043
+      }
+    },
+    {
+      "split": "test",
+      "pair_id": "flair_rgb__00b48d12bc6266e5",
+      "counts": {
+        "n": 2048,
+        "visible": 2045,
+        "error_sum": 870.4886474609375,
+        "correct1": 2010,
+        "correct3": 2045,
+        "correct5": 2045,
+        "correct10": 2045
+      }
+    },
+    {
+      "split": "test",
+      "pair_id": "flair_rgb__00b5ccf3cf97bda9",
+      "counts": {
+        "n": 2048,
+        "visible": 2017,
+        "error_sum": 926.9911499023438,
+        "correct1": 1936,
+        "correct3": 2017,
+        "correct5": 2017,
+        "correct10": 2017
+      }
+    },
+    {
+      "split": "test",
+      "pair_id": "flair_rgb__00bdb04ce611bcd9",
+      "counts": {
+        "n": 2048,
+        "visible": 2006,
+        "error_sum": 1049.3740234375,
+        "correct1": 1847,
+        "correct3": 1995,
+        "correct5": 2006,
+        "correct10": 2006
+      }
+    },
+    {
+      "split": "test",
+      "pair_id": "flair_rgb__00ce85e1a09066b9",
+      "counts": {
+        "n": 2048,
+        "visible": 2040,
+        "error_sum": 1001.8008422851562,
+        "correct1": 1952,
+        "correct3": 2040,
+        "correct5": 2040,
+        "correct10": 2040
+      }
+    },
+    {
+      "split": "test",
+      "pair_id": "flair_rgb__00d677529f7d8a37",
+      "counts": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 848.816162109375,
+        "correct1": 2020,
+        "correct3": 2048,
+        "correct5": 2048,
+        "correct10": 2048
+      }
+    },
+    {
+      "split": "test",
+      "pair_id": "flair_rgb__00d9ab6c3ad6925e",
+      "counts": {
+        "n": 2048,
+        "visible": 2022,
+        "error_sum": 895.5919799804688,
+        "correct1": 1919,
+        "correct3": 2022,
+        "correct5": 2022,
+        "correct10": 2022
+      }
+    },
+    {
+      "split": "test",
+      "pair_id": "flair_rgb__00de263e2652f10f",
+      "counts": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 1034.204833984375,
+        "correct1": 1873,
+        "correct3": 2048,
+        "correct5": 2048,
+        "correct10": 2048
+      }
+    },
+    {
+      "split": "test",
+      "pair_id": "flair_rgb__00e269feb3c0b098",
+      "counts": {
+        "n": 2048,
+        "visible": 2042,
+        "error_sum": 1054.770751953125,
+        "correct1": 1876,
+        "correct3": 2037,
+        "correct5": 2042,
+        "correct10": 2042
+      }
+    },
+    {
+      "split": "hangzhou_test_real",
+      "pair_id": "test_real_G0_17b2aff18c5dd264d360f11d",
+      "counts": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 1541.1341552734375,
+        "correct1": 1523,
+        "correct3": 2048,
+        "correct5": 2048,
+        "correct10": 2048
+      }
+    },
+    {
+      "split": "hangzhou_test_real",
+      "pair_id": "test_real_G0_1abd4a10c52188e43e1300f4",
+      "counts": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 15598.85546875,
+        "correct1": 0,
+        "correct3": 0,
+        "correct5": 215,
+        "correct10": 1649
+      }
+    },
+    {
+      "split": "hangzhou_test_real",
+      "pair_id": "test_real_G0_1d33142305f46a597d0f9580",
+      "counts": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 2047.5966796875,
+        "correct1": 1105,
+        "correct3": 2048,
+        "correct5": 2048,
+        "correct10": 2048
+      }
+    },
+    {
+      "split": "hangzhou_test_real",
+      "pair_id": "test_real_G0_250188ae2f265b031ea3563b",
+      "counts": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 1864.420654296875,
+        "correct1": 1365,
+        "correct3": 2035,
+        "correct5": 2048,
+        "correct10": 2048
+      }
+    },
+    {
+      "split": "hangzhou_test_real",
+      "pair_id": "test_real_G0_27084e63adb94e5e2db7cf99",
+      "counts": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 2349.63623046875,
+        "correct1": 697,
+        "correct3": 2047,
+        "correct5": 2048,
+        "correct10": 2048
+      }
+    },
+    {
+      "split": "hangzhou_test_real",
+      "pair_id": "test_real_G0_29a16240b536714564e9227e",
+      "counts": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 9159.2890625,
+        "correct1": 213,
+        "correct3": 1060,
+        "correct5": 1213,
+        "correct10": 2047
+      }
+    },
+    {
+      "split": "hangzhou_test_real",
+      "pair_id": "test_real_G0_2c842b112b06d8c17afa430d",
+      "counts": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 4893.564453125,
+        "correct1": 453,
+        "correct3": 1588,
+        "correct5": 1793,
+        "correct10": 2047
+      }
+    },
+    {
+      "split": "hangzhou_test_real",
+      "pair_id": "test_real_G0_2d1e65412d0321e5f8c98559",
+      "counts": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 1721.7491455078125,
+        "correct1": 1479,
+        "correct3": 2042,
+        "correct5": 2046,
+        "correct10": 2048
+      }
+    },
+    {
+      "split": "hangzhou_test_real",
+      "pair_id": "test_real_G0_305054737dc4885b79ed1a7e",
+      "counts": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 2502.04541015625,
+        "correct1": 845,
+        "correct3": 2030,
+        "correct5": 2048,
+        "correct10": 2048
+      }
+    },
+    {
+      "split": "hangzhou_test_real",
+      "pair_id": "test_real_G0_35736aaa884db074b7263f9f",
+      "counts": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 1632.027587890625,
+        "correct1": 1566,
+        "correct3": 2047,
+        "correct5": 2048,
+        "correct10": 2048
+      }
+    },
+    {
+      "split": "hangzhou_test_real",
+      "pair_id": "test_real_G0_36554cb4785d76e920510764",
+      "counts": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 1437.2291259765625,
+        "correct1": 1669,
+        "correct3": 2045,
+        "correct5": 2048,
+        "correct10": 2048
+      }
+    },
+    {
+      "split": "hangzhou_test_real",
+      "pair_id": "test_real_G0_37d644f902ca05c86e03142d",
+      "counts": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 1143.478759765625,
+        "correct1": 1892,
+        "correct3": 2048,
+        "correct5": 2048,
+        "correct10": 2048
+      }
+    },
+    {
+      "split": "hangzhou_test_real",
+      "pair_id": "test_real_G0_3b2c32592dbc96e7844fd841",
+      "counts": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 1407.554931640625,
+        "correct1": 1696,
+        "correct3": 2044,
+        "correct5": 2048,
+        "correct10": 2048
+      }
+    },
+    {
+      "split": "hangzhou_test_real",
+      "pair_id": "test_real_G0_3f09e442d80d3e9577fdf623",
+      "counts": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 1240.99169921875,
+        "correct1": 1872,
+        "correct3": 2048,
+        "correct5": 2048,
+        "correct10": 2048
+      }
+    },
+    {
+      "split": "hangzhou_test_real",
+      "pair_id": "test_real_G0_422ab8a108e254cfae9c4a8c",
+      "counts": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 2435.83251953125,
+        "correct1": 958,
+        "correct3": 2005,
+        "correct5": 2047,
+        "correct10": 2048
+      }
+    },
+    {
+      "split": "hangzhou_test_real",
+      "pair_id": "test_real_G0_44434c08788639ca3ad2a9c1",
+      "counts": {
+        "n": 2048,
+        "visible": 2048,
+        "error_sum": 1627.35986328125,
+        "correct1": 1526,
+        "correct3": 2047,
+        "correct5": 2048,
+        "correct10": 2048
+      }
+    }
+  ]
+}

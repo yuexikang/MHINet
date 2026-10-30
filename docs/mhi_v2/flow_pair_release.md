@@ -1,12 +1,12 @@
 # MHI-v2 正式路径：Flow0 → D8 → Local Pair-D2
 
-版本 `mhi-v2-flow-pair-20261028`。从 `codex/mhi-v2@acdbbfa` 选择性整合，未 merge 两条研究分支历史，未进行新训练。
+版本 `mhi-v2-flow-pair-deep-20261030`。在原正式 Flow → D8 → Pair-D2 路径上整合已验证的 CGMDP D2 加深模块；本次迁移没有进行新训练。原基础版本保留显式配置。
 
 ## 正式路径与历史接口
 
 原主线以 U0 D16 Flow0 为基础，`SemidenseMatcherV2` 走全局 D8、离散 D2 窗口及可选 QRRU。此前单独合入的 D2 目标扩窗仍保留。
 
-新正式入口 `mhinet.v2.load_mhi_v2` 使用：冻结 DINOv3 → 已训练 MVT/原 Flow 头 → VGG+CGMDP → 离散局部 D8 父点选择 → 连续 D8 目标中心 → D2 双侧 8×8 上下文、A 中心 4×4 查询、B 全部 8×8 候选 → Local Pair → FP32 16×64 Dual-Softmax → 峰值邻域连续坐标。
+新正式入口 `mhinet.v2.load_mhi_v2` 使用：冻结 DINOv3 → 已训练 MVT/原 Flow 头 → VGG+CGMDP（D2 hidden 后、输出投影前增加两个64通道残差块）→ 离散局部 D8 父点选择 → 连续 D8 目标中心 → D2 双侧 8×8 上下文、A 中心 4×4 查询、B 全部 8×8 候选 → Local Pair → FP32 16×64 Dual-Softmax → 峰值邻域连续坐标。
 
 最多 128 个父点、每父点 16 个输出，最多 2048 点。保留原父点优先、查询次序，不追加排序/阈值，不丢弃无效行以免改变历史指标分母。`valid` 供调用者显式过滤。输入原生 512×512 RGB float [0,1]，像素坐标 xy，归一化转换 `(xy+.5)/256-1`，`align_corners=False`。
 
@@ -17,15 +17,15 @@
 ## 权重与可迁移配置
 
 - 正式配置：`configs/mhi_v2/releases/flow_pair_v2.json`。
-- 权重清单：`configs/mhi_v2/releases/flow_pair_v2.weights.json`，记录 SHA256、字段、轮次、训练代码来源、数据规模和选模口径。
+- 权重清单：`configs/mhi_v2/releases/flow_pair_v2_deep.weights.json`，记录 SHA256、字段、轮次、训练代码来源、数据规模和选模口径。
 - 默认 Flow：`outputs/full_rgb_d2_20261027/flow/best.pt`，epoch 4；与 `outputs/full_rgb_d2_10epoch_20261028/flow/best.pt` 内容哈希完全相同。
-- 默认 D2：`outputs/full_rgb_d2_10epoch_20261028/d2/best.pt`，epoch 1。
-- 可选 `variant='latest'`：只切换 D2 第 10 轮，Flow 仍为第 4 轮 best，不能换成 Flow latest。
+- 默认 D2：`weight/mhi_v2/flow_pair_d2_deep_20261030.pt`，加深实验 epoch 10；当前 best/latest 均为此轮，Flow 固定第4轮 best。
+- 原基础模型：显式传入 `configs/mhi_v2/releases/flow_pair_v2_base.json`，继续使用原 D2 best 第1轮 / latest 第10轮及原权重清单。
 - U0：原 `weight/mhi_v2_u0.pt` 保留；不覆盖、不删除。
 
 Flow 检查点严格加载 `mvt/head`；D2 严格加载 `vgg/dedode/adapter/temperatures`。不是两个完整 state_dict 的合并。加载器核对实际文件哈希、阶段、轮次及 D2 记录的 locator 来源，迁移后的同内容文件仍可使用。默认选择依据仅为 RGB 验证 P@3，不能按最终测试成绩更换 best。
 
-源代码归档提交为 `codex/flow-d8-d2@c6d6ec4`，训练入口提交 `224fbd0`，父点优化提交 `afa1f52`。**原始检查点没有内嵌 Git SHA**，清单明确区分代码归档来源与训练进程未记录的信息，不伪造训练时 SHA。
+原基础模型源代码归档提交为 `codex/flow-d8-d2@c6d6ec4`，训练入口提交 `224fbd0`，父点优化提交 `afa1f52`。**原始检查点没有内嵌 Git SHA**，清单明确区分代码归档来源与训练进程未记录的信息，不伪造训练时 SHA。
 
 公开默认配置没有服务器绝对路径。`assets_root`（或环境变量 `MHI_V2_ASSETS`）决定权重和 runtime 相对路径根目录，默认仓库根目录。需要本地 DINO 权重、LoMa/LoRetta 源码；配置的 `weight/dinov3.pt` 是可迁移占位路径，需指向原冻结 DINO 文件。也可以传入本机 runtime JSON 的三个源代码/权重路径。推理不要求数据集或训练 manifest。
 
@@ -43,6 +43,8 @@ valid, parent, parent_ids = result['valid'], result['parent'], result['parent_id
 ```
 
 `parent` 是输出所属父点的局部序号；`parent_ids` 是每个输出对应的 D8 原网格 flat ID。可选 diagnostics 返回 D16 Flow/Matchability/valid、父点和中心、原窗口描述子/掩码、候选 log-probability、调用统计。默认结果不保留大诊断张量。`match` 一次处理一对，批量数据逐对调用，与原实验 batch=1 协议一致。
+
+加深模块来源为 `codex/d2-capacity@766f445`，仅迁移 deep 组。部署权重包含完整 VGG/CGMDP/Pair/温度，运行不需要实验代码或实验目录；权重文件不提交 Git。
 
 ## 保留的两阶段训练
 
@@ -68,9 +70,13 @@ python -m mhinet.v2.pair_matching.training \
 
 配置默认保留历史 D2 所使用的 `frozen_flow_checkpoint`。如果未来要运行新的一整套两阶段训练并使用该次 Flow 阶段选出的 best，明确将该字段设为 `null`。数据根目录、初始 downstream/adapter 都是显式配置，不再通过 QRRU 实验加载器隐式引入旧 checkpoint。初始文件仍需按归档记录提供。
 
-完整 10 轮实验由原早停任务续训完成，包含总 epoch 从 20 改为 10 的调度重设；不能声称是从头固定 10 轮的历史轨迹。完整历史见归档报告。
+原基础模型的完整 10 轮实验由原早停任务续训完成，包含总 epoch 从 20 改为 10 的调度重设；不能声称是从头固定 10 轮的历史轨迹。完整历史见归档报告。
+
+加深版后续微调可将新配置的 `initial_downstream` 指向打包权重，并将 `initial_locator` / `frozen_flow_checkpoint` 指向对应 Flow best；初始化自动恢复加深结构和原 Pair。现有 `full_rgb_training.json` 保留原基础实验设定。部署包不含 optimizer/scheduler/RNG，因此只能作为新训练的初始化，不能作为原加深实验的无缝续训状态。
 
 ## 实验档案与研究边界
+
+- [D2 加深版整合](../../reports/d2_deep_release/README.md)：4096 train / 512 val 加深训练，完整5106 RGB / 235杭州测试，32对迁移等价验证。
 
 - [完整 RGB 两阶段结果](../../reports/full_rgb_d2_10epoch_20261028/README.md)：40849 train / 5106 val / 5106 RGB test / 235 杭州 test_real。
 - [CGMDP A0–A4](../../reports/cgmdp_residual_research/analysis.md)：1024 train / 256 RGB test / 64 杭州；保留完整结果、负结果与旧三尺度参考。
@@ -87,8 +93,9 @@ python -m pytest tests/v2 -q
 CUBLAS_WORKSPACE_CONFIG=:4096:8 python /path/to/integration/tools/mhi_v2/reference_pair.py \
   --source-root /home/disk1/MHINet --output outputs/mhi_v2_integration/reference32_deterministic \
   --device cuda:2 --deterministic
-# 整合分支：逐层零容差比较，然后完整测试。
+# 原基础版本整合验收：明确选择旧配置，避免与当前加深版混用。
 CUBLAS_WORKSPACE_CONFIG=:4096:8 python -m mhinet.v2.pair_matching.evaluate \
+  --config configs/mhi_v2/releases/flow_pair_v2_base.json \
   --runtime configs/mhi_v2/runtime.rgb512.nvme.server.json --assets-root /home/disk1/MHINet \
   --rgb-root /home/disk1/Data/datasets/MHINet_RGB_512 \
   --hangzhou-root /home/disk1/Data/datasets/kewei/HangZhou_cloud0_rgb_RGBMatch_v4 \

@@ -12,6 +12,7 @@ from mhinet.config import sha256_file
 from .feature_provider import build_fresh_shared
 from .config import SemidenseConfigV2
 from .pair_matching.local import LocalPairModulation, extract_windows, match_windows, center_indices
+from .pair_matching.deep_d2 import configure_d2
 
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_CONFIG = ROOT / 'configs/mhi_v2/releases/flow_pair_v2.json'
@@ -130,9 +131,14 @@ def load_mhi_v2(config=DEFAULT_CONFIG, device='cuda:0', *, runtime=None, assets_
     if c.geometry_mode != 'flow_d16' or c.use_dgfo or c.use_discrepancy:
         raise ValueError('Checkpoint is not the validated Flow-only locator path')
     shared = build_shared(runtime or settings['runtime'], device, root)
+    refinement = settings.get('d2_refinement', 'none')
+    if d2.get('d2_refinement', 'none') != refinement:
+        raise ValueError('D2 checkpoint refinement differs from release configuration')
+    configure_d2(shared, refinement)
     matcher = MatchingTemperatures(c).to(device)
     adapter = LocalPairModulation('pair').to(device)
     load_components(shared, matcher, adapter, flow, d2)
     model = MHIV2(shared, matcher, adapter, settings['max_parents']).requires_grad_(False).eval()
-    model.release = dict(version=settings['version'], variant=variant, flow_epoch=fs['epoch'], d2_epoch=ds['epoch'])
+    model.release = dict(version=settings['version'], variant=variant, flow_epoch=fs['epoch'],
+                         d2_epoch=ds['epoch'], d2_refinement=refinement)
     return model

@@ -13,7 +13,7 @@ p.add_argument('--assets-root',type=Path,required=True)
 p.add_argument('--runtime',type=Path,required=True)
 p.add_argument('--output',type=Path,required=True)
 a=p.parse_args();torch.set_num_threads(2)
-model=load_mhi_v2(device='cpu',runtime=json.loads(a.runtime.read_text()),assets_root=a.assets_root)
+model=load_mhi_v2(config=Path(__file__).resolve().parents[2]/'configs/mhi_v2/releases/flow_pair_v2_base.json',device='cpu',runtime=json.loads(a.runtime.read_text()),assets_root=a.assets_root)
 modules=dict(mvt=model.shared.mvt,head=model.shared.stage1_head,vgg=model.shared.vgg,dedode=model.shared.dedode,matcher=model.matcher,adapter=model.adapter)
 report={}
 for stage in ('flow','d2'):

@@ -1,7 +1,7 @@
 {
-  "version": "mhi-v2-flow-pair-20261028",
+  "version": "mhi-v2-flow-pair-deep-20261030",
   "architecture": "flow_d8_pair_d2_v1",
-  "manifest": "configs/mhi_v2/releases/flow_pair_v2.weights.json",
+  "manifest": "configs/mhi_v2/releases/flow_pair_v2_deep.weights.json",
   "runtime": {
     "loma_root": "../LoMa",
     "loretta_source_root": "../LoMa/third_party/LoRetta",
@@ -13,5 +13,6 @@
   "global_modulation": false,
   "dustbin_rejection": false,
   "d8": "flow_local_discrete_selection_then_continuous_9x9",
-  "d2": "pair_8x8_context_4x4_queries_8x8_candidates"
+  "d2": "pair_8x8_context_4x4_queries_8x8_candidates",
+  "d2_refinement": "residual_deep"
 }

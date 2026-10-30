@@ -19,7 +19,7 @@ parser.add_argument('--output',type=Path)
 a=parser.parse_args();root=a.assets_root
 runtime=json.loads(a.runtime.read_text())
 torch.set_num_threads(2)
-model=load_mhi_v2(device=a.device,runtime=runtime,assets_root=root)
+model=load_mhi_v2(config=Path(__file__).resolve().parents[2]/'configs/mhi_v2/releases/flow_pair_v2_base.json',device=a.device,runtime=runtime,assets_root=root)
 rgb=a.rgb_root
 hz=a.hangzhou_root
 ds=dict(test=dataset(rgb/'test',rgb/'test/pairs.jsonl'),hangzhou_test_real=dataset(hz,hz/'manifests/test_real.jsonl'))

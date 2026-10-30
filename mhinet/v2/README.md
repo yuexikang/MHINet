@@ -1,6 +1,6 @@
 # MHI v2：Flow0 → D8 → Pair-D2 正式路径
 
-当前正式入口为 `from mhinet.v2 import load_mhi_v2`，配置 `configs/mhi_v2/releases/flow_pair_v2.json`。默认组装完整 RGB 的 Flow best（第4轮）与 D2 best（第1轮），冻结 DINO，使用局部 Pair；不启用 H0/QRRU/DGFO/全图 Delta/拒配头。
+当前正式入口为 `from mhinet.v2 import load_mhi_v2`，配置 `configs/mhi_v2/releases/flow_pair_v2.json`。默认组装完整 RGB 的 Flow best（第4轮）与 D2 加深版 best（第10轮，增加两个64通道残差块、18,176参数），冻结 DINO，使用局部 Pair；不启用 H0/QRRU/DGFO/全图 Delta/拒配头。
 
 [加载、推理、继续训练、权重来源和验收说明](../../docs/mhi_v2/flow_pair_release.md)。原 U0 与历史接口保留如下，其训练配置不会自动改用新权重。
 
@@ -54,3 +54,5 @@ D8→D2→QRRU沿用本分支的 `semidense.py`，输入仍仅512，最终输出
 `SemidenseConfigV2.fine_target_side` 默认 8：direct_d8 路径保留 A 侧 4×4 D2 子点，B 侧围绕原窗口中心搜索 8×8 D2 候选（16×64 相关矩阵）。训练与推理共用该设置，越界候选屏蔽；设为 4 可复现原窗口。旧权重可直接加载，旧配置缺省时采用新默认值 8。H0 兼容路径和 QRRU 的局部窗口不变。
 
 本次仅扩大候选范围，不包含联合训练或连续坐标解码改动；扩窗诊断不能完整解释 RGB_512 精度下降，也不代表主线已恢复原精度。
+
+原未加深版本可显式加载 `configs/mhi_v2/releases/flow_pair_v2_base.json`；加深版结果及迁移验证见 [报告](../../reports/d2_deep_release/README.md)。

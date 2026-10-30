@@ -25,6 +25,7 @@ from .continuous import coarse, sample
 from .losses import global_d8, local_loss
 from .local import LocalPairModulation, load_adapter, center_indices, match_windows, infer
 from .losses import loss_fn
+from .deep_d2 import configure_d2
 from .global_control import global_infer
 
 
@@ -172,6 +173,7 @@ def train_stage(stage, model, matcher, adapter, ds, config, device, out, smoke, 
         raise FileNotFoundError(f'{out}: resume requires both latest.pt and best.pt')
     def save(name, epoch, score):
         state = dict(**snapshot(model, matcher, adapter, stage), config=config, matcher_config=asdict(matcher.config),
+                     d2_refinement=config.get('d2_refinement', 'none'),
                      stage=stage, epoch=epoch, score=score, best=best, optimizer=optimizer.state_dict(),
                      early_best=early_best, bad_epochs=bad_epochs,
                      locator_checkpoint=(config.get('frozen_flow_checkpoint') or str(out.parent/'flow'/'best.pt')) if stage == 'd2' else config['initial_locator'],
@@ -283,16 +285,24 @@ def initialize(config, device, assets_root, resume_checkpoint=None):
     model = build_shared(config['runtime'], device, assets_root)
     if resume_checkpoint is not None:
         state = torch.load(resume_checkpoint, map_location='cpu', weights_only=False, mmap=True)
+        config['d2_refinement'] = state.get('d2_refinement', 'none')
+        configure_d2(model, config['d2_refinement'])
         matcher = MatchingTemperatures(SemidenseConfigV2(**state['matcher_config'])).to(device)
         adapter = LocalPairModulation('pair').to(device)
         restore(state, model, matcher, adapter, state['stage'])
     else:
         state = torch.load(config['initial_downstream'], map_location='cpu', weights_only=False, mmap=True)
-        matcher = MatchingTemperatures(SemidenseConfigV2(**state['matcher'])).to(device)
+        config['d2_refinement'] = state.get('d2_refinement', 'none')
+        configure_d2(model, config['d2_refinement'])
+        matcher = MatchingTemperatures(SemidenseConfigV2(**state.get('matcher_config', state.get('matcher')))).to(device)
         model.vgg.load_state_dict(state['vgg']); model.dedode.load_state_dict(state['dedode'])
         matcher.load_state_dict(state['temperatures'], strict=True)
         load_locator_weights(model, config['initial_locator'])
-        adapter = load_adapter(config['initial_adapter'], device)
+        if 'adapter' in state:
+            adapter = LocalPairModulation('pair').to(device)
+            adapter.load_state_dict(state['adapter'], strict=True)
+        else:
+            adapter = load_adapter(config['initial_adapter'], device)
     return model, matcher, adapter
 
 

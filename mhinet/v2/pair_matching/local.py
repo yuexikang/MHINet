@@ -78,14 +78,35 @@ def match_windows(adapter, windows, temperature):
                 confidence=confidence.reshape(-1, 16), valid=valid)
 
 
+def mutual_filter_mask(windows, fine):
+    """Local 16x64 reciprocity, with the diagnostic's native-image bounds.
+
+    Select by discrete candidate peaks; retain the existing continuous coordinates.
+    No extra forward, thresholds, or cross-window deduplication.
+    """
+    logp = fine['logp']
+    best = logp.argmax(-1)
+    reverse = logp.argmax(-2)
+    query = torch.arange(logp.shape[-2], device=logp.device)
+    keep = reverse.gather(1, best) == query[None]
+    keep &= fine['valid'].gather(2, best[..., None]).squeeze(-1)
+    for points in (windows['source'], fine['points_b']):
+        keep &= torch.isfinite(points).all(-1) & (points >= 0).all(-1) & (points <= 511).all(-1)
+    return keep.flatten()
+
+
 @torch.no_grad()
-def infer(shared, matcher, adapter):
-    """Pair-D2 inference without labels, rejection thresholds, or QRRU."""
+def infer(shared, matcher, adapter, *, mutual=False):
+    """Pair-D2 inference; optional local reciprocity filters outputs only."""
     windows = extract_windows(shared, matcher)
     result = match_windows(adapter, windows, matcher.tau_f)
-    return dict(points_a=windows['source'].reshape(-1, 2),
-                points_b=result['points_b'].reshape(-1, 2),
-                confidence=(result['confidence']*windows['score8'][:, None]).sqrt().flatten())
+    output = dict(points_a=windows['source'].reshape(-1, 2),
+                  points_b=result['points_b'].reshape(-1, 2),
+                  confidence=(result['confidence']*windows['score8'][:, None]).sqrt().flatten())
+    if mutual:
+        keep = mutual_filter_mask(windows, result)
+        output = {key: value[keep] for key, value in output.items()}
+    return output
 
 
 def load_adapter(checkpoint, device='cuda:0'):

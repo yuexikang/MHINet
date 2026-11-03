@@ -11,7 +11,7 @@ from torch import nn
 from mhinet.config import sha256_file
 from .feature_provider import build_fresh_shared
 from .config import SemidenseConfigV2
-from .pair_matching.local import LocalPairModulation, extract_windows, match_windows, center_indices
+from .pair_matching.local import LocalPairModulation, extract_windows, match_windows, center_indices, mutual_filter_mask
 from .pair_matching.deep_d2 import configure_d2
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -64,7 +64,7 @@ class MHIV2(nn.Module):
         self.max_parents = max_parents
 
     @torch.inference_mode()
-    def match(self, images, *, diagnostics=False):
+    def match(self, images, *, diagnostics=False, mutual=False):
         if images.shape == (2, 3, 512, 512):
             images = images.unsqueeze(0)
         if images.shape != (1, 2, 3, 512, 512):
@@ -72,10 +72,10 @@ class MHIV2(nn.Module):
         self.eval()
         device = next(self.shared.parameters()).device
         shared = self.shared(images.to(device), pyramid_scales=(8, 4, 2))
-        return self.match_shared(shared, diagnostics=diagnostics)
+        return self.match_shared(shared, diagnostics=diagnostics, mutual=mutual)
 
     @torch.inference_mode()
-    def match_shared(self, shared, *, diagnostics=False):
+    def match_shared(self, shared, *, diagnostics=False, mutual=False):
         """Reuse already computed features; preserve parent-major query ordering."""
         windows = extract_windows(shared, self.matcher, self.max_parents)
         fine = match_windows(self.adapter, windows, self.matcher.tau_f)
@@ -88,7 +88,10 @@ class MHIV2(nn.Module):
                       points_b=fine['points_b'].reshape(-1, 2),
                       confidence=(fine['confidence']*windows['score8'][:, None]).sqrt().flatten(),
                       valid=valid.flatten(), parent=parent, parent_ids=parent_ids[parent])
-        # Do not discard invalid rows or re-sort: historical metrics count every output.
+        # Default preserves historical outputs; reciprocity keeps a stable subset.
+        if mutual:
+            keep = mutual_filter_mask(windows, fine)
+            result = {key: value[keep] for key, value in result.items()}
         if diagnostics:
             result['diagnostics'] = dict(flow16_norm=shared['flow16_norm'],
                 flow16_target_norm=shared['flow16_target_norm'],
@@ -96,6 +99,8 @@ class MHIV2(nn.Module):
                 parent_ids=parent_ids, parents=windows['parents'], centers=windows['centers'],
                 windows=windows, candidate_logp=fine['logp'], candidate_valid=fine['valid'],
                 call_counts=shared['call_counts'])
+            if mutual:
+                result['diagnostics']['output_mask'] = keep
         return result
 
 

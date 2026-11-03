@@ -1,0 +1,752 @@
+{
+  "release": {
+    "version": "mhi-v2-flow-pair-deep-20261030",
+    "variant": "best",
+    "flow_epoch": 4,
+    "d2_epoch": 10,
+    "d2_refinement": "residual_deep"
+  },
+  "tests": {
+    "rgb": {
+      "pairs": [
+        {
+          "pair_id": "flair_rgb__009d8364411a4011",
+          "d2": {
+            "n": 2048,
+            "visible": 2044,
+            "error_sum": 729.3065185546875,
+            "correct1": 2034,
+            "correct3": 2044,
+            "correct5": 2044,
+            "correct10": 2044
+          },
+          "mutual": {
+            "n": 2046,
+            "visible": 2044,
+            "error_sum": 729.3065185546875,
+            "correct1": 2034,
+            "correct3": 2044,
+            "correct5": 2044,
+            "correct10": 2044
+          }
+        },
+        {
+          "pair_id": "flair_rgb__1a5ba3dbe6d4a022",
+          "d2": {
+            "n": 2048,
+            "visible": 2010,
+            "error_sum": 1387.0023193359375,
+            "correct1": 1650,
+            "correct3": 1988,
+            "correct5": 2007,
+            "correct10": 2008
+          },
+          "mutual": {
+            "n": 2016,
+            "visible": 1999,
+            "error_sum": 1329.415283203125,
+            "correct1": 1650,
+            "correct3": 1988,
+            "correct5": 1999,
+            "correct10": 1999
+          }
+        },
+        {
+          "pair_id": "flair_rgb__275922d3f0810d38",
+          "d2": {
+            "n": 2048,
+            "visible": 2015,
+            "error_sum": 1191.938720703125,
+            "correct1": 1759,
+            "correct3": 2011,
+            "correct5": 2015,
+            "correct10": 2015
+          },
+          "mutual": {
+            "n": 2014,
+            "visible": 2000,
+            "error_sum": 1183.16650390625,
+            "correct1": 1746,
+            "correct3": 1996,
+            "correct5": 2000,
+            "correct10": 2000
+          }
+        },
+        {
+          "pair_id": "flair_rgb__3766479f7da43b00",
+          "d2": {
+            "n": 2048,
+            "visible": 2040,
+            "error_sum": 758.3096313476562,
+            "correct1": 2024,
+            "correct3": 2040,
+            "correct5": 2040,
+            "correct10": 2040
+          },
+          "mutual": {
+            "n": 2041,
+            "visible": 2039,
+            "error_sum": 757.7899169921875,
+            "correct1": 2023,
+            "correct3": 2039,
+            "correct5": 2039,
+            "correct10": 2039
+          }
+        },
+        {
+          "pair_id": "flair_rgb__4bb83d8f5c35fa87",
+          "d2": {
+            "n": 2048,
+            "visible": 2041,
+            "error_sum": 749.8594360351562,
+            "correct1": 2033,
+            "correct3": 2041,
+            "correct5": 2041,
+            "correct10": 2041
+          },
+          "mutual": {
+            "n": 2039,
+            "visible": 2038,
+            "error_sum": 745.9910888671875,
+            "correct1": 2032,
+            "correct3": 2038,
+            "correct5": 2038,
+            "correct10": 2038
+          }
+        },
+        {
+          "pair_id": "flair_rgb__6c847533d0a8b113",
+          "d2": {
+            "n": 2048,
+            "visible": 2024,
+            "error_sum": 899.0034790039062,
+            "correct1": 1964,
+            "correct3": 2024,
+            "correct5": 2024,
+            "correct10": 2024
+          },
+          "mutual": {
+            "n": 2031,
+            "visible": 2024,
+            "error_sum": 899.0034790039062,
+            "correct1": 1964,
+            "correct3": 2024,
+            "correct5": 2024,
+            "correct10": 2024
+          }
+        },
+        {
+          "pair_id": "flair_rgb__7d5b455a3f989430",
+          "d2": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 813.4114990234375,
+            "correct1": 2038,
+            "correct3": 2048,
+            "correct5": 2048,
+            "correct10": 2048
+          },
+          "mutual": {
+            "n": 2034,
+            "visible": 2034,
+            "error_sum": 807.7192993164062,
+            "correct1": 2024,
+            "correct3": 2034,
+            "correct5": 2034,
+            "correct10": 2034
+          }
+        },
+        {
+          "pair_id": "flair_rgb__8be7607a30b87296",
+          "d2": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 811.3167724609375,
+            "correct1": 2037,
+            "correct3": 2048,
+            "correct5": 2048,
+            "correct10": 2048
+          },
+          "mutual": {
+            "n": 2042,
+            "visible": 2042,
+            "error_sum": 807.4192504882812,
+            "correct1": 2032,
+            "correct3": 2042,
+            "correct5": 2042,
+            "correct10": 2042
+          }
+        },
+        {
+          "pair_id": "flair_rgb__9c690de1f611d0a8",
+          "d2": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 836.1412353515625,
+            "correct1": 2033,
+            "correct3": 2048,
+            "correct5": 2048,
+            "correct10": 2048
+          },
+          "mutual": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 836.1412353515625,
+            "correct1": 2033,
+            "correct3": 2048,
+            "correct5": 2048,
+            "correct10": 2048
+          }
+        },
+        {
+          "pair_id": "flair_rgb__bdb34421463a4850",
+          "d2": {
+            "n": 2048,
+            "visible": 2044,
+            "error_sum": 1471.1153564453125,
+            "correct1": 1712,
+            "correct3": 2000,
+            "correct5": 2042,
+            "correct10": 2044
+          },
+          "mutual": {
+            "n": 1990,
+            "visible": 1988,
+            "error_sum": 1305.4970703125,
+            "correct1": 1708,
+            "correct3": 1972,
+            "correct5": 1988,
+            "correct10": 1988
+          }
+        },
+        {
+          "pair_id": "flair_rgb__d6985701368c4207",
+          "d2": {
+            "n": 2048,
+            "visible": 2012,
+            "error_sum": 810.6536865234375,
+            "correct1": 1969,
+            "correct3": 2012,
+            "correct5": 2012,
+            "correct10": 2012
+          },
+          "mutual": {
+            "n": 2017,
+            "visible": 2012,
+            "error_sum": 810.6536865234375,
+            "correct1": 1969,
+            "correct3": 2012,
+            "correct5": 2012,
+            "correct10": 2012
+          }
+        },
+        {
+          "pair_id": "flair_rgb__ef33e3f1a936f6c9",
+          "d2": {
+            "n": 2048,
+            "visible": 2031,
+            "error_sum": 746.093505859375,
+            "correct1": 2009,
+            "correct3": 2031,
+            "correct5": 2031,
+            "correct10": 2031
+          },
+          "mutual": {
+            "n": 2037,
+            "visible": 2029,
+            "error_sum": 744.3291015625,
+            "correct1": 2008,
+            "correct3": 2029,
+            "correct5": 2029,
+            "correct10": 2029
+          }
+        },
+        {
+          "pair_id": "googleearth_current__171033765817f3b5",
+          "d2": {
+            "n": 2048,
+            "visible": 2021,
+            "error_sum": 1522.28125,
+            "correct1": 1537,
+            "correct3": 2015,
+            "correct5": 2020,
+            "correct10": 2021
+          },
+          "mutual": {
+            "n": 2028,
+            "visible": 2017,
+            "error_sum": 1512.533447265625,
+            "correct1": 1537,
+            "correct3": 2012,
+            "correct5": 2016,
+            "correct10": 2017
+          }
+        },
+        {
+          "pair_id": "googleearth_current__72d2f3078d7bdb2c",
+          "d2": {
+            "n": 2048,
+            "visible": 1969,
+            "error_sum": 2011.308349609375,
+            "correct1": 1227,
+            "correct3": 1914,
+            "correct5": 1969,
+            "correct10": 1969
+          },
+          "mutual": {
+            "n": 1981,
+            "visible": 1953,
+            "error_sum": 1996.625,
+            "correct1": 1216,
+            "correct3": 1899,
+            "correct5": 1953,
+            "correct10": 1953
+          }
+        },
+        {
+          "pair_id": "googleearth_current__c4e0ec93158a9e13",
+          "d2": {
+            "n": 2048,
+            "visible": 2032,
+            "error_sum": 1014.981201171875,
+            "correct1": 1926,
+            "correct3": 2032,
+            "correct5": 2032,
+            "correct10": 2032
+          },
+          "mutual": {
+            "n": 2014,
+            "visible": 2007,
+            "error_sum": 998.975830078125,
+            "correct1": 1904,
+            "correct3": 2007,
+            "correct5": 2007,
+            "correct10": 2007
+          }
+        },
+        {
+          "pair_id": "whu__3ea3cc57c5324d9b",
+          "d2": {
+            "n": 2048,
+            "visible": 2027,
+            "error_sum": 865.17724609375,
+            "correct1": 2001,
+            "correct3": 2027,
+            "correct5": 2027,
+            "correct10": 2027
+          },
+          "mutual": {
+            "n": 2031,
+            "visible": 2027,
+            "error_sum": 865.17724609375,
+            "correct1": 2001,
+            "correct3": 2027,
+            "correct5": 2027,
+            "correct10": 2027
+          }
+        }
+      ],
+      "base": {
+        "n": 32768,
+        "visible": 32454,
+        "error_sum": 16617.90020751953,
+        "correct1": 29953,
+        "correct3": 32323,
+        "correct5": 32448,
+        "correct10": 32452,
+        "epe": 0.512044746642002,
+        "p3_visible": 0.9959635175941333,
+        "p1": 0.914093017578125,
+        "p3": 0.986419677734375,
+        "p5": 0.990234375,
+        "p10": 0.9903564453125
+      },
+      "mutual": {
+        "n": 32409,
+        "visible": 32301,
+        "error_sum": 16329.743957519531,
+        "correct1": 29881,
+        "correct3": 32211,
+        "correct5": 32300,
+        "correct10": 32301,
+        "epe": 0.5055491767288793,
+        "p3_visible": 0.9972137085539148,
+        "p1": 0.9219969761486007,
+        "p3": 0.9938905859483477,
+        "p5": 0.9966367367089388,
+        "p10": 0.9966675923354624
+      }
+    },
+    "hangzhou": {
+      "pairs": [
+        {
+          "pair_id": "test_real_G0_17b2aff18c5dd264d360f11d",
+          "d2": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 1541.1341552734375,
+            "correct1": 1523,
+            "correct3": 2048,
+            "correct5": 2048,
+            "correct10": 2048
+          },
+          "mutual": {
+            "n": 1995,
+            "visible": 1995,
+            "error_sum": 1506.2008056640625,
+            "correct1": 1485,
+            "correct3": 1995,
+            "correct5": 1995,
+            "correct10": 1995
+          }
+        },
+        {
+          "pair_id": "test_real_G0_422ab8a108e254cfae9c4a8c",
+          "d2": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 2435.83251953125,
+            "correct1": 958,
+            "correct3": 2005,
+            "correct5": 2047,
+            "correct10": 2048
+          },
+          "mutual": {
+            "n": 1882,
+            "visible": 1882,
+            "error_sum": 2227.293701171875,
+            "correct1": 884,
+            "correct3": 1847,
+            "correct5": 1882,
+            "correct10": 1882
+          }
+        },
+        {
+          "pair_id": "test_real_G0_a4e06a0a68ac9f474963c2d5",
+          "d2": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 1577.4962158203125,
+            "correct1": 1509,
+            "correct3": 2040,
+            "correct5": 2048,
+            "correct10": 2048
+          },
+          "mutual": {
+            "n": 1998,
+            "visible": 1998,
+            "error_sum": 1530.33935546875,
+            "correct1": 1477,
+            "correct3": 1992,
+            "correct5": 1998,
+            "correct10": 1998
+          }
+        },
+        {
+          "pair_id": "test_real_G0_dc0aeca7d7c05a3887469bf8",
+          "d2": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 280959.6875,
+            "correct1": 1,
+            "correct3": 2,
+            "correct5": 4,
+            "correct10": 13
+          },
+          "mutual": {
+            "n": 1505,
+            "visible": 1505,
+            "error_sum": 206115.125,
+            "correct1": 1,
+            "correct3": 1,
+            "correct5": 3,
+            "correct10": 11
+          }
+        },
+        {
+          "pair_id": "test_real_G1_0f3b17eb0e1f0f29a0ec7570",
+          "d2": {
+            "n": 2048,
+            "visible": 2000,
+            "error_sum": 4913.5400390625,
+            "correct1": 58,
+            "correct3": 1539,
+            "correct5": 1981,
+            "correct10": 2000
+          },
+          "mutual": {
+            "n": 1857,
+            "visible": 1830,
+            "error_sum": 4502.41845703125,
+            "correct1": 51,
+            "correct3": 1415,
+            "correct5": 1813,
+            "correct10": 1830
+          }
+        },
+        {
+          "pair_id": "test_real_G1_5b073e2a77dfe03053975103",
+          "d2": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 2358.6142578125,
+            "correct1": 870,
+            "correct3": 2041,
+            "correct5": 2046,
+            "correct10": 2048
+          },
+          "mutual": {
+            "n": 1914,
+            "visible": 1914,
+            "error_sum": 2220.2705078125,
+            "correct1": 798,
+            "correct3": 1909,
+            "correct5": 1912,
+            "correct10": 1914
+          }
+        },
+        {
+          "pair_id": "test_real_G1_aa74b5a1a6fe9315c8f4cfd9",
+          "d2": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 5728.3515625,
+            "correct1": 337,
+            "correct3": 1544,
+            "correct5": 1680,
+            "correct10": 2032
+          },
+          "mutual": {
+            "n": 1901,
+            "visible": 1901,
+            "error_sum": 5212.263671875,
+            "correct1": 321,
+            "correct3": 1440,
+            "correct5": 1567,
+            "correct10": 1892
+          }
+        },
+        {
+          "pair_id": "test_real_G1_c3e13679629e143d85dbb035",
+          "d2": {
+            "n": 2048,
+            "visible": 2016,
+            "error_sum": 6102.96240234375,
+            "correct1": 76,
+            "correct3": 1289,
+            "correct5": 1813,
+            "correct10": 2011
+          },
+          "mutual": {
+            "n": 1844,
+            "visible": 1819,
+            "error_sum": 5449.3447265625,
+            "correct1": 73,
+            "correct3": 1178,
+            "correct5": 1640,
+            "correct10": 1816
+          }
+        },
+        {
+          "pair_id": "test_real_G2_0a7dd6c7fd0b94cce058515b",
+          "d2": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 4348.31103515625,
+            "correct1": 389,
+            "correct3": 1650,
+            "correct5": 1975,
+            "correct10": 2042
+          },
+          "mutual": {
+            "n": 776,
+            "visible": 776,
+            "error_sum": 1784.559814453125,
+            "correct1": 129,
+            "correct3": 603,
+            "correct5": 737,
+            "correct10": 772
+          }
+        },
+        {
+          "pair_id": "test_real_G2_4ec6fb4d19204b18042ac791",
+          "d2": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 267381.5625,
+            "correct1": 0,
+            "correct3": 0,
+            "correct5": 1,
+            "correct10": 13
+          },
+          "mutual": {
+            "n": 1475,
+            "visible": 1475,
+            "error_sum": 192732.8125,
+            "correct1": 0,
+            "correct3": 0,
+            "correct5": 1,
+            "correct10": 13
+          }
+        },
+        {
+          "pair_id": "test_real_G2_6d6d0cea62e24c3cea2fd908",
+          "d2": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 8886.107421875,
+            "correct1": 20,
+            "correct3": 426,
+            "correct5": 1324,
+            "correct10": 2046
+          },
+          "mutual": {
+            "n": 2035,
+            "visible": 2035,
+            "error_sum": 8827.2451171875,
+            "correct1": 19,
+            "correct3": 423,
+            "correct5": 1316,
+            "correct10": 2033
+          }
+        },
+        {
+          "pair_id": "test_real_G2_ac0c6637dc0ba8fe53e1a67a",
+          "d2": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 4145.388671875,
+            "correct1": 405,
+            "correct3": 1670,
+            "correct5": 2031,
+            "correct10": 2048
+          },
+          "mutual": {
+            "n": 1342,
+            "visible": 1342,
+            "error_sum": 2708.69384765625,
+            "correct1": 258,
+            "correct3": 1102,
+            "correct5": 1330,
+            "correct10": 1342
+          }
+        },
+        {
+          "pair_id": "test_real_G2_f1429bbd7fdf77f23c8f2ab9",
+          "d2": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 4069.677734375,
+            "correct1": 468,
+            "correct3": 1648,
+            "correct5": 2045,
+            "correct10": 2048
+          },
+          "mutual": {
+            "n": 1613,
+            "visible": 1613,
+            "error_sum": 3219.5771484375,
+            "correct1": 365,
+            "correct3": 1297,
+            "correct5": 1611,
+            "correct10": 1613
+          }
+        },
+        {
+          "pair_id": "test_real_G3_2df16ba1ea254f4cfebcec8b",
+          "d2": {
+            "n": 2048,
+            "visible": 676,
+            "error_sum": 299725.1875,
+            "correct1": 0,
+            "correct3": 0,
+            "correct5": 0,
+            "correct10": 0
+          },
+          "mutual": {
+            "n": 1678,
+            "visible": 565,
+            "error_sum": 250586.421875,
+            "correct1": 0,
+            "correct3": 0,
+            "correct5": 0,
+            "correct10": 0
+          }
+        },
+        {
+          "pair_id": "test_real_G3_6e1e1a6391cdc1d20df0a5bb",
+          "d2": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 4658.9599609375,
+            "correct1": 266,
+            "correct3": 1564,
+            "correct5": 1995,
+            "correct10": 2048
+          },
+          "mutual": {
+            "n": 1555,
+            "visible": 1555,
+            "error_sum": 3475.6669921875,
+            "correct1": 214,
+            "correct3": 1201,
+            "correct5": 1519,
+            "correct10": 1555
+          }
+        },
+        {
+          "pair_id": "test_real_G3_982dde201b3b8b24edf4788d",
+          "d2": {
+            "n": 2048,
+            "visible": 2048,
+            "error_sum": 5673.72314453125,
+            "correct1": 18,
+            "correct3": 1396,
+            "correct5": 1976,
+            "correct10": 2048
+          },
+          "mutual": {
+            "n": 1616,
+            "visible": 1616,
+            "error_sum": 4517.529296875,
+            "correct1": 14,
+            "correct3": 1088,
+            "correct5": 1552,
+            "correct10": 1616
+          }
+        }
+      ],
+      "base": {
+        "n": 32768,
+        "visible": 31316,
+        "error_sum": 904506.5366210938,
+        "correct1": 6898,
+        "correct3": 20862,
+        "correct5": 25014,
+        "correct10": 26541,
+        "epe": 28.883207836923418,
+        "p3_visible": 0.6661770341039724,
+        "p1": 0.21051025390625,
+        "p3": 0.63665771484375,
+        "p5": 0.76336669921875,
+        "p10": 0.809967041015625
+      },
+      "mutual": {
+        "n": 26986,
+        "visible": 25821,
+        "error_sum": 696615.7628173828,
+        "correct1": 6089,
+        "correct3": 17491,
+        "correct5": 20876,
+        "correct10": 22282,
+        "epe": 26.978651594337276,
+        "p3_visible": 0.6773943689245188,
+        "p1": 0.2256355147113318,
+        "p3": 0.6481508930556585,
+        "p5": 0.7735863040094864,
+        "p10": 0.8256873934632772
+      }
+    }
+  },
+  "peak_gib": 2.1011056900024414
+}

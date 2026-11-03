@@ -2,6 +2,8 @@
 
 当前正式入口为 `from mhinet.v2 import load_mhi_v2`，配置 `configs/mhi_v2/releases/flow_pair_v2.json`。默认组装完整 RGB 的 Flow best（第4轮）与 D2 加深版 best（第10轮，增加两个64通道残差块、18,176参数），冻结 DINO，使用局部 Pair；不启用 H0/QRRU/DGFO/全图 Delta/拒配头。
 
+可选 `model.match(images, mutual=True)` 启用 D2 局部互选过滤；默认保留原输出。过滤仅删点，不改变坐标与权重，详见下方使用说明。
+
 [加载、推理、继续训练、权重来源和验收说明](../../docs/mhi_v2/flow_pair_release.md)。原 U0 与历史接口保留如下，其训练配置不会自动改用新权重。
 
 # 历史 U0 路径

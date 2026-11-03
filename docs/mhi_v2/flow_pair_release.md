@@ -46,6 +46,22 @@ valid, parent, parent_ids = result['valid'], result['parent'], result['parent_id
 
 加深模块来源为 `codex/d2-capacity@766f445`，仅迁移 deep 组。部署权重包含完整 VGG/CGMDP/Pair/温度，运行不需要实验代码或实验目录；权重文件不提交 Git。
 
+## 可选 D2 局部互选（2026-11-03）
+
+```python
+raw = model.match(images)                         # 历史默认：全部子点
+filtered = model.match(images, mutual=True)       # 精度优先：局部互选
+trace = model.match(images, mutual=True, diagnostics=True)
+```
+
+`match_shared(shared, mutual=True)` 和独立 `pair_matching.local.infer(..., mutual=True)` 使用同一筛选函数。训练、权重、D8选择和连续坐标解码不变；默认不开启，不新增全局状态或配置开关。
+
+在每个父点的16×64矩阵中，A查询的最高分B候选也必须反向选择该A查询，并满足候选有效性与原图坐标边界。只删除输出行，不重新解码、排序、补点，也不是跨父窗口去重或另跑一次B→A网络。坐标、confidence、valid、parent、parent_ids同步筛选，父点编号保留原值。开启diagnostics时保留完整父窗口和候选矩阵，新增`output_mask`指向过滤前子点顺序。
+
+Self调制仅用本侧均值构造`[s,s,0]`；Pair调制使用`[s_A,s_B,abs(s_A-s_B)]`，共享MLP生成两侧各自的通道参数。当前权重仍是Pair。互选是之后的输出筛选，与Self/Pair调制和D8 Matchability源点过滤是三件不同的事。
+
+此前无训练诊断中，互选使RGB256对的P@3从98.752%提高到99.396%，输出2048→2031点/对；杭州235对为63.036%→63.856%，输出2048→1804点/对。正确点@5也分别从2029.73降到2023.82、1610.33降到1425.45，不能宣称增加了正确点总数。当前合入复用其规则；32对归档样本对照和测试见[验收记录](../../reports/d2_mutual_release/README.md)。
+
 ## 保留的两阶段训练
 
 入口 `python -m mhinet.v2.pair_matching.training`；算法来自原 `d2_modulation/full_rgb.py`，训练损失、选择策略、初始权重、参数组与余弦调度保持不变。离散父点选择无梯度，连续 D8、VGG/CGMDP、D2 Pair 的监督保留。DINO 始终冻结。D2 阶段冻结 Flow/MVT。无 QRRU 优化器参数。

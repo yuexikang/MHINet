@@ -62,7 +62,7 @@ def test_component_loading_strict_and_temperatures():
 
 
 def test_release_disabled_experiments_and_input_shape():
-    c=json.loads(DEFAULT_CONFIG.read_text());c['qrru']=True
+    c=json.loads(DEFAULT_CONFIG.read_text());c['dgfo']=True
     with pytest.raises(ValueError,match='Experimental'):load_mhi_v2(c,'cpu')
     model=MHIV2(torch.nn.Identity(),MatchingTemperatures(SemidenseConfigV2()),LocalPairModulation())
     with pytest.raises(ValueError,match='single pair'):model.match(torch.empty(2,3,256,256))

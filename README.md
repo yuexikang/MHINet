@@ -1,5 +1,9 @@
 # MHINet
 
+当前 **MHI-v2** 主线：**Flow0 → D8 → Pair-D2 → QRRU 局部精修**，包含 D2 两残差块加深和可选局部互选过滤。入口为 `from mhinet.v2 import load_mhi_v2`，详见[正式模型说明](docs/mhi_v2/flow_pair_release.md)。
+
+## 历史版本与实验档案
+
 2026-10-19 起，当前代码以 **MHI v1** 固定在标签 `mhi-v1`
 （`522d9bd`）；**MHI v2** 在 `codex/mhi-v2` 分支开展独立实验。
 文件按版本归档，入口为 [版本目录](versions/README.md)：

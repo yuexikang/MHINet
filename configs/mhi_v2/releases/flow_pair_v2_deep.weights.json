@@ -153,5 +153,15 @@
     "epochs": 10,
     "selection": "strict RGB validation P@3; best and latest both epoch 10",
     "optimizer_included": false
+  },
+  "local_refinement": {
+    "path": "weight/mhi_v2/qrru_local_20261104.pt",
+    "epoch": 10,
+    "radius_d2": 1.5,
+    "harm_weight": 1.0,
+    "train_pairs": 4096,
+    "val_pairs": 512,
+    "selection": "minimum RGB validation EPE",
+    "validation_epe": 0.4665346599958007
   }
 }

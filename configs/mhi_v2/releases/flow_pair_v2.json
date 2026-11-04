@@ -1,5 +1,5 @@
 {
-  "version": "mhi-v2-flow-pair-deep-20261030",
+  "version": "mhi-v2-flow-pair-refined-20261104",
   "architecture": "flow_d8_pair_d2_v1",
   "manifest": "configs/mhi_v2/releases/flow_pair_v2_deep.weights.json",
   "runtime": {
@@ -8,7 +8,7 @@
     "dino_checkpoint": "weight/dinov3.pt"
   },
   "max_parents": 128,
-  "qrru": false,
+  "qrru": true,
   "dgfo": false,
   "global_modulation": false,
   "dustbin_rejection": false,

@@ -1,4 +1,4 @@
-"""Versioned, GT-free MHI-v2: Flow0 → local D8 → continuous Pair-D2."""
+"""Versioned, GT-free MHI-v2: Flow0 → local D8 → Pair-D2 → local refinement."""
 import json
 import math
 import os
@@ -13,6 +13,7 @@ from .feature_provider import build_fresh_shared
 from .config import SemidenseConfigV2
 from .pair_matching.local import LocalPairModulation, extract_windows, match_windows, center_indices, mutual_filter_mask
 from .pair_matching.deep_d2 import configure_d2
+from .local_refinement import LocalRefinement
 
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_CONFIG = ROOT / 'configs/mhi_v2/releases/flow_pair_v2.json'
@@ -58,10 +59,11 @@ def load_components(shared, matcher, adapter, flow, d2):
 
 class MHIV2(nn.Module):
     """match accepts one 2×3×512×512 RGB pair in [0,1]; coordinates are pixels."""
-    def __init__(self, shared, matcher, adapter, max_parents=128):
+    def __init__(self, shared, matcher, adapter, max_parents=128, refiner=None):
         super().__init__()
         self.shared, self.matcher, self.adapter = shared, matcher, adapter
         self.max_parents = max_parents
+        self.refiner = refiner
 
     @torch.inference_mode()
     def match(self, images, *, diagnostics=False, mutual=False):
@@ -88,17 +90,20 @@ class MHIV2(nn.Module):
                       points_b=fine['points_b'].reshape(-1, 2),
                       confidence=(fine['confidence']*windows['score8'][:, None]).sqrt().flatten(),
                       valid=valid.flatten(), parent=parent, parent_ids=parent_ids[parent])
+        points_b_d2 = result['points_b']
         # Default preserves historical outputs; reciprocity keeps a stable subset.
         if mutual:
             keep = mutual_filter_mask(windows, fine)
             result = {key: value[keep] for key, value in result.items()}
+        if self.refiner is not None:
+            result['points_b'] = self.refiner(shared['pyramid'][2][0], result['points_a'], result['points_b'])
         if diagnostics:
             result['diagnostics'] = dict(flow16_norm=shared['flow16_norm'],
                 flow16_target_norm=shared['flow16_target_norm'],
                 flow16_matchability=shared['flow16_matchability'], flow16_valid=shared['flow16_valid'],
                 parent_ids=parent_ids, parents=windows['parents'], centers=windows['centers'],
                 windows=windows, candidate_logp=fine['logp'], candidate_valid=fine['valid'],
-                call_counts=shared['call_counts'])
+                call_counts=shared['call_counts'], points_b_d2=points_b_d2)
             if mutual:
                 result['diagnostics']['output_mask'] = keep
         return result
@@ -114,7 +119,7 @@ def load_mhi_v2(config=DEFAULT_CONFIG, device='cuda:0', *, runtime=None, assets_
     root = Path(assets_root or os.environ.get('MHI_V2_ASSETS', ROOT)).expanduser().resolve()
     if settings['architecture'] != 'flow_d8_pair_d2_v1':
         raise ValueError('Unsupported MHI-v2 release architecture')
-    if settings['qrru'] or settings['dgfo'] or settings['global_modulation'] or settings['dustbin_rejection']:
+    if settings['dgfo'] or settings['global_modulation'] or settings['dustbin_rejection']:
         raise ValueError('Experimental refinement/rejection is not part of this release')
     if not 1 <= settings['max_parents'] <= 128:
         raise ValueError('max_parents must be 1..128 (16 outputs per parent, at most 2048)')
@@ -143,7 +148,15 @@ def load_mhi_v2(config=DEFAULT_CONFIG, device='cuda:0', *, runtime=None, assets_
     matcher = MatchingTemperatures(c).to(device)
     adapter = LocalPairModulation('pair').to(device)
     load_components(shared, matcher, adapter, flow, d2)
-    model = MHIV2(shared, matcher, adapter, settings['max_parents']).requires_grad_(False).eval()
+    refiner = None
+    if settings.get('qrru', False):
+        spec = manifest['local_refinement']
+        state = torch.load(asset_path(spec['path'], root), map_location='cpu', weights_only=False)
+        refiner = LocalRefinement(radius=spec['radius_d2']).to(device)
+        refiner.load_state_dict(state['head'], strict=True)
+    model = MHIV2(shared, matcher, adapter, settings['max_parents'], refiner).requires_grad_(False).eval()
     model.release = dict(version=settings['version'], variant=variant, flow_epoch=fs['epoch'],
                          d2_epoch=ds['epoch'], d2_refinement=refinement)
+    if refiner is not None:
+        model.release['local_refinement_epoch'] = spec['epoch']
     return model
